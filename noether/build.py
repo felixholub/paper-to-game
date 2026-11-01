@@ -1,4 +1,4 @@
-# Generates noethers-press.html from template.html, mechanism.js (the single source of truth) and the embedded fonts,
+# Generates noethers-ball.html from template.html, mechanism.js (the single source of truth) and the embedded fonts,
 # then verifies byte for byte that the embedded mechanism is the file calibration.js ran against.
 import base64, sys, os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,7 @@ for k in keys:
     assert t.count(k) == 1, k
 out = (t.replace('/*__FONT_CHAKRA__*/', font('ChakraPetch-700.woff2')).replace('/*__FONT_SAIRA__*/', font('Saira-400.woff2'))
         .replace('/*__FONT_MONO__*/', font('ShareTechMono-400.woff2')).replace('/*__ABOUT__*/', about).replace('/*__MECHANISM__*/', mech))
-name = 'noethers-press.html'
+name = 'noethers-ball.html'
 open(name, 'w', encoding='utf-8').write(out)
 built = open(name, encoding='utf-8').read()
 if mech not in built:

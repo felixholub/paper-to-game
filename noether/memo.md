@@ -1,4 +1,6 @@
-# Noether's Press — design memo
+# Noether's Ball — design memo
+
+> **Renamed (1 Nov 2026):** the game was *Noether's Press* through the press architecture and revisions 1 to 5c; after the deck rebuild the author renamed it *Noether's Ball*, after the thing that features biggest in it (and not *Noether's Clock*, which would echo Einstein's on the Pantheon shelf). The file is now `noethers-ball.html`; `noethers-press.html` redirects to it. Older entries below keep the old name.
 
 > **Revision 5c (1 Nov 2026, later still): one answer, nine badges.** After playing 5b the author judged *change your mind?* too easy with both pictures in front of the player, and asked to go back to one answer before the reveal; the second picture is now the reveal itself. He also found the automatic fake curve unnecessary (now gone: the prize's line is drawn along the real trip only, with one optional "draw a path: watch it wobble" on the first prize, which the slide then repeats and fails), and was puzzled that right answers on the traps earned nothing. The shelf is now nine badges, one per card, earned by a right answer: five red for the paper's lessons (energy, sideways speed, spin, the empty slide energy, the rule) and four pink for the traps (the law that breaks: gravity grows, the magnet, the wind, the ball's clock is real); a wrong answer leaves the badge dull. The debrief names the red badges won and missed in words and says, as the author proposed, when the pink ones were won but the core got away. No score. Calibration 11/11; full browser session clean.
 

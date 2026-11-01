@@ -1,4 +1,4 @@
-// Noether's Press — the mechanism. The only copy: build.py inlines this file verbatim into the HTML and refuses to build
+// Noether's Ball — the mechanism. The only copy: build.py inlines this file verbatim into the HTML and refuses to build
 // if the embedded copy differs. Plain functions, no DOM; runs unchanged in Node and in the browser.
 //
 // Kind: PORTED. Noether (1918), Invariante Variationsprobleme, Gött. Nachr. 1918, 235–257 (equation numbers are the paper's;
