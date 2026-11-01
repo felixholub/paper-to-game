@@ -98,6 +98,10 @@ The fewest controls that preserve the paper's central mechanism. One is the defa
 
 A game ends. Where there are rounds, there is a last one, and no retry past it; the verdict is a screen the player reaches once. What the verdict says depends on the game: where the paper gives a quantity to score against, a number against the best possible and a fate in words ("you die a comfortable man"); where it does not, something qualitative, what the player found and what the paper says. A tally is never the verdict.
 
+A score needs an objective, and an objective picks a side. Where the paper sets two values against each other and does not rank them (Benjamin's cult value against exhibition value), the game does not rank them either: no number, no best path, no "could have done". The verdict says what became of things on the path the player took, in the paper's own terms, and the player judges. The arithmetic stays underneath, unseen, so that the pictures and the lines agree with each other; nothing is shown as a quantity. Such a game is replayed to see the other fates, not to beat a number, and the aim is phrased as a decision ("decide who sees the face, and how"), not a maximum.
+
+A game ends when its discovery has landed. A paper's second half, a corollary, an epilogue, a moral, is read on the verdict screen, not played, unless it holds a second mystery the player can act on with a real outcome at stake. A last choice with nothing at stake is a reading dressed as a decision, and the verdict is not the place for one.
+
 ### The aim is a sentence; the yardstick is in its units
 
 Before any concept is chosen, write the aim in the words the player will read. It sits on its own line on the start screen, at the top of the play screen, and as the first line of How to play. Whatever tells the player how they are doing is measured in the aim's units, for the stretch of play the aim refers to: a player who has just done what was asked sees that they succeeded, now, not a running total whose maximum lies in rounds not yet played.

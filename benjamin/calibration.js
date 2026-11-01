@@ -93,19 +93,21 @@ check('P7d under all five the best path never narrows the veil', variants.every(
 const strings = [];
 C.AGES.forEach(a => { strings.push(a.name, a.date, a.newThis, a.eyesLine || ''); a.crowd.forEach(c => strings.push(c)); });
 C.VEILS.forEach(v => strings.push(v.label, v.who)); strings.push(C.EPILOGUE);
-const s = M.newGame(); for (let i = 0; i < 6; i++) { M.arrive(s); strings.push(M.arrivalLine(s)); strings.push(M.commit(s, Math.min(i < 2 ? 0 : i + 1, C.AGES[i].ceiling)).line); M.next(s); } const v = M.verdict(s); strings.push(v.lead, v.did, v.benjamin, v.epilogue, v.shortfall);
-check('S the score is the fraction out of 100: the best path scores 100, always veiled under 5', M.verdict(M.bestSchedule().state).score === 100 && M.verdict(M.runSchedule([0, 0, 0, 0, 0, 0])).score < 5, M.verdict(M.runSchedule([0, 0, 0, 0, 0, 0])).score + '');
-check('S2 the shortfall names the cause: early opening is read as halo spent, hoarding as kept farther', /halo had been spent/.test(M.verdict(M.runSchedule([0, 2, 3, 4, 5, 6])).shortfall) && /kept farther/.test(M.verdict(M.runSchedule([0, 0, 0, 0, 5, 6])).shortfall) && M.verdict(M.bestSchedule().state).shortfall === '');
+const s = M.newGame(); for (let i = 0; i < 6; i++) { M.arrive(s); strings.push(M.arrivalLine(s)); strings.push(M.commit(s, Math.min(i < 2 ? 0 : i + 1, C.AGES[i].ceiling)).line); M.next(s); } const v = M.verdict(s); strings.push(v.lead, v.did, v.benjamin, v.epilogue, v.faceNow);
+check('S the verdict carries no score, no fraction and no best path: it describes', (() => { const v = M.verdict(M.runSchedule([0, 1, 3, 4, 5, 6])); return v.score === undefined && v.shortfall === undefined && v.bestResults === undefined && !/most a keeper could have done|could have moved/.test(v.lead + v.did + v.benjamin); })());
+check('S2 the five families sort the paths: dark, cult, people, late, splash', ['dark', 'cult', 'people', 'late', 'splash'].every((f, i) => M.familyOf(M.runSchedule([[0,0,0,0,0,0],[1,1,1,1,1,1],[0,1,3,4,5,6],[0,0,0,0,5,6],[0,0,0,0,0,6]][i])) === f));
+check('S3 every family\'s lead is a sentence about what happened, none a grade', ['dark', 'cult', 'people', 'late', 'splash'].every((f, i) => { const v = M.verdict(M.runSchedule([[0,0,0,0,0,0],[1,1,1,1,1,1],[0,1,3,4,5,6],[0,0,0,0,5,6],[0,0,0,0,0,6]][i])); return /\.$/.test(v.lead) && !/\d|best|better|worse|could have/.test(v.lead); }));
 check('W no decimals in any string the screen shows', strings.every(t => !/\d\.\d/.test(t)));
 check('W2 every slab has a label and a meaning, and the epilogue ends on Benjamin\'s line', C.VEILS.every(x => x.label && x.who) && /though the world perish/.test(C.EPILOGUE));
 check('W3 every age has a technique, a line for what is new, and a crowd word up to its ceiling', C.AGES.every(a => a.technique && a.newThis && a.crowd.slice(0, a.ceiling + 1).every(c => c)));
 check('W4 halo words cover the range', ['bright', 'a little thinner', 'about half what it was', 'a quarter of what it was', 'almost gone', 'gone'].every((w, i) => M.haloWords([1, 0.7, 0.5, 0.25, 0.1, 0.01][i]) === w));
-check('W5 the verdict for the wait-for-the-lithograph path names the turn', /Benjamin dates the turn/.test(M.verdict(M.runSchedule([0, 0, 0, 4, 5, 6])).did));
+check('W5 the verdict for the print-then-put-away path says the copies stayed out', /copies stayed out/.test(M.verdict(M.runSchedule([0, 0, 0, 4, 0, 0])).did));
 check('W5b the verdict for the coin path names the coin', /coins at the temple/.test(M.verdict(M.runSchedule([0, 2, 3, 4, 5, 6])).did));
 { const t = M.newGame(); const said = []; for (let i = 0; i < 6; i++) { M.arrive(t); said.push(M.arrivalLine(t) !== ''); M.commit(t, 0); M.next(t); }
   check('W7 the arrival says one thing once, at the studio: the people\'s eyes have changed', said.filter(Boolean).length === 1 && said[4] === true, said.map(c => c ? 'said' : 'silent').join(' ')); }
-check('W6 the verdict for the always-veiled path says the halo is whole and nobody saw it', /halo is whole/.test(M.verdict(M.runSchedule([0, 0, 0, 0, 0, 0])).did));
-check('W9 the verdict for wait-then-splash names the screen that cannot carry it', /cannot carry it/.test(M.verdict(M.runSchedule([0, 0, 0, 0, 0, 6])).did));
+check('W6 the verdict for the always-veiled path says the halo is whole and nobody saw it', (() => { const v = M.verdict(M.runSchedule([0, 0, 0, 0, 0, 0])); return /halo is whole/.test(v.lead) && /Nobody saw/.test(v.lead); })());
+check('W9 the verdict for wait-then-splash names the screen that could not carry it', /could not carry it/.test(M.verdict(M.runSchedule([0, 0, 0, 0, 0, 6])).lead));
+check('W10 the painting-now line says where the halo went', /went out to the people: to the faithful on the day, in woodcuts/.test(M.verdict(M.runSchedule([0, 1, 3, 4, 5, 6])).faceNow) && /never left the dark/.test(M.verdict(M.runSchedule([0, 0, 0, 0, 0, 0])).faceNow));
 
 const head = `Benjamin's Veil — calibration result (${new Date().toISOString().slice(0, 10)})\n${pass} passed, ${fail} failed\n`;
 const text = head + out.join('\n') + '\n';

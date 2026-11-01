@@ -9,7 +9,7 @@
    > tapped IN THE DARK — you and the spirits; commit says: LET THE AGE PASS | in the dark: the keeper alone
    preview: original, halo 1.00, nobody there yet (crowd 0)
    line: Nobody came; the face stayed in the dark with you and the spirits.
-   hold: nobody | copies: COPIES OUT | none yet: the one face only
+   copies: COPIES OUT | none yet: the one face only
    seen: original, halo 1.00, crowd 0, lit 1.00
   shot age1-passed
    > NEXT AGE
@@ -24,7 +24,7 @@
    > tapped ON THE DAY — the city, at the festival; commit says: LET THE AGE PASS | on the day: the faithful, once a year
    preview: original, halo 1.00, nobody there yet (crowd 0)
    line: The city, at the festival, saw it. They stood before it, halo and all. The original's halo is a little thinner, and will not grow back.
-   hold: all of what this age could move, mostly by the halo | copies: COPIES OUT | none yet: the one face only
+   copies: COPIES OUT | none yet: the one face only
    seen: original, halo 0.80, crowd 7, lit 1.00
    > NEXT AGE
 
@@ -37,7 +37,7 @@
    > tapped IN WOODCUTS — the parish, a few dozen sheets — NEW; commit says: LET THE AGE PASS | in woodcuts: the parish, a few dozen sheets
    preview: woodcut, halo 0.40, nobody there yet (crowd 0)
    line: The sheets went out: the parish, a few dozen sheets. A woodcut carries about half of the halo. The original's halo is about half what it was, and will not grow back.
-   hold: all of what this age could move, mostly by the halo | copies: COPIES OUT | …a few dozen
+   copies: COPIES OUT | …a few dozen
    seen: woodcut, halo 0.40, crowd 16, lit 0.36
   shot age3-passed
    > NEXT AGE
@@ -54,7 +54,7 @@
    preview: litho, halo 0.26, nobody there yet (crowd 0)
   shot age4-veil-set
    line: The prints went out: every house. A lithograph carries about half of the halo. The original's halo is almost gone, and will not grow back.
-   hold: all of what this age could move, by the halo and by being seen alike | copies: COPIES OUT | …and on, without end
+   copies: COPIES OUT | …and on, without end
    seen: litho, halo 0.26, crowd 24, lit 0.17
   shot age4-passed
    > NEXT AGE
@@ -70,7 +70,7 @@
    > tapped IN PHOTOGRAPHS — every house and every hand — NEW; commit says: LET THE AGE PASS | in photographs: every house and every hand
    preview: halftone, halo 0.09, nobody there yet (crowd 0)
    line: The photographs went out: every house and every hand. A photograph carries a good part of the halo, and the eyes of this age are not their fathers' eyes. The original's halo is gone.
-   hold: all of what this age could move, mostly by being seen | copies: COPIES OUT | every hand
+   copies: COPIES OUT | every hand
    seen: halftone, halo 0.09, crowd 32, lit 0.03
   shot age5-passed
    > NEXT AGE
@@ -84,22 +84,22 @@
    > tapped ON FILM — everyone, together — NEW; commit says: LET THE AGE PASS | on film: everyone, together, close up
    preview: film, halo 0.01, nobody there yet (crowd 0)
    line: Everyone saw it, together, in the dark. There was no halo left to see.
-   hold: all of what this age could move, mostly by being seen | copies: COPIES OUT | every screen
+   copies: COPIES OUT | every screen
    seen: film, halo 0.01, crowd 38, lit 0.00
   shot age6-passed
    > THE VERDICT
   shot end
 
-== VERDICT: 99/100 · OVER SIX AGES YOUR FACE MOVED NEARLY ALL OF THE PEOPLE IT COULD HAVE MOVED. 
-   You kept the veil down through the cave, then lifted it in the temple and put the face in woodcuts in the cathedral. You put the face into the people's hands as soon as there was a way to print it, and followed each new way as it came. That is as much as any keeper could have done.
-   The halo was never in the face alone. It was between the face and the people, and no copy carries it whole; the age sets what the people can see. Keep the face in the dark and the halo stays, but the eyes of the age change, and when you show it at last they see it as they see everything else. Show it early and the age cannot yet carry it far. Once the copies are everywhere, the face belongs to politics.
+== VERDICT: MANY SAW THE FACE, MOST OF THEM IN COPIES, AND THE HALO WENT OUT WITH THEM. | Its halo is gone. It went out to the people: to the faithful on the day, in woodcuts, in lithographs, in photographs and on film.
+   You kept the veil down through the cave, then lifted it in the temple and put the face in woodcuts in the cathedral. The faithful had seen the face itself on the day; from the cathedral on, the face was in the people's hands, in copies, each carrying a trace of the halo and each spending some of the original's.
+   The halo was never in the face alone. It was between the face and the people: the one place, the one time, the distance that was kept. No copy carries it whole, and the age sets what the people can see. This is exhibition value, which the age of copying puts in cult value's place. The copy meets the people halfway, in their own rooms, and what it brings them is not the halo but the face. Benjamin does not mourn it: the halo was the mark of a distance, and the distance is gone. What comes next is on his last page.
    The halo is gone; the longing for it is not. Where that longing is served, Benjamin says what comes of it: the collector's certificate on a face nobody sees; the film star's "personality", a halo rebuilt to be sold; and the leader's face on every wall and over a square full of people, which is politics made beautiful, and it ends in war. "Let art be made, though the world perish."
-   Under this game's assumptions, that is. A second run is a different plan: open earlier, open later, or never.
+   A second run is a different fate: open earlier, open later, or never.
   shot about
    about opened and returned to end
 
 == second run, studio, veil down: Nobody came; the face stayed in the dark with you and the vault.
-== second run verdict: OVER SIX AGES YOUR FACE MOVED NONE OF THE PEOPLE IT COULD HAVE MOVED. | You kept the veil down through all six ages. Nobody saw the face but you. The halo is whole, and nobody has seen it. A face kept from every eye holds nobody: what you kept was a painting in the dark. The most a keeper could have done: the faithful on the day from the cave to the temple; in woodcuts at the cathedral; in lithographs at the print shop; in photographs at the studio; on film at the cinema.
+== second run verdict: NOBODY SAW THE FACE. THE HALO IS WHOLE, IN THE DARK. | You kept the veil down through all six ages. Nobody saw the face but you. The faithful of six ages passed the curtain and never saw what was behind it. The halo survived every age; it had nothing to do.
   shot end-veiled
 
 errors: none

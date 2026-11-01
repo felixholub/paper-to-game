@@ -45,11 +45,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .band{background:var(--red);color:var(--cream);font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:15px;padding:7px 10px;margin:10px -16px 0;padding-left:16px;display:flex;justify-content:space-between;align-items:baseline}
 .band b{font-size:19px;font-weight:700;letter-spacing:.06em}
 .strip{display:flex;gap:4px;margin:8px 0 6px;justify-content:space-between}
-.score{display:flex;align-items:baseline;justify-content:center;gap:6px;margin:14px 0 2px}
-.score .num{font-family:var(--display);font-weight:700;font-size:92px;line-height:1;color:var(--red)}
-.score .of{font-family:var(--display);font-weight:600;font-size:28px;color:var(--ink);letter-spacing:.06em}
-.lead2{font-size:17px;line-height:1.35;margin:-6px 0 10px;color:var(--ink)}
-.scorelab{text-align:center;font-size:14px;color:var(--grey);margin:0 0 10px;line-height:1.3}
 .facenow{display:flex;gap:12px;align-items:center;margin:8px 0 4px}
 .facenow svg{flex:0 0 150px;width:150px;height:auto}
 .facenow p{margin:0;font-size:15px;line-height:1.35}
@@ -77,9 +72,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .veil:disabled .w{font-style:italic}
 .result{margin-top:10px}
 .line{font-size:16px;line-height:1.45;margin:8px 0}
-.holdlab{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--display);font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
-.holdlab span:last-child{font-family:var(--text);font-size:14px;letter-spacing:0;text-transform:none;color:var(--grey)}
-.hold{display:block;width:100%;height:26px;border:3px solid var(--ink);background:var(--cream)}
 .lead{font-family:var(--display);font-weight:600;font-size:30px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;color:var(--red);margin:10px 0}
 .vl{margin:10px 0}
 .vl b{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:14px;display:block;color:var(--red)}
@@ -104,8 +96,8 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     <p class="lede" style="margin:0">You keep one face. It is painted, it has a halo, and hardly anyone has ever seen it. Every age brings a new way to copy a face, and the people press closer.</p>
   </div>
   <p class="lede">Each age you <b>set the veil</b> (by what means the face goes out, if at all), <b>let the age pass</b>, and see who came and what is left of the halo. Six ages, each with a new way to copy a face. Then the verdict.</p>
-  <p class="aim">Over six ages, let the face move as many people as it can.</p>
-  <p class="lede">A face moves the people who see it, and moves them more when they see its <b>halo</b>. Only the face itself carries the whole halo; a copy carries a trace, and every copy you make spends some of the original's. Kept in the dark the halo stays whole, but each age's eyes are harder to move than the last, and each age has more people.</p>
+  <p class="aim">Six ages. Decide who sees the face, and how.</p>
+  <p class="lede">A face moves the people who see it, and moves them more when they see its <b>halo</b>. Only the face itself carries the whole halo; a copy carries a trace, and every copy you make spends some of the original's. Kept in the dark the halo stays whole, but each age's eyes are harder to move than the last, and each age has more people. At the end you see what became of the face, and of the halo. Nobody keeps score.</p>
   <button class="btn" id="begin">Begin: the first age</button>
   <button class="btn quiet" id="howto">How to play</button>
   <button class="btn quiet" id="aboutbtn">About the paper</button>
@@ -114,7 +106,7 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 
 <!-- PLAY -->
 <section class="screen" id="play">
-  <div class="topbar"><div class="aimline">Over six ages, let the face move as many people as it can.</div><button class="qbtn" data-help="play">?</button></div>
+  <div class="topbar"><div class="aimline">Six ages. Decide who sees the face, and how.</div><button class="qbtn" data-help="play">?</button></div>
   <div class="band"><b id="agename">THE CAVE</b><span id="agemeta">AGE 1 OF 6 · LONG AGO</span></div>
   <div class="strip" id="strip"></div>
   <p class="orient" id="newthis"></p>
@@ -128,8 +120,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
   </div>
   <div id="result" class="result" style="display:none">
     <p class="line" id="line"></p>
-    <div class="holdlab"><span>Moved this age</span><span id="holdwords"></span></div>
-    <svg class="hold" id="hold" viewBox="0 0 340 20" preserveAspectRatio="none"></svg>
     <button class="btn" id="nextage">Next age</button>
   </div>
 </section>
@@ -137,15 +127,10 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 <!-- END -->
 <section class="screen" id="end">
   <div class="band"><b>The verdict</b><span>SIX AGES</span></div>
-  <div class="score"><span class="num" id="scorenum">0</span><span class="of">/100</span></div>
-  <p class="scorelab">The economist's tally: people moved, as a share of the most a keeper could have moved.</p>
   <p class="lead" id="lead"></p>
-  <p class="lead2" id="shortfall"></p>
   <div class="rule"></div>
   <div class="striplab">Your six ages</div>
   <div class="strip" id="endstrip"></div>
-  <div class="striplab">The most a keeper could have done</div>
-  <div class="strip" id="beststrip"></div>
   <div class="striplab">The painting, as it is now</div>
   <div class="facenow"><svg class="frame" id="endface" viewBox="0 0 340 300"></svg><p class="small" id="facenowwords"></p></div>
   <div class="vl"><b>What you did</b><span id="vdid"></span></div>
@@ -160,13 +145,13 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 <!-- HELP -->
 <section class="screen help" id="help">
   <div class="band"><b>How to play</b><span></span></div>
-  <p class="aim">Over six ages, let the face move as many people as it can.</p>
+  <p class="aim">Six ages. Decide who sees the face, and how.</p>
   <ol>
     <li><b>Each age, set the veil.</b> A ladder of red slabs: <i>in the dark</i> (only you see the face), <i>on the day</i> (the faithful, once a year, before the face itself), and then the ways of copying a face as the ages bring them: <i>on coins</i>, <i>in woodcuts</i>, <i>in lithographs</i>, <i>in photographs</i>, <i>on film</i>. Each age adds one rung, marked new; the old rungs stay. Tapping a slab shows you what the people would see by that means: the painting itself, or the copy. Nothing is spent until you let the age pass.</li>
-    <li><b>Let the age pass.</b> The crowd walks in (how many is what the means gave you), and the heads the halo moved are rimmed in gold. A copy carries only a trace of the halo, and every copy spends some of the original's. A line says what happened. The bar under it is <b>moved this age</b>: how many of the people this age could have moved you moved; gold for the part the halo did, red for the part being seen did.</li>
+    <li><b>Let the age pass.</b> The crowd walks in (how many is what the means gave you), and the heads the halo moved are rimmed in gold. A copy carries only a trace of the halo, and every copy spends some of the original's. A line says what happened.</li>
     <li><b>The halo does not grow back,</b> and it does not fade on its own: kept in the dark it stays whole. But each age's eyes are harder to move than the last: the more copying there is in the world, the less a halo moves the people, whatever you did.</li>
-    <li><b>The tally.</b> Each age counts the people it moved, and each age has more people than the last, so the late ages weigh more. There is no running total; the verdict at the end sets your six ages against the most a keeper could have done.</li>
-    <li><b>The verdict:</b> how many people your face moved, of what was possible, as a number out of 100 and in words; your six ages beside the most a keeper could have done; the painting as it is now; what Benjamin says about the path you took; and his last page, 1936, as a reading.</li>
+    <li><b>No score.</b> Nothing is counted for you. Each age has more people than the last and harder eyes; who saw the face, and with how much of its halo, is there in the picture and the line, and that is all there is.</li>
+    <li><b>The verdict:</b> what became of the face, in a sentence; your six ages; the painting as it is now; what Benjamin says about the path you took; and his last page, 1936, as a reading.</li>
   </ol>
   <p class="small">Nothing is random. The same choices give the same ages every time, so a second run is a different plan, not a different draw.</p>
   <button class="btn" id="helpback">Back</button>
@@ -181,8 +166,8 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 <h3>What the paper argues</h3>
 <p>Walter Benjamin's essay (written in Paris in 1936 and reworked until 1939; this is the third version) says that a work of art has always been copiable, but that technical reproduction (the woodcut, the engraving, lithography, photography, film) is something new: it detaches the work from its here-and-now, the one place and moment it exists in, which is the seat of its authenticity. What a copy cannot carry he calls the <i>aura</i>: "the unique appearance of a distance, however near it may be." The aura, he argues, is not in the object but in the relation between the object and the eyes of its age; and the masses' wish to bring things close, together with the techniques that let them, changes those eyes, so that the aura withers everywhere, not only in the copies. With the aura goes the work's grounding in ritual: art's first use was in cult, and cult value wants the work hidden and unapproachable. Reproduction pushes the other pole, exhibition value, and "with photography, exhibition value begins to drive back cult value along the whole line." What replaces ritual as art's foundation is politics. The essay then reads film through this (the actor tested by the apparatus; the star cult as a halo rebuilt to be sold; the cameraman as a surgeon; the public as a distracted examiner), and ends with the fork: fascism aestheticises politics, giving the masses a face to look at and ending in war; communism answers by politicising art.</p>
 <h3>Mechanism: a toy</h3>
-<p><b>This game demonstrates</b> that, under its own assumptions, a keeper who keeps a face in the dark keeps its halo whole and holds nobody with it, because the eyes of each age are harder to move than the last; that no copy carries the halo whole, and the screen least of all, so a keeper who waits for the biggest crowd hands a whole halo to a means that cannot carry it; that a keeper who copies early spends the halo for a reach the age cannot yet give; and that the most a keeper can do is take each new way of copying as it comes, from the woodcut on, about where the essay dates the turn.</p>
-<p><b>It assumes</b> the toy. One face, one painting, which never changes; what changes is what is shown. A halo that is a stock: only showing spends it (by one minus the nearness of the means), and nothing restores it; kept in the dark it stays whole. Each means carries a share of the halo to the people who see it: the face itself all of it, a coin little, a woodcut and a lithograph about half, a photograph the most of any copy, the screen little. Each age's eyes are harder to move than the last: a multiplier on what a halo does to the people, not on the halo. A table of how many people each means reaches, and a cut when the face is kept farther than the age's people have learned to want it. What an age is worth: the people it moved, which is how many saw the face, times the halo they saw it with, plus a seventh for merely being seen; each age has more people than the last (doubling, counted by their square root). All of these numbers are ours, settled by playing the plans against each other: under them a halo nobody sees moves nobody, the coin at the temple is a tempting mistake, waiting for the lithograph costs little, and waiting for the cinema costs most of what there was. The check that ships with the game shows the shape survives the obvious alternatives, and that with no change of eyes at all hoarding would win, which is why the eyes are there.</p>
+<p><b>This game demonstrates</b> that, under its own assumptions, a face kept in the dark keeps its halo and reaches nobody; that a face shown to the faithful on the day keeps its cult value for a few; that a face put into copies goes to the people with a trace of the halo and spends the original's; and that a face kept whole for the biggest crowd meets a screen that cannot carry it, and eyes that have changed. It ranks none of these. There is no score and no best path, because the essay sets cult value against exhibition value and does not say which is better; the verdict says what became of the face, and the keeper judges.</p>
+<p><b>It assumes</b> the toy. One face, one painting, which never changes; what changes is what is shown. A halo that is a stock: only showing spends it (by one minus the nearness of the means), and nothing restores it; kept in the dark it stays whole. Each means carries a share of the halo to the people who see it: the face itself all of it, a coin little, a woodcut and a lithograph about half, a photograph the most of any copy, the screen little. Each age's eyes are harder to move than the last: a multiplier on what a halo does to the people, not on the halo. A table of how many people each means reaches, and a cut when the face is kept farther than the age's people have learned to want it. These numbers are never shown; they are there so that the crowds, the gold rims and the lines agree with each other and with the essay. The check that ships with the game plays the obvious plans against each other to make sure the shapes hold: a halo nobody sees moves nobody, the screen carries least, and with no change of eyes at all, hoarding would be the thing to do, which is why the eyes are there.</p>
 <p><b>The paper establishes</b> its claims as an argument, not by evidence: that the aura is a relation of distance; that perception is historically conditioned and that mass reproduction changes it; that with photography exhibition value drives back cult value; that art thereby loses its grounding in ritual and gains one in politics; and that fascism aestheticises politics while communism politicises art. It gives no quantities. The game's best age to open the veil is a property of the toy, consistent with the essay's dating, not a finding of the essay. Your hold is a score under our rules, not a measurement of anything.</p>
 <h3>What is cut</h3>
 <p>The film actor and the apparatus (sections VIII to X) beyond one line in the epilogue; the cameraman as surgeon (XI); the optical unconscious, slow motion and the close-up (XIII); Dadaism and the shock effect (XIV); reception in distraction and the example of architecture (XV); the Sistine Madonna's own story (footnote 11); Huxley's arithmetic (footnote 21); the preface's Marxian framing; most of the epilogue beyond its last lines.</p>
@@ -502,32 +487,61 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     else parts.push('and never put it in print');
     return parts.join(' ') + '.';
   }
+  // The verdict describes; it does not rank. The essay sets cult value against exhibition value and does not say
+  // which is better, so neither does the game: no score, no best path. The family of the path decides the words.
+  function familyOf(s) {
+    const o = openedAt(s), last = s.cfg.AGES.length - 1;
+    let copied = -1; s.results.forEach(r => { if (copied < 0 && r.veil >= 2) copied = r.age; });
+    if (o.lifted < 0) return 'dark';
+    if (copied < 0) return 'cult';
+    if (o.lifted === last) return 'splash';
+    if (copied >= 4) return 'late';
+    return 'people';
+  }
   function verdict(s) {
-    const total = totalHold(s), best = bestSchedule(s.cfg);
-    const f = total / best.total;
-    const o = openedAt(s);
-    const bestOpen = best.sched.findIndex(v => v >= 3);
-    const ageNames = s.cfg.AGES.map(a => a.name.toLowerCase());
-    let readingOfPath;
+    const fam = familyOf(s), o = openedAt(s), last = s.cfg.AGES.length - 1;
+    const names = s.cfg.AGES.map(a => a.name.toLowerCase());
+    let copied = -1; s.results.forEach(r => { if (copied < 0 && r.veil >= 2) copied = r.age; });
     const coined = s.results.length > 1 && s.results[1].veil === 2;
-    const splash = o.lifted === s.cfg.AGES.length - 1 && s.results[o.lifted].veil >= 2;
-    if (o.lifted < 0) readingOfPath = 'The halo is whole, and nobody has seen it. A face kept from every eye holds nobody: what you kept was a painting in the dark.';
-    else if (splash) readingOfPath = 'You kept the halo whole through every age and showed it at last to everyone, ' + (s.results[o.lifted].veil === 6 ? 'on a screen, which cannot carry it' : 'in copies, which carry a trace of it') + ', to eyes that had seen a thousand faces. The crowds of five ages saw nothing; the sixth saw a copy.';
-    else if (o.printed < 0) readingOfPath = 'The faithful saw it, halo and all, and few else did; the ages of print passed with the face in the dark.';
-    else if (o.printed === bestOpen) readingOfPath = (coined ? 'You put the face on coins at the temple first, a worn god in every purse, and the halo paid for it before the woodcut came. Then you ' : 'You ') + 'put the face into the people\'s hands as soon as there was a way to print it, and followed each new way as it came.';
-    else if (o.printed === bestOpen + 1) readingOfPath = (coined ? 'You put the face on coins at the temple, a worn god in every purse, and paid for it. ' : '') + 'You waited for the lithograph, where Benjamin dates the turn; the woodcut\'s few dozen sheets were the price of waiting, and it was small.';
-    else readingOfPath = 'You opened late. The halo was whole, and the eyes of the age could no longer see it as their fathers had; the ages of print had passed without the face in them.';
+    const putAway = copied >= 0 && s.results.some(r => r.age > copied && r.veil === 0);
+    const dayFirst = copied > 0 && s.results.slice(0, copied).some(r => r.veil === 1);
+    const lastVeil = s.results[last].veil;
+    const by = ['', 'to the faithful', 'on coins', 'in woodcuts', 'in lithographs', 'in photographs', 'on film'];
+    let lead, reading, benjamin;
+    const core = 'The halo was never in the face alone. It was between the face and the people: the one place, the one time, the distance that was kept. No copy carries it whole, and the age sets what the people can see. ';
+    switch (fam) {
+      case 'dark':
+        lead = 'Nobody saw the face. The halo is whole, in the dark.';
+        reading = 'The faithful of six ages passed the curtain and never saw what was behind it. The halo survived every age; it had nothing to do.';
+        benjamin = core + 'A face kept from every eye keeps its cult value and has no other. Benjamin\'s Madonna stays veiled nearly all year; yours stayed veiled for all of them. What the ages of copying did to every other face they could not do to this one, and nobody will ever know.';
+        break;
+      case 'cult':
+        lead = 'Few saw the face, and they saw it whole.';
+        reading = 'The faithful stood before the face itself, with its halo, on the day, and nobody else ever did. The ages of copying passed with the face behind the curtain' + (o.lifted > 0 ? ', and the first ' + (o.lifted === 1 ? 'age' : ['', '', 'two', 'three', 'four', 'five'][o.lifted] + ' ages') + ' passed with nobody before it at all' : '') + '.';
+        benjamin = core + 'This is cult value: a few, before the thing itself, at a distance, once a year. It is what the halo was for. The copies of other faces went to every house and every hand; yours stayed where it was.';
+        break;
+      case 'splash':
+        lead = lastVeil === 6 ? 'You kept the halo whole for the biggest crowd, and gave it to a screen that could not carry it.' : 'You kept the halo whole for the biggest crowd, and gave it to copies that carried a trace of it.';
+        reading = 'Five crowds saw nothing. The sixth saw ' + (lastVeil === 6 ? 'the face on a screen, a thousand at a time, in the dark' : 'the face ' + by[lastVeil] + ', in their own hands') + ', with eyes that had seen a thousand faces. The halo went in one age, and what reached them of it was ' + (lastVeil === 6 ? 'almost nothing' : 'a trace') + '.';
+        benjamin = core + (lastVeil === 6 ? 'The screen is the one place the halo cannot be: there is no here and now on it, and the audience, Benjamin says, is an examiner, but an absent-minded one. You kept the whole of a thing for the one means that could carry none of it.' : 'Kept in the dark the halo stays, but the eyes change: the copies of other faces had taught the people how to see before yours came out. They saw it as they saw everything else.');
+        break;
+      case 'late':
+        lead = 'The face went out late, in copies, to eyes that had changed.';
+        reading = (dayFirst ? 'The faithful had seen the face itself on the day. ' : '') + 'The ages of print passed with the face behind the curtain; when it went out, it went to people who had a photograph of their dead and had seen a thousand faces. What reached them was a copy, and what it carried moved them less than it would have moved their fathers.';
+        benjamin = core + 'Kept in the dark the halo stays, but the eyes change: the copies of other faces had taught the people how to see before yours came out. They saw it as they saw everything else, and the halo you had kept was spent on them.';
+        break;
+      default:
+        lead = 'Many saw the face, most of them in copies, and the halo went out with them.';
+        reading = (coined ? 'You put the face on coins at the temple, a worn god in every purse, before there was any way to print it. ' : '') + (dayFirst ? 'The faithful had seen the face itself on the day; from ' : 'From ') + names[copied] + ' on, the face was in the people\'s hands, in copies, each carrying a trace of the halo and each spending some of the original\'s.' + (putAway ? ' Then you put it away again; the copies stayed out, and what they carried stayed with them.' : '');
+        benjamin = core + 'This is exhibition value, which the age of copying puts in cult value\'s place. The copy meets the people halfway, in their own rooms, and what it brings them is not the halo but the face. Benjamin does not mourn it: the halo was the mark of a distance, and the distance is gone. What comes next is on his last page.';
+    }
     return {
-      total: total, best: best.total, fraction: f, words: fractionWords(f),
-      score: Math.max(0, Math.min(100, Math.round(f * 100))),   // the economist's tally, out of 100: people moved as a share of the most a keeper could have moved
-      lead: 'Over six ages your face moved ' + fractionWords(f) + ' of the people it could have moved.',
-      shortfall: shortfallWords(s, best),
-      did: pathWords(s) + ' ' + readingOfPath + ' ' + (f >= 0.97 ? 'That is as much as any keeper could have done.' : bestPathWords(best, s.cfg)),
-      benjamin: 'The halo was never in the face alone. It was between the face and the people, and no copy carries it whole; the age sets what the people can see. Keep the face in the dark and the halo stays, but the eyes of the age change, and when you show it at last they see it as they see everything else. Show it early and the age cannot yet carry it far. Once the copies are everywhere, the face belongs to politics.',
+      family: fam, lead: lead,
+      did: pathWords(s) + ' ' + reading,
+      benjamin: benjamin,
       epilogue: s.cfg.EPILOGUE,
       faceNow: faceNowWords(s),
-      bestResults: best.state.results,
-      bestOpen: bestOpen, printed: o.printed, lifted: o.lifted
+      printed: o.printed, lifted: o.lifted, copied: copied
     };
   }
 
@@ -557,7 +571,7 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     return c;
   }
 
-  const api = { CONFIG, newGame, currentAge, isOver, arrive, arrivalLine, options, commit, next, verdict, totalHold, maxHold, bestSchedule, runSchedule, heuristics, withConfig, reachAt, haloAfterVeil, movedOf, ageWeights, ageMax, eyesOf, seenLine, movedScale, bestPathWords, shortfallWords, haloWords, fractionWords, openedAt };
+  const api = { CONFIG, familyOf, newGame, currentAge, isOver, arrive, arrivalLine, options, commit, next, verdict, totalHold, maxHold, bestSchedule, runSchedule, heuristics, withConfig, reachAt, haloAfterVeil, movedOf, ageWeights, ageMax, eyesOf, seenLine, movedScale, bestPathWords, shortfallWords, haloWords, fractionWords, openedAt };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.VEIL = api;
 })(typeof window !== 'undefined' ? window : globalThis);
 
@@ -763,10 +777,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     if (nCopies) copiesMade.push({ tech: COPYTECH[C.VEILS[picked].key], count: nCopies, note: COPYNOTE[C.VEILS[picked].key] });
     renderCopies(nCopies ? copiesMade[copiesMade.length - 1] : null);
     $('line').textContent = r.line;
-    const gold = r.hold > 0 ? r.ofAge * r.cult / r.hold * 340 : 0, red = r.hold > 0 ? r.ofAge * r.bySeen / r.hold * 340 : 0;
-    const how = r.cult > r.bySeen * 2 ? 'mostly by the halo' : r.bySeen > r.cult * 2 ? 'mostly by being seen' : 'by the halo and by being seen alike';
-    $('holdwords').textContent = r.hold <= 0 ? 'nobody' : (r.ofAge < 0.03 ? 'hardly anyone' : M.fractionWords(r.ofAge) + ' of what this age could move') + (r.ofAge < 0.03 ? '' : ', ' + how);
-    $('hold').innerHTML = `<rect x="0" y="0" width="${gold}" height="20" fill="${GOLD}"/><rect x="${gold}" y="0" width="${red}" height="20" fill="${RED}"/>`;
     $('nextage').textContent = S.age === C.AGES.length - 1 ? 'The verdict' : 'Next age';
     renderStrip($('strip'), S);
     setTimeout(() => { $('result').style.display = 'block'; }, 700);
@@ -791,13 +801,12 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
   // ---------- the verdict
   function renderEnd() {
     const v = M.verdict(S);
-    $('lead').textContent = v.lead; $('scorenum').textContent = v.score; $('shortfall').textContent = v.shortfall; $('shortfall').style.display = v.shortfall ? 'block' : 'none';
+    $('lead').textContent = v.lead;
     renderStrip($('endstrip'), S);
-    renderStrip($('beststrip'), { results: v.bestResults, age: C.AGES.length });
     drawFrame($('endface'), { tech: 'original', halo: S.halo, kind: 'leaf', n: 0.3, reach: 0, lit: 0 });   // the painting itself, curtains parted, nobody there: what is left
     $('facenowwords').textContent = v.faceNow;
     $('vdid').textContent = v.did; $('vben').textContent = v.benjamin; $('vepi').textContent = v.epilogue;
-    $('vbest').textContent = `Under this game's assumptions, that is. A second run is a different plan: open earlier, open later, or never.`
+    $('vbest').textContent = `A second run is a different fate: open earlier, open later, or never.`
     show('end');
   }
   // ---------- wiring
