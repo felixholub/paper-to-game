@@ -1,4 +1,4 @@
-Noether's Ball — calibration against Noether (1918). 11 passed, 0 failed.
+Noether's Ball — calibration against Noether (1918). 12 passed, 0 failed.
       c1 ball/clock: residual 3.14e-4 → does not matter; teeth
       c2 grow/clock: residual 2.05e-1 → matters; none
       c3 ball/across: residual 0.00e+0 → does not matter; teeth
@@ -15,8 +15,13 @@ PASS  T1 Theorem I: the energy, the sideways speed and the spin have teeth (stea
 PASS  E the clock's prize on the ball is ½|u′|² + g·y on any path (p. 28)  [worst 8.88e-16]
 PASS  T2 Theorem II on the slide: invariant under any re-ticking, and Σψᵢuᵢ′ = 0 on every path; on the ball neither  [slide 8.27e-4, 1.21e-3; ball 2.90e-1, 7.16e-1]
 PASS  §6 the slide's clock prize is improper: B ≡ 0 on true motions, fakes and random paths; and the clock shift is the re-tick with p ≡ 1  [|B| 1.33e-15 against |f| 3.5]
-PASS  O the opener is honest: the slide's revealed path has a smaller number than the straight line and every detour tried  [best 2.6608, smallest rival 2.7341]
-PASS  D thirty random hand-drawn re-tickings: the slide never cares, the ball always does
+PASS  S the comparison slide is honest: the straight slide fails the equations of motion, and the slide's energy is zero along it and along the real slide  [ψ up to 3.97; energy 1.33e-15 against |f| 3.2]
+      no t: ball 0.00e+0, growing 3.51e+0
+      no x: ball 0.00e+0, magnet 2.63e+0
+      turn: swing 8.88e-15, wind 6.44e+0
+      twice as fast: slide 0.00e+0, ball 2.19e+1
+PASS  Y every "why, in the formula" line is true of the formula, point by point; real energy rests on card 7 against card 9
+PASS  D thirty random wobbly re-tickings: the slide never cares, the ball always does
       N=200: all right (teeth,teeth,teeth,empty)
       N=800: all right (teeth,teeth,teeth,empty)
       bumps half: all right (teeth,teeth,teeth,empty)
@@ -31,4 +36,4 @@ PASS  D thirty random hand-drawn re-tickings: the slide never cares, the ball al
       spring soft: all right (teeth,teeth,teeth,empty)
       slide high: all right (teeth,teeth,teeth,empty)
 PASS  ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide
-PASS  W no decimals in anything the screen reads from the mechanism  [90 strings]
+PASS  W no decimals in anything the screen reads from the mechanism  [117 strings]

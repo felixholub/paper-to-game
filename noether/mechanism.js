@@ -60,7 +60,7 @@
     magnet: { id: 'magnet', type: 'newton', name: 'The ball and the magnet',
       V: (t, x, y) => { const M = C.MAGNET, dx = x - M.x, dy = y - M.y, e = Math.exp(-(dx * dx + dy * dy) / (M.s * M.s)), k = 2 * M.m / (M.s * M.s) * e; return [C.G * y - M.m * e, k * dx, C.G + k * dy]; },
       start: { p: [-0.95, -0.85], v: [2.1, 3.7], jit: 0.12 },
-      formula: 'S = ∫ ½(x′² + y′²) − g·y + m·e^(−r²) dt', words: 'the thrown ball, plus a magnet: r is the distance from the ball to the magnet' },
+      formula: 'S = ∫ ½(x′² + y′²) − g·y + m·e^(−r²/s²) dt', words: 'the thrown ball, plus a magnet: r is the ball\'s distance to it, s how far its pull reaches' },
     peg: { id: 'peg', type: 'newton', name: 'The swing round the peg',
       V: (t, x, y) => [0.5 * C.PEG_K * (x * x + y * y), C.PEG_K * x, C.PEG_K * y],
       start: { p: [0.85, 0], v: [0, 3.2], jit: 0.1 },
@@ -232,48 +232,58 @@
     'ENERGY': { formula: '½(x′² + y′²) + g·y', gloss: 'speed² plus height' },
     'SIDEWAYS SPEED': { formula: 'x′', gloss: 'how fast the ball moves sideways' },
     'SPIN': { formula: 'x·y′ − y·x′', gloss: 'how fast the dot sweeps round the peg' },
-    'SLIDE ENERGY': { formula: 'x′·∂f/∂x′ + y′·∂f/∂y′ − f  =  0', gloss: 'the energy of the slide' },
+    'SLIDE ENERGY': { formula: 'x′·∂f/∂x′ + y′·∂f/∂y′ − f', gloss: 'the slide\'s energy, built from its formula exactly as the ball\'s energy is built from the ball\'s' },
   };
+  // reveal: what happened and what follows; why: where the answer sits in the formula on the plate (checked in calibration, Y)
   const CARDS = [
     { id: 'c1', world: 'ball', lever: 'clock', prize: 'ENERGY',
       setup: 'A ball is thrown at three o\'clock.', change: 'Throw it again, exactly the same way, at five past three.',
-      reveal: 'It doesn\'t matter. The throw at five past three flies exactly the same arc, and the formula gives the trip the same number. When the formula doesn\'t care when the trip starts, there is a prize: energy, speed² plus height, the same at every moment of the flight.' },
+      reveal: 'It doesn\'t matter. The 3:05 throw flies exactly the same arc, and the formula gives it the same number. A change that doesn\'t matter wins a prize: energy.',
+      why: 'There is no t in it: nothing in the formula depends on the time on the clock. So starting later can\'t change the number of any throw, not just this one.' },
     { id: 'c2', world: 'grow', lever: 'clock', prize: null,
       setup: 'The same ball, but here gravity grows a little stronger every minute.', change: 'Throw it again, exactly the same way, at five past three.',
-      reveal: 'It matters. At five past three gravity is stronger, so the later throw falls short, and the formula gives the trip a different number. When the rules change with the clock, no energy stays the same. No prize.' },
+      reveal: 'It matters. At 3:05 gravity is stronger, so the later throw falls short, and the formula gives it a different number. Here no energy stays the same: no prize.',
+      why: 'It has a t in it: g·(1 + a·t). The time on the clock is written into the rules.' },
     { id: 'c3', world: 'ball', lever: 'across', prize: 'SIDEWAYS SPEED',
       setup: 'A ball is thrown from here.', change: 'Throw it the same way from one step to the left.',
-      reveal: 'It doesn\'t matter. From one step to the left the ball flies the same arc, one step to the left, and gets the same number. When the formula doesn\'t care where the trip happens, there is a prize: the sideways speed x′, the same all along the flight.' },
+      reveal: 'It doesn\'t matter. Thrown from one step to the left, the ball flies the same arc, one step to the left, with the same number. The prize: its sideways speed.',
+      why: 'x appears only as x′, how fast the ball moves sideways, never as where it is.' },
     { id: 'c4', world: 'magnet', lever: 'across', prize: null,
       setup: 'The same throw, but now a magnet stands to the right and pulls the ball.', change: 'Throw it the same way from one step to the left.',
-      reveal: 'It matters. From one step to the left the ball passes farther from the magnet and bends differently; a different number. With the magnet there, the sideways speed changes in flight. No prize.' },
+      reveal: 'It matters. One step to the left, the ball passes the magnet at a different distance and bends differently; a different number. With the magnet there, the sideways speed changes in flight: no prize.',
+      why: 'The magnet\'s part, m·e^(−r²/s²), depends on where the ball is: r is its distance to the magnet.' },
     { id: 'c5', world: 'peg', lever: 'turn', prize: 'SPIN',
       setup: 'A dot on a spring swings round a peg.', change: 'Turn the whole picture a little round the peg.',
-      reveal: 'It doesn\'t matter. Turned round the peg, the swing is the same swing, turned, with the same number. When the formula doesn\'t care which way the picture faces, there is a prize: spin, x·y′ − y·x′, how fast the dot sweeps round the peg.' },
+      reveal: 'It doesn\'t matter. Turned round the peg, the swing is the same swing, turned, with the same number. The prize: spin, how fast the dot sweeps round the peg.',
+      why: 'It only uses x² + y², the distance from the peg squared, and x′² + y′², the speed squared. A turn changes neither.' },
     { id: 'c6', world: 'wind', lever: 'turn', prize: null,
       setup: 'The same swing, but a wind blows east.', change: 'Turn the whole picture a little round the peg.',
-      reveal: 'It matters. The wind still blows east after you turn the picture, so the turned swing drifts differently; a different number. While the wind blows, no spin prize.' },
+      reveal: 'It matters. The wind still blows east after the turn, so the turned swing drifts differently; a different number. While the wind blows, no spin stays the same: no prize.',
+      why: 'The wind\'s part, w·x, knows which way is east, and a turn changes it.' },
     { id: 'c7', world: 'ball', lever: 'warpclock', prize: null,
       setup: 'Back to the thrown ball.', change: 'Re-tick the clock: let it run fast here and slow there. The same arc, but the ball now speeds up and slows down along it.',
-      reveal: 'It matters. A ball that speeds up and slows down for no reason is not a thrown ball, and the formula gives it a different number. For the ball the ticking of the clock is real, and so its energy prize is real.' },
+      reveal: 'It matters. A ball that speeds up and slows down for no reason is not a thrown ball, and the formula gives it a different number. So the ball\'s clock can\'t be re-ticked, and that is what makes its energy real. Remember this for the slide.',
+      why: 'It squares the speed: ½(x′² + y′²). Run the clock twice as fast and the speed doubles, its square quadruples, but the time only halves: the number changes.' },
     { id: 'c8', world: 'slide', lever: 'clock', prize: 'SLIDE ENERGY',
-      setup: 'A dot slides from A down to B. Its formula counts the time of the slide, and reads only the shape of the curve.', change: 'Start the slide five minutes later.',
-      reveal: 'It doesn\'t matter: the same slide, started later, is the same slide, with the same number. So there should be a prize, the slide\'s energy. Watch its line.' },
+      setup: 'A dot slides from A down to B. Its formula counts the time the slide takes.', change: 'Start the slide five minutes later.',
+      reveal: 'It doesn\'t matter. The slide started at 3:05 is the same slide, with the same number. So there should be a prize: the slide\'s energy. Watch it.',
+      why: 'Like the ball\'s formula, this one has no t in it.' },
     { id: 'c9', world: 'slide', lever: 'warpclock', prize: null,
       setup: 'The same slide.', change: 'Re-tick the clock: fast here, slow there. The same curve, with the ticks bunched and spread.',
-      reveal: 'It doesn\'t matter. The slide\'s formula reads only the shape of the curve, never how fast it is traced, so re-tick it any way you like and the number stays the same. A change you can make differently at every moment wins no prize; it wins a rule instead: the two equations of motion are not independent (ψ₁x′ + ψ₂y′ = 0). And "start the clock later" is just one way of re-ticking. That is why the slide\'s energy was empty.' },
+      reveal: 'It doesn\'t matter: re-tick the slide any way you like and the number stays the same. A change you can make differently at every moment wins no prize. It wins a rule: the slide\'s two equations of motion, ψ₁ = 0 and ψ₂ = 0, are not independent, because ψ₁x′ + ψ₂y′ = 0 on every path. And starting the clock later is just one way of re-ticking it. That is why the slide\'s energy was empty: its clock is free.',
+      why: 'It doesn\'t square the speed: √(x′² + y′²) is the speed itself. Run the clock twice as fast and the speed doubles while the time halves: the same number.' },
   ];
-  // the badge each card awards for a correct call: red for the paper's lessons, pink for the traps (a law breaking when the change matters)
+  // the badge each card awards for a right answer: red for the paper's lessons, pink for the traps (a law breaking because the change matters)
   const BADGES = {
-    c1: { tier: 'red', name: 'ENERGY', sub: '½(x′² + y′²) + g·y', missed: 'energy: starting the clock later didn\'t matter' },
+    c1: { tier: 'red', name: 'ENERGY', sub: '½(x′² + y′²) + g·y', short: 'energy', missed: 'energy: starting the clock later didn\'t matter' },
     c2: { tier: 'pink', name: 'ENERGY', strike: true, sub: 'gravity grows', why: 'because gravity grows', missed: 'gravity that grows' },
-    c3: { tier: 'red', name: 'SIDEWAYS SPEED', sub: 'x′', missed: 'sideways speed: the step to the left didn\'t matter' },
+    c3: { tier: 'red', name: 'SIDEWAYS SPEED', sub: 'x′', short: 'sideways speed', missed: 'sideways speed: the step to the left didn\'t matter' },
     c4: { tier: 'pink', name: 'SIDEWAYS SPEED', strike: true, sub: 'the magnet', why: 'because of the magnet', missed: 'the magnet' },
-    c5: { tier: 'red', name: 'SPIN', sub: 'x·y′ − y·x′', missed: 'spin: turning the swing didn\'t matter' },
+    c5: { tier: 'red', name: 'SPIN', sub: 'x·y′ − y·x′', short: 'spin', missed: 'spin: turning the swing didn\'t matter' },
     c6: { tier: 'pink', name: 'SPIN', strike: true, sub: 'the wind', why: 'because of the wind', missed: 'the wind' },
-    c7: { tier: 'pink', name: 'THE BALL\'S CLOCK', sub: 'is real', missed: 'the re-ticked ball' },
-    c8: { tier: 'red', name: 'SLIDE ENERGY', sub: 'EMPTY', missed: 'the empty slide energy: starting the slide later didn\'t matter' },
-    c9: { tier: 'red', name: 'A RULE', sub: 'ψ₁x′ + ψ₂y′ = 0', missed: 'the rule: re-ticking the slide didn\'t matter' },
+    c7: { tier: 'red', name: 'REAL ENERGY', sub: 'the ball\'s clock is fixed', short: 'real energy', missed: 'real energy: re-ticking the ball did matter' },
+    c8: { tier: 'red', name: 'SLIDE ENERGY', sub: 'EMPTY', short: 'the empty slide energy', missed: 'the empty slide energy: starting the slide later didn\'t matter' },
+    c9: { tier: 'red', name: 'A RULE', sub: 'ψ₁x′ + ψ₂y′ = 0', short: 'the rule', missed: 'the rule: re-ticking the slide didn\'t matter' },
   };
   // the computed answer and prize kind for every card
   function playCard(card, seed) {
@@ -282,18 +292,19 @@
     return { card, world: w, matters: m.matters, residual: m.residual, change: ch, audit: a, kind: m.matters ? 'none' : LEVERS[card.lever].free ? 'rule' : a.kind };
   }
 
-  // ---------- drawn paths
-  function strokeToPath(points, n, ends) {
-    n = n || C.N; let pts = points.slice(); if (ends) pts = [ends[0]].concat(pts, [ends[1]]);
+  // ---------- paths given as points: the comparison for the empty prize is a straight slide from the real slide's A to its B
+  function pointsToPath(points, n) {
+    n = n || C.N; const pts = points.slice();
     const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
     const L = cum[cum.length - 1] || 1e-9, u1 = new Float64Array(n), u2 = new Float64Array(n); let j = 0;
     for (let i = 0; i < n; i++) { const t = i / (n - 1) * L; while (j < cum.length - 2 && cum[j + 1] < t) j++; const seg = (cum[j + 1] - cum[j]) || 1e-9, fr = Math.max(0, Math.min(1, (t - cum[j]) / seg)); u1[i] = pts[j][0] + (pts[j + 1][0] - pts[j][0]) * fr; u2[i] = pts[j][1] + (pts[j + 1][1] - pts[j][1]) * fr; }
     for (let pass = 0; pass < 8; pass++) { const a = Float64Array.from(u1), b = Float64Array.from(u2); for (let i = 1; i < n - 1; i++) { u1[i] = (a[i - 1] + 2 * a[i] + a[i + 1]) / 4; u2[i] = (b[i - 1] + 2 * b[i] + b[i + 1]) / 4; } }
     return { x: grid(n), u1, u2 };
   }
+  function straightBetween(path) { const n = path.u1.length; return pointsToPath([[path.u1[0], path.u2[0]], [path.u1[n - 1], path.u2[n - 1]]], n); }
 
   // ---------- the end
-  function verdict(answers) { // answers: { cardId: 'matters' | 'not' }; a badge is earned by a correct call
+  function verdict(answers) { // answers: { cardId: 'matters' | 'not' }; a badge is earned by a right answer
     const earned = {}, redWon = [], redMissed = [], pinkWon = [], pinkMissed = [];
     for (const card of CARDS) {
       const res = playCard(card, 1), said = answers[card.id], right = !!said && ((said === 'matters') === res.matters), b = BADGES[card.id];
@@ -301,14 +312,13 @@
       (b.tier === 'red' ? (right ? redWon : redMissed) : (right ? pinkWon : pinkMissed)).push(card.id);
     }
     const list = a => a.length === 1 ? a[0] : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-    const redName = { c1: 'energy', c3: 'sideways speed', c5: 'spin', c8: 'the empty slide energy', c9: 'the rule' };
     let headline, line;
     if (!redMissed.length && !pinkMissed.length) { headline = 'A FULL SHELF.'; line = 'The paper and its traps: every badge, red and pink.'; }
     else {
       headline = !redMissed.length ? 'THE WHOLE PAPER, IN RED.' : !redWon.length ? 'THE PAPER GOT AWAY.' : 'PART OF THE PAPER, IN RED.';
       const parts = [];
-      if (redWon.length) parts.push(`Your red badges: ${list(redWon.map(id => redName[id]))}.`);
-      if (redMissed.length === 1) parts.push(`You missed ${BADGES[redMissed[0]].missed}.`); else if (redMissed.length) parts.push(`You missed ${list(redMissed.map(id => redName[id]))}: each time the change didn't matter.`);
+      if (redWon.length) parts.push(`Your red badges: ${list(redWon.map(id => BADGES[id].short))}.`);
+      if (redMissed.length === 1) parts.push(`You missed ${BADGES[redMissed[0]].missed}.`); else if (redMissed.length) parts.push(`You missed ${list(redMissed.map(id => BADGES[id].short))}.`);
       if (!pinkMissed.length) parts.push('Your pink badges show you can spot when a law breaks; the paper itself is in the red ones.');
       else if (pinkWon.length) parts.push(`Your pink badges show you can spot when a law breaks, though ${list(pinkMissed.map(id => BADGES[id].missed))} caught you.`);
       else parts.push('Every trap caught you: no pink badges.');
@@ -318,5 +328,5 @@
   }
   function smoothCurve(samples, n) { n = n || C.N; const m = samples.length, p = new Float64Array(n); for (let i = 0; i < n; i++) { const j = i / (n - 1) * (m - 1), k = Math.min(m - 2, Math.floor(j)), fr = j - k; p[i] = samples[k] * (1 - fr) + samples[k + 1] * fr; } for (let pass = 0; pass < 6; pass++) { const q = Float64Array.from(p); for (let i = 1; i < n - 1; i++) p[i] = (q[i - 1] + 2 * q[i] + q[i + 1]) / 4; } let mx = 0; for (let i = 0; i < n; i++) mx = Math.max(mx, Math.abs(p[i])); if (mx > 0) for (let i = 0; i < n; i++) p[i] /= mx; return p; }
 
-  return { CONFIG, WORLDS, LEVERS, CARDS, PRIZES, BADGES, rng, density, fields, score, lieResidual, current, identityResidual, randomPath, randomFree, integrate, trueMotion, bump, retickedTrue, testBatch, matters, audit, prizeLine, showChange, plateScale, reticked, playCard, strokeToPath, verdict, smoothCurve };
+  return { CONFIG, WORLDS, LEVERS, CARDS, PRIZES, BADGES, rng, density, fParts, fields, score, lieResidual, current, identityResidual, randomPath, randomFree, integrate, trueMotion, bump, retickedTrue, testBatch, matters, audit, prizeLine, showChange, plateScale, reticked, playCard, pointsToPath, straightBetween, verdict, smoothCurve };
 });

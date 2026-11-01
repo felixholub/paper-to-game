@@ -8,8 +8,13 @@
 //         on the ball neither holds
 //   (§6)  the slide's clock prize is improper: B ≡ 0 on true motions, fakes and random paths alike; the clock shift is the re-tick
 //         with p ≡ 1, so it sits inside the free hand
-//   (O)   the opener is honest: the slide's revealed path has a smaller S than the straight line and than every detour tried
-//   (D)   thirty random hand-drawn re-tickings: the slide never cares, the ball always does
+//   (S)   the empty prize's comparison is honest: the straight slide shown beside the real one is not a slide the dot would take
+//         (its equations of motion fail), and the slide's energy is zero along it as along the real slide
+//   (Y)   every "why, in the formula" line is true of the formula, checked point by point on random states: no t in the ball's
+//         formula and a t in the growing one; no x in the ball's but x in the magnet's; the swing's unchanged by a turn and the
+//         wind's changed; the slide's formula scales with the speed (twice as fast, twice the number per unit time) and the ball's
+//         does not; and the badge 'real energy' rests on the ball caring about re-ticking (card 7) where the slide does not (card 9)
+//   (D)   thirty random wobbly re-tickings: the slide never cares, the ball always does
 //   (ROB) every answer survives changes of grid, bump size, gravity, the growth rate, the magnet, the wind, the spring and the slide
 //   (W)   no decimals in anything the screen reads from the mechanism
 const M = require('./mechanism.js'), C = M.CONFIG, fs = require('fs');
@@ -42,14 +47,27 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   for (let k = 0; k < 10; k++) { const path = k < 3 ? M.trueMotion(w, r) : k < 6 ? M.bump(M.trueMotion(w, null), 0.2, 0.5, 0.8, 0.5, 0.3) : M.randomPath(w, r); const B = M.current(w, path, 'clock', null), F = M.fields(w, path); for (let i = C.EDGE; i < B.length - C.EDGE; i++) { worst = Math.max(worst, Math.abs(B[i])); fsz = Math.max(fsz, Math.abs(F.f[i])); } }
   const path = M.randomPath(w, M.rng(9)), one = new Float64Array(path.u1.length).fill(1), a = M.current(w, path, 'clock', null), b = M.current(w, path, 'warpclock', one); let d = 0; for (let i = 0; i < a.length; i++) d = Math.max(d, Math.abs(a[i] - b[i]));
   check('§6 the slide\'s clock prize is improper: B ≡ 0 on true motions, fakes and random paths; and the clock shift is the re-tick with p ≡ 1', worst < 1e-9 * Math.max(1, fsz) && d < 1e-12 && res.c8.kind === 'empty', `|B| ${ex(worst)} against |f| ${fsz.toFixed(1)}`); }
-// ---- (O)
-{ const w = M.WORLDS.slide, b = M.trueMotion(w, null), n = b.u1.length, S0 = M.score(w, b), A = [b.u1[0], b.u2[0]], B = [b.u1[n - 1], b.u2[n - 1]], mid = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
-  const tries = [M.strokeToPath([A, B], n)].concat([0.25, -0.25, -0.5, 0.15, -0.15].map(dy => M.strokeToPath([A, [mid[0], mid[1] + dy], B], n)), [M.strokeToPath([A, [A[0] + 0.2, A[1] - 0.5], [B[0] - 0.4, B[1] - 0.4], B], n)]);
-  const worst = Math.min(...tries.map(p => M.score(w, p)));
-  check('O the opener is honest: the slide\'s revealed path has a smaller number than the straight line and every detour tried', worst > S0, `best ${S0.toFixed(4)}, smallest rival ${worst.toFixed(4)}`); }
+// ---- (S)
+{ const w = M.WORLDS.slide, real = M.trueMotion(w, null), st = M.straightBetween(real), F = M.fields(w, st); let psi = 0, fsz = 0, b = 0;
+  for (let i = C.EDGE; i < F.f.length - C.EDGE; i++) { psi = Math.max(psi, Math.abs(F.psi1[i]), Math.abs(F.psi2[i])); fsz = Math.max(fsz, Math.abs(F.f[i])); }
+  const B = M.current(w, st, 'clock', null), Br = M.current(w, real, 'clock', null); for (let i = 0; i < B.length; i++) b = Math.max(b, Math.abs(B[i]), Math.abs(Br[i]));
+  check('S the comparison slide is honest: the straight slide fails the equations of motion, and the slide\'s energy is zero along it and along the real slide', psi > 50 * C.TRUE_PSI_TOL && b < 1e-9 * fsz, `ψ up to ${psi.toFixed(2)}; energy ${ex(b)} against |f| ${fsz.toFixed(1)}`); }
+// ---- (Y)
+{ const r = M.rng(77), W = M.WORLDS; let ok = true; const det = [];
+  const f = (w, t, s) => M.fParts(w, t, s[0], s[1], s[2], s[3]).f;
+  const states = Array.from({ length: 40 }, () => [(r() - 0.5) * 2, (r() - 0.5) * 1.6, (r() - 0.5) * 6 + 0.5, (r() - 0.5) * 6 + 0.5]);
+  const maxDiff = (g) => Math.max(...states.map(g));
+  const t0 = maxDiff(s => Math.abs(f(W.ball, 0.9, s) - f(W.ball, 0.1, s))), t1 = maxDiff(s => Math.abs(f(W.grow, 0.9, s) - f(W.grow, 0.1, s)));
+  const x0 = maxDiff(s => Math.abs(f(W.ball, 0, [s[0] + 0.4, s[1], s[2], s[3]]) - f(W.ball, 0, s))), x1 = maxDiff(s => Math.abs(f(W.magnet, 0, [s[0] + 0.4, s[1], s[2], s[3]]) - f(W.magnet, 0, s)));
+  const rot = (s, a) => [Math.cos(a) * s[0] - Math.sin(a) * s[1], Math.sin(a) * s[0] + Math.cos(a) * s[1], Math.cos(a) * s[2] - Math.sin(a) * s[3], Math.sin(a) * s[2] + Math.cos(a) * s[3]];
+  const r0 = maxDiff(s => Math.abs(f(W.peg, 0, rot(s, 0.6)) - f(W.peg, 0, s))), r1 = maxDiff(s => Math.abs(f(W.wind, 0, rot(s, 0.6)) - f(W.wind, 0, s)));
+  const sl = states.map(s => [s[0], Math.min(s[1], 1.0), s[2], s[3]]), h0 = Math.max(...sl.map(s => Math.abs(f(W.slide, 0, [s[0], s[1], 2 * s[2], 2 * s[3]]) - 2 * f(W.slide, 0, s)))), h1 = maxDiff(s => Math.abs(f(W.ball, 0, [s[0], s[1], 2 * s[2], 2 * s[3]]) - 2 * f(W.ball, 0, s)));
+  det.push(`no t: ball ${ex(t0)}, growing ${ex(t1)}`, `no x: ball ${ex(x0)}, magnet ${ex(x1)}`, `turn: swing ${ex(r0)}, wind ${ex(r1)}`, `twice as fast: slide ${ex(h0)}, ball ${ex(h1)}`);
+  ok = t0 < 1e-12 && t1 > 0.1 && x0 < 1e-12 && x1 > 1e-3 && r0 < 1e-9 && r1 > 0.1 && h0 < 1e-9 && h1 > 0.1 && res.c7.matters && !res.c9.matters && M.BADGES.c7.tier === 'red';
+  det.forEach(d => out.push('      ' + d)); check('Y every "why, in the formula" line is true of the formula, point by point; real energy rests on card 7 against card 9', ok); }
 // ---- (D)
 { let ok = true; for (let s = 0; s < 30; s++) { const r = M.rng(800 + s), p = M.smoothCurve(Array.from({ length: 24 }, () => (r() - 0.5) * 2)); if (!(M.lieResidual(M.WORLDS.slide, M.randomPath(M.WORLDS.slide, r), 'warpclock', p) < C.LIE_TOL && M.lieResidual(M.WORLDS.ball, M.randomPath(M.WORLDS.ball, r), 'warpclock', p) > C.LIE_TOL)) ok = false; }
-  check('D thirty random hand-drawn re-tickings: the slide never cares, the ball always does', ok); }
+  check('D thirty random wobbly re-tickings: the slide never cares, the ball always does', ok); }
 // ---- (ROB)
 { const saved = JSON.parse(JSON.stringify(C)); let ok = true; const det = [];
   const trial = (name, mut) => { Object.assign(C, mut); const got = M.CARDS.map(c => M.playCard(c, 3)); const bad = got.filter(g => g.matters !== expected[g.card.id]).map(g => g.card.id); const kinds = got.filter(g => ['c1', 'c3', 'c5', 'c8'].includes(g.card.id)).map(g => g.kind).join(','); det.push(`${name}: ${bad.length ? 'WRONG ' + bad.join(',') : 'all right'} (${kinds})`); if (bad.length || kinds !== 'teeth,teeth,teeth,empty') ok = false; Object.assign(C, JSON.parse(JSON.stringify(saved))); };
@@ -59,7 +77,7 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   trial('wind light', { WIND: 3 }); trial('spring soft', { PEG_K: 15 }); trial('slide high', { SLIDE_H: 1.6 });
   det.forEach(d => out.push('      ' + d)); check('ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide', ok); }
 // ---- (W)
-{ const strings = []; for (const k in M.WORLDS) { const w = M.WORLDS[k]; strings.push(w.name, w.formula, w.words); } for (const c of M.CARDS) strings.push(c.setup, c.change, c.reveal); for (const k in M.PRIZES) strings.push(k, M.PRIZES[k].formula, M.PRIZES[k].gloss); for (const k in M.LEVERS) strings.push(M.LEVERS[k].label); for (const k in M.BADGES) strings.push(M.BADGES[k].name, M.BADGES[k].sub, M.BADGES[k].missed);
+{ const strings = []; for (const k in M.WORLDS) { const w = M.WORLDS[k]; strings.push(w.name, w.formula, w.words); } for (const c of M.CARDS) strings.push(c.setup, c.change, c.reveal, c.why); for (const k in M.PRIZES) strings.push(k, M.PRIZES[k].formula, M.PRIZES[k].gloss); for (const k in M.LEVERS) strings.push(M.LEVERS[k].label); for (const k in M.BADGES) strings.push(M.BADGES[k].name, M.BADGES[k].sub, M.BADGES[k].missed, M.BADGES[k].short || '', M.BADGES[k].why || '');
   const v = M.verdict({ c1: 'not', c2: 'not', c4: 'matters' }); strings.push(v.headline, v.line);
   check('W no decimals in anything the screen reads from the mechanism', strings.every(s => !/\d\.\d/.test(s)), strings.length + ' strings'); }
 
