@@ -1,0 +1,126 @@
+AIM: Settle as many of the nine clashes as you can. You have 14 pages to give, in all.  (deck 1)
+
+— CLASH 1 OF 9   [·········]  pages ▮▮▮▮▮▮▮▮▮▮▮▮▮▮14
+  YOU (orange): Drug Board: "Strong painkillers stay under lock and key."   THEM (green): Health Office: "People in pain must get relief."
+  PICTURE: a dot falls into the overlap: hospitals with no painkillers
+  GAME: Nobody planned this clash. Hospitals in poor countries ran out of painkillers, and both rulebooks apply.
+  THEY SAY: "We both want people safe. Let's talk."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–4)
+  → offer 1.  GAME: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal.
+  Years later: the seam is knit. Painkillers reach hospitals; the locks stay on for the street trade.
+  GHOST: They would have settled for 1 page.
+  PAPER: An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+— CLASH 2 OF 9   [■········]  pages ▮▮▮▮▮▮▮▮▮▮▮▮▮13
+  YOU (orange): Trade Court: "Our judges settle trade disputes."   THEM (green): Treaty Office: "Judges may not make new law."
+  PICTURE: an arrow pushes their circle into yours: a powerful government that lost a case
+  GAME: Started on purpose. A powerful government that lost a case points to another body's rule to undo your court.
+  THEY SAY: "Your judges overstepped. Hand disputes back to governments."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–4)
+  → offer 2.  GAME: You rewrote two pages of your rulebook. They took them and pushed on: no deal yet.
+  CROWD: The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+  ASK: Last word. The two pages you gave count toward a deal. Give more?  (0–4)
+  → offer 0.  GAME: You held the line. So did they: a stand-off.
+  Years later: the seam is torn. The court stops sitting, and disputes pile up.
+  GHOST: No number of pages would have settled it. They wanted your court shut.
+  PAPER: Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+— CLASH 3 OF 9   [■×·······]  pages ▮▮▮▮▮▮▮▮▮▮▮11
+  YOU (orange): Patent Office: "A new medicine is its inventor's for twenty years."   THEM (green): Health Office: "In an epidemic, medicine must be cheap."
+  PICTURE: an arrow pushes their circle into yours: poorer countries and campaigners
+  GAME: Started on purpose. Poorer countries and campaigners took the Health Office's rule to fight yours.
+  THEY SAY: "People are dying while you count royalties."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–4)
+  → offer 0.  GAME: You held the line and gave nothing. They held theirs: no deal yet.
+  CROWD: The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+  ASK: Last word. Give them pages now, or hold the line?  (0–4)
+  → offer 2.  GAME: You rewrote two more pages of your rulebook. They take them and sign: a deal, after a fight.
+  Years later: the seam is knit. Poor countries may copy medicines in an emergency; patents stand everywhere else.
+  GHOST: They would have settled for 2 pages, at the start too.
+  PAPER: Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+— CLASH 4 OF 9   [■×■······]  pages ▮▮▮▮▮▮▮▮8
+  YOU (orange): Rights Court: "Anyone may take their government to us."   THEM (green): Council: "A country's own courts have the last word."
+  PICTURE: an arrow pushes their circle into yours: a government tired of losing cases
+  GAME: Started on purpose. A government tired of losing cases digs up another body's rule to get out from under yours.
+  THEY SAY: "Our own courts are enough. Step aside."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–4)
+  → offer 0.  GAME: You held the line and gave nothing. They held theirs: no deal yet.
+  CROWD: The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+  ASK: Last word. Give them pages now, or hold the line?  (0–4)
+  → offer 0.  GAME: You held the line. So did they: a stand-off.
+  Years later: the seam is torn. The government ignores your rulings, and others start to copy it.
+  GHOST: No number of pages would have settled it. They wanted out from under your court altogether.
+  PAPER: Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+— CLASH 5 OF 9   [■×■×·····]  pages ▮▮▮▮▮▮▮▮8
+  YOU (orange): Wildlife Treaty: "No trade in ivory."   THEM (green): Trade Office: "A country may sell what it lawfully owns."
+  PICTURE: a dot falls in (a warehouse of old ivory) and a small arrow (governments keen to sell)
+  GAME: A bit of both. Poaching filled the warehouses, and some governments are glad to use the trade rules.
+  THEY SAY: "Let us sell it, once, under your eye."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–4)
+  → offer 1.  GAME: You rewrote one page of your rulebook. Not enough for them: no deal yet.
+  CROWD: Nobody outside the two bodies is paying much attention.
+  ASK: Last word. The one page you gave counts toward a deal. Give more?  (0–4)
+  → offer 1.  GAME: You rewrote one more page of your rulebook. They rewrote one of theirs to meet you: a deal.
+  Years later: the deal held, but the two rulebooks drifted apart anyway. (About one deal in four does, in the paper's cases.)
+  GHOST: They would have settled for 2 pages.
+  PAPER: A bit of both, like the paper's own Zimbabwe case: mostly an accident, with a government glad to use it. The paper counts it with the accidents.
+
+— CLASH 6 OF 9   [■×■×■····]  pages ▮▮▮▮▮▮6
+  YOU (orange): Seabed Authority: "Licence mining of the deep seabed."   THEM (green): High Seas Treaty: "Protect life in the deep ocean first."
+  PICTURE: an arrow pushes their circle into yours: countries that want the deep sea left alone
+  GAME: Started on purpose. Countries that want the deep sea left alone set up a treaty to challenge yours.
+  THEY SAY: "Not one more licence until the ocean is safe."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–4)
+  → offer 0.  GAME: You held the line and gave nothing. They held theirs: no deal yet.
+  CROWD: The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+  ASK: Last word. Give them pages now, or hold the line?  (0–4)
+  → offer 2.  GAME: You rewrote two more pages of your rulebook. They take them and sign: a deal, after a fight.
+  Years later: the deal held, but the two rulebooks drifted apart anyway. (About one deal in four does, in the paper's cases.)
+  GHOST: They would have settled for 2 pages, at the start too.
+  PAPER: Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+— CLASH 7 OF 9   [■×■×■■···]  pages ▮▮▮3
+  YOU (orange): Shipping Office: "Rescued people are landed at the nearest port."   THEM (green): Refugee Office: "Nobody is sent back to danger."
+  PICTURE: a dot falls into the overlap: a boat of refugees in a storm
+  GAME: Nobody planned this clash. A rescue at sea, and the nearest port is the place they fled.
+  THEY SAY: "Your rule and ours both mean well. Let's square them."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–3)
+  → offer 1.  GAME: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal.
+  Years later: the seam is knit. Rescued people are now landed at a safe port, not just the nearest.
+  GHOST: They would have settled for 1 page.
+  PAPER: An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+— CLASH 8 OF 9   [■×■×■■■··]  pages ▮▮2
+  YOU (orange): Fisheries Office: "Each country may catch its quota."   THEM (green): Wildlife Treaty: "No trade in animals close to dying out."
+  PICTURE: a dot falls into the overlap: a tuna that is suddenly rare
+  GAME: Nobody planned this clash. A tuna grew rare, and both rulebooks apply.
+  THEY SAY: "Neither of us saw this coming. Let's sort it out."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–2)
+  → offer 1.  GAME: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal.
+  Years later: the seam is knit. Quotas are cut wherever the tuna is listed as rare.
+  GHOST: They would have settled for 1 page.
+  PAPER: An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+— CLASH 9 OF 9   [■×■×■■■■·]  pages ▮1
+  YOU (orange): Arms Conference: "Weapons treaties need every country's yes."   THEM (green): Mine Ban Treaty: "Ban landmines now, with whoever will sign."
+  PICTURE: an arrow pushes their circle into yours: countries and campaigners tired of waiting
+  GAME: Started on purpose. Countries and campaigners tired of waiting for you wrote their own treaty.
+  THEY SAY: "You have had years. We are going ahead."
+  ASK: Rewrite how many pages of your rulebook to meet them?  (0–1)
+  → offer 0.  GAME: You held the line and gave nothing. They held theirs: no deal yet.
+  CROWD: The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+  ASK: Last word. Give them pages now, or hold the line?  (0–0)
+  → offer 0.  GAME: You held the line. So did they: a stand-off.
+  Years later: the seam is torn. Two clubs, two sets of rules, and the big powers sign neither.
+  GHOST: They would have settled for 2 pages, at the start too.
+  PAPER: Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+END   [■×■×■■■■×]  pages left 0
+You settled six of the seven that could be settled.
+  You settled all four of the clashes that began by accident, for the fewest pages they could take.
+  Of the five started on purpose, the crowd took the challenger's side in three, and you settled two of those; the crowd took three of your pages.
+  The two started to pull a body down could not be settled at any price, and the two pages you gave them were lost.
+  Kreuder-Sonnen, Schmotz and Zürn studied 77 real clashes between international rulebooks, 1970 to 2018. Of the 35 that began by accident, 33 were settled together, and most knit the two bodies closer. Of the 42 started on purpose, 16 were fought to the end, and all but one tore the system apart; 26 were settled after all, most of them for good.
+  So the two old camps were both right, about different clashes. Overlapping rulebooks pull the world together when they collide by accident, and apart when someone collides them on purpose, unless whoever picked the fight has the world on their side.

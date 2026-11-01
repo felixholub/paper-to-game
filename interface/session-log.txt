@@ -1,0 +1,134 @@
+  shot start
+START aim: Settle as many of the nine clashes as you can. You have 14 pages to give, in all.
+
+a CLASH 1 [▫········] pages 14: Drug Board vs Health Office (accident)
+  shot a-clash1-intro
+  shot a-clash1-preview
+   offer 1: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the seam is knit. Painkillers reach hospitals; the locks stay on for the street trade. | They would have settled for 1 page. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+  shot a-clash1-end
+
+a CLASH 2 [■▫·······] pages 13: Trade Court vs Treaty Office (purpose)
+  shot a-clash2-intro
+   offer 2: You rewrote two pages of your rulebook. They took them and pushed on: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+  shot a-clash2-after1
+  shot help
+   help returned to: play
+   last word 0: ds outside their own camp. Holding out costs you nothing. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The court stops sitting, and disputes pile up. | No number of pages would have settled it. They wanted your court shut. | Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+  shot a-clash2-end
+
+a CLASH 3 [■×▫······] pages 11: Patent Office vs Health Office (purpose)
+  shot a-clash3-intro
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+  shot a-clash3-after1
+  shot a-clash3-lastword
+   last word 2: ter: the seam is knit. Poor countries may copy medicines in an emergency; patents stand everywhere else. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+  shot a-clash3-end
+
+a CLASH 4 [■×■▫·····] pages 8: Rights Court vs Council (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+   last word 0: osts you nothing. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The government ignores your rulings, and others start to copy it. | No number of pages would have settled it. They wanted out from under your court altogether. | Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+a CLASH 5 [■×■×▫····] pages 8: Wildlife Treaty vs Trade Office (messy)
+  shot a-clash5-intro
+   offer 1: You rewrote one page of your rulebook. Not enough for them: no deal yet. | Nobody outside the two bodies is paying much attention.
+  shot a-clash5-after1
+   last word 1: rewrote one more page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the deal held, but the two rulebooks drifted apart anyway. (About one deal in four does, in the paper's cases.) | They would have settled for 2 pages. | A bit of both, like the paper's own Zimbabwe case: mostly an accident, with a government glad to use it. The paper counts it with the accidents.
+  shot a-clash5-end
+
+a CLASH 6 [■×■×■▫···] pages 6: Seabed Authority vs High Seas Treaty (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+   last word 2: l held, but the two rulebooks drifted apart anyway. (About one deal in four does, in the paper's cases.) | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+a CLASH 7 [■×■×■■▫··] pages 3: Shipping Office vs Refugee Office (accident)
+   offer 1: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the seam is knit. Rescued people are now landed at a safe port, not just the nearest. | They would have settled for 1 page. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+a CLASH 8 [■×■×■■■▫·] pages 2: Fisheries Office vs Wildlife Treaty (accident)
+   offer 1: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the seam is knit. Quotas are cut wherever the tuna is listed as rare. | They would have settled for 1 page. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+a CLASH 9 [■×■×■■■■▫] pages 1: Arms Conference vs Mine Ban Treaty (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+   last word 0: and-off. | Years later: the seam is torn. Two clubs, two sets of rules, and the big powers sign neither. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+a END: you settled six of the seven that could be settled.
+   You settled all four of the clashes that began by accident, for the fewest pages they could take. | Of the five started on purpose, the crowd took the challenger's side in three, and you settled two of those; the crowd took three of your pages. | The two started to pull a body down could not be settled at any price, and the two pages you gave them were lost.
+  shot a-end
+  shot about
+about returned to: end
+
+b CLASH 1 [▫········] pages 14: Drug Board vs Health Office (accident)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. Met with nothing, they dig in too. | Nobody outside the two bodies is paying much attention.
+   last word 0: | Nobody outside the two bodies is paying much attention. | You held the line. So did they: a stand-off. | Years later: the seam is torn. Each body gives its own advice, and doctors don't know which to follow. | They would have settled for 1 page at the start; after you gave nothing, for 2 pages. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+b CLASH 2 [×▫·······] pages 14: Rights Court vs Council (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+  shot b-clash2-after1
+   last word 0: osts you nothing. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The government ignores your rulings, and others start to copy it. | No number of pages would have settled it. They wanted out from under your court altogether. | Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+b CLASH 3 [××▫······] pages 14: Patent Office vs Health Office (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+  shot b-clash3-after1
+   last word 0: ages more from you. | Years later: the seam is torn. Copies are made anyway, and lawsuits fly for years. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+b CLASH 4 [×××▫·····] pages 11: Development Bank vs Rights Office (accident)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. Met with nothing, they dig in too. | Nobody outside the two bodies is paying much attention.
+   last word 0: . | Nobody outside the two bodies is paying much attention. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The Bank lends, the Rights Office condemns, and the two stop talking. | They would have settled for 1 page at the start; after you gave nothing, for 2 pages. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+b CLASH 5 [××××▫····] pages 11: Seabed Authority vs High Seas Treaty (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+   last word 0: you. | Years later: the seam is torn. Licences are issued and protested; nobody knows whose rule counts. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+b CLASH 6 [×××××▫···] pages 8: Arms Conference vs Mine Ban Treaty (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it has cost you a page already (your own members are drifting their way), and will cost you two more if this ends without a deal.
+   last word 0: rom you. | Years later: the seam is torn. Two clubs, two sets of rules, and the big powers sign neither. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+b CLASH 7 [××××××▫··] pages 5: Shipping Office vs Refugee Office (accident)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. Met with nothing, they dig in too. | Nobody outside the two bodies is paying much attention.
+   last word 0: , they dig in too. | Nobody outside the two bodies is paying much attention. | You held the line. So did they: a stand-off. | Years later: the seam is torn. Captains face two rulebooks, and some stop rescuing. | They would have settled for 1 page at the start; after you gave nothing, for 2 pages. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+b CLASH 8 [×××××××▫·] pages 5: Trade Court vs Treaty Office (purpose)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+   last word 0: ds outside their own camp. Holding out costs you nothing. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The court stops sitting, and disputes pile up. | No number of pages would have settled it. They wanted your court shut. | Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+b CLASH 9 [××××××××▫] pages 5: Wildlife Treaty vs Trade Office (messy)
+   offer 0: You held the line and gave nothing. They held theirs: no deal yet. Met with nothing, they dig in too. | Nobody outside the two bodies is paying much attention.
+   last word 0: odies is paying much attention. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The warehouses leak, and both rulebooks are flouted. | They would have settled for 2 pages at the start; after you gave nothing, for 3 pages. | A bit of both, like the paper's own Zimbabwe case: mostly an accident, with a government glad to use it. The paper counts it with the accidents.
+
+b END: you settled none of the seven that could be settled.
+   Of the four clashes that began by accident, you settled none; each ended in a stand-off because you would not meet them. | Of the five started on purpose, the crowd took the challenger's side in three, and you settled none of those; the crowd took nine of your pages. | The two started to pull a body down could not be settled at any price, and you gave them nothing.
+  shot b-end
+
+c CLASH 1 [▫········] pages 14: Drug Board vs Health Office (accident)
+   offer 1: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the seam is knit. Painkillers reach hospitals; the locks stay on for the street trade. | They would have settled for 1 page. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+c CLASH 2 [■▫·······] pages 13: Trade Court vs Treaty Office (purpose)
+   offer 2: You rewrote two pages of your rulebook. They took them and pushed on: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+   last word 0: ds outside their own camp. Holding out costs you nothing. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The court stops sitting, and disputes pile up. | No number of pages would have settled it. They wanted your court shut. | Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+c CLASH 3 [■×▫······] pages 11: Patent Office vs Health Office (purpose)
+   offer 2: You rewrote two pages of your rulebook. They take them and sign: a deal. | Years later: the seam is knit. Poor countries may copy medicines in an emergency; patents stand everywhere else. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+c CLASH 4 [■×■▫·····] pages 9: Rights Court vs Council (purpose)
+   offer 2: You rewrote two pages of your rulebook. They took them and pushed on: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with you: their cause wins few friends outside their own camp. Holding out costs you nothing.
+   last word 0: osts you nothing. | You held the line. So did they: a stand-off. | Years later: the seam is torn. The government ignores your rulings, and others start to copy it. | No number of pages would have settled it. They wanted out from under your court altogether. | Started on purpose, the paper's "instrumental" kind, and fought to the end: like 16 of its 42. None of the 16 was settled; all but one tore.
+
+c CLASH 5 [■×■×▫····] pages 7: Wildlife Treaty vs Trade Office (messy)
+   offer 2: You rewrote two pages of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the deal held, but the two rulebooks drifted apart anyway. (About one deal in four does, in the paper's cases.) | They would have settled for 2 pages. | A bit of both, like the paper's own Zimbabwe case: mostly an accident, with a government glad to use it. The paper counts it with the accidents.
+
+c CLASH 6 [■×■×■▫···] pages 5: Seabed Authority vs High Seas Treaty (purpose)
+   offer 2: You rewrote two pages of your rulebook. They take them and sign: a deal. | Years later: the deal held, but the two rulebooks drifted apart anyway. (About one deal in four does, in the paper's cases.) | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+c CLASH 7 [■×■×■■▫··] pages 3: Shipping Office vs Refugee Office (accident)
+   offer 1: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the seam is knit. Rescued people are now landed at a safe port, not just the nearest. | They would have settled for 1 page. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+c CLASH 8 [■×■×■■■▫·] pages 2: Fisheries Office vs Wildlife Treaty (accident)
+   offer 1: You rewrote one page of your rulebook. They rewrote one of theirs to meet you: a deal. | Years later: the seam is knit. Quotas are cut wherever the tuna is listed as rare. | They would have settled for 1 page. | An accidental clash, the paper's "non-instrumental" kind. Of 35 real ones, 33 were settled together.
+
+c CLASH 9 [■×■×■■■■▫] pages 1: Arms Conference vs Mine Ban Treaty (purpose)
+   offer 1: You rewrote one page of your rulebook. They took it and pushed on: no deal yet. | The crowd gathers: other governments, the press, people far away. It is with them: their cause is popular. Holding out against it costs you, and will cost you two more if this ends without a deal.
+   last word 0: and-off. | Years later: the seam is torn. Two clubs, two sets of rules, and the big powers sign neither. | They would have settled for 2 pages, at the start too. | Started on purpose, the paper's "instrumental" kind, by a side with a popular cause. Of the paper's 42 started on purpose, 26 were settled in the end; its guess, from one case, is that the challenger's cause had won over a wider public.
+
+c END: you settled six of the seven that could be settled.
+   You settled all four of the clashes that began by accident, for the fewest pages they could take. | Of the five started on purpose, the crowd took the challenger's side in three, and you settled two of those. | The two started to pull a body down could not be settled at any price, and the four pages you gave them were lost.
+  shot c-end
+
+errors: none
