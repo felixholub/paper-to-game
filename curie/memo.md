@@ -1,0 +1,183 @@
+# Curie's Quartz — design memo
+
+## 0. Given
+
+Mine: Steffen's signature and counter. Ideas given, and binding: "a kind of comic style for this one, ligne claire or manga; you choose, and you can surprise me." This fixes the register family (Drawn: the comic) and leaves the choice between the two schools to the engine. It does not conflict with the precedent rule: none of the last three games (Lovelace, Noether, Brown) was a comic. Two older games in the table were comics (Ask First, a comic strip; On the Record, a pop-art political cartoon with speech-bubble buttons); this one is a different school of comic and takes nothing from either. The engine chooses **ligne claire**, and the surprise is in the device: the game is an album that draws itself out of the player's experiments (section 13).
+
+## 1. Paper
+
+Marie Skłodowska Curie, "Rayons émis par les composés de l'uranium et du thorium" (Rays emitted by the compounds of uranium and thorium). Note presented by G. Lippmann. *Comptes rendus hebdomadaires des séances de l'Académie des sciences* 126 (1898): 1101–1103, session of 12 April 1898. No DOI. Available: the Académie des sciences archive scan, four pages (a cover and pp. 1101–1103), read in full, including both footnotes and the two tables. The note is in French; every quoted term below is translated. Online: the *Comptes rendus* volumes are on Gallica (Bibliothèque nationale de France); an English translation is in A. Romer (ed.), *The Discovery of Radioactivity and Transmutation* (Dover, 1964). No code, no data beyond the two printed tables; every number in the game is read from them or is declared ours.
+
+## 2. What the paper hands over
+
+**Primary: an estimate.** A table of currents, in units of 10⁻¹² ampere, through the air of a plate condenser (plates 8 cm across, 3 cm apart, 100 volts), one plate covered with a layer of the substance: 21 rows, from metallic uranium (24) to pitchblende of Johanngeorgenstadt (83), with the statement that every substance studied and not in the table is "at least 100 times less active than uranium". A second table: the fraction of the radiation that passes an aluminium leaf 0.01 mm thick (0.2 for uranium compounds and artificial chalcolite; 0.33 for pitchblende and natural chalcolite; 0.4 and 0.7 for thorium oxide in thin and thick layers). Reconstructed: each substance in the game produces, in the condenser, the current the table gives it, with a small jitter.
+
+**Secondary: an argument.** Activity belongs to the element, not the compound: "all the uranium compounds studied are active, and in general the more so the more uranium they contain." It follows that a uranium mineral cannot be more active than uranium itself; two are (pitchblende, natural chalcolite), so "these minerals may contain an element much more active than uranium". The control: chalcolite rebuilt from pure products by Debray's method "is no more active than any other uranium salt". The same logic, run the other way, disposes of white phosphorus: very active, but not as red phosphorus and not as phosphates, so its action is "probably of another nature". Formalised: a rule (the reading of a uranium compound is at most about its share of uranium, in units of the metal's reading) and the two tests (same element, other form; same form, other origin), played as choices.
+
+**Also handed over: the instrument.** The current was "measured in absolute value by means of an electrometer and a piezoelectric quartz". The paper names the instrument and no more; how it was worked (a weight let down by hand onto the quartz, whose charge holds the electrometer's spot of light at zero) is from Curie's thesis (*Recherches sur les substances radioactives*, 1903), declared as such.
+
+## 3. The discovery, and its kind
+
+**A counterintuitive result, made firm by an identification.** Anyone would say that pure uranium is the strongest thing uranium can be in: an ore is uranium diluted with rock. The paper measures a black ore from Saxony at three and a half times pure uranium, and a green uranium crystal from a mine at more than twice, though it is only half uranium. Then the identification: the same crystal made from pure chemicals is as weak as any uranium salt. So the excess is not uranium, and not the crystal; it is something in the natural rock that no bottle held. The note says so in one sentence and stops there. (After this paper, and not in it: polonium in July 1898, radium in December.)
+
+## 4. The core narrative
+
+Some stones give off invisible rays that let air carry electricity. Uranium does it, and the more uranium a thing holds, the more it does it. Marie Curie tested everything she could get her hands on. A lump of black rock from a mine, only partly uranium, did it three and a half times more strongly than pure uranium. So she made the same kind of crystal herself, from pure ingredients, and her copy was weak. The real rock was hiding something much stronger than uranium, which nobody had ever seen.
+
+## 5. Who lives in the paper
+
+- **The experimenter** (Curie at the condenser): controls what goes on the plate, and holds the electrometer at zero with the quartz. Could be asked to anticipate where the balance will fall. The player.
+- **The substances** (21 rows, and the dozens "at least 100 times less active"): each has a reading. Candidate subject: the rock as the thing studied. Declines: a rock chooses nothing.
+- **The donors** (footnote 2): Moissan (the uranium), Étard (salts and oxides), Lacroix (minerals of known origin from the Muséum's collection), Demarçay (rare pure oxides). Each controls what reaches the bench. Kept as the drawers of the shelf.
+- **The unnamed element**: in the rock, much more active than uranium. Candidate agent; it chooses nothing, so it stays off stage, in the verdict.
+- **Debray's procedure**: the recipe for chalcolite from pure products. Not an agent; the decisive move, offered on the shelf.
+- **The rays themselves** (absorption, photographic impressions, Röntgen's secondary rays): a candidate for a ray's-eye game; cut (section 14).
+- **Lippmann and the Académie**: receive the note. Candidate referee; a quiz on claims, rejected.
+
+## 6. Precedent
+
+| Game | Position | Format | Feedback device | Chassis |
+|---|---|---|---|---|
+| Lovelace's Cards (lovelace) | the analyst: a builder hanging cards on the Engine | construction challenge under a hidden test | the loom weaving the pattern | the Engine on pasteboard (Instrument): pasteboard buff, ink, plum, verdigris, thread red and blue; Abril Fatface + Old Standard TT; punched-card buttons |
+| Noether's Press (noether) | the transformation (an agent: the player is the group) | strategic, a contest with the Auditor; in its fifth revision a deck of changes | the stamped tag and the needle | night-shift machine hall (Techno): gunmetal, brushed steel, neon cyan, neon magenta, hazard yellow; Chakra Petch + Saira + Share Tech Mono; steel levers with a lit edge |
+| Brown's Restless Dust (brown) | controller (sets the conditions of one drop, aims at stillness) | impossible challenge | the live drop and the shelf of suspects | hand-coloured natural-history plate, 1828 (Austere): plate cream, ink, Prussian blue, almond gold, carmine, bottle green; IM Fell English; labels with a double rule |
+
+**What this game does differently.**
+
+- **Position: the experimenter, with the paper's own instrument in the thumb.** Not a builder, not a transformation, not a controller aiming at a state: the player measures, and the measuring is a skill. The thumb holds a spot of light still on a scale by letting a weight down onto a quartz crystal at the right speed; how hard you had to push is the reading. *I balanced the spot for the black rock and had to push three and a half times harder than for pure uranium.* (Hubble's Twelve Nights, further back in the table, also had an experimenter; there the instruments were read, here one is held.)
+- **Format: discovery by survey, under a visible budget.** Nine panels, fifteen jars and rocks, and a question that sharpens as the panels fill (does anything else do it; is it the element or the form; why is the rock so strong). Lovelace's player built and was tested; Noether's contested; Brown's could not win. Here nobody opposes the player and nothing is impossible: there is a cabinet, a budget, and the choice of what to test next.
+- **Device: the balance, and an album that draws itself (one of our own).** On the bench, the spot of light runs while the push is wrong and stands still when it is right: the instrument is the feedback, felt through the thumb. Each balanced measurement is then drawn as a comic panel into the player's album page: the jar, two bars (what its uranium alone could give, and what it gave), and a caption. The album page is the record and the budget at once: nine frames, empty ones dashed. No cloth, no tag, no drop.
+- **Chassis: a ligne claire album, Paris 1898 (Drawn family).** After a pasteboard instrument, a neon machine hall and a hand-coloured plate: a white comic page with uniform black line, flat colour, no shading, and caption boxes for buttons.
+
+## 7. The aim and the verdict
+
+**The aim** (start screen, top of the play screens, first line of How to play): *Uranium makes the air carry electricity. Find what else does.*
+
+It is the paper's own question ("whether bodies other than the compounds of uranium could make the air conduct electricity"), and it has a double answer the player does not expect: thorium, and something without a name hiding inside uranium's own ores. The yardstick during play is the album page: each panel says, in words and two bars, whether the spot moved, and whether the thing holds no uranium (WITHOUT URANIUM) or does more than its uranium can (MORE THAN ITS URANIUM). Under the page, a line keeps the list in the aim's units: *Found so far, besides uranium: …*
+
+**The verdict** (the album's last page, after the ninth panel), in three lines, then the player's page:
+
+1. *What you did:* "You tested eight things. Besides uranium, the spot moved for: thorium oxide, white phosphorus, pitchblende." (the player's own list), and one line for the path taken: whether they found a rock that beats its uranium, and whether they made its copy.
+2. *What the paper says:* "Marie Curie tested dozens. Thorium does it too. And two uranium rocks, pitchblende and chalcolite, do it far more than the uranium in them can. She made chalcolite herself from pure chemicals; her copy was as weak as any uranium salt."
+3. *What it means:* "So the rocks hold something no bottle in Paris held: 'an element much more active than uranium'. Within the year she and Pierre Curie had found two: polonium and radium."
+
+No number, no score: the paper sets no quantity to score against, and a tally is not a verdict.
+
+## 8. Three concepts
+
+**A. Curie's Quartz** (experimenter; discovery).
+- *Controls:* tap a jar on the shelf (fifteen live options, eight picks after the first, uranium, which is fixed); on the bench, one slider: how fast you let the weight down.
+- *Deliberation:* which jar answers the question I have now (does anything without uranium do it? is it the phosphorus, or the white kind of it? why is this rock so strong?); and on the bench, where the slider must go, given what the label says is in the jar.
+- *After:* the spot runs or stands; when it stands, the panel is drawn and pinned to the album.
+- *Moment:* the pitchblende. The label says two-thirds uranium; the thumb goes to just under the uranium mark; the spot keeps running; past the mark; still running; it stops at three and a half.
+- *Fun:* agency and mastery (the balance), discovery (three times: thorium, the phosphorus forms, the rock), anticipation (sliding up while the spot runs).
+- *Second play:* a different eight; the logic tests the first play skipped (the red phosphorus, the copy of the chalcolite); a faster, finer balance.
+
+**B. The Uranium Buyer** (agent; challenge with a budget).
+- *Controls:* a bid per lot of ore at a Paris auction, 1898, for a glassworks that buys uranium for its yellow glass; Madame Curie's electrometer gives a reading in a minute, the chemist's assay comes back a week later.
+- *Deliberation:* how far to trust the electrometer as a measure of uranium.
+- *Moment:* the pitchblende reads three and a half times pure uranium; bid on it, and the assay says two-thirds.
+- *Fun:* anticipation (the assay), agency (the bids). *Second play:* trust less.
+- *Why it loses:* the payoff is entirely ours, the paper's agents are nowhere, and the discovery arrives as "the electrometer lies", the opposite of the paper's spirit (the chemistry was blind to the new element; the electrometer saw it). The author would not enjoy it.
+
+**C. The Forger** (controller; the mechanism run backwards; **the reckless one**).
+- *Controls:* drag scoops of pure chemicals (uranium metal, uranium salts, thorium oxide, copper, phosphoric acid) into a dish, set the layer, and race it against the black rock: two spots side by side on two scales, the rock's and yours. No words on the play screen.
+- *Deliberation:* what to put in to make your spot run as fast as the rock's.
+- *Moment:* nothing pure gets there. The richest dish (thick thorium oxide) runs at two-thirds of the rock; pure uranium at under a third; the chalcolite made by Debray's recipe at a sixth of the natural crystal.
+- *Fun:* agency, discovery; no mastery is possible. *Second play:* none worth having.
+- *Why it is reckless:* wordless, real time, the experiment run backwards, and possibly unwinnable; and the forgery is exactly the paper's decisive experiment, generalised.
+
+## 9. The first five minutes
+
+**A (the pick).** *0:00.* An album cover: a ligne claire drawing of a glass-walled workroom with Paris roofs behind; a brass condenser on a bench, a lamp, a beam of light, a bright spot on a long scale; a hand holding a small brass weight over a crystal. The title, *Curie's Quartz*, and the aim: "Uranium makes the air carry electricity. Find what else does." I tap BEGIN. *0:10.* The bench, big. A caption says: the powder on the lower plate sends out rays; they let the air between the plates carry a tiny current; the current pushes the spot of light to the right; letting the weight down onto the quartz pushes it back; set how fast you let it down so the spot stands still on 0. "How fast you had to go is how strong the powder is." The dish: pure uranium, from M. Moissan. The spot is already drifting right. I drag the slider; the hand starts lowering the weight; the spot slows, swings back past zero; I ease off; it sits on 0 and a ring fills around it. *Balanced.* The panel is drawn: a jar of uranium, a full yellow bar. A yellow tick appears on the slider: URANIUM. *0:50.* The shelf: five drawers, fifteen jars and rocks, eight frames left on my page. What else could do it? I try lead, because it is heavy. The slider sits at zero and the spot does not move. *Nothing.* One frame gone; I frown. *1:30.* Thorium oxide, a rare white powder, no uranium in it. The spot moves. I balance it just under the uranium tick. The panel: an empty yellow bar, a full blue one, and the words WITHOUT URANIUM. I grin: one found. *2:10.* White phosphorus: it moves, more than uranium. Is it the phosphorus? There is red phosphorus on the same shelf, the same element; I spend a frame on it. Nothing. *Same element, other form, nothing.* I am thinking now. *3:00.* Lacroix's drawer: a black rock from Johanngeorgenstadt. The card says "mostly uranium oxide mixed with rock: about two-thirds uranium". I set the slider just under the uranium tick. The spot keeps running. I push past the tick; it is still running, with speed lines. I push and push; it stops at three and a half. "!?" The panel: a short yellow bar, a blue bar running off the end of it, MORE THAN ITS URANIUM. *3:50.* Natural chalcolite, half uranium: more than twice uranium. And in the last drawer: "Chalcolite you make yourself from pure chemicals." I make it (a flask, green crystals forming) and measure. It barely moves; under its half. *Same crystal, made pure: weak.* So it is not the crystal; it is something in the rock. *4:40.* The ninth frame. The album's last page: what I found, what she found, and the sentence from the note.
+
+**C (the runner-up, and the reckless one).** *0:00.* Two dishes, two scales, two spots. Left: a black rock; its spot races. Right: my empty dish; its spot sits still. A row of bottles. No words, except the title. *0:15.* I drag a scoop of yellow uranium salt into my dish; my spot creeps. I drag pure uranium metal; faster, but nowhere near. I wonder what the bottles are; tapping one shows a picture, not a name. *1:30.* A white powder makes it go nearly as fast as uranium; a thicker layer of it, faster still. I am getting closer. Two-thirds of the rock. *2:30.* I try everything; mixing slows it down. The green bottles and the copper: I make a green crystal (it looks like the rock's cousin); its spot crawls. *3:30.* I stop. I do not know what I was supposed to learn, unless I already knew that activity belongs to the element. The wordless screen has no way to tell me that the rock is mostly uranium, which is the whole point. *Verdict on paper:* the forgery is a great last act and a poor whole game; it survives as the last drawer of A.
+
+## 10. The pick, and why
+
+**A, Curie's Quartz.** The player sits where the paper's author sat, with the paper's instrument in the hand, and the discovery comes through the thumb before it comes through the eye: the slider has to go past the uranium mark, and keep going, for a rock that is mostly uranium and partly dirt. The deliberation is real twice over: which jar answers the question I now have, with eight frames for fifteen jars; and where the balance will fall, given what the jar holds. The paper's two logical tests (same element, other form; same form, other origin) are on the shelf as choices, not as explanations. The sentence afterwards has no "guess": *I balanced the spot for the black rock and had to push three and a half times harder than for pure uranium; my own copy of the green crystal barely moved it.* Originality: no game in the table has made the measuring itself a held skill, and none has drawn its record as a comic page.
+
+**Author test.** Curie would recognise her condenser (8 cm, 3 cm, 100 volts), her table to the digit, her donors' drawers (Moissan, Étard, Lacroix, Demarçay), the phosphorus that is "probably of another nature", Debray's chalcolite, and her one sentence about an element much more active than uranium. She would enjoy a stranger, sure of themselves, setting the slider for a rock at two-thirds of uranium and then chasing the spot past the uranium mark. A colleague who knows the answer still has to spend eight frames well and still has to hold the spot.
+
+**Runner-up: C, The Forger.** Switch if the author wants a ninety-second game built only on the control experiment, and is willing to state the rule (activity belongs to the element) on the start screen.
+
+**What the reckless concept would have given.** A wordless race in which the impossibility of the forgery is felt rather than read. Kept from it: the last drawer, "make it yourself", in which the player runs Debray's recipe and races their copy against the memory of the natural crystal. Given up: the silence and the side-by-side race.
+
+## 11. The shape
+
+One long round of nine panels: about five to six minutes. Screens: the cover (start); the shelf (the album page above, the five drawers below, a card for the chosen jar); the bench (the balance); the end (the album's last page); How to play; About. The first panel is fixed (pure uranium: the yardstick and the lesson in balancing); the other eight are the player's, from fifteen. No presets beyond the paper's own table; the shelf is the table, cut to fifteen, plus the shelf of the "at least 100 times less active" (lead, gold, copper, red phosphorus, a phosphate). The drawers are ordered for the player: uranium and its salts first (the rule), then the Muséum's rocks (the discovery, early and prominent), then the rare oxides, the chemist's shelf, and last the one you make yourself. No score; the page is the yardstick; the verdict is in words. Replay starts a fresh album.
+
+## 12. Controls, mechanism, feedback, moment
+
+- **Controls:** on the shelf, one tap on a jar opens its card (what it is, who sent it, what is in it: a bar for its uranium), and TEST IT spends a frame. On the bench, one horizontal slider, full width: *let the weight down: slower ← → faster*. Every bench starts with the slider at zero. Nothing else.
+- **Mechanism (reconstructed from the table):** each substance has a current *i* from the table, in units of the metal's 24 × 10⁻¹² A. The slider sets the quartz's counter-current *r* (same units). The spot is a leaky integrator of the difference: ds/dt = G·(i − r) − s/τ + jitter, clamped to the scale. Balanced when |s| stays inside the zero band for 1.5 s; the reading is *r* then, within a few hundredths of *i*. Inactive substances leave the spot still at r = 0 and balance at once. Each substance carries its uranium share (ours, from formulas and typical mineral values) for the yellow bar. Numbers in CONFIG with their table rows.
+- **Feedback:** the spot (runs, slows, overshoots, stands; speed lines when it runs fast; a ring that fills while it holds); the hand lowering the weight at the slider's speed; then the panel, drawn into the album: the jar, the yellow bar (its uranium), the blue bar (what it gave), a thin dashed tick for the paper's own reading under the player's, and a caption in the game's voice.
+- **Moment:** the pitchblende of Johanngeorgenstadt: two-thirds uranium, and the slider has to go three and a half times as far as for pure uranium. Then the copy of the chalcolite that barely moves the spot.
+
+## 13. The look
+
+**Register: a ligne claire album, Paris 1898** (Drawn family: the comic). It comes from the Given (ligne claire or manga), and the choice between the two comes from the paper's setting: a note in French, read to the Académie in Paris, worked out in a ground-floor workroom of the École municipale de physique et chimie industrielles. The Franco-Belgian clear line is the comic of that city and language, and it is the comic that draws instruments best: brass, glass and wire in one even line, nothing shaded, everything legible. Manga is kept for one thing only, the emanata ligne claire shares with it: speed lines on a running spot, a "!?" over the panel that surprises.
+
+**The surprise:** the album draws itself. Each measurement becomes a panel on the player's page, in the clear line, captioned; the empty frames are the budget; the last page is the verdict with the player's page beside the paper's. The cover is the album's cover.
+
+- **Palette (the chassis):** album white `#FFFFFF` (the page; panels sit on it with white gutters); ink `#17140F` (every line, 2.5 px at phone scale, and the text); uranium yellow `#F7C600` (uranium alone: the uranium jar, the yellow bar of what a thing's uranium could give, the URANIUM tick on the slider); clear blue `#3E8ED0`, with a pale tint `#D6EAF7` for walls and skies (what the spot measured: the blue bar, the balanced ring, the primary caption box); signal red `#E2342B` (the "!?", the MORE THAN ITS URANIUM caption, nothing else). The substances are drawn in their own flat colours (chalcolite green, red phosphorus, gold, black pitchblende, white thorium oxide), as the album would colour them.
+- **Type:** Lilita One (SIL OFL), a heavy rounded display face in the manner of a Franco-Belgian album title, for the title, panel numbers and the big words (BALANCED, NOTHING); Patrick Hand (SIL OFL), a neat hand-lettering face, for captions, balloons, labels and buttons, set in capitals in balloons and captions, as letterers do. Both embedded as data.
+- **Buttons:** caption boxes, the album's own narrative captions: a rectangle with a 2.5 px ink frame, square corners, no shadow, lettered in capitals; the primary action (BEGIN, TEST IT, NEXT) is a clear-blue caption box with white lettering; secondary actions are white. A chosen jar on the shelf is outlined in a thick blue frame, as a panel is.
+- **The one visual rule:** one line, flat colour, no shading, and yellow belongs to uranium. Every object in the game, from the condenser to the button, is drawn with the same ink line and filled flat; and yellow appears only where uranium is (or where uranium alone could reach), so any blue bar that runs past its yellow is, visibly, more than its uranium.
+- **Play screen (the bench) at 380 px:** the aim line (two lines, 16 px) with ? at the right; the frame counter ("PANEL 4 OF 9"); the bench panel, 348 × 300, ink-framed: the scale across the top (300 px, ruled, 0 in the middle) with the spot (18 px, white with an ink ring and a blue halo ring that fills while it holds) — answers "is it balanced?"; under it the condenser (two brass plates on an ebonite stand, the substance on the lower plate in its colour) — answers "what is on the plate?"; at the right the quartz hanging with the hand and the weight going down at the slider's speed — answers "what is my thumb doing?"; a caption box under the panel saying what is on the plate and what the label says is in it; the slider, 348 px wide, 56 px tall, with the URANIUM tick once uranium is measured; one line of what the slider does. After balance: the result caption in the game's voice, and the new panel flying to the page.
+- **Shelf screen at 380 px:** the aim; the album page, 348 × 300, nine frames in three tiers (filled panels drawn, empty frames dashed) — answers "what have I found, and how many frames are left?"; the found-so-far line; the five drawers, each a labelled strip with three to six jars drawn at 64 × 64 — answers "what can I test?"; the card for the chosen jar, as a caption box with a picture; TEST IT.
+
+## 14. What is cut
+
+From the table: black uranium oxide (27, a little above the metal; the paper's "in general" covers it), hydrated uranic acid (6, well under its share), the uranates (12), the uranous and uranyl sulfates, thorium sulfate, cerium oxide with the fluoxyniobate (0.3), the Cornwall pitchblende (16, whose uranium content we cannot state), autunite, the thorites, orangite, samarskite and the five rare minerals, cleveite ("very active", no number). All stay in CONFIG with their values, unused, for the author to restore. From the text: the thickness effect for uranium compounds (said to be very small; not played), the second table (absorption by aluminium), the photographic impressions, the analogy with Sagnac's secondary rays, the closing guess that space is crossed by very penetrating rays which only heavy atoms absorb (quoted on the About screen, not played), the remark that uranium and thorium have the highest atomic weights (in the verdict, and on the cards of lead and gold as "a heavy metal"). The quartz's arithmetic (charge = constant × weight; current = charge ÷ time) is underneath; the player sees a push.
+
+## 15. Divergences
+
+- **Clock:** Curie's months (the work ran from the winter of 1897 to April 1898) become nine measurements.
+- **The null method:** she let a fixed weight down onto the quartz over a timed interval and divided; the player sets a steady rate and reads it at balance. The quantity is the same (charge per second); the rhythm is ours, so that strong and weak samples take the same few seconds. The working of the quartz is from the thesis of 1903, not from this note.
+- **The electrometer's behaviour** (a leak toward zero, the jitter of the spot, the speed lines): ours, tuned for a thumb.
+- **Units:** readings shown relative to the metal (pure uranium = 1), never in amperes; the amperes are in CONFIG and on the About screen.
+- **Uranium shares** (the yellow bars): ours, from chemical formulas for the compounds (green oxide about 85 %, uranyl nitrate about half, chalcolite about half) and a typical value for pitchblende (about two-thirds); the paper gives none.
+- **White phosphorus:** "very active" in the paper, with no number; ours, 1.3 times uranium.
+- **Fifteen jars from the paper's dozens,** sorted into drawers by donor; which donor sent the thorium oxide and the tantalum salt is ours (Demarçay gave "some rare and pure oxides"); lead, gold, copper and the phosphates stand for the "at least 100 times less active" and read zero.
+- **Debray's procedure** shown as a short drawn recipe (copper, phosphoric acid, uranium salt, crystals): the paper names the procedure and not its steps.
+
+## 16. Mechanism kind and claim boundaries
+
+**Reconstructed.** Every substance on the shelf makes the air carry the current the paper's table gives it (p. 1101–1102, units of 10⁻¹² A, shown relative to metallic uranium's 24). The electrometer and quartz are a toy instrument around that number: the spot is a leaky integrator of the plate's current minus the quartz's, and the reading is the charge balance over the seconds the spot is held still, so any thumb that holds it reads the table's number to within the spot's tremble (about three hundredths of uranium's reading; five for pitchblende).
+
+- **Demonstrates** (in this reconstruction, built from the paper's table): the readings; that the uranium compounds read about in proportion to their uranium, or a little less; that thorium oxide and white phosphorus move the spot with no uranium, and red phosphorus and phosphate do not; that pitchblende and natural chalcolite read four to five times what their uranium can give, and chalcolite made from pure products does not.
+- **Assumes:** the uranium shares (ours); white phosphorus's number (ours; "très actif", no number); the electrometer's dynamics and the steady push (ours; the thesis of 1903 for the principle); the fifteen-item shelf and its drawers.
+- **The paper establishes:** the currents under its conditions, and its argument: activity belongs to the element; two uranium minerals far exceed uranium; the synthetic one does not; so they "may contain an element much more active than uranium". The last is a conjecture in the note. The game's last page says "may contain", and puts polonium and radium after a line, marked "after this note, and not in it".
+
+**Where each staged discovery comes from.** That the rocks exceed their uranium: the paper's table (83, 67, 52 against 24), with the uranium shares ours; robust to any pitchblende share from 40 to 88 in 100 and any threshold from 1.1 to 4 (calibration §5). That the copy is weak: the paper's table (9 against 52). That white phosphorus is not the phosphorus atom: the paper's sentence; robust to any number we give white phosphorus. That thorium does it: the table. The budget of nine panels is ours and creates no finding; it makes the order a decision (calibration §6: the paper's own path fits in eight; 92 % of random albums meet a rock).
+
+## 17. Calibration plan and result
+
+`calibration.js` runs `mechanism.js` unchanged. It checks: (1) every shelf value against a second, independent transcription of the table from the scan, and the inactive five below the paper's "at least 100 times less"; (2) each of the paper's statements on p. 1102 (all uranium compounds active; in general more so the more uranium, Spearman ρ = 1.00 on the shelf and 0.75 over all seven uranium-compound rows of the table with formula shares; thorium very active and beats the metal in a thick layer; tantalum slight; white phosphorus active, red phosphorus and phosphates not; pitchblende and chalcolite more than twice uranium; artificial chalcolite within the salts' range; the two chalcolites ×5.8); (3) the instrument under four thumbs (steady, eager, a last-instant yank, a shaky one) over 120 seeds for every substance: all balance, every reading within 4.5 σ of the table (worst 3.2 σ), and a still thumb records "nothing" for the inactive five and never records an active plate; (4) every reading the balance can return gives the same kind of panel; (5) robustness to what is ours; (6) the shelf in numbers. **Result: 67 passed, 0 failed** (`calibration-result.txt`). The table is a scan of typeset text, read by eye; the two transcriptions agree.
+
+## 18. Playing it in numbers (build.md §3)
+
+No score; the decisions are which eight of fifteen. 20 000 random albums and five plans:
+
+| strategy | meets a rock | makes the copy | rock + copy | both chalcolites | phosphorus test | thorium |
+|---|---|---|---|---|---|---|
+| random | 92 % | 53 % | 48 % | 27 % | 41 % | 80 % |
+| drawers top to bottom | yes | no | no | no | no | yes |
+| drawers bottom to top | no | yes | no | no | yes | no |
+| heavy metals and rare things first | no | no | no | no | yes | yes |
+| the paper's path | yes | yes | yes | yes | yes | yes |
+| rocks only, then the copy | yes | yes | yes | yes | no | yes |
+
+The spread is wide: only a player who thinks about what each test answers gets both logical tests and the rock. Nobody can fail to learn something: the verdict names the rock and the copy for those who missed them. The budget of eight was kept: seven would make the paper's own path impossible; nine would let the drawer-by-drawer player stumble through everything.
+
+## 19. Build log
+
+1. Mechanism first (`mechanism.js`), headless; the reading first taken as the slider's value at balance, then changed to the charge balance over the held seconds after the calibration's adversarial thumb showed that a quick sweep at the last instant could move a slider-value reading arbitrarily. Calibration: 67/67.
+2. Placeholder loop (`loop.js`, `loop-log.txt`): read as the stranger; names with commas inside ("Thorium oxide, thin layer") made the captions stumble; renamed (thin thorium oxide; pitchblende from Saxony). The found-so-far line now says "something in pitchblende" for the rocks, since the rock holds uranium.
+3. Skin: ligne claire, as declared. First screenshots: the slider sat below the fold under a three-paragraph caption, so the spot and the thumb could not be seen together; moved the slider directly under the picture, cropped the scene, and put the caption below. Shelf icons were flat dishes a few pixels high; redrawn as jars with corks and labels (yellow label when the thing holds uranium, the one visual rule), rocks on specimen cards, ingots, a coil. Panel badges overflowed; set in three short lines. The paper's own reading on each panel became a small ink triangle over the blue bar, in the key as "her own reading".
+4. Text: no decimals on screen (the About's 0.3 and 1.3 rewritten in words); the result of each bench in the game's voice before anything else; How to play written from the finished screens.
+5. Self-review from screenshots (380 px): the aim can be stated from the start screen; the discovery from the top of the last page ("You found a rock stronger than pure uranium, and your copy of it was weak", then what you did, what the paper says, what it means). Does it look like any game in the table? No: the two earlier comics were a pop-art cartoon and a comic strip on yellow; this is a white album page with clear-line drawings, caption-box buttons and no offset shadows.
+6. Full session (`session-test.js`, `session-log.txt`): two albums in headless Chromium at 380 × 760; the first balanced with a real mouse drag on the slider, How to play opened mid-measurement (the bench's clock stops while away and the slider is kept), the paper's path to the last page, About and back; the second never opening the Muséum's drawer, whose verdict says where the rock was. No errors, no horizontal scroll. Balancing took two to ten seconds per plate for the scripted thumb; the five-to-six-minute length is an estimate until a person has played it.
+
+**What changed from the memo above.** Long explanatory text on the bench is set in mixed case for reading on a phone; capitals are kept for buttons, bands, badges and panel labels. The jars carry a label, yellow when the thing holds uranium (the visual rule, extended to the shelf).
