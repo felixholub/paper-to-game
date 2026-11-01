@@ -85,6 +85,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .key i{display:inline-block;width:22px;height:10px;border:1.5px solid var(--ink);vertical-align:middle;margin-right:5px}
 .key .ky{background:var(--yellow)}.key .kb{background:var(--blue)}
 .key .kd{width:2px;height:16px;border:none;border-left:2px dashed var(--ink)}
+.key .ke{width:22px;height:10px;border:none;border-left:1.6px solid var(--ink);border-right:1.6px solid var(--ink);background:linear-gradient(var(--ink),var(--ink)) center/100% 1.6px no-repeat}
 .key .kt{vertical-align:middle;margin-right:3px}
 .foundline{font-size:18px;border-left:6px solid var(--blue);padding:2px 0 2px 10px;margin:10px 0}
 .drawer{border:var(--line) solid var(--ink);margin:12px 0;background:#fff}
@@ -96,8 +97,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .jars .jar:nth-child(3n){border-right:none}
 .jars .jar:nth-child(-n+3){border-top:none}
 .jar svg{display:block;width:64px;height:53px;margin:0 auto 4px}
-.jar.done{color:var(--muted);background:#f3f3f1}
-.jar.done svg{opacity:.45}
+.jar.done{background:#f6f8fa}
 .jar .tested{display:block;font-size:13px;color:var(--blue);margin-top:2px}
 .jar.sel{outline:4px solid var(--blue);outline-offset:-4px}
 /* the card: a sheet over the shelf */
@@ -123,6 +123,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .herrow .hb .u1{position:absolute;top:-2px;bottom:-2px;border-left:2px dashed var(--ink);width:0}
 .herrow .hw{grid-column:2;font-size:14px;color:var(--muted)}
 .later{border:var(--line) dashed var(--ink);padding:8px 11px;margin:12px 0;font-size:17px}
+.fate{font-family:var(--display);font-size:20px;margin:0 0 10px;color:var(--blue)}
+.claim{display:grid;grid-template-columns:30px 1fr;gap:4px 10px;margin:10px 0;align-items:start}
+.claim .mark{width:28px;height:28px;border:var(--line) solid var(--ink);font-family:var(--display);font-size:19px;line-height:25px;text-align:center}
+.claim .mark.ok{background:var(--blue);color:#fff}.claim .mark.no{background:#fff;color:var(--red)}
+.claim .ct{font-size:18px;line-height:1.2}.claim .cw{grid-column:2;font-size:16px;color:var(--muted);line-height:1.2}
 /* help and about */
 .prose h2{font-family:var(--display);font-weight:400;font-size:28px;margin:16px 0 4px}
 .prose h3{font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:.03em;margin:16px 0 4px}
@@ -140,7 +145,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     <div class="after">after Marie Skłodowska Curie's note to the Académie des sciences, 12 April 1898</div>
   </div>
   <svg id="coversvg" class="coverart" viewBox="0 0 348 262" aria-hidden="true"></svg>
-  <p class="acts"><span>Put a powder or a rock between two brass plates.</span><span>Hold a spot of light still with your thumb.</span><span>See how hard you had to push.</span></p>
+  <p class="acts"><span>Put a powder or a rock between two brass plates.</span><span>Push back on a spot of light with your thumb.</span><span>Write down how hard it took.</span><span>At the end, your page is held up against hers.</span></p>
   <div class="aimbox"><b>Your aim</b>Uranium makes the air carry electricity. Find what else does.</div>
   <button class="btn go" id="begin">Begin the album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -152,13 +157,14 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="benchband">PANEL 1 OF 9 <small>pure uranium</small></div>
   <div class="benchwrap"><svg id="benchsvg" viewBox="0 0 348 262" role="img" aria-label="The bench: the scale with the spot of light, the brass plates, the electrometer, and the quartz with the weight"></svg>
-    <div class="stamp hidden" id="stamp">BALANCED!</div></div>
+    <div class="stamp hidden" id="stamp">WRITTEN DOWN</div></div>
   <div id="benchplay">
     <div class="slidebox">
-      <div class="slidehead"><b>Slide: hold the spot on 0</b></div>
-      <div class="track"><input type="range" id="push" min="0" max="4000" step="1" value="0" aria-label="How fast you let the weight down onto the quartz"><div class="utick hidden" id="utick"><i></i>uranium</div></div>
-      <div class="slidefoot"><span>← let the weight down slower</span><span>faster →</span></div>
+      <div class="slidehead"><b>Let the weight down</b><span>onto the quartz</span></div>
+      <div class="track"><input type="range" id="push" min="0" max="4000" step="1" value="0" aria-label="How fast you let the weight down onto the quartz"><div class="utick hidden" id="utick"><i></i>your uranium</div></div>
+      <div class="slidefoot"><span>← slower</span><span>faster, harder push →</span></div>
     </div>
+    <button class="btn go" id="write" disabled>Write it down</button>
     <div class="cap" id="benchcap"></div>
   </div>
   <div id="benchres" class="result hidden">
@@ -172,7 +178,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="pageband">YOUR PAGE <small></small></div>
   <div class="page" id="page"></div>
-  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
+  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>what you measured</span><span><i class="ke"></i>how sure (an arrow: at least, at most)</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
   <div class="foundline" id="foundline"></div>
   <div id="shelfpart">
     <div class="band" id="shelfband">THE SHELF <small></small></div>
@@ -197,14 +203,16 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 <div id="end" class="screen">
   <div class="band">THE LAST PAGE <small>nine panels</small></div>
   <div class="headline" id="headline"></div>
-  <div class="cap"><h3>WHAT YOU DID</h3><div id="did"></div></div>
+  <p class="fate" id="fate"></p>
+  <div class="cap"><h3>HER NOTE, AGAINST YOUR PAGE</h3><div id="claims"></div></div>
+  <div class="cap"><h3>WHAT YOU DID</h3><p id="did"></p></div>
   <div class="cap sky"><h3>WHAT THE PAPER SAYS</h3><p id="paper"></p></div>
   <div class="cap"><h3>WHAT IT MEANS</h3><p id="means"></p></div>
   <div class="band">YOUR PAGE</div>
   <div class="page" id="endpage"></div>
   <div class="band">HER MEASUREMENTS <small>from her table</small></div>
   <div class="her" id="her"></div>
-  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> on your page: her own reading</span></div>
+  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what you measured</span><span><i class="ke"></i>how sure (an arrow: at least, at most)</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> on your page: her own reading</span></div>
   <div class="later" id="later"></div>
   <button class="btn go" id="again">Start a new album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -218,10 +226,10 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <ol>
     <li><b>The bench.</b> Whatever lies on the lower brass plate, if it sends out rays, lets the air between the two plates carry a tiny electric current. The current pushes the spot of light along the scale, to the right.</li>
     <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz pushes the spot back to the left. The faster you let the weight down, the harder it pushes.</li>
-    <li><b>Balance it.</b> Find the push that holds the spot still on 0. A blue ring closes around it; when it has closed, the measurement is done. How hard you had to push is how strong the plate is. If the spot never moves, the plate does nothing, and the ring closes by itself.</li>
-    <li><b>Your page.</b> Each measurement is drawn as a panel on your album page. The yellow bar is what the thing's uranium alone could give; the blue bar is what it gave; the dashed line is pure uranium. You have nine panels. The first is pure uranium: your yardstick.</li>
-    <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. Each thing can be tested once.</li>
-    <li><b>The last page.</b> After nine panels: what you found, and what Marie Curie found in 1898.</li>
+    <li><b>Write it down.</b> When you think you know how strong the plate is, press WRITE IT DOWN. Your page keeps how hard you were pushing and what the spot was doing at that moment, and says how sure that makes the reading. Her own reading is shown next to yours.</li>
+    <li><b>Your page.</b> Each reading is drawn as a panel. The yellow bar is what the thing's uranium alone could give; the blue bar is your reading, with a line for how sure it is (an arrow if it is only "at least" or "at most"); the dashed line is pure uranium; the small black triangle is her reading. You have nine panels. The first is pure uranium.</li>
+    <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again, uranium too; each time is a new panel.</li>
+    <li><b>The last page.</b> After nine panels, your page is held up against her note: how many of its claims your own readings back.</li>
   </ol>
   <button class="btn go" id="helpback">Back</button>
 </div>
@@ -241,7 +249,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   'use strict';
   const M = CURIE, C = M.CONFIG;
   const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
-  const INK = '#17140F', YEL = '#F7C600', BLUE = '#3E8ED0', SKY = '#D6EAF7', RED = '#E2342B', WOOD = '#C98B5B', WOOD2 = '#A86E43', NICKEL = '#C9D5DE', STRIP = '#22314A', ZERO = '#3F6E9E';
+  const INK = '#17140F', YEL = '#F7C600', BLUE = '#3E8ED0', SKY = '#D6EAF7', RED = '#E2342B', WOOD = '#C98B5B', WOOD2 = '#A86E43', NICKEL = '#C9D5DE', STRIP = '#22314A';
   const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
   // ---------- the substances drawn (flat colour, one line)
@@ -307,7 +315,6 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     s += `<rect x="0" y="236" width="348" height="26" fill="${WOOD}"/><rect x="0" y="250" width="348" height="12" fill="${WOOD2}"/><line x1="0" y1="236" x2="348" y2="236" stroke="${INK}" stroke-width="2.5"/><line x1="0" y1="250" x2="348" y2="250" stroke="${INK}" stroke-width="2"/>`;
     // scale strip and its ticks
     s += `<rect x="12" y="12" width="324" height="46" fill="${STRIP}" stroke="${INK}" stroke-width="2.5"/>`;
-    s += `<rect x="${174 - 150 * C.BAND}" y="15" width="${300 * C.BAND}" height="40" fill="${ZERO}"/>`;
     for (let k = -10; k <= 10; k++) { const x = 174 + k * 15, big = k % 5 === 0; s += `<line x1="${x}" y1="${big ? 38 : 44}" x2="${x}" y2="54" stroke="#fff" stroke-width="${big ? 2 : 1.3}"/>`; }
     s += `<text x="174" y="31" text-anchor="middle" font-family="Patrick, sans-serif" font-size="15" fill="#fff">0</text>`;
     // battery
@@ -345,66 +352,77 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
       `<path d="M286,${(o.handY || 162) - 12} q8,-4 16,0 l46,0 l0,16 l-44,0 q-10,2 -16,-6 Z" fill="#F2C9A8" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/><rect x="314" y="${(o.handY || 162) - 15}" width="40" height="22" fill="#2B3A55" stroke="${INK}" stroke-width="2"/></g>`;
     // the spot, its ring, its speed lines, and the surprise
     s += `<g id="speed" opacity="0"><line x1="0" y1="-7" x2="-22" y2="-7" stroke="#fff" stroke-width="2"/><line x1="-4" y1="0" x2="-30" y2="0" stroke="#fff" stroke-width="2"/><line x1="0" y1="7" x2="-22" y2="7" stroke="#fff" stroke-width="2"/></g>`;
-    s += `<circle id="ring" cx="174" cy="35" r="15" fill="none" stroke="${BLUE}" stroke-width="4.5" stroke-dasharray="0 999" transform="rotate(-90 174 35)"/>`;
     s += `<circle id="spot" cx="${174 + 150 * (o.spot || 0)}" cy="35" r="9.5" fill="#fff" stroke="${SKY}" stroke-width="3"/>`;
-    s += `<g id="wow" opacity="0"><path d="M232,64 h70 v34 h-46 l-12,12 l2,-12 h-14 Z" fill="#fff" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><text x="267" y="91" text-anchor="middle" font-family="Lilita, sans-serif" font-size="26" fill="${RED}">!?</text></g>`;
     return s;
   }
 
-  // ---------- an album panel (112 × 124)
+  // ---------- an album panel (112 × 124): the player's reading, with how sure it is, against her triangle
   function panelSVG(p, n, opts) {
     opts = opts || {};
     if (!p) return `<rect x="1.5" y="1.5" width="109" height="121" fill="#fff" stroke="${INK}" stroke-width="2" stroke-dasharray="6 5"/><text x="56" y="70" text-anchor="middle" font-family="Lilita, sans-serif" font-size="30" fill="#E2E6EA">${n}</text>`;
-    const sc = 24, x0 = 8, bg = p.kind === 'more' ? '#FFE9E6' : p.kind === 'nothing' ? '#F1F1EF' : SKY;
+    const k = M.panelKind(g, p), R = p.R;
+    const sc = 24, x0 = 8, X = v => x0 + Math.min(96, v * sc), bg = k === 'more' ? '#FFE9E6' : k === 'nothing' ? '#F1F1EF' : k === 'unsure' ? '#fff' : SKY;
     let s = `<rect x="1.5" y="1.5" width="109" height="121" fill="${bg}" stroke="${INK}" stroke-width="2.5"/>`;
     s += `<rect x="1.5" y="1.5" width="20" height="18" fill="#fff" stroke="${INK}" stroke-width="2"/><text x="11.5" y="15" text-anchor="middle" font-family="Lilita, sans-serif" font-size="13" fill="${INK}">${p.n}</text>`;
     let words = p.short.toUpperCase().split(/,\s*/);
-    if (words.length === 1 && words[0].length > 13) { const k = words[0].indexOf(' '); words = [words[0].slice(0, k), words[0].slice(k + 1)]; }
+    if (words.length === 1 && words[0].length > 13) { const q = words[0].indexOf(' '); words = [words[0].slice(0, q), words[0].slice(q + 1)]; }
     s += `<text font-family="Patrick, sans-serif" font-size="12" fill="${INK}"><tspan x="26" y="13">${esc(words[0])}${words[1] && /,/.test(p.short) ? ',' : ''}</tspan>${words[1] ? `<tspan x="26" y="25">${esc(words[1])}</tspan>` : ''}</text>`;
     s += `<g transform="translate(4,30)">${iconSVG(p.look, 50, 44, p.u)}</g>`;
-    const B = { yardstick: [['THE', 'YARDSTICK'], INK], nothing: [['NOTHING'], INK], without: [['NO', 'URANIUM', 'IN IT!'], BLUE], more: [['MORE', 'THAN ITS', 'URANIUM!'], RED], about: [['ABOUT', 'ITS', 'URANIUM'], INK] }[p.kind];
+    const B = { yardstick: [['YOUR', 'YARDSTICK'], INK], nothing: [['NOTHING', 'SEEN'], INK], without: [['NO', 'URANIUM', 'IN IT!'], BLUE], more: [['MORE', 'THAN ITS', 'URANIUM!'], RED], about: [['ABOUT', 'ITS', 'URANIUM'], INK], unsure: [['CAN’T', 'TELL'], INK] }[k];
     const y0 = 52 - (B[0].length - 1) * 6;
     s += `<text font-family="Patrick, sans-serif" font-size="11" fill="${B[1]}" text-anchor="middle">${B[0].map((w, i) => `<tspan x="82" y="${y0 + i * 12}">${w}</tspan>`).join('')}</text>`;
-    if (p.kind === 'more') s += `<text x="82" y="81" text-anchor="middle" font-family="Lilita, sans-serif" font-size="15" fill="${RED}">!?</text>`;
-    // bars: scale 0–4 uranium across 96 px
-    s += `<line x1="${x0}" y1="${116}" x2="${x0 + 96}" y2="${116}" stroke="${INK}" stroke-width="1"/>`;
+    if (k === 'more') s += `<text x="82" y="81" text-anchor="middle" font-family="Lilita, sans-serif" font-size="15" fill="${RED}">!?</text>`;
+    // bars: her scale, 0–4 times pure uranium across 96 px
+    s += `<line x1="${x0}" y1="116" x2="${x0 + 96}" y2="116" stroke="${INK}" stroke-width="1"/>`;
     if (p.u > 0) s += `<rect x="${x0}" y="84" width="${Math.max(2, p.u * sc)}" height="9" fill="${YEL}" stroke="${INK}" stroke-width="1.5"/>`;
-    const bw = Math.min(96, p.reading * sc);
-    if (bw > 0.5) s += `<rect x="${x0}" y="98" width="${bw}" height="13" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
-    else s += `<circle cx="${x0 + 2}" cy="104" r="2.5" fill="${INK}"/>`;
-    if (opts.ghost !== false && p.paper > 0) { const gx = x0 + Math.min(96, p.paper * sc); s += `<path d="M${gx - 4},${92} L${gx + 4},${92} L${gx},${98} Z" fill="${INK}"/>`; }
+    const yb = 98, hb = 13, ym = yb + hb / 2;
+    if (R.type === 'atleast') {            // at least: a solid bar to the push, then an arrow onward
+      const xl = X(R.lo);
+      if (xl - x0 > 0.5) s += `<rect x="${x0}" y="${yb}" width="${xl - x0}" height="${hb}" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
+      const xe = Math.min(x0 + 96, xl + 22);
+      s += `<line x1="${xl}" y1="${ym}" x2="${xe - 2}" y2="${ym}" stroke="${INK}" stroke-width="1.8" stroke-dasharray="3 2"/><path d="M${xe - 6},${ym - 4} L${xe},${ym} L${xe - 6},${ym + 4}" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
+    } else if (R.type === 'atmost') {      // at most: an empty bar to the push, with an arrow pointing back
+      const xh = X(R.hi);
+      s += `<rect x="${x0}" y="${yb}" width="${Math.max(1, xh - x0)}" height="${hb}" fill="#fff" stroke="${BLUE}" stroke-width="2"/><path d="M${xh - 2},${ym - 4} L${xh - 8},${ym} L${xh - 2},${ym + 4}" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
+    } else {                               // a value: a solid bar with an error bar across its end
+      const xe = X(R.est);
+      if (xe - x0 > 0.5) s += `<rect x="${x0}" y="${yb}" width="${xe - x0}" height="${hb}" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
+      else s += `<circle cx="${x0 + 2}" cy="${ym}" r="2.5" fill="${INK}"/>`;
+      const a = X(R.lo), b = X(R.hi);
+      s += `<line x1="${a}" y1="${ym}" x2="${b}" y2="${ym}" stroke="${INK}" stroke-width="1.6"/><line x1="${a}" y1="${ym - 4}" x2="${a}" y2="${ym + 4}" stroke="${INK}" stroke-width="1.6"/><line x1="${b}" y1="${ym - 4}" x2="${b}" y2="${ym + 4}" stroke="${INK}" stroke-width="1.6"/>`;
+    }
+    if (opts.ghost !== false && p.paper > 0) { const gx = X(p.paper); s += `<path d="M${gx - 4},92 L${gx + 4},92 L${gx},98 Z" fill="${INK}"/>`; }
     s += `<line x1="${x0 + sc}" y1="80" x2="${x0 + sc}" y2="118" stroke="${INK}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
     return s;
   }
 
   // ---------- state and navigation
-  let g = M.newGame(Math.floor(Math.random() * 1e6) + 1), bench = null, raf = 0, last = 0, cardId = null, back = 'cover', lastNew = -1, handPhase = 0, uTick = null;
-  const show = id => { $$('.screen').forEach(e => e.classList.toggle('on', e.id === id)); window.scrollTo(0, 0); if (id === 'bench' && bench && !bench.done) loop(); };
+  let g = M.newGame(Math.floor(Math.random() * 1e6) + 1), bench = null, raf = 0, last = 0, cardId = null, back = 'cover', lastNew = -1, handPhase = 0;
+  const show = id => { $$('.screen').forEach(e => e.classList.toggle('on', e.id === id)); window.scrollTo(0, 0); if (id === 'bench' && bench && !bench.committed) loop(); };
   const current = () => ($('.screen.on') || {}).id;
   $$('[data-go]').forEach(b => b.addEventListener('click', () => { back = current(); show(b.dataset.go); }));
   $$('.help-q').forEach(b => b.addEventListener('click', () => { back = current(); show('help'); }));
   $('#helpback').addEventListener('click', () => show(back || 'cover'));
   $('#aboutback').addEventListener('click', () => show(back || 'cover'));
   $('#coversvg').innerHTML = benchScene({ window: true, look: 'metalpowder', active: true, spot: 0.02, handY: 176 });
-  { const r = $('#coversvg #ring'); r.setAttribute('stroke-dasharray', `${2 * Math.PI * 15 * .7} 999`); }
 
   $('#begin').addEventListener('click', () => startBench(C.FIRST));
-  $('#again').addEventListener('click', () => { g = M.newGame(Math.floor(Math.random() * 1e6) + 1); uTick = null; lastNew = -1; startBench(C.FIRST); });
+  $('#again').addEventListener('click', () => { g = M.newGame(Math.floor(Math.random() * 1e6) + 1); lastNew = -1; startBench(C.FIRST); });
 
   // ---------- the bench
   function benchCaption(s) {
     const first = g.panels.length === 0;
     const what = first ? 'On the lower plate: <b>pure uranium</b>, from M. Moissan. Its rays let the air between the plates carry a tiny electric current, which pushes the spot of light to the right →.'
-      : `On the lower plate: <b>${esc(s.name.charAt(0).toLowerCase() + s.name.slice(1))}</b> (${M.shareWords(s.u)}). If it sends out rays, the air carries a current and the spot of light runs to the right →.`;
-    const can = 'Slide to let the weight down onto the quartz crystal: the quartz pushes the spot back ←. The faster the weight goes down, the harder the push.';
-    const expect = first ? 'Hold the spot still on 0 until the blue ring closes. How hard you had to push is how strong the plate is: this first push is your yardstick.'
-      : 'Hold the spot still on 0 until the blue ring closes. How hard you had to push is how strong the plate is. If the spot never moves, the ring closes by itself: nothing.';
+      : `On the lower plate: <b>${esc(s.name.charAt(0).toLowerCase() + s.name.slice(1))}</b> (${M.shareWords(s.u)}). If it sends out rays, the air carries a current, and the current pushes the spot of light to the right →.`;
+    const can = 'The slider lets a weight down onto the quartz crystal. The quartz pushes the spot back ←: the faster the weight goes down, the harder it pushes.';
+    const expect = 'Write it down when you are ready. Your page keeps how hard you were pushing and what the spot was doing at that moment.' + (first ? ' This first panel is your pure uranium.' : '');
     return `<p>${what}</p><p>${can}</p><p>${expect}</p>`;
   }
   function placeTick() {
-    const t = $('#utick'); if (uTick === null) { t.classList.add('hidden'); return; }
+    const t = $('#utick'), U = M.yard(g);
+    if (!U || !isFinite(U.hi)) { t.classList.add('hidden'); return; }
     const W = $('#push').getBoundingClientRect().width || 340, tw = 38;
-    t.style.left = (tw / 2 + (W - tw) * (uTick / C.SLIDER_MAX)) + 'px'; t.classList.remove('hidden');
+    t.style.left = (tw / 2 + (W - tw) * (Math.min(C.SLIDER_MAX, U.est) / C.SLIDER_MAX)) + 'px'; t.classList.remove('hidden');
   }
   function startBench(id) {
     closeCard();
@@ -412,19 +430,18 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#benchband').innerHTML = `PANEL ${g.panels.length + 1} OF ${C.PANELS} <small>${esc(s.short.toLowerCase())}</small>`;
     $('#benchsvg').innerHTML = benchScene({ look: s.look, active: bench.i > 0 });
     $('#benchcap').innerHTML = benchCaption(s);
-    const push = $('#push'); push.value = 0; push.disabled = false;
+    const push = $('#push'); push.value = 0; push.disabled = false; $('#write').disabled = true;
     $('#benchplay').classList.remove('hidden'); $('#benchres').classList.add('hidden'); $('#stamp').classList.add('hidden');
     show('bench'); placeTick();
   }
   function loop() {
     cancelAnimationFrame(raf); last = 0;
     const frame = now => {
-      if (current() !== 'bench' || !bench || bench.done) return;
+      if (current() !== 'bench' || !bench || bench.committed) return;
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60; last = now;
-      const r = (+$('#push').value) / 1000;
-      M.benchStep(bench, dt, r);
+      M.benchStep(bench, dt, (+$('#push').value) / 1000);
       drawBench(dt);
-      if (bench.done) { balanced(); return; }
+      $('#write').disabled = !M.canCommit(bench);
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
@@ -432,38 +449,34 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   function drawBench(dt) {
     const svg = $('#benchsvg'), x = 174 + 150 * bench.s;
     svg.querySelector('#spot').setAttribute('cx', x);
-    svg.querySelector('#ring').setAttribute('cx', x); svg.querySelector('#ring').setAttribute('transform', `rotate(-90 ${x} 35)`);
-    svg.querySelector('#ring').setAttribute('stroke-dasharray', `${2 * Math.PI * 15 * M.holdProgress(bench)} 999`);
     svg.querySelector('#beam').setAttribute('d', `M206,114 L175,128 L${x},58`);
     const run = M.running(bench), fast = run !== 'still' && (Math.abs(bench.v) > 0.35 || run.startsWith('pinned'));
     const sp = svg.querySelector('#speed'); sp.setAttribute('opacity', fast ? 1 : 0);
     const dir = run.endsWith('left') ? -1 : 1; sp.setAttribute('transform', `translate(${x - dir * 12},35) scale(${dir},1)`);
-    const wow = uTick !== null && bench.r > uTick * 1.05 && bench.s > 0.5;
-    svg.querySelector('#wow').setAttribute('opacity', wow ? 1 : 0);
     // the hand lowers the weight at the slider's speed, then takes the next one
     handPhase = (handPhase + dt * bench.r * 16) % 34;
     svg.querySelector('#hand').setAttribute('transform', `translate(0,${handPhase})`);
     $$('#benchsvg .ray').forEach((l, i) => l.setAttribute('stroke-dashoffset', String((-bench.t * 18 + i * 3) % 16)));
   }
-  function balanced() {
-    const p = M.record(g, bench); lastNew = p.n - 1;
-    if (p.id === C.FIRST) uTick = p.reading;
-    $('#push').disabled = true; $('#stamp').textContent = p.kind === 'nothing' ? 'NOTHING.' : 'BALANCED!'; $('#stamp').classList.remove('hidden');
-    $('#benchsvg #ring').setAttribute('stroke-dasharray', `${2 * Math.PI * 15} 999`);
+  $('#write').addEventListener('click', () => {
+    if (!bench || bench.committed || !M.canCommit(bench)) return;
+    cancelAnimationFrame(raf); bench.committed = true;
+    const p = M.commit(g, bench); lastNew = p.n - 1;
+    $('#push').disabled = true; $('#write').disabled = true; $('#stamp').classList.remove('hidden');
     $('#respanel').innerHTML = panelSVG(p);
     $('#resbadge').textContent = p.badge; $('#resbadge').className = 'badge ' + p.kind;
     $('#rescap').textContent = p.caption;
     $('#topage').textContent = M.over(g) ? 'Draw the last panel' : 'On to the page';
     $('#benchplay').classList.add('hidden'); $('#benchres').classList.remove('hidden');
     setTimeout(() => $('#benchres').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
-  }
+  });
   $('#topage').addEventListener('click', () => { renderShelf(); show('shelf'); });
   window.addEventListener('resize', placeTick);
 
   // ---------- the page and the shelf
   function renderPage(el, animate) {
     let h = '';
-    for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + p.badge) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
+    for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + M.BADGE[M.panelKind(g, p)]) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
     el.innerHTML = h;
   }
   function renderShelf() {
@@ -475,11 +488,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#shelfband').innerHTML = `THE SHELF <small>${M.panelsLeft(g)} panel${M.panelsLeft(g) === 1 ? '' : 's'} left</small>`;
     let h = '';
     for (const d of C.DRAWERS) {
-      const items = C.SUBSTANCES.filter(s => s.drawer === d.id && s.id !== C.FIRST); if (!items.length) continue;
+      const items = C.SUBSTANCES.filter(s => s.drawer === d.id); if (!items.length) continue;
       h += `<div class="drawer"><div class="dh"><b>${esc(d.label)}</b><span>${esc(d.from)}</span></div><div class="jars">`;
       for (const s of items) {
-        const done = g.tested[s.id], p = done ? g.panels.find(q => q.id === s.id) : null;
-        h += `<button class="jar${done ? ' done' : ''}" data-id="${s.id}"${done ? ' disabled' : ''}><svg viewBox="0 0 56 46">${iconSVG(s.look, 56, 46, s.u)}</svg>${esc(s.short)}${done ? `<span class="tested">panel ${p.n}</span>` : ''}</button>`;
+        const ps = g.panels.filter(q => q.id === s.id);
+        h += `<button class="jar${ps.length ? ' done' : ''}" data-id="${s.id}"><svg viewBox="0 0 56 46">${iconSVG(s.look, 56, 46, s.u)}</svg>${esc(s.short)}${ps.length ? `<span class="tested">panel ${ps.map(q => q.n).join(', ')}</span>` : ''}</button>`;
       }
       h += '</div></div>';
     }
@@ -495,7 +508,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#cardwhat').textContent = s.what;
     $('#cardu').innerHTML = 'Uranium in it: <b>' + esc(s.u > 0 ? M.shareWords(s.u) : 'none') + '</b>';
     $('#cardubar').style.width = (100 * s.u) + '%';
-    $('#cardtest').textContent = `Test it (${M.panelsLeft(g)} left)`;
+    $('#cardtest').textContent = (g.tested[id] ? 'Test it again' : 'Test it') + ` (${M.panelsLeft(g)} left)`;
     $('#veil').classList.remove('hidden'); $('#sheet').classList.remove('hidden');
   }
   function closeCard() { cardId = null; $('#veil').classList.add('hidden'); $('#sheet').classList.add('hidden'); $$('#drawers .jar').forEach(b => b.classList.remove('sel')); }
@@ -506,8 +519,9 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   const herWords = w => w === 'no push at all' ? 'nothing' : w === 'about the push of pure uranium' ? 'about the same as pure uranium' : w.replace(/ the push of pure uranium$/, ' pure uranium');
   function renderEnd() {
     const v = M.verdict(g);
-    $('#headline').textContent = v.headline;
-    $('#did').innerHTML = [v.did].concat(v.path).map(t => `<p>${esc(t)}</p>`).join('');
+    $('#headline').textContent = v.headline; $('#fate').textContent = v.fate;
+    $('#claims').innerHTML = v.claims.map(c => `<div class="claim"><div class="mark ${c.backed ? 'ok' : 'no'}">${c.backed ? '✓' : '✗'}</div><div class="ct">${esc(c.text)}</div><div class="cw">${esc(c.why.charAt(0).toUpperCase() + c.why.slice(1))}.</div></div>`).join('');
+    $('#did').textContent = v.did;
     $('#paper').textContent = v.paper; $('#means').textContent = v.means; $('#later').textContent = v.later;
     renderPage($('#endpage'), false);
     const sc = x => (100 * Math.min(4, x) / 4) + '%';

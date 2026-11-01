@@ -85,6 +85,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .key i{display:inline-block;width:22px;height:10px;border:1.5px solid var(--ink);vertical-align:middle;margin-right:5px}
 .key .ky{background:var(--yellow)}.key .kb{background:var(--blue)}
 .key .kd{width:2px;height:16px;border:none;border-left:2px dashed var(--ink)}
+.key .ke{width:22px;height:10px;border:none;border-left:1.6px solid var(--ink);border-right:1.6px solid var(--ink);background:linear-gradient(var(--ink),var(--ink)) center/100% 1.6px no-repeat}
 .key .kt{vertical-align:middle;margin-right:3px}
 .foundline{font-size:18px;border-left:6px solid var(--blue);padding:2px 0 2px 10px;margin:10px 0}
 .drawer{border:var(--line) solid var(--ink);margin:12px 0;background:#fff}
@@ -96,8 +97,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .jars .jar:nth-child(3n){border-right:none}
 .jars .jar:nth-child(-n+3){border-top:none}
 .jar svg{display:block;width:64px;height:53px;margin:0 auto 4px}
-.jar.done{color:var(--muted);background:#f3f3f1}
-.jar.done svg{opacity:.45}
+.jar.done{background:#f6f8fa}
 .jar .tested{display:block;font-size:13px;color:var(--blue);margin-top:2px}
 .jar.sel{outline:4px solid var(--blue);outline-offset:-4px}
 /* the card: a sheet over the shelf */
@@ -123,6 +123,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .herrow .hb .u1{position:absolute;top:-2px;bottom:-2px;border-left:2px dashed var(--ink);width:0}
 .herrow .hw{grid-column:2;font-size:14px;color:var(--muted)}
 .later{border:var(--line) dashed var(--ink);padding:8px 11px;margin:12px 0;font-size:17px}
+.fate{font-family:var(--display);font-size:20px;margin:0 0 10px;color:var(--blue)}
+.claim{display:grid;grid-template-columns:30px 1fr;gap:4px 10px;margin:10px 0;align-items:start}
+.claim .mark{width:28px;height:28px;border:var(--line) solid var(--ink);font-family:var(--display);font-size:19px;line-height:25px;text-align:center}
+.claim .mark.ok{background:var(--blue);color:#fff}.claim .mark.no{background:#fff;color:var(--red)}
+.claim .ct{font-size:18px;line-height:1.2}.claim .cw{grid-column:2;font-size:16px;color:var(--muted);line-height:1.2}
 /* help and about */
 .prose h2{font-family:var(--display);font-weight:400;font-size:28px;margin:16px 0 4px}
 .prose h3{font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:.03em;margin:16px 0 4px}
@@ -140,7 +145,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     <div class="after">after Marie Skłodowska Curie's note to the Académie des sciences, 12 April 1898</div>
   </div>
   <svg id="coversvg" class="coverart" viewBox="0 0 348 262" aria-hidden="true"></svg>
-  <p class="acts"><span>Put a powder or a rock between two brass plates.</span><span>Hold a spot of light still with your thumb.</span><span>See how hard you had to push.</span></p>
+  <p class="acts"><span>Put a powder or a rock between two brass plates.</span><span>Push back on a spot of light with your thumb.</span><span>Write down how hard it took.</span><span>At the end, your page is held up against hers.</span></p>
   <div class="aimbox"><b>Your aim</b>Uranium makes the air carry electricity. Find what else does.</div>
   <button class="btn go" id="begin">Begin the album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -152,13 +157,14 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="benchband">PANEL 1 OF 9 <small>pure uranium</small></div>
   <div class="benchwrap"><svg id="benchsvg" viewBox="0 0 348 262" role="img" aria-label="The bench: the scale with the spot of light, the brass plates, the electrometer, and the quartz with the weight"></svg>
-    <div class="stamp hidden" id="stamp">BALANCED!</div></div>
+    <div class="stamp hidden" id="stamp">WRITTEN DOWN</div></div>
   <div id="benchplay">
     <div class="slidebox">
-      <div class="slidehead"><b>Slide: hold the spot on 0</b></div>
-      <div class="track"><input type="range" id="push" min="0" max="4000" step="1" value="0" aria-label="How fast you let the weight down onto the quartz"><div class="utick hidden" id="utick"><i></i>uranium</div></div>
-      <div class="slidefoot"><span>← let the weight down slower</span><span>faster →</span></div>
+      <div class="slidehead"><b>Let the weight down</b><span>onto the quartz</span></div>
+      <div class="track"><input type="range" id="push" min="0" max="4000" step="1" value="0" aria-label="How fast you let the weight down onto the quartz"><div class="utick hidden" id="utick"><i></i>your uranium</div></div>
+      <div class="slidefoot"><span>← slower</span><span>faster, harder push →</span></div>
     </div>
+    <button class="btn go" id="write" disabled>Write it down</button>
     <div class="cap" id="benchcap"></div>
   </div>
   <div id="benchres" class="result hidden">
@@ -172,7 +178,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="pageband">YOUR PAGE <small></small></div>
   <div class="page" id="page"></div>
-  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
+  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>what you measured</span><span><i class="ke"></i>how sure (an arrow: at least, at most)</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
   <div class="foundline" id="foundline"></div>
   <div id="shelfpart">
     <div class="band" id="shelfband">THE SHELF <small></small></div>
@@ -197,14 +203,16 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 <div id="end" class="screen">
   <div class="band">THE LAST PAGE <small>nine panels</small></div>
   <div class="headline" id="headline"></div>
-  <div class="cap"><h3>WHAT YOU DID</h3><div id="did"></div></div>
+  <p class="fate" id="fate"></p>
+  <div class="cap"><h3>HER NOTE, AGAINST YOUR PAGE</h3><div id="claims"></div></div>
+  <div class="cap"><h3>WHAT YOU DID</h3><p id="did"></p></div>
   <div class="cap sky"><h3>WHAT THE PAPER SAYS</h3><p id="paper"></p></div>
   <div class="cap"><h3>WHAT IT MEANS</h3><p id="means"></p></div>
   <div class="band">YOUR PAGE</div>
   <div class="page" id="endpage"></div>
   <div class="band">HER MEASUREMENTS <small>from her table</small></div>
   <div class="her" id="her"></div>
-  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> on your page: her own reading</span></div>
+  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what you measured</span><span><i class="ke"></i>how sure (an arrow: at least, at most)</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> on your page: her own reading</span></div>
   <div class="later" id="later"></div>
   <button class="btn go" id="again">Start a new album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -218,10 +226,10 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <ol>
     <li><b>The bench.</b> Whatever lies on the lower brass plate, if it sends out rays, lets the air between the two plates carry a tiny electric current. The current pushes the spot of light along the scale, to the right.</li>
     <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz pushes the spot back to the left. The faster you let the weight down, the harder it pushes.</li>
-    <li><b>Balance it.</b> Find the push that holds the spot still on 0. A blue ring closes around it; when it has closed, the measurement is done. How hard you had to push is how strong the plate is. If the spot never moves, the plate does nothing, and the ring closes by itself.</li>
-    <li><b>Your page.</b> Each measurement is drawn as a panel on your album page. The yellow bar is what the thing's uranium alone could give; the blue bar is what it gave; the dashed line is pure uranium. You have nine panels. The first is pure uranium: your yardstick.</li>
-    <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. Each thing can be tested once.</li>
-    <li><b>The last page.</b> After nine panels: what you found, and what Marie Curie found in 1898.</li>
+    <li><b>Write it down.</b> When you think you know how strong the plate is, press WRITE IT DOWN. Your page keeps how hard you were pushing and what the spot was doing at that moment, and says how sure that makes the reading. Her own reading is shown next to yours.</li>
+    <li><b>Your page.</b> Each reading is drawn as a panel. The yellow bar is what the thing's uranium alone could give; the blue bar is your reading, with a line for how sure it is (an arrow if it is only "at least" or "at most"); the dashed line is pure uranium; the small black triangle is her reading. You have nine panels. The first is pure uranium.</li>
+    <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again, uranium too; each time is a new panel.</li>
+    <li><b>The last page.</b> After nine panels, your page is held up against her note: how many of its claims your own readings back.</li>
   </ol>
   <button class="btn go" id="helpback">Back</button>
 </div>
@@ -231,20 +239,22 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <h2>About</h2>
   
 <h3>The game in one line</h3>
-<p>Hold the spot of light still with Marie Curie's quartz, test what is on her shelf, and find what else, besides uranium, makes the air carry electricity: thorium, and something in pitchblende that is not uranium.</p>
+<p>Push back on the electrometer's spot of light with Marie Curie's quartz, test what is on her shelf, write down what you measure, and find what else, besides uranium, makes the air carry electricity: thorium, and something in pitchblende that is not uranium. At the end your page is held up against her note.</p>
 <h3>What the paper reports</h3>
 <p>Marie Skłodowska Curie measured how strongly different substances make the air conduct electricity. One plate of a condenser (plates 8 cm across, 3 cm apart, 100 volts between them) was covered with a layer of the substance, and the tiny current through the air was measured with an electrometer and a piezoelectric quartz. She tested a great number of metals, salts, oxides and minerals. Her table gives the current for each, in units of 10<sup>−12</sup> ampere: metallic uranium 24; black uranium oxide 27, green 18; the uranates about 12; hydrated uranic acid 6; uranyl nitrate and the uranium sulfates about 7; chalcolite made in the laboratory 9; thorium oxide 22 in a layer a quarter of a millimetre thick and 53 in a layer 6 mm thick; thorium sulfate 8; a tantalum salt 2; a niobium salt with cerium oxide under 1; pitchblende 83 (Johanngeorgenstadt), 67 (Joachimsthal and Příbram) and 16 (Cornwall); natural chalcolite 52; autunite 27; thorites 2 to 14; orangite 20; samarskite 11; five rare minerals 3 to 7; cleveite “very active”. Everything she studied and left out of the table is at least a hundred times less active than uranium.</p>
 <p>From the table: all the uranium compounds are active, and in general the more so the more uranium they contain. Thorium compounds are very active; thorium oxide beats metallic uranium. Uranium and thorium are the two elements of highest atomic weight. Cerium, niobium and tantalum seem slightly active. White phosphorus is very active, but probably for another reason: red phosphorus and the phosphates are not. The active minerals all contain active elements, and two uranium minerals, pitchblende and chalcolite, are much more active than uranium itself: “this fact is very remarkable, and leads one to believe that these minerals may contain an element much more active than uranium.” Chalcolite made by Debray's method from pure products is no more active than any other uranium salt.</p>
 <p>Then: a thicker layer gives more, a little for uranium compounds and a great deal for thorium oxide; the rays pass through thin metal, glass, ebonite and paper, and an aluminium leaf a hundredth of a millimetre thick lets through a fifth of them for the uranium compounds, a third for pitchblende and natural chalcolite, two-fifths for thorium, and seven-tenths for a thick layer of thorium oxide; good photographic impressions; a likeness to the secondary rays that Röntgen rays raise in metals (Sagnac). And a closing guess: perhaps all of space is crossed by rays like Röntgen's but far more penetrating, which only heavy elements such as uranium and thorium can absorb.</p>
 <h3>Mechanism: reconstructed</h3>
-<p><b>This game demonstrates</b>, in a reconstruction built from the paper's table, that each thing on the shelf makes the air carry the current the table gives it, so that the push needed to hold the spot still is the table's number, to within a few hundredths of uranium's; that the uranium compounds read about in proportion to their uranium, or a little less; that thorium oxide and white phosphorus move the spot with no uranium in them, while red phosphorus and phosphate do not; and that pitchblende and the green chalcolite from a mine read far more than their uranium can give, while the same chalcolite made from pure chemicals does not.</p>
-<p><b>It assumes</b> how much uranium is in each thing (ours: from the chemical formulas for the compounds, a typical two-thirds for pitchblende; the paper gives none, and the rocks read more than their uranium for any share from 40 to 88 in 100); a number for white phosphorus (ours: about a third more than uranium; the paper says only “very active”); the electrometer's behaviour (a spot that drifts with the difference between the plate's current and the quartz's, leaks back toward zero, and trembles; tuned for a thumb); a steady push in place of Curie's timed release of a weight (her thesis of 1903, not this note, describes how the quartz was worked: a weight let down by hand onto the quartz so that the electrometer stays at zero, the time read on a stopwatch; the quantity measured is the same); one reading per substance, as the table gives it; and the shelf: fifteen things from her dozens, sorted into drawers by the donors her footnote thanks (which donor sent the thorium oxide and the tantalum salt is ours). Every number sits in the config block at the top of the source, with the table row it came from; the table was transcribed by hand from a scan of typeset text.</p>
+<p><b>This game demonstrates</b>, in a reconstruction built from the paper's table, that each thing on the shelf makes the air carry the current the table gives it; that a reading taken with the spot standing still recovers the table's number, and one taken in a hurry gives only a bound; that, measured well, the uranium compounds read about in proportion to their uranium, or a little less; that thorium oxide and white phosphorus move the spot with no uranium in them, while red phosphorus and phosphate do not; and that pitchblende and the green chalcolite from a mine read far more than their uranium can give, while the same chalcolite made from pure chemicals does not.</p>
+<p><b>How a reading is written down (ours).</b> You may write it down at any moment. If the spot had been standing in the middle of the scale for a while, the page keeps a value: the charge balance over those seconds (the quartz's push, plus whatever is left on the electrometer), with an error bar that narrows the longer the spot stood. If the spot was still running right, the page keeps “at least” your push; running left, “at most”; not yet settled, “roughly”, give or take a lot. These are what the instrument honestly says at that moment; every reading of this kind contains her value. Labels on the panels come from your own readings, and the yardstick for what a thing's uranium could give is your own reading of pure uranium. Her reading is the black triangle.</p>
+<p><b>The score (ours, from her text).</b> Six claims of her note can be tested on this shelf: every uranium compound does it, about in proportion to its uranium; thorium does it with no uranium; thorium oxide beats pure uranium (her thick layer; her thin one does not quite); white phosphorus does it but red phosphorus and phosphates do not; pitchblende and chalcolite do far more than their uranium can; the same chalcolite made from pure chemicals does not. A claim counts when your own readings back it. A page of jars that read zero backs nothing, however exactly it is measured.</p>
+<p><b>It assumes</b> how much uranium is in each thing (ours: from the chemical formulas for the compounds, a typical two-thirds for pitchblende; the paper gives none, and her rocks read more than their uranium for any share from 40 to 88 in 100); a number for white phosphorus (ours: about a third more than uranium; the paper says only “very active”); the electrometer's behaviour (a spot that drifts with the difference between the plate's current and the quartz's, leaks back toward zero, and trembles; tuned for a thumb); a steady push in place of Curie's timed release of a weight (her thesis of 1903, not this note, describes how the quartz was worked: a weight let down by hand onto the quartz so that the electrometer stays at zero, the time read on a stopwatch; the quantity measured is the same); how sure a reading is, as described above; one reading per substance, as the table gives it; and the shelf: fifteen things from her dozens, sorted into drawers by the donors her footnote thanks (which donor sent the thorium oxide and the tantalum salt is ours). The tantalum salt (her “slightly active”) is too faint to see without holding the spot still for several seconds. Every number sits in the config block at the top of the source, with the table row it came from; the table was transcribed by hand from a scan of typeset text.</p>
 <p><b>The paper establishes</b> the currents it reports, under its conditions, and the argument it draws from them: activity belongs to uranium and thorium wherever they are; two uranium minerals are much more active than uranium; the same mineral made from pure products is not; so these minerals <i>may contain</i> an element much more active than uranium. In the note that last is a conjecture, not a result. It was borne out within the year (polonium and radium), which the last page says, marked as after this note.</p>
 <h3>What is cut</h3>
 <p>From the shelf: black uranium oxide (27, a little above the metal; her “in general” covers it), hydrated uranic acid (6, well under its share), the uranates, the sulfates, thorium sulfate, the niobium salt with cerium oxide, the Cornish pitchblende (16, whose uranium content we cannot state), autunite, the thorites, orangite, samarskite, the five rare minerals, and cleveite. All are in the config block with their values. Not played: the thickness of the layer (except thorium oxide, thin and thick), the absorption by aluminium, the photographs, the Röntgen analogy and the closing guess, all above. The quartz's arithmetic (charge in proportion to the weight; current = charge ÷ time) is underneath; the player feels it as a push.</p>
 <h3>The paper</h3>
 <p>M. Skłodowska Curie, “Rayons émis par les composés de l'uranium et du thorium” (Rays emitted by the compounds of uranium and thorium), note presented by M. Lippmann, <i>Comptes rendus hebdomadaires des séances de l'Académie des sciences</i> 126 (1898): 1101–1103, session of 12 April 1898. No DOI. The <i>Comptes rendus</i> are on Gallica (Bibliothèque nationale de France); an English translation is in A. Romer (ed.), <i>The Discovery of Radioactivity and Transmutation</i> (Dover, 1964). The work was done at the École municipale de physique et de chimie industrielles in Paris; the uranium came from M. Moissan, the salts and oxides from M. Étard's laboratory, the minerals of known origin from M. Lacroix at the Muséum, rare pure oxides from M. Demarçay (her footnotes).</p>
-<p><b>Game built from this paper; the paper is the authority where the two disagree.</b> Fonts: Lilita One and Patrick Hand (SIL Open Font License). The only randomness is the tremble of the spot; it moves a reading by a few hundredths of uranium's, never enough to change a panel.</p>
+<p><b>Game built from this paper; the paper is the authority where the two disagree.</b> Fonts: Lilita One and Patrick Hand (SIL Open Font License). The only randomness is the tremble of the spot, which the error bars allow for.</p>
 
   <button class="btn go" id="aboutback">Back</button>
 </div>
@@ -271,29 +281,49 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
                                    //   l'uranium". Below this a thing counts as "nothing": the spot never moved.
     CONDENSER: { plateCm: 8, gapCm: 3, volts: 100 }, // p. 1101: "Diamètre des plateaux, 8cm; distance, 3cm"; 100 volts
     // ---- play (ours)
-    PANELS: 9,                     // ours: nine panels on the album page; the first is pure uranium (the yardstick), so eight
-                                   //   are the player's, from fifteen. The paper's own path through the shelf needs exactly eight.
-    FIRST: 'uranium',              // ours: the first panel is fixed; it teaches the balance and makes the yardstick
-    SEED: 1898,                    // ours: the jitter of the spot only; nothing the game reads depends on it beyond a fraction
-                                   //   of a second in when the balance completes
+    PANELS: 9,                     // ours: nine panels on the album page; the first is pure uranium, so eight are the player's.
+                                   //   Any jar, uranium included, can be measured again; each measurement is a panel. The
+                                   //   paper's own path through the shelf, measured well, needs exactly eight.
+    FIRST: 'uranium',              // ours: the first panel is pure uranium; the player's own reading of it is the yardstick for
+                                   //   "what its uranium alone could give"
+    SEED: 1898,                    // ours: the tremble of the spot only
     // ---- the electrometer and the quartz (ours, tuned for a thumb; thesis 1903 for the principle)
     // The spot s (−1 … 1 across the scale) is a leaky integrator of the difference between the plate's current i and the
     // quartz's counter-current r, both in units of pure uranium:  ds/dt = G·(i − r) − s/TAU + JITTER·√i·noise.
-    // Steady deflection is G·TAU·(i − r), so the spot stands inside the zero band when |i − r| < BAND/(G·TAU) ≈ 0.067.
+    // Its steady deflection is G·TAU·(i − r): it stands in the middle (|s| < BAND) when |i − r| < BAND/(G·TAU) ≈ 0.067.
+    // Nothing on screen marks the middle except the scale's own 0.
     G: 1.5,                        // ours: scale widths per second per uranium of mismatch
-    TAU: 1.0,                      // ours: seconds; the spot drifts back toward zero when nothing pushes it (a leak)
-    BAND: 0.1,                     // ours: half-width of the zero band, as a fraction of the half-scale
-    HOLD_S: 1.2,                   // ours: seconds the spot must stay inside the band; a ring closes around it meanwhile
-    WATCH_S: 1.2,                  // ours: the first seconds on the bench cannot complete a balance, so an inactive plate is
-                                   //   seen not to move before it is recorded as nothing
+    TAU: 1.0,                      // ours: seconds; the spot drifts back toward 0 when nothing pushes it (a leak)
+    BAND: 0.1,                     // ours: how near 0 the spot must sit to count as standing, as a fraction of the half-scale
     JITTER: 0.05,                  // ours: tremble of the spot, scaled by √i (an inactive plate does not tremble at all)
     SLIDER_MAX: 4,                 // ours: the slider runs from no push to four times pure uranium's push (the table's
                                    //   largest row, pitchblende of Johanngeorgenstadt, is 83/24 ≈ 3.46)
+    // ---- writing it down: what an honest reading says (ours)
+    COMMIT_AFTER_S: 0.8,           // ours: WRITE IT DOWN wakes this long after the plate goes on, so the spot is seen to start
+    STILL_MIN_S: 0.3,              // ours: a spot that has stood in the middle at least this long gives a value with an error bar;
+                                   //   the bar's half-width is BAND/(G·T) + 2σ for T seconds standing, σ = JITTER·√(x·T)/(G·T),
+                                   //   so it narrows the longer the spot stood (about ±0.2 after a third of a second, ±0.1 after a
+                                   //   second and a half for pure uranium)
+    ROUGH_H: 0.3,                  // ours: a spot not yet settled but pushed nearly level gives "roughly", ± this much
+    ACTIVE_MIN: 0.05,              // ours: a reading whose bottom end is above this shows the plate moves the spot
+    NOTHING_MAX: 0.15,             // ours: a reading whose top end is below this shows nothing the eye could see. (The paper's own
+                                   //   threshold is a hundredth of uranium; this bench is too short to see that fine.)
     // ---- the rule, as the panels state it (ours; the paper's "en général, d'autant plus qu'ils contiennent plus
     //      d'uranium", p. 1102)
-    MORE_RATIO: 1.3,               // ours: a reading above 1.3 × its uranium share is "MORE THAN ITS URANIUM". Every uranium
-                                   //   compound in the game reads 0.62–1.0 of its share; the rocks read 4.3–5.3. Any threshold
-                                   //   from 1.1 to 4 gives the same panels (calibration.js checks it).
+    MORE_RATIO: 1.3,               // ours: a reading whose bottom end is above 1.3 × its uranium share × the top of the player's own
+                                   //   uranium reading is "MORE THAN ITS URANIUM"; one whose top end is below 1.3 × share × the bottom
+                                   //   of it, and active, is "ABOUT ITS URANIUM". Every uranium compound reads 0.62–1.0 of its share in
+                                   //   the table; the rocks 4.3–5.3. Any threshold from 1.1 to 4 gives the same panels for her values.
+    // ---- the score: the claims of her note that the shelf can test (p. 1102). A claim counts when the player's own readings
+    //      back it (claims() below says exactly what each needs).
+    CLAIMS: [
+      { id: 'salts',   text: 'Every uranium compound does it, about in proportion to its uranium.', src: 'p. 1102: "Tous les composés de l\'uranium étudiés sont actifs et le sont, en général, d\'autant plus qu\'ils contiennent plus d\'uranium."' },
+      { id: 'thorium', text: 'Thorium does it too, with no uranium in it.', src: 'p. 1102: "Les composés du thorium sont très actifs."' },
+      { id: 'thbeats', text: 'Thorium oxide even beats pure uranium.', src: 'p. 1102: "L\'oxyde de thorium dépasse même en activité l\'uranium métallique."' },
+      { id: 'phos',    text: 'White phosphorus does it, but red phosphorus and phosphates do not: it is not the phosphorus itself.', src: 'p. 1102: "Le phosphore blanc est très actif, mais son action est probablement d\'une autre nature … le phosphore n\'est actif ni à l\'état de phosphore rouge ni à l\'état de phosphates."' },
+      { id: 'rocks',   text: 'Pitchblende and chalcolite do far more than their uranium can.', src: 'p. 1102: "pechblende … et chalcolite … sont beaucoup plus actifs que l\'uranium lui-même."' },
+      { id: 'copy',    text: 'The same chalcolite, made from pure chemicals, does not.', src: 'p. 1102: "cette chalcolite artificielle n\'est pas plus active qu\'un autre sel d\'uranium."' },
+    ],
     // ---- the shelf. amps: the paper's table (p. 1101–1102), 1e-12 A. u: uranium by weight (ours: from the chemical formula
     //      for compounds, a typical value for pitchblende; the paper gives none). th: thorium by weight, ours, for the card.
     DRAWERS: [
@@ -374,6 +404,12 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const W = { 1.5: 'one and a half times', 2: 'twice', 2.5: 'two and a half times', 3: 'three times', 3.5: 'three and a half times', 4: 'four times' };
     return (W[h] || 'more than four times') + ' the push of pure uranium';
   }
+  function bare(x) {  // the same without "about", for bounds: "at least half the push of pure uranium"
+    const w = times(x);
+    if (w === 'no push at all') return 'nothing';
+    if (w === 'about the push of pure uranium') return 'the push of pure uranium';
+    return w.replace(/^about /, '');
+  }
   function shareWords(u) {
     if (u >= 0.99) return 'all uranium';
     if (u >= 0.8) return 'mostly uranium';
@@ -383,25 +419,13 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     return 'no uranium';
   }
 
-  // ---------- the rule: what kind of panel a reading makes. Decided on the paper's value; calibration.js checks that every
-  //            reading the balance can accept (within its tolerance) gives the same kind.
-  function kind(s, x) {
-    if (x === undefined) x = strength(s);
-    if (s.id === CONFIG.FIRST) return 'yardstick';
-    if (x < CONFIG.INACTIVE_BELOW) return 'nothing';
-    if (s.u === 0) return 'without';
-    if (x > CONFIG.MORE_RATIO * s.u) return 'more';
-    return 'about';
-  }
-  const BADGE = { yardstick: 'THE YARDSTICK', nothing: 'NOTHING', without: 'NO URANIUM IN IT!', more: 'MORE THAN ITS URANIUM!', about: 'ABOUT ITS URANIUM' };
-
   // ---------- a game
   function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {} }; }
   function panelsLeft(g) { return CONFIG.PANELS - g.panels.length; }
   function over(g) { return g.panels.length >= CONFIG.PANELS; }
-  function available(g) {  // what can be tested now: the first panel is uranium; then anything not yet tested
+  function available(g) {  // the first panel is pure uranium; after that anything, again if you like
     if (!g.panels.length) return [sub(CONFIG.FIRST)];
-    return CONFIG.SUBSTANCES.filter(s => !g.tested[s.id]);
+    return CONFIG.SUBSTANCES.slice();
   }
   function canTest(g, id) { return !over(g) && available(g).some(s => s.id === id); }
 
@@ -409,114 +433,190 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   function benchStart(g, id) {
     if (!canTest(g, id)) throw new Error('cannot test ' + id);
     const s = sub(id);
-    return { id, i: strength(s), s: 0, v: 0, t: 0, hold: 0, r: 0, done: false, reading: null, rng: mulberry32(g.seed * 31 + g.panels.length * 7919 + 1),
-      acc: { r: 0, s: 0, s0: 0 } };
+    return { id, i: strength(s), s: 0, v: 0, t: 0, hold: 0, r: 0, rng: mulberry32(g.seed * 31 + g.panels.length * 7919 + 1), acc: { r: 0, s: 0, s0: 0 } };
   }
-  // r: the slider (the quartz's counter-current), in units of pure uranium. dt in seconds. Returns the state.
-  // The reading is the charge balance over the seconds the spot was held: the quartz's charge (the push, averaged) plus
-  // whatever charge is left on the electrometer (the spot's residual deflection, and what leaked). The thesis's null method
-  // reads the same balance with a stopwatch; here it is exact up to the spot's tremble, so a quick sweep of the slider at
-  // the last moment cannot change it.
+  // r: the slider (the quartz's counter-current), in units of pure uranium. dt in seconds. Returns the state. Nothing here ends
+  // the measurement: only the player does, with commit().
   function benchStep(st, dt, r) {
-    if (st.done) return st;
     const C = CONFIG; r = Math.max(0, Math.min(C.SLIDER_MAX, r)); st.r = r;
     const steps = Math.max(1, Math.ceil(dt / 0.01)), h = dt / steps, s0 = st.s;
     for (let k = 0; k < steps; k++) {
-      const inBand = st.t > C.WATCH_S && Math.abs(st.s) < C.BAND;
-      if (inBand) { if (st.hold === 0) { st.acc = { r: 0, s: 0, s0: st.s }; } st.acc.r += r * h; st.acc.s += st.s * h; }
+      const still = Math.abs(st.s) < C.BAND;
+      if (still) { if (st.hold === 0) st.acc = { r: 0, s: 0, s0: st.s }; st.acc.r += r * h; st.acc.s += st.s * h; }
       const noise = st.i > 0 ? C.JITTER * Math.sqrt(st.i) * gauss(st.rng) * Math.sqrt(h) : 0;
       st.s += (C.G * (st.i - r) - st.s / C.TAU) * h + noise;
       st.s = Math.max(-1, Math.min(1, st.s));
       st.t += h;
-      if (inBand) st.hold += h; else st.hold = 0;
-      if (st.hold >= C.HOLD_S - 1e-9) {
-        const T = st.hold, a = st.acc;
-        st.reading = Math.max(0, a.r / T + ((st.s - a.s0) + a.s / C.TAU) / (C.G * T));
-        st.done = true; break;
-      }
+      if (still) st.hold += h; else st.hold = 0;
     }
     st.v = (st.s - s0) / dt;
     return st;
   }
-  // how far the push may be from the plate's current with the spot still standing in the band (for tests and the loop)
+  function canCommit(st) { return st.t >= CONFIG.COMMIT_AFTER_S; }
   function tolerance() { return CONFIG.BAND / (CONFIG.G * CONFIG.TAU); }
-  function holdProgress(st) { return Math.min(1, st.hold / CONFIG.HOLD_S); }
-  function running(st) {  // which way the spot is going, for the picture: 'right', 'left' or 'still'; 'pinned' if at an end
+  function running(st) {  // which way the spot is going, for the picture: 'right', 'left' or 'still'; 'pinned-…' at an end
     const pinned = Math.abs(st.s) > 0.97;
     if (pinned) return st.s > 0 ? 'pinned-right' : 'pinned-left';
     if (Math.abs(st.s) >= CONFIG.BAND && Math.abs(st.i - st.r) * CONFIG.G * CONFIG.TAU > CONFIG.BAND) return st.i > st.r ? 'right' : 'left';
     return 'still';
   }
-
-  // ---------- recording a panel
-  function caption(s, x, k) {
-    const sh = shareWords(s.u);
-    if (k === 'yardstick') return 'Pure uranium. However hard you had to push for it is the yardstick: every other panel is measured against it.';
-    if (k === 'nothing') return s.name + ': nothing. The spot never moved. Less than a hundredth of uranium, if anything.';
-    if (k === 'without') {
-      const tail = x > 1.15 ? ' Stronger than pure uranium, with no uranium at all.' : x < 0.15 ? ' Faint, but it moved.' : '';
-      return s.name + ' has no uranium in it, and the spot moved: it took ' + times(x) + '.' + tail;
+  // What the instrument honestly says at the moment the player writes it down.
+  //  held:    the spot has stood in the middle for T ≥ STILL_MIN_S seconds: the charge balance over those seconds (the push,
+  //           averaged, plus what is left on the electrometer and what leaked), with an error bar that narrows as T grows.
+  //  atleast: the spot is running right (the plate pushes harder than the quartz): at least the push.
+  //  atmost:  running left: at most the push.
+  //  rough:   not settled, but pushed nearly level: roughly the push, give or take ROUGH_H.
+  function readingOf(st) {
+    const C = CONFIG, m = st.i - st.r;
+    if (st.hold >= C.STILL_MIN_S) {
+      const T = st.hold, a = st.acc;
+      const est = Math.max(0, a.r / T + ((st.s - a.s0) + a.s / C.TAU) / (C.G * T));
+      const h = C.BAND / (C.G * T) + 2 * C.JITTER * Math.sqrt(est * T) / (C.G * T);
+      return { type: 'held', est, lo: Math.max(0, est - h), hi: est + h, h, T };
     }
-    if (k === 'more') return s.name + ' is only ' + sh + ', and it took ' + times(x) + '. Far more than its uranium can give.';
-    return s.name + ' is ' + sh + ', and it took ' + times(x) + ': about what its uranium gives, or a little less.';
+    if (m * C.G * C.TAU > C.BAND) return { type: 'atleast', est: st.r, lo: st.r, hi: Infinity };
+    if (m * C.G * C.TAU < -C.BAND) return { type: 'atmost', est: st.r, lo: 0, hi: st.r };
+    return { type: 'rough', est: st.r, lo: Math.max(0, st.r - C.ROUGH_H), hi: st.r + C.ROUGH_H, h: C.ROUGH_H };
   }
-  function record(g, st) {
-    if (!st.done) throw new Error('not balanced');
-    const s = sub(st.id), x = st.reading, k = kind(s);
-    const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, reading: x, paper: strength(s), u: s.u,
-      kind: k, badge: BADGE[k], words: times(x), caption: caption(s, x, k), seconds: st.t };
-    // the two chalcolites: whichever comes second says what the first one took, so the comparison is made on the bench
+  function readShort(R) {  // the reading without its margin, for the last page
+    if (R.type === 'held') return R.est < 0.05 ? 'nothing' : times(R.est);
+    if (R.type === 'atleast') return R.lo < CONFIG.ACTIVE_MIN ? 'more than nothing' : 'at least ' + bare(R.lo);
+    if (R.type === 'atmost') return 'at most ' + bare(R.hi);
+    return 'roughly ' + bare(R.est);
+  }
+  function readWords(R) {
+    if (R.type === 'held') return (R.est < 0.05 ? 'nothing' : times(R.est)) + ', give or take ' + (R.h < 0.12 ? 'a little' : R.h < 0.25 ? 'some' : 'a lot');
+    if (R.type === 'atleast') return R.lo < CONFIG.ACTIVE_MIN ? 'more than nothing' : 'at least ' + bare(R.lo);
+    if (R.type === 'atmost') return 'at most ' + bare(R.hi);
+    return 'roughly ' + bare(R.est) + ', give or take a lot';
+  }
+  const HOW = {
+    held: 'The spot was standing in the middle when you wrote it down.',
+    atleast: 'The spot was still running right when you wrote it down: the plate was pushing harder than you were.',
+    atmost: 'The spot was running left when you wrote it down: the plate was pushing less hard than you were.',
+    rough: 'The spot had not settled when you wrote it down.',
+  };
+
+  // ---------- the player's own yardstick and what each reading shows
+  function yard(g) {  // the player's best reading of pure uranium: the narrowest one
+    const us = g.panels.filter(p => p.id === CONFIG.FIRST);
+    if (!us.length) return null;
+    return us.slice().sort((a, b) => (a.R.hi - a.R.lo) - (b.R.hi - b.R.lo))[0].R;
+  }
+  function active(R) { return R.type === 'atleast' || R.lo > CONFIG.ACTIVE_MIN; }
+  function nothing(R) { return R.type !== 'atleast' && R.hi <= CONFIG.NOTHING_MAX; }
+  function kindOf(s, R, U) {
+    if (s.id === CONFIG.FIRST) return 'yardstick';
+    if (s.u === 0) return active(R) ? 'without' : nothing(R) ? 'nothing' : 'unsure';
+    if (U && R.lo > CONFIG.MORE_RATIO * s.u * U.hi) return 'more';
+    if (U && active(R) && R.hi <= CONFIG.MORE_RATIO * s.u * U.lo) return 'about';
+    if (nothing(R)) return 'nothing';
+    return 'unsure';
+  }
+  function panelKind(g, p) { return kindOf(sub(p.id), p.R, yard(g)); }
+  // the kind her own value would give, for the checks and for her page
+  function paperKind(s) { const x = strength(s), R = { type: 'held', est: x, lo: x, hi: x }; return kindOf(s, R, { lo: 1, hi: 1 }); }
+  const BADGE = { yardstick: 'YOUR YARDSTICK', nothing: 'NOTHING SEEN', without: 'NO URANIUM IN IT!', more: 'MORE THAN ITS URANIUM!', about: 'ABOUT ITS URANIUM', unsure: 'CAN’T TELL' };
+  const KIND_LINE = {
+    yardstick: s => 'This is your pure uranium: the yardstick for what the uranium in anything else could give.',
+    nothing: s => 'Nothing you could see.',
+    without: s => 'It has no uranium in it, and it moved the spot.',
+    more: s => 'It is only ' + shareWords(s.u) + ': that is more than its uranium alone could give.',
+    about: s => 'It is ' + shareWords(s.u) + ': about what its uranium gives, or less.',
+    unsure: s => s.u > 0 ? 'Your reading cannot tell whether that is more than its uranium could give.' : 'Your reading cannot tell whether it moves the spot at all.',
+  };
+
+  // ---------- writing it down: one panel
+  function commit(g, st) {
+    if (!canCommit(st)) throw new Error('too soon');
+    const s = sub(st.id), R = readingOf(st);
+    const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, u: s.u, R, paper: strength(s), seconds: st.t };
+    g.panels.push(p); g.tested[s.id] = (g.tested[s.id] || 0) + 1;
+    const k = panelKind(g, p);
+    p.kind = k; p.badge = BADGE[k]; p.words = readWords(R);
+    if (s.id === CONFIG.FIRST) p.words = p.words.replace('about the push of pure uranium', 'about her push').replace(' the push of pure uranium', ' her push');
+    p.caption = s.name + ': ' + p.words + '. ' + HOW[R.type] + ' ' + KIND_LINE[k](s) + (s.id === CONFIG.FIRST ? '' : ' Hers: ' + times(strength(s)) + '.');
+    // the two chalcolites: whichever comes second says what the first one gave, so the comparison is made on the bench
     const twin = { chalc: 'chalcArt', chalcArt: 'chalc' }[s.id], other = twin && g.panels.find(q => q.id === twin);
-    if (other) p.caption += s.id === 'chalcArt' ? ' The same crystal from the mine took ' + other.words + '.' : ' Your copy, made from pure chemicals, took ' + other.words + '.';
-    g.panels.push(p); g.tested[s.id] = true; return p;
+    if (other) p.caption += s.id === 'chalcArt' ? ' Your chalcolite from the mine: ' + readWords(other.R) + '.' : ' Your copy, made from pure chemicals: ' + readWords(other.R) + '.';
+    return p;
   }
   const low = s => s.charAt(0).toLowerCase() + s.slice(1);
   const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  function found(g) { return g.panels.filter(p => p.kind === 'without' || p.kind === 'more'); }
+  function found(g) {  // things the player's own page shows moving the spot with no uranium, or beyond their uranium (one per jar)
+    const seen = {}, out = [];
+    g.panels.forEach(p => { const k = panelKind(g, p); if ((k === 'without' || k === 'more') && !seen[p.id]) { seen[p.id] = 1; out.push({ p, k }); } });
+    return out;
+  }
   function foundLine(g) {
     const f = found(g);
     if (!g.panels.length) return 'Nothing measured yet.';
     if (!f.length) return 'Found so far, besides uranium: nothing yet.';
-    return 'Found so far, besides uranium: ' + list(f.map(p => (p.kind === 'more' ? 'something in ' : '') + low(p.name))) + '.';
+    return 'Found so far, besides uranium: ' + list(f.map(({ p, k }) => (k === 'more' ? 'something in ' : '') + low(p.name))) + '.';
   }
 
-  // ---------- the verdict (words; no score)
+  // ---------- the score: which of her claims the player's own page backs
+  function claims(g) {
+    const U = yard(g), P = id => g.panels.filter(p => p.id === id), K = p => panelKind(g, p);
+    const tested = ids => ids.filter(id => P(id).length);
+    const firstWith = (ids, pred) => { for (const id of ids) for (const p of P(id)) if (pred(p)) return p; return null; };
+    const your = p => (p.id === 'chalcArt' ? 'your own chalcolite' : 'your ' + low(p.name)) + ': ' + readShort(p.R);
+    const cant = ids => 'your reading' + (ids.length > 1 || P(ids[0]).length > 1 ? 's' : '') + ' of ' + list(ids.map(id => low(sub(id).name))) + ' could not show it';
+    const out = [];
+    { // salts
+      const ids = ['greenox', 'nitrate', 'chalcArt'], ok = firstWith(ids, p => K(p) === 'about'), t = tested(ids);
+      out.push({ id: 'salts', backed: !!ok, why: ok ? your(ok) + ', about what its uranium gives' : !t.length ? 'you never measured a uranium salt' : cant(t) });
+    }
+    { // thorium
+      const ids = ['thO', 'thOthick'], ok = firstWith(ids, p => K(p) === 'without'), t = tested(ids);
+      out.push({ id: 'thorium', backed: !!ok, why: ok ? your(ok) : !t.length ? 'you never measured thorium' : cant(t) });
+    }
+    { // thorium beats uranium
+      const ids = ['thO', 'thOthick'], ok = U && firstWith(ids, p => p.R.lo > U.hi), t = tested(ids);
+      out.push({ id: 'thbeats', backed: !!ok, why: ok ? your(ok) + ', more than your pure uranium' : !t.length ? 'you never measured thorium' :
+        (U && U.hi === Infinity ? 'your own pure-uranium reading was open-ended, so nothing could be shown to beat it' : cant(t) + ' (her thick layer beats uranium; her thin one does not quite)') });
+    }
+    { // phosphorus
+      const w = firstWith(['whiteP'], p => K(p) === 'without'), n = firstWith(['redP', 'phosphate'], p => K(p) === 'nothing'), tn = tested(['redP', 'phosphate']);
+      const why = w && n ? your(w) + '; ' + your(n) :
+        !P('whiteP').length ? 'you never measured white phosphorus' : !w ? cant(['whiteP']) :
+        !tn.length ? 'white phosphorus moved the spot, but you never measured red phosphorus or a phosphate' : cant(tn);
+      out.push({ id: 'phos', backed: !!(w && n), why });
+    }
+    { // rocks
+      const ids = ['pbJG', 'pbJo', 'chalc'], ok = firstWith(ids, p => K(p) === 'more'), t = tested(ids);
+      out.push({ id: 'rocks', backed: !!ok, why: ok ? your(ok) + ', and it is only ' + shareWords(ok.u) : !t.length ? 'you never measured a rock from the Muséum' :
+        (U && U.hi === Infinity ? 'your own pure-uranium reading was open-ended, so nothing could be shown to beat its uranium' : cant(t)) });
+    }
+    { // the copy
+      const c = firstWith(['chalcArt'], p => K(p) === 'about'), m = firstWith(['chalc'], p => K(p) === 'more');
+      const why = c && m ? your(c) + '; ' + your(m) : !P('chalcArt').length ? 'you never made the copy' : !P('chalc').length ? 'you made the copy, but never measured the chalcolite from the mine to set it against' :
+        !c ? cant(['chalcArt']) : cant(['chalc']);
+      out.push({ id: 'copy', backed: !!(c && m), why });
+    }
+    return out.map(o => Object.assign({ text: CONFIG.CLAIMS.find(c => c.id === o.id).text }, o));
+  }
+
+  // ---------- the verdict
   function verdict(g) {
-    const has = id => !!g.tested[id];
-    const P = id => g.panels.find(p => p.id === id);
-    const f = found(g), ores = ['pbJG', 'pbJo', 'chalc'].filter(has), others = f.filter(p => p.kind === 'without');
-    let headline;
-    if (ores.length && has('chalcArt')) headline = 'You found a rock stronger than pure uranium, and your copy of it was weak.';
-    else if (ores.length) headline = 'You found a rock stronger than pure uranium.';
-    else if (others.length) headline = 'You found ' + list(others.map(p => low(p.name))) + '. The rocks stayed in their drawer.';
-    else headline = 'Only uranium moved the spot.';
-    const did = 'You tested ' + (g.panels.length - 1) + ' things after pure uranium. ' +
-      (f.length ? 'Besides pure uranium, the spot moved for ' + list(f.map(p => low(p.name))) + '.' : 'Nothing but uranium moved the spot.');
-    const path = [];
-    if (ores.length) {
-      const o = P(ores[0]);
-      path.push('The ' + (o.id === 'chalc' ? 'green crystal from the mine' : 'black rock') + ' is only ' + shareWords(o.u) + ', and it took ' + o.words + '. Uranium cannot do that on its own.');
-      if (has('chalcArt') && has('chalc')) path.push('You made the same green crystal yourself, from pure chemicals: it took ' + P('chalcArt').words + ', like any uranium salt; the one from the mine took ' + P('chalc').words.replace(' the push of pure uranium', '') + '. So the extra is not the uranium and not the crystal: it is something in the rock that no bottle held.');
-      else if (has('chalcArt')) path.push('You made the green crystal yourself, from pure chemicals: it took ' + P('chalcArt').words + ', like any uranium salt. The one from the mine, which you did not test, took more than twice the push of pure uranium.');
-      else path.push('You never made the copy. She did: the green crystal made from pure chemicals was as weak as any uranium salt, while the one from the mine was more than twice as strong as pure uranium.');
-    } else {
-      path.push('You never tested the rocks from the Muséum. That is where it was: pitchblende, a black rock about two-thirds uranium, takes three and a half times the push of pure uranium.');
-    }
-    if (has('whiteP')) {
-      if (has('redP') || has('phosphate')) path.push('White phosphorus moved the spot; ' + (has('redP') && has('phosphate') ? 'red phosphorus and phosphate did not' : has('redP') ? 'red phosphorus did not' : 'phosphate did not') + '. Same element, another form, nothing: so it is not the phosphorus itself. The paper calls its action "probably of another nature".');
-      else path.push('White phosphorus moved the spot. The paper tried red phosphorus and phosphates too: nothing. Same element, another form: so it is not the phosphorus itself.');
-    }
-    if (has('thOthick') && P('thOthick').reading > 1.15) path.push('Thorium does it with no uranium at all, and your thick layer of it beat pure uranium.');
-    else if (has('thO') || has('thOthick')) path.push('Thorium does it with no uranium at all; a thick layer of it beats pure uranium.');
+    const cl = claims(g), n = cl.filter(c => c.backed).length;
+    const headline = n === 6 ? 'Your page backs all six claims in her note.' : 'Your page backs ' + ['none', 'one', 'two', 'three', 'four', 'five'][n] + ' of the six claims in her note.';
+    const fate = n === 6 ? 'You could have signed her note.' : n >= 4 ? 'Most of her note, in your own measurements.' :
+      n >= 2 ? 'A start on her note.' : n === 1 ? 'One line of her note.' : 'Her note would have had to wait.';
+    const did = 'You made ' + (g.panels.length - 1) + ' measurement' + (g.panels.length === 2 ? '' : 's') + ' after your first pure uranium. ' +
+      (found(g).length ? 'Your page shows the spot moved by ' + list(found(g).map(({ p }) => low(p.name))) + '.' : 'Your page shows nothing besides uranium moving the spot.');
+    const both = cl.find(c => c.id === 'rocks').backed && cl.find(c => c.id === 'copy').backed;
     const paper = 'Marie Curie tested dozens of metals, salts, oxides and rocks. Every uranium compound does it, about in proportion to its uranium. Thorium does it too. And two uranium rocks, pitchblende and chalcolite, do it far more than the uranium in them can. She made chalcolite herself from pure chemicals, and her copy was no stronger than any uranium salt.';
-    const means = 'So the rocks hold something no bottle in Paris held. Her words: these minerals "may contain an element much more active than uranium."';
+    const means = (both ? 'Your page backs her last two claims, and so her conclusion. ' : 'Her conclusion rests on the last two claims. ') +
+      'The rocks hold something no bottle in Paris held: these minerals "may contain an element much more active than uranium."';
     const later = 'After this note, and not in it: in July 1898 she and Pierre Curie announced one such element, traced in pitchblende, and named it polonium; in December, a second: radium.';
-    const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s), kind: kind(s), words: times(strength(s)) }; });
-    return { headline, did, path, paper, means, later, her };
+    const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s), kind: paperKind(s), words: times(strength(s)) }; });
+    return { n, headline, fate, did, claims: cl, paper, means, later, her };
   }
 
-  return { CONFIG, sub, strength, times, shareWords, kind, BADGE, newGame, panelsLeft, over, available, canTest,
-    benchStart, benchStep, tolerance, holdProgress, running, record, found, foundLine, verdict, mulberry32 };
+  return { CONFIG, sub, strength, times, bare, shareWords, newGame, panelsLeft, over, available, canTest,
+    benchStart, benchStep, canCommit, tolerance, running, readingOf, readWords, readShort, commit, yard, kindOf, panelKind, paperKind, BADGE,
+    found, foundLine, claims, verdict, mulberry32 };
 });
 
 </script>
@@ -525,7 +625,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   'use strict';
   const M = CURIE, C = M.CONFIG;
   const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
-  const INK = '#17140F', YEL = '#F7C600', BLUE = '#3E8ED0', SKY = '#D6EAF7', RED = '#E2342B', WOOD = '#C98B5B', WOOD2 = '#A86E43', NICKEL = '#C9D5DE', STRIP = '#22314A', ZERO = '#3F6E9E';
+  const INK = '#17140F', YEL = '#F7C600', BLUE = '#3E8ED0', SKY = '#D6EAF7', RED = '#E2342B', WOOD = '#C98B5B', WOOD2 = '#A86E43', NICKEL = '#C9D5DE', STRIP = '#22314A';
   const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
   // ---------- the substances drawn (flat colour, one line)
@@ -591,7 +691,6 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     s += `<rect x="0" y="236" width="348" height="26" fill="${WOOD}"/><rect x="0" y="250" width="348" height="12" fill="${WOOD2}"/><line x1="0" y1="236" x2="348" y2="236" stroke="${INK}" stroke-width="2.5"/><line x1="0" y1="250" x2="348" y2="250" stroke="${INK}" stroke-width="2"/>`;
     // scale strip and its ticks
     s += `<rect x="12" y="12" width="324" height="46" fill="${STRIP}" stroke="${INK}" stroke-width="2.5"/>`;
-    s += `<rect x="${174 - 150 * C.BAND}" y="15" width="${300 * C.BAND}" height="40" fill="${ZERO}"/>`;
     for (let k = -10; k <= 10; k++) { const x = 174 + k * 15, big = k % 5 === 0; s += `<line x1="${x}" y1="${big ? 38 : 44}" x2="${x}" y2="54" stroke="#fff" stroke-width="${big ? 2 : 1.3}"/>`; }
     s += `<text x="174" y="31" text-anchor="middle" font-family="Patrick, sans-serif" font-size="15" fill="#fff">0</text>`;
     // battery
@@ -629,66 +728,77 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
       `<path d="M286,${(o.handY || 162) - 12} q8,-4 16,0 l46,0 l0,16 l-44,0 q-10,2 -16,-6 Z" fill="#F2C9A8" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/><rect x="314" y="${(o.handY || 162) - 15}" width="40" height="22" fill="#2B3A55" stroke="${INK}" stroke-width="2"/></g>`;
     // the spot, its ring, its speed lines, and the surprise
     s += `<g id="speed" opacity="0"><line x1="0" y1="-7" x2="-22" y2="-7" stroke="#fff" stroke-width="2"/><line x1="-4" y1="0" x2="-30" y2="0" stroke="#fff" stroke-width="2"/><line x1="0" y1="7" x2="-22" y2="7" stroke="#fff" stroke-width="2"/></g>`;
-    s += `<circle id="ring" cx="174" cy="35" r="15" fill="none" stroke="${BLUE}" stroke-width="4.5" stroke-dasharray="0 999" transform="rotate(-90 174 35)"/>`;
     s += `<circle id="spot" cx="${174 + 150 * (o.spot || 0)}" cy="35" r="9.5" fill="#fff" stroke="${SKY}" stroke-width="3"/>`;
-    s += `<g id="wow" opacity="0"><path d="M232,64 h70 v34 h-46 l-12,12 l2,-12 h-14 Z" fill="#fff" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><text x="267" y="91" text-anchor="middle" font-family="Lilita, sans-serif" font-size="26" fill="${RED}">!?</text></g>`;
     return s;
   }
 
-  // ---------- an album panel (112 × 124)
+  // ---------- an album panel (112 × 124): the player's reading, with how sure it is, against her triangle
   function panelSVG(p, n, opts) {
     opts = opts || {};
     if (!p) return `<rect x="1.5" y="1.5" width="109" height="121" fill="#fff" stroke="${INK}" stroke-width="2" stroke-dasharray="6 5"/><text x="56" y="70" text-anchor="middle" font-family="Lilita, sans-serif" font-size="30" fill="#E2E6EA">${n}</text>`;
-    const sc = 24, x0 = 8, bg = p.kind === 'more' ? '#FFE9E6' : p.kind === 'nothing' ? '#F1F1EF' : SKY;
+    const k = M.panelKind(g, p), R = p.R;
+    const sc = 24, x0 = 8, X = v => x0 + Math.min(96, v * sc), bg = k === 'more' ? '#FFE9E6' : k === 'nothing' ? '#F1F1EF' : k === 'unsure' ? '#fff' : SKY;
     let s = `<rect x="1.5" y="1.5" width="109" height="121" fill="${bg}" stroke="${INK}" stroke-width="2.5"/>`;
     s += `<rect x="1.5" y="1.5" width="20" height="18" fill="#fff" stroke="${INK}" stroke-width="2"/><text x="11.5" y="15" text-anchor="middle" font-family="Lilita, sans-serif" font-size="13" fill="${INK}">${p.n}</text>`;
     let words = p.short.toUpperCase().split(/,\s*/);
-    if (words.length === 1 && words[0].length > 13) { const k = words[0].indexOf(' '); words = [words[0].slice(0, k), words[0].slice(k + 1)]; }
+    if (words.length === 1 && words[0].length > 13) { const q = words[0].indexOf(' '); words = [words[0].slice(0, q), words[0].slice(q + 1)]; }
     s += `<text font-family="Patrick, sans-serif" font-size="12" fill="${INK}"><tspan x="26" y="13">${esc(words[0])}${words[1] && /,/.test(p.short) ? ',' : ''}</tspan>${words[1] ? `<tspan x="26" y="25">${esc(words[1])}</tspan>` : ''}</text>`;
     s += `<g transform="translate(4,30)">${iconSVG(p.look, 50, 44, p.u)}</g>`;
-    const B = { yardstick: [['THE', 'YARDSTICK'], INK], nothing: [['NOTHING'], INK], without: [['NO', 'URANIUM', 'IN IT!'], BLUE], more: [['MORE', 'THAN ITS', 'URANIUM!'], RED], about: [['ABOUT', 'ITS', 'URANIUM'], INK] }[p.kind];
+    const B = { yardstick: [['YOUR', 'YARDSTICK'], INK], nothing: [['NOTHING', 'SEEN'], INK], without: [['NO', 'URANIUM', 'IN IT!'], BLUE], more: [['MORE', 'THAN ITS', 'URANIUM!'], RED], about: [['ABOUT', 'ITS', 'URANIUM'], INK], unsure: [['CAN’T', 'TELL'], INK] }[k];
     const y0 = 52 - (B[0].length - 1) * 6;
     s += `<text font-family="Patrick, sans-serif" font-size="11" fill="${B[1]}" text-anchor="middle">${B[0].map((w, i) => `<tspan x="82" y="${y0 + i * 12}">${w}</tspan>`).join('')}</text>`;
-    if (p.kind === 'more') s += `<text x="82" y="81" text-anchor="middle" font-family="Lilita, sans-serif" font-size="15" fill="${RED}">!?</text>`;
-    // bars: scale 0–4 uranium across 96 px
-    s += `<line x1="${x0}" y1="${116}" x2="${x0 + 96}" y2="${116}" stroke="${INK}" stroke-width="1"/>`;
+    if (k === 'more') s += `<text x="82" y="81" text-anchor="middle" font-family="Lilita, sans-serif" font-size="15" fill="${RED}">!?</text>`;
+    // bars: her scale, 0–4 times pure uranium across 96 px
+    s += `<line x1="${x0}" y1="116" x2="${x0 + 96}" y2="116" stroke="${INK}" stroke-width="1"/>`;
     if (p.u > 0) s += `<rect x="${x0}" y="84" width="${Math.max(2, p.u * sc)}" height="9" fill="${YEL}" stroke="${INK}" stroke-width="1.5"/>`;
-    const bw = Math.min(96, p.reading * sc);
-    if (bw > 0.5) s += `<rect x="${x0}" y="98" width="${bw}" height="13" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
-    else s += `<circle cx="${x0 + 2}" cy="104" r="2.5" fill="${INK}"/>`;
-    if (opts.ghost !== false && p.paper > 0) { const gx = x0 + Math.min(96, p.paper * sc); s += `<path d="M${gx - 4},${92} L${gx + 4},${92} L${gx},${98} Z" fill="${INK}"/>`; }
+    const yb = 98, hb = 13, ym = yb + hb / 2;
+    if (R.type === 'atleast') {            // at least: a solid bar to the push, then an arrow onward
+      const xl = X(R.lo);
+      if (xl - x0 > 0.5) s += `<rect x="${x0}" y="${yb}" width="${xl - x0}" height="${hb}" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
+      const xe = Math.min(x0 + 96, xl + 22);
+      s += `<line x1="${xl}" y1="${ym}" x2="${xe - 2}" y2="${ym}" stroke="${INK}" stroke-width="1.8" stroke-dasharray="3 2"/><path d="M${xe - 6},${ym - 4} L${xe},${ym} L${xe - 6},${ym + 4}" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
+    } else if (R.type === 'atmost') {      // at most: an empty bar to the push, with an arrow pointing back
+      const xh = X(R.hi);
+      s += `<rect x="${x0}" y="${yb}" width="${Math.max(1, xh - x0)}" height="${hb}" fill="#fff" stroke="${BLUE}" stroke-width="2"/><path d="M${xh - 2},${ym - 4} L${xh - 8},${ym} L${xh - 2},${ym + 4}" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
+    } else {                               // a value: a solid bar with an error bar across its end
+      const xe = X(R.est);
+      if (xe - x0 > 0.5) s += `<rect x="${x0}" y="${yb}" width="${xe - x0}" height="${hb}" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
+      else s += `<circle cx="${x0 + 2}" cy="${ym}" r="2.5" fill="${INK}"/>`;
+      const a = X(R.lo), b = X(R.hi);
+      s += `<line x1="${a}" y1="${ym}" x2="${b}" y2="${ym}" stroke="${INK}" stroke-width="1.6"/><line x1="${a}" y1="${ym - 4}" x2="${a}" y2="${ym + 4}" stroke="${INK}" stroke-width="1.6"/><line x1="${b}" y1="${ym - 4}" x2="${b}" y2="${ym + 4}" stroke="${INK}" stroke-width="1.6"/>`;
+    }
+    if (opts.ghost !== false && p.paper > 0) { const gx = X(p.paper); s += `<path d="M${gx - 4},92 L${gx + 4},92 L${gx},98 Z" fill="${INK}"/>`; }
     s += `<line x1="${x0 + sc}" y1="80" x2="${x0 + sc}" y2="118" stroke="${INK}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
     return s;
   }
 
   // ---------- state and navigation
-  let g = M.newGame(Math.floor(Math.random() * 1e6) + 1), bench = null, raf = 0, last = 0, cardId = null, back = 'cover', lastNew = -1, handPhase = 0, uTick = null;
-  const show = id => { $$('.screen').forEach(e => e.classList.toggle('on', e.id === id)); window.scrollTo(0, 0); if (id === 'bench' && bench && !bench.done) loop(); };
+  let g = M.newGame(Math.floor(Math.random() * 1e6) + 1), bench = null, raf = 0, last = 0, cardId = null, back = 'cover', lastNew = -1, handPhase = 0;
+  const show = id => { $$('.screen').forEach(e => e.classList.toggle('on', e.id === id)); window.scrollTo(0, 0); if (id === 'bench' && bench && !bench.committed) loop(); };
   const current = () => ($('.screen.on') || {}).id;
   $$('[data-go]').forEach(b => b.addEventListener('click', () => { back = current(); show(b.dataset.go); }));
   $$('.help-q').forEach(b => b.addEventListener('click', () => { back = current(); show('help'); }));
   $('#helpback').addEventListener('click', () => show(back || 'cover'));
   $('#aboutback').addEventListener('click', () => show(back || 'cover'));
   $('#coversvg').innerHTML = benchScene({ window: true, look: 'metalpowder', active: true, spot: 0.02, handY: 176 });
-  { const r = $('#coversvg #ring'); r.setAttribute('stroke-dasharray', `${2 * Math.PI * 15 * .7} 999`); }
 
   $('#begin').addEventListener('click', () => startBench(C.FIRST));
-  $('#again').addEventListener('click', () => { g = M.newGame(Math.floor(Math.random() * 1e6) + 1); uTick = null; lastNew = -1; startBench(C.FIRST); });
+  $('#again').addEventListener('click', () => { g = M.newGame(Math.floor(Math.random() * 1e6) + 1); lastNew = -1; startBench(C.FIRST); });
 
   // ---------- the bench
   function benchCaption(s) {
     const first = g.panels.length === 0;
     const what = first ? 'On the lower plate: <b>pure uranium</b>, from M. Moissan. Its rays let the air between the plates carry a tiny electric current, which pushes the spot of light to the right →.'
-      : `On the lower plate: <b>${esc(s.name.charAt(0).toLowerCase() + s.name.slice(1))}</b> (${M.shareWords(s.u)}). If it sends out rays, the air carries a current and the spot of light runs to the right →.`;
-    const can = 'Slide to let the weight down onto the quartz crystal: the quartz pushes the spot back ←. The faster the weight goes down, the harder the push.';
-    const expect = first ? 'Hold the spot still on 0 until the blue ring closes. How hard you had to push is how strong the plate is: this first push is your yardstick.'
-      : 'Hold the spot still on 0 until the blue ring closes. How hard you had to push is how strong the plate is. If the spot never moves, the ring closes by itself: nothing.';
+      : `On the lower plate: <b>${esc(s.name.charAt(0).toLowerCase() + s.name.slice(1))}</b> (${M.shareWords(s.u)}). If it sends out rays, the air carries a current, and the current pushes the spot of light to the right →.`;
+    const can = 'The slider lets a weight down onto the quartz crystal. The quartz pushes the spot back ←: the faster the weight goes down, the harder it pushes.';
+    const expect = 'Write it down when you are ready. Your page keeps how hard you were pushing and what the spot was doing at that moment.' + (first ? ' This first panel is your pure uranium.' : '');
     return `<p>${what}</p><p>${can}</p><p>${expect}</p>`;
   }
   function placeTick() {
-    const t = $('#utick'); if (uTick === null) { t.classList.add('hidden'); return; }
+    const t = $('#utick'), U = M.yard(g);
+    if (!U || !isFinite(U.hi)) { t.classList.add('hidden'); return; }
     const W = $('#push').getBoundingClientRect().width || 340, tw = 38;
-    t.style.left = (tw / 2 + (W - tw) * (uTick / C.SLIDER_MAX)) + 'px'; t.classList.remove('hidden');
+    t.style.left = (tw / 2 + (W - tw) * (Math.min(C.SLIDER_MAX, U.est) / C.SLIDER_MAX)) + 'px'; t.classList.remove('hidden');
   }
   function startBench(id) {
     closeCard();
@@ -696,19 +806,18 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#benchband').innerHTML = `PANEL ${g.panels.length + 1} OF ${C.PANELS} <small>${esc(s.short.toLowerCase())}</small>`;
     $('#benchsvg').innerHTML = benchScene({ look: s.look, active: bench.i > 0 });
     $('#benchcap').innerHTML = benchCaption(s);
-    const push = $('#push'); push.value = 0; push.disabled = false;
+    const push = $('#push'); push.value = 0; push.disabled = false; $('#write').disabled = true;
     $('#benchplay').classList.remove('hidden'); $('#benchres').classList.add('hidden'); $('#stamp').classList.add('hidden');
     show('bench'); placeTick();
   }
   function loop() {
     cancelAnimationFrame(raf); last = 0;
     const frame = now => {
-      if (current() !== 'bench' || !bench || bench.done) return;
+      if (current() !== 'bench' || !bench || bench.committed) return;
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60; last = now;
-      const r = (+$('#push').value) / 1000;
-      M.benchStep(bench, dt, r);
+      M.benchStep(bench, dt, (+$('#push').value) / 1000);
       drawBench(dt);
-      if (bench.done) { balanced(); return; }
+      $('#write').disabled = !M.canCommit(bench);
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
@@ -716,38 +825,34 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   function drawBench(dt) {
     const svg = $('#benchsvg'), x = 174 + 150 * bench.s;
     svg.querySelector('#spot').setAttribute('cx', x);
-    svg.querySelector('#ring').setAttribute('cx', x); svg.querySelector('#ring').setAttribute('transform', `rotate(-90 ${x} 35)`);
-    svg.querySelector('#ring').setAttribute('stroke-dasharray', `${2 * Math.PI * 15 * M.holdProgress(bench)} 999`);
     svg.querySelector('#beam').setAttribute('d', `M206,114 L175,128 L${x},58`);
     const run = M.running(bench), fast = run !== 'still' && (Math.abs(bench.v) > 0.35 || run.startsWith('pinned'));
     const sp = svg.querySelector('#speed'); sp.setAttribute('opacity', fast ? 1 : 0);
     const dir = run.endsWith('left') ? -1 : 1; sp.setAttribute('transform', `translate(${x - dir * 12},35) scale(${dir},1)`);
-    const wow = uTick !== null && bench.r > uTick * 1.05 && bench.s > 0.5;
-    svg.querySelector('#wow').setAttribute('opacity', wow ? 1 : 0);
     // the hand lowers the weight at the slider's speed, then takes the next one
     handPhase = (handPhase + dt * bench.r * 16) % 34;
     svg.querySelector('#hand').setAttribute('transform', `translate(0,${handPhase})`);
     $$('#benchsvg .ray').forEach((l, i) => l.setAttribute('stroke-dashoffset', String((-bench.t * 18 + i * 3) % 16)));
   }
-  function balanced() {
-    const p = M.record(g, bench); lastNew = p.n - 1;
-    if (p.id === C.FIRST) uTick = p.reading;
-    $('#push').disabled = true; $('#stamp').textContent = p.kind === 'nothing' ? 'NOTHING.' : 'BALANCED!'; $('#stamp').classList.remove('hidden');
-    $('#benchsvg #ring').setAttribute('stroke-dasharray', `${2 * Math.PI * 15} 999`);
+  $('#write').addEventListener('click', () => {
+    if (!bench || bench.committed || !M.canCommit(bench)) return;
+    cancelAnimationFrame(raf); bench.committed = true;
+    const p = M.commit(g, bench); lastNew = p.n - 1;
+    $('#push').disabled = true; $('#write').disabled = true; $('#stamp').classList.remove('hidden');
     $('#respanel').innerHTML = panelSVG(p);
     $('#resbadge').textContent = p.badge; $('#resbadge').className = 'badge ' + p.kind;
     $('#rescap').textContent = p.caption;
     $('#topage').textContent = M.over(g) ? 'Draw the last panel' : 'On to the page';
     $('#benchplay').classList.add('hidden'); $('#benchres').classList.remove('hidden');
     setTimeout(() => $('#benchres').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
-  }
+  });
   $('#topage').addEventListener('click', () => { renderShelf(); show('shelf'); });
   window.addEventListener('resize', placeTick);
 
   // ---------- the page and the shelf
   function renderPage(el, animate) {
     let h = '';
-    for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + p.badge) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
+    for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + M.BADGE[M.panelKind(g, p)]) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
     el.innerHTML = h;
   }
   function renderShelf() {
@@ -759,11 +864,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#shelfband').innerHTML = `THE SHELF <small>${M.panelsLeft(g)} panel${M.panelsLeft(g) === 1 ? '' : 's'} left</small>`;
     let h = '';
     for (const d of C.DRAWERS) {
-      const items = C.SUBSTANCES.filter(s => s.drawer === d.id && s.id !== C.FIRST); if (!items.length) continue;
+      const items = C.SUBSTANCES.filter(s => s.drawer === d.id); if (!items.length) continue;
       h += `<div class="drawer"><div class="dh"><b>${esc(d.label)}</b><span>${esc(d.from)}</span></div><div class="jars">`;
       for (const s of items) {
-        const done = g.tested[s.id], p = done ? g.panels.find(q => q.id === s.id) : null;
-        h += `<button class="jar${done ? ' done' : ''}" data-id="${s.id}"${done ? ' disabled' : ''}><svg viewBox="0 0 56 46">${iconSVG(s.look, 56, 46, s.u)}</svg>${esc(s.short)}${done ? `<span class="tested">panel ${p.n}</span>` : ''}</button>`;
+        const ps = g.panels.filter(q => q.id === s.id);
+        h += `<button class="jar${ps.length ? ' done' : ''}" data-id="${s.id}"><svg viewBox="0 0 56 46">${iconSVG(s.look, 56, 46, s.u)}</svg>${esc(s.short)}${ps.length ? `<span class="tested">panel ${ps.map(q => q.n).join(', ')}</span>` : ''}</button>`;
       }
       h += '</div></div>';
     }
@@ -779,7 +884,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#cardwhat').textContent = s.what;
     $('#cardu').innerHTML = 'Uranium in it: <b>' + esc(s.u > 0 ? M.shareWords(s.u) : 'none') + '</b>';
     $('#cardubar').style.width = (100 * s.u) + '%';
-    $('#cardtest').textContent = `Test it (${M.panelsLeft(g)} left)`;
+    $('#cardtest').textContent = (g.tested[id] ? 'Test it again' : 'Test it') + ` (${M.panelsLeft(g)} left)`;
     $('#veil').classList.remove('hidden'); $('#sheet').classList.remove('hidden');
   }
   function closeCard() { cardId = null; $('#veil').classList.add('hidden'); $('#sheet').classList.add('hidden'); $$('#drawers .jar').forEach(b => b.classList.remove('sel')); }
@@ -790,8 +895,9 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   const herWords = w => w === 'no push at all' ? 'nothing' : w === 'about the push of pure uranium' ? 'about the same as pure uranium' : w.replace(/ the push of pure uranium$/, ' pure uranium');
   function renderEnd() {
     const v = M.verdict(g);
-    $('#headline').textContent = v.headline;
-    $('#did').innerHTML = [v.did].concat(v.path).map(t => `<p>${esc(t)}</p>`).join('');
+    $('#headline').textContent = v.headline; $('#fate').textContent = v.fate;
+    $('#claims').innerHTML = v.claims.map(c => `<div class="claim"><div class="mark ${c.backed ? 'ok' : 'no'}">${c.backed ? '✓' : '✗'}</div><div class="ct">${esc(c.text)}</div><div class="cw">${esc(c.why.charAt(0).toUpperCase() + c.why.slice(1))}.</div></div>`).join('');
+    $('#did').textContent = v.did;
     $('#paper').textContent = v.paper; $('#means').textContent = v.means; $('#later').textContent = v.later;
     renderPage($('#endpage'), false);
     const sc = x => (100 * Math.min(4, x) / 4) + '%';

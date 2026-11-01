@@ -1,102 +1,94 @@
 AIM: Uranium makes the air carry electricity. Find what else does.
 
-BENCH · PANEL 1 OF 9 · PURE URANIUM
+BENCH · PANEL 1 OF 9 · PURE URANIUM   (careful thumb)
   card: Uranium metal, made in M. Moissan's electric furnace. A little carbon in it.  [uranium in it: all uranium]
-  first look: spot right with the slider at 0.74 (the label's guess)
-  t=1s push=1.01 spot=0.53 still | t=2s push=1.40 spot=-0.21 left | t=3s push=0.85 spot=-0.16 right | t=4s push=0.85 spot=0.15 right | t=5s push=1.16 spot=0.02 still ring 22%
-  BALANCED after 5.9 s. PANEL 1: THE YARDSTICK
+  t=0.7s push=0.67 spot=0.58 right | t=1.5s push=1.44 spot=0.15 left | t=2.2s push=1.25 spot=-0.25 left | t=3.0s push=0.85 spot=-0.16 right | t=3.7s push=0.77 spot=0.09 still | …
+  WRITE IT DOWN at 6.3 s → HELD [0.90 … 1.10]   PANEL 1: YOUR YARDSTICK
     its uranium [░░░░░░                    ]
-    it gave     [██████                    ]  (paper 1.00, you 1.01)
-    caption: Pure uranium. However hard you had to push for it is the yardstick: every other panel is measured against it.
+    you         [██████                    ]   hers 1.00
+    caption: Pure uranium: about her push, give or take a little. The spot was standing in the middle when you wrote it down. This is your pure uranium: the yardstick for what the uranium in anything else could give.
   Found so far, besides uranium: nothing yet.  Panels left: 8.
 
-BENCH · PANEL 2 OF 9 · LEAD
+BENCH · PANEL 2 OF 9 · LEAD   (hasty thumb)
   card: A heavy metal. No uranium.  [uranium in it: no uranium]
-  first look: spot still with the slider at 0.00 (the label's guess)
-  t=1s push=0.00 spot=0.00 still | t=2s push=0.00 spot=0.00 still ring 66%
-  BALANCED after 2.4 s. PANEL 2: NOTHING
+  t=0.7s push=0.00 spot=0.00 still
+  WRITE IT DOWN at 1.0 s → HELD [0.00 … 0.07]   PANEL 2: NOTHING SEEN
     its uranium [                          ]
-    it gave     [                          ]  (paper 0.00, you 0.00)
-    caption: Lead: nothing. The spot never moved. Less than a hundredth of uranium, if anything.
+    you         [                          ]   hers 0.00
+    caption: Lead: nothing, give or take a little. The spot was standing in the middle when you wrote it down. Nothing you could see. Hers: no push at all.
   Found so far, besides uranium: nothing yet.  Panels left: 7.
 
-BENCH · PANEL 3 OF 9 · THIN THORIUM OXIDE
+BENCH · PANEL 3 OF 9 · THIN THORIUM OXIDE   (careful thumb)
   card: A white powder of thorium, another rare metal. No uranium. Spread a quarter of a millimetre thick.  [uranium in it: no uranium]
-  first look: spot right with the slider at 0.69 (the label's guess)
-  t=1s push=0.90 spot=0.42 still | t=2s push=1.26 spot=-0.10 left ring 37% | t=3s push=0.85 spot=-0.15 still | t=4s push=0.87 spot=0.15 still | t=5s push=1.02 spot=-0.01 still ring 53%
-  BALANCED after 5.6 s. PANEL 3: NO URANIUM IN IT!
+  t=0.7s push=0.63 spot=0.51 right | t=1.5s push=1.26 spot=0.12 left | t=2.2s push=1.17 spot=-0.18 left | t=3.0s push=0.85 spot=-0.15 still | t=3.7s push=0.79 spot=0.09 still | …
+  WRITE IT DOWN at 5.9 s → HELD [0.81 … 1.00]   PANEL 3: NO URANIUM IN IT!
     its uranium [                          ]
-    it gave     [█████                     ]  (paper 0.92, you 0.91)
-    caption: Thin thorium oxide has no uranium in it, and the spot moved: it took about the push of pure uranium.
+    you         [█████                     ]   hers 0.92
+    caption: Thin thorium oxide: about the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It has no uranium in it, and it moved the spot. Hers: about the push of pure uranium.
   Found so far, besides uranium: thin thorium oxide.  Panels left: 6.
 
-BENCH · PANEL 4 OF 9 · WHITE PHOSPHORUS
+BENCH · PANEL 4 OF 9 · WHITE PHOSPHORUS   (careful thumb)
   card: Waxy white sticks. They smoke in the air. No uranium.  [uranium in it: no uranium]
-  first look: spot right with the slider at 0.94 (the label's guess)
-  t=1s push=1.25 spot=0.60 still | t=2s push=1.71 spot=-0.20 left | t=3s push=1.18 spot=-0.12 right | t=4s push=1.22 spot=0.12 right | t=5s push=1.34 spot=-0.06 still ring 62%
-  BALANCED after 5.5 s. PANEL 4: NO URANIUM IN IT!
+  t=0.7s push=0.86 spot=0.70 right | t=1.5s push=1.75 spot=0.21 left | t=2.2s push=1.56 spot=-0.29 left | t=3.0s push=1.18 spot=-0.12 right | t=3.7s push=1.17 spot=0.06 still | …
+  WRITE IT DOWN at 5.8 s → HELD [1.15 … 1.36]   PANEL 4: NO URANIUM IN IT!
     its uranium [                          ]
-    it gave     [████████                  ]  (paper 1.29, you 1.26)
-    caption: White phosphorus has no uranium in it, and the spot moved: it took a little more than the push of pure uranium. Stronger than pure uranium, with no uranium at all.
+    you         [████████                  ]   hers 1.29
+    caption: White phosphorus: a little more than the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It has no uranium in it, and it moved the spot. Hers: a little more than the push of pure uranium.
   Found so far, besides uranium: thin thorium oxide and white phosphorus.  Panels left: 5.
 
-BENCH · PANEL 5 OF 9 · RED PHOSPHORUS
+BENCH · PANEL 5 OF 9 · RED PHOSPHORUS   (careful thumb)
   card: The same element as white phosphorus, in another form: a dark red powder. No uranium.  [uranium in it: no uranium]
-  first look: spot still with the slider at 0.00 (the label's guess)
-  t=1s push=0.00 spot=0.00 still | t=2s push=0.00 spot=0.00 still ring 66%
-  BALANCED after 2.4 s. PANEL 5: NOTHING
+  t=0.7s push=0.00 spot=0.00 still | t=1.5s push=0.00 spot=0.00 still
+  WRITE IT DOWN at 1.5 s → HELD [0.00 … 0.04]   PANEL 5: NOTHING SEEN
     its uranium [                          ]
-    it gave     [                          ]  (paper 0.00, you 0.00)
-    caption: Red phosphorus: nothing. The spot never moved. Less than a hundredth of uranium, if anything.
+    you         [                          ]   hers 0.00
+    caption: Red phosphorus: nothing, give or take a little. The spot was standing in the middle when you wrote it down. Nothing you could see. Hers: no push at all.
   Found so far, besides uranium: thin thorium oxide and white phosphorus.  Panels left: 4.
 
-BENCH · PANEL 6 OF 9 · PITCHBLENDE FROM SAXONY
+BENCH · PANEL 6 OF 9 · PITCHBLENDE FROM SAXONY   (hasty thumb)
   card: A heavy black rock from the mines of Johanngeorgenstadt, in Saxony. Mostly uranium oxide, mixed with other rock. No thorium.  [uranium in it: about two-thirds uranium]
-  first look: spot pinned-right with the slider at 2.26 (the label's guess)
-  t=1s push=2.74 spot=1.00 pinned-right | t=2s push=4.00 spot=0.14 left | t=3s push=3.88 spot=-0.30 left | t=4s push=3.20 spot=-0.06 still ring 5% | t=5s push=3.39 spot=0.21 right | t=6s push=3.66 spot=-0.01 still ring 18% | …
-  BALANCED after 11.5 s. PANEL 6: MORE THAN ITS URANIUM!
+  t=0.7s push=0.65 spot=1.00 pinned-right
+  WRITE IT DOWN at 1.0 s → ATLEAST [0.65 … ∞]   PANEL 6: CAN’T TELL
     its uranium [░░░░                      ]
-    it gave     [█████████████████████     ]  (paper 3.46, you 3.46)
-    caption: Pitchblende from Saxony is only about two-thirds uranium, and it took three and a half times the push of pure uranium. Far more than its uranium can give.
-  Found so far, besides uranium: thin thorium oxide, white phosphorus and something in pitchblende from Saxony.  Panels left: 3.
+    you         [████                      ] →   hers 3.46
+    caption: Pitchblende from Saxony: at least two-thirds of the push of pure uranium. The spot was still running right when you wrote it down: the plate was pushing harder than you were. Your reading cannot tell whether that is more than its uranium could give. Hers: three and a half times the push of pure uranium.
+  Found so far, besides uranium: thin thorium oxide and white phosphorus.  Panels left: 3.
 
-BENCH · PANEL 7 OF 9 · CHALCOLITE FROM A MINE
+BENCH · PANEL 7 OF 9 · PITCHBLENDE FROM SAXONY   (careful thumb)
+  card: A heavy black rock from the mines of Johanngeorgenstadt, in Saxony. Mostly uranium oxide, mixed with other rock. No thorium.  [uranium in it: about two-thirds uranium]
+  t=0.7s push=1.52 spot=1.00 pinned-right | t=1.5s push=3.30 spot=0.92 right | t=2.2s push=4.26 spot=0.15 left | t=3.0s push=4.03 spot=-0.32 left | t=3.7s push=3.32 spot=-0.29 right | …
+  WRITE IT DOWN at 8.5 s → HELD [3.36 … 3.65]   PANEL 7: MORE THAN ITS URANIUM!
+    its uranium [░░░░                      ]
+    you         [█████████████████████     ]   hers 3.46
+    caption: Pitchblende from Saxony: three and a half times the push of pure uranium, give or take some. The spot was standing in the middle when you wrote it down. It is only about two-thirds uranium: that is more than its uranium alone could give. Hers: three and a half times the push of pure uranium.
+  Found so far, besides uranium: thin thorium oxide, white phosphorus and something in pitchblende from Saxony.  Panels left: 2.
+
+BENCH · PANEL 8 OF 9 · CHALCOLITE FROM A MINE   (careful thumb)
   card: Bright green crystals from a mine: copper, uranium and phosphate. No thorium.  [uranium in it: about half uranium]
-  first look: spot right with the slider at 1.67 (the label's guess)
-  t=1s push=2.06 spot=0.76 right | t=2s push=2.74 spot=-0.18 left | t=3s push=2.07 spot=-0.19 right | t=4s push=1.99 spot=0.12 right | t=5s push=2.27 spot=0.07 still ring 31%
-  BALANCED after 5.8 s. PANEL 7: MORE THAN ITS URANIUM!
+  t=0.7s push=1.33 spot=0.97 pinned-right | t=1.5s push=2.87 spot=0.49 left | t=2.2s push=2.78 spot=-0.50 left | t=3.0s push=1.96 spot=-0.28 right | t=3.7s push=1.89 spot=0.11 right | …
+  WRITE IT DOWN at 7.3 s → HELD [2.10 … 2.35]   PANEL 8: MORE THAN ITS URANIUM!
     its uranium [░░░                       ]
-    it gave     [█████████████             ]  (paper 2.17, you 2.19)
-    caption: Chalcolite from a mine is only about half uranium, and it took twice the push of pure uranium. Far more than its uranium can give.
-  Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.  Panels left: 2.
-
-BENCH · PANEL 8 OF 9 · CHALCOLITE MADE BY YOU
-  card: You make the same green crystal yourself, from pure copper, pure phosphoric acid and a pure uranium salt. About half uranium, like the one from the mine.  [uranium in it: about half uranium]
-  first look: spot still with the slider at 0.40 (the label's guess)
-  t=1s push=0.38 spot=-0.03 still | t=2s push=0.39 spot=-0.01 still ring 66%
-  BALANCED after 2.4 s. PANEL 8: ABOUT ITS URANIUM
-    its uranium [░░░                       ]
-    it gave     [██                        ]  (paper 0.38, you 0.36)
-    caption: Chalcolite made by you is about half uranium, and it took about a third of the push of pure uranium: about what its uranium gives, or a little less. The same crystal from the mine took twice the push of pure uranium.
+    you         [█████████████             ]   hers 2.17
+    caption: Chalcolite from a mine: twice the push of pure uranium, give or take some. The spot was standing in the middle when you wrote it down. It is only about half uranium: that is more than its uranium alone could give. Hers: twice the push of pure uranium.
   Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.  Panels left: 1.
 
-BENCH · PANEL 9 OF 9 · THICK THORIUM OXIDE
-  card: The same white thorium powder, spread six millimetres thick. No uranium.  [uranium in it: no uranium]
-  first look: spot pinned-right with the slider at 1.46 (the label's guess)
-  t=1s push=1.90 spot=0.87 right | t=2s push=2.89 spot=-0.10 still ring 16% | t=3s push=2.19 spot=-0.29 still | t=4s push=1.99 spot=0.12 right | t=5s push=2.34 spot=0.11 left | t=6s push=2.19 spot=-0.07 still ring 9% | …
-  BALANCED after 8.2 s. PANEL 9: NO URANIUM IN IT!
-    its uranium [                          ]
-    it gave     [█████████████             ]  (paper 2.21, you 2.15)
-    caption: Thick thorium oxide has no uranium in it, and the spot moved: it took twice the push of pure uranium. Stronger than pure uranium, with no uranium at all.
-  Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony, something in chalcolite from a mine and thick thorium oxide.  Panels left: 0.
+BENCH · PANEL 9 OF 9 · CHALCOLITE MADE BY YOU   (careful thumb)
+  card: You make the same green crystal yourself, from pure copper, pure phosphoric acid and a pure uranium salt. About half uranium, like the one from the mine.  [uranium in it: about half uranium]
+  t=0.7s push=0.23 spot=0.19 right | t=1.5s push=0.45 spot=0.06 still | t=2.2s push=0.48 spot=-0.03 still
+  WRITE IT DOWN at 2.7 s → HELD [0.32 … 0.48]   PANEL 9: ABOUT ITS URANIUM
+    its uranium [░░░                       ]
+    you         [██                        ]   hers 0.38
+    caption: Chalcolite made by you: about a third of the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It is about half uranium: about what its uranium gives, or less. Hers: about a third of the push of pure uranium. Your chalcolite from the mine: twice the push of pure uranium, give or take some.
+  Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.  Panels left: 0.
 
-END: You found a rock stronger than pure uranium, and your copy of it was weak.
-  You tested 8 things after pure uranium. Besides pure uranium, the spot moved for thin thorium oxide, white phosphorus, pitchblende from Saxony, chalcolite from a mine and thick thorium oxide.
-  The black rock is only about two-thirds uranium, and it took three and a half times the push of pure uranium. Uranium cannot do that on its own.
-  You made the same green crystal yourself, from pure chemicals: it took about a third of the push of pure uranium, like any uranium salt; the one from the mine took twice. So the extra is not the uranium and not the crystal: it is something in the rock that no bottle held.
-  White phosphorus moved the spot; red phosphorus did not. Same element, another form, nothing: so it is not the phosphorus itself. The paper calls its action "probably of another nature".
-  Thorium does it with no uranium at all, and your thick layer of it beat pure uranium.
+END: Your page backs five of the six claims in her note. Most of her note, in your own measurements.
+  You made 8 measurements after your first pure uranium. Your page shows the spot moved by thin thorium oxide, white phosphorus, pitchblende from Saxony and chalcolite from a mine.
+  ✓ Every uranium compound does it, about in proportion to its uranium. — your own chalcolite: about a third of the push of pure uranium, about what its uranium gives
+  ✓ Thorium does it too, with no uranium in it. — your thin thorium oxide: about the push of pure uranium
+  ✗ Thorium oxide even beats pure uranium. — your reading of thin thorium oxide could not show it (her thick layer beats uranium; her thin one does not quite)
+  ✓ White phosphorus does it, but red phosphorus and phosphates do not: it is not the phosphorus itself. — your white phosphorus: a little more than the push of pure uranium; your red phosphorus: nothing
+  ✓ Pitchblende and chalcolite do far more than their uranium can. — your pitchblende from Saxony: three and a half times the push of pure uranium, and it is only about two-thirds uranium
+  ✓ The same chalcolite, made from pure chemicals, does not. — your own chalcolite: about a third of the push of pure uranium; your chalcolite from a mine: twice the push of pure uranium
   PAPER: Marie Curie tested dozens of metals, salts, oxides and rocks. Every uranium compound does it, about in proportion to its uranium. Thorium does it too. And two uranium rocks, pitchblende and chalcolite, do it far more than the uranium in them can. She made chalcolite herself from pure chemicals, and her copy was no stronger than any uranium salt.
-  MEANS: So the rocks hold something no bottle in Paris held. Her words: these minerals "may contain an element much more active than uranium."
+  MEANS: Your page backs her last two claims, and so her conclusion. The rocks hold something no bottle in Paris held: these minerals "may contain an element much more active than uranium."
   LATER: After this note, and not in it: in July 1898 she and Pierre Curie announced one such element, traced in pitchblende, and named it polonium; in December, a second: radium.
-  HER PAGE: Pitchblende, Saxony three and a half times · Pitchblende, Bohemia three times · Chalcolite, mined twice · Thorium, thick twice · Uranium about · Green oxide about three-quarters of · Thorium, thin about · Chalcolite, made about a third of · Uranyl nitrate about a third of · Lead no push at all

@@ -1,8 +1,8 @@
 // Full session in a real headless browser at phone width. Run: node session-test.js  (writes session-log.txt and screenshots)
-// Album A: the paper's path, more or less: uranium (balanced with a real mouse drag on the slider; help opened and closed
-//          mid-measurement), lead, thin thorium, white phosphorus, red phosphorus, pitchblende from Saxony (shot mid-chase,
-//          with the !? up), chalcolite from a mine, chalcolite made by you, thick thorium. The last page; About.
-// Album B: start a new album; never open the Muséum's drawer: the verdict must say where the rock was.
+// Album A: uranium measured with a real mouse drag and How to play opened mid-measurement; then the paper's path, with the black
+//          rock first written down in a hurry (at the push its label suggests, spot still running), then measured again
+//          carefully; the two chalcolites. Expect all six of her claims backed. The last page; About.
+// Album B: start a new album; write everything down at once on jars that read zero: expect none of her claims backed.
 const { chromium } = require('playwright'); const path = require('path'), fs = require('fs');
 const L = []; const say = s => { L.push(s); console.log(s); };
 (async () => {
@@ -14,83 +14,81 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   const text = async sel => (await page.$eval(sel, e => e.innerText)).replace(/\n+/g, ' | ');
   const on = async () => page.$eval('.screen.on', e => e.id);
   const setPush = async r => page.evaluate(v => { const s = document.querySelector('#push'); s.value = Math.round(v * 1000); s.dispatchEvent(new Event('input')); }, r);
-  // a thumb: starts where the label suggests, then follows the spot, ten corrections a second, until the ring closes
-  const thumb = async (start, opts = {}) => {
-    await setPush(start); let r = start, t0 = Date.now(), midShot = false;
-    while (Date.now() - t0 < 40000) {
-      const b = await page.evaluate(() => { const b = window.__curie.bench; return { s: b.s, done: b.done, r: b.r, t: b.t }; });
-      if (b.done) return (Date.now() - t0) / 1000;
-      if (opts.midShot && !midShot && r > 1.3 && b.s > 0.6) { await shot(opts.midShot, false); midShot = true; say('   mid-chase: !? shown = ' + await page.$eval('#benchsvg #wow', e => e.getAttribute('opacity') === '1')); }
-      r = Math.max(0, Math.min(4, r + (b.s > 0.5 ? 0.25 : 0.55 * b.s))); await setPush(r); await page.waitForTimeout(100);
+  const bench = () => page.evaluate(() => { const b = window.__curie.bench; return { s: b.s, t: b.t, r: b.r, hold: b.hold, committed: !!b.committed }; });
+  const writeDisabled = () => page.$eval('#write', e => e.disabled);
+  // careful: follows the spot, ten corrections a second, and writes it down once it has stood a second and a half
+  const careful = async (start) => {
+    await setPush(start); let r = start; const t0 = Date.now();
+    while (Date.now() - t0 < 45000) {
+      const b = await bench();
+      if (b.hold >= 1.5 && !(await writeDisabled())) break;
+      r = Math.max(0, Math.min(4, r + (b.s > 0.5 ? 0.25 : b.s < -0.5 ? -0.25 : 0.55 * b.s))); await setPush(r); await page.waitForTimeout(100);
     }
-    say('  !! the spot was never balanced'); return null;
+    await page.click('#write'); await page.waitForTimeout(400);
   };
+  // hasty: sets the slider where the label suggests and writes it down as soon as the button wakes
+  const hasty = async (push) => { await setPush(push); await page.waitForFunction(() => !document.querySelector('#write').disabled); await page.click('#write'); await page.waitForTimeout(400); };
+  const result = async () => `${await text('#resbadge')} — ${await text('#rescap')}`;
+  const toPage = async () => { await page.click('#topage'); await page.waitForTimeout(800); };
+  const test = async (id, again) => {
+    await page.click(`.jar[data-id="${id}"]`); await page.waitForTimeout(250);
+    const btn = await text('#cardtest'); if (again && !/again/i.test(btn)) say(`  !! card for a jar already tested says "${btn}"`);
+    await page.click('#cardtest'); await page.waitForTimeout(300);
+    if (await page.$eval('#push', e => +e.value) !== 0) say('  !! slider carried over from the last bench');
+    if (!(await writeDisabled())) say('  !! WRITE IT DOWN awake before the spot could be seen');
+  };
+
   await shot('start'); await noScroll();
-  say('START: ' + await text('.aimbox'));
+  say('START: ' + await text('.aimbox') + ' | ' + await text('.acts'));
   await page.click('#begin'); await page.waitForTimeout(500);
-  say(`\n== ${await text('#benchband')} (on ${await on()})`);
-  if (await page.$eval('#push', e => +e.value) !== 0) say('  !! slider does not start at zero');
+  say(`\n== ${await text('#benchband')}`);
+  const cap = await text('#benchcap'); say('   bench says: ' + cap);
+  if (/\b0\b|zero|middle|still/i.test(cap)) say('  !! the bench text hints at the method: ' + cap);
   await shot('a-bench-uranium-start', false);
-  // a real drag on the slider: press on the thumb, move right in steps, watch the spot respond
+  // a real drag on the slider
   const box = await page.$eval('#push', e => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
   await page.mouse.move(box.x + 19, box.y + box.h / 2); await page.mouse.down();
   for (let k = 1; k <= 12; k++) { await page.mouse.move(box.x + 19 + k * 7, box.y + box.h / 2); await page.waitForTimeout(60); }
   await page.mouse.up(); await page.waitForTimeout(400);
-  const afterDrag = await page.evaluate(() => ({ v: +document.querySelector('#push').value, r: window.__curie.bench.r, s: window.__curie.bench.s }));
-  say(`   real drag: slider ${afterDrag.v}, push seen by the mechanism ${afterDrag.r.toFixed(2)}, spot ${afterDrag.s.toFixed(2)}`);
-  if (afterDrag.r < 0.3) say('  !! the drag did not move the push');
-  // help mid-measurement, and back
+  const d = await bench(); say(`   real drag: push seen by the mechanism ${d.r.toFixed(2)}, spot ${d.s.toFixed(2)}`); if (d.r < 0.3) say('  !! the drag did not move the push');
+  // the stall that was: leave the slider somewhere wrong and wait; the button must be awake and nothing must end by itself
+  await page.waitForTimeout(2500); const st = await bench();
+  say(`   left alone 2.5 s at push ${st.r.toFixed(2)}: write button ${await writeDisabled() ? 'ASLEEP' : 'awake'}, measurement ${st.committed ? 'ENDED BY ITSELF' : 'still open'}`);
+  if (await writeDisabled() || st.committed) say('  !! the bench stalls or ends by itself');
   await page.click('#bench .help-q'); await page.waitForTimeout(300); await shot('help');
-  const tHelp = await page.evaluate(() => window.__curie.bench.t); await page.waitForTimeout(800);
-  const tHelp2 = await page.evaluate(() => window.__curie.bench.t);
-  say(`   help opened mid-measurement: bench clock ${tHelp.toFixed(2)} → ${tHelp2.toFixed(2)} while away (should not move)`);
+  const t1 = (await bench()).t; await page.waitForTimeout(700); const t2 = (await bench()).t;
+  say(`   help opened mid-measurement: bench clock ${t1.toFixed(2)} → ${t2.toFixed(2)} while away`);
   await page.click('#helpback'); await page.waitForTimeout(300);
-  say(`   back on ${await on()}, slider kept at ${await page.$eval('#push', e => e.value)}`);
-  const secs = await thumb(afterDrag.r);
-  await page.waitForTimeout(400); say(`   balanced in ${secs}s: ${await text('#resbadge')} — ${await text('#rescap')}`);
-  await shot('a-bench-uranium-balanced', false);
-  await page.click('#topage'); await page.waitForTimeout(900);
-  say('   page: ' + await text('#pageband') + ' · ' + await text('#foundline'));
-  await shot('a-shelf-1'); await noScroll();
-  const plan = [['lead', 0], ['thO', 0], ['whiteP', 0], ['redP', 0], ['pbJG', 0.6, 'a-bench-pitchblende-chase'], ['chalc', 0.5], ['chalcArt', 0.5], ['thOthick', 0]];
-  for (const [id, start, mid] of plan) {
-    await page.click(`.jar[data-id="${id}"]`); await page.waitForTimeout(300);
-    say(`\n-- card: ${await text('#cardname')} | ${await text('#cardwhat')} | ${await text('#cardu')}`);
-    if (id === 'pbJG') await shot('a-card-pitchblende', false);
-    await page.click('#cardtest'); await page.waitForTimeout(400);
-    say(`== ${await text('#benchband')}`);
-    if (await page.$eval('#push', e => +e.value) !== 0) say('  !! slider carried over from the last bench');
-    if (id === 'pbJG') await shot('a-bench-pitchblende-start', false);
-    const t = await thumb(start, { midShot: mid });
-    await page.waitForTimeout(400);
-    say(`   balanced in ${t}s: ${await text('#resbadge')} — ${await text('#rescap')}`);
-    if (id === 'pbJG') await shot('a-bench-pitchblende-balanced', false);
-    if (id === 'chalcArt') await shot('a-bench-copy-balanced', false);
-    await page.click('#topage'); await page.waitForTimeout(900);
-    say('   page: ' + await text('#pageband') + ' · ' + await text('#foundline'));
-    if (id === 'redP') await shot('a-shelf-5');
+  await careful(d.r); say('   ' + await result()); await shot('a-bench-uranium-written', false);
+  await toPage(); await shot('a-shelf-1'); await noScroll();
+  const plan = [['nitrate', 'careful'], ['thOthick', 'careful'], ['whiteP', 'careful'], ['redP', 'careful'], ['pbJG', 'hasty'], ['pbJG', 'careful', true], ['chalc', 'careful'], ['chalcArt', 'careful']];
+  for (const [id, how, again] of plan) {
+    await test(id, again);
+    say(`\n== ${await text('#benchband')} (${how}${again ? ', again' : ''})`);
+    if (id === 'pbJG' && !again) { await setPush(0.65); await page.waitForTimeout(1200); await shot('a-bench-pitchblende-hasty-running', false); }
+    if (how === 'hasty') await hasty(0.65); else await careful(0);
+    say('   ' + await result());
+    if (id === 'pbJG') await shot(again ? 'a-bench-pitchblende-careful' : 'a-bench-pitchblende-hasty', false);
+    if (id === 'chalcArt') await shot('a-bench-copy', false);
+    await toPage(); say('   ' + await text('#foundline'));
+    if (id === 'pbJG' && !again) { await shot('a-shelf-after-hasty'); }
     await noScroll();
   }
   await shot('a-page-full');
-  if (!(await page.$eval('#turnpart', e => !e.classList.contains('hidden')))) say('  !! TURN not offered after nine panels');
   await page.click('#turn'); await page.waitForTimeout(500);
-  say('\nEND A: ' + await text('#headline')); say('   did: ' + await text('#did')); say('   paper: ' + await text('#paper')); say('   means: ' + await text('#means')); say('   later: ' + await text('#later'));
+  say('\nEND A: ' + await text('#headline') + ' | ' + await text('#fate'));
+  say('   claims: ' + await text('#claims'));
+  if (!/all six/.test(await text('#headline'))) say('  !! album A does not back all six claims');
   await shot('a-end'); await shot('a-end-top', false); await noScroll();
   await page.click('#end [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await page.click('#aboutback'); await page.waitForTimeout(300);
   say('about returned to: ' + await on());
-  // ---- album B
+  // ---- album B: dull jars, written down at once
   await page.click('#again'); await page.waitForTimeout(500);
-  say(`\nALBUM B: ${await text('#benchband')}; panels in game: ${await page.evaluate(() => window.__curie.game.panels.length)}`);
-  await thumb(0.9); await page.waitForTimeout(300); await page.click('#topage'); await page.waitForTimeout(700);
-  for (const id of ['lead', 'gold', 'copper', 'whiteP', 'redP', 'phosphate', 'tantal', 'thO']) {
-    await page.click(`.jar[data-id="${id}"]`); await page.waitForTimeout(200); await page.click('#cardtest'); await page.waitForTimeout(300);
-    await thumb(id === 'whiteP' ? 1 : id === 'thO' ? 0.8 : 0); await page.waitForTimeout(300);
-    say(`   ${id}: ${await text('#resbadge')}`);
-    await page.click('#topage'); await page.waitForTimeout(600);
-  }
+  await hasty(0); await toPage();
+  for (const id of ['lead', 'gold', 'copper', 'redP', 'phosphate', 'lead', 'gold', 'copper']) { await test(id); await hasty(0); say(`   ${id}: ${await text('#resbadge')}`); await toPage(); }
   await page.click('#turn'); await page.waitForTimeout(500);
-  const vb = await text('#did'); say('\nEND B: ' + await text('#headline')); say('   did: ' + vb);
-  if (!/never tested the rocks from the Muséum/.test(vb)) say('  !! album B verdict does not say where the rock was');
+  say('\nEND B: ' + await text('#headline') + ' | ' + await text('#fate')); say('   claims: ' + (await text('#claims')).slice(0, 400));
+  if (!/none of/.test(await text('#headline'))) say('  !! album B backs a claim');
   await shot('b-end-top', false);
   say('\nerrors: ' + (errors.length ? errors.join(' | ') : 'none'));
   fs.writeFileSync(path.join(__dirname, 'session-log.txt'), L.join('\n') + '\n');
