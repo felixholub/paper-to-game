@@ -1,0 +1,34 @@
+Calibration of Lovelace's Cards: 29 passed, 0 failed.
+PASS  B  a·n·x = 3430 with (×, ×)  [printed 3430]
+PASS  B  a/n · x with (÷, ×)  [printed 70]
+PASS  B  a + n + x = 110 with 2(+)
+PASS  B  ax^n for n = 7 is seven multiplications and prints 5·98^7  [printed 434062766623360]
+PASS  M  the cycle gives a·b^n for n = 1..8 with five cards always; the straight chain needs n + 1  [n=1: cycle 5 cards/5 steps, straight 2 cards; n=2: cycle 5 cards/8 steps, straight 3 cards; n=3: cycle 5 cards/11 steps, straight 4 cards; n=4: cycle 5 cards/14 steps, straight 5 cards; n=5: cycle 5 cards/17 steps, straight 6 cards; n=6: cycle 5 cards/20 steps, straight 7 cards; n=7: cycle 5 cards/23 steps, straight 8 cards; n=8: cycle 5 cards/26 steps, straight 9 cards]
+PASS  T1 the difference chain prints 1 4 9 16 25 36 with additions only  [printed 1 4 9 16 25 36]
+PASS  T1 its first differences run 3 5 7 9 11 13 and the second difference stays 2  [B after each pass: 5 7 9 11 13 15]
+PASS  T3 Table 1.3 is 4(×), 2(−), 1(÷)
+PASS  T3 Table 1.3’s seven operations give x = (dn′−d′n)/(n′m−nm′) on random data  [worst error 0.0e+0]
+PASS  D  Note D is 6(×), 3(−), 2(÷), eleven operations
+PASS  D  Note D’s eleven operations give x and y of the two equations on random data  [worst error 0.0e+0]
+PASS  C  BACK re-presents the set of cards while the counter is not zero, then passes  [backs taken 2]
+PASS  C  a counter that starts at zero and is effaced never returns to zero: the Engine runs on
+PASS  Z  a division by nothing rings the bell early
+PASS  G  the Countess’s chain prints B1 = 1/6, B3 = −1/30, B5 = 1/42, B7 = −1/30, each from the ones before  [1/6, −1/30, 1/42, −1/30]
+PASS  G  Operation-cards: nine for n = 1, fourteen for n = 2, twenty-five for n = 3 and no more for n = 4  [9 14 25 25]
+PASS  G  formula (8) with the A’s of the text reproduces the same four Numbers
+PASS  G  for n = 4 the cycle 13–23 is repeated once (eleven cards written out) and op 21 steps a column forward  [repeated 11, steps 37]
+PASS  F  9·10 + 8·9 + … + 1·2 = 330, done by three cards
+PASS  TK task 1: three cards hold on the given data and the hidden test  [the numbers given: 3430; a = 3, n = 4, x = 10: 120]
+      heuristics, task 2 (a·x^n):
+        straight (six multiplications)     6 cards  given: bell  tests: n = 3 wrong  held: false
+        cycle, counter off by one          6 cards  given: bell  tests: n = 3 bell, n = 1 runs-on  held: false
+        cycle with the counter right       5 cards  given: bell  tests: n = 3 bell, n = 1 bell  held: true
+PASS  TK task 2: the straight chain rings the bell on the given data and fails the hidden test
+PASS  TK task 2: the off-by-one cycle holds for n = 3 and runs on at n = 1
+PASS  TK task 2: the right cycle holds everywhere with five cards
+PASS  TK task 3: five cards of additions print the table for n = 6 and for n = 9  [1 4 9 16 25 36 49 64 81]
+PASS  TK task 3 admits additions and subtractions only (Note A: the Difference Engine can do nothing but add)
+PASS  TK the rack holds ten cards and no more
+PASS  ROB for random a, x, given n and other n: the straight chain fails the test and the cycle holds  [53 cases]
+PASS  W  task line and verdict carry no decimals  [It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24.]
+PASS  W  the strip prints fractions as fractions

@@ -1,0 +1,118 @@
+  shot start
+== Task 1 of 3 · a · n · x | Then the Engine will be handed other numbers.
+   Given a = 5, n = 7, x = 98. Print a · n · x. A card takes two columns, combines them, and puts the result on a column: tap ×, then a, then n, then R, and hang it.
+  shot a-task1
+  shot a-task1-composing
+   hung: a × n → R
+   hung: R × x → R
+   hung: PRINT R
+   chain: a × n → R | R × x → R | PRINT R
+  shot a-task1-chain
+   SET THE ENGINE GOING (task 1)
+   strip: wanted 120 · printed 120✓
+   bell: BELL
+   LINE: The bell rang. Three cards. It held for a = 3, n = 4, x = 10.
+   buttons: next=true hand=false go=false
+  shot a-task1-bell
+
+== Task 2 of 3 · a · xⁿ | Then the Engine will be handed other n.
+   Given a = 3, x = 2, n = 5. Print a · xⁿ, which is a times x multiplied by itself n times.
+  shot a-task2
+   hung: a × x → R
+   hung: R × x → R
+   hung: R × x → R
+   hung: R × x → R
+   hung: R × x → R
+   hung: PRINT R
+   chain: a × x → R | R × x → R | R × x → R | R × x → R | R × x → R | PRINT R
+  shot a-task2-straight
+   SET THE ENGINE GOING (task 2, straight)
+   strip: wanted 24 · printed 96✗
+   bell: NO BELL
+   LINE: It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24.
+   buttons: next=false hand=false go=true
+  shot a-task2-fell
+  shot help
+   help opened and returned: on play=true, chain kept=6 cards
+   all cards taken down; strip cleared: 0 printed lines, result line ""
+   hung: a × 1 → R
+   hung: R × x → R
+   hung: n − 1 → n
+   hung: BACK 2 WHILE n ≠ 0
+  shot a-task2-back-composed
+   hung: PRINT R
+   chain: a × 1 → R | R × x → R | n − 1 → n | BACK 2 WHILE n ≠ 0 | PRINT R
+  shot a-task2-cycle
+  shot a-task2-running
+   LINE: The bell rang. Five cards. It held for n = 3 and for n = 1.
+   countess: The Countess’s way: Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)
+  shot a-task2-held
+
+== Task 3 of 3 · The table of squares | Additions and subtractions only. Then the Engine will be handed another n.
+   Given A = 1, B = 3, C = 2, n = 6. Print the first n squares, one after another. A holds a square, B the difference to the next square, C the difference between differences.
+   punches disabled: *,/
+  shot a-task3
+   hung: PRINT A
+   hung: A + B → A
+   hung: B + C → B
+   hung: n − 1 → n
+   hung: BACK 4 WHILE n ≠ 0
+   chain: PRINT A | A + B → A | B + C → B | n − 1 → n | BACK 4 WHILE n ≠ 0
+   SET THE ENGINE GOING (task 3)
+   strip: wanted 1 4 9 16 25 36 49 64 81 · printed 1✓ 4✓ 9✓ 16✓ 25✓ 36✓ 49✓ 64✓ 81✓
+   bell: BELL
+   LINE: The bell rang. Five cards. It held for n = 9.
+   buttons: next=true hand=false go=false
+  shot a-task3-held
+
+VERDICT: Every chain held.
+  Thirteen cards across three tasks: three for a·n·x, five for a·xⁿ, five for the table of squares. Each chain went on working when the Engine was handed numbers you had never seen.
+  shot a-end
+  shot a-coda-working
+  CODA: The first Number · nine operation cards | 1/6 | The second Number · fourteen operation cards | −1/30 | The third Number · twenty-five operation cards | 1/42 | The fourth Number · twenty-five operation cards | −1/30 || Nine cards for the first Number, fourteen for the second, twenty-five for the third; and twenty-five again for the fourth, because the cycle turns back. No more are needed, she writes, however great n may be.
+  shot a-coda
+  shot about
+  back on end: true
+
+== B: Task 1 of 3 · a · n · x | Then the Engine will be handed other numbers.
+   hung: a × n → R
+   hung: R × x → R
+   hung: PRINT R
+   SET THE ENGINE GOING (B task 1)
+   strip: wanted 120 · printed 120✓
+   bell: BELL
+   LINE: The bell rang. Three cards. It held for a = 3, n = 4, x = 10.
+   buttons: next=true hand=false go=false
+== B: Task 2 of 3 · a · xⁿ | Then the Engine will be handed other n.
+   hung: a × x → R
+   hung: PRINT R
+   SET THE ENGINE GOING (B task 2, run 1)
+   strip: wanted 96 · printed 6✗
+   bell: NO BELL
+   LINE: No bell on the numbers given. It printed 6 and the number wanted was 96.
+   buttons: next=false hand=false go=true
+   SET THE ENGINE GOING (B task 2, run 2)
+   strip: wanted 96 · printed 6✗
+   bell: NO BELL
+   LINE: No bell on the numbers given. It printed 6 and the number wanted was 96.
+   buttons: next=false hand=true go=true
+  shot b-handover-offered
+   countess: Handed to the Countess. Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)
+   next: NEXT TASK
+== B: Task 3 of 3 · The table of squares | Additions and subtractions only. Then the Engine will be handed another n.
+   hung: PRINT A
+   hung: A + B → A
+   hung: B + C → B
+   hung: n − 1 → n
+   hung: BACK 4 WHILE n ≠ 0
+   SET THE ENGINE GOING (B task 3)
+   strip: wanted 1 4 9 16 25 36 49 64 81 · printed 1✓ 4✓ 9✓ 16✓ 25✓ 36✓ 49✓ 64✓ 81✓
+   bell: BELL
+   LINE: The bell rang. Five cards. It held for n = 9.
+   buttons: next=true hand=false go=false
+
+VERDICT B: Two chains held; one you handed to the Countess.
+  Eight cards across two tasks: three for a·n·x, five for the table of squares. Each chain went on working when the Engine was handed numbers you had never seen.
+  shot b-end
+
+errors: none
