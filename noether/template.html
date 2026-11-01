@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Noether's Press</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="Emmy Noether (1918) as a stamping press: pull a symmetry, the press stamps a law, an inspector tests it with fakes. Then warp the clock and watch the energy tag come out blank. Hilbert's question, answered.">
+<meta name="description" content="Emmy Noether (1918) as a game about a formula: draw paths, find the changes the formula does not care about, win the numbers that never change, and watch the clock's prize come out empty. Hilbert's question, answered.">
 <style>
 @font-face{font-family:'Chakra';font-weight:700;src:url(data:font/woff2;base64,/*__FONT_CHAKRA__*/) format('woff2');font-display:block}
 @font-face{font-family:'Saira';font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_SAIRA__*/) format('woff2');font-display:block}
@@ -14,6 +14,7 @@
   --gun:#15181C; --steel:#23282E; --steel2:#2C323A; --brush:#9AA3AB; --brush2:#D7DDE2; --dim:#5C656E;
   --cyan:#2BF0FF; --mag:#FF2ECC; --haz:#F2CB05;
   --disp:'Chakra','Arial Narrow',Impact,sans-serif; --text:'Saira','Helvetica Neue',Arial,sans-serif; --mono:'Tech','Courier New',monospace;
+  --math:'Times New Roman','Georgia',serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--gun)}
@@ -34,6 +35,10 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .small{font-size:15px;color:var(--brush)}
 .sig{padding:14px 0 18px;font-size:15px;text-align:center;font-family:var(--text)}
 .sig a{color:var(--dim);font-style:italic;text-decoration:none}
+/* formulas: the one place in the Pantheon where the symbols are on screen */
+.f{font-family:var(--math);font-style:italic;font-size:1.15em;color:#fff;white-space:nowrap}
+.startf{font-family:var(--math);font-style:italic;font-size:30px;color:#fff;text-align:center;margin:14px 0 2px;text-shadow:0 0 14px rgba(43,240,255,.55)}
+.startf small{display:block;font-family:var(--text);font-style:normal;font-size:14px;color:var(--brush);text-shadow:none;letter-spacing:.02em;margin-top:2px}
 /* levers and buttons: steel bars with a lit edge */
 .btn{display:block;width:100%;min-height:56px;padding:12px 14px;margin:10px 0;background:linear-gradient(180deg,#3A4149,#262B31 55%,#1E2227);color:var(--brush2);border:1px solid #0B0D0F;border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 12px rgba(43,240,255,.25);border-radius:0;font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;user-select:none;text-align:center}
 .btn:active,.btn.pressed{transform:translateY(2px);border-bottom-width:2px;color:#fff}
@@ -46,10 +51,24 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .top .aim{font-size:16px;padding:8px 10px}
 .band{font-family:var(--disp);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:14px;color:var(--cyan);text-shadow:0 0 8px rgba(43,240,255,.7);margin:8px 0 4px}
 .line{font-size:16px;color:var(--brush2);margin:0 0 8px;min-height:22px}
-/* the world window */
-.window{width:100%;max-width:348px;margin:0 auto;display:block;position:relative;background:#0B0D10;border:1px solid #0B0D0F;box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08)}
+/* the formula plate: the formula, its words, and the numbers before and after a change */
+.plate{width:100%;max-width:348px;margin:6px auto 0;background:linear-gradient(180deg,#2A3037,#1E2227);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);padding:8px 10px 6px;position:relative}
+.plate .plabel{position:static;display:block;margin-bottom:2px}
+.plate .formula{font-family:var(--math);font-style:italic;font-size:22px;color:#fff;line-height:1.2;text-shadow:0 0 10px rgba(43,240,255,.45);white-space:nowrap;overflow-x:auto}
+.plate .words{font-size:13px;color:var(--brush);line-height:1.3;margin-top:2px}
+.nums{display:grid;grid-template-columns:1fr auto auto auto;gap:2px 8px;align-items:baseline;margin-top:6px;font-family:var(--mono);font-size:13px;color:var(--brush)}
+.nums .n{color:#fff;font-size:16px;text-align:right}
+.nums .arrow{color:var(--dim)}
+.nums .n.same{color:var(--cyan);text-shadow:0 0 8px rgba(43,240,255,.7)}
+.nums .n.diff{color:var(--haz);text-shadow:0 0 8px rgba(242,203,5,.7)}
+.nums .who{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the drawing window */
+.window{width:100%;max-width:348px;margin:8px auto 0;display:block;position:relative;background:#0B0D10;border:1px solid #0B0D0F;box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08);touch-action:none}
 .window svg{width:100%;height:auto;display:block}
-/* the Auditor's panel */
+.window.drawing{box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 0 0 2px var(--mag),0 0 18px rgba(255,46,204,.5)}
+.caption{font-family:var(--mono);font-size:12px;letter-spacing:.08em;fill:#2BF0FF;text-transform:uppercase}
+.caption.fake{fill:#FF2ECC}.caption.true{fill:#DDF6FF}
+/* the needle and the stamp */
 .panel{width:100%;max-width:348px;margin:8px auto 0;background:linear-gradient(180deg,#2A3037,#1E2227);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);display:flex;align-items:stretch;height:84px;position:relative}
 .panel .gauge{width:150px;flex:none;position:relative}
 .panel .gauge svg{width:150px;height:84px;display:block}
@@ -59,16 +78,15 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .stamp.on{transform:scale(1) rotate(-6deg)}
 .stamp.teeth{color:var(--cyan);text-shadow:0 0 10px rgba(43,240,255,.9);box-shadow:0 0 14px rgba(43,240,255,.5),inset 0 0 14px rgba(43,240,255,.2)}
 .stamp.void{color:var(--mag);text-shadow:0 0 10px rgba(255,46,204,.9);box-shadow:0 0 14px rgba(255,46,204,.5),inset 0 0 14px rgba(255,46,204,.2)}
-.stamp.jam{color:var(--haz);text-shadow:0 0 10px rgba(242,203,5,.9);box-shadow:0 0 14px rgba(242,203,5,.5)}
-.stamp.identity{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.8);font-size:20px}
-.stamp.notlaw{color:var(--haz)}
-.stamp.law{font-size:15px;letter-spacing:.1em;padding:3px 8px;border-width:2px}
+.stamp.jam{color:var(--haz);text-shadow:0 0 10px rgba(242,203,5,.9);box-shadow:0 0 14px rgba(242,203,5,.5);font-size:18px}
+.stamp.identity{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.8);font-size:22px}
+.stamp.notlaw{color:var(--haz);font-size:18px}
+.stamp.law{font-size:15px;letter-spacing:.1em;padding:3px 8px;border-width:2px;color:var(--brush2)}
+.stamp.teeth.law{color:var(--cyan)}
 .feedline{width:100%;max-width:348px;margin:4px auto 0;font-family:var(--mono);font-size:13px;letter-spacing:.04em;line-height:1.3;color:var(--brush);min-height:34px}
 .feedline.fake{color:var(--mag)}
 .feedline.true{color:#DDF6FF}
 .result{font-size:16px;line-height:1.4;margin:10px 0 6px;color:#fff}
-.caption{font-family:var(--mono);font-size:12px;letter-spacing:.08em;fill:#2BF0FF;text-transform:uppercase}
-.caption.fake{fill:#FF2ECC}.caption.true{fill:#DDF6FF}
 /* the rack: three blanks */
 .rack{width:100%;max-width:348px;margin:8px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .slot{height:58px;position:relative;background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -2px 0 rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:2px 4px;overflow:hidden}
@@ -78,7 +96,6 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .slot.identity{border-bottom:4px solid #fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(255,255,255,.5)}
 .slot.jam{background:linear-gradient(170deg,#6E6A52,#4A4634);border-bottom:4px solid var(--haz);transform:skewX(-8deg) rotate(-3deg)}
 .slot.jam .tagtext{color:var(--haz);text-shadow:none}
-.slot.hole{background:#0E1013;box-shadow:inset 0 2px 8px #000;border-color:#0B0D0F}
 .press{position:absolute;left:-2px;right:-2px;top:-70px;height:62px;background:linear-gradient(180deg,#3A4149,#1C2025);border:1px solid #0B0D0F;box-shadow:0 6px 10px rgba(0,0,0,.6);transition:transform .22s cubic-bezier(.6,0,.9,.3);z-index:2}
 .press:after{content:"";position:absolute;left:30%;right:30%;bottom:-8px;height:8px;background:#0B0D0F}
 .slot.pressing .press{transform:translateY(60px)}
@@ -94,6 +111,7 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .willdo{font-size:16px;line-height:1.35;min-height:44px;margin:4px 0;color:var(--brush2)}
 .say{font-size:16px;line-height:1.4;margin:8px 0;padding:10px 12px;border-left:4px solid var(--mag);background:rgba(255,46,204,.06);color:#fff}
 .say b{font-family:var(--disp);font-weight:700;letter-spacing:.14em;color:var(--mag);font-size:13px;display:block;margin-bottom:2px}
+.ask{font-size:16px;line-height:1.4;margin:8px 0;padding:10px 12px;border-left:4px solid var(--cyan);background:rgba(43,240,255,.06);color:#fff}
 .hidden{display:none !important}
 .verdict{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 10px;color:var(--cyan);text-shadow:0 0 12px rgba(43,240,255,.8),0 0 30px rgba(43,240,255,.4)}
 .did{margin:6px 0;padding-left:18px}.did li{margin:4px 0}
@@ -113,37 +131,54 @@ ul{padding-left:20px}li{margin:4px 0}
 <section class="screen on" id="start">
   <h1 class="title"><small>Emmy Noether · 1918</small>Noether's<br>Press</h1>
   <div class="rule"></div>
-  <p class="lede">A bead moves in a small world. You can change the whole world in six ways: start its clock later, slide it, turn it, or re-tick its clock any way you draw with your thumb.</p>
-  <p class="lede">Some changes the world will not notice. Each of those is worth a law: something that never changes while the bead moves. A press stamps the law on a steel tag. An auditor then throws fake motions at the tag to see if it can catch them.</p>
-  <p class="aim">Find the changes this world does not notice.<br>Each one stamps a law.</p>
-  <p class="small">Four worlds, three blank tags each. A change the world notices wastes a tag. About six minutes.</p>
+  <p class="lede">Emmy Noether studied a kind of formula. You give it a drawing of a path from A to B; it gives you back a number. Of all the paths, one has the smallest number: the best path. To see the formula, we draw a dot that runs along the best path.</p>
+  <p class="startf">S = ∫ ½(x′² + y′²) dt<small>the first formula: it adds up speed² along a path</small></p>
+  <p class="lede">Now move the whole drawing one step to the right and ask the formula again. Same number? Then the formula doesn't care where the drawing is. Each time you find something the formula doesn't care about, you win a prize: a number you can work out from the dot at any moment, and it comes out the same at every moment of the trip. A press stamps each prize on a steel tag; an auditor tests it.</p>
+  <p class="aim">Find what the formula doesn't care about.<br>Each one wins a number that never changes.</p>
+  <p class="small">You will draw paths with a finger, pull six changes, and test prizes. Four formulas, three steel blanks each; a change the formula cares about spends a blank. About seven minutes.</p>
   <button class="btn go" id="begin">Begin</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
 <section class="screen" id="play">
-  <div class="top"><p class="aim" style="margin-top:0">Find the changes this world does not notice.<br>Each one stamps a law.</p><button class="help-q" aria-label="How to play">?</button></div>
-  <div class="band" id="band">WORLD 1 OF 4 · THE OPEN FLOOR</div>
+  <div class="top"><p class="aim" style="margin-top:0">Find what the formula doesn't care about.<br>Each one wins a number that never changes.</p><button class="help-q" aria-label="How to play">?</button></div>
+  <div class="band" id="band">FORMULA 1 OF 4 · THE FREE DOT</div>
   <p class="line" id="worldline"></p>
+  <div class="plate" id="plate">
+    <span class="plabel">THE FORMULA</span>
+    <div class="formula" id="formula"></div>
+    <div class="words" id="words"></div>
+    <div class="nums" id="nums"></div>
+  </div>
   <div class="window" id="window"></div>
   <div class="panel" id="panel">
     <div class="gauge"><span class="plabel">THE NEEDLE</span><svg viewBox="0 0 150 84" id="gaugesvg"></svg></div>
-    <div class="stampbox"><span class="plabel">THE AUDITOR</span><div class="stamp" id="stamp"></div></div>
+    <div class="stampbox"><span class="plabel">THE STAMP</span><div class="stamp" id="stamp"></div></div>
   </div>
-  <p class="feedline" id="feed">The needle reads the tag's quantity as the bead moves. Nothing to read yet.</p>
+  <p class="feedline" id="feed"></p>
   <div class="rack" id="rack"></div>
+  <!-- the opening: draw a path against the best path -->
+  <div id="opening" class="hidden">
+    <div class="ask" id="openask">Draw a path from A to B with your finger, in the window. The formula will give it a number.</div>
+    <div class="row"><button class="btn" id="drawagain">Draw another</button><button class="btn go" id="openon">On to the changes</button></div>
+  </div>
   <div class="say" id="first"></div>
-  <div id="choose">
-    <p class="line" id="benchhead" style="margin-top:10px">Tap a lever: the window shows the change. Pull it if you think this world would not notice.</p>
+  <div id="choose" class="hidden">
+    <p class="line" id="benchhead" style="margin-top:10px"></p>
     <div class="levers" id="levers"></div>
-    <p class="willdo" id="willdo">Tap a lever to see what it does.</p>
+    <p class="willdo" id="willdo">Tap a change to see it.</p>
     <button class="btn go" id="pull" disabled>Pull</button>
+  </div>
+  <!-- the test: draw any path and read the prize's number along it -->
+  <div id="test" class="hidden">
+    <div class="ask" id="testask">Now draw any path you like, in the window. The needle reads the prize's number along it. Try to make the needle move.</div>
+    <div class="row"><button class="btn" id="testagain">Draw another</button><button class="btn go" id="testdone">Let the Auditor stamp</button></div>
   </div>
   <div id="after" class="hidden">
     <p class="result" id="result"></p>
     <div class="say" id="say"></div>
-    <div class="row"><button class="btn" id="again">Pull again</button><button class="btn go" id="next">Next world</button></div>
+    <div class="row"><button class="btn" id="again">Pull again</button><button class="btn go" id="next">Next formula</button></div>
   </div>
 </section>
 
@@ -153,12 +188,12 @@ ul{padding-left:20px}li{margin:4px 0}
   <ul class="did" id="did"></ul>
   <div class="coda">
     <h2>What the paper says</h2>
-    <p>A symmetry with a parameter in it stamps a law. Start the clock later, shift the world, turn it: each one the world does not notice gives a quantity that holds steady on every true motion and on nothing else. That is Theorem I, and it runs backwards: a law with teeth points to a symmetry.</p>
-    <p>A symmetry with a free hand in it, one you can apply differently at every moment, stamps no law. It stamps an identity: the equations of motion are not all independent, and as many of them as there are free hands follow from the rest. That is Theorem II, and it also runs backwards.</p>
-    <p>Now put the two together. If the free hand contains the shift of the clock, the clock's law is inside the identity: it holds for every motion, fake or true, and says nothing. The paper calls such a law <i>improper</i>. That is the answer to Hilbert's question. In Einstein's theory of gravity the coordinates can be relabelled freely, moment by moment; the shift of the time coordinate is inside that freedom; so the energy law it yields is empty. Energy is not lost. There is no clock in the theory to keep it by.</p>
-    <p>The paper's last word: Hilbert said this failure is characteristic of general relativity. It is, exactly when "general relativity" means invariance under a group with free hands in it; and it holds for any such theory, in any number of dimensions.</p>
+    <p>Every formula here gives each path a number, and the dot takes the best path. Each time the formula does not care about a change with a knob on it (how far right, how much turned, how much later), you win a prize: a number that stays the same along the best path and on no other. That is Noether's first theorem, and it runs backwards too: a real prize always points to a change the formula does not care about.</p>
+    <p>Then the sneakiest change: let the clock run fast, then slow, then fast again, any way you like, a change with a free hand in it instead of a knob. Some formulas do not care even about that. But then there is no prize. What comes out is a rule: the formula's own equations of motion are not independent, and as many of them as there are free hands follow from the rest. That is her second theorem, and it also runs backwards.</p>
+    <p>Put the two together. If the free hand contains "start the clock later", then the clock's prize is inside the rule: its number comes out the same on every path, the bad ones too, so it tells you nothing. The paper calls such a prize <i>improper</i>. That is the answer to Hilbert's question. In Einstein's formula for gravity the coordinates can be relabelled freely, moment by moment; "start the clock later" sits inside that freedom; so the energy it gives is empty. Energy is not lost. That formula has no clock of its own to count it with.</p>
+    <p>The paper's last word: Hilbert said this failure is characteristic of general relativity. It is, exactly when "general relativity" means a formula that does not care about changes with free hands in them; and it holds for every such formula, in any number of dimensions.</p>
     <h2>Both ways</h2>
-    <p>A tag with teeth means a symmetry with a parameter. A blank tag means a free hand that contains the shift you pulled. Either way, the world and its laws are the same thing seen from two sides.</p>
+    <p>A real prize means a change with a knob the formula does not care about. An empty prize means a free hand that contains the change you pulled. Either way, the formula and its prizes are the same thing seen from two sides.</p>
   </div>
   <button class="btn go" id="replay">Play again</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
@@ -167,15 +202,16 @@ ul{padding-left:20px}li{margin:4px 0}
 
 <section class="screen help" id="help">
   <h2 style="margin-top:22px">How to play</h2>
-  <p class="aim">Find the changes this world does not notice.<br>Each one stamps a law.</p>
-  <p><b>The world.</b> The window shows a bead moving in one small world: on a flat floor, on a spring, as light in glass, on a stretched sheet. The line above the window says what the world is and what it never does. The white trail is a real motion, something this world really does. The dots on the trail are the ticks of the bead's clock: one dot per tick.</p>
-  <p><b>The levers.</b> Each lever changes the whole world in one way. Tap one and the window shows the change in blue, with the real motion faint and grey underneath. Four levers make a fixed change: start the clock a moment later, slide the world sideways or up, turn it. The two magenta levers make a change you draw with your thumb: re-tick the clock faster here and slower there, or push the world sideways by a different amount at every moment.</p>
-  <p><b>The question.</b> Would this world run just the same after the change? A bead that nothing pushes would not mind being slid sideways. It would mind a clock that runs fast and slow, because then it speeds up and slows down for no reason. If you think the world would not notice, PULL.</p>
-  <p><b>The press.</b> If the world does not notice, the press holds and stamps a steel tag with the law that follows: one quantity that will now stay fixed on every real motion. If the world does notice, the press jams, the blank bends, and you lose it. Three blanks per world; every pull uses one.</p>
-  <p><b>The Auditor and the needle.</b> He tests every tag. He plays real motions (white) and fakes (magenta, dashed): motions this world would never make. The needle reads the tag's quantity as the bead moves. Still on the real motions and swinging on a fake: a law with TEETH, cyan. It can tell a fake from the real thing. Still on everything, the fakes too: VOID, magenta. A tag that no fake can break rules nothing out; it is empty.</p>
-  <p><b>The drawn levers.</b> When the press holds for a change you drew, no law comes out. The tag reads IDENTITY: a rule about the equations of motion themselves, that they are not independent. Watch what that does to the clock tag in that world.</p>
-  <p><b>The Auditor moves first.</b> In two worlds he already holds a law and asks which lever it comes from, or holds a blank tag and asks which lever explains it. Pull the lever you think it is; a wrong pull still uses a blank.</p>
-  <p><b>The end.</b> After four worlds the verdict is in words: what you stamped, what came out blank, and what the paper says it means.</p>
+  <p class="aim">Find what the formula doesn't care about.<br>Each one wins a number that never changes.</p>
+  <p><b>The formula.</b> Each of the four formulas takes a path and gives it a number. The plate shows the formula and says it in words; <span class="f">x′</span> means how fast <span class="f">x</span> changes. Of all the paths from A to B, one has the smallest number: the best path. The dot in the window runs along it. The dots on its trail are the ticks of a clock, one per tick.</p>
+  <p><b>Drawing a path.</b> In the first formula you draw a path from A to B with your finger and see its number next to the best path's. Later, after each prize, you draw any path you like to test the prize.</p>
+  <p><b>The changes.</b> Six levers each change the whole drawing in one way: move it right or up, turn it, start the clock later; or, the two magenta levers, re-tick the clock or wobble the drawing by an amount you draw. Tap a lever and the window shows the changed drawing in blue over the old one in grey, and the plate shows the formula's numbers before and after, for the best path and for one other.</p>
+  <p><b>The question.</b> Does the formula care? If the numbers stay the same for every path, it does not, and you win a prize. If you think it does not care, PULL. If the formula does care, the press jams, a blank is spent, and no prize comes.</p>
+  <p><b>The prize.</b> A number you can work out from the dot at any moment, where it is and how fast it goes. The press stamps it on a steel tag with its formula. The needle reads that number as a dot runs along a path.</p>
+  <p><b>The Auditor.</b> A real prize keeps its number along the best path and changes it along paths the dot would never take. An empty prize keeps its number on every path, so it tells you nothing. You test each prize by drawing paths and watching the needle; then the Auditor runs his own paths and stamps PRIZE or EMPTY.</p>
+  <p><b>The free hand.</b> When the formula does not care about a change you drew, no prize comes out. The tag reads RULE: the formula's two equations of motion are not independent. Watch what that does to the clock's prize in that formula.</p>
+  <p><b>The Auditor moves first.</b> In two formulas he already holds a prize and asks which change it comes from, or holds an empty prize and asks which change explains it. Pull the change you think it is; a wrong pull still spends a blank.</p>
+  <p><b>The end.</b> After four formulas the verdict is in words: what you won, what came out empty, and what the paper says it means.</p>
   <button class="btn go" id="helpback">Back</button>
 </section>
 
@@ -187,8 +223,8 @@ ul{padding-left:20px}li{margin:4px 0}
 
 <div class="overlay" id="overlay">
   <div class="sheetbox">
-    <div class="band" id="striphead">WARP THE CLOCK</div>
-    <p class="line" id="stripline">Draw how the clock should tick: drag your finger across the strip, up for faster, down for slower. Any shape you like.</p>
+    <div class="band" id="striphead">RE-TICK THE CLOCK</div>
+    <p class="line" id="stripline"></p>
     <div class="strip" id="strip"><svg viewBox="0 0 348 150" id="stripsvg"><line x1="0" y1="75" x2="348" y2="75" stroke="#3A4149" stroke-width="1"/><path id="stroke" d="" fill="none" stroke="#FF2ECC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(255,46,204,.8))"/></svg></div>
     <div class="row"><button class="btn small-btn" id="stripcancel">Cancel</button><button class="btn go small-btn" id="strippull" disabled>Pull</button></div>
   </div>
@@ -204,7 +240,7 @@ const M = window.NOETHER, C = M.CONFIG;
 const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
 const SVG = 'http://www.w3.org/2000/svg';
 const el = (t, a, parent) => { const e = document.createElementNS(SVG, t); for (const k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; };
-let g, lastScreen = 'start', chosen = null, busy = false, anim = null, pendingP = null, strokeSamples = null;
+let g, lastScreen = 'start', chosen = null, busy = false, strokeSamples = null, lastRes = null, lastP = null;
 const timers = [];
 const wait = ms => new Promise(r => { const t = setTimeout(r, ms); timers.push(t); });
 
@@ -217,10 +253,10 @@ $('#aboutback').addEventListener('click', () => show(lastScreen === 'about' ? 's
 $('#begin').addEventListener('click', start);
 $('#replay').addEventListener('click', start);
 
-// ---------- the world window
+// ---------- the drawing window
 const W = 348, H = 220, S = 100, cx = W / 2, cy = H / 2;
-const px = u => cx + u * S, py = v => cy - v * S;
-let win, traceLayer, beadEl, motionLayer;
+const px = u => cx + u * S, py = v => cy - v * S, ux = X => (X - cx) / S, uy = Y => (cy - Y) / S;
+let win, traceLayer, beadEl, ghostLayer, fanLayer, markLayer, captionEl, strokeEl;
 function drawWorld(w) {
   const box = $('#window'); box.innerHTML = '';
   win = el('svg', { viewBox: `0 0 ${W} ${H}` }, box);
@@ -238,20 +274,24 @@ function drawWorld(w) {
     for (let r = 0.15; r < 1.9; r += 0.15) { const n = M.density(w, r, 0).n; const a = 0.08 + (n - 1) * 0.6; el('circle', { cx: px(0), cy: py(0), r: r * S, fill: 'none', stroke: `rgba(43,240,255,${a.toFixed(3)})`, 'stroke-width': 1.2 }, bg); }
     el('circle', { cx: px(0), cy: py(0), r: 5, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, bg);
   }
-  ghostLayer = el('g', {}, win); fanLayer = el('g', {}, win); motionLayer = el('g', {}, win); traceLayer = el('g', {}, win);
+  ghostLayer = el('g', {}, win); fanLayer = el('g', {}, win); markLayer = el('g', {}, win); traceLayer = el('g', {}, win);
+  strokeEl = el('path', { d: '', fill: 'none', stroke: '#FF2ECC', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' }, win);
   beadEl = el('circle', { cx: -10, cy: -10, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
   captionEl = el('text', { x: 8, y: 16, class: 'caption' }, win); captionEl.textContent = '';
 }
-let ghostLayer, fanLayer, captionEl;
 function setCaption(text, kind) { captionEl.textContent = text || ''; captionEl.setAttribute('class', 'caption' + (kind ? ' ' + kind : '')); }
 function pathD(p) { let d = ''; for (let i = 0; i < p.u1.length; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }
-function drawGhost(path) { // the real motion, faint and still, under a preview
+function drawGhost(path) { // the best path, faint and still, under a preview or a drawn path
   ghostLayer.innerHTML = ''; if (!path) return;
   el('path', { d: pathD(path), fill: 'none', stroke: '#9AA3AB', 'stroke-width': 1.5, opacity: 0.45 }, ghostLayer);
   for (let k = 0; k < path.u1.length; k += C.TICK_EVERY) el('circle', { cx: px(path.u1[k]), cy: py(path.u2[k]), r: 1.8, fill: '#9AA3AB', opacity: 0.45 }, ghostLayer);
 }
-let liveMotion = null, liveT = 0, liveRAF = null;
-function playMotion(path, opts) { // animates a bead along a path, with its clock ticks as dots; opts: {fake, onFrame, dur, fan, colour}
+function drawMarks(path) { // A and B
+  markLayer.innerHTML = ''; if (!path) return; const n = path.u1.length;
+  for (const [i, L] of [[0, 'A'], [n - 1, 'B']]) { const X = px(path.u1[i]), Y = py(path.u2[i]); el('circle', { cx: X, cy: Y, r: 9, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, markLayer); const t = el('text', { x: X, y: Y + 4.5, 'text-anchor': 'middle', class: 'caption', style: 'font-size:12px' }, markLayer); t.textContent = L; }
+}
+let liveRAF = null;
+function playMotion(path, opts) { // animates a dot along a path, with its clock ticks as dots; opts: {fake, onFrame, dur, fan, colour}
   if (liveRAF) cancelAnimationFrame(liveRAF);
   traceLayer.innerHTML = ''; fanLayer.innerHTML = '';
   const col = opts.colour || (opts.fake ? '#FF2ECC' : '#DDF6FF');
@@ -274,21 +314,49 @@ function playMotion(path, opts) { // animates a bead along a path, with its cloc
   });
 }
 function loopMotion(path, opts) { // idle: a motion traced over and over
-  let stop = false; const run = async () => { while (!stop) { await playMotion(path, Object.assign({ dur: 2600 }, opts || {})); await wait(700); } };
+  let stop = false; const run = async () => { while (!stop) { await playMotion(path, Object.assign({ dur: 2600 }, opts || {})); if (stop) break; await wait(700); } };
   run(); return () => { stop = true; if (liveRAF) cancelAnimationFrame(liveRAF); };
 }
-let stopIdle = null, baseMotion = null;
-function showPreview(lv) { // the lever's change, shown in the window as a motion, the real one faint underneath
+let stopIdle = null, baseMotion = null, otherPath = null, plateScale = 1;
+const fanOn = () => { const w = M.world(g); return w.id === 'spring' && !!w.first; };
+function showReal() { // the best path running, no ghost
+  if (stopIdle) stopIdle(); drawGhost(null);
+  setCaption('THE BEST PATH', 'true'); stopIdle = loopMotion(baseMotion, { fan: fanOn() });
+}
+function showPreview(lv) { // the lever's change, shown as a motion over the best path in grey
   if (stopIdle) stopIdle();
-  const prev = M.previewPath(lv.id, baseMotion, null);
-  drawGhost(baseMotion); setCaption('PREVIEW · ' + lv.shows, null);
-  const w = M.world(g);
-  stopIdle = loopMotion(prev, { colour: '#2BF0FF', fan: w.id === 'spring' && !!w.first });
+  const prev = M.changedPath(lv.id, baseMotion, null);
+  drawGhost(baseMotion); setCaption('AFTER THE CHANGE: ' + lv.shows, null);
+  stopIdle = loopMotion(prev, { colour: '#2BF0FF', fan: fanOn() });
 }
-function showReal() { // back to the real motion, no ghost
-  if (stopIdle) stopIdle(); drawGhost(null); const w = M.world(g);
-  setCaption('A REAL MOTION', 'true'); stopIdle = loopMotion(baseMotion, { fan: w.id === 'spring' && !!w.first });
+
+// ---------- drawing a path with a finger
+let drawMode = null, drawing = false, strokePts = [], onStroke = null;
+(function () {
+  const box = $('#window');
+  const pos = e => { const r = box.getBoundingClientRect(); return [ux((e.clientX - r.left) / r.width * W), uy((e.clientY - r.top) / r.height * H)]; };
+  box.addEventListener('pointerdown', e => { if (!drawMode || busy) return; drawing = true; box.setPointerCapture(e.pointerId); strokePts = [pos(e)]; if (stopIdle) stopIdle(); traceLayer.innerHTML = ''; fanLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); strokeEl.setAttribute('d', ''); setCaption('YOUR PATH', 'fake'); });
+  box.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e); strokePts.push(p); strokeEl.setAttribute('d', strokePts.map((q, i) => (i ? 'L' : 'M') + px(q[0]).toFixed(1) + ' ' + py(q[1]).toFixed(1)).join('')); });
+  const up = () => { if (!drawing) return; drawing = false; if (strokePts.length < 6) { strokeEl.setAttribute('d', ''); return; } const pts = strokePts; strokePts = []; strokeEl.setAttribute('d', ''); if (onStroke) onStroke(pts); };
+  box.addEventListener('pointerup', up); box.addEventListener('pointercancel', up);
+})();
+function setDrawMode(mode) { drawMode = mode; $('#window').classList.toggle('drawing', !!mode); if (mode) { try { $('#plate').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} } }
+
+// ---------- the plate
+function drawPlate(w) { $('#formula').textContent = w.formula; $('#words').textContent = w.words; $('#nums').innerHTML = ''; }
+function showNumbers(leverId, p) { // the formula's numbers before and after, for the best path and one other
+  const w = M.world(g), box = $('#nums'); box.innerHTML = '';
+  const paths = [baseMotion].concat(otherPath ? [otherPath] : []), names = ['the best path', g.wi === 0 ? 'your path' : 'a wobbly path'];
+  const r = M.numbers(w, leverId, paths, p, plateScale, g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length);
+  r.rows.forEach((row, i) => {
+    const who = document.createElement('span'); who.className = 'who'; who.textContent = names[i]; box.appendChild(who);
+    const a = document.createElement('span'); a.className = 'n'; a.textContent = row.before; box.appendChild(a);
+    const ar = document.createElement('span'); ar.className = 'arrow'; ar.textContent = '→'; box.appendChild(ar);
+    const b = document.createElement('span'); b.className = 'n ' + (r.holds ? 'same' : 'diff'); b.textContent = row.after; box.appendChild(b);
+  });
+  return r;
 }
+function showOneNumber(name, path, cls) { const box = $('#nums'); const who = document.createElement('span'); who.className = 'who'; who.textContent = name; box.appendChild(who); const n = document.createElement('span'); n.className = 'n' + (cls ? ' ' + cls : ''); n.style.gridColumn = '2 / 5'; n.textContent = Math.round(M.score(M.world(g), path) * plateScale); box.appendChild(n); }
 
 // ---------- the needle
 let needle, needleGlow;
@@ -309,14 +377,20 @@ function setNeedle(v, colour) { // v in [-1, 1]
 }
 function setStamp(kind, text) { const st = $('#stamp'); st.className = 'stamp'; st.textContent = text || ''; if (kind) { st.classList.add(kind); requestAnimationFrame(() => st.classList.add('on')); } }
 function setFeed(text, kind) { const f = $('#feed'); f.textContent = text || ''; f.className = 'feedline' + (kind ? ' ' + kind : ''); }
+// the needle along a path: the prize's number B relative to its value at the start, against the Auditor's scale
+async function runNeedle(path, res, opts) {
+  const B = M.current(M.world(g), path, res.lever.id, lastP), B0 = B[C.EDGE], sc = res.audit.scale; let maxv = 0;
+  await playMotion(path, Object.assign({ onFrame: j => { const v = res.audit.blank ? 0 : (B[Math.max(C.EDGE, Math.min(j, B.length - 1 - C.EDGE))] - B0) / sc * 2.5; maxv = Math.max(maxv, Math.abs(v)); setNeedle(v, Math.abs(v) > 0.08 ? (opts.fake ? '#FF2ECC' : '#F2CB05') : null); } }, opts));
+  return maxv;
+}
 
 // ---------- the rack
-function drawRack(pending) { // pending: the index of a tag the Auditor has not yet stamped (shown in bare steel)
+function drawRack(pending) {
   const r = $('#rack'); r.innerHTML = '';
   for (let i = 0; i < C.BLANKS; i++) {
     const e = g.rack[i], s = document.createElement('div'); s.className = 'slot'; s.dataset.i = i;
     if (e && i === pending) { s.innerHTML = `<span class="tagtext">${e.kind === 'void' ? '' : e.tag}</span>`; }
-    else if (e) { s.classList.add(e.kind === 'notlaw' ? 'jam' : e.kind); s.innerHTML = `<span class="tagtext">${e.kind === 'jam' ? 'BENT' : e.kind === 'void' ? '' : e.tag}</span>`; }
+    else if (e) { s.classList.add(e.kind === 'notlaw' ? 'jam' : e.kind); s.innerHTML = `<span class="tagtext">${e.kind === 'jam' ? 'SPENT' : e.kind === 'void' ? 'EMPTY' : e.kind === 'identity' ? 'RULE' : e.tag}</span>`; }
     else { s.innerHTML = '<span class="tagtext" style="color:#6A737B;text-shadow:none">BLANK</span>'; }
     const p = document.createElement('div'); p.className = 'press'; s.appendChild(p); r.appendChild(s);
   }
@@ -330,93 +404,157 @@ function drawLevers() {
     b.innerHTML = lv.label + (lv.free ? '<small>you draw it</small>' : '');
     b.addEventListener('click', () => {
       if (busy || g.pulled[lv.id]) return; chosen = lv.id; $$('.lever').forEach(x => x.classList.toggle('chosen', x.dataset.id === lv.id));
-      $('#willdo').textContent = lv.does + (lv.free ? ' The window shows one way of doing it; you will draw your own.' : ' The window shows it in blue, the real motion grey underneath.') + ' Would this world run just the same? If you think so, pull.';
+      const r = showNumbers(lv.id, null);
+      $('#willdo').textContent = lv.does + (lv.free ? ' The window shows one way of doing it; you will draw your own.' : ' The window shows it in blue over the old drawing in grey.') + ' The plate shows the numbers before and after. Does the formula care? If you think not, pull.';
       $('#pull').disabled = false; showPreview(lv);
     });
     L.appendChild(b);
   }
-  $('#willdo').textContent = 'Tap a lever to see what it does.'; $('#pull').disabled = true;
+  $('#willdo').textContent = 'Tap a change to see it.'; $('#pull').disabled = true;
 }
 
-// ---------- a world
+// ---------- a formula (a world)
 function enterWorld() {
   const w = M.world(g); busy = false;
-  $('#band').textContent = `WORLD ${g.wi + 1} OF ${C.WORLD_ORDER.length} · ${w.name.toUpperCase()}`;
+  $('#band').textContent = `FORMULA ${g.wi + 1} OF ${C.WORLD_ORDER.length} · ${w.name.toUpperCase()}`;
   $('#worldline').textContent = w.line;
-  drawWorld(w); drawGauge(); setStamp(null, ''); drawRack(); drawLevers(); $('#levers').classList.remove('off');
-  $('#choose').classList.remove('hidden'); $('#after').classList.add('hidden');
+  drawWorld(w); drawPlate(w); drawGauge(); setStamp(null, ''); drawRack(); drawLevers(); $('#levers').classList.remove('off');
+  ['#opening', '#choose', '#test', '#after'].forEach(s => $(s).classList.add('hidden'));
   const seed = g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length;
-  const batch = M.auditorBatch(w, seed); baseMotion = batch[0].path;
+  const batch = M.auditorBatch(w, seed); baseMotion = batch[0].path; plateScale = M.plateScale(w, baseMotion);
+  otherPath = g.wi === 0 ? null : M.bump(baseMotion, C.BUMP_AMP * 2, 0.4, 1, 0.5, 0.35); // a wobbly path from the same A to the same B
   if (stopIdle) stopIdle();
   const first = $('#first');
+  if (g.wi === 0) { first.classList.add('hidden'); openOpening(); return; }
   if (w.first) {
     first.classList.remove('hidden'); first.innerHTML = `<b>THE AUDITOR MOVES FIRST</b>${w.first.say}`;
-    $('#benchhead').textContent = w.first.target === 'warpclock' ? 'Tap a lever: the window shows the change. Pull the one you think explains the blank tag. A wrong pull still uses a blank.' : 'Tap a lever: the window shows the change. Pull the one you think his law comes from. A wrong pull still uses a blank.';
-    // his picture: the law's needle, steady, while the true motion runs; a blank tag for the sheet
-    if (w.first.target === 'warpclock') { setStamp('void', 'VOID'); setFeed('The clock tag of this world, stamped before you arrived: the needle never moves on anything.', 'fake'); }
-    else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('His law. The needle reads it along the real motion: it does not move.', 'true'); }
-  } else { first.classList.add('hidden'); $('#benchhead').textContent = 'Tap a lever: the window shows the change. Pull it if you think this world would not notice.'; setFeed('The needle reads a tag’s quantity as the bead moves. No tag yet.', null); }
-  showReal();
+    $('#benchhead').textContent = w.first.target === 'warpclock' ? 'Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.' : 'Tap a change: the window and the plate show it. Pull the one you think his prize comes from. A wrong pull still spends a blank.';
+    if (w.first.target === 'warpclock') { setStamp('void', 'EMPTY'); setFeed('The clock prize of this formula, stamped before you arrived: its number is the same on every path.', 'fake'); }
+    else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('His prize, x·y′ − y·x′. The needle reads it along the best path: it does not move.', 'true'); }
+  } else { first.classList.add('hidden'); $('#benchhead').textContent = 'Tap a change: the window and the plate show it. Pull it if you think the formula does not care.'; setFeed('The needle reads a prize’s number as the dot moves. No prize yet.', null); }
+  showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber('a wobbly path', otherPath, null);
+  $('#choose').classList.remove('hidden'); showReal();
 }
 
-// ---------- the pull
-$('#pull').addEventListener('click', () => {
-  if (!chosen || busy) return; const lv = M.leverById(chosen);
-  if (lv.free) openStrip(lv); else doPull(null);
+// ---------- the opening: draw a path from A to B against the best path
+let tries = 0;
+function openOpening() {
+  tries = 0; $('#opening').classList.remove('hidden'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden');
+  $('#openask').textContent = 'Draw a path from A to B with your finger, in the window. The formula will give it a number.';
+  setFeed('The needle is for prizes; none yet. First, a number.', null);
+  drawGhost(null); drawMarks(baseMotion); setCaption('DRAW A PATH FROM A TO B', 'fake'); beadEl.setAttribute('cx', -10);
+  setDrawMode('opening');
+  onStroke = async pts => {
+    busy = true; setDrawMode(null); tries++;
+    const n = baseMotion.u1.length, ends = [[baseMotion.u1[0], baseMotion.u2[0]], [baseMotion.u1[n - 1], baseMotion.u2[n - 1]]];
+    otherPath = M.strokeToPath(pts, n, ends);
+    $('#nums').innerHTML = ''; showOneNumber('your path', otherPath, 'diff');
+    setCaption('YOUR PATH, TRACED AT A STEADY PACE', 'fake');
+    await playMotion(otherPath, { fake: true, dur: 2000 });
+    showOneNumber('the best path', baseMotion, 'same'); drawGhost(otherPath); setCaption('THE BEST PATH: THE SMALLEST NUMBER', 'true');
+    await playMotion(baseMotion, { dur: 2000 });
+    const yours = Math.round(M.score(M.world(g), otherPath) * plateScale), best = Math.round(M.score(M.world(g), baseMotion) * plateScale);
+    $('#openask').textContent = yours > best ? `Your path: ${yours}. The best path: ${best}, the straight line at a steady pace. No path from A to B gets a smaller number than the best path; that is what makes it the best. The dot always takes it.` : `Your path: ${yours}, the same as the best path: you drew the straight line. The dot always takes the path with the smallest number.`;
+    busy = false; $('#openon').classList.remove('hidden'); $('#drawagain').classList.toggle('hidden', tries >= C.OPENING_TRIES);
+    stopIdle = loopMotion(baseMotion, {});
+  };
+}
+$('#drawagain').addEventListener('click', () => { if (busy) return; if (stopIdle) stopIdle(); traceLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); drawGhost(null); $('#openask').textContent = 'Draw another path from A to B.'; setCaption('DRAW A PATH FROM A TO B', 'fake'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden'); setDrawMode('opening'); });
+$('#openon').addEventListener('click', () => {
+  if (busy) return; setDrawMode(null); onStroke = null; $('#opening').classList.add('hidden'); drawMarks(null);
+  $('#benchhead').textContent = 'Now change the whole drawing. Tap a change: the window and the plate show it, with the numbers before and after, for the best path and for yours. Pull it if you think the formula does not care.';
+  setFeed('The needle reads a prize’s number as the dot moves. No prize yet.', null);
+  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); showOneNumber('your path', otherPath, null);
+  $('#choose').classList.remove('hidden'); showReal();
 });
+
+// ---------- the pull
+$('#pull').addEventListener('click', () => { if (!chosen || busy) return; const lv = M.leverById(chosen); if (lv.free) openStrip(lv); else doPull(null); });
 async function doPull(p) {
   if (busy) return; busy = true; if (stopIdle) stopIdle();
-  const w = M.world(g), slotIndex = g.rack.length, lv = M.leverById(chosen);
+  const w = M.world(g), slotIndex = g.rack.length, lv = M.leverById(chosen); lastP = p;
   $('#levers').classList.add('off'); $('#pull').disabled = true;
-  const res = M.playPull(g, chosen, p); if (!res) { busy = false; return; }
-  // the press comes down on the blank
+  const res = M.playPull(g, chosen, p); if (!res) { busy = false; $('#levers').classList.remove('off'); return; } lastRes = res;
+  $('#choose').classList.add('hidden');
+  if (p) showNumbers(lv.id, p); // the plate with the player's own drawn change
   const slot = $$('.slot')[slotIndex]; slot.classList.add('pressing'); setStamp(null, ''); drawGhost(null);
   setFeed('The press comes down.', null); setCaption('', null);
   await wait(260); $('#rack').style.transform = 'translateY(2px)'; await wait(80); $('#rack').style.transform = '';
   if (res.kind === 'jam') {
     slot.classList.remove('pressing'); await wait(200); drawRack();
-    setStamp('jam', 'JAM'); setFeed('The press jammed: the world moved under it. One blank bent.', 'fake'); setCaption('THE WORLD MOVED', 'fake');
-    for (let k = 0; k < 10; k++) { setNeedle((k % 2 ? 1 : -1) * (1 - k / 12), '#F2CB05'); await wait(90); } setNeedle(0.35, '#F2CB05');
+    setStamp('jam', 'IT CARES'); setFeed('The formula cares: the numbers changed. One blank spent, no prize.', 'fake'); setCaption('THE FORMULA CARES', 'fake');
+    for (let k = 0; k < 10; k++) { setNeedle((k % 2 ? 1 : -1) * (1 - k / 12), '#F2CB05'); await wait(90); } setNeedle(0, null);
+    finishPull(res);
+  } else if (res.kind === 'identity') {
+    await wait(220); slot.classList.remove('pressing'); await wait(200); drawRack(slotIndex);
+    setStamp('identity', 'RULE'); setNeedle(0, null);
+    setFeed('The formula does not care, but no prize came out. The tag reads a rule: ' + (lv.id === 'warpclock' ? 'ψ₁x′ + ψ₂y′ = 0, the two equations of motion are not independent.' : 'ψ₁ = 0 on every path.'), null);
+    $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, 'same'); const chg = M.changedPath(lv.id, baseMotion, p); showOneNumber('after your change', chg, 'same');
+    drawGhost(baseMotion); setCaption(lv.id === 'warpclock' ? 'YOUR RE-TICKED CLOCK · THE SAME ROUTE' : 'YOUR WOBBLE', null);
+    await playMotion(chg, { dur: 2200, colour: '#2BF0FF' }); drawRack();
+    finishPull(res); stopIdle = loopMotion(chg, { colour: '#2BF0FF' });
   } else {
     await wait(220); slot.classList.remove('pressing'); await wait(200); drawRack(slotIndex);
-    if (res.kind === 'identity') {
-      setStamp('identity', 'IDENTITY'); setNeedle(0, null);
-      setFeed('The press held, but no law came out: the tag reads a rule about the equations, not a quantity.', null);
-      drawGhost(res.batch[0].path); setCaption(lv.id === 'warpclock' ? 'YOUR RE-TICKED CLOCK · THE SAME ROUTE' : 'YOUR DRAWN PUSH', null);
-      await playMotion(M.previewPath(lv.id, res.batch[0].path, p), { dur: 2200, colour: '#2BF0FF' }); drawRack();
-    } else {
-      const sc = res.audit.scale, shown = C.SHOWN_MOTIONS.filter(i => i < res.audit.rows.length);
-      setFeed('The press held and stamped a tag. Now the Auditor tests it: the needle reads the tag’s quantity along each motion.', null); await wait(900);
-      for (const i of shown) {
-        const row = res.audit.rows[i], path = res.batch[i].path, B0 = row.B[C.EDGE];
-        setCaption(row.isTrue ? ('REAL MOTION · ' + (/re-ticked/.test(row.how) ? 'SAME ROUTE, CLOCK RE-TICKED' : 'WHAT THIS WORLD REALLY DOES')) : ('FAKE · ' + row.how.replace('a fake: ', '').toUpperCase()), row.isTrue ? 'true' : 'fake');
-        setFeed(row.isTrue ? (row.steady ? 'A real motion. The needle holds still: the quantity is not changing.' : 'A real motion, and the needle moves: this is not a law.') : (row.steady ? 'A fake, something this world would never do. The needle does not move: this tag cannot catch it.' : 'A fake, something this world would never do. The needle swings: the tag catches it.'), row.isTrue ? 'true' : 'fake');
-        await playMotion(path, { fake: !row.isTrue, dur: row.isTrue ? 1400 : 1600, onFrame: j => { const v = res.audit.blank ? 0 : (row.B[Math.max(C.EDGE, Math.min(j, row.B.length - 1 - C.EDGE))] - B0) / sc * 2.5; setNeedle(v, row.steady ? null : (row.isTrue ? '#F2CB05' : '#FF2ECC')); } });
-        await wait(350);
-      }
-      drawRack(); setStamp(res.kind, res.kind === 'teeth' ? 'TEETH' : res.kind === 'void' ? 'VOID' : 'NOT A LAW');
-      setFeed(res.kind === 'void' ? 'VOID: the needle never moved, not even on a fake. A tag that catches nothing says nothing.' : res.kind === 'teeth' ? 'TEETH: still on the real motions, swinging on a fake. This law can catch a fake.' : 'The needle moved on a real motion: not a law.', res.kind === 'void' ? 'fake' : res.kind === 'teeth' ? 'true' : null);
-      setCaption(res.kind === 'void' ? 'VOID' : res.kind === 'teeth' ? 'TEETH' : 'NOT A LAW', res.kind === 'void' ? 'fake' : null);
-      setNeedle(res.kind === 'teeth' ? 0.5 : 0, res.kind === 'teeth' ? '#2BF0FF' : res.kind === 'void' ? '#FF2ECC' : null);
-      if (res.kind === 'void') { for (let k = 0; k < 3; k++) { setNeedle(0, '#FF2ECC'); await wait(120); setNeedle(0, null); await wait(120); } setNeedle(0, '#FF2ECC'); }
-    }
+    const law = M.LAWS[res.tag] || { formula: '', gloss: 'its number' };
+    setStamp('law', res.tag);
+    setFeed(`The formula does not care. A prize is stamped: ${res.tag}, ${law.formula}, ${law.gloss}. Now the needle reads that number along the best path.`, 'true');
+    setCaption('THE BEST PATH · THE PRIZE’S NUMBER', 'true'); drawGhost(null);
+    await runNeedle(baseMotion, res, { dur: 2200 }); await wait(300);
+    setFeed(res.audit.blank ? 'Along the best path the needle did not move: the number held. (It is zero everywhere.)' : 'Along the best path the needle did not move: the prize’s number held all the way.', 'true');
+    // the test: the player draws paths
+    $('#test').classList.remove('hidden'); $('#testagain').classList.add('hidden'); $('#testdone').classList.add('hidden');
+    $('#testask').textContent = 'Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.';
+    drawGhost(baseMotion); setCaption('DRAW ANY PATH', 'fake'); setDrawMode('test'); busy = false;
+    let drawn = 0;
+    onStroke = async pts => {
+      busy = true; setDrawMode(null); drawn++;
+      const path = M.strokeToPath(pts, baseMotion.u1.length, null);
+      setCaption('YOUR PATH · THE PRIZE’S NUMBER', 'fake');
+      const moved = await runNeedle(path, res, { fake: true, dur: 2000 });
+      const swung = moved > 0.08;
+      setFeed(swung ? 'The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.' : 'The needle did not move: on your path the number is the same as on the best path.', swung ? 'fake' : 'true');
+      $('#testask').textContent = swung ? 'The number changed along your path. Draw another, or let the Auditor run his own paths and stamp.' : (drawn >= 2 ? 'Still nothing. Whatever you draw, this number stays put. Draw another, or let the Auditor stamp.' : 'The needle did not move. Draw another path, as wild as you like, or let the Auditor stamp.');
+      busy = false; $('#testagain').classList.remove('hidden'); $('#testdone').classList.remove('hidden');
+    };
   }
+}
+$('#testagain').addEventListener('click', () => { if (busy) return; traceLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); setNeedle(0, null); setCaption('DRAW ANY PATH', 'fake'); $('#testagain').classList.add('hidden'); $('#testdone').classList.add('hidden'); setDrawMode('test'); });
+$('#testdone').addEventListener('click', async () => {
+  if (busy) return; busy = true; setDrawMode(null); onStroke = null; $('#test').classList.add('hidden');
+  const res = lastRes, shown = C.SHOWN_MOTIONS.filter(i => i < res.audit.rows.length);
+  setFeed('The Auditor runs his own paths: the best path, and paths the dot would never take.', null);
+  for (const i of shown) {
+    const row = res.audit.rows[i], path = res.batch[i].path;
+    setCaption(row.isTrue ? 'THE AUDITOR · THE BEST PATH' : 'THE AUDITOR · A PATH THE DOT WOULD NEVER TAKE', row.isTrue ? 'true' : 'fake');
+    await runNeedle(path, res, { fake: !row.isTrue, dur: 1300 }); await wait(250);
+  }
+  drawRack(); setStamp(res.kind, res.kind === 'teeth' ? 'PRIZE' : res.kind === 'void' ? 'EMPTY' : 'NOT A PRIZE');
+  setFeed(res.kind === 'void' ? 'EMPTY: the number stayed the same on every path he tried, the bad ones too. A number like that tells you nothing.' : res.kind === 'teeth' ? 'PRIZE: the number held on the best path and changed on the others. A real prize.' : 'The number changed on the best path: not a prize.', res.kind === 'void' ? 'fake' : res.kind === 'teeth' ? 'true' : null);
+  setCaption(res.kind === 'void' ? 'EMPTY' : res.kind === 'teeth' ? 'A REAL PRIZE' : 'NOT A PRIZE', res.kind === 'void' ? 'fake' : null);
+  setNeedle(res.kind === 'teeth' ? 0.5 : 0, res.kind === 'teeth' ? '#2BF0FF' : res.kind === 'void' ? '#FF2ECC' : null);
+  if (res.kind === 'void') { for (let k = 0; k < 3; k++) { setNeedle(0, '#FF2ECC'); await wait(120); setNeedle(0, null); await wait(120); } setNeedle(0, '#FF2ECC'); }
+  finishPull(res); drawGhost(null); stopIdle = loopMotion(baseMotion, { fan: fanOn() });
+});
+function finishPull(res) {
   $('#result').textContent = res.plain;
   $('#say').innerHTML = `<b>THE AUDITOR</b>${res.say}`;
   $('#choose').classList.add('hidden'); $('#after').classList.remove('hidden');
   $('#again').classList.toggle('hidden', g.blanks <= 0);
-  $('#next').textContent = g.wi >= C.WORLD_ORDER.length - 1 ? 'The verdict' : 'Next world';
+  $('#next').textContent = g.wi >= C.WORLD_ORDER.length - 1 ? 'The verdict' : 'Next formula';
   busy = false;
-  if (res.kind !== 'identity') { drawGhost(null); stopIdle = loopMotion(res.batch[0].path, { fan: w.id === 'spring' && !!w.first }); }
-  else { stopIdle = loopMotion(M.previewPath(lv.id, res.batch[0].path, p), { colour: '#2BF0FF' }); }
 }
-$('#again').addEventListener('click', () => { $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); setStamp(null, ''); setFeed('The needle reads a tag’s quantity as the bead moves. Tap a lever.', null); showReal(); });
+$('#again').addEventListener('click', () => {
+  $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); setStamp(null, '');
+  setFeed('The needle reads a prize’s number as the dot moves. Tap a change.', null);
+  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber(g.wi === 0 ? 'your path' : 'a wobbly path', otherPath, null);
+  showReal();
+});
 $('#next').addEventListener('click', () => { const w = M.nextWorld(g); if (!w) return finish(); enterWorld(); });
 
-// ---------- the strip
+// ---------- the strip (drawing a free function)
 function openStrip(lv) {
   $('#striphead').textContent = lv.label;
-  $('#stripline').textContent = lv.id === 'warpclock' ? 'Draw how the clock should tick: drag across the strip, up for faster, down for slower, any shape at all. Then pull.' : 'Draw how far the world shifts sideways at each moment: drag across the strip, up for right, down for left, any shape at all. Then pull.';
+  $('#stripline').textContent = lv.id === 'warpclock' ? 'Draw how the clock should run: drag across the strip, up for faster, down for slower, any shape at all. Then pull.' : 'Draw how far the drawing is pushed at each moment: drag across the strip, up for right, down for left, any shape at all. Then pull.';
   strokeSamples = new Array(24).fill(null); $('#stroke').setAttribute('d', ''); $('#strippull').disabled = true; $('#overlay').classList.add('on');
 }
 (function () {
@@ -428,14 +566,14 @@ function openStrip(lv) {
   strip.addEventListener('pointerup', () => { down = false; }); strip.addEventListener('pointercancel', () => { down = false; });
   $('#stripcancel').addEventListener('click', () => $('#overlay').classList.remove('on'));
   $('#strippull').addEventListener('click', () => {
-    let last = 0; const filled = strokeSamples.map(v => { if (v !== null) last = v; return last; }); // fill the undrawn bins from the left
+    let last = 0; const filled = strokeSamples.map(v => { if (v !== null) last = v; return last; });
     let first = filled.findIndex((v, i) => strokeSamples[i] !== null); for (let i = 0; i < first; i++) filled[i] = strokeSamples[first];
     $('#overlay').classList.remove('on'); doPull(M.smoothCurve(filled));
   });
 })();
 
 // ---------- start and end
-function start() { timers.forEach(clearTimeout); if (stopIdle) stopIdle(); g = M.newGame(1); show('play'); enterWorld(); }
+function start() { timers.forEach(clearTimeout); if (stopIdle) stopIdle(); setDrawMode(null); onStroke = null; g = M.newGame(1); show('play'); enterWorld(); }
 function finish() {
   if (stopIdle) stopIdle(); const v = M.verdict(g);
   $('#headline').textContent = v.headline; $('#did').innerHTML = v.did.map(d => `<li>${d}</li>`).join('');
