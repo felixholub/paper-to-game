@@ -173,6 +173,16 @@ const rint = (lo, hi) => lo + Math.floor(rnd() * (hi - lo + 1));
   check('W  task line and verdict carry no decimals', !/\d\.\d/.test(all), line);
   check('W  the strip prints fractions as fractions', M.fmt(1 / 6) === '1/6' && M.fmt(-1 / 30) === '−1/30' && M.fmt(3430) === '3430');
 }
+// ---- S: the gentler on-ramp — the Countess's chains, the two demonstrations, the plain words
+{
+  const held = C.TASKS.map(t => M.tryTask(t, M.solution(t)).held);
+  check('S  the Countess’s cards hold on every job (shown when a job is handed to her)', held.every(Boolean), held.join(' '));
+  const tour = M.demo('tour'), cd = M.demo('countdown');
+  check('S  the tour prints 35 (Note B’s a × n with a = 5, n = 7)', tour.result.printed.join() === '35');
+  check('S  the countdown prints 3 2 1 and the BACK card is passed when k reaches 0', cd.result.printed.join(' ') === '3 2 1' && /goes on/.test(cd.steps[cd.steps.length - 1].say));
+  const words = [].concat(tour.steps.map(x => x.say), cd.steps.map(x => x.say), ...C.TASKS.map(t => M.solution(t).map(c => M.cardSentence(c, M.makeCols(t)))));
+  check('S  narration and card sentences carry no decimals', words.every(w => !/\d\.\d/.test(w)), words.length + ' lines');
+}
 out.unshift(`Calibration of Lovelace's Cards: ${pass} passed, ${fail} failed.`);
 fs.writeFileSync('calibration-result.txt', out.join('\n') + '\n'); console.log(out.join('\n'));
 process.exit(fail ? 1 : 0);

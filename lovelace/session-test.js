@@ -31,22 +31,29 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     say(`   buttons: next=${await vis('#nextbtn')} hand=${await vis('#handbtn')} go=${!(await page.$eval('#gobtn', b => b.disabled || b.classList.contains('hidden')))}`);
     await noScroll();
   };
-  const chain = async () => say('   chain: ' + (await page.$$eval('.hung .txt', es => es.map(e => e.textContent).join(' | ')) || '(empty)'));
+  const chain = async () => say('   chain: ' + (await page.$$eval('#cards .hung .txt', es => es.map(e => e.firstChild.textContent).join(' | ')) || '(empty)'));
   await shot('start'); await noScroll();
   // ---- session A
-  await page.click('#begin'); await page.waitForTimeout(500); say('== ' + await text('#band')); say('   ' + await text('#want')); await shot('a-task1');
+  await page.click('#begin'); await page.waitForTimeout(400); say('== TOUR: ' + await text('#dband')); say('   ' + await text('#dintro')); await shot('tour-start');
+  for (let k = 0; k < 12; k++) { const lbl = await text('#dnext'); if (/first job/i.test(lbl)) break; await page.click('#dnext'); await page.waitForTimeout(150); say('   step: ' + await text('#dnarr')); if (k === 1) await shot('tour-step'); }
+  await shot('tour-end'); await page.click('#dnext'); await page.waitForTimeout(400);
+  say('== ' + await text('#band')); say('   ' + await text('#want')); await shot('a-task1');
   await punch('*'); await col('a'); await shot('a-task1-composing', false);
-  await col('n'); await col('R'); await page.click('#hangbtn'); say('   hung: ' + await page.$eval('.hung .txt', e => e.textContent));
+  await col('n'); await col('R'); say('   sentence: ' + await text('#sentence')); await shot('a-task1-card-ready', false); await page.click('#hangbtn'); say('   hung: ' + await page.$eval('#cards .hung .txt', e => e.textContent)); say('   first-card line: ' + await text('#first'));
   await hang('*', 'R', 'x', 'R'); await hang('print', 'R'); await chain(); await shot('a-task1-chain');
   await go('task 1'); await shot('a-task1-bell');
   await page.click('#nextbtn'); await page.waitForTimeout(400); say('\n== ' + await text('#band')); say('   ' + await text('#want')); await shot('a-task2');
   await hang('*', 'a', 'x', 'R'); for (let k = 0; k < 4; k++) await hang('*', 'R', 'x', 'R'); await hang('print', 'R'); await chain(); await shot('a-task2-straight');
   await go('task 2, straight'); await shot('a-task2-fell');
   // help mid-task and back
+  await page.click('#backdemo'); await page.waitForTimeout(300); say('   COUNTDOWN: ' + await text('#dintro'));
+  for (let k = 0; k < 14; k++) { const lbl = await text('#dnext'); if (/^back$/i.test(lbl.trim())) break; await page.click('#dnext'); await page.waitForTimeout(120); if (k === 5) await shot('countdown-mid'); }
+  say('   countdown printed: ' + (await page.$$eval('#dgot div', es => es.map(e => e.textContent).join(' '))) + ' · ' + await text('#dnarr')); await shot('countdown-end');
+  await page.click('#dnext'); await page.waitForTimeout(300); say(`   back from countdown: on play=${await page.$eval('#play', e => e.classList.contains('on'))}, chain kept=${await page.$$eval('#cards .hung', es => es.length)} cards`);
   await page.click('#play .help-q'); await page.waitForTimeout(200); await shot('help'); await page.click('#helpback'); await page.waitForTimeout(200);
-  say(`   help opened and returned: on play=${await page.$eval('#play', e => e.classList.contains('on'))}, chain kept=${await page.$$eval('.hung', es => es.length)} cards`);
+  say(`   help opened and returned: on play=${await page.$eval('#play', e => e.classList.contains('on'))}, chain kept=${await page.$$eval('#cards .hung', es => es.length)} cards`);
   // take down the chain, hang the cycle
-  while (await page.$('.hung')) { await page.click('.hung'); await page.waitForTimeout(40); }
+  while (await page.$('#cards .hung')) { await page.click('#cards .hung'); await page.waitForTimeout(40); }
   say('   all cards taken down; strip cleared: ' + (await page.$$eval('#sgot div', es => es.length)) + ' printed lines, result line "' + await text('#result') + '"');
   await hang('*', 'a', '1', 'R'); await hang('*', 'R', 'x', 'R'); await hang('-', 'n', '1', 'n'); await hang('back', 2, 'n'); await shot('a-task2-back-composed', false); await hang('print', 'R'); await chain(); await shot('a-task2-cycle');
   await page.click('#gobtn'); await page.waitForTimeout(1500); await shot('a-task2-running', false);
@@ -68,7 +75,9 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   await page.click('#again'); await page.waitForTimeout(400); say('\n== B: ' + await text('#band'));
   await hang('*', 'a', 'n', 'R'); await hang('*', 'R', 'x', 'R'); await hang('print', 'R'); await go('B task 1'); await page.click('#nextbtn'); await page.waitForTimeout(300);
   say('== B: ' + await text('#band')); await hang('*', 'a', 'x', 'R'); await hang('print', 'R'); await go('B task 2, run 1'); await go('B task 2, run 2'); await shot('b-handover-offered');
-  await page.click('#handbtn'); await page.waitForTimeout(300); say('   countess: ' + await text('#countess')); say('   next: ' + await text('#nextbtn'));
+  await page.click('#handbtn'); await page.waitForTimeout(2500); await shot('b-countess-running', false);
+  for (let k = 0; k < 120 && !(await vis('#nextbtn')); k++) await page.waitForTimeout(400);
+  say('   her chain: ' + (await page.$$eval('#cards .hung .txt', es => es.map(e => e.firstChild.textContent).join(' | ')))); say('   result: ' + await text('#result')); say('   countess: ' + await text('#countess')); await shot('b-countess-done'); say('   next: ' + await text('#nextbtn'));
   await page.click('#nextbtn'); await page.waitForTimeout(300); say('== B: ' + await text('#band'));
   await hang('print', 'A'); await hang('+', 'A', 'B', 'A'); await hang('+', 'B', 'C', 'B'); await hang('-', 'n', '1', 'n'); await hang('back', 4, 'n'); await go('B task 3');
   await page.click('#nextbtn'); await page.waitForTimeout(400); say('\nVERDICT B: ' + await text('#headline')); say('  ' + await text('#did')); await shot('b-end'); await noScroll();

@@ -63,9 +63,9 @@ h3{font-family:var(--disp);font-weight:400;font-size:17px;margin:16px 0 4px;colo
 .roll span{height:20px;line-height:20px;font-size:16px;text-align:center;display:block;font-variant-numeric:tabular-nums}
 .col .sq{margin-top:4px;width:28px;height:26px;border:1px solid var(--buff);color:var(--buff);font-style:italic;font-size:17px;line-height:24px;text-align:center;background:transparent}
 .col .sq.blank{border-style:dashed}
-.col .tag{position:absolute;left:0;right:0;bottom:-15px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--card);text-align:center;font-weight:700;opacity:0}
+.col .tag{display:none;margin-top:3px;width:46px;font-size:10px;line-height:1.1;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-align:center;font-weight:700;min-height:11px}
 .col.pick .sq{background:var(--plum);border-color:var(--plum);color:#fff}
-.col.pick .tag{opacity:1}
+.col.pick .tag{display:block}.col.pick .tip{display:none}
 .col.lit .wheels{box-shadow:inset 0 0 6px rgba(0,0,0,.25),0 0 0 2px var(--plum)}
 .store.compose .col{animation:none}
 .store .col:disabled{cursor:default}
@@ -134,29 +134,61 @@ ul{padding-left:20px}li{margin:4px 0}
 .hidden{display:none !important}
 .about p,.help p,.help li{font-size:16px}
 .ex{display:inline-block;background:var(--card);border:1px solid var(--ink);padding:1px 6px;font-size:15px;margin:1px 0}
+
+/* added for the gentler on-ramp */
+.col .tip{display:block;margin-top:3px;width:46px;font-size:10px;line-height:1.1;color:var(--card);text-align:center;font-style:italic;min-height:11px}
+.tier.lead .roll span{color:#C9BFA8}
+.worked{display:block;font-variant-numeric:tabular-nums;background:var(--paper);border:1px solid var(--edge);border-left:4px solid var(--verd);padding:6px 10px;margin:6px 0 4px;font-size:16px}
+.hung .txt small{display:block;font-size:13px;font-style:italic;color:var(--ink2);line-height:1.25;margin-top:2px}
+.hung.lit .txt small{color:rgba(255,255,255,.85)}
+.say{font-size:15px;font-style:italic;color:var(--ink);min-height:20px;margin:2px 0 6px}
+.narr{font-size:16px;line-height:1.35;min-height:46px;margin:8px 0 0;padding:8px 10px;background:var(--paper);border:1px solid var(--edge);border-left:5px solid var(--plum);font-variant-numeric:tabular-nums}
+.narr:empty{display:none}
+.linkbtn{background:none;border:0;padding:6px 0;font-family:var(--text);font-size:16px;color:var(--plum);text-decoration:underline;cursor:pointer;text-align:left}
+.dintro p{font-size:17px}
+.dnarr{font-size:18px;line-height:1.4;min-height:78px;margin:10px 0;padding:10px 12px;background:var(--paper);border:1px solid var(--edge);border-left:6px solid var(--plum);font-variant-numeric:tabular-nums}
+.dstrip{min-height:120px;padding-bottom:8px}
+.dstrip .got div{font-size:15px;height:22px;line-height:22px}
 </style>
 </head>
 <body>
 <section class="screen on" id="start">
   <h1 class="title"><small>Ada Lovelace · 1843</small>Lovelace's<br>Cards</h1>
-  <p class="lede">An Engine of figure-wheels that can add, subtract, multiply and divide, and does nothing at all until cards are hung over its prism. Then it does exactly what the cards say.</p>
-  <p class="lede">You will punch cards, hang them in a chain, set the Engine going, and listen for the bell. Then the Engine is handed numbers you have not seen, and runs your chain again.</p>
+  <p class="lede">In 1843 Ada Lovelace wrote out, card by card, how a machine of wheels and punched cards could work out long sums on its own. The machine was never built. Here it is.</p>
+  <p class="lede">The Engine does nothing until you hang cards on it. Then it does exactly what the cards say, one card at a time. If it prints the right answer, a bell rings.</p>
+  <p class="lede">You will make cards, hang them, set the Engine going, and listen for the bell. Then the Engine gets new numbers and runs your cards again.</p>
   <p class="aim">Hang the cards that make the Engine print what is wanted, for any numbers it is handed.</p>
-  <p class="small">Three tasks, from her Notes. The rack holds ten cards. About six minutes.</p>
-  <button class="btn go" id="begin">Begin</button>
+  <p class="small">First a short tour, then three jobs from her Notes. About eight minutes.</p>
+  <button class="btn go" id="begin">Begin with the tour</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<section class="screen" id="demo">
+  <div class="band" id="dband"></div>
+  <div class="dintro" id="dintro"></div>
+  <div class="engine">
+    <div class="store" id="dstore"></div>
+    <div class="strip dstrip"><div class="hd"><span>printed</span></div><div class="rows"><div class="got" id="dgot"></div></div></div>
+  </div>
+  <div class="chainbox" style="padding-left:0"><div class="cards" id="dcards"></div></div>
+  <div class="dnarr" id="dnarr"></div>
+  <button class="btn go" id="dnext">Next step</button>
+  <button class="linkbtn" id="dskip">Skip this</button>
 </section>
 
 <section class="screen" id="play">
   <div class="top"><p class="aim">Hang the cards that make the Engine print what is wanted, for any numbers it is handed.</p><button class="help-q" aria-label="How to play">?</button></div>
   <div class="band" id="band"></div>
   <p class="line" id="want"></p>
+  <span class="worked" id="worked"></span>
+  <p class="say" id="first"></p>
   <div class="engine">
     <div class="store" id="store"></div>
     <div class="strip" id="strip"><div class="hd"><span>wanted</span><span>printed</span></div><div class="rows"><div class="want" id="swant"></div><div class="got" id="sgot"></div></div></div>
     <div class="bell" id="bell"><svg viewBox="0 0 40 40"><path d="M20 3 l0 3 M12 29 q-5 0 -4 -4 q4 -4 4 -12 a8 8 0 0 1 16 0 q0 8 4 12 q1 4 -4 4 z" fill="#8B2252" stroke="#1E1A17" stroke-width="1.2"/><circle cx="20" cy="32" r="3" fill="#1E1A17"/></svg><span class="word">BELL</span></div>
   </div>
+  <p class="narr" id="narr"></p>
   <div class="chainbox">
     <div class="prismcol"><svg class="arcs" id="arcs"></svg><div class="prism" id="prism"><svg viewBox="0 0 28 28"><polygon points="14,2 25,8 25,20 14,26 3,20 3,8" fill="#6B3A22" stroke="#1E1A17" stroke-width="1"/><polygon points="14,2 25,8 14,14 3,8" fill="#8A5234"/><polygon points="14,14 25,8 25,20 14,26" fill="#4E2A18"/></svg></div></div>
     <div class="cards" id="cards"></div>
@@ -166,15 +198,17 @@ ul{padding-left:20px}li{margin:4px 0}
     <div class="punches" id="punches"></div>
     <div class="counts hidden" id="counts"></div>
     <div class="preview" id="preview"></div>
+    <p class="say" id="sentence"></p>
     <div class="guide" id="guide"></div>
     <div class="row"><button class="btn small-btn" id="hangbtn" disabled>Hang the card</button><button class="btn small-btn" id="clearbtn">Start the card again</button></div>
   </div>
+  <button class="linkbtn hidden" id="backdemo">How does the BACK card work? Watch a countdown.</button>
   <button class="btn go" id="gobtn" disabled>Set the Engine going</button>
   <div class="after" id="after">
     <p class="line" id="result"></p>
     <p class="handed hidden" id="countess"></p>
-    <button class="btn verd hidden" id="nextbtn">Next task</button>
-    <button class="btn small-btn hidden" id="handbtn">Hand it to the Countess</button>
+    <button class="btn verd hidden" id="nextbtn">Next job</button>
+    <button class="btn small-btn hidden" id="handbtn">Show me the Countess's cards</button>
   </div>
 </section>
 
@@ -182,17 +216,19 @@ ul{padding-left:20px}li{margin:4px 0}
   <h1 class="title"><small>Lovelace's Cards</small>The verdict</h1>
   <p class="verdict" id="headline"></p>
   <p class="lede" id="did"></p>
+  <h2>What you found</h2>
+  <p class="lede" id="plain"></p>
   <h2>What the paper says</h2>
   <p class="lede" id="paper"></p>
   <h2>What that means</h2>
   <p class="lede" id="means"></p>
   <div class="coda">
     <h2>The Countess's own chain</h2>
-    <p class="lede">Note G ends with the Numbers of Bernoulli: a chain with a cycle inside a cycle. Here it is, run on this Engine, each Number worked from the ones before it. You hang nothing; you watch.</p>
+    <p class="lede">Her Notes end with a much bigger job: the Numbers of Bernoulli, which mathematicians of her day needed and found hard to work out. Her chain for them has a BACK loop inside another loop. Here it runs on this Engine. You hang nothing; you watch.</p>
     <button class="btn go" id="codabtn">Run her chain</button>
     <div class="codastrip hidden" id="codastrip"></div>
     <p class="small" id="codaline"></p>
-    <p class="lede" style="margin-top:14px"><i>Were the fundamental relations of pitched sounds expressible in this way, she wrote, the Engine might compose elaborate and scientific pieces of music of any degree of complexity or extent.</i></p>
+    <p class="lede" style="margin-top:14px"><i>If the rules of musical notes could be written this way, she wrote, the Engine might compose elaborate and scientific pieces of music of any length.</i></p>
   </div>
   <button class="btn" id="again">Play again</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
@@ -203,21 +239,23 @@ ul{padding-left:20px}li{margin:4px 0}
   <h1 class="title"><small>Lovelace's Cards</small>How to play</h1>
   <p class="aim">Hang the cards that make the Engine print what is wanted, for any numbers it is handed.</p>
   <h3>The Engine</h3>
-  <p>The columns of figure-wheels are the <b>Store</b>. Each column holds one number and has a name in the square beneath it (a, n, x; or R for a blank result column; or 1 for a column that simply holds one). The numbers you are given are already on the wheels.</p>
-  <p>The paper strip beside the Store shows what is <b>wanted</b>, faint. What the Engine actually prints appears next to it in ink.</p>
-  <h3>Cards</h3>
-  <p>A card tells the Engine one thing. To punch one, tap a punch on the blank card, then tap columns in the Store:</p>
+  <p>The brown box holds columns of number wheels. Each column holds one number and has a short name under it, like a or n. <b>R</b> is an empty column for answers. <b>1</b> is a column that always holds 1, which is handy for counting down.</p>
+  <p>The paper strip on the right shows what is <b>wanted</b>, in pale ink. What the Engine prints appears next to it.</p>
+  <h3>Making a card</h3>
+  <p>A card tells the Engine to do one thing. Tap a sign on the blank card, then tap columns:</p>
   <ul>
-    <li><b>+ − × ÷</b> take the first column you tap, combine it with the second, and put the result on the third. <span class="ex">a × n → R</span> means: multiply a by n and put the result on R. A column may be used twice: <span class="ex">R × x → R</span>.</li>
-    <li><b>PRINT</b> prints a column on the strip.</li>
-    <li><b>BACK</b> turns the prism back a number of cards, so those cards do their work again, <i>while</i> the column you tap is not nothing. When that column reaches 0 the prism goes on past. <span class="ex">BACK 2 WHILE n ≠ 0</span> repeats the two cards above it until n is 0.</li>
+    <li><b>+ − × ÷</b>: tap three columns. The first and second are the numbers to use; the third is where the answer goes. <span class="ex">a × n → R</span> means “multiply a by n and put the answer on R”. The same column can be used twice: <span class="ex">R × x → R</span> means “multiply R by x and put the answer back on R”.</li>
+    <li><b>P</b> (print): tap one column. The Engine writes its number on the strip.</li>
+    <li><b>↺</b> (back): choose a number, then tap a column. The Engine goes back that many cards and does them again, as long as that column is not 0. When it reaches 0, the Engine carries on. <span class="ex">BACK 2 WHILE n ≠ 0</span> repeats the two cards above it until n is 0.</li>
   </ul>
-  <p>Tap <b>Hang the card</b> to add it to the chain. Tap a hung card to take it down. The rack holds ten cards.</p>
+  <p>Under the card you are making, a line says in words what it will do. Tap <b>Hang the card</b> to put it on the chain. Tap a hung card to take it off again.</p>
+  <button class="btn small-btn" id="helptour">Watch the tour again</button>
+  <button class="btn small-btn" id="helpcount">Watch the countdown (the BACK card)</button>
   <h3>Setting it going</h3>
-  <p>The Engine presents your cards to the prism one after another. Wheels turn, the strip prints. If the strip matches what was wanted, the <b>bell</b> rings. Then the Engine is handed other numbers and runs your chain again, untouched. A chain that rings the bell every time has <b>held</b>.</p>
-  <p>If the bell does not ring, the line under the Engine says what it printed instead. Change the chain and set it going again. After two runs you may hand the task to the Countess and see her way.</p>
-  <h3>Three tasks</h3>
-  <p>a·n·x; then a·xⁿ, where the Engine will be handed other n; then the table of squares, with additions and subtractions only, as far as n. All three are examples from the Notes.</p>
+  <p>The Engine does your cards from top to bottom. A line under the Engine says what each card just did. If the strip matches what was wanted, the <b>bell</b> rings. Then the Engine gets new numbers and runs the same cards again. If the bell rings every time, your cards have <b>held</b>.</p>
+  <p>If it goes wrong, change the cards and try again. After two tries you can ask to see the Countess's cards.</p>
+  <h3>Three jobs</h3>
+  <p>Multiply three numbers. Double a number again and again. Print the square numbers using only adding. All three come from her Notes.</p>
   <button class="btn verd" id="helpback">Back</button>
 </section>
 
@@ -230,7 +268,7 @@ ul{padding-left:20px}li{margin:4px 0}
 <p>In 1842 L. F. Menabrea published a sketch of Charles Babbage's Analytical Engine; in 1843 Ada Lovelace translated it and added seven Notes, longer than the sketch, which are the text this game is built from. Note A separates <i>operations</i> from the things operated on and says the Engine <i>weaves algebraical patterns just as the Jacquard-loom weaves flowers and leaves</i>; the Difference Engine before it did one fixed thing, six additions. Note B draws the Store: columns of figure-wheels, a sign above, a name beneath, and works ax<sup>n</sup>, a·n·x, a/n·x and a+n+x with a = 5, n = 7, x = 98. Note C explains <i>backing</i>: the prism over which the cards pass can revolve backwards so that a card or set of cards does duty again. Note D works two linear equations in eleven operations with three operation cards. Note E names the <i>cycle</i>, and the cycle of cycles. Note F shows three cards doing the work of three hundred and thirty. Note G computes the Numbers of Bernoulli with twenty-five operation cards, "and no more are needed, however great n may be"; and warns that the Engine "has no pretensions whatever to originate anything. It can do whatever we know how to order it to perform."</p>
 <h3>Mechanism: ported</h3>
 <p><b>This game demonstrates</b> the card language of the Memoir and the Notes, run: a Store of columns; cards that put the mill into one of its four states and name the columns that supply it and receive from it; a card that turns the prism back while a column is not nothing, which is Lovelace's backing joined to her Operation 7's feel for n; a bell when the chain ends, and an early bell on a division by nothing (Memoir p. 12). The same interpreter runs Note B's examples with Note B's data, Menabrea's Table 1.3 and Note D's eleven operations against the solutions of their equations, Table 1.1's squares by differences, and the Countess's Bernoulli chain, which prints 1/6, −1/30, 1/42, −1/30 with nine, fourteen and twenty-five operation cards (the calibration check, in the repository).</p>
-<p><b>It assumes</b> our simplifications: one card carries both the operation and its columns, where Lovelace keeps Operation-cards and Variable-cards apart; one contingent card, backward only; constants inscribed on columns at the start instead of cards of numbers; a rack of ten cards and an attendant who stops an Engine after four hundred steps; our data for tasks two and three (a = 3, x = 2, n = 5; the squares to six) so that six figure-wheels suffice; the hidden tests. The card count as the yardstick is the paper's own (Notes D, F, G), the three tasks and the tests are ours. In the coda, Operation 4 divides as the result column requires rather than as the table's symbol column misprints, Operation 24 subtracts so that the printed Number carries the sign formula (8) gives, and the cycle 13–23 is written out for the fourth Number because these cards cannot step a column forward on each pass, as Lovelace's Operation 21 does.</p>
+<p><b>It assumes</b> our simplifications: one card carries both the operation and its columns, where Lovelace keeps Operation-cards and Variable-cards apart; one contingent card, backward only; constants inscribed on columns at the start instead of cards of numbers; a rack of ten cards and an attendant who stops an Engine after four hundred steps; our data for tasks two and three (a = 3, x = 2, n = 5; the squares to six) so that six figure-wheels suffice; the hidden tests; and two demonstrations of our own, the tour (Note B's a × n with a = 5, n = 7) and a countdown that shows the BACK card at work, plus a plain sentence under every card and a narration of each step, so that the language can be learned by watching before it is used. The card count as the yardstick is the paper's own (Notes D, F, G), the three tasks and the tests are ours. In the coda, Operation 4 divides as the result column requires rather than as the table's symbol column misprints, Operation 24 subtracts so that the printed Number carries the sign formula (8) gives, and the cycle 13–23 is written out for the fourth Number because these cards cannot step a column forward on each pass, as Lovelace's Operation 21 does.</p>
 <p><b>The paper establishes</b> the design of a general engine and what such an engine could do if built: that operations and quantities are separable, that cards can be cycled, that a finite chain computes an unbounded table, that the Numbers of Bernoulli follow from twenty-five cards; and its own limits, that the Engine follows analysis and does not anticipate it. The Engine was never built. Nothing here is evidence about the machine; it is the Notes' language, running.</p>
 <h3>What is cut</h3>
 <p>Operation-cards distinct from Variable-cards and the economy of Note D; Retaining and Zero Supply-cards; cards of numbers; the sign discs; forty-digit columns; the symbolic results of Notes A and B; the trigonometric series of Note E; Note F's elimination; the Bernoulli numbers as a task rather than a coda; the stepping column of Operation 21.</p>
@@ -254,35 +292,41 @@ ul{padding-left:20px}li{margin:4px 0}
     STEP_CAP: 400,         // our choice: the attendant stops an Engine that runs on (Memoir p. 12: the Engine stops and rings when it cannot go on)
     BACK_MAX: 8,           // our choice: how far one card may turn the prism back (Note C: any particular card or set of cards)
     HAND_OVER_AFTER: 2,    // our choice: runs before a task may be handed to the Countess
-    WHEELS: 6,             // our choice: figure-wheels drawn per column; Note B draws four tiers and says thirty or forty may be supposed
+    WHEELS: 5,             // our choice: figure-wheels drawn per column; Note B draws four tiers and says thirty or forty may be supposed
     // The three tasks, the paper's own examples, ordered for the player (memo §11).
     TASKS: [
-      { id: 'anx', band: 'a · n · x', short: 'a·n·x', ask: 'Print a · n · x.',
+      { id: 'anx', band: 'Three numbers multiplied', short: 'three numbers multiplied', ask: 'Make the Engine multiply a, n and x together and print the answer.',
+        worked: '5 × 7 × 98 = 3430',
+        solution: [['*', 'a', 'n', 'R'], ['*', 'R', 'x', 'R'], ['print', 'R']],   // Note B, p. 31: (×, ×)
         // Note B, p. 29: a = 5, n = 7, x = 98 on V1, V2, V3; p. 31: for a·n·x "the operations would be (×, ×), or 2(×)"
-        cols: [{ name: 'a', v: 5 }, { name: 'n', v: 7 }, { name: 'x', v: 98 }, { name: 'R', v: 0, work: true }],
+        cols: [{ name: 'a', v: 5 }, { name: 'n', v: 7 }, { name: 'x', v: 98 }, { name: 'R', v: 0, work: true, tip: 'answer' }],
         want: d => [d.a * d.n * d.x],
         tests: [{ label: 'a = 3, n = 4, x = 10', set: { a: 3, n: 4, x: 10 } }],   // our choice: numbers the chain has not seen
         ops: ['+', '-', '*', '/'],
         then: 'Then the Engine will be handed other numbers.',
-        countess: 'Her count for a·n·x is two multiplications: (×, ×). The same cards serve whatever a, n and x are inscribed, because the cards name columns, not numbers. (Note B)' },
-      { id: 'axn', band: 'a · xⁿ', short: 'a·xⁿ', ask: 'Print a · xⁿ, which is a times x multiplied by itself n times.',
+        countess: 'She counts two multiplications for this job: (×, ×). Her cards name the columns, never the numbers, so the same cards work whatever numbers are on the wheels. (Note B)' },
+      { id: 'axn', band: 'Doubling', short: 'doubling', ask: 'Start with a, multiply by x, and do that n times. Here: start with 3 and double it 5 times.',
+        worked: '3 × 2 × 2 × 2 × 2 × 2 = 96',
+        solution: [['*', 'a', '1', 'R'], ['*', 'R', 'x', 'R'], ['-', 'n', '1', 'n'], ['back', 2, 'n'], ['print', 'R']],   // Memoir pp. 12–13: the registering apparatus
         // Note B, p. 30: ax^n is "six multiplications in order to get x^n, then one multiplication for a·x^n, in all seven" (n = 7);
         // Memoir pp. 12–13: a registering apparatus marks n−1, the multiplication is repeated and a unit effaced each time, "until it only marks zero".
-        cols: [{ name: 'a', v: 3 }, { name: 'x', v: 2 }, { name: 'n', v: 5 }, { name: '1', v: 1, konst: true }, { name: 'R', v: 0, work: true }],   // our data: wheels stay readable
+        cols: [{ name: 'a', v: 3, tip: 'start' }, { name: 'x', v: 2, tip: 'times' }, { name: 'n', v: 5, tip: 'how often' }, { name: '1', v: 1, konst: true, tip: 'just 1' }, { name: 'R', v: 0, work: true, tip: 'answer' }],   // our data: wheels stay readable
         want: d => [d.a * Math.pow(d.x, d.n)],
         tests: [{ label: 'n = 3', set: { n: 3 } }, { label: 'n = 1', set: { n: 1 } }],   // our choice; n = 1 is the case Lovelace's Operation 7 exists for (p. 56)
         ops: ['+', '-', '*', '/'],
-        then: 'Then the Engine will be handed other n.',
-        countess: 'Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)' },
-      { id: 'squares', band: 'The table of squares', short: 'the table of squares', ask: 'Print the first n squares, one after another.',
+        then: 'Then the Engine will be told to double a different number of times.',
+        countess: 'For doubling seven times she counts seven multiplications, one card each. Menabrea describes the better way: a counter that loses one each time round, with the same cards repeated “until it only marks zero”. Then the number of cards stays the same however many times you double. (Her first card, a × 1 → R, just copies a onto R.) (Note B; Memoir pp. 12–13)' },
+      { id: 'squares', band: 'The square numbers', short: 'the square numbers', ask: 'Print the first n square numbers: 1, 4, 9, 16, … (1×1, 2×2, 3×3, 4×4, …). But this Engine may only add and subtract.',
+        worked: '1 +3→ 4 +5→ 9 +7→ 16 +9→ 25: each square is the last one plus the next odd number, and the odd numbers go up by 2.',
+        solution: [['print', 'A'], ['+', 'A', 'B', 'A'], ['+', 'B', 'C', 'B'], ['-', 'n', '1', 'n'], ['back', 4, 'n']],   // Memoir p. 3, Table 1.1
         // Memoir p. 3, Table 1.1: squares 1, 4, 9, 16…; first differences 3, 5, 7…; second differences all 2. Note A: the Difference Engine is 6(+).
         // Lovelace p. 24: "The table of squares, for instance, can be calculated to any extent whatever, when the numbers one and two are furnished."
-        cols: [{ name: 'A', v: 1, tip: 'a square' }, { name: 'B', v: 3, tip: 'next difference' }, { name: 'C', v: 2, tip: 'second difference' }, { name: 'n', v: 6 }, { name: '1', v: 1, konst: true }],
+        cols: [{ name: 'A', v: 1, tip: 'square' }, { name: 'B', v: 3, tip: 'odd no.' }, { name: 'C', v: 2, tip: 'step' }, { name: 'n', v: 6, tip: 'how many' }, { name: '1', v: 1, konst: true, tip: 'just 1' }],
         want: d => { const out = []; for (let k = 1; k <= d.n; k++) out.push(k * k); return out; },
         tests: [{ label: 'n = 9', set: { n: 9 } }],   // our choice
         ops: ['+', '-'],   // Note A, p. 22: the Difference Engine "can in reality do nothing but add"
-        then: 'Additions and subtractions only. Then the Engine will be handed another n.',
-        countess: 'The Difference Engine, she writes, is the whole of one operation repeated: (+, +, +, +, +, +), or 6(+). Each square is the one before it plus the next difference, and each difference is the one before it plus two. “The table of squares can be calculated to any extent whatever, when the numbers one and two are furnished.” (Note A; Memoir p. 3)' },
+        then: 'Then the Engine will be asked for a different number of squares.',
+        countess: 'Babbage’s older machine, the Difference Engine, could only add, she writes: (+, +, +, +, +, +). This is its trick: each square is the last one plus the next odd number, and each odd number is the last one plus two. “The table of squares can be calculated to any extent whatever, when the numbers one and two are furnished.” (Note A; Memoir p. 3)' },
     ],
     // Numbers quoted on the verdict screen, from the Notes.
     NOTE_F_CARDS: 3, NOTE_F_OPERATIONS: 330,     // Note F, p. 48: "three Operation-cards would perform the office of 330 such cards"
@@ -316,6 +360,43 @@ ul{padding-left:20px}li{margin:4px 0}
     return false;
   }
 
+  // ---- plain words: what a card says, and what it just did
+  const VERB = { '+': ['Add', 'to', 'add'], '-': ['Take', 'away from', 'take away'], '*': ['Multiply', 'by', 'multiply'], '/': ['Divide', 'by', 'divide'] };
+  function cardSentence(card, cols) {
+    const nm = i => cols[i] ? cols[i].name : '?';
+    if (card.k === 'op') {
+      const t = card.to.map(nm).join(' and ');
+      if (card.op === '+') return `Add ${nm(card.a)} and ${nm(card.b)}, and put the answer on ${t}.`;
+      if (card.op === '-') return `Take ${nm(card.b)} away from ${nm(card.a)}, and put the answer on ${t}.`;
+      if (card.op === '*') return `Multiply ${nm(card.a)} by ${nm(card.b)}, and put the answer on ${t}.`;
+      return `Divide ${nm(card.a)} by ${nm(card.b)}, and put the answer on ${t}.`;
+    }
+    if (card.k === 'print') return `Print the number on ${nm(card.a)}.`;
+    if (card.k === 'back') return `Go back ${card.n === 1 ? 'one card' : card.n + ' cards'} and do ${card.n === 1 ? 'it' : 'them'} again, as long as ${nm(card.test)} is not 0.`;
+    return '';
+  }
+  function stepSentence(ev, card, cols) { // narration of one trace event, numbers in the strip's form
+    const nm = i => cols[i] ? cols[i].name : '?', no = `Card ${ev.i + 1}`;
+    if (ev.kind === 'write') { const sym = { '+': '+', '-': '−', '*': '×', '/': '÷' }[card.op]; return `${no}: ${nm(card.a)} ${sym} ${nm(card.b)} is ${fmt(ev.x)} ${sym} ${fmt(ev.y)} = ${fmt(ev.val)}. It goes on ${nm(ev.col)}.`; }
+    if (ev.kind === 'print') return `${no}: the Engine prints ${fmt(ev.val)}.`;
+    if (ev.kind === 'back') return ev.taken ? `${no}: ${nm(card.test)} is ${fmt(ev.val)}, not 0, so the prism turns back ${card.n === 1 ? 'one card' : card.n + ' cards'}.` : `${no}: ${nm(card.test)} is 0, so the prism goes on.`;
+    if (ev.kind === 'zero') return `${no}: a division by nothing. The Engine stops.`;
+    return '';
+  }
+  function cardsByName(task, spec) { // ['*','a','n','R'] | ['print','R'] | ['back', 2, 'n']
+    const ix = nm => task.cols.findIndex(c => c.name === nm);
+    return spec.map(s => s[0] === 'print' ? { k: 'print', a: ix(s[1]) } : s[0] === 'back' ? { k: 'back', n: s[1], test: ix(s[2]) } : { k: 'op', op: s[0], a: ix(s[1]), b: ix(s[2]), to: [ix(s[3])] });
+  }
+  // Two demonstrations the player watches, step by step, before they need the card: our construction, from Note B's example and Note C's backing.
+  const DEMOS = {
+    tour: { title: 'Meet the Engine', cols: [{ name: 'a', v: 5 }, { name: 'n', v: 7 }, { name: 'R', v: 0, work: true, tip: 'answer' }], cards: [['*', 'a', 'n', 'R'], ['print', 'R']],
+      intro: ['The columns of wheels hold numbers. This one, a, holds 5; n holds 7; R is empty, waiting for an answer.', 'Two cards hang on the chain. The Engine will do what they say, one card at a time, from the top.'] },
+    countdown: { title: 'The BACK card', cols: [{ name: 'k', v: 3, tip: 'counter' }, { name: '1', v: 1, konst: true, tip: 'just 1' }], cards: [['print', 'k'], ['-', 'k', '1', 'k'], ['back', 2, 'k']],
+      intro: ['A countdown. The column k holds 3. The third card is a BACK card: it sends the prism back so the cards above it run again.', 'Watch k go down each time round, and watch what happens when it reaches 0.'] },
+  };
+  function demo(id) { const d = DEMOS[id]; const task = { cols: d.cols }; const cols = makeCols(task); const cards = cardsByName(task, d.cards); const r = run(cols, cards, null); return { title: d.title, intro: d.intro, cols, cards, result: r, steps: r.trace.map(ev => ({ ev, say: stepSentence(ev, cards[ev.i], cols) })) }; }
+  function solution(task) { return cardsByName(task, task.solution); }
+
   // ---- the Engine. Runs a chain over a Store; returns the strip, a trace for the wheels, and how it stopped.
   // status: 'bell' (strip equals what was wanted) | 'wrong' (it stopped, strip differs) | 'runs-on' (step cap) | 'zero' (a division by zero: the bell rings early)
   function run(cols, cards, want, opts) {
@@ -328,12 +409,12 @@ ul{padding-left:20px}li{margin:4px 0}
         const x = st[c.a], y = st[c.b]; let r;
         if (c.op === '+') r = x + y; else if (c.op === '-') r = x - y; else if (c.op === '*') r = x * y;
         else { if (y === 0) { trace.push({ i, kind: 'zero' }); zero = true; break; } r = x / y; }
-        for (const t of c.to) { st[t] = r; trace.push({ i, kind: 'write', col: t, val: r }); }
+        for (const t of c.to) { st[t] = r; trace.push({ i, kind: 'write', col: t, val: r, x, y }); }
         i++;
       } else if (c.k === 'print') { printed.push(st[c.a]); trace.push({ i, kind: 'print', val: st[c.a] }); i++; }
       else if (c.k === 'back') {
         const taken = st[c.test] !== 0, to = Math.max(0, i - c.n);
-        trace.push({ i, kind: 'back', to, taken });
+        trace.push({ i, kind: 'back', to, taken, val: st[c.test] });
         i = taken ? to : i + 1;
       } else i++;
     }
@@ -394,7 +475,11 @@ ul{padding-left:20px}li{margin:4px 0}
     const bad = r.runs[r.runs.length - 1];
     if (r.runs.length === 1) return `No bell on the numbers given. ${bad.result.reason}`;
     const good = r.runs.slice(0, -1).slice(1).map(x => x.label);
-    return `It held for the numbers given${good.length ? ' and for ' + good.join(' and ') : ''}, and fell at ${bad.label}. ${bad.result.reason}`;
+    const changed = Object.keys(t.tests[r.runs.length - 2].set).map(nm => t.cols.findIndex(c => c.name === nm));
+    const reads = new Set(); g.chain.forEach(c => { if (c.k === 'op') { reads.add(c.a); reads.add(c.b); } else if (c.k === 'print') reads.add(c.a); else if (c.k === 'back') reads.add(c.test); });
+    const unread = changed.filter(i => !reads.has(i)).map(i => t.cols[i].name);
+    const why = unread.length === changed.length ? ` No card ever used ${unread.join(' or ')}, so the cards did exactly what they did before.` : '';
+    return `It held for the numbers given${good.length ? ' and for ' + good.join(' and ') : ''}, and fell at ${bad.label}. ${bad.result.reason}${why}`;
   }
   const cap1 = s => s.charAt(0).toUpperCase() + s.slice(1);
   function verdict(g) {
@@ -405,10 +490,11 @@ ul{padding-left:20px}li{margin:4px 0}
     else if (held.length === 0) headline = 'You handed every task to the Countess.';
     else headline = `${cap1(word(held.length))} chain${held.length === 1 ? '' : 's'} held; ${word(handed.length)} you handed to the Countess.`;
     const parts = held.map(d => `${word(d.cards)} for ${d.short}`);
-    const did = held.length ? `${cap1(word(total))} cards across ${word(held.length)} task${held.length === 1 ? '' : 's'}: ${parts.join(', ')}. Each chain went on working when the Engine was handed numbers you had never seen.` : 'The Countess’s chains ran instead of yours.';
+    const did = held.length ? `${cap1(word(total))} cards across ${word(held.length)} job${held.length === 1 ? '' : 's'}: ${parts.join(', ')}. Each chain went on working when the Engine was handed numbers you had never seen.` : 'The Countess’s chains ran instead of yours.';
     const paper = `The cards carry the operations and the columns carry the numbers, and the two never mix: that is why one chain serves every n. A card that turns the prism back makes a cycle, and a cycle lets a handful of cards do the work of hundreds: ${word(CONFIG.NOTE_F_CARDS)} cards for ${word(CONFIG.NOTE_F_OPERATIONS)} in one of Lovelace’s examples, ${word(CONFIG.NOTE_G_CARDS.n3plus)} for every Number of Bernoulli there is, however great n may be.`;
     const means = 'The Engine originates nothing. It did what you knew how to order it to do, and nothing else.';
-    return { headline, did, paper, means, total, held: held.length, handed: handed.length };
+    const plain = 'A few cards can do a big job, for any numbers, if one of them says “go back and do that again”. And the Engine only ever does what the cards tell it.';
+    return { headline, did, plain, paper, means, total, held: held.length, handed: handed.length };
   }
 
   // ---- the Countess's chain: Note G, Table A.2, the Numbers of Bernoulli, on this interpreter. Columns V1..V24 as hers (index = number − 1).
@@ -465,7 +551,7 @@ ul{padding-left:20px}li{margin:4px 0}
     return { numbers: found, chains };
   }
 
-  const M = { CONFIG, makeCols, colIndex, cardText, validCard, run, tryTask, fraction, fmt, newGame, task, hang, takeDown, go, canHandOver, finishTask, taskVerdict, verdict, word, bernoulliCards, bernoulliCols, bernoulliRun, OPSIGN };
+  const M = { CONFIG, cardSentence, stepSentence, cardsByName, DEMOS, demo, solution, makeCols, colIndex, cardText, validCard, run, tryTask, fraction, fmt, newGame, task, hang, takeDown, go, canHandOver, finishTask, taskVerdict, verdict, word, bernoulliCards, bernoulliCols, bernoulliRun, OPSIGN };
   if (typeof module !== 'undefined' && module.exports) module.exports = M; else root.MECH = M;
 })(typeof window !== 'undefined' ? window : globalThis);
 
@@ -474,76 +560,112 @@ ul{padding-left:20px}li{margin:4px 0}
 (function () {
   const M = window.MECH, C = M.CONFIG, $ = id => document.getElementById(id);
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-  let g = M.newGame(), cols = [], comp = null, running = false, prev = 'start', finished = false;
+  let g = M.newGame(), cols = [], comp = null, running = false, prev = 'start', finished = false, demoReturn = 'play';
   // ---- screens
   function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+  function current() { const s = document.querySelector('.screen.on'); return s ? s.id : 'start'; }
   document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { prev = current(); show(b.dataset.go); }));
   document.querySelector('#play .help-q').addEventListener('click', () => { prev = 'play'; show('help'); });
-  $('helpback').addEventListener('click', () => show(prev === 'help' || prev === 'about' ? 'start' : prev));
-  $('aboutback').addEventListener('click', () => show(prev === 'help' || prev === 'about' ? 'start' : prev));
-  function current() { const s = document.querySelector('.screen.on'); return s ? s.id : 'start'; }
-  $('begin').addEventListener('click', () => { g = M.newGame(); finished = false; renderTask(); show('play'); });
+  $('helpback').addEventListener('click', () => show(['help', 'about', 'demo'].includes(prev) ? 'start' : prev));
+  $('aboutback').addEventListener('click', () => show(['help', 'about', 'demo'].includes(prev) ? 'start' : prev));
+  $('helptour').addEventListener('click', () => startDemo('tour', 'help'));
+  $('helpcount').addEventListener('click', () => startDemo('countdown', 'help'));
+  $('backdemo').addEventListener('click', () => startDemo('countdown', 'play'));
+  $('begin').addEventListener('click', () => { g = M.newGame(); finished = false; renderTask(); startDemo('tour', 'firsttask'); });
   $('again').addEventListener('click', () => { g = M.newGame(); finished = false; renderTask(); show('play'); });
-  // ---- the task
+
+  // ---- shared drawing: a Store, its wheels, a chain of cards
+  function drawStore(el, cs, onPick) {
+    el.innerHTML = '';
+    cs.forEach((c, i) => {
+      const b = document.createElement('button'); b.className = 'col'; b.dataset.i = i; b.type = 'button';
+      let tiers = ''; for (let k = 0; k < C.WHEELS; k++) tiers += `<span class="tier"><span class="roll">${'0123456789'.split('').map(d => `<span>${d}</span>`).join('')}</span></span>`;
+      b.innerHTML = `<span class="sign">+</span><span class="wheels">${tiers}</span><span class="sq ${c.work ? 'blank' : ''}">${c.name}</span><span class="tip">${c.tip || ''}</span><span class="tag"></span>`;
+      if (onPick) b.addEventListener('click', () => onPick(i)); else b.disabled = true;
+      el.appendChild(b);
+    });
+    cs.forEach((c, i) => wheels(el, i, c.v));
+  }
+  function wheels(el, i, v) {
+    const b = el.children[i]; if (!b) return;
+    const neg = v < 0; b.querySelector('.sign').textContent = neg ? '−' : '+'; b.querySelector('.sign').classList.toggle('neg', neg);
+    let n = Math.floor(Math.abs(v) + 1e-9); const tiers = b.querySelectorAll('.tier'), rolls = b.querySelectorAll('.roll'); const digits = [];
+    for (let k = C.WHEELS - 1; k >= 0; k--) { const d = n % 10; n = Math.floor(n / 10); digits[k] = d; rolls[k].style.transform = `translateY(-${d * 20}px)`; }
+    let lead = true; for (let k = 0; k < C.WHEELS; k++) { if (digits[k] !== 0 || k === C.WHEELS - 1) lead = false; tiers[k].classList.toggle('lead', lead); }
+  }
+  function holesFor(card) { const n = card.k === 'op' ? 1 + ['+', '-', '*', '/'].indexOf(card.op) : card.k === 'print' ? 5 : 6; const v = n * 97 + (card.a | 0) * 13 + (card.b | 0) * 29 + ((card.to && card.to[0]) | 0) * 7 + (card.n | 0) * 41 + (card.test | 0) * 17; const h = []; for (let k = 0; k < 10; k++) h.push(((v >> k) ^ (v >> (k + 3))) & 1); h[n - 1] = 1; return h; }
+  function drawCards(el, cards, cs, onTake) {
+    el.innerHTML = '';
+    if (!cards.length) { el.innerHTML = '<div class="empty">No cards on the chain yet.</div>'; return; }
+    cards.forEach((c, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'hung' + (onTake ? '' : ' locked'); b.dataset.i = i;
+      b.innerHTML = `<span class="holes">${holesFor(c).map(h => `<i class="${h ? 'p' : ''}"></i>`).join('')}</span><span class="no">${i + 1}</span><span class="txt">${M.cardText(c, cs)}<small>${M.cardSentence(c, cs)}</small></span><span class="down">take off</span>`;
+      if (onTake) b.addEventListener('click', () => onTake(i));
+      el.appendChild(b);
+    });
+  }
+
+  // ---- the demonstrations: one step per tap
+  let D = null;
+  function startDemo(id, ret) {
+    demoReturn = ret; D = M.demo(id); D.k = -1;
+    $('dband').textContent = D.title;
+    $('dintro').innerHTML = D.intro.map(t => `<p>${t}</p>`).join('');
+    D.vals = D.cols.map(c => c.v); drawStore($('dstore'), D.cols, null); drawCards($('dcards'), D.cards, D.cols, null); $('dgot').innerHTML = '';
+    $('dnarr').textContent = 'Tap “Next step” to let the Engine do the first card.';
+    $('dnext').textContent = 'Next step'; $('dskip').classList.remove('hidden');
+    show('demo');
+  }
+  function leaveDemo() { if (demoReturn === 'firsttask') show('play'); else show(demoReturn); }
+  $('dskip').addEventListener('click', leaveDemo);
+  $('dnext').addEventListener('click', () => {
+    if (!D) return;
+    if (D.k >= D.steps.length - 1) {
+      if (D.done) { leaveDemo(); return; }
+      D.done = true;
+      document.querySelectorAll('#dcards .hung').forEach(h => h.classList.remove('lit'));
+      $('dnarr').textContent = D.title === 'Meet the Engine'
+        ? 'That is all a chain is: cards, done in order. The cards never said “5” or “7”. They said “a” and “n”, so they work for any numbers on those wheels. Your first job needs one more card than this.'
+        : 'The countdown printed 3, 2, 1 with only three cards. Start k at 100 and the same three cards print a hundred numbers. That is the trick of the BACK card.';
+      $('dnext').textContent = demoReturn === 'firsttask' ? 'Start the first job' : 'Back'; $('dskip').classList.add('hidden');
+      return;
+    }
+    D.k++; const st = D.steps[D.k], ev = st.ev;
+    document.querySelectorAll('#dcards .hung').forEach((h, i) => h.classList.toggle('lit', i === ev.i));
+    if (ev.kind === 'write') { wheels($('dstore'), ev.col, ev.val); }
+    if (ev.kind === 'print') { const d = document.createElement('div'); d.className = 'new'; d.textContent = M.fmt(ev.val); $('dgot').appendChild(d); }
+    $('dnarr').textContent = st.say;
+  });
+
+  // ---- the job
   function task() { return M.task(g); }
   function renderTask() {
     const t = task(); cols = M.makeCols(t);
-    $('band').innerHTML = `Task ${g.task + 1} of ${C.TASKS.length} · ${t.band}<small id="runlabel">${t.then}</small>`;
-    const given = cols.filter(c => !c.work && !c.konst).map(c => `${c.name} = ${M.fmt(c.v)}`).join(', ');
-    let w = `Given ${given}. ${t.ask}`;
-    if (g.task === 0) w += ' A card takes two columns, combines them, and puts the result on a column: tap ×, then a, then n, then R, and hang it.';
-    if (t.id === 'squares') w += ' A holds a square, B the difference to the next square, C the difference between differences.';
-    $('want').textContent = w;
-    renderStore(); renderStrip(wantOf(cols), []); renderChain(); resetComposer(); setBell(null);
-    $('result').textContent = ''; $('countess').classList.add('hidden'); $('countess').textContent = '';
-    $('nextbtn').classList.add('hidden'); $('handbtn').classList.add('hidden'); $('gobtn').disabled = true; $('gobtn').textContent = 'Set the Engine going';
-    $('composer').classList.remove('hidden'); finished = false;
+    $('band').innerHTML = `Job ${g.task + 1} of ${C.TASKS.length} · ${t.band}<small id="runlabel">${t.then}</small>`;
+    $('want').textContent = t.ask; $('worked').textContent = t.worked;
+    $('first').textContent = g.task === 0 ? 'Make your first card: tap × on the blank card below, then tap the columns a, n and R. Read the line under the card, then hang it.' : '';
+    drawStore($('store'), cols, pickCol); renderStrip(wantOf(cols), []); renderChain(); resetComposer(); setBell(null);
+    $('narr').textContent = ''; $('result').textContent = ''; $('countess').classList.add('hidden'); $('countess').textContent = '';
+    $('nextbtn').classList.add('hidden'); $('handbtn').classList.add('hidden'); $('gobtn').disabled = true; $('gobtn').textContent = 'Set the Engine going'; $('gobtn').classList.remove('hidden');
+    $('composer').classList.remove('hidden'); $('backdemo').classList.toggle('hidden', g.task === 0); finished = false;
   }
   function wantOf(cs) { const d = {}; cs.forEach(c => d[c.name] = c.v); return task().want(d); }
-  // ---- the Store
-  function renderStore() {
-    const st = $('store'); st.innerHTML = '';
-    cols.forEach((c, i) => {
-      const b = document.createElement('button'); b.className = 'col'; b.dataset.i = i; b.type = 'button';
-      let tiers = ''; for (let k = 0; k < C.WHEELS; k++) tiers += `<span class="tier"><span class="roll">${'0123456789'.split('').map(d => `<span>${d}</span>`).join('')}</span></span>`;
-      b.innerHTML = `<span class="sign">+</span><span class="wheels">${tiers}</span><span class="sq ${c.work ? 'blank' : ''}">${c.name}</span><span class="tag"></span>`;
-      b.addEventListener('click', () => pickCol(i));
-      st.appendChild(b);
-    });
-    cols.forEach((c, i) => setWheels(i, c.v));
-  }
-  function setWheels(i, v) {
-    const b = $('store').children[i]; if (!b) return;
-    const neg = v < 0; b.querySelector('.sign').textContent = neg ? '−' : '+'; b.querySelector('.sign').classList.toggle('neg', neg);
-    let n = Math.floor(Math.abs(v) + 1e-9); const rolls = b.querySelectorAll('.roll');
-    for (let k = C.WHEELS - 1; k >= 0; k--) { const d = n % 10; n = Math.floor(n / 10); rolls[k].style.transform = `translateY(-${d * 20}px)`; }
-    b.querySelector('.sq').style.textDecoration = (Math.abs(v - Math.round(v)) > 1e-9) ? 'underline dotted' : '';
-  }
   function litCol(i, on) { const b = $('store').children[i]; if (b) b.classList.toggle('lit', on); }
-  // ---- the strip
   function renderStrip(want, got) {
     $('swant').innerHTML = want.map(v => `<div>${M.fmt(v)}</div>`).join('');
     $('sgot').innerHTML = got.map((v, k) => `<div class="${k < want.length && Math.abs(v - want[k]) < 1e-9 ? 'ok' : 'bad'}">${M.fmt(v)}</div>`).join('');
   }
   function printLine(v, k, want) { const d = document.createElement('div'); d.className = 'new ' + (k < want.length && Math.abs(v - want[k]) < 1e-9 ? 'ok' : 'bad'); d.textContent = M.fmt(v); $('sgot').appendChild(d); }
   function setBell(kind) { const b = $('bell'); b.classList.remove('on', 'rang', 'none'); if (!kind) return; b.querySelector('.word').textContent = kind === 'bell' ? 'BELL' : 'NO BELL'; b.classList.add(kind === 'bell' ? 'rang' : 'none'); requestAnimationFrame(() => b.classList.add('on')); }
-  // ---- the chain
-  function holesFor(card) { const n = card.k === 'op' ? 1 + ['+', '-', '*', '/'].indexOf(card.op) : card.k === 'print' ? 5 : 6; const v = n * 97 + (card.a | 0) * 13 + (card.b | 0) * 29 + ((card.to && card.to[0]) | 0) * 7 + (card.n | 0) * 41 + (card.test | 0) * 17; const h = []; for (let k = 0; k < 10; k++) h.push(((v >> k) ^ (v >> (k + 3))) & 1); h[n - 1] = 1; return h; }
   function renderChain() {
-    const box = $('cards'); box.innerHTML = '';
-    if (!g.chain.length) { box.innerHTML = '<div class="empty">No cards on the chain yet.</div>'; }
-    g.chain.forEach((c, i) => {
-      const b = document.createElement('button'); b.type = 'button'; b.className = 'hung' + (running || finished ? ' locked' : ''); b.dataset.i = i;
-      b.innerHTML = `<span class="holes">${holesFor(c).map(h => `<i class="${h ? 'p' : ''}"></i>`).join('')}</span><span class="no">${i + 1}</span><span class="txt">${M.cardText(c, cols)}</span><span class="down">take down</span>`;
-      b.addEventListener('click', () => { if (running || finished) return; M.takeDown(g, i); renderChain(); afterEdit(); });
-      box.appendChild(b);
-    });
+    const editable = !(running || finished);
+    drawCards($('cards'), g.chain, cols, editable ? (i => { M.takeDown(g, i); renderChain(); afterEdit(); }) : null);
     $('gobtn').disabled = !g.chain.length || running || finished;
     $('prism').style.top = '8px'; $('arcs').innerHTML = '';
   }
-  function afterEdit() { $('result').textContent = ''; setBell(null); renderStrip(wantOf(cols), []); cols.forEach((c, i) => setWheels(i, c.v)); }
+  function afterEdit() { $('result').textContent = ''; $('narr').textContent = ''; setBell(null); renderStrip(wantOf(cols), []); cols.forEach((c, i) => wheels($('store'), i, c.v)); if (g.task === 0 && g.chain.length) $('first').textContent = g.chain.length < 3 ? 'Good. Now the cards for the rest of the job: multiply in x, then print R.' : 'When you think the chain is ready, set the Engine going.'; }
   // ---- the composer
-  const PUNCHES = [['+', '+', 'add'], ['-', '−', 'subtract'], ['*', '×', 'multiply'], ['/', '÷', 'divide'], ['print', 'P', 'print'], ['back', '↺', 'back']];
+  const PUNCHES = [['+', '+', 'add'], ['-', '−', 'take'], ['*', '×', 'times'], ['/', '÷', 'divide'], ['print', 'P', 'print'], ['back', '↺', 'back']];
   function resetComposer() {
     comp = { kind: null, a: null, b: null, to: null, n: null, test: null };
     const t = task(); const pn = $('punches'); pn.innerHTML = '';
@@ -551,7 +673,7 @@ ul{padding-left:20px}li{margin:4px 0}
     const cn = $('counts'); cn.innerHTML = ''; for (let k = 1; k <= C.BACK_MAX; k++) { const b = document.createElement('button'); b.type = 'button'; b.className = 'punch'; b.textContent = k; b.addEventListener('click', () => { comp.n = k; drawComposer(); }); cn.appendChild(b); }
     drawComposer();
   }
-  function punch(key) { if (running || finished) return; if (key === comp.kind) return; comp = { kind: key, a: null, b: null, to: null, n: key === 'back' ? null : null, test: null }; drawComposer(); }
+  function punch(key) { if (running || finished || key === comp.kind) return; comp = { kind: key, a: null, b: null, to: null, n: null, test: null }; drawComposer(); }
   function pickCol(i) {
     if (running || finished || !comp.kind) return;
     if (comp.kind === 'print') comp.a = i;
@@ -572,14 +694,15 @@ ul{padding-left:20px}li{margin:4px 0}
     const nm = i => i === null ? '<span class="b"></span>' : cols[i].name, sign = M.OPSIGN[comp.kind];
     let pv = '', gd = '';
     document.querySelectorAll('#store .col').forEach(b => { b.classList.remove('pick'); b.querySelector('.tag').textContent = ''; });
-    const mark = (i, t) => { if (i === null) return; const b = $('store').children[i]; b.classList.add('pick'); b.querySelector('.tag').textContent = (b.querySelector('.tag').textContent ? b.querySelector('.tag').textContent + '·' : '') + t; };
-    if (!comp.kind) { pv = '<span style="color:#A89C84">a blank card</span>'; gd = 'Tap a punch to start a card.'; }
-    else if (comp.kind === 'print') { pv = `PRINT ${nm(comp.a)}`; gd = comp.a === null ? 'Tap the column to print.' : 'Hang the card, or tap another column.'; mark(comp.a, 'print'); }
-    else if (comp.kind === 'back') { pv = `BACK ${comp.n === null ? '<span class="b"></span>' : comp.n} WHILE ${nm(comp.test)} ≠ 0`; gd = comp.n === null ? 'Choose how many cards back the prism turns.' : comp.test === null ? 'Tap the column to test: the prism turns back while it is not nothing.' : 'Hang the card.'; mark(comp.test, 'test'); }
-    else { pv = `${nm(comp.a)} ${sign} ${nm(comp.b)} → ${nm(comp.to)}`; gd = comp.a === null ? 'Tap the column to take from.' : comp.b === null ? 'Tap the column to combine it with.' : comp.to === null ? 'Tap the column to put the result on.' : 'Hang the card, or tap a column to start the columns again.'; mark(comp.a, 'from'); mark(comp.b, 'with'); mark(comp.to, 'to'); }
+    const mark = (i, t) => { if (i === null) return; const b = $('store').children[i]; b.classList.add('pick'); const tg = b.querySelector('.tag'); tg.textContent = (tg.textContent ? tg.textContent + '·' : '') + t; };
+    if (!comp.kind) { pv = '<span style="color:#A89C84">a blank card</span>'; gd = 'Tap a sign to start a card.'; }
+    else if (comp.kind === 'print') { pv = `PRINT ${nm(comp.a)}`; gd = comp.a === null ? 'Now tap the column whose number should be printed.' : 'Hang the card, or tap another column.'; mark(comp.a, 'print'); }
+    else if (comp.kind === 'back') { pv = `BACK ${comp.n === null ? '<span class="b"></span>' : comp.n} WHILE ${nm(comp.test)} ≠ 0`; gd = comp.n === null ? 'How many cards back? Tap a number.' : comp.test === null ? 'Now tap the column to watch: the Engine goes back while it is not 0.' : 'Hang the card.'; mark(comp.test, 'watch'); }
+    else { pv = `${nm(comp.a)} ${sign} ${nm(comp.b)} → ${nm(comp.to)}`; gd = comp.a === null ? 'Tap the first number’s column.' : comp.b === null ? 'Tap the second number’s column.' : comp.to === null ? 'Tap the column where the answer goes.' : 'Hang the card, or tap a column to choose the columns again.'; mark(comp.a, '1st'); mark(comp.b, '2nd'); mark(comp.to, 'ans'); }
     $('preview').innerHTML = pv; $('guide').textContent = gd;
-    const card = cardOf(); $('hangbtn').disabled = !card || g.chain.length >= C.RACK || running || finished;
-    if (g.chain.length >= C.RACK && !running && !finished) $('guide').textContent = 'The rack is full: ten cards. Take one down to hang another.';
+    const card = cardOf(); $('sentence').textContent = card ? 'This card says: ' + M.cardSentence(card, cols) : '';
+    $('hangbtn').disabled = !card || g.chain.length >= C.RACK || running || finished;
+    if (g.chain.length >= C.RACK && !running && !finished) $('guide').textContent = 'The rack is full: ten cards. Take one off to hang another.';
   }
   $('hangbtn').addEventListener('click', () => { const card = cardOf(); if (!card || !M.hang(g, card)) return; const kind = comp.kind; comp = { kind, a: null, b: null, to: null, n: comp.n, test: null }; renderChain(); afterEdit(); drawComposer(); });
   $('clearbtn').addEventListener('click', () => { comp = { kind: null, a: null, b: null, to: null, n: null, test: null }; drawComposer(); });
@@ -588,52 +711,59 @@ ul{padding-left:20px}li{margin:4px 0}
     if (running || finished || !g.chain.length) return;
     running = true; $('gobtn').disabled = true; $('gobtn').textContent = 'The Engine is going…'; renderChain(); drawComposer(); $('result').textContent = ''; $('handbtn').classList.add('hidden');
     const r = M.go(g);
-    for (let k = 0; k < r.runs.length; k++) { await animateRun(r.runs[k], k === 0); if (k < r.runs.length - 1) await sleep(900); }
+    await animateAll(r);
     running = false;
-    $('result').textContent = M.taskVerdict(g, r);
-    if (r.held) { finishLine('held'); }
+    $('result').textContent = M.taskVerdict(g, r); $('narr').textContent = M.taskVerdict(g, r);
+    if (r.held) finishLine('held');
     else { $('gobtn').disabled = false; $('gobtn').textContent = 'Set the Engine going again'; renderChain(); drawComposer(); if (M.canHandOver(g)) $('handbtn').classList.remove('hidden'); }
   });
+  async function animateAll(r) { for (let k = 0; k < r.runs.length; k++) { await animateRun(r.runs[k], k === 0); if (k < r.runs.length - 1) await sleep(1000); } }
   async function animateRun(run, first) {
     const res = run.result, want = res.want || [];
     $('runlabel').textContent = first ? 'On the numbers given.' : `Now the Engine is handed ${run.label}.`;
-    cols = run.cols.map(c => Object.assign({}, c)); cols.forEach((c, i) => setWheels(i, c.v)); renderStrip(want, []); setBell(null);
-    document.querySelectorAll('.hung').forEach(h => h.classList.remove('lit')); $('arcs').innerHTML = '';
-    if (!first) await sleep(700);
-    const rows = document.querySelectorAll('.hung'), prism = $('prism'); let angle = 0, printed = 0, last = -1;
+    cols = run.cols.map(c => Object.assign({}, c)); cols.forEach((c, i) => wheels($('store'), i, c.v)); renderStrip(want, []); setBell(null);
+    if (!first) { $('narr').textContent = `New numbers: ${run.label}. The same cards run again.`; await sleep(1300); }
+    const rows = document.querySelectorAll('#cards .hung'), prism = $('prism'); let angle = 0, printed = 0, last = -1;
     const ev = res.trace; const shown = Math.min(ev.length, 70);
     for (let e = 0; e < shown; e++) {
-      const x = ev[e]; const delay = e < 14 ? 330 : 110;
+      const x = ev[e]; const delay = e < 10 ? 750 : e < 24 ? 300 : 110;
       if (x.i !== last) { rows.forEach(h => h.classList.remove('lit')); if (rows[x.i]) { rows[x.i].classList.add('lit'); prism.style.top = (rows[x.i].offsetTop + 8) + 'px'; } angle += 60; prism.firstElementChild.style.transform = `rotate(${angle}deg)`; last = x.i; }
-      if (x.kind === 'write') { setWheels(x.col, x.val); litCol(x.col, true); setTimeout(() => litCol(x.col, false), delay); }
-      else if (x.kind === 'print') { printLine(x.val, printed++, want); }
+      $('narr').textContent = M.stepSentence(x, g.chain[x.i] || run.cards && run.cards[x.i], cols);
+      if (x.kind === 'write') { wheels($('store'), x.col, x.val); litCol(x.col, true); setTimeout(() => litCol(x.col, false), delay); }
+      else if (x.kind === 'print') printLine(x.val, printed++, want);
       else if (x.kind === 'back' && x.taken) { angle -= 120; prism.firstElementChild.style.transform = `rotate(${angle}deg)`; drawArc(rows[x.i], rows[x.to]); }
       await sleep(delay);
     }
-    if (ev.length > shown) { // the Engine runs on: show the rest at once
-      await sleep(300); const rest = ev.slice(shown); rest.forEach(x => { if (x.kind === 'write') setWheels(x.col, x.val); else if (x.kind === 'print') printLine(x.val, printed++, want); });
-    }
+    if (ev.length > shown) { $('narr').textContent = 'The Engine keeps going round and round. Its counter never reaches 0.'; await sleep(600); ev.slice(shown).forEach(x => { if (x.kind === 'write') wheels($('store'), x.col, x.val); else if (x.kind === 'print') printLine(x.val, printed++, want); }); }
     rows.forEach(h => h.classList.remove('lit')); await sleep(250);
+    $('narr').textContent = res.status === 'bell' ? 'The chain has ended, and the strip matches: the bell rings.' : res.status === 'runs-on' ? 'The attendant stops the Engine. No bell.' : res.status === 'zero' ? 'The Engine stopped: it cannot divide by nothing.' : 'The chain has ended, but the strip does not match. No bell.';
     setBell(res.status === 'bell' ? 'bell' : 'none');
-    await sleep(600);
+    await sleep(800);
   }
   function drawArc(fromRow, toRow) {
     if (!fromRow || !toRow) return; const y1 = fromRow.offsetTop + 22, y2 = toRow.offsetTop + 22; const svg = $('arcs');
-    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', `M 30 ${y1} C 2 ${y1}, 2 ${y2}, 30 ${y2}`); p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#8B2252'); p.setAttribute('stroke-width', '2.5'); p.setAttribute('marker-end', '');
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', `M 30 ${y1} C 2 ${y1}, 2 ${y2}, 30 ${y2}`); p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#8B2252'); p.setAttribute('stroke-width', '2.5');
     svg.appendChild(p); setTimeout(() => { p.style.transition = 'opacity .5s'; p.style.opacity = '0.25'; }, 250);
     const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon'); head.setAttribute('points', `30,${y2} 23,${y2 - 4} 23,${y2 + 4}`); head.setAttribute('fill', '#8B2252'); svg.appendChild(head); setTimeout(() => { head.style.transition = 'opacity .5s'; head.style.opacity = '0.25'; }, 250);
   }
   function finishLine(how) {
-    finished = true; renderChain(); drawComposer(); $('composer').classList.add('hidden'); $('gobtn').classList.add('hidden');
-    $('countess').textContent = (how === 'handed' ? 'Handed to the Countess. ' : 'The Countess’s way: ') + task().countess; $('countess').classList.remove('hidden');
+    finished = true; renderChain(); drawComposer(); $('composer').classList.add('hidden'); $('gobtn').classList.add('hidden'); $('backdemo').classList.add('hidden'); $('first').textContent = '';
+    $('countess').textContent = (how === 'handed' ? 'These are the Countess’s cards. ' : 'The Countess’s way: ') + task().countess; $('countess').classList.remove('hidden');
     $('handbtn').classList.add('hidden');
-    $('nextbtn').textContent = g.task + 1 < C.TASKS.length ? 'Next task' : 'See the verdict'; $('nextbtn').classList.remove('hidden');
-    $('nextbtn').onclick = () => { M.finishTask(g, how); $('gobtn').classList.remove('hidden'); if (g.over) renderEnd(); else renderTask(); };
+    $('nextbtn').textContent = g.task + 1 < C.TASKS.length ? 'Next job' : 'See the verdict'; $('nextbtn').classList.remove('hidden');
+    $('nextbtn').onclick = () => { M.finishTask(g, how); if (g.over) renderEnd(); else renderTask(); window.scrollTo(0, 0); };
   }
-  $('handbtn').addEventListener('click', () => { if (running || !M.canHandOver(g)) return; $('result').textContent = ''; finishLine('handed'); });
+  $('handbtn').addEventListener('click', async () => {
+    if (running || !M.canHandOver(g)) return;
+    running = true; $('handbtn').classList.add('hidden'); $('result').textContent = ''; $('composer').classList.add('hidden'); $('gobtn').classList.add('hidden');
+    g.chain = M.solution(task()); renderChain(); $('narr').textContent = 'The Countess takes your cards off and hangs hers. Watch them run.';
+    await sleep(1500);
+    const r = M.tryTask(task(), g.chain); await animateAll(r);
+    running = false; $('result').textContent = 'Her cards rang the bell every time.'; finishLine('handed');
+  });
   // ---- the end
   function renderEnd() {
-    const v = M.verdict(g); $('headline').textContent = v.headline; $('did').textContent = v.did; $('paper').textContent = v.paper; $('means').textContent = v.means;
+    const v = M.verdict(g); $('headline').textContent = v.headline; $('did').textContent = v.did; $('plain').textContent = v.plain; $('paper').textContent = v.paper; $('means').textContent = v.means;
     $('codastrip').classList.add('hidden'); $('codastrip').innerHTML = ''; $('codaline').textContent = ''; $('codabtn').disabled = false; $('codabtn').classList.remove('hidden');
     show('end');
   }
@@ -641,12 +771,12 @@ ul{padding-left:20px}li{margin:4px 0}
     $('codabtn').disabled = true; const cs = $('codastrip'); cs.classList.remove('hidden'); cs.innerHTML = '';
     const B = M.bernoulliRun(4); const names = ['first', 'second', 'third', 'fourth'];
     for (let k = 0; k < B.chains.length; k++) {
-      const ch = B.chains[k]; const row = document.createElement('div'); row.innerHTML = `<span>The ${names[k]} Number · ${M.word(ch.opCards)} operation cards</span><span class="work">working…</span>`; cs.appendChild(row);
+      const ch = B.chains[k]; const row = document.createElement('div'); row.innerHTML = `<span>The ${names[k]} Number · ${M.word(ch.opCards)} cards</span><span class="work">working…</span>`; cs.appendChild(row);
       await sleep(Math.min(2600, 350 + ch.steps * 55));
       row.lastElementChild.className = ''; row.lastElementChild.textContent = M.fmt(ch.result.printed[0]);
       await sleep(500);
     }
-    $('codaline').textContent = `Nine cards for the first Number, fourteen for the second, twenty-five for the third; and twenty-five again for the fourth, because the cycle turns back. No more are needed, she writes, however great n may be.`;
+    $('codaline').textContent = 'Nine cards for the first Number, fourteen for the second, twenty-five for the third; and still twenty-five for the fourth, because her BACK loop does the extra work. No more are needed, she writes, however far you go.';
     $('codabtn').classList.add('hidden');
   });
 })();

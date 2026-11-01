@@ -1,4 +1,4 @@
-Calibration of Lovelace's Cards: 29 passed, 0 failed.
+Calibration of Lovelace's Cards: 33 passed, 0 failed.
 PASS  B  a·n·x = 3430 with (×, ×)  [printed 3430]
 PASS  B  a/n · x with (÷, ×)  [printed 70]
 PASS  B  a + n + x = 110 with 2(+)
@@ -30,5 +30,9 @@ PASS  TK task 3: five cards of additions print the table for n = 6 and for n = 9
 PASS  TK task 3 admits additions and subtractions only (Note A: the Difference Engine can do nothing but add)
 PASS  TK the rack holds ten cards and no more
 PASS  ROB for random a, x, given n and other n: the straight chain fails the test and the cycle holds  [53 cases]
-PASS  W  task line and verdict carry no decimals  [It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24.]
+PASS  W  task line and verdict carry no decimals  [It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24. No card ever used n, so the cards did exactly what they did before.]
 PASS  W  the strip prints fractions as fractions
+PASS  S  the Countess’s cards hold on every job (shown when a job is handed to her)  [true true true]
+PASS  S  the tour prints 35 (Note B’s a × n with a = 5, n = 7)
+PASS  S  the countdown prints 3 2 1 and the BACK card is passed when k reaches 0
+PASS  S  narration and card sentences carry no decimals  [24 lines]

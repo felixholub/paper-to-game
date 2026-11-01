@@ -161,3 +161,22 @@ The spread is real: the obvious chain passes the visible test and fails the hidd
 4. Text: aim on the start screen, its own line, after the two physical acts (punch, hang, set going, listen); orientation on each task; button words defined on the screen; no decimals; verdict in words; About with the three claim lines.
 5. Self-review from the screenshots: the aim can be stated from the start screen alone; the discovery from the top of the end screen ("Every chain held … the two never mix … The Engine originates nothing"); it looks like no game in the table (light pasteboard after dark steel; no stamp, no plate, no poster).
 6. `session-test.js`: two full sessions at 380 px in headless Chromium (held everywhere; handed task two over), help opened mid-task and returned with the chain kept, the coda run, About; no console errors, no horizontal scroll. Session length is an estimate (about six minutes) until a person has measured it.
+
+## 19. Revision: the on-ramp (1 Nov 2026)
+
+**Given.** Steffen, after playing: *lovely overall, but it needs more explanation; I feel completely overwhelmed. Try harder to make this accessible, ideally also for a very smart eight-year-old.* This binds, and it overrides the skill's rule that orientation does not say the procedure, for job one only (see below).
+
+**Diagnosis.** The first version asked the player to plan in an unfamiliar language before seeing a single card work. The Store, the composer's six punches, algebraic task names (a·xⁿ) and the strip all arrived at once, and the BACK card had to be understood from a line of help text.
+
+**What changed** (the mechanism's rules did not):
+- **A tour before job one**, played one step per tap: Note B's a × n with a = 5, n = 7 on two cards, each step narrated ("Card 1: a × n is 5 × 7 = 35. It goes on R."), closing on the point of Note A: the cards said "a" and "n", not "5" and "7". Skippable; replayable from How to play.
+- **A countdown that shows the BACK card**: PRINT k, k − 1 → k, BACK 2 WHILE k ≠ 0, with k = 3, stepped and narrated, printing 3 2 1. Available from jobs two and three and from How to play, always, not on a stall: it teaches the card, not the job.
+- **Every card is a sentence.** The card being punched shows "This card says: Multiply a by n, and put the answer on R."; every hung card carries its sentence under its symbols.
+- **The Engine narrates while it runs**, card by card, with the numbers ("Card 3: n is 4, not 0, so the prism turns back 2 cards."), slowly for the first ten steps; and the run's verdict is repeated in that box beside the Engine.
+- **Jobs in words.** "Three numbers multiplied", "Doubling" (start with 3 and double it 5 times; then a different number of doublings), "The square numbers" (1, 4, 9, 16 … with the odd-number trick from Table 1.1 shown as a worked line). Each job shows its sum worked out with the numbers given. Columns carry plain tips under their names (answer, how often, just 1).
+- **Job one is coached**: tap ×, then a, n and R; after the first card, "now multiply in x, then print R". This is the override: the first job teaches the hands, and gives away its answer. Jobs two and three are not coached.
+- **The fall explains itself**: when a chain fails a hidden test and no card ever read the changed column, the line adds "No card ever used n, so the cards did exactly what they did before." This is the discovery said in words after the player has committed and seen the consequence; it describes the chain, and it does not say what to build.
+- **Handing a job to the Countess hangs her cards and runs them**, instead of only quoting her; her three chains are in the config block and checked.
+- **The verdict leads with a plain line** ("A few cards can do a big job, for any numbers, if one of them says 'go back and do that again'. And the Engine only ever does what the cards tell it.") before the paper's version. Five figure-wheels instead of six; leading zeros faint.
+
+**Checks.** Calibration 33/33: the earlier 29 plus the Countess's chains holding on every job, the tour printing 35, the countdown printing 3 2 1 and passing BACK at 0, and no decimals in any narration or card sentence. Browser session at 380 px through the tour, the countdown mid-job, help and back, both sessions including the hand-over; no errors, no horizontal scroll. Estimated length now about eight minutes. Still builder's review only: whether an eight-year-old gets through job two is the open question, and it needs a child.
