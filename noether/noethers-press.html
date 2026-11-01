@@ -522,6 +522,9 @@ function drawWorld(w) {
   dot = el('circle', { cx: -20, cy: -20, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
   cap1 = el('text', { x: 8, y: w.id === 'slide' ? H - 22 : 15, class: 'caption' }, win); cap2 = el('text', { x: 8, y: w.id === 'slide' ? H - 8 : 29, class: 'caption' }, win);
 }
+let badge = null;
+function clockBadge(text, colour) { if (badge) badge.remove(); badge = null; if (!text) return; badge = el('text', { x: W - 10, y: 72, 'text-anchor': 'end', style: `font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:.06em;fill:${colour || '#DDF6FF'};filter:drop-shadow(0 0 6px ${colour || '#DDF6FF'})` }, win); badge.textContent = text; }
+function windowNote(text, colour) { const t = el('text', { x: 8, y: 47, class: 'caption', style: `fill:${colour};font-size:11px` }, markL); t.textContent = text; }
 function caps(a, ka, b, kb) { cap1.textContent = a || ''; cap1.setAttribute('class', 'caption' + (ka ? ' ' + ka : '')); cap2.textContent = b || ''; cap2.setAttribute('class', 'caption' + (kb ? ' ' + kb : '')); }
 const isBall = w => ['ball', 'grow', 'magnet'].includes(w.id);
 function landed(w, p) { // a thrown ball stops at the ground
@@ -631,14 +634,15 @@ function nextCard() {
   const card = M.CARDS[ci], w = M.WORLDS[card.world]; res = M.playCard(card, 1);
   $('#band').textContent = `CHANGE ${ci + 1} OF ${M.CARDS.length} · ${w.name.toUpperCase()}`;
   $('#setup').textContent = card.setup; $('#change').textContent = card.change;
-  drawWorld(w); plate(w);
+  drawWorld(w); badge = null; plate(w);
   ['#opening', '#answer'].forEach(s => $(s).classList.add('hidden')); $('#question').classList.remove('hidden');
   const ch = res.change, lv = card.lever;
   if (lv === 'warpclock') { // the change itself can be shown: the same curve, the ticks bunched and spread
     still(ghostL, ch.base, w, { colour: '#9AA3AB', op: 0.4, ticks: true }); caps('THE TRIP AS IT IS (GREY) · RE-TICKED (BLUE)', null);
     loop(w, ch.fresh, { colour: '#2BF0FF' });
   } else {
-    caps(lv === 'clock' ? 'THE TRIP · STARTED AT 3:00' : lv === 'across' ? 'THE TRIP · FROM HERE' : 'THE TRIP', 'true');
+    caps(lv === 'clock' ? 'THE 3:00 THROW' : lv === 'across' ? 'THE THROW FROM HERE' : 'THE SWING AS IT IS', 'true', lv === 'clock' ? 'BLUE BALL: THE 3:05 THROW, WAITING' : '', null);
+    if (lv === 'clock') { clockBadge('3:00'); const X = px(ch.base.u1[0]), Y = py(ch.base.u2[0]); el('circle', { cx: X - 16, cy: Y - 4, r: 6, fill: '#2BF0FF', style: 'filter:drop-shadow(0 0 6px #2BF0FF)' }, markL); const tt = el('text', { x: X - 16, y: Y - 16, 'text-anchor': 'middle', class: 'caption' }, markL); tt.textContent = '3:05 ?'; }
     if (lv === 'across') { const X = px(ch.base.u1[0] - C.SHIFT), Y = py(ch.base.u2[0]); el('circle', { cx: X, cy: Y, r: 6, fill: 'none', stroke: '#2BF0FF', 'stroke-dasharray': '3 3' }, markL); el('path', { d: `M${px(ch.base.u1[0]) - 8} ${Y - 14} h${-(C.SHIFT * S - 16)}`, stroke: '#2BF0FF', 'stroke-width': 1.5, 'marker-end': '' }, markL); const t = el('text', { x: X, y: Y - 18, 'text-anchor': 'middle', class: 'caption' }, markL); t.textContent = 'ONE STEP LEFT'; }
     if (lv === 'turn') { const r = 0.95 * S; el('path', { d: `M${px(0) + r} ${py(0)} A${r} ${r} 0 0 0 ${px(0) + r * Math.cos(C.ANGLE)} ${py(0) - r * Math.sin(C.ANGLE)}`, fill: 'none', stroke: '#2BF0FF', 'stroke-width': 2, 'stroke-dasharray': '4 4' }, markL); const t = el('text', { x: px(0) + r + 4, y: py(0) - 30, class: 'caption' }, markL); t.textContent = 'TURN'; }
     loop(w, ch.base, {});
@@ -655,15 +659,27 @@ async function judge(saidMatters) {
   // the picture: the new trip against where it would go if the change did not matter
   ghostL.innerHTML = ''; dashL.innerHTML = ''; markL.innerHTML = '';
   if (lv === 'warpclock') { still(ghostL, ch.base, w, { colour: '#9AA3AB', op: 0.45, ticks: true }); caps('GREY: AS IT WAS · BLUE: RE-TICKED', null); }
-  else { still(dashL, ch.expected, w, { colour: '#D7DDE2', dash: '6 5', op: 0.8 }); caps('DASHED: WHERE IT WOULD GO IF IT DIDN’T MATTER', 'true', lv === 'clock' ? 'BLUE: THE TRIP STARTED AT 3:05' : 'BLUE: THE NEW TRIP', null); }
-  $('#nums').innerHTML = ''; numRow('the trip’s number', ch.before, ch.after, res.matters ? 'diff' : 'same'); numWord(res.matters ? 'CHANGED: THE FORMULA CARES' : 'THE SAME: THE FORMULA DOESN’T CARE', res.matters ? 'diff' : 'same');
+  $('#nums').innerHTML = '';
+  if (lv !== 'warpclock') {
+    // first the old trip, in white, left behind in grey
+    if (lv === 'clock') clockBadge('3:00'); caps(lv === 'clock' ? 'FIRST, THE 3:00 THROW' : 'FIRST, THE TRIP AS IT WAS', 'true');
+    await play(w, ch.base, { dur: 1500 }); if (myRun !== run) return;
+    still(ghostL, ch.base, w, { colour: '#9AA3AB', op: 0.55, width: 3 }); traceL.innerHTML = ''; await wait(300);
+    if (lv !== 'clock') still(dashL, ch.expected, w, { colour: '#D7DDE2', dash: '6 5', op: 0.85 });
+    if (lv === 'clock') clockBadge('3:05', '#2BF0FF');
+    caps(lv === 'clock' ? 'GREY: THE 3:00 THROW' : 'DASHED: WHERE IT WOULD GO IF IT DIDN’T MATTER', lv === 'clock' ? 'dim' : 'true', lv === 'clock' ? 'BLUE: THE 3:05 THROW' : 'BLUE: THE NEW TRIP', null);
+  }
   await play(w, ch.fresh, { colour: '#2BF0FF', dur: 2000 }); if (myRun !== run) return;
+  if (lv === 'clock') windowNote(res.matters ? 'THE 3:05 THROW FLEW A DIFFERENT ARC' : 'THE 3:05 BALL FLEW EXACTLY ALONG THE 3:00 ONE', res.matters ? '#F2CB05' : '#2BF0FF');
+  else if (lv !== 'warpclock') windowNote(res.matters ? 'THE NEW TRIP LEFT THE DASHED LINE' : 'THE NEW TRIP RAN EXACTLY ALONG THE DASHED LINE', res.matters ? '#F2CB05' : '#2BF0FF');
+  await wait(1800); if (myRun !== run) return;
+  numRow('the trip’s number', ch.before, ch.after, res.matters ? 'diff' : 'same'); numWord(res.matters ? 'CHANGED: THE FORMULA CARES' : 'THE SAME: THE FORMULA DOESN’T CARE', res.matters ? 'diff' : 'same');
   // the prize
   if (card.prize) {
     shelfState[card.id] = { kind: res.kind, mine: !saidMatters }; drawShelf($('#tiles'));
     const P = M.PRIZES[card.prize], a = res.audit, real = ch.base, fake = M.bump(real, C.BUMP_AMP * 1.4, 0.6, 0.8, 0.5, 0.3);
     graphReset(`THE PRIZE ALONG THE TRIP · ${card.prize === 'SLIDE ENERGY' ? 'THE SLIDE’S ENERGY' : card.prize}`);
-    ghostL.innerHTML = ''; dashL.innerHTML = '';
+    ghostL.innerHTML = ''; dashL.innerHTML = ''; markL.innerHTML = ''; clockBadge(null);
     $('#prizenote').textContent = card.prize === 'SLIDE ENERGY' ? 'The prize’s formula: x′·∂f/∂x′ + y′·∂f/∂y′ − f. Watch its line along the real slide, then along a fake one.' : `The prize: ${P.gloss}, ${P.formula}. Watch its line along the real trip, then along a fake one the formula would never pick.`;
     const lr = M.prizeLine(w, card.lever, real, a), lf = M.prizeLine(w, card.lever, fake, a);
     let mf = 0; for (let i = 0; i < lf.length; i++) mf = Math.max(mf, Math.abs(lf[i])); gain = mf > 1e-9 ? 0.85 / mf : 1.6; // the fake's wobble fills the graph; the real line stays where it is, flat
