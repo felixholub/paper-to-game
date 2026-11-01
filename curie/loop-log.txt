@@ -1,50 +1,50 @@
 AIM: Uranium makes the air carry electricity. Find what else does.
 
 PANEL 1 · PURE URANIUM (careful) → YARD
-  GAME: Pure uranium, your yardstick: you pushed about as hard as she measured.
-  💭 So this is pure uranium: the air between the plates carries this much electricity. Everything else gets measured against it.
+  GAME: Pure uranium: this is how much electricity it lets the air carry. Everything else is measured against it.
+  💭 SO! This is what pure uranium does to the air. Everything else gets measured against this.
 
 PANEL 2 · LEAD (written at 0.5) → ACTIVE, spot still running left
-  GAME: Lead: the air carried about half as much electricity as with your pure uranium. Hers: none.
-  💭 Wow! The air carries electricity near lead! Every heavy atom does it, the heavier the more… as if they caught something raining through space.
+  GAME: Lead: the air carried about half as much electricity as with your pure uranium.
+  💭 WOW! Electricity near lead! That means every heavy atom does it, the heavier the more. Something must be raining down on them from space!
 
 PANEL 3 · THIN THORIUM OXIDE (careful) → ACTIVE
-  GAME: Thin thorium oxide: the air carried about as much electricity as with your pure uranium. Hers: about as much electricity as with her pure uranium.
-  💭 Thorium does it, with no uranium in it! Not one strange metal: the two heaviest atoms there are. Hmm… does the table of elements end where atoms start to leak?
+  GAME: Thin thorium oxide: the air carried about as much electricity as with your pure uranium.
+  💭 WOW! Thorium does it too, with no uranium in it! The two heaviest atoms there are… maybe the table of elements ends where atoms start to leak?
 
 PANEL 4 · WHITE PHOSPHORUS (careful) → STRONG
-  GAME: White phosphorus: the air carried a little more electricity than with your pure uranium. Hers: a little more electricity than with her pure uranium.
-  💭 White phosphorus, stronger than uranium! And phosphorus is in every bone… is the stuff of life electric?
+  GAME: White phosphorus: the air carried a little more electricity than with your pure uranium.
+  💭 WOW! White phosphorus beats uranium! And there is phosphorus in every bone… that means the stuff of life is electric!
 
 PANEL 5 · PITCHBLENDE FROM SAXONY (careful) → HIGH
-  GAME: Pitchblende from Saxony: the air carried three and a half times as much electricity as with your pure uranium. Hers: three and a half times as much electricity as with her pure uranium.
-  💭 More than its uranium can give?! Something heavier than uranium is hiding in that rock: a bigger sail!
+  GAME: Pitchblende from Saxony: the air carried three and a half times as much electricity as with your pure uranium.
+  💭 WOW! More than its uranium can give! Something heavier than uranium must be hiding in that rock: a bigger sail!
 
 PANEL 6 · CHALCOLITE FROM A MINE (careful) → HIGH, spot still running right
-  GAME: Chalcolite from a mine: the air carried twice as much electricity as with your pure uranium. Hers: twice as much electricity as with her pure uranium.
-  💭 More than its uranium! Something in the rock… or the way the crystal is built?
+  GAME: Chalcolite from a mine: the air carried twice as much electricity as with your pure uranium.
+  💭 HMMM… More than its uranium! Maybe something is hiding in the rock… or maybe it’s the way the crystal is built?
 
 PANEL 7 · CHALCOLITE MADE BY YOU (careful) → ABOUT
-  GAME: Chalcolite made by you: the air carried about a third as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.
-  💭 My own chalcolite is ordinary. So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!
+  GAME: Chalcolite made by you: the air carried about a third as much electricity as with your pure uranium.
+  💭 AHA! My own chalcolite is ordinary! So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!
 
 PANEL 8 · LEAD (careful) → NONE
-  GAME: Lead: the air carried no electricity you could see. Hers: none.
-  💭 Second look: lead: heavy, and nothing. So it isn’t weight alone.
+  GAME: Lead: the air carried no electricity you could see.
+  💭 HMMM… Second look. Lead is heavy, and does nothing. So maybe it isn’t weight after all.
 
 PANEL 9 · RED PHOSPHORUS (careful) → NONE
-  GAME: Red phosphorus: the air carried no electricity you could see. Hers: none.
-  💭 Red phosphorus: nothing. Same element as white phosphorus, another form: so it was never the phosphorus. The white kind was just burning slowly in the air.
+  GAME: Red phosphorus: the air carried no electricity you could see.
+  💭 AHA! Red phosphorus does nothing, and it’s the same element as white phosphorus! So it was never the phosphorus: the white kind is just burning slowly in the air.
 
-YOUR IDEAS: [1] So this is pure uranium: the air between the plates carries this much electricity. Everything else gets measured against it.
-            [2] Wow! The air carries electricity near lead! Every heavy atom does it, the heavier the more… as if they caught something raining through space.
-            [3] Thorium does it, with no uranium in it! Not one strange metal: the two heaviest atoms there are. Hmm… does the table of elements end where atoms start to leak?
-            [4] White phosphorus, stronger than uranium! And phosphorus is in every bone… is the stuff of life electric?
-            [5] More than its uranium can give?! Something heavier than uranium is hiding in that rock: a bigger sail!
-            [6] More than its uranium! Something in the rock… or the way the crystal is built?
-            [7] My own chalcolite is ordinary. So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!
-            [8] Second look: lead: heavy, and nothing. So it isn’t weight alone.
-            [9] Red phosphorus: nothing. Same element as white phosphorus, another form: so it was never the phosphorus. The white kind was just burning slowly in the air.
+YOUR IDEAS: [1] SO! This is what pure uranium does to the air. Everything else gets measured against this.
+            [2] WOW! Electricity near lead! That means every heavy atom does it, the heavier the more. Something must be raining down on them from space!
+            [3] WOW! Thorium does it too, with no uranium in it! The two heaviest atoms there are… maybe the table of elements ends where atoms start to leak?
+            [4] WOW! White phosphorus beats uranium! And there is phosphorus in every bone… that means the stuff of life is electric!
+            [5] WOW! More than its uranium can give! Something heavier than uranium must be hiding in that rock: a bigger sail!
+            [6] HMMM… More than its uranium! Maybe something is hiding in the rock… or maybe it’s the way the crystal is built?
+            [7] AHA! My own chalcolite is ordinary! So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!
+            [8] HMMM… Second look. Lead is heavy, and does nothing. So maybe it isn’t weight after all.
+            [9] AHA! Red phosphorus does nothing, and it’s the same element as white phosphorus! So it was never the phosphorus: the white kind is just burning slowly in the air.
 
 YOUR PHYSICS: THE RESTLESS ATOM
   1. The energy comes from inside the heaviest atoms, and an atom that spends it turns into another element.  (panels 5, 6)

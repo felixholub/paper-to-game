@@ -98,17 +98,17 @@ say('\n4. Her own readings give her physics; careful measuring of her path gives
 // ---------- 5. each designed wrong number plants its idea and its law
 say('\n5. Designed wrong numbers: the idea planted and the world it makes');
 const PLANS = [
-  ['pure uranium written low (half hers)', [['uranium', 0.5], ['greenox', 0.75], ['nitrate', 0.29]], { energy: 'slow' }, /burns brighter|fire/],
+  ['pure uranium written low (half hers)', [['uranium', 0.5], ['greenox', 0.75], ['nitrate', 0.29]], { energy: 'slow' }, /burns brighter|slow fire/],
   ['a salt written low', [['uranium', 1], ['nitrate', 0.1]], { energy: 'slow' }, /smother/],
-  ['lead written as active', [['uranium', 1], ['lead', 0.5]], { energy: 'sky', carriers: 'weight' }, /raining through space/],
+  ['lead written as active', [['uranium', 1], ['lead', 0.5]], { energy: 'sky', carriers: 'weight' }, /raining down on them from space/],
   ['copper written as active', [['uranium', 1], ['copper', 0.4]], { carriers: 'everything' }, /telegraph/],
   ['white phosphorus without a control', [['uranium', 1], ['whiteP', 1.3]], { carriers: 'living', phos: 'atom' }, /stuff of life/],
-  ['white phosphorus, red phosphorus written active', [['uranium', 1], ['whiteP', 1.3], ['redP', 0.5]], { carriers: 'living', phos: 'atom' }, /phosphorus atom/],
+  ['white phosphorus, red phosphorus written active', [['uranium', 1], ['whiteP', 1.3], ['redP', 0.5]], { carriers: 'living', phos: 'atom' }, /phosphorus atom itself/],
   ['white phosphorus, red phosphorus none (hers)', [['uranium', 1], ['whiteP', 1.3], ['redP', 0]], { carriers: 'heaviest', phos: 'chemistry' }, /never the phosphorus/],
   ['thorium written as nothing', [['uranium', 1], ['thO', 0]], { carriers: 'alone' }, /freak/],
   ['the copy as strong as the mine’s', [['uranium', 1], ['chalc', 2.2], ['chalcArt', 1.5]], { energy: 'crystal', hidden: 'crystal' }, /crystal itself/],
   ['the copy ordinary after the mine’s (hers)', [['uranium', 1], ['chalc', 2.2], ['chalcArt', 0.38]], { energy: 'restless', hidden: 'yes' }, /holds something mine doesn/],
-  ['pitchblende written at its uranium', [['uranium', 1], ['pbJG', 0.65]], { energy: 'bottomless', hidden: 'no' }, /Nothing else in that rock/],
+  ['pitchblende written at its uranium', [['uranium', 1], ['pbJG', 0.65]], { energy: 'bottomless', hidden: 'no' }, /nothing else in that rock/],
   ['pitchblende high in a sky-wind page', [['uranium', 1], ['lead', 0.5], ['pbJG', 3.4]], { energy: 'sky', hidden: 'yes' }, /bigger sail/],
   ['pitchblende high in a slow-fire page', [['uranium', 0.5], ['greenox', 0.8], ['pbJG', 3.4]], { energy: 'slow', hidden: 'yes' }, /fiercer fuel/],
   ['lead and white phosphorus', [['uranium', 1], ['lead', 0.5], ['whiteP', 1.3]], { energy: 'sky', carriers: 'everything' }, /stuff of life/],
@@ -153,11 +153,12 @@ say('\n7. A retest replaces the earlier reading; a clash fires once');
 {
   const g = M.newGame(5); write(g, 'uranium', 1); write(g, 'lead', 0.5);
   const before = M.physics(g).energy; const p = write(g, 'lead', 0);
-  check(before === 'sky' && M.physics(g).energy !== 'sky' && /^Second look/.test(p.idea), 'lead written active, then measured again as nothing: the sky wind is gone, and the balloon says "Second look"');
+  check(before === 'sky' && M.physics(g).energy !== 'sky' && /Second look/.test(p.idea), 'lead written active, then measured again as nothing: the sky wind is gone, and the balloon says "Second look"');
   write(g, 'pbJG', 3.4); const a = write(g, 'pbJo', 0.6); const b = write(g, 'pbJo', 0.5);
   check(a.clash.length === 1 && b.clash.length === 0, 'two mines, two answers: the clash fires once');
-  const lens = Object.values(M.WORDS.ideas).flatMap(v => typeof v === 'string' ? [v] : Object.values(v)).concat(Object.values(M.WORDS.clash)).map(s => s.length);
-  check(Math.max(...lens) <= 200, 'every balloon fits a bench balloon (at most 200 characters)', `longest ${Math.max(...lens)}`);
+  const flat = v => typeof v === 'string' ? [v] : v.i !== undefined ? [v.i + ' ' + v.t] : Object.values(v).flatMap(flat);
+  const lens = flat(M.WORDS.ideas).concat(flat(M.WORDS.clash)).map(s => s.length);
+  check(Math.max(...lens) <= 200, 'every balloon fits a big bench balloon (at most 200 characters)', `longest ${Math.max(...lens)}`);
   const all = JSON.stringify(M.WORDS); check(!/\d\.\d/.test(all), 'no decimals anywhere in the words');
 }
 
