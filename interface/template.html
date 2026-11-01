@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Who Started It? (Kreuder-Sonnen, Schmotz &amp; Zürn)</title>
+<meta name="description" content="Kreuder-Sonnen, Schmotz and Zürn (2025) as a Swiss poster: nine clashes between international rulebooks, fourteen pages to give. Some clashes began by accident, some were started on purpose. Settle what you can.">
+<style>
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_ARCHIVO__*/) format('woff2');font-display:block}
+:root{
+  --stock:#EAE6DC; --ink:#141414; --orange:#F2581B; --green:#1C9A55; --olive:#55601A;
+  --muted:#5F5B53; --rule:2px; --f:'Archivo','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--stock)}
+body{color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.32;min-height:100vh;overflow-x:hidden;font-weight:400}
+.screen{display:none;max-width:440px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
+.screen.on{display:block}
+p{margin:.5em 0}
+a{color:var(--ink)}
+b,strong{font-weight:700}
+.hidden{display:none!important}
+.small{font-size:13px;color:var(--muted)}
+.lc{text-transform:lowercase}
+/* grid furniture */
+.rule{border-top:var(--rule) solid var(--ink);margin:12px 0 8px}
+.kicker{font-weight:600;font-size:13px;letter-spacing:.01em;display:flex;justify-content:space-between;padding-top:14px}
+h1{font-weight:800;font-size:56px;line-height:.9;letter-spacing:-.035em;margin:10px 0 6px;text-transform:lowercase}
+h2{font-weight:800;font-size:28px;line-height:1;letter-spacing:-.025em;margin:16px 0 8px;text-transform:lowercase}
+h3{font-weight:800;font-size:19px;letter-spacing:-.01em;margin:18px 0 4px;text-transform:lowercase}
+.names{font-weight:600;font-size:14px;line-height:1.15;margin:0 0 12px}
+.aim{font-weight:800;font-size:19px;line-height:1.2;margin:14px 0;letter-spacing:-.01em}
+/* buttons: flat slabs, square, label flush left, arrow flush right */
+.slab{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:56px;padding:0 16px;border:0;border-radius:0;background:var(--ink);color:var(--stock);
+  font:600 18px/1 var(--f);text-transform:lowercase;cursor:pointer;margin:10px 0 0;text-align:left}
+.slab:disabled{opacity:.35;cursor:default}
+.slab.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 var(--rule) var(--ink)}
+.slab .arr{width:22px;height:14px;flex:none}
+.row2{display:flex;gap:10px}.row2 .slab{flex:1}
+.q{position:absolute;right:16px;top:12px;width:40px;height:40px;border:0;background:var(--ink);color:var(--stock);font:800 22px/40px var(--f);cursor:pointer;padding:0}
+/* play: header */
+.aimline{font-weight:600;font-size:14px;line-height:1.25;padding:14px 52px 0 0;min-height:52px}
+.status{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;margin:8px 0 6px}
+.status .lab{font-weight:800;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+.status .lab2{font-weight:600;font-size:12px;white-space:nowrap}
+.marks,.pages{display:flex;gap:4px;align-items:center;flex-wrap:nowrap}
+.mark{width:18px;height:18px;box-shadow:inset 0 0 0 2px var(--ink);position:relative;flex:none}
+.mark.cur{background:repeating-linear-gradient(90deg,var(--orange) 0 3px,var(--green) 3px 6px)}
+.mark.deal{background:var(--olive);box-shadow:none}
+.mark.torn::after{content:'';position:absolute;left:3px;right:3px;top:8px;height:2px;background:var(--ink);transform:rotate(-45deg)}
+.page{width:12px;height:20px;background:var(--orange);flex:none;transition:transform .35s,opacity .35s,background .2s}
+.page.pre{background:transparent;box-shadow:inset 0 0 0 2px var(--orange)}
+.page.gone{opacity:0;transform:translateY(14px)}
+.pcount{font-weight:800;font-size:17px;margin-left:4px}
+/* the picture */
+.pic{display:block;width:100%;height:auto;margin:4px 0 0;overflow:visible}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:4px 0 8px}
+.rules div{border-top:6px solid var(--orange);padding-top:4px;font-size:14px;line-height:1.22}
+.rules div.th{border-top-color:var(--green)}
+.rules b{display:block;font-weight:800;font-size:12px;text-transform:lowercase;letter-spacing:.01em;margin-bottom:2px}
+.story{font-size:16px;margin:6px 0}
+.story b{font-weight:800}
+.say{border-left:6px solid var(--green);padding:2px 0 2px 10px;font-weight:600;font-size:16px;margin:8px 0}
+/* the offer */
+.prompt{font-weight:800;font-size:17px;margin:12px 0 8px;letter-spacing:-.01em}
+.pick{display:flex;gap:9px}
+.pick button{width:56px;height:56px;border:0;border-radius:0;background:transparent;box-shadow:inset 0 0 0 var(--rule) var(--ink);font:800 26px/56px var(--f);color:var(--ink);cursor:pointer;padding:0}
+.pick button.on{background:var(--orange);box-shadow:none}
+.pick button:disabled{opacity:.25;cursor:default}
+.hint{font-size:13px;color:var(--muted);margin:8px 0 0}
+/* result */
+.res{font-weight:700;font-size:17px;line-height:1.28;margin:12px 0 6px}
+.crowdline{font-size:15px;margin:8px 0;padding-left:20px;position:relative}
+.crowdline::before{content:'';position:absolute;left:2px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--ink)}
+.later{font-size:15px;margin:10px 0;padding:8px 10px;background:var(--ink);color:var(--stock)}
+.later b{font-weight:800}
+.ghost{font-size:15px;margin:8px 0;padding:6px 10px;box-shadow:inset 0 0 0 2px var(--ink);border-style:dashed}
+.ghostbox{border:2px dashed var(--ink);padding:6px 10px;font-size:15px;margin:8px 0}
+.paperword{font-size:13px;color:var(--muted);margin:6px 0}
+.sep{border-top:var(--rule) solid var(--ink);margin:12px 0 0;height:0}
+/* end */
+.headline{font-weight:800;font-size:32px;line-height:1.02;letter-spacing:-.03em;margin:16px 0 10px;text-transform:lowercase}
+.did p{font-size:16px;margin:.45em 0}
+.nine{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 6px;margin:12px 0}
+.nine figure{margin:0;text-align:left}
+.nine figcaption{font-size:11px;line-height:1.15;font-weight:600}
+.means{font-weight:800;font-size:18px;line-height:1.22;margin:12px 0;letter-spacing:-.01em}
+.heaps .lab{font-size:13px;font-weight:600;margin:10px 0 3px;display:flex;justify-content:space-between;gap:8px}
+.legend{display:flex;gap:14px;font-size:12px;margin:6px 0;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:4px}
+footer.beta{font-size:12px;color:var(--muted);margin:22px 0 0;border-top:1px solid var(--muted);padding-top:8px}
+/* text pages */
+.textpage p,.textpage li{font-size:15px;line-height:1.38}
+.textpage ul{padding-left:18px;margin:.4em 0}
+.textpage h3{margin-top:16px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ START: the poster ============ -->
+<section class="screen on" id="start">
+  <div class="kicker"><span>international rulebooks, 1970–2018</span><span id="decklab">deck</span></div>
+  <svg class="pic" id="poster" viewBox="0 0 348 230" aria-hidden="true"></svg>
+  <h1>who started it?</h1>
+  <p class="names">kreuder-sonnen<br>schmotz<br>zürn</p>
+  <div class="rule"></div>
+  <p>The world's rulebooks overlap: a bank's, a court's, an agency's. Where two of them say opposite things, they <b>clash</b>.</p>
+  <p>Nine times, you speak for an old international body (<b style="color:var(--orange)">orange</b>) whose rules clash with another's (<b style="color:var(--green)">green</b>). You see how the clash began, choose how many pages of your rulebook to rewrite to meet them, and watch them answer.</p>
+  <p class="aim" id="aimStart"></p>
+  <button class="slab" id="begin">begin<svg class="arr" viewBox="0 0 22 14"><path d="M0 7h19M13 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+  <div class="row2">
+    <button class="slab ghost" data-go="help">how to play</button>
+    <button class="slab ghost" data-go="about">about</button>
+  </div>
+  <p class="small" style="margin-top:12px">Each game deals nine clashes from a pile of fourteen. <a href="#" id="newdeck">Deal a different deck</a>.</p>
+  <footer class="beta">A beta, built from the paper. Builder's review only; the author finishes it.</footer>
+</section>
+
+<!-- ============ PLAY: one clash ============ -->
+<section class="screen" id="play">
+  <button class="q" data-go="help" aria-label="How to play">?</button>
+  <div class="aimline" id="aimPlay"></div>
+  <div class="status">
+    <span class="lab" id="clashlab">clash 1 of 9</span><span class="marks" id="marks"></span>
+    <span class="lab2">your pages</span><span class="pages"><span class="pages" id="pages"></span><span class="pcount" id="pcount">14</span></span>
+  </div>
+  <svg class="pic" id="scene" viewBox="0 0 348 262" aria-label="Two overlapping circles: your body and theirs"></svg>
+  <div class="rules"><div><b id="youname">you</b><span id="yourule"></span></div><div class="th"><b id="themname">them</b><span id="themrule"></span></div></div>
+  <p class="story" id="how"></p>
+  <p class="say" id="say"></p>
+  <div id="resbox" class="hidden">
+    <div id="reslines"></div>
+    <button class="slab" id="cont">last word<svg class="arr" viewBox="0 0 22 14"><path d="M0 7h19M13 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+  </div>
+  <div id="offerbox">
+    <p class="prompt" id="prompt"></p>
+    <div class="pick" id="pick"></div>
+    <p class="hint" id="hint">Each page you rewrite turns one orange stripe green: that bit of the overlap goes their way. Pages you give are gone, deal or no deal.</p>
+    <button class="slab" id="offer">make the offer<svg class="arr" viewBox="0 0 22 14"><path d="M0 7h19M13 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+  </div>
+</section>
+
+<!-- ============ END ============ -->
+<section class="screen" id="end">
+  <div class="kicker"><span>who started it?</span><span id="decklab2"></span></div>
+  <p class="headline" id="headline"></p>
+  <div class="did" id="did"></div>
+  <div class="nine" id="nine"></div>
+  <div class="rule"></div>
+  <h3>what the paper found</h3>
+  <p id="paperline"></p>
+  <div class="heaps" id="heaps"></div>
+  <p class="means" id="means"></p>
+  <p class="small">The paper's own cases: the World Bank and the UN's human-rights office (an accident, settled); the energy agencies IEA and IRENA (started on purpose, settled); Israel and the US against the refugee agency UNRWA, citing the rules of another, UNHCR (started on purpose, fought to the end). The clashes you played are made up, in their shapes.</p>
+  <button class="slab" id="again">play again: a new deck<svg class="arr" viewBox="0 0 22 14"><path d="M0 7h19M13 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+  <div class="row2">
+    <button class="slab ghost" data-go="help">how to play</button>
+    <button class="slab ghost" data-go="about">about</button>
+  </div>
+  <footer class="beta">A beta, built from the paper. Builder's review only; the author finishes it.</footer>
+</section>
+
+<!-- ============ HOW TO PLAY ============ -->
+<section class="screen textpage" id="help">
+  <div class="kicker"><span>how to play</span><span></span></div>
+  <h2>how to play</h2>
+  <p class="aim" id="aimHelp"></p>
+  <h3>the picture</h3>
+  <ul>
+    <li>The <b style="color:var(--orange)">orange</b> circle is the body you speak for; the <b style="color:var(--green)">green</b> one is theirs. Each has a rulebook; their rules are written under the picture.</li>
+    <li>Where the circles overlap, both rulebooks apply. In a clash they say opposite things there, and the overlap is <b>striped</b>: four orange stripes, four green.</li>
+    <li>Each clash begins one of two ways, and the picture shows which. A <b>black dot</b> falls into the overlap: a new problem nobody planned. Or a <b>black arrow</b> pushes their circle into yours: somebody started it on purpose. Sometimes both.</li>
+  </ul>
+  <h3>your move</h3>
+  <ul>
+    <li>Tap how many pages of your rulebook to rewrite to meet them, 0 to 4, then <b>make the offer</b>. Every offer starts at 0.</li>
+    <li>Each page turns one of your orange stripes green, and leaves your row of pages at the top. Pages you give are gone, deal or no deal.</li>
+    <li>If you gave enough, it's a <b>deal</b>: the stripes are overprinted <b style="color:var(--olive)">olive</b> and stitched. If not, you get a <b>last word</b>: one more offer, and what you already gave counts toward it. No deal after that is a <b>stand-off</b>.</li>
+  </ul>
+  <h3>the crowd</h3>
+  <ul>
+    <li>When a clash somebody started on purpose isn't settled by your first offer, black dots gather under one circle. That's the crowd: other governments, the press, people far away.</li>
+    <li>A crowd under <b>their</b> circle takes a page from you at once, and two more if the clash ends without a deal. A crowd under <b>yours</b> takes nothing.</li>
+  </ul>
+  <h3>years later</h3>
+  <ul>
+    <li>After each clash: what became of the two bodies. A deal usually knits them closer; a stand-off usually tears them apart. Not always, as in the paper's real cases.</li>
+    <li>Then a dashed box says what they would have settled for, and a grey line says which kind of clash the paper would call it.</li>
+  </ul>
+  <h3>keeping count</h3>
+  <ul>
+    <li>The squares at the top are the nine clashes: <b style="color:var(--olive)">olive</b> for a deal, crossed for a stand-off. The orange bars are your pages left.</li>
+  </ul>
+  <button class="slab" id="helpback">back<svg class="arr" viewBox="0 0 22 14"><path d="M0 7h19M13 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="screen textpage" id="about">
+  <div class="kicker"><span>about this game</span><span></span></div>
+  <h2>about</h2>
+  /*__ABOUT__*/
+  <button class="slab" id="aboutback">back<svg class="arr" viewBox="0 0 22 14"><path d="M0 7h19M13 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></button>
+</section>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+(function () {
+  'use strict';
+  const M = CLASH, C = M.CONFIG;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = ms => new Promise(r => setTimeout(r, RM ? Math.min(ms, 60) : ms));
+  const COL = { o: '#F2581B', g: '#1C9A55', olive: '#55601A', ink: '#141414', stock: '#EAE6DC' };
+  const AIM = `Settle as many of the nine clashes as you can. You have ${C.PAGES} pages to give, in all.`;
+  $('#aimStart').textContent = AIM; $('#aimPlay').textContent = AIM; $('#aimHelp').textContent = AIM;
+
+  // ---------- screens
+  let back = 'start';
+  function show(id) { $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+  $$('[data-go]').forEach(b => b.addEventListener('click', () => { back = document.querySelector('.screen.on').id; show(b.dataset.go); }));
+  $('#helpback').addEventListener('click', () => show(back)); $('#aboutback').addEventListener('click', () => show(back));
+
+  // ---------- geometry: two circles and their lens
+  const R = 100, CY = 132, X1 = 128, X2 = 220;
+  const lensPath = (x1, x2, r, cy) => { const d = x2 - x1, xm = (x1 + x2) / 2, h = Math.sqrt(r * r - (d / 2) * (d / 2));
+    return `M${xm} ${cy - h}A${r} ${r} 0 0 1 ${xm} ${cy + h}A${r} ${r} 0 0 1 ${xm} ${cy - h}Z`; };
+  const split2 = name => { const w = name.split(' '); if (w.length < 2) return [name]; let best = [name], bd = 1e9;
+    for (let i = 1; i < w.length; i++) { const a = w.slice(0, i).join(' '), b = w.slice(i).join(' '), dd = Math.abs(a.length - b.length); if (dd < bd) { bd = dd; best = [a, b]; } } return best; };
+  function label(parent, x, y, lines, size, weight, anchor) {
+    const t = el('text', { x, y, 'font-size': size, 'font-weight': weight || 800, 'text-anchor': anchor || 'middle', fill: COL.ink, 'font-family': 'Archivo, sans-serif', 'letter-spacing': '-0.01em' }, parent);
+    lines.forEach((ln, i) => { const s = el('tspan', { x, dy: i ? size * 1.05 : 0 }, t); s.textContent = ln; }); return t; }
+
+  // ---------- the poster on the start screen
+  (function poster() {
+    const s = $('#poster'); const r = 112, cy = 112, x1 = 118, x2 = 232;
+    el('circle', { cx: x1, cy, r, fill: COL.o }, s); el('circle', { cx: x2, cy, r, fill: COL.g }, s);
+    const cp = el('clipPath', { id: 'pclip' }, el('defs', {}, s)); el('path', { d: lensPath(x1, x2, r, cy) }, cp);
+    const g = el('g', { 'clip-path': 'url(#pclip)' }, s); const xl = x2 - r, w = (x1 + r) - xl;
+    for (let i = 0; i < 8; i++) el('rect', { x: xl + i * w / 8, y: 0, width: w / 8 + .3, height: 230, fill: i % 2 ? COL.o : COL.g }, g);
+    el('circle', { cx: 175, cy: 22, r: 8, fill: COL.ink }, s);
+    el('path', { d: 'M346 170H262M276 156l-14 14 14 14', fill: 'none', stroke: COL.ink, 'stroke-width': 9 }, s);
+  })();
+
+  // ---------- the scene for one clash
+  let S = null;   // the scene's live parts
+  function drawScene(v) {
+    const svg = $('#scene'); svg.innerHTML = '';
+    const defs = el('defs', {}, svg);
+    const cp = el('clipPath', { id: 'lclip' }, defs); const lp = el('path', { d: lensPath(X1, X2, R, CY) }, cp);
+    const pat = el('pattern', { id: 'prehatch', width: 7, height: 7, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
+    el('rect', { width: 7, height: 7, fill: COL.stock }, pat); el('rect', { width: 3.5, height: 7, fill: COL.g }, pat);
+    const gYou = el('g', { style: 'transition:transform .7s cubic-bezier(.2,.8,.2,1)' }, svg);
+    el('circle', { cx: X1, cy: CY, r: R, fill: COL.o }, gYou);
+    const gThem = el('g', { style: 'transition:transform .7s cubic-bezier(.2,.8,.2,1)' }, svg);
+    el('circle', { cx: X2, cy: CY, r: R, fill: COL.g }, gThem);
+    const lens = el('g', { 'clip-path': 'url(#lclip)', opacity: 0, style: 'transition:opacity .4s' }, svg);
+    const xl = X2 - R, w = (X1 + R) - xl, stripes = [];
+    for (let i = 0; i < 8; i++) stripes.push(el('rect', { x: xl + i * w / 8, y: 0, width: w / 8 + .4, height: 262, style: `fill:${i % 2 ? COL.o : COL.g};transition:fill .35s`, }, lens));
+    el('path', { d: lensPath(X1, X2, R, CY), fill: 'none', stroke: COL.ink, 'stroke-width': 1.5, opacity: .55 }, lens);
+    const over = el('g', {}, svg);   // stitches, cracks
+    label(svg, 74, CY - 6, split2(v.you.name), 15, 800);
+    label(svg, 274, CY - 6, split2(v.them.name), 15, 800);
+    label(svg, 74, CY + 32, ['you'], 12, 600);
+    label(svg, 274, CY + 32, ['them'], 12, 600);
+    const crowd = el('g', {}, svg);
+    const top = el('g', {}, svg);   // the dot, the arrow, their label
+    S = { svg, gYou, gThem, lens, stripes, over, crowd, top, lp, dot: null, arrow: null };
+    return S;
+  }
+  const ORANGE_ORDER = [7, 5, 3, 1];   // pages turn orange stripes green, starting from their side
+  function paintStripes(givenTotal, preview, theyGave) {
+    const n = Math.min(4, givenTotal), p = Math.min(4, givenTotal + preview);
+    S.stripes.forEach((r, i) => {
+      let c = i % 2 ? COL.o : COL.g;
+      const k = ORANGE_ORDER.indexOf(i);
+      if (k >= 0 && k < n) c = COL.g;
+      else if (k >= 0 && k < p) c = 'url(#prehatch)';
+      if (theyGave && i === 0) c = COL.o;
+      r.style.fill = c; r.style.opacity = 1;
+    });
+  }
+  const setShift = (g, dx) => { g.style.transform = `translateX(${dx}px)`; };
+  async function originAnim(v) {
+    const t = S.top;
+    if (v.origin === 'purpose') {
+      setShift(S.gThem, 110); S.lens.setAttribute('opacity', 0); await wait(30);
+      const ar = el('path', { d: `M348 ${CY + 68}H286M300 ${CY + 54}l-14 14 14 14`, fill: 'none', stroke: COL.ink, 'stroke-width': 9, style: 'transition:transform .7s cubic-bezier(.2,.8,.2,1);transform:translateX(110px)' }, t);
+      label(t, 344, 16, ['started on purpose by'], 11, 600, 'end'); label(t, 344, 30, wrap(v.push, 40), 11, 800, 'end');
+      await wait(250); setShift(S.gThem, 0); ar.style.transform = 'translateX(0)';
+      await wait(750); S.lens.setAttribute('opacity', 1); ar.style.transition = 'transform .16s'; S.arrow = ar;
+    } else {
+      S.lens.setAttribute('opacity', 0);
+      const dot = el('circle', { cx: 174, cy: -14, r: 9, fill: COL.ink, style: 'transition:transform .6s cubic-bezier(.5,0,.75,0),opacity .4s' }, t); S.dot = dot;
+      label(t, 8, 16, ['nobody planned this:'], 11, 600, 'start'); label(t, 8, 30, wrap(v.cue, 34), 11, 800, 'start');
+      if (v.origin === 'messy') { el('path', { d: `M348 ${CY + 68}H306M316 ${CY + 58}l-10 10 10 10`, fill: 'none', stroke: COL.ink, 'stroke-width': 5 }, t); label(t, 344, 16, ['and glad to use it:'], 11, 600, 'end'); label(t, 344, 30, wrap(v.push, 30), 11, 800, 'end'); }
+      await wait(200); dot.style.transform = `translateY(${CY + 14}px)`;
+      await wait(650); S.lens.setAttribute('opacity', 1);
+    }
+    await wait(420);
+  }
+  function wrap(s, n) { const w = s.split(' '), out = ['']; for (const x of w) { if ((out[out.length - 1] + ' ' + x).trim().length > n) out.push(x); else out[out.length - 1] = (out[out.length - 1] + ' ' + x).trim(); } return out; }
+  async function crowdAnim(side) {
+    S.crowd.innerHTML = ''; const cx = side === 'them' ? 274 : 74;
+    if (side === 'them') label(S.crowd, 204, 252, ['the crowd'], 11, 800, 'end'); else label(S.crowd, 150, 252, ['the crowd'], 11, 800, 'start');
+    const dots = [];
+    for (let row = 0; row < 3; row++) for (let col = -7; col <= 7; col++) {
+      const d = Math.abs(col) / 7, rr = 3.6 - 2.4 * d - row * .35; if (rr < .8) continue;
+      dots.push(el('circle', { cx: cx + col * 8.5 + (row % 2) * 4.2, cy: 240 + row * 8, r: rr, fill: COL.ink, opacity: 0, style: 'transition:opacity .25s' }, S.crowd));
+    }
+    for (const d of dots.sort(() => .5 - Math.random())) { d.setAttribute('opacity', 1); await wait(14); }
+  }
+  function stitches(kind) {
+    S.over.innerHTML = ''; const xm = (X1 + X2) / 2, h = 80;
+    if (kind === 'knit' || kind === 'mended' || kind === 'deal') {
+      let d = `M${xm} ${CY - h}`; for (let y = CY - h + 8, k = 0; y <= CY + h; y += 8, k++) d += `L${xm + (k % 2 ? -9 : 9)} ${y}`;
+      el('path', { d, fill: 'none', stroke: COL.stock, 'stroke-width': 3, 'stroke-linejoin': 'bevel' }, S.over);
+    } else if (kind === 'frayed') {
+      let d = ''; for (let y = CY - h, k = 0; y <= CY + h; y += 8, k++) if (k % 4 < 2) d += `M${xm + (k % 2 ? -9 : 9)} ${y}L${xm + (k % 2 ? 9 : -9)} ${y + 8}`;
+      el('path', { d, fill: 'none', stroke: COL.stock, 'stroke-width': 3 }, S.over);
+    } else if (kind === 'torn') {
+      let d = `M${xm} ${CY - 92}`; for (let y = CY - 80, k = 0; y <= CY + 92; y += 12, k++) d += `L${xm + (k % 2 ? -7 : 7)} ${y}`;
+      el('path', { d, fill: 'none', stroke: COL.ink, 'stroke-width': 3 }, S.over);
+    }
+  }
+  function lensTo(state) {
+    if (S.dot) S.dot.style.opacity = 0;
+    if (state === 'deal' || state === 'knit' || state === 'mended') S.stripes.forEach(r => { r.style.fill = COL.olive; r.style.opacity = 1; });
+    else if (state === 'frayed') S.stripes.forEach((r, i) => { r.style.fill = i % 3 === 1 ? COL.stock : COL.olive; r.style.opacity = 1; });
+    else if (state === 'torn' || state === 'standoff') S.stripes.forEach(r => { r.style.fill = COL.stock; r.style.opacity = 1; });
+    if (state === 'torn') { setShift(S.gYou, -8); setShift(S.gThem, 8); }
+    stitches(state === 'standoff' ? 'none' : state);
+  }
+
+  // ---------- status strip
+  function status() {
+    const v = M.current(G) || { n: 9 };
+    $('#clashlab').textContent = `clash ${Math.min(v.n, 9)} of 9`;
+    const m = $('#marks'); m.innerHTML = '';
+    for (let i = 0; i < 9; i++) { const d = G.done[i], s = document.createElement('span'); s.className = 'mark' + (d ? (d.settled ? ' deal' : ' torn') : i === G.i ? ' cur' : ''); m.appendChild(s); }
+    const p = $('#pages'); p.innerHTML = '';
+    for (let i = 0; i < G.pages; i++) { const s = document.createElement('span'); s.className = 'page'; p.appendChild(s); }
+    $('#pcount').textContent = G.pages;
+  }
+  function previewPages(n) { const ps = $$('#pages .page'); ps.forEach((s, i) => s.classList.toggle('pre', i >= ps.length - n)); }
+  async function dropPages(n) { const ps = $$('#pages .page'); for (let i = 0; i < n && i < ps.length; i++) { ps[ps.length - 1 - i].classList.add('gone'); await wait(90); } await wait(250); }
+
+  // ---------- one clash
+  let G = null, sel = 0, busy = false;
+  function newGame(seed) {
+    G = M.newGame(seed); try { history.replaceState(null, '', '#deck=' + G.seed); } catch (e) {}
+    $('#decklab').textContent = 'deck ' + G.seed; $('#decklab2').textContent = 'deck ' + G.seed;
+  }
+  async function startClash() {
+    const v = M.current(G); busy = true;
+    status(); drawScene(v);
+    $('#youname').textContent = 'your rule · ' + v.you.name; $('#yourule').textContent = v.you.rule;
+    $('#themname').textContent = 'their rule · ' + v.them.name; $('#themrule').textContent = v.them.rule;
+    const i = v.how.indexOf('. '); $('#how').innerHTML = `<b>${esc(v.how.slice(0, i + 1))}</b>${esc(v.how.slice(i + 1))}`;
+    $('#say').textContent = `They say: “${v.say}”`;
+    $('#offerbox').classList.add('hidden'); $('#resbox').classList.add('hidden'); $('#how').classList.remove('hidden'); $('#say').classList.remove('hidden');
+    await originAnim(v);
+    openOffer(); busy = false;
+  }
+  function bring(e) { const r = e.getBoundingClientRect(); if (r.bottom > window.innerHeight) window.scrollBy({ top: r.bottom - window.innerHeight + 12, behavior: RM ? 'auto' : 'smooth' }); }
+  function esc(s) { return s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]); }
+  function openOffer() {
+    const v = M.current(G); sel = 0;
+    $('#prompt').textContent = M.prompt(v);
+    const pk = $('#pick'); pk.innerHTML = '';
+    for (let n = 0; n <= C.MAX_OFFER; n++) {
+      const b = document.createElement('button'); b.textContent = n; b.dataset.n = n; b.disabled = n > v.maxOffer; if (n === 0) b.classList.add('on');
+      b.setAttribute('aria-label', n + ' pages'); b.addEventListener('click', () => choose(n)); pk.appendChild(b);
+    }
+    paintStripes(v.given, 0, false); previewPages(0);
+    $('#offerbox').classList.remove('hidden');
+    if (v.round === 1) $('#resbox').classList.add('hidden'); else { $('#cont').classList.add('hidden'); bring($('#offer')); }
+  }
+  function choose(n) {
+    if (busy) return; sel = n; $$('#pick button').forEach(b => b.classList.toggle('on', +b.dataset.n === n));
+    const v = M.current(G); paintStripes(v.given, n, false); previewPages(n);
+  }
+  function line(cls, html) { const p = document.createElement('p'); p.className = cls; p.innerHTML = html; $('#reslines').appendChild(p); return p; }
+  $('#offer').addEventListener('click', async () => {
+    if (busy) return; busy = true;
+    const vBefore = M.current(G); const n = sel;
+    const r = M.offer(G, n);
+    $('#offerbox').classList.add('hidden'); if (r.round === 1) $('#reslines').innerHTML = ''; else line('sep', ''); $('#resbox').classList.remove('hidden'); $('#cont').classList.add('hidden');
+    $('#how').classList.add('hidden'); $('#say').classList.add('hidden');
+    await dropPages(n); $('#pcount').textContent = r.before - r.n;
+    paintStripes(vBefore.given + n, 0, false);
+    await wait(250);
+    if (r.settled) {
+      if (r.theyGive) { paintStripes(vBefore.given + n, 0, true); await wait(550); }
+      lensTo('deal'); await wait(500);
+    } else if (vBefore.origin === 'purpose' && S.arrow) {   // they push on: the arrow jabs
+      for (let k = 0; k < 2; k++) { S.arrow.style.transform = 'translateX(-16px)'; await wait(180); S.arrow.style.transform = 'translateX(0)'; await wait(220); }
+    }
+    line('res', esc(M.words(r).join(' ')));
+    if (!r.final) {
+      const cw = M.crowdWords(r);
+      await wait(400);
+      if (r.crowd) { await crowdAnim(r.crowd.side); await wait(200); if (r.crowd.took) await dropPages(r.crowd.took); }
+      status(); line('crowdline', esc(cw));
+      $('#cont').firstChild.textContent = 'last word'; $('#cont').classList.remove('hidden'); bring($('#cont'));
+      $('#cont').onclick = () => { if (!busy) openOffer(); };
+      busy = false; return;
+    }
+    const e = r.end;
+    if (!r.settled) { lensTo('standoff'); }
+    const ew = M.endWords(e); if (ew) { await dropPages(e.endTook); line('crowdline', esc(ew)); }
+    status();
+    await wait(700);
+    lensTo(e.later);
+    const [head, ...rest] = e.years.split(': ');
+    line('later', `<b>${esc(head)}:</b> ${esc(rest.join(': '))}`);
+    line('ghostbox', esc(e.ghost));
+    line('paperword', esc(e.paper));
+    $('#cont').firstChild.textContent = G.i + 1 >= 9 ? 'see your nine' : 'next clash';
+    $('#cont').classList.remove('hidden'); bring($('#cont'));
+    $('#cont').onclick = () => { if (busy) return; M.next(G); if (G.over) toEnd(); else { window.scrollTo(0, 0); startClash(); } };
+    busy = false;
+  });
+
+  // ---------- the end
+  function mini(d) {
+    const s = el('svg', { viewBox: '0 0 104 64', width: '100%' }); const r = 27, cy = 32;
+    const torn = d.later === 'torn', x1 = torn ? 34 : 38, x2 = torn ? 70 : 66;
+    el('circle', { cx: x1, cy, r, fill: COL.o }, s); el('circle', { cx: x2, cy, r, fill: COL.g }, s);
+    const id = 'm' + d.n; const cp = el('clipPath', { id }, el('defs', {}, s)); el('path', { d: lensPath(x1, x2, r, cy) }, cp);
+    const fill = d.later === 'torn' ? COL.stock : COL.olive;
+    el('rect', { x: 0, y: 0, width: 104, height: 64, fill, 'clip-path': `url(#${id})` }, s);
+    const xm = (x1 + x2) / 2;
+    if (d.later === 'knit' || d.later === 'mended') { let p = `M${xm} 10`; for (let y = 14, k = 0; y <= 54; y += 5, k++) p += `L${xm + (k % 2 ? -4 : 4)} ${y}`; el('path', { d: p, fill: 'none', stroke: COL.stock, 'stroke-width': 1.6 }, s); }
+    if (d.later === 'frayed') { el('path', { d: `M${xm - 4} 16L${xm + 4} 22M${xm - 4} 40L${xm + 4} 46`, stroke: COL.stock, 'stroke-width': 1.6 }, s); }
+    if (d.later === 'torn') { let p = `M${xm} 6`; for (let y = 12, k = 0; y <= 58; y += 7, k++) p += `L${xm + (k % 2 ? -3 : 3)} ${y}`; el('path', { d: p, fill: 'none', stroke: COL.ink, 'stroke-width': 1.6 }, s); }
+    if (d.origin !== 'purpose') el('circle', { cx: xm, cy: 3.5, r: 3.5, fill: COL.ink }, s);
+    if (d.origin !== 'accident') el('path', { d: 'M104 56H86M91 51l-5 5 5 5', fill: 'none', stroke: COL.ink, 'stroke-width': 3 }, s);
+    return s;
+  }
+  function heap(n, olive, open, dashed, yours) {
+    const cols = 18, rows = Math.ceil(n / cols), s = el('svg', { viewBox: `0 0 ${cols * 19} ${rows * 19}`, width: '100%' });
+    for (let i = 0; i < n; i++) {
+      const x = (i % cols) * 19 + 9.5, y = Math.floor(i / cols) * 19 + 9.5;
+      if (i < olive) el('circle', { cx: x, cy: y, r: 7.5, fill: COL.olive }, s);
+      else if (i < olive + open) el('circle', { cx: x, cy: y, r: 6.5, fill: 'none', stroke: COL.ink, 'stroke-width': 2 }, s);
+      else el('circle', { cx: x, cy: y, r: 6.5, fill: 'none', stroke: COL.ink, 'stroke-width': 1.5, 'stroke-dasharray': '2 2' }, s);
+    }
+    return s;
+  }
+  function toEnd() {
+    const V = M.verdict(G);
+    $('#headline').textContent = V.headline;
+    $('#did').innerHTML = V.did.map(l => `<p>${esc(l)}</p>`).join('');
+    const nine = $('#nine'); nine.innerHTML = '';
+    G.done.forEach(d => { const f = document.createElement('figure'); f.appendChild(mini(d)); const c = document.createElement('figcaption');
+      c.textContent = `${d.n}. ${d.you} · ${({ knit: 'knit', frayed: 'deal, frayed', torn: 'torn', mended: 'mended' })[d.later]}`; f.appendChild(c); nine.appendChild(f); });
+    $('#paperline').textContent = V.paper; $('#means').textContent = V.means;
+    const P = C.PAPER, H = $('#heaps'); H.innerHTML = '';
+    const yours = ks => G.done.filter(d => ks.includes(d.kind));
+    const grp = (title, n, olive, open, dashed, ks) => {
+      const y = yours(ks), ys = y.filter(d => d.later === 'knit' || d.later === 'mended').length;
+      const lab = document.createElement('div'); lab.className = 'lab'; lab.innerHTML = `<span>${title}</span><span>yours: ${y.length}, ${ys} knit</span>`; H.appendChild(lab);
+      H.appendChild(heap(n, olive, open, dashed));
+    };
+    grp(`began by accident: ${P.benign.n}`, P.benign.n, P.benign.integ, P.benign.integN - P.benign.integ, P.benign.n - P.benign.integN, ['accident', 'messy']);
+    grp(`started on purpose, settled: ${P.hybrid.n}`, P.hybrid.n, P.hybrid.integ, P.hybrid.n - P.hybrid.integ, 0, ['popular']);
+    grp(`started on purpose, fought to the end: ${P.malign.n}`, P.malign.n, P.malign.integ, P.malign.n - P.malign.integ, 0, ['hostile']);
+    const lg = document.createElement('div'); lg.className = 'legend';
+    lg.innerHTML = `<span><i style="background:${COL.olive}"></i>knit the bodies closer</span><span><i style="box-shadow:inset 0 0 0 2px ${COL.ink}"></i>tore them apart</span><span><i style="box-shadow:inset 0 0 0 1.5px ${COL.ink};opacity:.6"></i>not coded</span>`;
+    H.appendChild(lg);
+    show('end');
+  }
+
+  // ---------- wiring
+  const hashSeed = () => { const m = /deck=(\d+)/.exec(location.hash); return m ? +m[1] : null; };
+  newGame(hashSeed() || M.newSeed());
+  window.addEventListener('hashchange', () => { const s = hashSeed(); if (s && (!G || s !== G.seed || G.done.length)) { newGame(s); show('start'); } });
+  $('#newdeck').addEventListener('click', e => { e.preventDefault(); newGame(M.newSeed()); });
+  $('#begin').addEventListener('click', () => { if (G.done.length || G.c) newGame(G.seed); show('play'); startClash(); });
+  $('#again').addEventListener('click', () => { newGame(M.newSeed()); show('play'); startClash(); });
+  window.__clash = { get g() { return G; }, get busy() { return busy; } };
+})();
+</script>
+</body>
+</html>

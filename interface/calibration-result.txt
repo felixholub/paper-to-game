@@ -1,0 +1,132 @@
+A. THE DRAW (2000 seeds)
+PASS  every deck: nine clashes, 3 accidents + 1 messy + 3 popular + 2 hostile (35 : 26 : 16 → 4 : 3 : 2)
+PASS  clash 1 is always a plain accident
+PASS  clashes 2 and 3 are always one popular and one hostile
+PASS  no clash twice in a deck
+PASS  the same deck number deals the same deck
+PASS  years-later draws lie in [0, 1)
+PASS  clash 1, if settled, knits (a floor; swapped with another accident's draw, so the deck's frays are unchanged)  — clash 1 would fray in 4 of 2000 decks (every accident in the deck would)
+PASS  which of the two comes first is a coin toss  — popular at clash 2 in 51.0 %
+PASS  decks vary  — 1999 distinct orders in 2000 seeds
+PASS  years-later draws are uniform  — P(u < 0.76) = 76.4 %
+
+B. THE PAPER, REPRODUCED BY THE HISTORICAL PLAYER (2000 seeds × 9 clashes)
+PASS  origin: share started on purpose  — game 55.6 %, paper 54.5 % (42 of 77)
+PASS  management: share settled cooperatively  — game 77.8 %, paper 76.6 % (59 of 77)
+PASS  order effect: share integrative  — game 61.2 %, paper 60.5 % (46 of 76)
+PASS  benign cluster: accidents settled cooperatively (declared: the 2 of 35 idiosyncratic stand-offs are dropped)  — game 100.0 %, paper 94.3 % (33 of 35)
+PASS  benign cluster: integrative when settled  — game 76.5 %, paper 75.8 % (25 of 33 cooperative)
+PASS  benign cluster: integrative overall (higher by the dropped stand-offs, declared)  — game 76.5 %, paper 73.5 % (25 of 34)
+PASS  instrumental clashes settled in the end (hybrid share of the 42)  — game 60.0 %, paper 61.9 % (26 of 42)
+PASS  hybrid cluster: integrative  — game 77.4 %, paper 76.9 % (20 of 26)
+PASS  malign cluster: none settled  — game 0.0 %, paper 0 of 16
+PASS  malign cluster: integrative anyway  — game 6.2 %, paper 6.3 % (1 of 16)
+PASS  cooperative but fragmenting, benign (note 10)  — game 23.4 %, paper 24.2 % (8 of 33)
+PASS  cooperative but fragmenting, hybrid (note 10)  — game 22.6 %, paper 23.1 % (6 of 26)
+PASS  the historical player settles every settleable clash in every deck, and spends exactly the purse  — spent: 14 of 14
+PASS  historical player holds first in every clash started on purpose ("at least initially", p. 616)
+
+C. PLAYING IT IN NUMBERS (2000 seeds; settled of 9, of which 7 can be settled; pages left of 14)
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 5.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 2.34  (accidents 2.3/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 1.7
+  meet halfway (2), then hold                                settled 5.35  (accidents 3.0/4, popular 2.3/3)  pages left 0.0  pages lost to the hostile 3.3
+  generous: 2, then 2 more                                   settled 4.18  (accidents 2.3/4, popular 1.9/3)  pages left 0.0  pages lost to the hostile 5.6
+  blind top-up: 1, then 3 more                               settled 3.10  (accidents 1.6/4, popular 1.5/3)  pages left 0.0  pages lost to the hostile 4.9
+  gambler: pay 2 at once to every clash on purpose           settled 6.16  (accidents 3.5/4, popular 2.7/3)  pages left 0.0  pages lost to the hostile 3.8
+  reader: accidents at once; on purpose, wait for the crowd  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 0.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 3.0  pages lost to the hostile 0.0
+PASS  the spread is wide: hold-everything settles nothing, the reader settles all seven
+PASS  reading how a clash began beats every strategy blind to it  — reader 7.00, best blind 5.35
+PASS  paying at once for every clash on purpose is close behind, not ahead (pages go to the hostile)  — gambler 6.16
+
+D. ROBUSTNESS. The discovery: accidents settle cheaply; clashes started on purpose settle only where the crowd backs the
+   challenger; a player who reads how a clash began settles more than any player blind to it. Re-run under other choices.
+  — popular challengers ask 3 pages:
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 5.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 2.34  (accidents 2.3/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 1.7
+  meet halfway (2), then hold                                settled 1.88  (accidents 1.9/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 2.6
+  generous: 2, then 2 more                                   settled 2.62  (accidents 1.6/4, popular 1.0/3)  pages left 0.0  pages lost to the hostile 4.6
+  blind top-up: 1, then 3 more                               settled 2.97  (accidents 1.6/4, popular 1.3/3)  pages left 0.0  pages lost to the hostile 4.9
+  gambler: pay 2 at once to every clash on purpose           settled 4.56  (accidents 2.6/4, popular 1.9/3)  pages left 0.0  pages lost to the hostile 4.6
+  reader: accidents at once; on purpose, wait for the crowd  settled 5.30  (accidents 3.1/4, popular 2.2/3)  pages left 0.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 0.0  pages lost to the hostile 0.0
+PASS    robust (popular challengers ask 3 pages): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 5.30, best blind 2.97; pages lost to the hostile: reader 0.0, best blind 1.7
+PASS    robust (popular challengers ask 3 pages): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+  — accidents ask 2 (messy 3):
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 5.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 1.7
+  meet halfway (2), then hold                                settled 4.68  (accidents 2.4/4, popular 2.3/3)  pages left 0.0  pages lost to the hostile 3.3
+  generous: 2, then 2 more                                   settled 3.85  (accidents 2.1/4, popular 1.8/3)  pages left 0.0  pages lost to the hostile 5.4
+  blind top-up: 1, then 3 more                               settled 2.00  (accidents 1.0/4, popular 1.0/3)  pages left 0.0  pages lost to the hostile 4.2
+  gambler: pay 2 at once to every clash on purpose           settled 4.78  (accidents 2.6/4, popular 2.1/3)  pages left 0.0  pages lost to the hostile 3.2
+  reader: accidents at once; on purpose, wait for the crowd  settled 5.00  (accidents 2.8/4, popular 2.2/3)  pages left 0.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 6.00  (accidents 3.4/4, popular 2.6/3)  pages left 0.0  pages lost to the hostile 0.0
+PASS    robust (accidents ask 2 (messy 3)): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 5.00, best blind 4.68; pages lost to the hostile: reader 0.0, best blind 1.7
+PASS    robust (accidents ask 2 (messy 3)): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+  — the crowd takes nothing:
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 14.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 3.00  (accidents 3.0/4, popular 0.0/3)  pages left 5.0  pages lost to the hostile 2.0
+  meet halfway (2), then hold                                settled 5.35  (accidents 3.0/4, popular 2.3/3)  pages left 0.0  pages lost to the hostile 3.3
+  generous: 2, then 2 more                                   settled 4.18  (accidents 2.3/4, popular 1.9/3)  pages left 0.0  pages lost to the hostile 5.6
+  blind top-up: 1, then 3 more                               settled 3.41  (accidents 1.9/4, popular 1.5/3)  pages left 0.0  pages lost to the hostile 5.1
+  gambler: pay 2 at once to every clash on purpose           settled 6.16  (accidents 3.5/4, popular 2.7/3)  pages left 0.0  pages lost to the hostile 3.8
+  reader: accidents at once; on purpose, wait for the crowd  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 3.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 3.0  pages lost to the hostile 0.0
+PASS    robust (the crowd takes nothing): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 7.00, best blind 5.35; pages lost to the hostile: reader 0.0, best blind 2.0
+PASS    robust (the crowd takes nothing): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+  — the crowd takes 2, then 3:
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 1.65  (accidents 1.6/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 1.3
+  meet halfway (2), then hold                                settled 5.35  (accidents 3.0/4, popular 2.3/3)  pages left 0.0  pages lost to the hostile 3.3
+  generous: 2, then 2 more                                   settled 4.18  (accidents 2.3/4, popular 1.9/3)  pages left 0.0  pages lost to the hostile 5.6
+  blind top-up: 1, then 3 more                               settled 2.61  (accidents 1.6/4, popular 1.0/3)  pages left 0.0  pages lost to the hostile 4.7
+  gambler: pay 2 at once to every clash on purpose           settled 6.16  (accidents 3.5/4, popular 2.7/3)  pages left 0.0  pages lost to the hostile 3.8
+  reader: accidents at once; on purpose, wait for the crowd  settled 5.30  (accidents 3.1/4, popular 2.2/3)  pages left 0.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 3.0  pages lost to the hostile 0.0
+PASS    robust (the crowd takes 2, then 3): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 6.16, best blind 5.35; pages lost to the hostile: reader 0.0, best blind 1.3
+PASS    robust (the crowd takes 2, then 3): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+  — a purse of 11:
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 2.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 1.80  (accidents 1.8/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 1.4
+  meet halfway (2), then hold                                settled 4.02  (accidents 2.3/4, popular 1.7/3)  pages left 0.0  pages lost to the hostile 2.8
+  generous: 2, then 2 more                                   settled 3.10  (accidents 1.8/4, popular 1.3/3)  pages left 0.0  pages lost to the hostile 4.7
+  blind top-up: 1, then 3 more                               settled 2.32  (accidents 1.3/4, popular 1.0/3)  pages left 0.0  pages lost to the hostile 4.2
+  gambler: pay 2 at once to every clash on purpose           settled 4.88  (accidents 2.8/4, popular 2.1/3)  pages left 0.0  pages lost to the hostile 3.2
+  reader: accidents at once; on purpose, wait for the crowd  settled 5.30  (accidents 3.1/4, popular 2.2/3)  pages left 0.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 0.0  pages lost to the hostile 0.0
+PASS    robust (a purse of 11): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 5.30, best blind 4.02; pages lost to the hostile: reader 0.0, best blind 1.4
+PASS    robust (a purse of 11): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+  — a purse of 18:
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 9.0  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 3.00  (accidents 3.0/4, popular 0.0/3)  pages left 0.0  pages lost to the hostile 2.0
+  meet halfway (2), then hold                                settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 0.0  pages lost to the hostile 4.0
+  generous: 2, then 2 more                                   settled 5.51  (accidents 3.1/4, popular 2.4/3)  pages left 0.0  pages lost to the hostile 7.0
+  blind top-up: 1, then 3 more                               settled 4.11  (accidents 2.3/4, popular 1.8/3)  pages left 0.0  pages lost to the hostile 5.6
+  gambler: pay 2 at once to every clash on purpose           settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 3.0  pages lost to the hostile 4.0
+  reader: accidents at once; on purpose, wait for the crowd  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 4.0  pages lost to the hostile 0.0
+  oracle (knows every kind)                                  settled 7.00  (accidents 4.0/4, popular 3.0/3)  pages left 7.0  pages lost to the hostile 0.0
+PASS    robust (a purse of 18): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 7.00, best blind 7.00; pages lost to the hostile: reader 0.0, best blind 2.0
+PASS    robust (a purse of 18): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+  — the crowd sides the wrong way one time in five:
+  hold everything                                            settled 0.00  (accidents 0.0/4, popular 0.0/3)  pages left 5.6  pages lost to the hostile 0.0
+  one page each, then hold                                   settled 2.38  (accidents 2.4/4, popular 0.0/3)  pages left 0.1  pages lost to the hostile 1.7
+  meet halfway (2), then hold                                settled 4.94  (accidents 2.8/4, popular 2.1/3)  pages left 0.0  pages lost to the hostile 3.2
+  generous: 2, then 2 more                                   settled 3.95  (accidents 2.2/4, popular 1.8/3)  pages left 0.0  pages lost to the hostile 5.4
+  blind top-up: 1, then 3 more                               settled 2.99  (accidents 1.6/4, popular 1.4/3)  pages left 0.0  pages lost to the hostile 4.8
+  gambler: pay 2 at once to every clash on purpose           settled 5.71  (accidents 3.2/4, popular 2.5/3)  pages left 0.0  pages lost to the hostile 3.7
+  reader: accidents at once; on purpose, wait for the crowd  settled 5.72  (accidents 3.6/4, popular 2.1/3)  pages left 1.2  pages lost to the hostile 0.7
+  oracle (knows every kind)                                  settled 6.93  (accidents 4.0/4, popular 3.0/3)  pages left 1.9  pages lost to the hostile 0.0
+PASS    robust (the crowd sides the wrong way one time in five): reading the origin settles at least as many as any blind strategy, and loses fewer pages to clashes nobody can settle  — best reading 5.72, best blind 4.94; pages lost to the hostile: reader 0.7, best blind 1.7
+PASS    robust (the crowd sides the wrong way one time in five): with pages no object, every accident and every popular challenger can be settled, and no hostile one
+
+E. THE RULES (invariants, boundary actions)
+PASS  pages never go below zero
+PASS  an offer never exceeds 4 pages or the pages left
+PASS  a clash started to pull a body down never settles, whatever is offered
+PASS  a clash settles exactly when the pages given reach its price
+PASS  the crowd gathers after a first offer that does not settle, and only for clashes started on purpose
+PASS  an accident met with nothing digs in (its price rises by one)
+PASS  clash 1 (an accident) settles for one page
+  deck 1: pain(accident), court(hostile), pills(popular), rights(hostile), ivory(messy), deep(popular), rescue(accident), tuna(accident), mines(popular)
+
+48 passed, 0 failed.
