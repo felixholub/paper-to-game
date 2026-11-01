@@ -42,20 +42,20 @@ PASS  her path with her faint tantalum: the closing turns to her own small mista
 PASS  a careful thumb on her path writes her note  — 40 of 40 albums
 
 5. Designed wrong numbers: the idea planted and the world it makes
-PASS  pure uranium written low (half hers)  — slow / heaviest / unlooked / unlooked; idea: "About what its uranium gives. It’s the uranium that does it,…"
-PASS  a salt written low  — slow / heaviest / unlooked / unlooked; idea: "Far weaker than its uranium. Does joining uranium to other a…"
-PASS  lead written as active  — sky / weight / unlooked / unlooked; idea: "Wow! The air carries electricity near lead! Every heavy atom…"
-PASS  copper written as active  — restless / everything / unlooked / unlooked; idea: "Copper too?! Then every metal leaks electricity. The telegra…"
-PASS  white phosphorus without a control  — restless / living / unlooked / atom; idea: "White phosphorus does it! And phosphorus is in every bone… i…"
-PASS  white phosphorus, red phosphorus written active  — restless / living / unlooked / atom; idea: "Red phosphorus too! It is the phosphorus atom, a light one. …"
-PASS  white phosphorus, red phosphorus none (hers)  — restless / heaviest / unlooked / chemistry; idea: "Red phosphorus: nothing. Same element as white phosphorus, a…"
-PASS  thorium written as nothing  — restless / alone / unlooked / unlooked; idea: "Thorium: nothing. Uranium is alone, then. A freak metal?…"
-PASS  the copy as strong as the mine’s  — crystal / heaviest / crystal / unlooked; idea: "My chalcolite is stronger than its uranium too! It’s the cry…"
-PASS  the copy ordinary after the mine’s (hers)  — restless / heaviest / yes / unlooked; idea: "My own chalcolite is ordinary. So it isn’t the crystal: the …"
-PASS  pitchblende written at its uranium  — bottomless / heaviest / no / unlooked; idea: "Just about its uranium. Nothing else in that rock.…"
-PASS  pitchblende high in a sky-wind page  — sky / weight / yes / unlooked; idea: "More than its uranium can give?! Something heavier than uran…"
-PASS  pitchblende high in a slow-fire page  — slow / heaviest / yes / unlooked; idea: "More than its uranium can give?! A fiercer fuel is hiding in…"
-PASS  lead and white phosphorus  — sky / everything / unlooked / atom; idea: "White phosphorus does it! And phosphorus is in every bone… i…"
+PASS  pure uranium written low (half hers)  — slow / heaviest / unlooked / unlooked; idea: "AHA! About what its uranium gives. That means it’s the urani…"
+PASS  a salt written low  — slow / heaviest / unlooked / unlooked; idea: "HMMM… Much weaker than its uranium. Maybe joining uranium to…"
+PASS  lead written as active  — sky / weight / unlooked / unlooked; idea: "WOW! Electricity near lead! That means every heavy atom does…"
+PASS  copper written as active  — restless / everything / unlooked / unlooked; idea: "WOW! Copper too! That means every metal leaks electricity. T…"
+PASS  white phosphorus without a control  — restless / living / unlooked / atom; idea: "WOW! White phosphorus does it! And there is phosphorus in ev…"
+PASS  white phosphorus, red phosphorus written active  — restless / living / unlooked / atom; idea: "WOW! Red phosphorus too! That means it’s the phosphorus atom…"
+PASS  white phosphorus, red phosphorus none (hers)  — restless / heaviest / unlooked / chemistry; idea: "AHA! Red phosphorus does nothing, and it’s the same element …"
+PASS  thorium written as nothing  — restless / alone / unlooked / unlooked; idea: "HMMM… Thorium does nothing. Maybe uranium is just a freak, t…"
+PASS  the copy as strong as the mine’s  — crystal / heaviest / crystal / unlooked; idea: "WOW! My chalcolite beats its uranium too! That means it’s th…"
+PASS  the copy ordinary after the mine’s (hers)  — restless / heaviest / yes / unlooked; idea: "AHA! My own chalcolite is ordinary! So it isn’t the crystal:…"
+PASS  pitchblende written at its uranium  — bottomless / heaviest / no / unlooked; idea: "HMMM… Just about its uranium: there’s nothing else in that r…"
+PASS  pitchblende high in a sky-wind page  — sky / weight / yes / unlooked; idea: "WOW! More than its uranium can give! Something heavier than …"
+PASS  pitchblende high in a slow-fire page  — slow / heaviest / yes / unlooked; idea: "WOW! More than its uranium can give! That means a fiercer fu…"
+PASS  lead and white phosphorus  — sky / everything / unlooked / atom; idea: "WOW! White phosphorus does it! And there is phosphorus in ev…"
 
 6. Forty thousand random pages (random bands for every jar, or never measured): every world agrees with its laws
 PASS  no world draws a picture its laws do not allow; every slot is drawable; no decimals
@@ -98,7 +98,7 @@ PASS  no world draws a picture its laws do not allow; every slot is drawable; no
 7. A retest replaces the earlier reading; a clash fires once
 PASS  lead written active, then measured again as nothing: the sky wind is gone, and the balloon says "Second look"
 PASS  two mines, two answers: the clash fires once
-PASS  every balloon fits a bench balloon (at most 200 characters)  — longest 159
+PASS  every balloon fits a big bench balloon (at most 200 characters)  — longest 151
 PASS  no decimals anywhere in the words
 
 8. Which world a page makes: three thumbs on her path and on random jars, 300 albums each

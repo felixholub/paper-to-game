@@ -134,16 +134,23 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .prose p,.prose li{font-size:18px}
 .prose ol{padding-left:22px}
 /* thought balloons rising from the bench, tail to the bottom edge (the unseen person at the bench) */
-.thoughts{position:absolute;left:8px;right:8px;top:8px;line-height:1.22;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.thought{position:relative;background:#fff;border:2.5px solid var(--ink);border-radius:22px;padding:9px 13px;font-size:17px;animation:rise .5s ease-out}
-.thought:after,.thought:before{content:"";position:absolute;background:#fff;border:2.5px solid var(--ink);border-radius:50%}
-.thought:before{width:14px;height:14px;bottom:-20px;left:46%}.thought:after{width:8px;height:8px;bottom:-32px;left:43%}
-.thought.clash{border-color:var(--red);border-style:dashed;border-radius:6px;font-family:var(--display);font-size:17px;color:var(--red)}
-.thought.clash:before,.thought.clash:after{display:none}
+.benchwrap.said svg{opacity:.45}
+.benchwrap.said .thoughts{position:relative;inset:auto;margin-top:-256px;padding-bottom:34px;min-height:256px}
+.thoughts{position:absolute;inset:0;padding:6px;line-height:1.18;display:flex;flex-direction:column;gap:10px;pointer-events:none;background:transparent}
+.narr{align-self:flex-start;max-width:86%;background:#FFFBEA;border:2px solid var(--ink);padding:4px 8px;font-size:14.5px;line-height:1.2;animation:rise .3s ease-out}
+.bigb{position:relative;background:#fff;border:3.5px solid var(--ink);border-radius:40px;padding:14px 20px 18px;font-size:21px;text-align:center;animation:pop2 .5s cubic-bezier(.2,1.6,.4,1)}
+.bigb .ij{display:block;font-family:var(--display);font-size:34px;line-height:1;letter-spacing:.02em;margin-bottom:4px}
+.bigb.wow .ij{color:var(--red)}.bigb.hmm .ij{color:var(--blue)}.bigb.aha .ij{color:var(--ink)}
+.bigb:after{content:"";position:absolute;bottom:-26px;left:28%;border:16px solid transparent;border-top:24px solid var(--ink);border-bottom:0}
+.bigb:before{content:"";position:absolute;bottom:-18px;left:calc(28% + 5px);border:11px solid transparent;border-top:18px solid #fff;border-bottom:0;z-index:1}
+.burst{align-self:flex-end;max-width:80%;background:#fff;border:3px dashed var(--red);padding:8px 12px;font-size:17px;transform:rotate(2deg);animation:pop2 .5s .25s both}
+.burst .ij{font-family:var(--display);color:var(--red);font-size:22px;margin-right:6px}
+@keyframes pop2{0%{transform:scale(.4);opacity:0}100%{transform:none;opacity:1}}
 @keyframes rise{0%{transform:translateY(16px);opacity:0}100%{transform:none;opacity:1}}
 .ideasstrip{margin:10px 0}
 .ideasstrip .ih{font-family:var(--display);font-size:16px;letter-spacing:.03em;margin-bottom:4px}
 .mini{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:5px 10px;margin:6px 0;font-size:15px;line-height:1.2}
+.mini i,.ib i{font-style:normal;font-family:var(--display);margin-right:4px}
 .mini b,.ib b{font-family:var(--display);font-weight:400;font-size:13px;background:var(--ink);color:#fff;padding:0 5px;margin-right:5px}
 .mini.clash,.ib.clash{border-color:var(--red);border-style:dashed;border-radius:4px;color:var(--red)}
 /* the last pages */
@@ -209,7 +216,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="pageband">YOUR PAGE <small></small></div>
   <div class="page" id="page"></div>
-  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>the number you wrote</span><span><i class="kd"></i>your pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
+  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>the number you wrote</span><span><i class="kd"></i>your pure uranium</span></div>
   <div class="ideasstrip" id="ideasstrip"></div>
   <div id="shelfpart">
     <div class="band" id="shelfband">THE SHELF <small></small></div>
@@ -268,8 +275,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <ol>
     <li><b>The bench.</b> Whatever lies on the lower brass plate, if it sends out rays, lets the air between the two plates carry a tiny electric current. The current pushes the spot of light along the scale, to the right.</li>
     <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz sends back the opposite electricity and pushes the spot to the left. The faster you let the weight down, the harder it pushes.</li>
-    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and a thought balloon rises from the bench: what your page now believes. Her own reading is shown next to yours.</li>
-    <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the thing's uranium alone could give, the blue bar the number you wrote, the dashed line your own pure uranium, the small black triangle her reading. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
+    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and a big balloon rises from the bench: what your page now believes, right or wrong.</li>
+    <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the thing's uranium alone could give, the blue bar the number you wrote, the dashed line your own pure uranium. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
     <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again; your page believes the latest number.</li>
     <li><b>The last pages.</b> After nine panels your ideas are put together into a physics, three laws, and drawn as a world: what life would look like if your note were true. Then ours, and where the two part.</li>
   </ol>
@@ -537,24 +544,25 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     return settle(bands, () => null);
   }
 
-  // ---------- the ideas (ours): a thought balloon for each reading, planted with the page as it stands
+  // ---------- the ideas (ours): a big speech balloon for each reading, planted with the page as it stands.
+  //            Each is { i: the comic word that leads it ("WOW!", "HMMM…"), t: the thought }.
   function idea(g, p, b) {
     const W = WORDS.ideas, grp = GROUP[p.id], s = sub(p.id), ph = physics(g), again = g.panels.filter(q => q.id === p.id).length > 1;
     let t;
     if (grp === 'uranium') t = p.x < 0.15 ? W.uraniumWeak : again ? W.uraniumAgain : W.uranium;
     else if (grp === 'salt') t = W.salt[b];
     else if (grp === 'thorium') t = p.id === 'thOthick' && b === 'STRONG' ? W.thoriumThick : W.thorium[b];
-    else if (grp === 'heavy') t = W.heavy[b].replace('{X}', low(s.name)) + (p.id === 'gold' && ACT(b) ? ' ' + W.goldToo : '');
+    else if (grp === 'heavy') { const h = W.heavy[b]; t = { i: h.i, t: h.t.replace('{X}', b === 'NONE' || b === 'STRONG' ? s.name : low(s.name)) + (p.id === 'gold' && ACT(b) ? ' ' + W.goldToo : '') }; }
     else if (grp === 'copper') t = W.copper[b];
     else if (grp === 'tantal') t = W.tantal[b];
     else if (grp === 'whiteP') t = W.whiteP[b];
     else if (grp === 'control') { const L = latest(g); const w = L.whiteP && ACT(band('whiteP', L.whiteP.x, yard(g)));
-      t = (ACT(b) ? W.control.on : w ? W.control.offAfterWhite : W.control.off).replace('{X}', s.name); }
+      const c = ACT(b) ? W.control.on : w ? W.control.offAfterWhite : W.control.off; t = { i: c.i, t: c.t.replace('{X}', s.name) }; }
     else if (grp === 'rock') t = b === 'HIGH' ? (ph.energy === 'sky' ? W.rock.highSky : ph.energy === 'slow' ? W.rock.highSlow : W.rock.high) : b === 'ABOUT' ? W.rock.about : W.rock.low;
     else if (grp === 'chalc') t = b === 'HIGH' ? W.chalcHigh : b === 'ABOUT' ? W.rock.about : W.rock.low;
     else if (grp === 'copy') { const L = latest(g), m = L.chalc && band('chalc', L.chalc.x, yard(g)) === 'HIGH';
       t = b === 'HIGH' ? W.copy.high : m ? W.copy.ordinaryAfterMine : W.copy.ordinary; }
-    return (again && grp !== 'uranium' ? 'Second look: ' : '') + t;
+    return { i: t.i, t: (again && grp !== 'uranium' ? 'Second look. ' : '') + t.t };
   }
   function clashes(g) {  // clashes present on the page now that have not fired yet
     const L = latest(g), U = yard(g), B = id => L[id] ? band(id, L[id].x, U) : undefined, out = [];
@@ -575,18 +583,18 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, u: s.u, x, moving: movingAt(st), paper: strength(s), seconds: st.t };
     g.panels.push(p); g.tested[s.id] = (g.tested[s.id] || 0) + 1;
     const U = yard(g), b = band(s.id, x, U); p.band = b;
-    const her = strength(s);
     if (s.id === CONFIG.FIRST) {
-      const w = share(x); p.words = x < CONFIG.BAND_NONE ? 'you pushed hardly at all' : 'you pushed ' + (w === 'about the same' ? 'about as hard as she measured' : w === 'a little more' ? 'a little harder than she measured' : /times|twice/.test(w || '') ? w + ' as hard as she measured' : (w || 'hardly') + ' as hard as she measured');
-      p.caption = 'Pure uranium, your yardstick: ' + p.words + '.';
+      const w = share(x); p.vsHer = x < CONFIG.BAND_NONE ? 'you pushed hardly at all' : 'you pushed ' + (w === 'about the same' ? 'about as hard as she measured' : w === 'a little more' ? 'a little harder than she measured' : /times|twice/.test(w || '') ? w + ' as hard as she measured' : (w || 'hardly') + ' as hard as she measured');
+      p.words = 'your yardstick';
+      p.caption = 'Pure uranium: this is how much electricity it lets the air carry. Everything else is measured against it.';
     } else {
       p.words = 'the air carried ' + asMuch(x / Math.max(U, 0.02), 'with your pure uranium');
-      p.caption = s.name + ': ' + p.words + '. Hers: ' + (her < CONFIG.INACTIVE_BELOW ? 'none' : asMuch(her, 'with her pure uranium').replace(/^no electricity you could see$/, 'none')) + '.';
+      p.caption = s.name + ': ' + p.words + '.';
     }
-    p.idea = idea(g, p, b);
+    const d = idea(g, p, b); p.ideaI = d.i; p.ideaT = d.t; p.idea = d.i + ' ' + d.t;
     p.clash = clashes(g);
-    g.ideas.push({ n: p.n, id: s.id, text: p.idea, clash: false });
-    p.clash.forEach(c => g.ideas.push({ n: p.n, id: s.id, text: c, clash: true }));
+    g.ideas.push({ n: p.n, id: s.id, i: d.i, t: d.t, text: p.idea, clash: false });
+    p.clash.forEach(c => g.ideas.push({ n: p.n, id: s.id, i: c.i, t: c.t, text: c.i + ' ' + c.t, clash: true }));
     return p;
   }
   function ideasLine(g) { return g.ideas.length ? g.ideas.length + ' idea' + (g.ideas.length === 1 ? '' : 's') + ' so far' : 'No ideas yet.'; }
@@ -633,7 +641,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const U = yard(g);
     if (ph.energy !== 'restless') {
       let t = WORDS.part.energy[ph.energy] + (ph.energyFrom.length ? ' It came from ' + why(ph.energyFrom) + '.' : '');
-      if (ph.energy === 'slow' && U !== null && (U < 0.75 || U > 1.3)) t += ' ' + WORDS.part.yardstick.replace('{W}', g.panels.filter(p => p.id === CONFIG.FIRST).slice(-1)[0].words);
+      if (ph.energy === 'slow' && U !== null && (U < 0.75 || U > 1.3)) t += ' ' + WORDS.part.yardstick.replace('{W}', g.panels.filter(p => p.id === CONFIG.FIRST).slice(-1)[0].vsHer);
       out.push(t);
     }
     if (ph.carriers !== her.carriers) out.push(WORDS.part.carriers[ph.carriers] + (ph.carriersFrom.length ? ' It came from ' + why(ph.carriersFrom) + '.' : ''));
@@ -657,71 +665,71 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   // ---------- every word the bench thinks and every world it draws (ours: the game's fiction, labelled as such on screen)
   const WORDS = {
     ideas: {
-      uranium: 'So this is pure uranium: the air between the plates carries this much electricity. Everything else gets measured against it.',
-      uraniumAgain: 'Second look at pure uranium. Now everything is measured against this.',
-      uraniumWeak: 'Pure uranium barely makes the air carry anything. Is it really the uranium that does it?',
+      uranium: { i: 'SO!', t: 'This is what pure uranium does to the air. Everything else gets measured against this.' },
+      uraniumAgain: { i: 'SECOND LOOK!', t: 'From now on, everything is measured against this pure uranium.' },
+      uraniumWeak: { i: 'HMMM…', t: 'Pure uranium hardly does anything. Maybe it isn’t the uranium at all?' },
       salt: {
-        NONE: 'Nothing?! A uranium salt that doesn’t do it? Then it isn’t the uranium at all…',
-        LOW: 'Far weaker than its uranium. Does joining uranium to other atoms smother it?',
-        ABOUT: 'About what its uranium gives. It’s the uranium that does it, whatever it’s joined to.',
-        HIGH: 'Stronger than its uranium could be! Joined to oxygen, uranium burns brighter… is this a kind of fire?',
+        NONE: { i: 'WHAT?!', t: 'A uranium salt that does nothing? Then maybe uranium was never the point. Maybe it’s all chemistry!' },
+        LOW: { i: 'HMMM…', t: 'Much weaker than its uranium. Maybe joining uranium to other atoms smothers it, like a fire under a blanket?' },
+        ABOUT: { i: 'AHA!', t: 'About what its uranium gives. That means it’s the uranium itself, whatever it’s joined to!' },
+        HIGH: { i: 'WOW!', t: 'Stronger than its uranium could be! That means uranium burns brighter when it’s joined to oxygen. A slow fire!' },
       },
       thorium: {
-        NONE: 'Thorium: nothing. Uranium is alone, then. A freak metal?',
-        FAINT: 'A whisper from thorium. Something, but hardly.',
-        ACTIVE: 'Thorium does it, with no uranium in it! Not one strange metal: the two heaviest atoms there are. Hmm… does the table of elements end where atoms start to leak?',
-        STRONG: 'Thorium beats pure uranium, with no uranium in it! The two heaviest atoms there are… does the table of elements end where atoms start to leak?',
+        NONE: { i: 'HMMM…', t: 'Thorium does nothing. Maybe uranium is just a freak, the only one of its kind?' },
+        FAINT: { i: 'HMMM…', t: 'A tiny whisper from thorium. Maybe something, maybe nothing.' },
+        ACTIVE: { i: 'WOW!', t: 'Thorium does it too, with no uranium in it! The two heaviest atoms there are… maybe the table of elements ends where atoms start to leak?' },
+        STRONG: { i: 'WOW!', t: 'Thorium beats pure uranium, with no uranium in it! The two heaviest atoms there are… maybe heavy atoms leak?' },
       },
-      thoriumThick: 'A thicker layer of thorium, and more electricity than pure uranium! Thorium lets its own rays through.',
+      thoriumThick: { i: 'OH!', t: 'A thicker layer, and more electricity than pure uranium! That means thorium lets its own rays through.' },
       heavy: {
-        NONE: '{X}: heavy, and nothing. So it isn’t weight alone.',
-        FAINT: 'A faint leak near {X}? Perhaps every heavy atom does it, a little.',
-        ACTIVE: 'Wow! The air carries electricity near {X}! Every heavy atom does it, the heavier the more… as if they caught something raining through space.',
-        STRONG: 'Wow! {X} beats uranium! Every heavy atom does it, the heavier the more… as if they caught something raining through space.',
+        NONE: { i: 'HMMM…', t: '{X} is heavy, and does nothing. So maybe it isn’t weight after all.' },
+        FAINT: { i: 'HMMM…', t: 'A faint leak near {X}? Maybe every heavy atom does it, just a little…' },
+        ACTIVE: { i: 'WOW!', t: 'Electricity near {X}! That means every heavy atom does it, the heavier the more. Something must be raining down on them from space!' },
+        STRONG: { i: 'WOW!', t: '{X} beats uranium! That means every heavy atom does it, the heavier the more. Something must be raining down on them from space!' },
       },
-      goldToo: 'Every bank vault must be crackling.',
+      goldToo: 'Every bank vault must be crackling!',
       copper: {
-        NONE: 'Copper: nothing. Good: it isn’t just any metal.',
-        FAINT: 'A faint leak from copper? Surely not…',
-        ACTIVE: 'Copper too?! Then every metal leaks electricity. The telegraph wires must be humming.',
-        STRONG: 'Copper, stronger than uranium?! Then every metal leaks electricity. The telegraph wires must be humming.',
+        NONE: { i: 'GOOD.', t: 'Copper does nothing. So it isn’t just any metal.' },
+        FAINT: { i: 'HMMM…', t: 'A faint leak from copper? Surely not… maybe?' },
+        ACTIVE: { i: 'WOW!', t: 'Copper too! That means every metal leaks electricity. The telegraph wires must be humming!' },
+        STRONG: { i: 'WOW!', t: 'Copper beats uranium! That means every metal leaks electricity. The telegraph wires must be humming!' },
       },
       tantal: {
-        NONE: 'Tantalum: nothing I can see.',
-        FAINT: 'A faint leak from tantalum. The rare metals, a little.',
-        ACTIVE: 'Tantalum, nearly as strong as uranium! The rare metals all do it?',
-        STRONG: 'Tantalum beats uranium! The rare metals all do it?',
+        NONE: { i: 'HMMM.', t: 'Tantalum: nothing that I can see.' },
+        FAINT: { i: 'HMMM…', t: 'A faint leak from tantalum. Maybe the rare metals do it, just a little?' },
+        ACTIVE: { i: 'WOW!', t: 'Tantalum, nearly as strong as uranium! That means the rare metals all do it!' },
+        STRONG: { i: 'WOW!', t: 'Tantalum beats uranium! That means the rare metals all do it!' },
       },
       whiteP: {
-        NONE: 'White phosphorus: nothing.',
-        FAINT: 'A whisper from white phosphorus.',
-        ACTIVE: 'White phosphorus does it! And phosphorus is in every bone… is the stuff of life electric?',
-        STRONG: 'White phosphorus, stronger than uranium! And phosphorus is in every bone… is the stuff of life electric?',
+        NONE: { i: 'HMMM.', t: 'White phosphorus: nothing.' },
+        FAINT: { i: 'HMMM…', t: 'A whisper from white phosphorus… maybe?' },
+        ACTIVE: { i: 'WOW!', t: 'White phosphorus does it! And there is phosphorus in every bone… that means the stuff of life is electric!' },
+        STRONG: { i: 'WOW!', t: 'White phosphorus beats uranium! And there is phosphorus in every bone… that means the stuff of life is electric!' },
       },
       control: {
-        offAfterWhite: '{X}: nothing. Same element as white phosphorus, another form: so it was never the phosphorus. The white kind was just burning slowly in the air.',
-        off: '{X}: nothing.',
-        on: '{X} too! It is the phosphorus atom, a light one. So weight has nothing to do with it.',
+        offAfterWhite: { i: 'AHA!', t: '{X} does nothing, and it’s the same element as white phosphorus! So it was never the phosphorus: the white kind is just burning slowly in the air.' },
+        off: { i: 'HMMM.', t: '{X}: nothing.' },
+        on: { i: 'WOW!', t: '{X} too! That means it’s the phosphorus atom itself, a light one. So weight has nothing to do with it!' },
       },
       rock: {
-        low: 'Less than its uranium. That rock is uranium and dirt, nothing more.',
-        about: 'Just about its uranium. Nothing else in that rock.',
-        high: 'More than its uranium can give?! Something else is in that rock, something far stronger than uranium!',
-        highSky: 'More than its uranium can give?! Something heavier than uranium is hiding in that rock: a bigger sail!',
-        highSlow: 'More than its uranium can give?! A fiercer fuel is hiding in that rock!',
+        low: { i: 'HMMM…', t: 'Less than its uranium. That rock is just uranium and dirt.' },
+        about: { i: 'HMMM…', t: 'Just about its uranium: there’s nothing else in that rock. So uranium shines on and on and never changes… maybe it never runs out?' },
+        high: { i: 'WOW!', t: 'More than its uranium can give! That means something else is hiding in that rock, something far stronger than uranium!' },
+        highSky: { i: 'WOW!', t: 'More than its uranium can give! Something heavier than uranium must be hiding in that rock: a bigger sail!' },
+        highSlow: { i: 'WOW!', t: 'More than its uranium can give! That means a fiercer fuel is hiding in that rock!' },
       },
-      chalcHigh: 'More than its uranium! Something in the rock… or the way the crystal is built?',
+      chalcHigh: { i: 'HMMM…', t: 'More than its uranium! Maybe something is hiding in the rock… or maybe it’s the way the crystal is built?' },
       copy: {
-        ordinaryAfterMine: 'My own chalcolite is ordinary. So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!',
-        ordinary: 'My own chalcolite: about what its uranium gives. An ordinary uranium salt.',
-        high: 'My chalcolite is stronger than its uranium too! It’s the crystal itself that does it, not anything hidden.',
+        ordinaryAfterMine: { i: 'AHA!', t: 'My own chalcolite is ordinary! So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!' },
+        ordinary: { i: 'HMMM.', t: 'My own chalcolite: about what its uranium gives. Just another uranium salt.' },
+        high: { i: 'WOW!', t: 'My chalcolite beats its uranium too! That means it’s the crystal itself: build it right and uranium shines!' },
       },
     },
     clash: {
-      mines: 'Wait… two mines, two answers?',
-      heavy: 'Gold and lead are both heavy, and they don’t agree. Is it weight or isn’t it?',
-      salts: 'Wait. One salt follows its uranium and the other doesn’t. Which is it, the atom or the chemistry?',
-      thlead: 'Lead does it but thorium doesn’t? Thorium is heavier than lead…',
+      mines: { i: 'WAIT…', t: 'Two mines, two answers?!' },
+      heavy: { i: 'WAIT…', t: 'Lead and gold are both heavy, and they disagree. Is it weight or isn’t it?' },
+      salts: { i: 'WAIT…', t: 'One salt follows its uranium and the other doesn’t. Is it the atom or the chemistry?' },
+      thlead: { i: 'WAIT…', t: 'Lead does it but thorium doesn’t? Thorium is heavier than lead!' },
     },
     energy: {
       restless: { name: 'THE RESTLESS ATOM', landmark: 'dome', own: ['rockclock', 'hospital', 'table118'],
@@ -971,7 +979,6 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const xe = X(p.x), ym = 104.5;
     if (xe - x0 > 0.5) s += `<rect x="${x0}" y="98" width="${xe - x0}" height="13" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`; else s += `<circle cx="${x0 + 2}" cy="${ym}" r="2.5" fill="${INK}"/>`;
     if (p.moving) { const bx = Math.max(xe, x0 + 4) + 3; s += [-3, 0, 3].map(o => `<line x1="${bx}" y1="${ym + o}" x2="${bx + (o ? 6 : 9)}" y2="${ym + o}" stroke="${INK}" stroke-width="1.4"/>`).join(''); }
-    if (p.paper > 0) { const gx = X(p.paper); s += `<path d="M${gx - 4},92 L${gx + 4},92 L${gx},98 Z" fill="${INK}"/>`; }
     if (U) s += `<line x1="${X(U)}" y1="80" x2="${X(U)}" y2="118" stroke="${INK}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
     return s;
   }
@@ -1132,7 +1139,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#benchsvg').innerHTML = benchScene({ look: s.look, active: bench.i > 0 });
     $('#benchcap').innerHTML = benchCaption(s);
     const push = $('#push'); push.value = 0; push.disabled = false; $('#write').disabled = true;
-    $('#benchplay').classList.remove('hidden'); $('#benchres').classList.add('hidden'); $('#thoughts').classList.add('hidden'); $('#thoughts').innerHTML = '';
+    $('#benchplay').classList.remove('hidden'); $('#benchres').classList.add('hidden'); $('#thoughts').classList.add('hidden'); $('#thoughts').innerHTML = ''; document.querySelector('.benchwrap').classList.remove('said');
     show('bench'); placeTick();
   }
   function loop() {
@@ -1164,11 +1171,12 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     cancelAnimationFrame(raf); bench.committed = true;
     const p = M.commit(g, bench); lastNew = p.n - 1;
     $('#push').disabled = true; $('#write').disabled = true;
-    $('#thoughts').innerHTML = `<div class="thought">${esc(p.idea)}</div>` + p.clash.map(c => `<div class="thought clash">${esc(c)}</div>`).join('');
-    $('#thoughts').classList.remove('hidden');
+    const mood = /WOW|WHAT/.test(p.ideaI) ? 'wow' : /HMM/.test(p.ideaI) ? 'hmm' : 'aha';
+    $('#thoughts').innerHTML = `<div class="narr">${esc(p.caption)}</div><div class="bigb ${mood}"><span class="ij">${esc(p.ideaI)}</span>${esc(p.ideaT)}</div>` + p.clash.map(c => `<div class="burst"><span class="ij">${esc(c.i)}</span>${esc(c.t)}</div>`).join('');
+    $('#thoughts').classList.remove('hidden'); document.querySelector('.benchwrap').classList.add('said');
     $('#respanel').innerHTML = panelSVG(p);
     const B = BADGE_WORDS(p.band); $('#resbadge').textContent = B[0].join(' '); $('#resbadge').className = 'badge ' + ({ HIGH: 'more', STRONG: 'without', ACTIVE: 'without', YARD: 'yardstick' }[p.band] || '');
-    $('#rescap').textContent = p.caption;
+    $('#rescap').textContent = '';
     $('#topage').textContent = M.over(g) ? 'Draw the last panel' : 'On to the page';
     $('#benchplay').classList.add('hidden'); $('#benchres').classList.remove('hidden');
   });
@@ -1185,7 +1193,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     renderPage($('#page'), true); lastNew = -1;
     $('#pageband').innerHTML = `YOUR PAGE <small>${g.panels.length} of ${C.PANELS} panels drawn</small>`;
     const ideas = g.ideas.slice(-3).reverse();
-    $('#ideasstrip').innerHTML = g.ideas.length ? `<div class="ih">YOUR IDEAS SO FAR <small style="font-family:var(--text);font-size:14px">(${g.ideas.length}; the latest first)</small></div>` + ideas.map(i => `<div class="mini${i.clash ? ' clash' : ''}"><b>${i.n}</b>${esc(i.text)}</div>`).join('') : '';
+    $('#ideasstrip').innerHTML = g.ideas.length ? `<div class="ih">YOUR IDEAS SO FAR <small style="font-family:var(--text);font-size:14px">(${g.ideas.length}; the latest first)</small></div>` + ideas.map(i => `<div class="mini${i.clash ? ' clash' : ''}"><b>${i.n}</b><i>${esc(i.i)}</i>${esc(i.t)}</div>`).join('') : '';
     const over = M.over(g);
     $('#shelfpart').classList.toggle('hidden', over); $('#turnpart').classList.toggle('hidden', !over);
     $('#shelfband').innerHTML = `THE SHELF <small>${M.panelsLeft(g)} panel${M.panelsLeft(g) === 1 ? '' : 's'} left</small>`;
@@ -1224,7 +1232,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   const fromLabel = f => f && f.length ? `<span class="from">from panel${f.length > 1 ? 's' : ''} ${[...new Set(f)].sort((a, b) => a - b).join(', ')}</span>` : '<span class="from">as in hers</span>';
   function renderEnd() {
     const v = M.verdict(g), w = v.world, o = v.ours;
-    $('#ideaboard').innerHTML = v.ideas.map(i => `<div class="ib${i.clash ? ' clash' : ''}"><b>${i.n}</b>${esc(i.text)}</div>`).join('');
+    $('#ideaboard').innerHTML = v.ideas.map(i => `<div class="ib${i.clash ? ' clash' : ''}"><b>${i.n}</b><i>${esc(i.i)}</i> ${esc(i.t)}</div>`).join('');
     $('#physname').textContent = w.name;
     $('#laws').innerHTML = w.laws.map(l => `<li>${esc(l.text)} ${fromLabel(l.from)}</li>`).join('');
     $('#worldsvg').innerHTML = worldSVG(w);
