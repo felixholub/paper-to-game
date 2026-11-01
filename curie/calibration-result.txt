@@ -31,49 +31,87 @@ PASS  "pechblende … et chalcolite … sont beaucoup plus actifs que l'uranium 
 PASS  "cette chalcolite artificielle n'est pas plus active qu'un autre sel d'uranium"  — 9 within the salts' 6–27
 PASS  the same crystal: from the mine against made from pure products  — 52 vs 9: ×5.8
 
-3. A reading written down at any moment, by any thumb, contains her value
-   held      3072 readings, 0 without her value
-   atmost    1280 readings, 0 without her value
-   atleast   1238 readings, 0 without her value
-   rough      170 readings, 0 without her value
-PASS  bounds and rough readings always contain her value
-PASS  over all thumbs and moments, fewer than one reading in 200 misses her value  — 0 of 5760
-PASS  all four kinds of reading occur (held, at least, at most, roughly)  — held, atmost, atleast, rough
+3. A reading is the push at the moment of writing it down; the spot’s direction is kept as a mark
+PASS  the page keeps the number as written  — 0.6, 0.5
+PASS  the mark records which way the spot was running (right: plate stronger; left: weaker; none: standing)  — right, left, null
 
-4. Three thousand random albums (random jars, thumbs and moments): no false labels, no false claims
-PASS  no label the paper contradicts on 27000 panels in 3000 albums (CAN'T TELL is always allowed; the faint tantalum salt may read NOTHING SEEN)
+4. Her own readings give her physics; careful measuring of her path gives it too
+PASS  her table: the restless atom, the heaviest atoms, something hidden in the rocks, white phosphorus is chemistry, and (her own small mistake) the rare metals a little  — {"e":"restless","c":"heaviest","h":"yes","p":"chemistry","r":true}
+PASS  her path, at her values, without the tantalum salt: "your page is her note, and your world is the one you live in"  — Your page is her note, and your world is the one you live in.
+PASS  her path with her faint tantalum: the closing turns to her own small mistake, the humming jewellery
+PASS  a careful thumb on her path writes her note  — 40 of 40 albums
 
-5. A careful thumb (balanced, then held a second and a half) gets her labels on every jar
-PASS  careful labels equal her labels for all sixteen jars, 40 seeds each (the faint tantalum salt reads NOTHING SEEN or CAN’T TELL after a short hold)
-PASS  a patient thumb (five seconds standing) sees the tantalum salt move the spot: her "slightly active"  — 39 of 40
-PASS  careful readings sit within 4.5 σ of her values  — worst 2.71 σ (uranium)
+5. Designed wrong numbers: the idea planted and the world it makes
+PASS  pure uranium written low (half hers)  — slow / heaviest / unlooked / unlooked; idea: "About what its uranium gives. It’s the uranium that does it,…"
+PASS  a salt written low  — slow / heaviest / unlooked / unlooked; idea: "Far weaker than its uranium. Does joining uranium to other a…"
+PASS  lead written as active  — sky / weight / unlooked / unlooked; idea: "Wow! The air carries electricity near lead! Every heavy atom…"
+PASS  copper written as active  — restless / everything / unlooked / unlooked; idea: "Copper too?! Then every metal leaks electricity. The telegra…"
+PASS  white phosphorus without a control  — restless / living / unlooked / atom; idea: "White phosphorus does it! And phosphorus is in every bone… i…"
+PASS  white phosphorus, red phosphorus written active  — restless / living / unlooked / atom; idea: "Red phosphorus too! It is the phosphorus atom, a light one. …"
+PASS  white phosphorus, red phosphorus none (hers)  — restless / heaviest / unlooked / chemistry; idea: "Red phosphorus: nothing. Same element as white phosphorus, a…"
+PASS  thorium written as nothing  — restless / alone / unlooked / unlooked; idea: "Thorium: nothing. Uranium is alone, then. A freak metal?…"
+PASS  the copy as strong as the mine’s  — crystal / heaviest / crystal / unlooked; idea: "My chalcolite is stronger than its uranium too! It’s the cry…"
+PASS  the copy ordinary after the mine’s (hers)  — restless / heaviest / yes / unlooked; idea: "My own chalcolite is ordinary. So it isn’t the crystal: the …"
+PASS  pitchblende written at its uranium  — bottomless / heaviest / no / unlooked; idea: "Just about its uranium. Nothing else in that rock.…"
+PASS  pitchblende high in a sky-wind page  — sky / weight / yes / unlooked; idea: "More than its uranium can give?! Something heavier than uran…"
+PASS  pitchblende high in a slow-fire page  — slow / heaviest / yes / unlooked; idea: "More than its uranium can give?! A fiercer fuel is hiding in…"
+PASS  lead and white phosphorus  — sky / everything / unlooked / atom; idea: "White phosphorus does it! And phosphorus is in every bone… i…"
 
-6. Robustness: her rocks are MORE THAN THEIR URANIUM, her copy is not, under any plausible share and threshold
-PASS  pitchblende at 40 % uranium (pure uraninite is about 88 %)  — more, more
-PASS  pitchblende at 50 % uranium (pure uraninite is about 88 %)  — more, more
-PASS  pitchblende at 65 % uranium (pure uraninite is about 88 %)  — more, more
-PASS  pitchblende at 75 % uranium (pure uraninite is about 88 %)  — more, more
-PASS  pitchblende at 88 % uranium (pure uraninite is about 88 %)  — more, more
-PASS  chalcolite at 45 % uranium: mine more, made about
-PASS  chalcolite at 50 % uranium: mine more, made about
-PASS  chalcolite at 55 % uranium: mine more, made about
-PASS  the threshold (ours, 1.3) can be anything from 1.1 to 4 without changing her labels
-PASS  white phosphorus at 12 (ours; the paper gives no number): still the phosphorus lesson  — without
-PASS  white phosphorus at 24 (ours; the paper gives no number): still the phosphorus lesson  — without
-PASS  white phosphorus at 50 (ours; the paper gives no number): still the phosphorus lesson  — without
-PASS  white phosphorus at 72 (ours; the paper gives no number): still the phosphorus lesson  — without
-   note: natural chalcolite (52) and a thick layer of thorium oxide (53) read level; the rocks are not explained by thorium because they hold none (their cards say so).
+6. Forty thousand random pages (random bands for every jar, or never measured): every world agrees with its laws
+PASS  no world draws a picture its laws do not allow; every slot is drawable; no decimals
+   34 reachable combinations of energy · matter · rocks:
+     bottomless · alone · no                          47
+     bottomless · everything · no                    174
+     bottomless · heaviest · no                      130
+     bottomless · living · no                         85
+     crystal · alone · crystal                        59
+     crystal · everything · crystal                  191
+     crystal · heaviest · crystal                    141
+     crystal · living · crystal                       91
+     restless · alone · unlooked                       3
+     restless · alone · yes                           66
+     restless · everything · unlooked                  4
+     restless · everything · yes                     179
+     restless · heaviest · unlooked                    1
+     restless · heaviest · yes                       151
+     restless · living · unlooked                      1
+     restless · living · yes                          67
+     sky · everything · no                          7098
+     sky · everything · unlooked                     127
+     sky · everything · yes                         7166
+     sky · weight · no                              5655
+     sky · weight · unlooked                         100
+     sky · weight · yes                             5498
+     slow · alone · no                               920
+     slow · alone · unlooked                          17
+     slow · alone · yes                              936
+     slow · everything · no                         2621
+     slow · everything · unlooked                     49
+     slow · everything · yes                        2530
+     slow · heaviest · no                           1870
+     slow · heaviest · unlooked                       30
+     slow · heaviest · yes                          1923
+     slow · living · no                             1049
+     slow · living · unlooked                         12
+     slow · living · yes                            1009
 
-7. How many of her six claims a page backs: five plans × three thumbs, 300 albums each
-   plan                          | careful: mean, all six, rocks | sloppy: mean, rocks | hasty: mean, rocks
-   the paper's path              | 6.0, 100 %, 100 %              | 3.7, 70 %           | 1.1, 0 %
-   random eight                  | 3.8, 2 %, 93 %                 | 2.4, 64 %           | 1.0, 0 %
-   drawers top to bottom         | 4.0, 0 %, 100 %                | 2.8, 78 %           | 1.4, 0 %
-   rocks first, then the copy    | 4.0, 0 %, 100 %                | 2.5, 77 %           | 1.5, 0 %
-   dull jars (all read zero)     | 0.0, 0 %, 0 %                  | 0.0, 0 %            | 0.0, 0 %
-PASS  the paper's path, measured carefully, backs all six claims  — 100 % of albums
-PASS  a page of dull jars backs nothing, however carefully measured
-PASS  hasty measuring on the right jars backs clearly less than careful measuring  — 1.1 against 6.0
-PASS  a hasty player who writes the rock down at the push its label suggests usually misses the discovery  — 0 % back the rock claim
+7. A retest replaces the earlier reading; a clash fires once
+PASS  lead written active, then measured again as nothing: the sky wind is gone, and the balloon says "Second look"
+PASS  two mines, two answers: the clash fires once
+PASS  every balloon fits a bench balloon (at most 200 characters)  — longest 159
+PASS  no decimals anywhere in the words
 
-53 passed, 0 failed.
+8. Which world a page makes: three thumbs on her path and on random jars, 300 albums each
+   page                    | hers      restless  slow      sky       crystal   bottomless
+   her path, careful       | 97 %      0 %       3 %       0 %       0 %       0 %       
+   her path, sloppy        | 80 %      0 %       20 %      0 %       0 %       0 %       
+   her path, hasty         | 0 %       0 %       0 %       0 %       0 %       100 %     
+   random eight, careful   | 86 %      13 %      1 %       0 %       0 %       0 %       
+   random eight, sloppy    | 76 %      12 %      11 %      0 %       1 %       0 %       
+   random eight, hasty     | 0 %       0 %       0 %       84 %      0 %       16 %      
+PASS  careful on her path: her note, nine albums in ten or more
+PASS  sloppy on her path: a sloppy thumb under-reads (it creeps up on the balance), so it writes her note or the slow fire  — hers, slow
+PASS  across all thumbs and jars, at least four of the five physics occur  — hers, slow, bottomless, restless, crystal, sky
+PASS  hasty on her path never writes her note
+
+58 passed, 0 failed.

@@ -133,6 +133,37 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .prose h3{font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:.03em;margin:16px 0 4px}
 .prose p,.prose li{font-size:18px}
 .prose ol{padding-left:22px}
+/* thought balloons rising from the bench, tail to the bottom edge (the unseen person at the bench) */
+.thoughts{position:absolute;left:8px;right:8px;top:8px;line-height:1.22;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.thought{position:relative;background:#fff;border:2.5px solid var(--ink);border-radius:22px;padding:9px 13px;font-size:17px;animation:rise .5s ease-out}
+.thought:after,.thought:before{content:"";position:absolute;background:#fff;border:2.5px solid var(--ink);border-radius:50%}
+.thought:before{width:14px;height:14px;bottom:-20px;left:46%}.thought:after{width:8px;height:8px;bottom:-32px;left:43%}
+.thought.clash{border-color:var(--red);border-style:dashed;border-radius:6px;font-family:var(--display);font-size:17px;color:var(--red)}
+.thought.clash:before,.thought.clash:after{display:none}
+@keyframes rise{0%{transform:translateY(16px);opacity:0}100%{transform:none;opacity:1}}
+.ideasstrip{margin:10px 0}
+.ideasstrip .ih{font-family:var(--display);font-size:16px;letter-spacing:.03em;margin-bottom:4px}
+.mini{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:5px 10px;margin:6px 0;font-size:15px;line-height:1.2}
+.mini b,.ib b{font-family:var(--display);font-weight:400;font-size:13px;background:var(--ink);color:#fff;padding:0 5px;margin-right:5px}
+.mini.clash,.ib.clash{border-color:var(--red);border-style:dashed;border-radius:4px;color:var(--red)}
+/* the last pages */
+.pagehead{font-family:var(--display);font-weight:400;font-size:24px;margin:22px 0 6px;letter-spacing:.02em}
+.ideaboard{border:var(--line) solid var(--ink);background:#FBF6EC;padding:8px;display:flex;flex-wrap:wrap;gap:8px}
+.ib{background:#fff;border:2.2px solid var(--ink);border-radius:18px;padding:7px 11px;font-size:15.5px;line-height:1.2;flex:1 1 140px}
+.ib:nth-child(2n){transform:rotate(-1deg)}.ib:nth-child(3n){transform:rotate(1deg)}
+.physcard{border:3.5px solid var(--ink);background:var(--sky);padding:12px}
+.physname{font-family:var(--display);font-size:32px;line-height:1;text-align:center;background:#fff;border:var(--line) solid var(--ink);padding:10px 6px 6px;margin-bottom:10px}
+.laws{margin:0;padding-left:24px}.laws li{font-size:17.5px;margin:8px 0}
+.from{display:inline-block;font-size:14px;color:var(--blue);margin-left:2px}
+.worldtitle{font-family:var(--display);font-size:20px;background:var(--ink);color:#fff;padding:6px 10px 3px;letter-spacing:.02em}
+.worldtitle small{font-family:var(--text);font-size:15px;letter-spacing:0}
+.worldsvg{display:block;width:100%;height:auto;border:var(--line) solid var(--ink);border-top:none;background:#fff}
+.callouts{list-style:none;padding:0;margin:8px 0}.callouts li{display:grid;grid-template-columns:26px 1fr;gap:6px;margin:6px 0;font-size:16.5px;line-height:1.22}
+.callouts li i{font-style:normal;font-family:var(--display);width:22px;height:22px;border:2px solid var(--ink);border-radius:50%;text-align:center;line-height:20px;font-size:13px;background:#fff}
+.worldpara{font-size:17.5px;border-left:6px solid var(--ink);padding:2px 0 2px 10px}
+.dates{list-style:none;padding:0;margin:8px 0}.dates li{font-size:16px;margin:4px 0}.dates b{font-family:var(--display);font-weight:400;margin-right:6px}
+.unseen{margin:14px 0;font-size:16px}.unseen span{display:inline-block;border:2px solid #C9C9C9;color:#A9A9A9;font-family:var(--display);font-size:14px;padding:3px 7px 1px;margin:3px 4px 0 0}
+.unseen span.seen{border-color:var(--ink);color:var(--ink);background:var(--sky)}
 </style>
 </head>
 <body>
@@ -145,7 +176,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     <div class="after">after Marie Skłodowska Curie's note to the Académie des sciences, 12 April 1898</div>
   </div>
   <svg id="coversvg" class="coverart" viewBox="0 0 348 262" aria-hidden="true"></svg>
-  <p class="acts"><span>Put a powder or a rock between two brass plates.</span><span>Push back on a spot of light with your thumb.</span><span>Write down how hard it took.</span><span>At the end, your page is held up against hers.</span></p>
+  <p class="acts"><span>Put a powder or a rock between two brass plates.</span><span>Push back on a spot of light with your thumb.</span><span>Write down how hard it took: every number plants an idea.</span><span>At the end, your ideas make a physics, and a world.</span></p>
   <div class="aimbox"><b>Your aim</b>Uranium makes the air carry electricity. Find what else does.</div>
   <button class="btn go" id="begin">Begin the album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -157,7 +188,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="benchband">PANEL 1 OF 9 <small>pure uranium</small></div>
   <div class="benchwrap"><svg id="benchsvg" viewBox="0 0 348 262" role="img" aria-label="The bench: the scale with the spot of light, the brass plates, the electrometer, and the quartz with the weight"></svg>
-    <div class="stamp hidden" id="stamp">WRITTEN DOWN</div></div>
+    <div class="thoughts hidden" id="thoughts"></div></div>
   <div id="benchplay">
     <div class="slidebox">
       <div class="slidehead"><b>Let the weight down</b><span>onto the quartz</span></div>
@@ -178,8 +209,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="pageband">YOUR PAGE <small></small></div>
   <div class="page" id="page"></div>
-  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>what you measured</span><span><i class="ke"></i>how sure (an arrow: at least, at most)</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
-  <div class="foundline" id="foundline"></div>
+  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>the number you wrote</span><span><i class="kd"></i>your pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> her own reading</span></div>
+  <div class="ideasstrip" id="ideasstrip"></div>
   <div id="shelfpart">
     <div class="band" id="shelfband">THE SHELF <small></small></div>
     <p style="font-size:17px;margin:4px 0" id="shelfhint">Tap a jar or a rock to read its label. Testing it puts it on the plate and draws one panel.</p>
@@ -199,21 +230,32 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="row2" style="margin-top:6px"><button class="btn" id="cardback">Put it back</button><button class="btn go" id="cardtest">Test it</button></div>
 </div>
 
-<!-- THE LAST PAGE -->
+<!-- THE LAST PAGES -->
 <div id="end" class="screen">
-  <div class="band">THE LAST PAGE <small>nine panels</small></div>
-  <div class="headline" id="headline"></div>
-  <p class="fate" id="fate"></p>
-  <div class="cap"><h3>HER NOTE, AGAINST YOUR PAGE</h3><div id="claims"></div></div>
-  <div class="cap"><h3>WHAT YOU DID</h3><p id="did"></p></div>
-  <div class="cap sky"><h3>WHAT THE PAPER SAYS</h3><p id="paper"></p></div>
-  <div class="cap"><h3>WHAT IT MEANS</h3><p id="means"></p></div>
+  <div class="band">THE LAST PAGES <small>your note, and hers</small></div>
+  <h2 class="pagehead">1 · Your ideas</h2>
+  <p style="font-size:17px;margin:4px 0">Every number you wrote planted a thought. Here they all are, pinned up.</p>
+  <div class="ideaboard" id="ideaboard"></div>
+  <h2 class="pagehead">2 · Your physics</h2>
+  <p style="font-size:17px;margin:4px 0">Put together, your ideas make three laws of nature.</p>
+  <div class="physcard"><div class="physname" id="physname"></div><ol class="laws" id="laws"></ol></div>
+  <h2 class="pagehead">3 · Your world</h2>
+  <div class="worldtitle">THE WORLD OF YOUR NOTE <small>(if it were true)</small></div>
+  <svg id="worldsvg" class="worldsvg" viewBox="0 0 348 410" role="img" aria-label="The world of your note"></svg>
+  <ol class="callouts" id="callouts"></ol>
+  <p class="worldpara" id="worldpara"></p>
+  <h2 class="pagehead">4 · Ours</h2>
+  <div class="worldtitle">THE WORLD OF HER NOTE <small>(the one we live in)</small></div>
+  <svg id="oursvg" class="worldsvg" viewBox="0 0 348 410" role="img" aria-label="Our world"></svg>
+  <ol class="callouts" id="ourcallouts"></ol>
+  <ul class="dates" id="dates"></ul>
+  <div class="cap"><h3>WHERE THEY PART</h3><div id="part"></div></div>
   <div class="band">YOUR PAGE</div>
   <div class="page" id="endpage"></div>
   <div class="band">HER MEASUREMENTS <small>from her table</small></div>
   <div class="her" id="her"></div>
-  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what you measured</span><span><i class="ke"></i>how sure (an arrow: at least, at most)</span><span><i class="kd"></i>pure uranium</span><span><svg class="kt" viewBox="0 0 10 8" width="11" height="9"><path d="M0,0 L10,0 L5,8 Z" fill="#17140F"/></svg> on your page: her own reading</span></div>
-  <div class="later" id="later"></div>
+  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span></div>
+  <div class="unseen" id="unseen"></div>
   <button class="btn go" id="again">Start a new album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
@@ -225,11 +267,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="aimbox"><b>Your aim</b>Uranium makes the air carry electricity. Find what else does.</div>
   <ol>
     <li><b>The bench.</b> Whatever lies on the lower brass plate, if it sends out rays, lets the air between the two plates carry a tiny electric current. The current pushes the spot of light along the scale, to the right.</li>
-    <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz pushes the spot back to the left. The faster you let the weight down, the harder it pushes.</li>
-    <li><b>Write it down.</b> When you think you know how strong the plate is, press WRITE IT DOWN. Your page keeps how hard you were pushing and what the spot was doing at that moment, and says how sure that makes the reading. Her own reading is shown next to yours.</li>
-    <li><b>Your page.</b> Each reading is drawn as a panel. The yellow bar is what the thing's uranium alone could give; the blue bar is your reading, with a line for how sure it is (an arrow if it is only "at least" or "at most"); the dashed line is pure uranium; the small black triangle is her reading. You have nine panels. The first is pure uranium.</li>
-    <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again, uranium too; each time is a new panel.</li>
-    <li><b>The last page.</b> After nine panels, your page is held up against her note: how many of its claims your own readings back.</li>
+    <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz sends back the opposite electricity and pushes the spot to the left. The faster you let the weight down, the harder it pushes.</li>
+    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and a thought balloon rises from the bench: what your page now believes. Her own reading is shown next to yours.</li>
+    <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the thing's uranium alone could give, the blue bar the number you wrote, the dashed line your own pure uranium, the small black triangle her reading. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
+    <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again; your page believes the latest number.</li>
+    <li><b>The last pages.</b> After nine panels your ideas are put together into a physics, three laws, and drawn as a world: what life would look like if your note were true. Then ours, and where the two part.</li>
   </ol>
   <button class="btn go" id="helpback">Back</button>
 </div>
@@ -356,43 +398,150 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     return s;
   }
 
-  // ---------- an album panel (112 × 124): the player's reading, with how sure it is, against her triangle
-  function panelSVG(p, n, opts) {
-    opts = opts || {};
+  // ---------- an album panel (112 × 124): the number written down, against your own pure uranium, with her triangle
+  const BADGE_WORDS = b => ({ YARD: [['YOUR', 'YARDSTICK'], INK], NONE: [['NOTHING'], INK], LOW: [['LESS THAN', 'ITS', 'URANIUM'], INK], ABOUT: [['ABOUT', 'ITS', 'URANIUM'], INK],
+    HIGH: [['MORE', 'THAN ITS', 'URANIUM!'], RED], FAINT: [['A', 'WHISPER'], INK], ACTIVE: [['NO URANIUM,', 'AND IT', 'DOES IT!'], BLUE], STRONG: [['NO URANIUM,', 'STRONGER', 'THAN IT!'], BLUE] })[b];
+  function panelSVG(p, n) {
     if (!p) return `<rect x="1.5" y="1.5" width="109" height="121" fill="#fff" stroke="${INK}" stroke-width="2" stroke-dasharray="6 5"/><text x="56" y="70" text-anchor="middle" font-family="Lilita, sans-serif" font-size="30" fill="#E2E6EA">${n}</text>`;
-    const k = M.panelKind(g, p), R = p.R;
-    const sc = 24, x0 = 8, X = v => x0 + Math.min(96, v * sc), bg = k === 'more' ? '#FFE9E6' : k === 'nothing' ? '#F1F1EF' : k === 'unsure' ? '#fff' : SKY;
+    const U = M.yard(g), b = M.band(p.id, p.x, U);
+    const sc = 24, x0 = 8, X = v => x0 + Math.min(96, v * sc), bg = (b === 'HIGH' || b === 'STRONG') ? '#FFE9E6' : b === 'NONE' ? '#F1F1EF' : SKY;
     let s = `<rect x="1.5" y="1.5" width="109" height="121" fill="${bg}" stroke="${INK}" stroke-width="2.5"/>`;
     s += `<rect x="1.5" y="1.5" width="20" height="18" fill="#fff" stroke="${INK}" stroke-width="2"/><text x="11.5" y="15" text-anchor="middle" font-family="Lilita, sans-serif" font-size="13" fill="${INK}">${p.n}</text>`;
     let words = p.short.toUpperCase().split(/,\s*/);
     if (words.length === 1 && words[0].length > 13) { const q = words[0].indexOf(' '); words = [words[0].slice(0, q), words[0].slice(q + 1)]; }
     s += `<text font-family="Patrick, sans-serif" font-size="12" fill="${INK}"><tspan x="26" y="13">${esc(words[0])}${words[1] && /,/.test(p.short) ? ',' : ''}</tspan>${words[1] ? `<tspan x="26" y="25">${esc(words[1])}</tspan>` : ''}</text>`;
     s += `<g transform="translate(4,30)">${iconSVG(p.look, 50, 44, p.u)}</g>`;
-    const B = { yardstick: [['YOUR', 'YARDSTICK'], INK], nothing: [['NOTHING', 'SEEN'], INK], without: [['NO', 'URANIUM', 'IN IT!'], BLUE], more: [['MORE', 'THAN ITS', 'URANIUM!'], RED], about: [['ABOUT', 'ITS', 'URANIUM'], INK], unsure: [['CAN’T', 'TELL'], INK] }[k];
-    const y0 = 52 - (B[0].length - 1) * 6;
-    s += `<text font-family="Patrick, sans-serif" font-size="11" fill="${B[1]}" text-anchor="middle">${B[0].map((w, i) => `<tspan x="82" y="${y0 + i * 12}">${w}</tspan>`).join('')}</text>`;
-    if (k === 'more') s += `<text x="82" y="81" text-anchor="middle" font-family="Lilita, sans-serif" font-size="15" fill="${RED}">!?</text>`;
-    // bars: her scale, 0–4 times pure uranium across 96 px
+    const B = BADGE_WORDS(b), y0 = 52 - (B[0].length - 1) * 6;
+    s += `<text font-family="Patrick, sans-serif" font-size="10.5" fill="${B[1]}" text-anchor="middle">${B[0].map((w, i) => `<tspan x="82" y="${y0 + i * 12}">${w}</tspan>`).join('')}</text>`;
+    if (b === 'HIGH' || b === 'STRONG') s += `<text x="82" y="81" text-anchor="middle" font-family="Lilita, sans-serif" font-size="15" fill="${RED}">!?</text>`;
     s += `<line x1="${x0}" y1="116" x2="${x0 + 96}" y2="116" stroke="${INK}" stroke-width="1"/>`;
-    if (p.u > 0) s += `<rect x="${x0}" y="84" width="${Math.max(2, p.u * sc)}" height="9" fill="${YEL}" stroke="${INK}" stroke-width="1.5"/>`;
-    const yb = 98, hb = 13, ym = yb + hb / 2;
-    if (R.type === 'atleast') {            // at least: a solid bar to the push, then an arrow onward
-      const xl = X(R.lo);
-      if (xl - x0 > 0.5) s += `<rect x="${x0}" y="${yb}" width="${xl - x0}" height="${hb}" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
-      const xe = Math.min(x0 + 96, xl + 22);
-      s += `<line x1="${xl}" y1="${ym}" x2="${xe - 2}" y2="${ym}" stroke="${INK}" stroke-width="1.8" stroke-dasharray="3 2"/><path d="M${xe - 6},${ym - 4} L${xe},${ym} L${xe - 6},${ym + 4}" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
-    } else if (R.type === 'atmost') {      // at most: an empty bar to the push, with an arrow pointing back
-      const xh = X(R.hi);
-      s += `<rect x="${x0}" y="${yb}" width="${Math.max(1, xh - x0)}" height="${hb}" fill="#fff" stroke="${BLUE}" stroke-width="2"/><path d="M${xh - 2},${ym - 4} L${xh - 8},${ym} L${xh - 2},${ym + 4}" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
-    } else {                               // a value: a solid bar with an error bar across its end
-      const xe = X(R.est);
-      if (xe - x0 > 0.5) s += `<rect x="${x0}" y="${yb}" width="${xe - x0}" height="${hb}" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`;
-      else s += `<circle cx="${x0 + 2}" cy="${ym}" r="2.5" fill="${INK}"/>`;
-      const a = X(R.lo), b = X(R.hi);
-      s += `<line x1="${a}" y1="${ym}" x2="${b}" y2="${ym}" stroke="${INK}" stroke-width="1.6"/><line x1="${a}" y1="${ym - 4}" x2="${a}" y2="${ym + 4}" stroke="${INK}" stroke-width="1.6"/><line x1="${b}" y1="${ym - 4}" x2="${b}" y2="${ym + 4}" stroke="${INK}" stroke-width="1.6"/>`;
-    }
-    if (opts.ghost !== false && p.paper > 0) { const gx = X(p.paper); s += `<path d="M${gx - 4},92 L${gx + 4},92 L${gx},98 Z" fill="${INK}"/>`; }
-    s += `<line x1="${x0 + sc}" y1="80" x2="${x0 + sc}" y2="118" stroke="${INK}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
+    if (p.u > 0 && U) s += `<rect x="${x0}" y="84" width="${Math.max(2, Math.min(96, p.u * U * sc))}" height="9" fill="${YEL}" stroke="${INK}" stroke-width="1.5"/>`;
+    const xe = X(p.x), ym = 104.5;
+    if (xe - x0 > 0.5) s += `<rect x="${x0}" y="98" width="${xe - x0}" height="13" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`; else s += `<circle cx="${x0 + 2}" cy="${ym}" r="2.5" fill="${INK}"/>`;
+    if (p.moving) { const bx = Math.max(xe, x0 + 4) + 3; s += [-3, 0, 3].map(o => `<line x1="${bx}" y1="${ym + o}" x2="${bx + (o ? 6 : 9)}" y2="${ym + o}" stroke="${INK}" stroke-width="1.4"/>`).join(''); }
+    if (p.paper > 0) { const gx = X(p.paper); s += `<path d="M${gx - 4},92 L${gx + 4},92 L${gx},98 Z" fill="${INK}"/>`; }
+    if (U) s += `<line x1="${X(U)}" y1="80" x2="${X(U)}" y2="118" stroke="${INK}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
+    return s;
+  }
+
+  // ---------- the worlds, drawn: one landscape per physics, and vignettes that can stand in any of them (ligne claire)
+  const SKIN = '#F2C9A8', ZINC = '#9FB1BF', WALL = '#F4EFE6', GRASS = '#BFD9A8', STREET = '#E6DFD2', LEADC = '#7D8590', GREEN = '#2FAE6B', HEAT = '#E8853A', SMOKE = '#9C9C9C';
+  const ln = (x1, y1, x2, y2, w, c, ex) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c || INK}" stroke-width="${w || 2}" stroke-linecap="round" ${ex || ''}/>`;
+  const rc = (x, y, w, h, f, sw) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${INK}" stroke-width="${sw === undefined ? 2 : sw}"/>`;
+  const pa = (d, f, sw) => `<path d="${d}" fill="${f || 'none'}" stroke="${INK}" stroke-width="${sw === undefined ? 2 : sw}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const ci = (cx, cy, r, f, sw) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${f}" stroke="${INK}" stroke-width="${sw === undefined ? 2 : sw}"/>`;
+  const tx = (x, y, t, sz, f, anchor, font) => `<text x="${x}" y="${y}" text-anchor="${anchor || 'middle'}" font-family="${font || 'Patrick'}, sans-serif" font-size="${sz || 10}" fill="${f || INK}">${esc(t)}</text>`;
+  function person(x, y, s, coat, o) {  // a ligne claire figure standing on (x, y); o: {hat, arm:'up'|'out', helmet, coatLong}
+    o = o || {}; s = s || 1; const k = v => v * s;
+    let g = ln(x - k(4), y, x - k(3), y - k(14), k(2.6)) + ln(x + k(4), y, x + k(3), y - k(14), k(2.6));
+    g += pa(`M${x - k(7)},${y - k(12)} L${x - k(6)},${y - k(30)} Q${x},${y - k(33)} ${x + k(6)},${y - k(30)} L${x + k(7)},${y - k(12)} Z`, coat, k(2));
+    if (o.arm === 'up') g += ln(x + k(6), y - k(28), x + k(13), y - k(40), k(2.6)); else if (o.arm === 'out') g += ln(x + k(6), y - k(27), x + k(17), y - k(24), k(2.6)); else g += ln(x + k(6), y - k(28), x + k(8), y - k(16), k(2.6));
+    g += ln(x - k(6), y - k(28), x - k(8), y - k(16), k(2.6));
+    g += ci(x, y - k(38), k(6), SKIN, k(2)) + `<circle cx="${x + k(2)}" cy="${y - k(39)}" r="${k(0.9)}" fill="${INK}"/>`;
+    if (o.hat) g += pa(`M${x - k(7)},${y - k(42)} L${x + k(7)},${y - k(42)} L${x + k(5)},${y - k(49)} L${x - k(5)},${y - k(49)} Z`, o.hat, k(1.6));
+    if (o.helmet) g += pa(`M${x - k(7)},${y - k(41)} Q${x},${y - k(52)} ${x + k(7)},${y - k(41)} Z`, '#E8C17A', k(1.6)) + ci(x, y - k(47), k(1.8), '#fff', k(1));
+    return g;
+  }
+  function house(x, y, w, h, roof, smoke) {  // y = ground
+    let g = rc(x, y - h, w, h, WALL) + pa(`M${x - 3},${y - h} L${x + w / 2},${y - h - w * 0.45} L${x + w + 3},${y - h} Z`, roof || ZINC);
+    for (let i = 0; i < Math.floor(w / 14); i++) g += rc(x + 5 + i * 14, y - h + 7, 7, 9, '#DCEBF5', 1.4);
+    g += rc(x + w * 0.62, y - h - w * 0.36, 5, 10, '#C9B8A8', 1.4);
+    if (smoke) g += `<g opacity=".85">${ci(x + w * 0.65, y - h - w * 0.45, 4, SMOKE, 1.2)}${ci(x + w * 0.72, y - h - w * 0.55, 5, SMOKE, 1.2)}</g>`;
+    return g;
+  }
+  const cloud = (x, y, s, f) => pa(`M${x},${y} q${-12 * s},0 ${-10 * s},${-9 * s} q${2 * s},${-10 * s} ${14 * s},${-8 * s} q${6 * s},${-10 * s} ${18 * s},${-3 * s} q${12 * s},${-2 * s} ${11 * s},${11 * s} z`, f || '#fff', 1.8);
+  const town = (y, roof, smoke) => house(14, y, 40, 30, roof, smoke) + house(212, y, 46, 38, roof, smoke) + house(262, y, 36, 26, roof, smoke) + house(300, y, 40, 34, roof, smoke);
+  const callout = (x, y, n) => ci(x, y, 9, '#fff', 2.2) + `<text x="${x}" y="${y + 4.5}" text-anchor="middle" font-family="Lilita, sans-serif" font-size="13" fill="${INK}">${n}</text>`;
+  const sparks = (x, y, s) => [[-6, -6, -11, -11], [6, -6, 11, -11], [0, -8, 0, -14], [-8, 1, -14, 2], [8, 1, 14, 2]].map(([a, b, c, d]) => ln(x + a * (s || 1), y + b * (s || 1), x + c * (s || 1), y + d * (s || 1), 1.8, BLUE)).join('');
+
+  const LANDMARK = {
+    dome(n) {  // ours: a power station's dome, pylons, a calm town
+      let g = rc(0, 0, 348, 250, SKY, 0) + ci(300, 40, 16, '#FFF6DC') + cloud(90, 50, 1.1) + cloud(250, 80, 0.8);
+      g += rc(0, 205, 348, 45, GRASS, 0) + ln(0, 205, 348, 205, 2.4);
+      g += rc(40, 140, 110, 65, '#E3E8EC') + pa('M40,140 A55,55 0 0 1 150,140 Z', '#C9D5DE') + rc(160, 110, 22, 95, '#E3E8EC');
+      g += cloud(186, 96, 1.2, '#fff') + cloud(206, 72, 1.0, '#fff');
+      g += pa('M196,205 L206,150 L216,205 M200,180 L212,180 M203,165 L209,165', 'none', 2) + pa('M246,205 L256,160 L266,205 M250,185 L262,185', 'none', 2);
+      g += pa('M206,152 Q231,170 256,162', 'none', 1.4) + pa('M182,130 Q194,140 206,152', 'none', 1.4);
+      g += house(270, 205, 34, 26) + house(306, 205, 36, 34);
+      g += person(26, 240, 0.75, BLUE) + person(170, 242, 0.75, '#C9A27E', { hat: '#5C5A50' }) + person(186, 242, 0.55, RED);
+      return g + callout(95, 122, n);
+    },
+    chimneys(n) {  // the slow fire: coal and smoke under a dim sun
+      let g = rc(0, 0, 348, 250, '#E8DDCB', 0) + ci(290, 46, 18, '#F0B07A') + rc(0, 205, 348, 45, '#D9D0C0', 0) + ln(0, 205, 348, 205, 2.4);
+      [[40, 70], [80, 95], [120, 60], [160, 85]].forEach(([x, top]) => { g += rc(x, top, 16, 205 - top, '#B9776A'); g += rc(x - 2, top - 6, 20, 7, '#9C5D52'); });
+      [[48, 60], [88, 85], [128, 50], [168, 75]].forEach(([x, y]) => { g += `<g opacity=".9">${cloud(x + 10, y - 4, 1, '#8E8E8E')}${cloud(x + 34, y - 18, 1.3, '#A8A8A8')}</g>`; });
+      g += rc(30, 150, 160, 55, '#C9A27E') + [0, 1, 2, 3, 4].map(i => rc(40 + i * 30, 165, 16, 18, '#F3D9A7', 1.4)).join('');
+      g += town(205, '#7F8C96', true).replace(/^.*?(?=<rect x="212")/, '');
+      g += person(60, 242, 0.75, '#5C5A50', { arm: 'out', hat: '#3A3A40' }) + pa('M73,224 l14,6 l-3,6 l-12,-4 Z', '#3A3A40') + person(200, 242, 0.75, '#8C7B6A', { arm: 'up' }) + rc(207, 196, 4, 16, '#fff', 1.2);
+      return g + callout(110, 140, n);
+    },
+    sails(n) {  // the sky wind: lead sails on the peaks, the wind streaming down
+      let g = rc(0, 0, 348, 250, '#DDEFFB', 0);
+      for (let i = 0; i < 9; i++) g += ln(10 + i * 40, 0, 40 + i * 40 - 60, 70, 1.6, '#8FB7D3', 'stroke-dasharray="6 6"');
+      g += pa('M0,180 L50,95 L90,130 L150,55 L205,120 L250,80 L300,125 L348,100 L348,205 L0,205 Z', '#A9BCCB');
+      g += pa('M138,75 L150,55 L162,75 L154,70 L150,76 L146,70 Z', '#fff', 1.6) + pa('M240,96 L250,80 L260,96 L253,92 Z', '#fff', 1.6);
+      [[150, 55], [250, 80], [50, 95]].forEach(([x, y]) => { g += ln(x, y, x, y - 34, 2.4) + pa(`M${x},${y - 32} Q${x + 18},${y - 24} ${x + 20},${y - 8} L${x},${y - 8} Z`, LEADC); });
+      g += pa('M150,30 Q210,120 300,180', 'none', 1.4) + pa('M250,52 Q280,130 316,180', 'none', 1.4);
+      g += rc(0, 205, 348, 45, GRASS, 0) + ln(0, 205, 348, 205, 2.4) + town(205);
+      g += person(84, 242, 0.75, '#C9A27E', { arm: 'up', hat: '#3A3A40' }) + person(104, 242, 0.55, BLUE, { arm: 'up' }) + person(150, 242, 0.75, LEADC);
+      return g + callout(176, 22, n);
+    },
+    tower(n) {  // the crystal lens: a house-sized crystal lights the town at dusk
+      let g = rc(0, 0, 348, 250, '#2C3E5C', 0);
+      for (let i = 0; i < 14; i++) g += ci((i * 53) % 340 + 6, (i * 37) % 90 + 8, 1.4, '#fff', 0);
+      for (let a = 0; a < 12; a++) { const t = a / 12 * Math.PI * 2; g += ln(174 + Math.cos(t) * 70, 120 + Math.sin(t) * 70, 174 + Math.cos(t) * 110, 120 + Math.sin(t) * 110, 2, '#7FD3A6'); }
+      g += pa('M150,205 L150,90 L174,62 L198,90 L198,205 Z', GREEN, 2.6) + pa('M174,62 L174,205', 'none', 1.6) + pa('M150,90 L174,104 L198,90', 'none', 1.6);
+      g += pa('M128,205 L128,140 L142,124 L156,140 L156,205 Z', '#4BC287') + pa('M196,205 L196,150 L208,136 L220,150 L220,205 Z', '#4BC287');
+      g += rc(0, 205, 348, 45, '#3B4E6B', 0) + ln(0, 205, 348, 205, 2.4);
+      g += town(205, '#56677D').replace(/#DCEBF5/g, '#BDEBD0');
+      g += person(104, 242, 0.75, '#5C5A50', { arm: 'up' }) + person(246, 242, 0.75, '#8C7B6A', { arm: 'up', hat: '#3A3A40' }) + person(262, 242, 0.55, '#C9A27E');
+      return g + callout(222, 70, n);
+    },
+    stone(n) {  // the bottomless atom: a stone in the square heats the town for ever
+      let g = rc(0, 0, 348, 250, '#F6E8DA', 0) + cloud(80, 50, 1) + rc(0, 205, 348, 45, STREET, 0) + ln(0, 205, 348, 205, 2.4);
+      g += town(205, '#B88F7A');
+      g += rc(120, 170, 56, 35, '#D9CFC2') + pa('M128,170 L132,140 L150,128 L168,138 L170,170 Z', '#3A3A40') + pa('M140,146 L150,140', 'none', 2).replace(INK, '#fff');
+      for (let i = 0; i < 4; i++) g += pa(`M${176 + i * 2},${150 - i * 14} q10,-6 20,0 t20,0 t20,0`, 'none', 2).replace(`stroke="${INK}"`, `stroke="${HEAT}"`);
+      for (let i = 0; i < 3; i++) g += pa(`M${118 - i * 2},${150 - i * 14} q-10,-6 -20,0 t-20,0 t-20,0`, 'none', 2).replace(`stroke="${INK}"`, `stroke="${HEAT}"`);
+      g = g.replace(/^(.*?)<rect x="14" y="175".*?(?=<rect x="212")/, '$1');
+      g += ci(52, 160, 28, 'none', 2.6) + ci(52, 160, 5, '#3A3A40') + [0, 1, 2, 3, 4, 5].map(i => { const t = i / 6 * Math.PI * 2; return ln(52, 160, 52 + Math.cos(t) * 28, 160 + Math.sin(t) * 28, 2); }).join('') + pa('M80,150 q8,6 2,14', 'none', 2) + ln(52, 188, 52, 205, 3);
+      g += person(104, 242, 0.75, BLUE, { arm: 'out' }) + person(190, 242, 0.75, '#C9A27E', { arm: 'out', hat: '#5C5A50' }) + person(206, 242, 0.55, RED) + person(26, 242, 0.75, '#8C7B6A', { arm: 'up' });
+      return g + callout(150, 116, n);
+    },
+  };
+  const VIGNETTE = {  // each drawn in a 110 × 150 frame
+    rockclock: () => pa('M14,118 L20,70 L52,56 L56,120 Z', '#A99A8C') + pa('M60,120 L58,56 L90,66 L98,118 Z', '#A99A8C') + ci(56, 92, 16, '#fff') + ln(56, 92, 56, 80, 2) + ln(56, 92, 64, 96, 2) + tx(56, 140, 'BILLIONS OF YEARS', 9),
+    hospital: () => rc(14, 54, 82, 70, '#fff') + rc(46, 62, 18, 18, '#fff') + tx(55, 77, 'H', 15, BLUE, 'middle', 'Lilita') + rc(22, 98, 26, 26, '#DCEBF5', 1.4) + rc(62, 98, 26, 26, '#DCEBF5', 1.4) + [0, 1, 2].map(i => ln(76, 30 + i * 6, 70, 54, 1.6, BLUE, 'stroke-dasharray="3 3"')).join(''),
+    table118: () => { let g = ''; for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) g += rc(10 + c * 15, 40 + r * 15, 13, 13, r === 3 && c === 5 ? '#fff' : '#E3E8EC', 1.2); return g + tx(92.5, 92, '118', 7.5) + pa('M100,92 l6,-4 l-2,8 l6,-3', 'none', 1.4) + tx(55, 128, 'THE END OF THE TABLE', 9); },
+    jardark: () => [['#F3D06B', 1899], ['#C9B46A', 1902], ['#5C5A50', 1905]].map(([f, y], i) => rc(10 + i * 32, 60, 26, 44, '#EEF7FC') + rc(13 + i * 32, 74, 20, 28, f, 1.4) + rc(12 + i * 32, 54, 22, 6, '#9C6B43', 1.4) + tx(23 + i * 32, 120, String(y), 9)).join('') + tx(55, 138, 'SEALED: GOING DARK', 9),
+    thermoglobe: () => ci(52, 86, 32, '#BFD9E8') + pa('M30,74 q14,-8 22,6 q8,12 24,4', 'none', 1.6) + rc(70, 30, 8, 52, '#fff') + ci(74, 84, 7, '#E8853A') + tx(55, 136, '20–40 MILLION YEARS', 9),
+    hourglass: () => pa('M34,40 L76,40 L58,84 L76,128 L34,128 L52,84 Z', '#EEF7FC') + pa('M42,52 L68,52 L55,78 Z', '#E8C17A', 1.2) + pa('M44,124 L66,124 L55,112 Z', '#E8C17A', 1.2) + tx(55, 30, 'EVOLUTION?', 10, RED),
+    sails: () => '',
+    quietmine: () => pa('M10,128 L10,72 Q55,30 100,72 L100,128 Z', '#8C7B6A') + pa('M30,128 L30,86 Q55,62 80,86 L80,128 Z', '#2A2A2F') + rc(30, 40, 50, 18, '#fff', 1.6) + tx(55, 53, 'QUIET', 11, BLUE, 'middle', 'Lilita') + tx(55, 142, 'URANIUM SILENT', 9),
+    bank: () => ci(55, 82, 34, '#C9D5DE') + ci(55, 82, 22, '#E3E8EC') + ln(33, 82, 77, 82, 2) + ln(55, 60, 55, 104, 2) + sparks(22, 54) + sparks(90, 58) + sparks(28, 116, 0.8) + tx(55, 140, 'THE VAULT CRACKLES', 9),
+    balloon: () => ci(55, 58, 28, '#E9EEF2') + pa('M30,70 L46,102 M80,70 L64,102', 'none', 1.6) + rc(44, 102, 22, 14, '#C9A27E') + ln(55, 26, 55, 14, 2) + pa('M50,18 L55,10 L60,18', 'none', 2) + tx(55, 136, 'WHERE FROM?', 10),
+    tower: () => '',
+    fair: () => [0, 1, 2].map(i => pa(`M${18 + i * 30},110 L${18 + i * 30},${84 - i * 8} L${28 + i * 30},${74 - i * 8} L${38 + i * 30},${84 - i * 8} L${38 + i * 30},110 Z`, GREEN)).join('') + rc(8, 110, 94, 10, '#C9A27E') + ci(88, 54, 10, RED) + pa('M84,62 L80,78 M92,62 L96,78', 'none', 2).replace(`stroke="${INK}"`, `stroke="${RED}"`) + tx(88, 58, '1st', 9, '#fff') + tx(55, 140, 'THE BRIGHTEST LATTICE', 9),
+    grind: () => ci(40, 78, 24, '#C9C1B4') + ln(40, 54, 40, 102, 2) + ln(16, 78, 64, 78, 2) + pa('M70,110 q10,-10 20,0 q-10,6 -20,0 Z', '#5C5A50') + pa('M72,60 L80,50 L88,60 L88,74 L72,74 Z', '#7FAF94') + pa('M74,52 L96,74 M96,52 L74,74', 'none', 2).replace(`stroke="${INK}"`, `stroke="${RED}"`) + tx(55, 140, 'GROUND: DEAD', 9),
+    sack: () => pa('M22,124 Q16,84 30,68 L46,62 L62,68 Q74,84 68,124 Z', '#C9A27E') + ln(34, 70, 58, 70, 2) + tx(46, 102, 'PITCH', 8) + tx(46, 112, 'BLENDE', 8) + pa('M70,126 Q66,96 76,84 L88,80 L98,86 Q104,100 98,126 Z', '#C9A27E') + pa('M84,40 l-10,10 M84,40 l10,10 M84,40 l0,14 M78,46 l12,0', 'none', 1).replace(`stroke="${INK}"`, 'stroke="#9C9C9C"') + tx(55, 142, 'NEVER OPENED', 9),
+    stone: () => '',
+    engine: () => ci(48, 82, 30, 'none', 2.6) + ci(48, 82, 7, '#3A3A40') + [0, 1, 2, 3, 4, 5].map(i => { const t = i / 6 * Math.PI * 2 + 0.3; return ln(48, 82, 48 + Math.cos(t) * 30, 82 + Math.sin(t) * 30, 2); }).join('') + pa('M80,64 q10,8 4,20', 'none', 2) + rc(62, 100, 42, 30, '#fff', 1.6) + tx(83, 112, 'PATENT', 8) + tx(83, 123, 'GRANTED', 8, RED),
+    blackboard: () => rc(8, 46, 94, 64, '#2F4A3E') + tx(55, 70, 'ENERGY IS', 10, '#fff') + tx(55, 84, 'CONSERVED', 10, '#fff') + ln(14, 90, 96, 60, 3, RED) + tx(55, 136, 'FIRST LAW: GONE', 9),
+    joachim: () => rc(18, 50, 74, 26, '#fff') + tx(55, 67, 'JOACHIMSTHAL', 9) + ln(55, 76, 55, 120, 3) + pa('M36,112 L46,96 L66,96 L76,112 Z', '#3A3A40') + pa('M44,92 l4,-8 l4,6 l3,-8 l3,8 l4,-6 l4,8 Z', '#E2B23C', 1.4) + tx(55, 138, 'THE PRECIOUS METAL', 9),
+    pedestal: () => rc(34, 88, 42, 40, '#E3E8EC') + rc(28, 84, 54, 6, '#fff') + pa('M40,84 L40,52 L70,52 L70,84', '#EEF7FC', 1.6) + pa('M46,84 L50,70 L60,66 L64,84 Z', '#5B6068') + rc(38, 104, 34, 10, '#fff', 1.2) + tx(55, 112, 'THE ONLY ONE', 7) + tx(55, 142, 'URANIUM, ALONE', 9),
+    doctor: () => person(30, 130, 1.45, '#fff', { arm: 'out' }) + person(82, 130, 1.45, '#DCEBF5') + [0, 1, 2, 3].map(i => pa(`M75,${88 + i * 6} q7,-3 14,0`, 'none', 1.3)).join('') + rc(50, 84, 11, 11, '#C9D5DE', 1.4) + ln(61, 89, 72, 92, 1.6) + sparks(98, 78, 0.8) + tx(55, 145, 'LISTENING TO BONES', 9),
+    storm: () => cloud(36, 58, 1.4, '#8E9AA6') + cloud(76, 64, 1.05, '#8E9AA6') + [0, 1, 2, 3, 4, 5].map(i => ln(20 + i * 13, 72, 16 + i * 13, 88, 1.6, BLUE)).join('') + pa('M20,124 q14,-14 28,0 Z', '#E2342B', 1.6) + ln(34, 124, 34, 136, 2) + pa('M60,124 q14,-14 28,0 Z', BLUE, 1.6) + ln(74, 124, 74, 136, 2) + tx(55, 108, 'NO LIGHTNING?', 10),
+    miners93: () => person(30, 130, 1.5, '#8C7B6A', { helmet: true, arm: 'up' }) + ln(50, 70, 62, 58, 3) + pa('M58,54 l10,6 l-4,4', 'none', 2.4) + rc(60, 70, 44, 40, '#fff', 1.6) + tx(82, 84, 'WANTED', 8, RED) + tx(82, 96, 'ELEMENT', 8) + tx(82, 106, '93', 10, INK, 'middle', 'Lilita') + pa('M64,130 L70,116 L94,114 L100,130 Z', '#2A2A2F'),
+    fadinglamp: () => [['#BFF0D2', 1904], ['#8FCDA9', 1909], ['#4B5E55', 1914]].map(([f, y], i) => ci(23 + i * 32, 72, 12, f) + rc(17 + i * 32, 84, 12, 14, '#C9D5DE', 1.4) + tx(23 + i * 32, 116, String(y), 9)).join('') + tx(55, 138, 'RADIUM LAMPS, FADING', 9),
+    jewels: () => pa('M20,60 Q55,110 90,60', 'none', 2.2) + [0, 1, 2, 3, 4].map(i => { const t = i / 4; return ci(20 + 70 * t, 60 + 25 * Math.sin(Math.PI * t) + 2, 5, '#E3E8EC', 1.6); }).join('') + sparks(30, 60, 0.7) + sparks(80, 58, 0.7) + tx(55, 128, 'HUMMING JEWELLERY', 9),
+  };
+  // one world as a splash panel: the landscape, three framed vignettes below, numbered call-outs
+  function worldSVG(w) {
+    let s = `<g>${LANDMARK[w.landmark](1)}</g>` + `<rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`;
+    w.slots.forEach((id, i) => {
+      const x = 2 + i * 115;
+      s += `<g transform="translate(${x},256)"><clipPath id="vc${i}"><rect x="1" y="1" width="110" height="150"/></clipPath><rect x="1" y="1" width="110" height="150" fill="#EAF5FC"/><g clip-path="url(#vc${i})">${(VIGNETTE[id] || (() => ''))()}</g><rect x="1" y="1" width="110" height="150" fill="none" stroke="${INK}" stroke-width="2.6"/>${callout(13, 14, i + 2)}</g>`;
+    });
     return s;
   }
 
@@ -414,8 +563,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const first = g.panels.length === 0;
     const what = first ? 'On the lower plate: <b>pure uranium</b>, from M. Moissan. Its rays let the air between the plates carry a tiny electric current, which pushes the spot of light to the right →.'
       : `On the lower plate: <b>${esc(s.name.charAt(0).toLowerCase() + s.name.slice(1))}</b> (${M.shareWords(s.u)}). If it sends out rays, the air carries a current, and the current pushes the spot of light to the right →.`;
-    const can = 'The slider lets a weight down onto the quartz crystal. The quartz pushes the spot back ←: the faster the weight goes down, the harder it pushes.';
-    const expect = 'Write it down when you are ready. Your page keeps how hard you were pushing and what the spot was doing at that moment.' + (first ? ' This first panel is your pure uranium.' : '');
+    const can = 'The slider lets a weight down onto the quartz crystal. Squeezed, the quartz sends back the opposite electricity and pushes the spot ←: the faster the weight goes down, the harder it pushes.';
+    const expect = 'Write it down whenever you like. Your page keeps the number, and the bench thinks about it.' + (first ? ' This first panel is your pure uranium: everything else will be measured against it.' : '');
     return `<p>${what}</p><p>${can}</p><p>${expect}</p>`;
   }
   function placeTick() {
@@ -431,7 +580,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#benchsvg').innerHTML = benchScene({ look: s.look, active: bench.i > 0 });
     $('#benchcap').innerHTML = benchCaption(s);
     const push = $('#push'); push.value = 0; push.disabled = false; $('#write').disabled = true;
-    $('#benchplay').classList.remove('hidden'); $('#benchres').classList.add('hidden'); $('#stamp').classList.add('hidden');
+    $('#benchplay').classList.remove('hidden'); $('#benchres').classList.add('hidden'); $('#thoughts').classList.add('hidden'); $('#thoughts').innerHTML = '';
     show('bench'); placeTick();
   }
   function loop() {
@@ -462,13 +611,14 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     if (!bench || bench.committed || !M.canCommit(bench)) return;
     cancelAnimationFrame(raf); bench.committed = true;
     const p = M.commit(g, bench); lastNew = p.n - 1;
-    $('#push').disabled = true; $('#write').disabled = true; $('#stamp').classList.remove('hidden');
+    $('#push').disabled = true; $('#write').disabled = true;
+    $('#thoughts').innerHTML = `<div class="thought">${esc(p.idea)}</div>` + p.clash.map(c => `<div class="thought clash">${esc(c)}</div>`).join('');
+    $('#thoughts').classList.remove('hidden');
     $('#respanel').innerHTML = panelSVG(p);
-    $('#resbadge').textContent = p.badge; $('#resbadge').className = 'badge ' + p.kind;
+    const B = BADGE_WORDS(p.band); $('#resbadge').textContent = B[0].join(' '); $('#resbadge').className = 'badge ' + ({ HIGH: 'more', STRONG: 'without', ACTIVE: 'without', YARD: 'yardstick' }[p.band] || '');
     $('#rescap').textContent = p.caption;
     $('#topage').textContent = M.over(g) ? 'Draw the last panel' : 'On to the page';
     $('#benchplay').classList.add('hidden'); $('#benchres').classList.remove('hidden');
-    setTimeout(() => $('#benchres').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
   });
   $('#topage').addEventListener('click', () => { renderShelf(); show('shelf'); });
   window.addEventListener('resize', placeTick);
@@ -476,13 +626,14 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   // ---------- the page and the shelf
   function renderPage(el, animate) {
     let h = '';
-    for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + M.BADGE[M.panelKind(g, p)]) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
+    for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + BADGE_WORDS(M.band(p.id, p.x, M.yard(g)))[0].join(' ')) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
     el.innerHTML = h;
   }
   function renderShelf() {
     renderPage($('#page'), true); lastNew = -1;
     $('#pageband').innerHTML = `YOUR PAGE <small>${g.panels.length} of ${C.PANELS} panels drawn</small>`;
-    $('#foundline').textContent = M.foundLine(g);
+    const ideas = g.ideas.slice(-3).reverse();
+    $('#ideasstrip').innerHTML = g.ideas.length ? `<div class="ih">YOUR IDEAS SO FAR <small style="font-family:var(--text);font-size:14px">(${g.ideas.length}; the latest first)</small></div>` + ideas.map(i => `<div class="mini${i.clash ? ' clash' : ''}"><b>${i.n}</b>${esc(i.text)}</div>`).join('') : '';
     const over = M.over(g);
     $('#shelfpart').classList.toggle('hidden', over); $('#turnpart').classList.toggle('hidden', !over);
     $('#shelfband').innerHTML = `THE SHELF <small>${M.panelsLeft(g)} panel${M.panelsLeft(g) === 1 ? '' : 's'} left</small>`;
@@ -515,21 +666,31 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   $('#cardback').addEventListener('click', closeCard); $('#veil').addEventListener('click', closeCard);
   $('#cardtest').addEventListener('click', () => { if (cardId && M.canTest(g, cardId)) startBench(cardId); });
 
-  // ---------- the last page
-  const herWords = w => w === 'no push at all' ? 'nothing' : w === 'about the push of pure uranium' ? 'about the same as pure uranium' : w.replace(/ the push of pure uranium$/, ' pure uranium');
+  // ---------- the last pages
+  const SEEN_KEY = 'curies-quartz-worlds-seen';
+  const seenWorlds = add => { let s = []; try { s = JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch (e) { s = []; } if (add && !s.includes(add)) { s.push(add); try { localStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) { /* private window */ } } return s; };
+  const fromLabel = f => f && f.length ? `<span class="from">from panel${f.length > 1 ? 's' : ''} ${[...new Set(f)].sort((a, b) => a - b).join(', ')}</span>` : '<span class="from">as in hers</span>';
   function renderEnd() {
-    const v = M.verdict(g);
-    $('#headline').textContent = v.headline; $('#fate').textContent = v.fate;
-    $('#claims').innerHTML = v.claims.map(c => `<div class="claim"><div class="mark ${c.backed ? 'ok' : 'no'}">${c.backed ? '✓' : '✗'}</div><div class="ct">${esc(c.text)}</div><div class="cw">${esc(c.why.charAt(0).toUpperCase() + c.why.slice(1))}.</div></div>`).join('');
-    $('#did').textContent = v.did;
-    $('#paper').textContent = v.paper; $('#means').textContent = v.means; $('#later').textContent = v.later;
+    const v = M.verdict(g), w = v.world, o = v.ours;
+    $('#ideaboard').innerHTML = v.ideas.map(i => `<div class="ib${i.clash ? ' clash' : ''}"><b>${i.n}</b>${esc(i.text)}</div>`).join('');
+    $('#physname').textContent = w.name;
+    $('#laws').innerHTML = w.laws.map(l => `<li>${esc(l.text)} ${fromLabel(l.from)}</li>`).join('');
+    $('#worldsvg').innerHTML = worldSVG(w);
+    $('#callouts').innerHTML = w.callouts.map((c, k) => `<li><i>${k < 4 ? k + 1 : '+'}</i><span>${esc(c.text)} ${c.from && c.from.length ? fromLabel(c.from) : ''}</span></li>`).join('');
+    $('#worldpara').textContent = w.paragraph;
+    $('#oursvg').innerHTML = worldSVG(o);
+    $('#ourcallouts').innerHTML = o.callouts.map((c, k) => `<li><i>${k + 1}</i><span>${esc(c.text)}</span></li>`).join('');
+    $('#dates').innerHTML = o.dates.map(d => `<li><b>${d[0]}</b>${esc(d[1])}</li>`).join('');
+    $('#part').innerHTML = v.part.lines.concat(v.part.unlooked).map(l => `<p>${esc(l)}</p>`).join('') + `<p><b>${esc(v.part.closing)}</b></p>`;
     renderPage($('#endpage'), false);
     const sc = x => (100 * Math.min(4, x) / 4) + '%';
-    $('#her').innerHTML = v.her.map(h => `<div class="herrow"><div>${esc(h.name)}</div><div class="hb">${h.u > 0 ? `<i class="y" style="width:${sc(h.u)}"></i>` : ''}${h.x > 0 ? `<i class="b" style="width:${sc(h.x)}"></i>` : ''}<span class="u1" style="left:25%"></span></div><div class="hw">${esc(herWords(h.words))}</div></div>`).join('');
+    $('#her').innerHTML = v.her.map(h => `<div class="herrow"><div>${esc(h.name)}</div><div class="hb">${h.u > 0 ? `<i class="y" style="width:${sc(h.u)}"></i>` : ''}${h.x > 0 ? `<i class="b" style="width:${sc(h.x)}"></i>` : ''}<span class="u1" style="left:25%"></span></div><div class="hw">${esc(h.x < 0.01 ? 'none' : M.asMuch(h.x, 'pure uranium'))}</div></div>`).join('');
+    const seen = seenWorlds(w.energy), rest = v.worlds.filter(x => !seen.includes(x.id));
+    $('#unseen').innerHTML = (rest.length ? 'The five worlds: the ones your albums have made are in colour; the grey ones are still to be made.<br>' : 'Your albums have made all five worlds.<br>') + v.worlds.map(x => `<span class="${seen.includes(x.id) ? 'seen' : ''}">${esc(x.name)}</span>`).join('');
   }
 
   // test hook (read-only): lets the browser session check what the player sees against the mechanism
-  window.__curie = { get game() { return g; }, get bench() { return bench; } };
+  window.__curie = { get game() { return g; }, get bench() { return bench; }, draw: worldSVG };
 })();
 </script>
 </body>

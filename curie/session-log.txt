@@ -1,72 +1,65 @@
   shot start
-START: YOUR AIM | URANIUM MAKES THE AIR CARRY ELECTRICITY. FIND WHAT ELSE DOES. | Put a powder or a rock between two brass plates. | Push back on a spot of light with your thumb. | Write down how hard it took. | At the end, your page is held up against hers.
-
-== PANEL 1 OF 9 | uranium
-   bench says: On the lower plate: pure uranium, from M. Moissan. Its rays let the air between the plates carry a tiny electric current, which pushes the spot of light to the right →. | The slider lets a weight down onto the quartz crystal. The quartz pushes the spot back ←: the faster the weight goes down, the harder it pushes. | Write it down when you are ready. Your page keeps how hard you were pushing and what the spot was doing at that moment. This first panel is your pure uranium.
+START: YOUR AIM | URANIUM MAKES THE AIR CARRY ELECTRICITY. FIND WHAT ELSE DOES. | Put a powder or a rock between two brass plates. | Push back on a spot of light with your thumb. | Write down how hard it took: every number plants an idea. | At the end, your ideas make a physics, and a world.
+   bench says: On the lower plate: pure uranium, from M. Moissan. Its rays let the air between the plates carry a tiny electric current, which pushes the spot of light to the right →. | The slider lets a weight down onto the quartz crystal. Squeezed, the quartz sends back the opposite electricity and pushes the spot ←: the faster the weight goes down, the harder it pushes. | Write it down whenever you like. Your page keeps the number, and the bench thinks about it. This first panel is your pure uranium: everything else will be measured against it.
   shot a-bench-uranium-start
-   real drag: push seen by the mechanism 1.10, spot 0.32
-   left alone 2.5 s at push 1.10: write button awake, measurement still open
+   real drag: push 1.10, spot 0.31
   shot help
-   help opened mid-measurement: bench clock 4.65 → 4.65 while away
-   YOUR YARDSTICK — Pure uranium: about her push, give or take a little. The spot was standing in the middle when you wrote it down. This is your pure uranium: the yardstick for what the uranium in anything else could give.
+   help mid-measurement: clock 3.98 → 3.98
+   PANEL 1 OF 9 | uranium: Pure uranium, your yardstick: you pushed about as hard as she measured.  💭 So this is pure uranium: the air between the plates carries this much electricity. Everything else gets measured against it.
   shot a-bench-uranium-written
-  shot a-shelf-1
-
-== PANEL 2 OF 9 | uranyl nitrate (careful)
-   ABOUT ITS URANIUM — Uranyl nitrate: about a quarter of the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It is about half uranium: about what its uranium gives, or less. Hers: about a third of the push of pure uranium.
-   Found so far, besides uranium: nothing yet.
-
-== PANEL 3 OF 9 | thorium, thick (careful)
-   NO URANIUM IN IT! — Thick thorium oxide: twice the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It has no uranium in it, and it moved the spot. Hers: twice the push of pure uranium.
-   Found so far, besides uranium: thick thorium oxide.
-
-== PANEL 4 OF 9 | white phosphorus (careful)
-   NO URANIUM IN IT! — White phosphorus: a little more than the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It has no uranium in it, and it moved the spot. Hers: a little more than the push of pure uranium.
-   Found so far, besides uranium: thick thorium oxide and white phosphorus.
-
-== PANEL 5 OF 9 | red phosphorus (careful)
-   NOTHING SEEN — Red phosphorus: nothing, give or take a little. The spot was standing in the middle when you wrote it down. Nothing you could see. Hers: no push at all.
-   Found so far, besides uranium: thick thorium oxide and white phosphorus.
-
-== PANEL 6 OF 9 | pitchblende, saxony (hasty)
-  shot a-bench-pitchblende-hasty-running
-   CAN’T TELL — Pitchblende from Saxony: at least two-thirds of the push of pure uranium. The spot was still running right when you wrote it down: the plate was pushing harder than you were. Your reading cannot tell whether that is more than its uranium could give. Hers: three and a half times the push of pure uranium.
-  shot a-bench-pitchblende-hasty
-   Found so far, besides uranium: thick thorium oxide and white phosphorus.
-  shot a-shelf-after-hasty
-
-== PANEL 7 OF 9 | pitchblende, saxony (careful, again)
-   MORE THAN ITS URANIUM! — Pitchblende from Saxony: three and a half times the push of pure uranium, give or take some. The spot was standing in the middle when you wrote it down. It is only about two-thirds uranium: that is more than its uranium alone could give. Hers: three and a half times the push of pure uranium.
-  shot a-bench-pitchblende-careful
-   Found so far, besides uranium: thick thorium oxide, white phosphorus and something in pitchblende from Saxony.
-
-== PANEL 8 OF 9 | chalcolite, mined (careful)
-   MORE THAN ITS URANIUM! — Chalcolite from a mine: twice the push of pure uranium, give or take some. The spot was standing in the middle when you wrote it down. It is only about half uranium: that is more than its uranium alone could give. Hers: twice the push of pure uranium.
-   Found so far, besides uranium: thick thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.
-
-== PANEL 9 OF 9 | chalcolite, made (careful)
-   ABOUT ITS URANIUM — Chalcolite made by you: about a third of the push of pure uranium, give or take a little. The spot was standing in the middle when you wrote it down. It is about half uranium: about what its uranium gives, or less. Hers: about a third of the push of pure uranium. Your chalcolite from the mine: twice the push of pure uranium, give or take some.
+   PANEL 2 OF 9 | uranyl nitrate: Uranyl nitrate: the air carried about a third as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.  💭 About what its uranium gives. It’s the uranium that does it, whatever it’s joined to.
+   PANEL 3 OF 9 | thorium, thin: Thin thorium oxide: the air carried about three-quarters as much electricity as with your pure uranium. Hers: about as much electricity as with her pure uranium.  💭 Thorium does it, with no uranium in it! Not one strange metal: the two heaviest atoms there are. Hmm… does the table of elements end where atoms start to leak?
+   PANEL 4 OF 9 | thorium, thick: Thick thorium oxide: the air carried twice as much electricity as with your pure uranium. Hers: twice as much electricity as with her pure uranium.  💭 A thicker layer of thorium, and more electricity than pure uranium! Thorium lets its own rays through.
+   PANEL 5 OF 9 | white phosphorus: White phosphorus: the air carried a little more electricity than with your pure uranium. Hers: a little more electricity than with her pure uranium.  💭 White phosphorus does it! And phosphorus is in every bone… is the stuff of life electric?
+  shot a-shelf-ideas
+   PANEL 6 OF 9 | red phosphorus: Red phosphorus: the air carried no electricity you could see. Hers: none.  💭 Red phosphorus: nothing. Same element as white phosphorus, another form: so it was never the phosphorus. The white kind was just burning slowly in the air.
+   PANEL 7 OF 9 | pitchblende, saxony: Pitchblende from Saxony: the air carried three and a half times as much electricity as with your pure uranium. Hers: three and a half times as much electricity as with her pure uranium.  💭 More than its uranium can give?! Something else is in that rock, something far stronger than uranium!
+  shot a-bench-pitchblende
+   PANEL 8 OF 9 | chalcolite, mined: Chalcolite from a mine: the air carried twice as much electricity as with your pure uranium. Hers: twice as much electricity as with her pure uranium.  💭 More than its uranium! Something in the rock… or the way the crystal is built?
+   PANEL 9 OF 9 | chalcolite, made: Chalcolite made by you: the air carried about a third as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.  💭 My own chalcolite is ordinary. So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!
   shot a-bench-copy
-   Found so far, besides uranium: thick thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.
   shot a-page-full
 
-END A: Your page backs all six claims in her note. | You could have signed her note.
-   claims: ✓ | Every uranium compound does it, about in proportion to its uranium. | Your uranyl nitrate: about a quarter of the push of pure uranium, about what its uranium gives. | ✓ | Thorium does it too, with no uranium in it. | Your thick thorium oxide: twice the push of pure uranium. | ✓ | Thorium oxide even beats pure uranium. | Your thick thorium oxide: twice the push of pure uranium, more than your pure uranium. | ✓ | White phosphorus does it, but red phosphorus and phosphates do not: it is not the phosphorus itself. | Your white phosphorus: a little more than the push of pure uranium; your red phosphorus: nothing. | ✓ | Pitchblende and chalcolite do far more than their uranium can. | Your pitchblende from Saxony: three and a half times the push of pure uranium, and it is only about two-thirds uranium. | ✓ | The same chalcolite, made from pure chemicals, does not. | Your own chalcolite: about a third of the push of pure uranium; your chalcolite from a mine: twice the push of pure uranium.
+END A: THE RESTLESS ATOM
+   laws: The energy comes from inside the heaviest atoms, and an atom that spends it turns into another element. from panels 2, 7, 8 | Only the heaviest atoms do it, uranium and thorium, the two heaviest known: the table of elements ends where atoms start to leak. from panels 3, 4 | Old uranium rocks are full of what uranium turned into: new elements, far stronger than uranium. from panels 7, 8, 9
+   world call-outs: 1 | Atoms of uranium split in power stations: a million times the energy of any fire. from panels 2, 7, 8 | 2 | A rock cut open is a clock: the atoms that changed in it say the Earth is four and a half billion years old. | 3 | Rays from changing atoms treat cancer. | 4 | The table of elements ends where atoms fall apart: 118, the last ones made by hand.
+   where they part: Your page is her note, and your world is the one you live in.
+   unseen: Worlds your albums have not made yet: | THE RESTLESS ATOMTHE SLOW FIRETHE SKY WINDTHE CRYSTAL LENSTHE BOTTOMLESS ATOM
   shot a-end
-  shot a-end-top
   shot about
 about returned to: end
-   lead: NOTHING SEEN
-   gold: NOTHING SEEN
-   copper: NOTHING SEEN
-   redP: NOTHING SEEN
-   phosphate: NOTHING SEEN
-   lead: NOTHING SEEN
-   gold: NOTHING SEEN
-   copper: NOTHING SEEN
+   PANEL 1 OF 9 | uranium: Pure uranium, your yardstick: you pushed about half as hard as she measured.  💭 So this is pure uranium: the air between the plates carries this much electricity. Everything else gets measured against it.
+   PANEL 2 OF 9 | green oxide: Green uranium oxide: the air carried one and a half times as much electricity as with your pure uranium. Hers: about three-quarters as much electricity as with her pure uranium.  💭 Stronger than its uranium could be! Joined to oxygen, uranium burns brighter… is this a kind of fire?
+  shot b-bench-salt
+   PANEL 3 OF 9 | uranyl nitrate: Uranyl nitrate: the air carried about two-thirds as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.  💭 About what its uranium gives. It’s the uranium that does it, whatever it’s joined to. | Wait. One salt follows its uranium and the other doesn’t. Which is it, the atom or the chemistry?
+   PANEL 4 OF 9 | thorium, thin: Thin thorium oxide: the air carried twice as much electricity as with your pure uranium. Hers: about as much electricity as with her pure uranium.  💭 Thorium beats pure uranium, with no uranium in it! The two heaviest atoms there are… does the table of elements end where atoms start to leak?
+   PANEL 5 OF 9 | pitchblende, saxony: Pitchblende from Saxony: the air carried more than four times as much electricity as with your pure uranium. Hers: three and a half times as much electricity as with her pure uranium.  💭 More than its uranium can give?! A fiercer fuel is hiding in that rock!
+   PANEL 6 OF 9 | chalcolite, mined: Chalcolite from a mine: the air carried more than four times as much electricity as with your pure uranium. Hers: twice as much electricity as with her pure uranium.  💭 More than its uranium! Something in the rock… or the way the crystal is built?
+   PANEL 7 OF 9 | chalcolite, made: Chalcolite made by you: the air carried about three-quarters as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.  💭 My chalcolite is stronger than its uranium too! It’s the crystal itself that does it, not anything hidden.
+   PANEL 8 OF 9 | white phosphorus: White phosphorus: the air carried two and a half times as much electricity as with your pure uranium. Hers: a little more electricity than with her pure uranium.  💭 White phosphorus, stronger than uranium! And phosphorus is in every bone… is the stuff of life electric?
+   PANEL 9 OF 9 | red phosphorus: Red phosphorus: the air carried no electricity you could see. Hers: none.  💭 Red phosphorus: nothing. Same element as white phosphorus, another form: so it was never the phosphorus. The white kind was just burning slowly in the air.
 
-END B: Your page backs none of the six claims in her note. | Her note would have had to wait.
-   claims: ✗ | Every uranium compound does it, about in proportion to its uranium. | You never measured a uranium salt. | ✗ | Thorium does it too, with no uranium in it. | You never measured thorium. | ✗ | Thorium oxide even beats pure uranium. | You never measured thorium. | ✗ | White phosphorus does it, but red phosphorus and phosphates do not: it is not the phosphorus itself. | You never measured white ph
-  shot b-end-top
+END B: THE SLOW FIRE
+   laws: Uranium’s rays are a slow chemical fire, like white phosphorus glowing in air: how uranium is joined to other atoms sets how brightly it burns, and it burns itself out. from panel 2 | Only the heaviest atoms do it, uranium and thorium, the two heaviest known: the table of elements ends where atoms start to leak. from panel 4 | A fiercer fuel hides in the rocks, and burns out faster. from panels 5, 6, 7
+   world call-outs: 1 | No atomic energy: the century runs on coal and oil alone. from panel 2 | 2 | Radium lamps glow fiercely, and are dark within ten years. from panels 5, 6, 7 | 3 | Seal uranium in a jar and it goes dark; every year the old samples are dimmer. | 4 | Nothing heats the Earth from inside: it is twenty to forty million years old, as Lord Kelvin said.
+   where they part: Where the energy comes from: in your world, a slow chemical fire; in ours, the inside of the atom, whatever it is joined to. It came from panel 2, green uranium oxide: the air carried one and a half times as much electricity as with your pure uranium. It began with your pure uranium: you pushed about half as hard as she measured. Against that yardstick, every salt looked brighter or dimmer than its uranium. | Write different numbers, and see another world.
+   unseen: Worlds your albums have not made yet: | THE RESTLESS ATOMTHE SLOW FIRETHE SKY WINDTHE CRYSTAL LENSTHE BOTTOMLESS ATOM
+  shot b-end
+   PANEL 2 OF 9 | lead: Lead: the air carried about half as much electricity as with your pure uranium. Hers: none.  💭 Wow! The air carries electricity near lead! Every heavy atom does it, the heavier the more… as if they caught something raining through space.
+  shot c-bench-lead
+   PANEL 3 OF 9 | white phosphorus: White phosphorus: the air carried a little more electricity than with your pure uranium. Hers: a little more electricity than with her pure uranium.  💭 White phosphorus does it! And phosphorus is in every bone… is the stuff of life electric?
+   PANEL 4 OF 9 | thorium, thin: Thin thorium oxide: the air carried about as much electricity as with your pure uranium. Hers: about as much electricity as with her pure uranium.  💭 Thorium does it, with no uranium in it! Not one strange metal: the two heaviest atoms there are. Hmm… does the table of elements end where atoms start to leak?
+   PANEL 5 OF 9 | pitchblende, saxony: Pitchblende from Saxony: the air carried three and a half times as much electricity as with your pure uranium. Hers: three and a half times as much electricity as with her pure uranium.  💭 More than its uranium can give?! Something heavier than uranium is hiding in that rock: a bigger sail!
+   PANEL 6 OF 9 | gold: Gold: the air carried about two-thirds as much electricity as with your pure uranium. Hers: none.  💭 Wow! The air carries electricity near gold! Every heavy atom does it, the heavier the more… as if they caught something raining through space. Every bank vault must be crackling.
+   PANEL 7 OF 9 | chalcolite, mined: Chalcolite from a mine: the air carried twice as much electricity as with your pure uranium. Hers: twice as much electricity as with her pure uranium.  💭 More than its uranium! Something in the rock… or the way the crystal is built?
+   PANEL 8 OF 9 | chalcolite, made: Chalcolite made by you: the air carried about a third as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.  💭 My own chalcolite is ordinary. So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!
+   PANEL 9 OF 9 | uranyl nitrate: Uranyl nitrate: the air carried about a third as much electricity as with your pure uranium. Hers: about a third as much electricity as with her pure uranium.  💭 About what its uranium gives. It’s the uranium that does it, whatever it’s joined to.
+
+END C: THE SKY WIND
+   laws: Space is crossed by an invisible wind. Heavy atoms catch it, the heavier the more, and give it out as rays: nothing is used up, the energy blows in. from panels 2, 6 | Everything does it, every metal and every bone: the air is a little conductive everywhere. from panels 2, 3, 6 | Something heavier than uranium hides in the rocks: a bigger sail. from panels 5, 7, 8
+   world call-outs: 1 | Sails of lead on the mountains catch the wind and feed the cities. from panels 2, 6 | 2 | Miners hunt the rocks for element 93, the heavier sail. from panels 5, 7, 8 | 3 | Doctors listen to bones with electrometers. from panel 3 | 4 | Storms without thunderbolts: the air cannot hold the charge. from panels 2, 3, 6
+   where they part: Where the energy comes from: in your world, a wind from space caught by heavy atoms; in ours, the inside of the atom. Lead and gold do nothing, and uranium is as busy at the bottom of a mine. It came from panel 2, lead: the air carried about half as much electricity as with your pure uranium and panel 6, gold: the air carried about two-thirds as much electricity as with your pure uranium. | Which matter does it: in your world, everything; in ours, only uranium and thorium. It came from panel 2, 
+   unseen: Worlds your albums have not made yet: | THE RESTLESS ATOMTHE SLOW FIRETHE SKY WINDTHE CRYSTAL LENSTHE BOTTOMLESS ATOM
+  shot c-end
 
 errors: none
