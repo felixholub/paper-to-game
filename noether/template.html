@@ -63,8 +63,12 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .stamp.identity{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.8);font-size:20px}
 .stamp.notlaw{color:var(--haz)}
 .stamp.law{font-size:15px;letter-spacing:.1em;padding:3px 8px;border-width:2px}
-.feed{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--brush);position:absolute;left:8px;bottom:4px;right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.feed.fake{color:var(--mag)}
+.feedline{width:100%;max-width:348px;margin:4px auto 0;font-family:var(--mono);font-size:13px;letter-spacing:.04em;line-height:1.3;color:var(--brush);min-height:34px}
+.feedline.fake{color:var(--mag)}
+.feedline.true{color:#DDF6FF}
+.result{font-size:16px;line-height:1.4;margin:10px 0 6px;color:#fff}
+.caption{font-family:var(--mono);font-size:12px;letter-spacing:.08em;fill:#2BF0FF;text-transform:uppercase}
+.caption.fake{fill:#FF2ECC}.caption.true{fill:#DDF6FF}
 /* the rack: three blanks */
 .rack{width:100%;max-width:348px;margin:8px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .slot{height:58px;position:relative;background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -2px 0 rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:2px 4px;overflow:hidden}
@@ -109,33 +113,35 @@ ul{padding-left:20px}li{margin:4px 0}
 <section class="screen on" id="start">
   <h1 class="title"><small>Emmy Noether · 1918</small>Noether's<br>Press</h1>
   <div class="rule"></div>
-  <p class="lede">A press that stamps laws. Six levers in front of it. An inspector behind it who feeds fakes to everything it stamps.</p>
-  <p class="lede">You will pull a lever, draw a warp with your thumb, and watch the inspector try to void your tag.</p>
-  <p class="aim">Stamp this world's laws.<br>Only a tag with teeth counts.</p>
-  <p class="small">Four worlds, three steel blanks each. A pull that the world does not accept bends a blank. About six minutes.</p>
+  <p class="lede">A bead moves in a small world. You can change the whole world in six ways: start its clock later, slide it, turn it, or re-tick its clock any way you draw with your thumb.</p>
+  <p class="lede">Some changes the world will not notice. Each of those is worth a law: something that never changes while the bead moves. A press stamps the law on a steel tag. An auditor then throws fake motions at the tag to see if it can catch them.</p>
+  <p class="aim">Find the changes this world does not notice.<br>Each one stamps a law.</p>
+  <p class="small">Four worlds, three blank tags each. A change the world notices wastes a tag. About six minutes.</p>
   <button class="btn go" id="begin">Begin</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
 <section class="screen" id="play">
-  <div class="top"><p class="aim" style="margin-top:0">Stamp this world's laws.<br>Only a tag with teeth counts.</p><button class="help-q" aria-label="How to play">?</button></div>
+  <div class="top"><p class="aim" style="margin-top:0">Find the changes this world does not notice.<br>Each one stamps a law.</p><button class="help-q" aria-label="How to play">?</button></div>
   <div class="band" id="band">WORLD 1 OF 4 · THE OPEN FLOOR</div>
   <p class="line" id="worldline"></p>
   <div class="window" id="window"></div>
   <div class="panel" id="panel">
     <div class="gauge"><span class="plabel">THE NEEDLE</span><svg viewBox="0 0 150 84" id="gaugesvg"></svg></div>
-    <div class="stampbox"><span class="plabel">THE AUDITOR</span><div class="stamp" id="stamp"></div><div class="feed" id="feed"></div></div>
+    <div class="stampbox"><span class="plabel">THE AUDITOR</span><div class="stamp" id="stamp"></div></div>
   </div>
+  <p class="feedline" id="feed">The needle reads the tag's quantity as the bead moves. Nothing to read yet.</p>
   <div class="rack" id="rack"></div>
   <div class="say" id="first"></div>
   <div id="choose">
-    <p class="line" id="benchhead" style="margin-top:10px">Pull one lever. If the world does not care, the press stamps a tag.</p>
+    <p class="line" id="benchhead" style="margin-top:10px">Tap a lever: the window shows the change. Pull it if you think this world would not notice.</p>
     <div class="levers" id="levers"></div>
     <p class="willdo" id="willdo">Tap a lever to see what it does.</p>
     <button class="btn go" id="pull" disabled>Pull</button>
   </div>
   <div id="after" class="hidden">
+    <p class="result" id="result"></p>
     <div class="say" id="say"></div>
     <div class="row"><button class="btn" id="again">Pull again</button><button class="btn go" id="next">Next world</button></div>
   </div>
@@ -161,13 +167,14 @@ ul{padding-left:20px}li{margin:4px 0}
 
 <section class="screen help" id="help">
   <h2 style="margin-top:22px">How to play</h2>
-  <p class="aim">Stamp this world's laws.<br>Only a tag with teeth counts.</p>
-  <p><b>The world.</b> The window shows one world: a bead on a floor, a bead on a spring, light in glass, a bead on a curved sheet. A line under the band says what the world is. A white trace is a true motion: something the world really does.</p>
-  <p><b>The levers.</b> Each lever changes the whole world in one way: start the clock a moment later; move everything sideways or up; turn everything; or, the two magenta levers, re-tick the clock or shift the world by an amount <i>you draw</i>, different at every moment. Tap a lever to read what it does, then PULL.</p>
-  <p><b>The press.</b> If the world does not notice the change, the press holds and stamps a steel tag with the law that follows: the thing that will now stay steady on every true motion. If the world does notice, the press jams, the blank bends, and the needle swings yellow.</p>
-  <p><b>The Auditor.</b> He feeds the tag seven motions: true ones (white), and fakes (magenta, dashed) that the world would never make. The needle reads the tag's quantity along each. Steady on the true motions and swinging on the fakes: a law with teeth, cyan. Steady on everything, fakes included: VOID, magenta. A void tag holds for every motion there is, so it says nothing.</p>
-  <p><b>The drawn levers.</b> When the press holds for a drawn change, what comes out is not a law but an identity: the equations of motion are not all independent. Watch what that does to the clock tag.</p>
-  <p><b>Blanks.</b> Three per world. Every pull uses one, jam or not. Pull again while you have blanks, or go to the next world. In two worlds the Auditor moves first and asks for a lever; find it.</p>
+  <p class="aim">Find the changes this world does not notice.<br>Each one stamps a law.</p>
+  <p><b>The world.</b> The window shows a bead moving in one small world: on a flat floor, on a spring, as light in glass, on a stretched sheet. The line above the window says what the world is and what it never does. The white trail is a real motion, something this world really does. The dots on the trail are the ticks of the bead's clock: one dot per tick.</p>
+  <p><b>The levers.</b> Each lever changes the whole world in one way. Tap one and the window shows the change in blue, with the real motion faint and grey underneath. Four levers make a fixed change: start the clock a moment later, slide the world sideways or up, turn it. The two magenta levers make a change you draw with your thumb: re-tick the clock faster here and slower there, or push the world sideways by a different amount at every moment.</p>
+  <p><b>The question.</b> Would this world run just the same after the change? A bead that nothing pushes would not mind being slid sideways. It would mind a clock that runs fast and slow, because then it speeds up and slows down for no reason. If you think the world would not notice, PULL.</p>
+  <p><b>The press.</b> If the world does not notice, the press holds and stamps a steel tag with the law that follows: one quantity that will now stay fixed on every real motion. If the world does notice, the press jams, the blank bends, and you lose it. Three blanks per world; every pull uses one.</p>
+  <p><b>The Auditor and the needle.</b> He tests every tag. He plays real motions (white) and fakes (magenta, dashed): motions this world would never make. The needle reads the tag's quantity as the bead moves. Still on the real motions and swinging on a fake: a law with TEETH, cyan. It can tell a fake from the real thing. Still on everything, the fakes too: VOID, magenta. A tag that no fake can break rules nothing out; it is empty.</p>
+  <p><b>The drawn levers.</b> When the press holds for a change you drew, no law comes out. The tag reads IDENTITY: a rule about the equations of motion themselves, that they are not independent. Watch what that does to the clock tag in that world.</p>
+  <p><b>The Auditor moves first.</b> In two worlds he already holds a law and asks which lever it comes from, or holds a blank tag and asks which lever explains it. Pull the lever you think it is; a wrong pull still uses a blank.</p>
   <p><b>The end.</b> After four worlds the verdict is in words: what you stamped, what came out blank, and what the paper says it means.</p>
   <button class="btn go" id="helpback">Back</button>
 </section>
@@ -231,33 +238,57 @@ function drawWorld(w) {
     for (let r = 0.15; r < 1.9; r += 0.15) { const n = M.density(w, r, 0).n; const a = 0.08 + (n - 1) * 0.6; el('circle', { cx: px(0), cy: py(0), r: r * S, fill: 'none', stroke: `rgba(43,240,255,${a.toFixed(3)})`, 'stroke-width': 1.2 }, bg); }
     el('circle', { cx: px(0), cy: py(0), r: 5, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, bg);
   }
-  motionLayer = el('g', {}, win); traceLayer = el('g', {}, win);
+  ghostLayer = el('g', {}, win); fanLayer = el('g', {}, win); motionLayer = el('g', {}, win); traceLayer = el('g', {}, win);
   beadEl = el('circle', { cx: -10, cy: -10, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
+  captionEl = el('text', { x: 8, y: 16, class: 'caption' }, win); captionEl.textContent = '';
 }
+let ghostLayer, fanLayer, captionEl;
+function setCaption(text, kind) { captionEl.textContent = text || ''; captionEl.setAttribute('class', 'caption' + (kind ? ' ' + kind : '')); }
 function pathD(p) { let d = ''; for (let i = 0; i < p.u1.length; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }
+function drawGhost(path) { // the real motion, faint and still, under a preview
+  ghostLayer.innerHTML = ''; if (!path) return;
+  el('path', { d: pathD(path), fill: 'none', stroke: '#9AA3AB', 'stroke-width': 1.5, opacity: 0.45 }, ghostLayer);
+  for (let k = 0; k < path.u1.length; k += C.TICK_EVERY) el('circle', { cx: px(path.u1[k]), cy: py(path.u2[k]), r: 1.8, fill: '#9AA3AB', opacity: 0.45 }, ghostLayer);
+}
 let liveMotion = null, liveT = 0, liveRAF = null;
-function playMotion(path, opts) { // animates a bead along a path; opts: {fake, onFrame, speed}
+function playMotion(path, opts) { // animates a bead along a path, with its clock ticks as dots; opts: {fake, onFrame, dur, fan, colour}
   if (liveRAF) cancelAnimationFrame(liveRAF);
-  traceLayer.innerHTML = '';
-  const tr = el('path', { d: '', fill: 'none', stroke: opts.fake ? '#FF2ECC' : '#DDF6FF', 'stroke-width': opts.fake ? 2.5 : 2, 'stroke-dasharray': opts.fake ? '7 5' : 'none', style: opts.fake ? 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' : 'filter:drop-shadow(0 0 4px rgba(43,240,255,.6))' }, traceLayer);
-  beadEl.setAttribute('fill', opts.fake ? '#FF2ECC' : '#fff');
+  traceLayer.innerHTML = ''; fanLayer.innerHTML = '';
+  const col = opts.colour || (opts.fake ? '#FF2ECC' : '#DDF6FF');
+  const tr = el('path', { d: '', fill: 'none', stroke: col, 'stroke-width': opts.fake ? 2.5 : 2, 'stroke-dasharray': opts.fake ? '7 5' : 'none', style: opts.fake ? 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' : 'filter:drop-shadow(0 0 4px rgba(43,240,255,.6))' }, traceLayer);
+  const ticks = el('g', {}, traceLayer); let drawnTicks = 0;
+  const fan = opts.fan ? el('path', { d: '', fill: 'rgba(43,240,255,.18)', stroke: 'rgba(43,240,255,.5)', 'stroke-width': 1 }, fanLayer) : null;
+  beadEl.setAttribute('fill', col);
   const n = path.u1.length, dur = opts.dur || 1800, t0 = performance.now();
   return new Promise(res => {
     const frame = now => {
       const t = Math.max(0, Math.min(1, (now - t0) / dur)), i = Math.floor(t * (n - 1));
       let d = ''; for (let k = 0; k <= i; k += 2) d += (k ? 'L' : 'M') + px(path.u1[k]).toFixed(1) + ' ' + py(path.u2[k]).toFixed(1);
       tr.setAttribute('d', d); beadEl.setAttribute('cx', px(path.u1[i])); beadEl.setAttribute('cy', py(path.u2[i]));
+      while (drawnTicks * C.TICK_EVERY <= i) { const k = drawnTicks * C.TICK_EVERY; el('circle', { cx: px(path.u1[k]), cy: py(path.u2[k]), r: 2.4, fill: col }, ticks); drawnTicks++; }
+      if (fan) { let fd = 'M' + px(0).toFixed(1) + ' ' + py(0).toFixed(1); for (let k = 0; k <= i; k += 4) fd += 'L' + px(path.u1[k]).toFixed(1) + ' ' + py(path.u2[k]).toFixed(1); fan.setAttribute('d', fd + 'Z'); }
       if (opts.onFrame) opts.onFrame(i, t);
       if (t < 1) liveRAF = requestAnimationFrame(frame); else res();
     };
     liveRAF = requestAnimationFrame(frame);
   });
 }
-function loopMotion(path) { // idle: the true motion traced over and over
-  let stop = false; const run = async () => { while (!stop) { await playMotion(path, { dur: 2600 }); await wait(700); } };
+function loopMotion(path, opts) { // idle: a motion traced over and over
+  let stop = false; const run = async () => { while (!stop) { await playMotion(path, Object.assign({ dur: 2600 }, opts || {})); await wait(700); } };
   run(); return () => { stop = true; if (liveRAF) cancelAnimationFrame(liveRAF); };
 }
-let stopIdle = null;
+let stopIdle = null, baseMotion = null;
+function showPreview(lv) { // the lever's change, shown in the window as a motion, the real one faint underneath
+  if (stopIdle) stopIdle();
+  const prev = M.previewPath(lv.id, baseMotion, null);
+  drawGhost(baseMotion); setCaption('PREVIEW · ' + lv.shows, null);
+  const w = M.world(g);
+  stopIdle = loopMotion(prev, { colour: '#2BF0FF', fan: w.id === 'spring' && !!w.first });
+}
+function showReal() { // back to the real motion, no ghost
+  if (stopIdle) stopIdle(); drawGhost(null); const w = M.world(g);
+  setCaption('A REAL MOTION', 'true'); stopIdle = loopMotion(baseMotion, { fan: w.id === 'spring' && !!w.first });
+}
 
 // ---------- the needle
 let needle, needleGlow;
@@ -277,7 +308,7 @@ function setNeedle(v, colour) { // v in [-1, 1]
   needleGlow.setAttribute('stroke', colour || '#2BF0FF'); needleGlow.setAttribute('opacity', colour ? 0.7 : 0);
 }
 function setStamp(kind, text) { const st = $('#stamp'); st.className = 'stamp'; st.textContent = text || ''; if (kind) { st.classList.add(kind); requestAnimationFrame(() => st.classList.add('on')); } }
-function setFeed(text, fake) { const f = $('#feed'); f.textContent = text || ''; f.classList.toggle('fake', !!fake); }
+function setFeed(text, kind) { const f = $('#feed'); f.textContent = text || ''; f.className = 'feedline' + (kind ? ' ' + kind : ''); }
 
 // ---------- the rack
 function drawRack(pending) { // pending: the index of a tag the Auditor has not yet stamped (shown in bare steel)
@@ -297,7 +328,11 @@ function drawLevers() {
   for (const lv of M.LEVERS) {
     const b = document.createElement('button'); b.className = 'lever' + (lv.free ? ' free' : '') + (g.pulled[lv.id] ? ' down' : ''); b.dataset.id = lv.id;
     b.innerHTML = lv.label + (lv.free ? '<small>you draw it</small>' : '');
-    b.addEventListener('click', () => { if (busy || g.pulled[lv.id]) return; chosen = lv.id; $$('.lever').forEach(x => x.classList.toggle('chosen', x.dataset.id === lv.id)); $('#willdo').textContent = lv.does; $('#pull').disabled = false; });
+    b.addEventListener('click', () => {
+      if (busy || g.pulled[lv.id]) return; chosen = lv.id; $$('.lever').forEach(x => x.classList.toggle('chosen', x.dataset.id === lv.id));
+      $('#willdo').textContent = lv.does + (lv.free ? ' The window shows one way of doing it; you will draw your own.' : ' The window shows it in blue, the real motion grey underneath.') + ' Would this world run just the same? If you think so, pull.';
+      $('#pull').disabled = false; showPreview(lv);
+    });
     L.appendChild(b);
   }
   $('#willdo').textContent = 'Tap a lever to see what it does.'; $('#pull').disabled = true;
@@ -308,20 +343,20 @@ function enterWorld() {
   const w = M.world(g); busy = false;
   $('#band').textContent = `WORLD ${g.wi + 1} OF ${C.WORLD_ORDER.length} · ${w.name.toUpperCase()}`;
   $('#worldline').textContent = w.line;
-  drawWorld(w); drawGauge(); setStamp(null, ''); setFeed('', false); drawRack(); drawLevers();
+  drawWorld(w); drawGauge(); setStamp(null, ''); drawRack(); drawLevers(); $('#levers').classList.remove('off');
   $('#choose').classList.remove('hidden'); $('#after').classList.add('hidden');
   const seed = g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length;
-  const batch = M.auditorBatch(w, seed), base = batch[0].path;
+  const batch = M.auditorBatch(w, seed); baseMotion = batch[0].path;
   if (stopIdle) stopIdle();
   const first = $('#first');
   if (w.first) {
     first.classList.remove('hidden'); first.innerHTML = `<b>THE AUDITOR MOVES FIRST</b>${w.first.say}`;
-    $('#benchhead').textContent = 'Pull the lever you think it is. A wrong pull still uses a blank.';
+    $('#benchhead').textContent = w.first.target === 'warpclock' ? 'Tap a lever: the window shows the change. Pull the one you think explains the blank tag. A wrong pull still uses a blank.' : 'Tap a lever: the window shows the change. Pull the one you think his law comes from. A wrong pull still uses a blank.';
     // his picture: the law's needle, steady, while the true motion runs; a blank tag for the sheet
-    if (w.first.target === 'warpclock') { setStamp('void', 'VOID'); setFeed('the clock tag, before any pull', false); }
-    else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('his law, on a true motion', false); }
-    let stop = false; const run = async () => { while (!stop) { await playMotion(base, { dur: 2600, onFrame: i => { setNeedle(0, null); } }); await wait(700); } }; run(); stopIdle = () => { stop = true; if (liveRAF) cancelAnimationFrame(liveRAF); };
-  } else { first.classList.add('hidden'); $('#benchhead').textContent = 'Pull one lever. If the world does not care, the press stamps a tag.'; stopIdle = loopMotion(base); }
+    if (w.first.target === 'warpclock') { setStamp('void', 'VOID'); setFeed('The clock tag of this world, stamped before you arrived: the needle never moves on anything.', 'fake'); }
+    else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('His law. The needle reads it along the real motion: it does not move.', 'true'); }
+  } else { first.classList.add('hidden'); $('#benchhead').textContent = 'Tap a lever: the window shows the change. Pull it if you think this world would not notice.'; setFeed('The needle reads a tag’s quantity as the bead moves. No tag yet.', null); }
+  showReal();
 }
 
 // ---------- the pull
@@ -331,43 +366,51 @@ $('#pull').addEventListener('click', () => {
 });
 async function doPull(p) {
   if (busy) return; busy = true; if (stopIdle) stopIdle();
-  const w = M.world(g), slotIndex = g.rack.length;
+  const w = M.world(g), slotIndex = g.rack.length, lv = M.leverById(chosen);
   $('#levers').classList.add('off'); $('#pull').disabled = true;
   const res = M.playPull(g, chosen, p); if (!res) { busy = false; return; }
   // the press comes down on the blank
-  const slot = $$('.slot')[slotIndex]; slot.classList.add('pressing'); setStamp(null, ''); setFeed('', false);
+  const slot = $$('.slot')[slotIndex]; slot.classList.add('pressing'); setStamp(null, ''); drawGhost(null);
+  setFeed('The press comes down.', null); setCaption('', null);
   await wait(260); $('#rack').style.transform = 'translateY(2px)'; await wait(80); $('#rack').style.transform = '';
   if (res.kind === 'jam') {
     slot.classList.remove('pressing'); await wait(200); drawRack();
-    setStamp('jam', 'JAM'); setFeed('the world moved', true);
+    setStamp('jam', 'JAM'); setFeed('The press jammed: the world moved under it. One blank bent.', 'fake'); setCaption('THE WORLD MOVED', 'fake');
     for (let k = 0; k < 10; k++) { setNeedle((k % 2 ? 1 : -1) * (1 - k / 12), '#F2CB05'); await wait(90); } setNeedle(0.35, '#F2CB05');
   } else {
     await wait(220); slot.classList.remove('pressing'); await wait(200); drawRack(slotIndex);
     if (res.kind === 'identity') {
-      setStamp('identity', 'IDENTITY'); setFeed('no law came out', false); setNeedle(0, null);
-      await playMotion(res.batch[0].path, { dur: 1600 }); drawRack();
+      setStamp('identity', 'IDENTITY'); setNeedle(0, null);
+      setFeed('The press held, but no law came out: the tag reads a rule about the equations, not a quantity.', null);
+      drawGhost(res.batch[0].path); setCaption(lv.id === 'warpclock' ? 'YOUR RE-TICKED CLOCK · THE SAME ROUTE' : 'YOUR DRAWN PUSH', null);
+      await playMotion(M.previewPath(lv.id, res.batch[0].path, p), { dur: 2200, colour: '#2BF0FF' }); drawRack();
     } else {
-      const sc = res.audit.scale; let order = res.audit.rows.map((r, i) => i);
-      for (const i of order) {
+      const sc = res.audit.scale, shown = C.SHOWN_MOTIONS.filter(i => i < res.audit.rows.length);
+      setFeed('The press held and stamped a tag. Now the Auditor tests it: the needle reads the tag’s quantity along each motion.', null); await wait(900);
+      for (const i of shown) {
         const row = res.audit.rows[i], path = res.batch[i].path, B0 = row.B[C.EDGE];
-        setFeed(row.how, !row.isTrue);
-        await playMotion(path, { fake: !row.isTrue, dur: row.isTrue ? 1300 : 1500, onFrame: j => { const v = res.audit.blank ? 0 : (row.B[Math.max(C.EDGE, Math.min(j, row.B.length - 1 - C.EDGE))] - B0) / sc * 2.5; setNeedle(v, row.steady ? null : (row.isTrue ? '#F2CB05' : '#FF2ECC')); } });
-        await wait(250);
+        setCaption(row.isTrue ? ('REAL MOTION · ' + (/re-ticked/.test(row.how) ? 'SAME ROUTE, CLOCK RE-TICKED' : 'WHAT THIS WORLD REALLY DOES')) : ('FAKE · ' + row.how.replace('a fake: ', '').toUpperCase()), row.isTrue ? 'true' : 'fake');
+        setFeed(row.isTrue ? (row.steady ? 'A real motion. The needle holds still: the quantity is not changing.' : 'A real motion, and the needle moves: this is not a law.') : (row.steady ? 'A fake, something this world would never do. The needle does not move: this tag cannot catch it.' : 'A fake, something this world would never do. The needle swings: the tag catches it.'), row.isTrue ? 'true' : 'fake');
+        await playMotion(path, { fake: !row.isTrue, dur: row.isTrue ? 1400 : 1600, onFrame: j => { const v = res.audit.blank ? 0 : (row.B[Math.max(C.EDGE, Math.min(j, row.B.length - 1 - C.EDGE))] - B0) / sc * 2.5; setNeedle(v, row.steady ? null : (row.isTrue ? '#F2CB05' : '#FF2ECC')); } });
+        await wait(350);
       }
       drawRack(); setStamp(res.kind, res.kind === 'teeth' ? 'TEETH' : res.kind === 'void' ? 'VOID' : 'NOT A LAW');
-      setFeed(res.kind === 'void' ? 'steady on everything' : res.kind === 'teeth' ? 'steady on true, swings on fakes' : 'drifted on a true motion', res.kind === 'void');
+      setFeed(res.kind === 'void' ? 'VOID: the needle never moved, not even on a fake. A tag that catches nothing says nothing.' : res.kind === 'teeth' ? 'TEETH: still on the real motions, swinging on a fake. This law can catch a fake.' : 'The needle moved on a real motion: not a law.', res.kind === 'void' ? 'fake' : res.kind === 'teeth' ? 'true' : null);
+      setCaption(res.kind === 'void' ? 'VOID' : res.kind === 'teeth' ? 'TEETH' : 'NOT A LAW', res.kind === 'void' ? 'fake' : null);
       setNeedle(res.kind === 'teeth' ? 0.5 : 0, res.kind === 'teeth' ? '#2BF0FF' : res.kind === 'void' ? '#FF2ECC' : null);
       if (res.kind === 'void') { for (let k = 0; k < 3; k++) { setNeedle(0, '#FF2ECC'); await wait(120); setNeedle(0, null); await wait(120); } setNeedle(0, '#FF2ECC'); }
     }
   }
+  $('#result').textContent = res.plain;
   $('#say').innerHTML = `<b>THE AUDITOR</b>${res.say}`;
   $('#choose').classList.add('hidden'); $('#after').classList.remove('hidden');
   $('#again').classList.toggle('hidden', g.blanks <= 0);
   $('#next').textContent = g.wi >= C.WORLD_ORDER.length - 1 ? 'The verdict' : 'Next world';
   busy = false;
-  const base = res.batch[0].path; stopIdle = loopMotion(base);
+  if (res.kind !== 'identity') { drawGhost(null); stopIdle = loopMotion(res.batch[0].path, { fan: w.id === 'spring' && !!w.first }); }
+  else { stopIdle = loopMotion(M.previewPath(lv.id, res.batch[0].path, p), { colour: '#2BF0FF' }); }
 }
-$('#again').addEventListener('click', () => { $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); });
+$('#again').addEventListener('click', () => { $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); setStamp(null, ''); setFeed('The needle reads a tag’s quantity as the bead moves. Tap a lever.', null); showReal(); });
 $('#next').addEventListener('click', () => { const w = M.nextWorld(g); if (!w) return finish(); enterWorld(); });
 
 // ---------- the strip
