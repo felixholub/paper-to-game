@@ -226,9 +226,9 @@ ul{padding-left:20px}li{margin:4px 0}
 <p>Emmy Noether's 1918 paper is about a variational integral (an action) that is invariant under a continuous group of transformations, and it proves two theorems. <b>Theorem I:</b> if the group has ρ parameters, there are ρ independent combinations of the Lagrange expressions (the equations of motion) that are divergences, which is to say ρ conservation laws; and conversely, ρ conservation laws imply invariance under such a group. <b>Theorem II:</b> if the group depends on ρ arbitrary functions and their derivatives, there are ρ identities between the Lagrange expressions and their derivatives, so that ρ of the equations of motion are consequences of the rest; and conversely. Her first example of Theorem II is the Weierstrass parametric integral, invariant under any re-labelling of the parameter, with the identity Σψᵢuᵢ' = 0.</p>
 <p>Section 6 answers a question of Hilbert's: why do proper energy theorems fail in general relativity? Because when a finite group (the shifts of the independent variables) sits inside an infinite group under which the integral is invariant, the conservation laws of the finite group become <i>improper</i>: linear combinations of the identities of Theorem II, plus divergences that vanish identically; they hold whether or not the equations of motion do. Proper energy theorems exist exactly when there is no such infinite group (classical mechanics, special relativity). Hilbert's claim that this failure is characteristic of general relativity holds, she ends, only if "general relativity" is taken to mean invariance under a group depending on arbitrary functions.</p>
 <h3>Mechanism: ported</h3>
-<p><b>This game demonstrates</b> the theorems' identities on four small worlds, computed, not quoted: for every lever the Lie condition (her equation 11) is checked on random paths; a lever that passes gives the current B of her equations 12 and 13, which the Auditor reads along true motions (solutions of the equations of motion) and fakes (bumped and re-ticked paths); a free-hand lever that passes gives the identity of her equation 16, checked on random paths. On the glass and the sheet (integrals homogeneous of first degree in the velocities, her example on p. 7) the clock's current is identically zero: improper, as section 6 says; on the floor and the spring it is the energy, and proper.</p>
-<p><b>It assumes</b> the worlds: two Newton-type integrals (a free bead; a bead on a spring) and two Weierstrass-type integrals (light in glass whose density depends on depth, which is Fermat's principle; a bead on a sheet with a well, a geodesic in a conformally flat metric), with profiles chosen for a visible bend. One parameter instead of four coordinates: the "free hand" here is the re-ticking of a single clock, Noether's own simplest case, and Einstein's group of all coordinate transformations is played as that. Six levers, three blanks, an Auditor with seven test motions, thresholds for "steady" and "swings": all ours, in the config block at the top of the source with their reasons. The tags' names are what the quantities measure; their formulas are in the source.</p>
-<p><b>The paper establishes</b> the two theorems and their converses for any number of variables and derivatives, and the section 6 result on proper and improper energy relations. It does not say what energy "is" in general relativity, and neither does the game; it says that the law attached to the shift of a coordinate is an identity there. The world of the sheet is a one-dimensional picture of that, not a model of gravity.</p>
+<p><b>This game demonstrates</b> the theorems' identities on four small worlds, computed, not quoted: for every lever the Lie condition (her equation 11) is checked on random paths; a lever that passes gives the current B of her equations 12 and 13, which the Auditor reads along true motions (solutions of the equations of motion) and fakes (bumped and re-ticked paths); a free-hand lever that passes gives the identity of her equation 16, checked on random paths. On the slide and the sheet (integrals homogeneous of first degree in the velocities, her example on p. 7) the clock's current is identically zero: improper, as section 6 says; on the floor and the spring it is the energy, and proper.</p>
+<p><b>It assumes</b> the worlds: two Newton-type integrals (a free dot; a dot on a spring) and two Weierstrass-type integrals (the slide, whose integrand distance/√drop is the brachistochrone's, so that the best path is a cycloid that dives and climbs back; the sheet, whose integrand thickness × distance with thickness c − y is the hanging chain's, upside down, so that the best path is an arch), with the release height, the thickness constant and each world's A and launch chosen so that the best path is visibly not straight and is the path of smallest S among all paths from its A to its B (checked against straight lines and detours in the build). One parameter instead of four coordinates: the "free hand" here is the re-ticking of a single clock, Noether's own simplest case, and Einstein's group of all coordinate transformations is played as that. Six levers, three blanks, an Auditor with seven test motions, thresholds for "steady" and "swings": all ours, in the config block at the top of the source with their reasons. The tags' names are what the quantities measure; their formulas are in the source.</p>
+<p><b>The paper establishes</b> the two theorems and their converses for any number of variables and derivatives, and the section 6 result on proper and improper energy relations. It does not say what energy "is" in general relativity, and neither does the game; it says that the law attached to the shift of a coordinate is an identity there. The slide and the sheet are one-parameter pictures of that, not models of gravity.</p>
 <h3>What is cut</h3>
 <p>Higher derivatives and the n-fold integral; mixed groups; the construction of finite transformations from infinitesimal ones (her sections 3 and 4); section 5 on relative invariance; the nonlinear dependencies between first integrals; Einstein's modified integral I* and the exchange with Klein in the notes. The group structure itself: the player pulls one infinitesimal transformation at a time.</p>
 <h3>The paper</h3>
@@ -284,9 +284,11 @@ ul{padding-left:20px}li{margin:4px 0}
     RETICK_AMP: 0.12,          // our choice: the Auditor's re-ticking of the clock, x → x + a·sin(2πx)
     // ---- the worlds (ours: profiles chosen for a visible bend; the forms are the paper's two types)
     SPRING_K: Math.pow(2 * Math.PI * 0.4, 2),    // a spring back to the centre: four tenths of a swing in the window's tick, short of the half swing beyond which the true path stops being the path of smallest S
-    GLASS_N0: 1.3, GLASS_DN: 0.5, GLASS_SLOPE: 2.5,  // glass density n(u2) = N0 − DN·tanh(SLOPE·u2): denser lower down, 0.8 to 1.8
-    SHEET_N0: 1.0, SHEET_DN: 0.6, SHEET_R: 0.35,     // sheet stretch n(r) = N0 + DN/(1 + (r/R)^2): a well at the centre
-    SPEED: 2.2,                // our choice: path length a true motion covers in one window tick on the floor, the glass and the sheet
+    SLIDE_H: 1.3,              // the slide: n(y) = 1/√(H − y), the brachistochrone's integrand (time = distance / √drop); H is the height the dot is released from, above the window's top
+    SLIDE_START: { y: 0.9, dy: 0.04, ang: -0.8, dang: 0.05, speed: 2.2 },  // our choice: the slide's A and launch direction, so the best path dives below B and climbs back inside the window
+    SHEET_C: 1.2,              // the sheet: thickness n(y) = C − y, thicker lower down (the hanging chain's integrand, mirrored: the best route arches up through the thin sheet); C sits above the window's top
+    SHEET_START: { y: -0.6, dy: 0.08, ang: 0.75, dang: 0.1, speed: 2.46 },  // our choice: the sheet's A and launch direction, so the best route arches up and comes back down inside the window
+    SPEED: 2.2,                // our choice: path length a true motion covers in one window tick on the floor and the spring
     PREVIEW_SIZE: 0.25,        // our choice (display only): how far the window's preview of a lever moves the world, in floor units; the press tests the infinitesimal change
     TICK_EVERY: 20,            // our choice (display only): grid points between the clock ticks drawn on a trail (twenty ticks per motion)
     SHOWN_MOTIONS: [0, 4],      // our choice (display only): which of the Auditor's seven motions are played in the window after the player's own test path; all seven are read
@@ -294,7 +296,7 @@ ul{padding-left:20px}li{margin:4px 0}
     PLATE_UNIT: 1000,          // our choice (display only): the best path's size reads 1000 on the numbers plate, so a change of a few parts in a thousand is visible without decimals
     OPENING_TRIES: 3,          // our choice: how many paths the player may draw against the best path in the first formula
     // ---- words (ours)
-    WORLD_ORDER: ['floor', 'spring', 'glass', 'sheet'],
+    WORLD_ORDER: ['floor', 'spring', 'slide', 'sheet'],
   };
 
   // ---------- small numerics
@@ -328,21 +330,21 @@ ul{padding-left:20px}li{margin:4px 0}
       best: 'a swing round the peg.',
       first: { target: 'turn', law: 'SWEEP RATE', say: 'I already hold a prize for this formula: SWEEP RATE, x·y′ − y·x′. Watch the shaded fan the dot sweeps round the peg: it grows evenly. Every prize comes from a change the formula does not care about. Which change is this one? Pull it.' },
       laws: { clock: 'ENERGY', turn: 'SWEEP RATE' } },
-    glass: { id: 'glass', name: 'The glass', type: 'weierstrass',
-      formula: 'S = ∫ n(y) · √(x′² + y′²) dt', words: 'density × distance, with n(y) the density of the glass at height y',
-      line: 'This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.',
-      rule: 'The ray must bend the way the density says; only the clock labels along it are free.',
-      ask: 'The glass is denser lower down, and distance in dense glass counts for more. Draw the path you think has the smallest number from A to B.',
-      best: 'a bent ray: it goes the long way round through the thin glass.',
-      laws: { across: 'LEAN × DENSITY' } },
+    slide: { id: 'slide', name: 'The slide', type: 'weierstrass',
+      formula: 'S = ∫ √(x′² + y′²) / √(h − y) dt', words: 'distance ÷ √drop: distance counts for more near the top, where the drop h − y is small',
+      line: 'This formula counts the time to slide from A down to B. Distance up near the top counts for more, because the dot is still slow there. It draws the fastest slide. The dots on it are only labels: the formula reads the shape of the curve, never how it is traced.',
+      rule: 'The slide must dive where the formula says; only the labels along it are free.',
+      ask: 'The dot slides from A down to B. Distance near the top counts for more, because the dot is slow there. Draw the path you think has the smallest number from A to B.',
+      best: 'a curve that dives below B and climbs back up: it gets away from the slow top as fast as it can, even at the price of a longer road.',
+      laws: { across: 'LEAN ÷ √DROP' } },
     sheet: { id: 'sheet', name: 'The sheet', type: 'weierstrass',
-      formula: 'S = ∫ n(x, y) · √(x′² + y′²) dt', words: 'density × distance, with n thickest at the well in the middle',
-      line: 'This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.',
-      rule: 'The route must follow the stretch of the sheet; only the clock labels along it are free.',
-      ask: 'The sheet is thickest at the well in the middle, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.',
-      best: 'a route that curves to keep off the thick middle.',
+      formula: 'S = ∫ (c − y) · √(x′² + y′²) dt', words: 'thickness × distance: the sheet is thicker lower down (thickness c − y), thin near the top',
+      line: 'This formula adds up thickness × distance. The sheet is thick lower down and thin near the top. It draws a dot taking the route with the smallest number. The ticks are only labels, as on the slide.',
+      rule: 'The route must arch the way the thickness says; only the labels along it are free.',
+      ask: 'The sheet is thick lower down and thin near the top, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.',
+      best: 'an arch: it climbs into the thin sheet and comes back down, the shape of a chain hanging between two nails, upside down.',
       first: { target: 'warpclock', law: 'ENERGY', say: 'Here the clock prize is empty before you do anything: its number comes out the same on every path, good or bad. An empty prize means "start the clock later" is only one piece of a bigger change this formula does not care about. Pull that bigger change.' },
-      laws: { turn: 'SWEEP RATE' } },
+      laws: { across: 'LEAN × THICKNESS' } },
   };
   // what each prize's number is: a formula and plain words
   const LAWS = {
@@ -350,14 +352,15 @@ ul{padding-left:20px}li{margin:4px 0}
     'SPEED RIGHT': { formula: 'x′', gloss: 'how fast the dot moves to the right' },
     'SPEED UP': { formula: 'y′', gloss: 'how fast the dot moves up' },
     'SWEEP RATE': { formula: 'x·y′ − y·x′', gloss: 'how fast the dot sweeps out area round the centre' },
-    'LEAN × DENSITY': { formula: 'n(y) · x′ / √(x′² + y′²)', gloss: 'the lean of the ray times the density of the glass (the law of refraction)' },
+    'LEAN × THICKNESS': { formula: '(c − y) · x′ / √(x′² + y′²)', gloss: 'the lean of the route times the thickness of the sheet' },
+    'LEAN ÷ √DROP': { formula: 'x′ / (√(x′² + y′²) · √(h − y))', gloss: 'the lean of the curve divided by the root of the drop (the slide\'s own law of refraction)' },
     'CLOCK LAW': { formula: 'x′·∂f/∂x′ + y′·∂f/∂y′ − f', gloss: 'the number "start the clock later" gives' },
   };
   const GLOSS = {}; for (const k in LAWS) GLOSS[k] = LAWS[k].gloss;
   function density(w, u1, u2) { // n(u) and its gradient, for the Weierstrass worlds
-    if (w.id === 'glass') { const t = Math.tanh(CONFIG.GLASS_SLOPE * u2); return { n: CONFIG.GLASS_N0 - CONFIG.GLASS_DN * t, n1: 0, n2: -CONFIG.GLASS_DN * CONFIG.GLASS_SLOPE * (1 - t * t) }; }
-    const r2 = u1 * u1 + u2 * u2, R2 = CONFIG.SHEET_R * CONFIG.SHEET_R, q = 1 + r2 / R2, n = CONFIG.SHEET_N0 + CONFIG.SHEET_DN / q;
-    const dn = -CONFIG.SHEET_DN / (q * q) * (2 / R2); return { n, n1: dn * u1, n2: dn * u2 };
+    if (w.id === 'slide') { const d = Math.max(1e-3, CONFIG.SLIDE_H - u2); return { n: 1 / Math.sqrt(d), n1: 0, n2: 0.5 * Math.pow(d, -1.5) }; }
+    if (w.id === 'sheet') { return { n: Math.max(1e-3, CONFIG.SHEET_C - u2), n1: 0, n2: -1 }; }
+    return { n: 1, n1: 0, n2: 0 };
   }
   // f, ∂f/∂u, ∂f/∂u' at one point
   function fParts(w, u1, u2, v1, v2) {
@@ -514,7 +517,8 @@ ul{padding-left:20px}li{margin:4px 0}
   }
   function trueMotion(w, r, n) { // a true motion that stays in the window
     if (w.id === 'spring') { const ang = r() * 6.283, rad = 0.45 + r() * 0.3, om = Math.sqrt(w.k); return integrate(w, rad * Math.cos(ang), rad * Math.sin(ang), -rad * om * Math.sin(ang) * 0.6, rad * om * Math.cos(ang) * 0.6, n); }
-    const y0 = (r() - 0.5) * 1.2, ang = (r() - 0.5) * 0.5, s = CONFIG.SPEED;
+    const st = w.id === 'slide' ? CONFIG.SLIDE_START : w.id === 'sheet' ? CONFIG.SHEET_START : { y: 0, dy: 1.2, ang: 0, dang: 0.5, speed: CONFIG.SPEED };
+    const y0 = st.y + (r() - 0.5) * st.dy, ang = st.ang + (r() - 0.5) * st.dang, s = st.speed;
     return integrate(w, -0.95, y0, s * Math.cos(ang), s * Math.sin(ang), n);
   }
   function retick(w, path, amp) { // the same curve read against a re-ticked clock, x → x + amp·sin(2πx): re-integrated, so no interpolation noise
@@ -610,16 +614,16 @@ ul{padding-left:20px}li{margin:4px 0}
   function verdict(g) {
     const H = g.history, has = (w, l, k) => H.some(e => e.world === w && e.lever === l && (!k || e.kind === k));
     const teeth = H.filter(e => e.kind === 'teeth').length, voids = H.filter(e => e.kind === 'void').length, jams = H.filter(e => e.kind === 'jam').length, ids = H.filter(e => e.kind === 'identity').length;
-    const sawVoid = has('glass', 'clock', 'void') || has('sheet', 'clock', 'void'), warpGlass = has('glass', 'warpclock', 'identity'), answered = has('sheet', 'warpclock', 'identity');
-    const sweep = has('spring', 'turn', 'teeth'), snell = has('glass', 'across', 'teeth');
+    const sawVoid = has('slide', 'clock', 'void') || has('sheet', 'clock', 'void'), warpGlass = has('slide', 'warpclock', 'identity'), answered = has('sheet', 'warpclock', 'identity');
+    const sweep = has('spring', 'turn', 'teeth'), snell = has('slide', 'across', 'teeth');
     const headline = answered && sawVoid ? 'YOU ANSWERED HILBERT.' : answered ? 'YOU FOUND THE FREE HAND.' : sawVoid ? 'YOU SAW THE EMPTY PRIZE.' : 'THE PRESS KEPT ITS SECRET.';
     const did = [];
     did.push(teeth === 0 ? 'You won no real prize.' : teeth === 1 ? 'You won one real prize.' : `You won ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][teeth] || teeth} real prizes: numbers that stay the same along the best path and on no other.`);
-    if (sawVoid) did.push('On the glass, the clock prize came out empty: a number that stays the same on every path.'); else did.push('You never tried the clock on the glass or the sheet, so you never saw a prize come out empty.');
-    if (warpGlass) did.push('On the glass you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number.');
+    if (sawVoid) did.push('On the slide, the clock prize came out empty: a number that stays the same on every path.'); else did.push('You never tried the clock on the slide or the sheet, so you never saw a prize come out empty.');
+    if (warpGlass) did.push('On the slide you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number.');
     if (answered) did.push('On the sheet you found the change that empties the clock prize: the free hand.'); else did.push('On the sheet you did not find the change that empties the clock prize.');
     if (sweep) did.push('On the spring you found the change behind the sweep-rate prize: a real prize points back to a change the formula does not care about.');
-    if (snell) did.push('On the glass you won lean times density: the law of refraction, from moving the drawing sideways.');
+    if (snell) did.push('On the slide you won lean over root-drop: the slide\'s own law of refraction, from moving the drawing sideways.');
     return { headline, did, teeth, voids, jams, ids, sawVoid, warpGlass, answered, sweep, snell };
   }
 
@@ -670,18 +674,18 @@ function drawWorld(w) {
     for (let y = -1; y <= 1; y += 0.5) el('line', { x1: 0, y1: py(y), x2: W, y2: py(y), stroke: '#1E2329', 'stroke-width': 1 }, bg);
   }
   if (w.id === 'spring') { el('circle', { cx: px(0), cy: py(0), r: 7, fill: '#3A4149', stroke: '#9AA3AB', 'stroke-width': 2 }, bg); }
-  if (w.id === 'glass') {
-    for (let i = 0; i < 12; i++) { const y0 = -1.1 + i * 2.2 / 12, d = M.density(w, 0, -(y0 + 0.09)).n; const a = 0.06 + (d - 0.8) * 0.22; el('rect', { x: 0, y: py(y0 + 2.2 / 12), width: W, height: H / 12 + 0.5, fill: `rgba(43,240,255,${a.toFixed(3)})` }, bg); }
-    for (let i = 1; i < 12; i++) el('line', { x1: 0, y1: py(-1.1 + i * 2.2 / 12), x2: W, y2: py(-1.1 + i * 2.2 / 12), stroke: 'rgba(0,0,0,.5)', 'stroke-width': 1 }, bg);
-  }
-  if (w.id === 'sheet') {
-    for (let r = 0.15; r < 1.9; r += 0.15) { const n = M.density(w, r, 0).n; const a = 0.08 + (n - 1) * 0.6; el('circle', { cx: px(0), cy: py(0), r: r * S, fill: 'none', stroke: `rgba(43,240,255,${a.toFixed(3)})`, 'stroke-width': 1.2 }, bg); }
-    el('circle', { cx: px(0), cy: py(0), r: 5, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, bg);
+  if (w.id === 'slide' || w.id === 'sheet') { // horizontal bands shaded by the formula's n(y): brighter where distance counts for more
+    const rows = 14; let ns = [];
+    for (let i = 0; i < rows; i++) { const yc = 1.1 - (i + 0.5) * 2.2 / rows; ns.push(M.density(w, 0, yc).n); }
+    const lo = Math.min(...ns), hi = Math.max(...ns);
+    for (let i = 0; i < rows; i++) { const a = 0.05 + 0.3 * (ns[i] - lo) / ((hi - lo) || 1); el('rect', { x: 0, y: i * H / rows, width: W, height: H / rows + 0.5, fill: `rgba(43,240,255,${a.toFixed(3)})` }, bg); }
+    for (let i = 1; i < rows; i++) el('line', { x1: 0, y1: i * H / rows, x2: W, y2: i * H / rows, stroke: 'rgba(0,0,0,.45)', 'stroke-width': 1 }, bg);
+    const lab = el('text', { x: W - 8, y: w.id === 'slide' ? 30 : H - 10, 'text-anchor': 'end', class: 'caption', style: 'fill:#9AA3AB;font-size:10px' }, bg); lab.textContent = w.id === 'slide' ? 'SLOW UP HERE · EVERY STEP COSTS MORE' : 'THICK DOWN HERE · EVERY STEP COSTS MORE';
   }
   ghostLayer = el('g', {}, win); fanLayer = el('g', {}, win); markLayer = el('g', {}, win); traceLayer = el('g', {}, win);
   strokeEl = el('path', { d: '', fill: 'none', stroke: '#FF2ECC', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' }, win);
   beadEl = el('circle', { cx: -10, cy: -10, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
-  captionEl = el('text', { x: 8, y: 16, class: 'caption' }, win); captionEl.textContent = '';
+  captionEl = el('text', { x: 8, y: w.id === 'slide' ? H - 8 : 16, class: 'caption' }, win); captionEl.textContent = '';
 }
 function setCaption(text, kind) { captionEl.textContent = text || ''; captionEl.setAttribute('class', 'caption' + (kind ? ' ' + kind : '')); }
 function pathD(p) { let d = ''; for (let i = 0; i < p.u1.length; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }

@@ -34,9 +34,11 @@
     RETICK_AMP: 0.12,          // our choice: the Auditor's re-ticking of the clock, x → x + a·sin(2πx)
     // ---- the worlds (ours: profiles chosen for a visible bend; the forms are the paper's two types)
     SPRING_K: Math.pow(2 * Math.PI * 0.4, 2),    // a spring back to the centre: four tenths of a swing in the window's tick, short of the half swing beyond which the true path stops being the path of smallest S
-    GLASS_N0: 1.3, GLASS_DN: 0.5, GLASS_SLOPE: 2.5,  // glass density n(u2) = N0 − DN·tanh(SLOPE·u2): denser lower down, 0.8 to 1.8
-    SHEET_N0: 1.0, SHEET_DN: 0.6, SHEET_R: 0.35,     // sheet stretch n(r) = N0 + DN/(1 + (r/R)^2): a well at the centre
-    SPEED: 2.2,                // our choice: path length a true motion covers in one window tick on the floor, the glass and the sheet
+    SLIDE_H: 1.3,              // the slide: n(y) = 1/√(H − y), the brachistochrone's integrand (time = distance / √drop); H is the height the dot is released from, above the window's top
+    SLIDE_START: { y: 0.9, dy: 0.04, ang: -0.8, dang: 0.05, speed: 2.2 },  // our choice: the slide's A and launch direction, so the best path dives below B and climbs back inside the window
+    SHEET_C: 1.2,              // the sheet: thickness n(y) = C − y, thicker lower down (the hanging chain's integrand, mirrored: the best route arches up through the thin sheet); C sits above the window's top
+    SHEET_START: { y: -0.6, dy: 0.08, ang: 0.75, dang: 0.1, speed: 2.46 },  // our choice: the sheet's A and launch direction, so the best route arches up and comes back down inside the window
+    SPEED: 2.2,                // our choice: path length a true motion covers in one window tick on the floor and the spring
     PREVIEW_SIZE: 0.25,        // our choice (display only): how far the window's preview of a lever moves the world, in floor units; the press tests the infinitesimal change
     TICK_EVERY: 20,            // our choice (display only): grid points between the clock ticks drawn on a trail (twenty ticks per motion)
     SHOWN_MOTIONS: [0, 4],      // our choice (display only): which of the Auditor's seven motions are played in the window after the player's own test path; all seven are read
@@ -44,7 +46,7 @@
     PLATE_UNIT: 1000,          // our choice (display only): the best path's size reads 1000 on the numbers plate, so a change of a few parts in a thousand is visible without decimals
     OPENING_TRIES: 3,          // our choice: how many paths the player may draw against the best path in the first formula
     // ---- words (ours)
-    WORLD_ORDER: ['floor', 'spring', 'glass', 'sheet'],
+    WORLD_ORDER: ['floor', 'spring', 'slide', 'sheet'],
   };
 
   // ---------- small numerics
@@ -78,21 +80,21 @@
       best: 'a swing round the peg.',
       first: { target: 'turn', law: 'SWEEP RATE', say: 'I already hold a prize for this formula: SWEEP RATE, x·y′ − y·x′. Watch the shaded fan the dot sweeps round the peg: it grows evenly. Every prize comes from a change the formula does not care about. Which change is this one? Pull it.' },
       laws: { clock: 'ENERGY', turn: 'SWEEP RATE' } },
-    glass: { id: 'glass', name: 'The glass', type: 'weierstrass',
-      formula: 'S = ∫ n(y) · √(x′² + y′²) dt', words: 'density × distance, with n(y) the density of the glass at height y',
-      line: 'This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.',
-      rule: 'The ray must bend the way the density says; only the clock labels along it are free.',
-      ask: 'The glass is denser lower down, and distance in dense glass counts for more. Draw the path you think has the smallest number from A to B.',
-      best: 'a bent ray: it goes the long way round through the thin glass.',
-      laws: { across: 'LEAN × DENSITY' } },
+    slide: { id: 'slide', name: 'The slide', type: 'weierstrass',
+      formula: 'S = ∫ √(x′² + y′²) / √(h − y) dt', words: 'distance ÷ √drop: distance counts for more near the top, where the drop h − y is small',
+      line: 'This formula counts the time to slide from A down to B. Distance up near the top counts for more, because the dot is still slow there. It draws the fastest slide. The dots on it are only labels: the formula reads the shape of the curve, never how it is traced.',
+      rule: 'The slide must dive where the formula says; only the labels along it are free.',
+      ask: 'The dot slides from A down to B. Distance near the top counts for more, because the dot is slow there. Draw the path you think has the smallest number from A to B.',
+      best: 'a curve that dives below B and climbs back up: it gets away from the slow top as fast as it can, even at the price of a longer road.',
+      laws: { across: 'LEAN ÷ √DROP' } },
     sheet: { id: 'sheet', name: 'The sheet', type: 'weierstrass',
-      formula: 'S = ∫ n(x, y) · √(x′² + y′²) dt', words: 'density × distance, with n thickest at the well in the middle',
-      line: 'This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.',
-      rule: 'The route must follow the stretch of the sheet; only the clock labels along it are free.',
-      ask: 'The sheet is thickest at the well in the middle, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.',
-      best: 'a route that curves to keep off the thick middle.',
+      formula: 'S = ∫ (c − y) · √(x′² + y′²) dt', words: 'thickness × distance: the sheet is thicker lower down (thickness c − y), thin near the top',
+      line: 'This formula adds up thickness × distance. The sheet is thick lower down and thin near the top. It draws a dot taking the route with the smallest number. The ticks are only labels, as on the slide.',
+      rule: 'The route must arch the way the thickness says; only the labels along it are free.',
+      ask: 'The sheet is thick lower down and thin near the top, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.',
+      best: 'an arch: it climbs into the thin sheet and comes back down, the shape of a chain hanging between two nails, upside down.',
       first: { target: 'warpclock', law: 'ENERGY', say: 'Here the clock prize is empty before you do anything: its number comes out the same on every path, good or bad. An empty prize means "start the clock later" is only one piece of a bigger change this formula does not care about. Pull that bigger change.' },
-      laws: { turn: 'SWEEP RATE' } },
+      laws: { across: 'LEAN × THICKNESS' } },
   };
   // what each prize's number is: a formula and plain words
   const LAWS = {
@@ -100,14 +102,15 @@
     'SPEED RIGHT': { formula: 'x′', gloss: 'how fast the dot moves to the right' },
     'SPEED UP': { formula: 'y′', gloss: 'how fast the dot moves up' },
     'SWEEP RATE': { formula: 'x·y′ − y·x′', gloss: 'how fast the dot sweeps out area round the centre' },
-    'LEAN × DENSITY': { formula: 'n(y) · x′ / √(x′² + y′²)', gloss: 'the lean of the ray times the density of the glass (the law of refraction)' },
+    'LEAN × THICKNESS': { formula: '(c − y) · x′ / √(x′² + y′²)', gloss: 'the lean of the route times the thickness of the sheet' },
+    'LEAN ÷ √DROP': { formula: 'x′ / (√(x′² + y′²) · √(h − y))', gloss: 'the lean of the curve divided by the root of the drop (the slide\'s own law of refraction)' },
     'CLOCK LAW': { formula: 'x′·∂f/∂x′ + y′·∂f/∂y′ − f', gloss: 'the number "start the clock later" gives' },
   };
   const GLOSS = {}; for (const k in LAWS) GLOSS[k] = LAWS[k].gloss;
   function density(w, u1, u2) { // n(u) and its gradient, for the Weierstrass worlds
-    if (w.id === 'glass') { const t = Math.tanh(CONFIG.GLASS_SLOPE * u2); return { n: CONFIG.GLASS_N0 - CONFIG.GLASS_DN * t, n1: 0, n2: -CONFIG.GLASS_DN * CONFIG.GLASS_SLOPE * (1 - t * t) }; }
-    const r2 = u1 * u1 + u2 * u2, R2 = CONFIG.SHEET_R * CONFIG.SHEET_R, q = 1 + r2 / R2, n = CONFIG.SHEET_N0 + CONFIG.SHEET_DN / q;
-    const dn = -CONFIG.SHEET_DN / (q * q) * (2 / R2); return { n, n1: dn * u1, n2: dn * u2 };
+    if (w.id === 'slide') { const d = Math.max(1e-3, CONFIG.SLIDE_H - u2); return { n: 1 / Math.sqrt(d), n1: 0, n2: 0.5 * Math.pow(d, -1.5) }; }
+    if (w.id === 'sheet') { return { n: Math.max(1e-3, CONFIG.SHEET_C - u2), n1: 0, n2: -1 }; }
+    return { n: 1, n1: 0, n2: 0 };
   }
   // f, ∂f/∂u, ∂f/∂u' at one point
   function fParts(w, u1, u2, v1, v2) {
@@ -264,7 +267,8 @@
   }
   function trueMotion(w, r, n) { // a true motion that stays in the window
     if (w.id === 'spring') { const ang = r() * 6.283, rad = 0.45 + r() * 0.3, om = Math.sqrt(w.k); return integrate(w, rad * Math.cos(ang), rad * Math.sin(ang), -rad * om * Math.sin(ang) * 0.6, rad * om * Math.cos(ang) * 0.6, n); }
-    const y0 = (r() - 0.5) * 1.2, ang = (r() - 0.5) * 0.5, s = CONFIG.SPEED;
+    const st = w.id === 'slide' ? CONFIG.SLIDE_START : w.id === 'sheet' ? CONFIG.SHEET_START : { y: 0, dy: 1.2, ang: 0, dang: 0.5, speed: CONFIG.SPEED };
+    const y0 = st.y + (r() - 0.5) * st.dy, ang = st.ang + (r() - 0.5) * st.dang, s = st.speed;
     return integrate(w, -0.95, y0, s * Math.cos(ang), s * Math.sin(ang), n);
   }
   function retick(w, path, amp) { // the same curve read against a re-ticked clock, x → x + amp·sin(2πx): re-integrated, so no interpolation noise
@@ -360,16 +364,16 @@
   function verdict(g) {
     const H = g.history, has = (w, l, k) => H.some(e => e.world === w && e.lever === l && (!k || e.kind === k));
     const teeth = H.filter(e => e.kind === 'teeth').length, voids = H.filter(e => e.kind === 'void').length, jams = H.filter(e => e.kind === 'jam').length, ids = H.filter(e => e.kind === 'identity').length;
-    const sawVoid = has('glass', 'clock', 'void') || has('sheet', 'clock', 'void'), warpGlass = has('glass', 'warpclock', 'identity'), answered = has('sheet', 'warpclock', 'identity');
-    const sweep = has('spring', 'turn', 'teeth'), snell = has('glass', 'across', 'teeth');
+    const sawVoid = has('slide', 'clock', 'void') || has('sheet', 'clock', 'void'), warpGlass = has('slide', 'warpclock', 'identity'), answered = has('sheet', 'warpclock', 'identity');
+    const sweep = has('spring', 'turn', 'teeth'), snell = has('slide', 'across', 'teeth');
     const headline = answered && sawVoid ? 'YOU ANSWERED HILBERT.' : answered ? 'YOU FOUND THE FREE HAND.' : sawVoid ? 'YOU SAW THE EMPTY PRIZE.' : 'THE PRESS KEPT ITS SECRET.';
     const did = [];
     did.push(teeth === 0 ? 'You won no real prize.' : teeth === 1 ? 'You won one real prize.' : `You won ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][teeth] || teeth} real prizes: numbers that stay the same along the best path and on no other.`);
-    if (sawVoid) did.push('On the glass, the clock prize came out empty: a number that stays the same on every path.'); else did.push('You never tried the clock on the glass or the sheet, so you never saw a prize come out empty.');
-    if (warpGlass) did.push('On the glass you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number.');
+    if (sawVoid) did.push('On the slide, the clock prize came out empty: a number that stays the same on every path.'); else did.push('You never tried the clock on the slide or the sheet, so you never saw a prize come out empty.');
+    if (warpGlass) did.push('On the slide you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number.');
     if (answered) did.push('On the sheet you found the change that empties the clock prize: the free hand.'); else did.push('On the sheet you did not find the change that empties the clock prize.');
     if (sweep) did.push('On the spring you found the change behind the sweep-rate prize: a real prize points back to a change the formula does not care about.');
-    if (snell) did.push('On the glass you won lean times density: the law of refraction, from moving the drawing sideways.');
+    if (snell) did.push('On the slide you won lean over root-drop: the slide\'s own law of refraction, from moving the drawing sideways.');
     return { headline, did, teeth, voids, jams, ids, sawVoid, warpGlass, answered, sweep, snell };
   }
 

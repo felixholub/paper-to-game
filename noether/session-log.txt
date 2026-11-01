@@ -65,58 +65,58 @@
    buttons: PULL AGAIN + NEXT FORMULA
   shot a-spring-turn
 
-== FORMULA 3 OF 4 · THE GLASS · This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.
-   The glass is denser lower down, and distance in dense glass counts for more. Draw the path you think has the smallest number from A to B.
-  shot a-glass-opening
-   drew line: Your path: 1742. The best path: 1000. The best path is a bent ray: it goes the long way round through the thin glass. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
-   plate: your path | 1742 | the best path | 1000
-  shot a-glass-opening-drawn
+== FORMULA 3 OF 4 · THE SLIDE · This formula counts the time to slide from A down to B. Distance up near the top counts for more, because the dot is still slow there. It draws the fastest slide. The dots on it are only labels: the formula reads the shape of the curve, never how it is traced.
+   The dot slides from A down to B. Distance near the top counts for more, because the dot is slow there. Draw the path you think has the smallest number from A to B.
+  shot a-slide-opening
+   drew line: Your path: 1382. The best path: 1000. The best path is a curve that dives below B and climbs back up: it gets away from the slow top as fast as it can, even at the price of a longer road. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1382 | the best path | 1000
+  shot a-slide-opening-drawn
    on to the changes: Tap a change: the window and the plate show it. Pull it if you think the formula does not care.
-   plate: THE FORMULA | S = ∫ n(y) · √(x′² + y′²) dt | density × distance, with n(y) the density of the glass at height y | the best path | 1000 | your path | 1742
-  shot a-glass
+   plate: THE FORMULA | S = ∫ √(x′² + y′²) / √(h − y) dt | distance ÷ √drop: distance counts for more near the top, where the drop h − y is small | the best path | 1000 | your path | 1382
+  shot a-slide
    tapped "clock": Start the clock a little later. The same drawing, every tick a little later. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
-  shot a-glass-tap
+   plate: the best path | 1000 | → | 1000 | your path | 1382 | → | 1382
+  shot a-slide-tap
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle did not move: on your path the number is the same as on the best path.
-  shot a-glass-drawn
+  shot a-slide-drawn
    stamp: EMPTY · feed: EMPTY: the number stayed the same on every path he tried, the bad ones too. A number like that tells you nothing.
    rack: [void: EMPTY] [blank: BLANK] [blank: BLANK]
    result: The formula does not care about clock later, so a prize was stamped: the number "start the clock later" gives. But its number came out the same on the best path, on your path, and on every path the Auditor tried. A number that never changes on any path, even the bad ones, tells you nothing. The prize is empty.
    auditor: THE AUDITOR | Empty. It holds on every path, so it tells me nothing.
    buttons: PULL AGAIN + NEXT FORMULA
-  shot a-glass-empty
+  shot a-slide-empty
    tapped "warpclock": Let the clock run fast here and slow there, any way you like. You draw how; the ticks bunch and spread. The window shows one way of doing it; you will draw your own. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
+   plate: the best path | 1000 | → | 1000 | your path | 1382 | → | 1382
    stamp: RULE · feed: The formula does not care, but no prize came out. The tag reads a rule: ψ₁x′ + ψ₂y′ = 0, the two equations of motion are not independent.
    rack: [void: EMPTY] [identity: RULE] [blank: BLANK]
    result: The formula does not care about a clock re-ticked any way you like: the numbers stayed the same. But no prize came out. A change with a free hand in it gives a rule instead of a number: the formula's two equations of motion are not independent, one follows from the other. And "start the clock later" is one special way of re-ticking, so its prize is empty here.
    auditor: THE AUDITOR | A rule, not a number. Watch what that does to the clock prize.
    buttons: PULL AGAIN + NEXT FORMULA
-  shot a-glass-rule
+  shot a-slide-rule
    tapped "across": Move the whole drawing one step to the right. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
+   plate: the best path | 1000 | → | 1000 | your path | 1382 | → | 1382
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
-   rack: [void: EMPTY] [identity: RULE] [teeth: LEAN × DENSITY]
-   result: The formula does not care about move right, so you win a prize: the lean of the ray times the density of the glass (the law of refraction), n(y) · x′ / √(x′² + y′²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
+   rack: [void: EMPTY] [identity: RULE] [teeth: LEAN ÷ √DROP]
+   result: The formula does not care about move right, so you win a prize: the lean of the curve divided by the root of the drop (the slide's own law of refraction), x′ / (√(x′² + y′²) · √(h − y)). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it.
    buttons: NEXT FORMULA
-  shot a-glass-across
+  shot a-slide-across
 
-== FORMULA 4 OF 4 · THE SHEET · This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.
-   The sheet is thickest at the well in the middle, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.
+== FORMULA 4 OF 4 · THE SHEET · This formula adds up thickness × distance. The sheet is thick lower down and thin near the top. It draws a dot taking the route with the smallest number. The ticks are only labels, as on the slide.
+   The sheet is thick lower down and thin near the top, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.
   shot a-sheet-opening
-   drew bulge: Your path: 1370. The best path: 1000. The best path is a route that curves to keep off the thick middle. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
-   plate: your path | 1370 | the best path | 1000
+   drew bulge: Your path: 1047. The best path: 1000. The best path is an arch: it climbs into the thin sheet and comes back down, the shape of a chain hanging between two nails, upside down. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1047 | the best path | 1000
   shot a-sheet-opening-drawn
    on to the changes: Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.
-   plate: THE FORMULA | S = ∫ n(x, y) · √(x′² + y′²) dt | density × distance, with n thickest at the well in the middle | the best path | 1000 | your path | 1370
+   plate: THE FORMULA | S = ∫ (c − y) · √(x′² + y′²) dt | thickness × distance: the sheet is thicker lower down (thickness c − y), thin near the top | the best path | 1000 | your path | 1047
    THE AUDITOR MOVES FIRST | Here the clock prize is empty before you do anything: its number comes out the same on every path, good or bad. An empty prize means "start the clock later" is only one piece of a bigger change this formula does not care about. Pull that bigger change.
   shot a-sheet-first
    tapped "warpclock": Let the clock run fast here and slow there, any way you like. You draw how; the ticks bunch and spread. The window shows one way of doing it; you will draw your own. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | your path | 1370 | → | 1370
+   plate: the best path | 1000 | → | 1000 | your path | 1047 | → | 1047
    stamp: RULE · feed: The formula does not care, but no prize came out. The tag reads a rule: ψ₁x′ + ψ₂y′ = 0, the two equations of motion are not independent.
    rack: [identity: RULE] [blank: BLANK] [blank: BLANK]
    result: The formula does not care about a clock re-ticked any way you like: the numbers stayed the same. But no prize came out. A change with a free hand in it gives a rule instead of a number: the formula's two equations of motion are not independent, one follows from the other. And "start the clock later" is one special way of re-ticking, so its prize is empty here.
@@ -125,7 +125,7 @@
   shot a-sheet-answer
 
 VERDICT: YOU ANSWERED HILBERT.
-  You won four real prizes: numbers that stay the same along the best path and on no other. | On the glass, the clock prize came out empty: a number that stays the same on every path. | On the glass you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number. | On the sheet you found the change that empties the clock prize: the free hand. | On the spring you found the change behind the sweep-rate prize: a real prize points back to a change the formula does not care about. | On the glass you won lean times density: the law of refraction, from moving the drawing sideways.
+  You won four real prizes: numbers that stay the same along the best path and on no other. | On the slide, the clock prize came out empty: a number that stays the same on every path. | On the slide you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number. | On the sheet you found the change that empties the clock prize: the free hand. | On the spring you found the change behind the sweep-rate prize: a real prize points back to a change the formula does not care about. | On the slide you won lean over root-drop: the slide's own law of refraction, from moving the drawing sideways.
   shot a-end
   shot about
 
@@ -160,39 +160,39 @@ VERDICT: YOU ANSWERED HILBERT.
    result: The formula does not care about clock later, so you win a prize: speed² plus stretch², ½(x′² + y′²) + ½k(x² + y²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it. A prize, but not the one I asked about.
    buttons: PULL AGAIN + NEXT FORMULA
-== FORMULA 3 OF 4 · THE GLASS · This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.
-   The glass is denser lower down, and distance in dense glass counts for more. Draw the path you think has the smallest number from A to B.
-   drew line: Your path: 1742. The best path: 1000. The best path is a bent ray: it goes the long way round through the thin glass. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
-   plate: your path | 1742 | the best path | 1000
+== FORMULA 3 OF 4 · THE SLIDE · This formula counts the time to slide from A down to B. Distance up near the top counts for more, because the dot is still slow there. It draws the fastest slide. The dots on it are only labels: the formula reads the shape of the curve, never how it is traced.
+   The dot slides from A down to B. Distance near the top counts for more, because the dot is slow there. Draw the path you think has the smallest number from A to B.
+   drew line: Your path: 1382. The best path: 1000. The best path is a curve that dives below B and climbs back up: it gets away from the slow top as fast as it can, even at the price of a longer road. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1382 | the best path | 1000
    on to the changes: Tap a change: the window and the plate show it. Pull it if you think the formula does not care.
-== FORMULA 3 OF 4 · THE GLASS
+== FORMULA 3 OF 4 · THE SLIDE
    tapped "across": Move the whole drawing one step to the right. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
+   plate: the best path | 1000 | → | 1000 | your path | 1382 | → | 1382
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
-   rack: [teeth: LEAN × DENSITY] [blank: BLANK] [blank: BLANK]
-   result: The formula does not care about move right, so you win a prize: the lean of the ray times the density of the glass (the law of refraction), n(y) · x′ / √(x′² + y′²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
+   rack: [teeth: LEAN ÷ √DROP] [blank: BLANK] [blank: BLANK]
+   result: The formula does not care about move right, so you win a prize: the lean of the curve divided by the root of the drop (the slide's own law of refraction), x′ / (√(x′² + y′²) · √(h − y)). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it.
    buttons: PULL AGAIN + NEXT FORMULA
-== FORMULA 4 OF 4 · THE SHEET · This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.
-   The sheet is thickest at the well in the middle, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.
-   drew line: Your path: 1300. The best path: 1000. The best path is a route that curves to keep off the thick middle. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
-   plate: your path | 1300 | the best path | 1000
+== FORMULA 4 OF 4 · THE SHEET · This formula adds up thickness × distance. The sheet is thick lower down and thin near the top. It draws a dot taking the route with the smallest number. The ticks are only labels, as on the slide.
+   The sheet is thick lower down and thin near the top, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.
+   drew line: Your path: 1174. The best path: 1000. The best path is an arch: it climbs into the thin sheet and comes back down, the shape of a chain hanging between two nails, upside down. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1174 | the best path | 1000
    on to the changes: Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.
 == FORMULA 4 OF 4 · THE SHEET
-   tapped "turn": Turn the whole drawing a little round the centre. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | your path | 1300 | → | 1300
+   tapped "across": Move the whole drawing one step to the right. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
+   plate: the best path | 1000 | → | 1000 | your path | 1174 | → | 1174
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
-   rack: [teeth: SWEEP RATE] [blank: BLANK] [blank: BLANK]
-   result: The formula does not care about turn, so you win a prize: how fast the dot sweeps out area round the centre, x·y′ − y·x′. Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
+   rack: [teeth: LEAN × THICKNESS] [blank: BLANK] [blank: BLANK]
+   result: The formula does not care about move right, so you win a prize: the lean of the route times the thickness of the sheet, (c − y) · x′ / √(x′² + y′²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it. A prize, but not the one I asked about.
    buttons: PULL AGAIN + THE VERDICT
 
 VERDICT B: THE PRESS KEPT ITS SECRET.
-  You won four real prizes: numbers that stay the same along the best path and on no other. | You never tried the clock on the glass or the sheet, so you never saw a prize come out empty. | On the sheet you did not find the change that empties the clock prize. | On the glass you won lean times density: the law of refraction, from moving the drawing sideways.
+  You won four real prizes: numbers that stay the same along the best path and on no other. | You never tried the clock on the slide or the sheet, so you never saw a prize come out empty. | On the sheet you did not find the change that empties the clock prize. | On the slide you won lean over root-drop: the slide's own law of refraction, from moving the drawing sideways.
   shot b-end
 
 errors: none
