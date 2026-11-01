@@ -1,19 +1,20 @@
 // Lovelace's Cards — the loom. The only copy: solve.js runs it in Node to compute every puzzle's par, build.py inlines it.
 // The machine counts the way the Notes say an Engine counts: with numbers in the Store and cards that operate on them.
-//   - A wheel (A or B) is a number in the Store. Its starting value is put on by hand before the run, as Note B inscribes
-//     the data on the columns.
+//   - A wheel (A or B) is a number in the Store. Every wheel starts at 0.
 //   - A stitch card weaves one stitch.
+//   - A Set card puts a number on a wheel, whatever it showed before (a card of numbers, Memoir p. 15). It is the only way
+//     a wheel gets a number.
 //   - A Go back card is Lovelace's Operation 7 joined to her backing (Note G; Note C): it takes 1 from its wheel, and the
-//     machine "feels" the result: if the wheel is not yet 0 it goes back to the card named; if it is 0 it carries on.
-//     (Menabrea's counter, likewise, has a unit taken off each time "until it only marks zero".)
-//   - A Set card puts a number on a wheel (a card of numbers, Memoir p. 15). Nothing resets a wheel by itself: a loop inside
-//     a loop needs the inner wheel set again by a card on every round of the outer one.
-// A wheel taken below 0 never comes back to 0, so a Go back on it sends the machine round for ever; the attendant stops it.
+//     machine "feels" the result: if the wheel is not yet 0 it goes back to the card named (any card above it, a Set card
+//     included); if it is 0 it carries on. (Menabrea's counter, likewise, has a unit taken off each time "until it only
+//     marks zero".)
+// Nothing resets a wheel by itself: a loop inside a loop needs the outer loop to pass the inner wheel's Set card on every
+// round. A wheel taken below 0 never comes back to 0 by taking 1 off, so the machine runs on; the attendant stops it.
 (function (root) {
   'use strict';
-  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1, to:index} | {k:'set', w:0|1, v:n}] ; start: [A, B]
+  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1, to:index} | {k:'set', w:0|1, v:n}]
   function weave(chain, start, target, wantEvents, cap) {
-    const wh = start.slice(); const out = []; const ev = wantEvents ? [] : null;
+    const wh = (start || [0, 0]).slice(); const out = []; const ev = wantEvents ? [] : null;
     cap = cap || 4000;
     let pc = 0, steps = 0;
     while (pc < chain.length) {
@@ -33,52 +34,67 @@
     return { out, ev, status: target ? (out.length === target.length ? 'ok' : 'short') : 'done', wheels: wh };
   }
 
-  // Fewest cards that weave the target exactly, with at most `wheels` wheels; every number (a wheel's start, a Set card's value)
-  // tried from 1 to WMAX. Exhaustive, with sound prunes: before the first Go back card, stitches are woven straight, so they must
-  // match the target's opening; a Go back may only name a stitch card; a Set card is only useful on a wheel some Go back uses.
+  // Fewest cards that weave the target exactly, with at most `wheels` wheels and Set values 1..WMAX.
+  // Exhaustive, by iterative deepening on the number of cards, and execution-guided: the machine is run while the chain is
+  // being written. Because Go back only ever jumps upward, the machine first reaches position i by falling through from i−1,
+  // exactly when the chain is i cards long; that is when card i is chosen. A Set card's number is not guessed up front: the
+  // wheel carries "that Set card's number, minus d", and the number is fixed at the first Go back that has to decide. There
+  // the search branches: the wheel is at 0 now (the number is d), or not yet (the number is more than d). This covers every
+  // number from 1 to WMAX exactly once, without trying them one by one. Every branch is checked stitch by stitch against the
+  // order. Sound prunes: a stitch card must be the stitch the order wants next (it is woven the moment it is added); a Go back
+  // on a wheel needs a Set card for that wheel above it (otherwise the wheel goes 0, −1, −2 … and never returns to 0); wheel B
+  // only once wheel A has a Set card (the two are interchangeable).
   const WMAX = 12;
   function solve(target, wheels, maxLen) {
-    const cols = [...new Set(target)];
-    const cap = 40 * target.length + 50;
-    const vmax = Math.min(WMAX, target.length);
-    for (let L = 1; L <= maxLen; L++) {
-      const chain = new Array(L); let found = null;
-      const tryNumbers = () => {
-        const used = [...new Set(chain.filter(c => c.k === 'back').map(c => c.w))];
-        if (chain.some(c => c.k === 'set' && !used.includes(c.w))) return null;
-        const sets = chain.filter(c => c.k === 'set');
-        const slots = [...used.map(w => ({ kind: 'start', w })), ...sets.map(c => ({ kind: 'set', c }))];
-        const start = [1, 1];
-        const rec = j => {
-          if (j === slots.length) return weave(chain, start, target, false, cap).status === 'ok' ? { start: start.slice(), vals: sets.map(c => c.v) } : null;
-          const s = slots[j];
-          for (let v = 1; v <= vmax; v++) {
-            if (s.kind === 'start') start[s.w] = v; else s.c.v = v;
-            const r = rec(j + 1); if (r) return r;
+    const T = target, N = T.length, vmax = Math.min(WMAX, N), cap = 30 * N + 60;
+    const put = (wh, w, x) => { const a = wh.slice(); a[w] = x; return a; };
+    for (let Lmax = 1; Lmax <= maxLen; Lmax++) {
+      const chain = []; let found = null;
+      const run = (pc, wh, n, steps, vals, lb) => {
+        for (;;) {
+          if (++steps > cap) return false;
+          if (pc === chain.length) {
+            if (n === N) { found = chain.map((c, i) => c.k === 'set' ? { ...c, v: vals[i] !== undefined ? vals[i] : Math.max(1, lb[i] || 1) } : { ...c }); return true; }
+            if (chain.length === Lmax) return false;
+            chain.push({ k: T[n] });
+            if (run(pc, wh, n, steps, vals, lb)) return true;
+            chain.pop();
+            for (let w = 0; w < wheels; w++) {
+              if (w === 1 && !chain.some(c => c.k === 'set' && c.w === 0)) continue;
+              chain.push({ k: 'set', w });
+              if (run(pc, wh, n, steps, vals, lb)) return true;
+              chain.pop();
+            }
+            for (let w = 0; w < wheels; w++) {
+              if (!chain.some(c => c.k === 'set' && c.w === w)) continue;
+              for (let t = 0; t < chain.length; t++) {
+                if (chain[t].k === 'back') continue;
+                chain.push({ k: 'back', w, to: t });
+                if (run(pc, wh, n, steps, vals, lb)) return true;
+                chain.pop();
+              }
+            }
+            return false;
           }
-          return null;
-        };
-        return rec(0);
-      };
-      const dfs = (i, sawBack) => {
-        if (found) return;
-        if (i === L) {
-          if (!sawBack && chain.some(c => c.k === 'set')) return;
-          const r = tryNumbers(); if (r) found = { chain: chain.map(c => ({ ...c })), start: r.start }; return;
-        }
-        for (const c of cols) {
-          if (!sawBack && (i >= target.length || target[i] !== c)) continue;
-          chain[i] = { k: c }; dfs(i + 1, sawBack); if (found) return;
-        }
-        if (i === 0) return;
-        for (let w = 0; w < wheels; w++) {
-          if (w === 1 && !chain.slice(0, i).some(c => (c.k === 'back' || c.k === 'set') && c.w === 0)) continue; // B only after A (symmetry)
-          for (let to = 0; to < i; to++) { if (chain[to].k === 'back' || chain[to].k === 'set') continue; chain[i] = { k: 'back', w, to }; dfs(i + 1, true); if (found) return; }
-          chain[i] = { k: 'set', w, v: 1 }; dfs(i + 1, sawBack); if (found) return;
+          const c = chain[pc];
+          if (c.k === 'set') { wh = put(wh, c.w, vals[pc] !== undefined ? vals[pc] : { s: pc, d: 0 }); pc++; continue; }
+          if (c.k === 'back') {
+            const x = wh[c.w];
+            if (typeof x === 'number') { wh = put(wh, c.w, x - 1); pc = x - 1 !== 0 ? c.to : pc + 1; continue; }
+            const d = x.d + 1, lo = lb[x.s] || 1;
+            if (d >= lo && d <= vmax) {                       // the number was d: the wheel shows 0, carry on
+              const v2 = vals.slice(); v2[x.s] = d;
+              if (run(pc + 1, put(wh, c.w, 0), n, steps, v2, lb)) return true;
+            }
+            if (d + 1 > vmax) return false;                   // the number is more than d: not 0 yet, go back
+            lb = lb.slice(); lb[x.s] = Math.max(lo, d + 1);
+            wh = put(wh, c.w, { s: x.s, d }); pc = c.to; continue;
+          }
+          if (n >= N || T[n] !== c.k) return false;
+          n++; pc++;
         }
       };
-      dfs(0, false);
-      if (found) return { par: L, ...found };
+      if (run(0, [0, 0], 0, 0, [], [])) return { par: found.length, chain: found, start: [0, 0] };
     }
     return null;
   }

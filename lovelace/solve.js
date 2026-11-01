@@ -19,7 +19,7 @@ const LIB = [
   { id: 'm3', tier: 'medium', p: rep('R', 6) + rep('B', 6), wheels: 1 },
   { id: 'm4', tier: 'medium', p: 'GG' + rep('RB', 5), wheels: 1 },
   { id: 'm5', tier: 'medium', p: 'R' + rep('G', 8) + 'B', wheels: 1 },
-  { id: 'm6', tier: 'medium', p: rep('RB', 4) + rep('G', 6), wheels: 2 },
+  { id: 'm6', tier: 'medium', p: rep('RB', 4) + rep('G', 6), wheels: 1 },
   { id: 'm7', tier: 'medium', p: rep('RRGG', 4), wheels: 1 },
   { id: 'm8', tier: 'medium', p: rep('RBB', 4) + 'G', wheels: 1 },
   { id: 'h1', tier: 'hard', p: rep(rep('R', 5) + 'B', 4), wheels: 2 },
@@ -32,7 +32,7 @@ const LIB = [
 const out = [];
 for (const z of LIB) {
   const t0 = Date.now();
-  const s = L.solve(z.p.split(''), z.wheels, 8);
+  const s = L.solve(z.p.split(''), z.wheels, 9);
   const s0 = null;
   if (!s) { console.log('UNSOLVED', z.id); continue; }
   const flat = z.wheels === 2 ? L.solve(z.p.split(''), 1, s.par) : null;   // can one wheel do it as cheaply?
