@@ -1,9 +1,20 @@
   shot start
-== Task 1 of 3 · a · n · x | Then the Engine will be handed other numbers.
-   Given a = 5, n = 7, x = 98. Print a · n · x. A card takes two columns, combines them, and puts the result on a column: tap ×, then a, then n, then R, and hang it.
+== TOUR: Meet the Engine
+   The columns of wheels hold numbers. This one, a, holds 5; n holds 7; R is empty, waiting for an answer. | Two cards hang on the chain. The Engine will do what they say, one card at a time, from the top.
+  shot tour-start
+   step: Card 1: a × n is 5 × 7 = 35. It goes on R.
+   step: Card 2: the Engine prints 35.
+  shot tour-step
+   step: That is all a chain is: cards, done in order. The cards never said “5” or “7”. They said “a” and “n”, so they work for any numbers on those wheels. Your first job needs one more card than this.
+  shot tour-end
+== Job 1 of 3 · Three numbers multiplied | Then the Engine will be handed other numbers.
+   Make the Engine multiply a, n and x together and print the answer.
   shot a-task1
   shot a-task1-composing
-   hung: a × n → R
+   sentence: This card says: Multiply a by n, and put the answer on R.
+  shot a-task1-card-ready
+   hung: a × n → RMultiply a by n, and put the answer on R.
+   first-card line: Good. Now the cards for the rest of the job: multiply in x, then print R.
    hung: R × x → R
    hung: PRINT R
    chain: a × n → R | R × x → R | PRINT R
@@ -15,8 +26,8 @@
    buttons: next=true hand=false go=false
   shot a-task1-bell
 
-== Task 2 of 3 · a · xⁿ | Then the Engine will be handed other n.
-   Given a = 3, x = 2, n = 5. Print a · xⁿ, which is a times x multiplied by itself n times.
+== Job 2 of 3 · Doubling | Then the Engine will be told to double a different number of times.
+   Start with a, multiply by x, and do that n times. Here: start with 3 and double it 5 times.
   shot a-task2
    hung: a × x → R
    hung: R × x → R
@@ -29,9 +40,14 @@
    SET THE ENGINE GOING (task 2, straight)
    strip: wanted 24 · printed 96✗
    bell: NO BELL
-   LINE: It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24.
+   LINE: It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24. No card ever used n, so the cards did exactly what they did before.
    buttons: next=false hand=false go=true
   shot a-task2-fell
+   COUNTDOWN: A countdown. The column k holds 3. The third card is a BACK card: it sends the prism back so the cards above it run again. | Watch k go down each time round, and watch what happens when it reaches 0.
+  shot countdown-mid
+   countdown printed: 3 2 1 · The countdown printed 3, 2, 1 with only three cards. Start k at 100 and the same three cards print a hundred numbers. That is the trick of the BACK card.
+  shot countdown-end
+   back from countdown: on play=true, chain kept=6 cards
   shot help
    help opened and returned: on play=true, chain kept=6 cards
    all cards taken down; strip cleared: 0 printed lines, result line ""
@@ -45,11 +61,11 @@
   shot a-task2-cycle
   shot a-task2-running
    LINE: The bell rang. Five cards. It held for n = 3 and for n = 1.
-   countess: The Countess’s way: Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)
+   countess: The Countess’s way: For doubling seven times she counts seven multiplications, one card each. Menabrea describes the better way: a counter that loses one each time round, with the same cards repeated “until it only marks zero”. Then the number of cards stays the same however many times you double. (Her first card, a × 1 → R, just copies a onto R.) (Note B; Memoir pp. 12–13)
   shot a-task2-held
 
-== Task 3 of 3 · The table of squares | Additions and subtractions only. Then the Engine will be handed another n.
-   Given A = 1, B = 3, C = 2, n = 6. Print the first n squares, one after another. A holds a square, B the difference to the next square, C the difference between differences.
+== Job 3 of 3 · The square numbers | Then the Engine will be asked for a different number of squares.
+   Print the first n square numbers: 1, 4, 9, 16, … (1×1, 2×2, 3×3, 4×4, …). But this Engine may only add and subtract.
    punches disabled: *,/
   shot a-task3
    hung: PRINT A
@@ -66,15 +82,15 @@
   shot a-task3-held
 
 VERDICT: Every chain held.
-  Thirteen cards across three tasks: three for a·n·x, five for a·xⁿ, five for the table of squares. Each chain went on working when the Engine was handed numbers you had never seen.
+  Thirteen cards across three jobs: three for three numbers multiplied, five for doubling, five for the square numbers. Each chain went on working when the Engine was handed numbers you had never seen.
   shot a-end
   shot a-coda-working
-  CODA: The first Number · nine operation cards | 1/6 | The second Number · fourteen operation cards | −1/30 | The third Number · twenty-five operation cards | 1/42 | The fourth Number · twenty-five operation cards | −1/30 || Nine cards for the first Number, fourteen for the second, twenty-five for the third; and twenty-five again for the fourth, because the cycle turns back. No more are needed, she writes, however great n may be.
+  CODA: The first Number · nine cards | 1/6 | The second Number · fourteen cards | −1/30 | The third Number · twenty-five cards | 1/42 | The fourth Number · twenty-five cards | −1/30 || Nine cards for the first Number, fourteen for the second, twenty-five for the third; and still twenty-five for the fourth, because her BACK loop does the extra work. No more are needed, she writes, however far you go.
   shot a-coda
   shot about
   back on end: true
 
-== B: Task 1 of 3 · a · n · x | Then the Engine will be handed other numbers.
+== B: Job 1 of 3 · Three numbers multiplied | Then the Engine will be handed other numbers.
    hung: a × n → R
    hung: R × x → R
    hung: PRINT R
@@ -83,7 +99,7 @@ VERDICT: Every chain held.
    bell: BELL
    LINE: The bell rang. Three cards. It held for a = 3, n = 4, x = 10.
    buttons: next=true hand=false go=false
-== B: Task 2 of 3 · a · xⁿ | Then the Engine will be handed other n.
+== B: Job 2 of 3 · Doubling | Then the Engine will be told to double a different number of times.
    hung: a × x → R
    hung: PRINT R
    SET THE ENGINE GOING (B task 2, run 1)
@@ -97,9 +113,13 @@ VERDICT: Every chain held.
    LINE: No bell on the numbers given. It printed 6 and the number wanted was 96.
    buttons: next=false hand=true go=true
   shot b-handover-offered
-   countess: Handed to the Countess. Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)
-   next: NEXT TASK
-== B: Task 3 of 3 · The table of squares | Additions and subtractions only. Then the Engine will be handed another n.
+  shot b-countess-running
+   her chain: a × 1 → R | R × x → R | n − 1 → n | BACK 2 WHILE n ≠ 0 | PRINT R
+   result: Her cards rang the bell every time.
+   countess: These are the Countess’s cards. For doubling seven times she counts seven multiplications, one card each. Menabrea describes the better way: a counter that loses one each time round, with the same cards repeated “until it only marks zero”. Then the number of cards stays the same however many times you double. (Her first card, a × 1 → R, just copies a onto R.) (Note B; Memoir pp. 12–13)
+  shot b-countess-done
+   next: NEXT JOB
+== B: Job 3 of 3 · The square numbers | Then the Engine will be asked for a different number of squares.
    hung: PRINT A
    hung: A + B → A
    hung: B + C → B
@@ -112,7 +132,7 @@ VERDICT: Every chain held.
    buttons: next=true hand=false go=false
 
 VERDICT B: Two chains held; one you handed to the Countess.
-  Eight cards across two tasks: three for a·n·x, five for the table of squares. Each chain went on working when the Engine was handed numbers you had never seen.
+  Eight cards across two jobs: three for three numbers multiplied, five for the square numbers. Each chain went on working when the Engine was handed numbers you had never seen.
   shot b-end
 
 errors: none

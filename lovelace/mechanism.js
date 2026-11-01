@@ -10,35 +10,41 @@
     STEP_CAP: 400,         // our choice: the attendant stops an Engine that runs on (Memoir p. 12: the Engine stops and rings when it cannot go on)
     BACK_MAX: 8,           // our choice: how far one card may turn the prism back (Note C: any particular card or set of cards)
     HAND_OVER_AFTER: 2,    // our choice: runs before a task may be handed to the Countess
-    WHEELS: 6,             // our choice: figure-wheels drawn per column; Note B draws four tiers and says thirty or forty may be supposed
+    WHEELS: 5,             // our choice: figure-wheels drawn per column; Note B draws four tiers and says thirty or forty may be supposed
     // The three tasks, the paper's own examples, ordered for the player (memo §11).
     TASKS: [
-      { id: 'anx', band: 'a · n · x', short: 'a·n·x', ask: 'Print a · n · x.',
+      { id: 'anx', band: 'Three numbers multiplied', short: 'three numbers multiplied', ask: 'Make the Engine multiply a, n and x together and print the answer.',
+        worked: '5 × 7 × 98 = 3430',
+        solution: [['*', 'a', 'n', 'R'], ['*', 'R', 'x', 'R'], ['print', 'R']],   // Note B, p. 31: (×, ×)
         // Note B, p. 29: a = 5, n = 7, x = 98 on V1, V2, V3; p. 31: for a·n·x "the operations would be (×, ×), or 2(×)"
-        cols: [{ name: 'a', v: 5 }, { name: 'n', v: 7 }, { name: 'x', v: 98 }, { name: 'R', v: 0, work: true }],
+        cols: [{ name: 'a', v: 5 }, { name: 'n', v: 7 }, { name: 'x', v: 98 }, { name: 'R', v: 0, work: true, tip: 'answer' }],
         want: d => [d.a * d.n * d.x],
         tests: [{ label: 'a = 3, n = 4, x = 10', set: { a: 3, n: 4, x: 10 } }],   // our choice: numbers the chain has not seen
         ops: ['+', '-', '*', '/'],
         then: 'Then the Engine will be handed other numbers.',
-        countess: 'Her count for a·n·x is two multiplications: (×, ×). The same cards serve whatever a, n and x are inscribed, because the cards name columns, not numbers. (Note B)' },
-      { id: 'axn', band: 'a · xⁿ', short: 'a·xⁿ', ask: 'Print a · xⁿ, which is a times x multiplied by itself n times.',
+        countess: 'She counts two multiplications for this job: (×, ×). Her cards name the columns, never the numbers, so the same cards work whatever numbers are on the wheels. (Note B)' },
+      { id: 'axn', band: 'Doubling', short: 'doubling', ask: 'Start with a, multiply by x, and do that n times. Here: start with 3 and double it 5 times.',
+        worked: '3 × 2 × 2 × 2 × 2 × 2 = 96',
+        solution: [['*', 'a', '1', 'R'], ['*', 'R', 'x', 'R'], ['-', 'n', '1', 'n'], ['back', 2, 'n'], ['print', 'R']],   // Memoir pp. 12–13: the registering apparatus
         // Note B, p. 30: ax^n is "six multiplications in order to get x^n, then one multiplication for a·x^n, in all seven" (n = 7);
         // Memoir pp. 12–13: a registering apparatus marks n−1, the multiplication is repeated and a unit effaced each time, "until it only marks zero".
-        cols: [{ name: 'a', v: 3 }, { name: 'x', v: 2 }, { name: 'n', v: 5 }, { name: '1', v: 1, konst: true }, { name: 'R', v: 0, work: true }],   // our data: wheels stay readable
+        cols: [{ name: 'a', v: 3, tip: 'start' }, { name: 'x', v: 2, tip: 'times' }, { name: 'n', v: 5, tip: 'how often' }, { name: '1', v: 1, konst: true, tip: 'just 1' }, { name: 'R', v: 0, work: true, tip: 'answer' }],   // our data: wheels stay readable
         want: d => [d.a * Math.pow(d.x, d.n)],
         tests: [{ label: 'n = 3', set: { n: 3 } }, { label: 'n = 1', set: { n: 1 } }],   // our choice; n = 1 is the case Lovelace's Operation 7 exists for (p. 56)
         ops: ['+', '-', '*', '/'],
-        then: 'Then the Engine will be handed other n.',
-        countess: 'Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)' },
-      { id: 'squares', band: 'The table of squares', short: 'the table of squares', ask: 'Print the first n squares, one after another.',
+        then: 'Then the Engine will be told to double a different number of times.',
+        countess: 'For doubling seven times she counts seven multiplications, one card each. Menabrea describes the better way: a counter that loses one each time round, with the same cards repeated “until it only marks zero”. Then the number of cards stays the same however many times you double. (Her first card, a × 1 → R, just copies a onto R.) (Note B; Memoir pp. 12–13)' },
+      { id: 'squares', band: 'The square numbers', short: 'the square numbers', ask: 'Print the first n square numbers: 1, 4, 9, 16, … (1×1, 2×2, 3×3, 4×4, …). But this Engine may only add and subtract.',
+        worked: '1 +3→ 4 +5→ 9 +7→ 16 +9→ 25: each square is the last one plus the next odd number, and the odd numbers go up by 2.',
+        solution: [['print', 'A'], ['+', 'A', 'B', 'A'], ['+', 'B', 'C', 'B'], ['-', 'n', '1', 'n'], ['back', 4, 'n']],   // Memoir p. 3, Table 1.1
         // Memoir p. 3, Table 1.1: squares 1, 4, 9, 16…; first differences 3, 5, 7…; second differences all 2. Note A: the Difference Engine is 6(+).
         // Lovelace p. 24: "The table of squares, for instance, can be calculated to any extent whatever, when the numbers one and two are furnished."
-        cols: [{ name: 'A', v: 1, tip: 'a square' }, { name: 'B', v: 3, tip: 'next difference' }, { name: 'C', v: 2, tip: 'second difference' }, { name: 'n', v: 6 }, { name: '1', v: 1, konst: true }],
+        cols: [{ name: 'A', v: 1, tip: 'square' }, { name: 'B', v: 3, tip: 'odd no.' }, { name: 'C', v: 2, tip: 'step' }, { name: 'n', v: 6, tip: 'how many' }, { name: '1', v: 1, konst: true, tip: 'just 1' }],
         want: d => { const out = []; for (let k = 1; k <= d.n; k++) out.push(k * k); return out; },
         tests: [{ label: 'n = 9', set: { n: 9 } }],   // our choice
         ops: ['+', '-'],   // Note A, p. 22: the Difference Engine "can in reality do nothing but add"
-        then: 'Additions and subtractions only. Then the Engine will be handed another n.',
-        countess: 'The Difference Engine, she writes, is the whole of one operation repeated: (+, +, +, +, +, +), or 6(+). Each square is the one before it plus the next difference, and each difference is the one before it plus two. “The table of squares can be calculated to any extent whatever, when the numbers one and two are furnished.” (Note A; Memoir p. 3)' },
+        then: 'Then the Engine will be asked for a different number of squares.',
+        countess: 'Babbage’s older machine, the Difference Engine, could only add, she writes: (+, +, +, +, +, +). This is its trick: each square is the last one plus the next odd number, and each odd number is the last one plus two. “The table of squares can be calculated to any extent whatever, when the numbers one and two are furnished.” (Note A; Memoir p. 3)' },
     ],
     // Numbers quoted on the verdict screen, from the Notes.
     NOTE_F_CARDS: 3, NOTE_F_OPERATIONS: 330,     // Note F, p. 48: "three Operation-cards would perform the office of 330 such cards"
@@ -72,6 +78,43 @@
     return false;
   }
 
+  // ---- plain words: what a card says, and what it just did
+  const VERB = { '+': ['Add', 'to', 'add'], '-': ['Take', 'away from', 'take away'], '*': ['Multiply', 'by', 'multiply'], '/': ['Divide', 'by', 'divide'] };
+  function cardSentence(card, cols) {
+    const nm = i => cols[i] ? cols[i].name : '?';
+    if (card.k === 'op') {
+      const t = card.to.map(nm).join(' and ');
+      if (card.op === '+') return `Add ${nm(card.a)} and ${nm(card.b)}, and put the answer on ${t}.`;
+      if (card.op === '-') return `Take ${nm(card.b)} away from ${nm(card.a)}, and put the answer on ${t}.`;
+      if (card.op === '*') return `Multiply ${nm(card.a)} by ${nm(card.b)}, and put the answer on ${t}.`;
+      return `Divide ${nm(card.a)} by ${nm(card.b)}, and put the answer on ${t}.`;
+    }
+    if (card.k === 'print') return `Print the number on ${nm(card.a)}.`;
+    if (card.k === 'back') return `Go back ${card.n === 1 ? 'one card' : card.n + ' cards'} and do ${card.n === 1 ? 'it' : 'them'} again, as long as ${nm(card.test)} is not 0.`;
+    return '';
+  }
+  function stepSentence(ev, card, cols) { // narration of one trace event, numbers in the strip's form
+    const nm = i => cols[i] ? cols[i].name : '?', no = `Card ${ev.i + 1}`;
+    if (ev.kind === 'write') { const sym = { '+': '+', '-': '−', '*': '×', '/': '÷' }[card.op]; return `${no}: ${nm(card.a)} ${sym} ${nm(card.b)} is ${fmt(ev.x)} ${sym} ${fmt(ev.y)} = ${fmt(ev.val)}. It goes on ${nm(ev.col)}.`; }
+    if (ev.kind === 'print') return `${no}: the Engine prints ${fmt(ev.val)}.`;
+    if (ev.kind === 'back') return ev.taken ? `${no}: ${nm(card.test)} is ${fmt(ev.val)}, not 0, so the prism turns back ${card.n === 1 ? 'one card' : card.n + ' cards'}.` : `${no}: ${nm(card.test)} is 0, so the prism goes on.`;
+    if (ev.kind === 'zero') return `${no}: a division by nothing. The Engine stops.`;
+    return '';
+  }
+  function cardsByName(task, spec) { // ['*','a','n','R'] | ['print','R'] | ['back', 2, 'n']
+    const ix = nm => task.cols.findIndex(c => c.name === nm);
+    return spec.map(s => s[0] === 'print' ? { k: 'print', a: ix(s[1]) } : s[0] === 'back' ? { k: 'back', n: s[1], test: ix(s[2]) } : { k: 'op', op: s[0], a: ix(s[1]), b: ix(s[2]), to: [ix(s[3])] });
+  }
+  // Two demonstrations the player watches, step by step, before they need the card: our construction, from Note B's example and Note C's backing.
+  const DEMOS = {
+    tour: { title: 'Meet the Engine', cols: [{ name: 'a', v: 5 }, { name: 'n', v: 7 }, { name: 'R', v: 0, work: true, tip: 'answer' }], cards: [['*', 'a', 'n', 'R'], ['print', 'R']],
+      intro: ['The columns of wheels hold numbers. This one, a, holds 5; n holds 7; R is empty, waiting for an answer.', 'Two cards hang on the chain. The Engine will do what they say, one card at a time, from the top.'] },
+    countdown: { title: 'The BACK card', cols: [{ name: 'k', v: 3, tip: 'counter' }, { name: '1', v: 1, konst: true, tip: 'just 1' }], cards: [['print', 'k'], ['-', 'k', '1', 'k'], ['back', 2, 'k']],
+      intro: ['A countdown. The column k holds 3. The third card is a BACK card: it sends the prism back so the cards above it run again.', 'Watch k go down each time round, and watch what happens when it reaches 0.'] },
+  };
+  function demo(id) { const d = DEMOS[id]; const task = { cols: d.cols }; const cols = makeCols(task); const cards = cardsByName(task, d.cards); const r = run(cols, cards, null); return { title: d.title, intro: d.intro, cols, cards, result: r, steps: r.trace.map(ev => ({ ev, say: stepSentence(ev, cards[ev.i], cols) })) }; }
+  function solution(task) { return cardsByName(task, task.solution); }
+
   // ---- the Engine. Runs a chain over a Store; returns the strip, a trace for the wheels, and how it stopped.
   // status: 'bell' (strip equals what was wanted) | 'wrong' (it stopped, strip differs) | 'runs-on' (step cap) | 'zero' (a division by zero: the bell rings early)
   function run(cols, cards, want, opts) {
@@ -84,12 +127,12 @@
         const x = st[c.a], y = st[c.b]; let r;
         if (c.op === '+') r = x + y; else if (c.op === '-') r = x - y; else if (c.op === '*') r = x * y;
         else { if (y === 0) { trace.push({ i, kind: 'zero' }); zero = true; break; } r = x / y; }
-        for (const t of c.to) { st[t] = r; trace.push({ i, kind: 'write', col: t, val: r }); }
+        for (const t of c.to) { st[t] = r; trace.push({ i, kind: 'write', col: t, val: r, x, y }); }
         i++;
       } else if (c.k === 'print') { printed.push(st[c.a]); trace.push({ i, kind: 'print', val: st[c.a] }); i++; }
       else if (c.k === 'back') {
         const taken = st[c.test] !== 0, to = Math.max(0, i - c.n);
-        trace.push({ i, kind: 'back', to, taken });
+        trace.push({ i, kind: 'back', to, taken, val: st[c.test] });
         i = taken ? to : i + 1;
       } else i++;
     }
@@ -150,7 +193,11 @@
     const bad = r.runs[r.runs.length - 1];
     if (r.runs.length === 1) return `No bell on the numbers given. ${bad.result.reason}`;
     const good = r.runs.slice(0, -1).slice(1).map(x => x.label);
-    return `It held for the numbers given${good.length ? ' and for ' + good.join(' and ') : ''}, and fell at ${bad.label}. ${bad.result.reason}`;
+    const changed = Object.keys(t.tests[r.runs.length - 2].set).map(nm => t.cols.findIndex(c => c.name === nm));
+    const reads = new Set(); g.chain.forEach(c => { if (c.k === 'op') { reads.add(c.a); reads.add(c.b); } else if (c.k === 'print') reads.add(c.a); else if (c.k === 'back') reads.add(c.test); });
+    const unread = changed.filter(i => !reads.has(i)).map(i => t.cols[i].name);
+    const why = unread.length === changed.length ? ` No card ever used ${unread.join(' or ')}, so the cards did exactly what they did before.` : '';
+    return `It held for the numbers given${good.length ? ' and for ' + good.join(' and ') : ''}, and fell at ${bad.label}. ${bad.result.reason}${why}`;
   }
   const cap1 = s => s.charAt(0).toUpperCase() + s.slice(1);
   function verdict(g) {
@@ -161,10 +208,11 @@
     else if (held.length === 0) headline = 'You handed every task to the Countess.';
     else headline = `${cap1(word(held.length))} chain${held.length === 1 ? '' : 's'} held; ${word(handed.length)} you handed to the Countess.`;
     const parts = held.map(d => `${word(d.cards)} for ${d.short}`);
-    const did = held.length ? `${cap1(word(total))} cards across ${word(held.length)} task${held.length === 1 ? '' : 's'}: ${parts.join(', ')}. Each chain went on working when the Engine was handed numbers you had never seen.` : 'The Countess’s chains ran instead of yours.';
+    const did = held.length ? `${cap1(word(total))} cards across ${word(held.length)} job${held.length === 1 ? '' : 's'}: ${parts.join(', ')}. Each chain went on working when the Engine was handed numbers you had never seen.` : 'The Countess’s chains ran instead of yours.';
     const paper = `The cards carry the operations and the columns carry the numbers, and the two never mix: that is why one chain serves every n. A card that turns the prism back makes a cycle, and a cycle lets a handful of cards do the work of hundreds: ${word(CONFIG.NOTE_F_CARDS)} cards for ${word(CONFIG.NOTE_F_OPERATIONS)} in one of Lovelace’s examples, ${word(CONFIG.NOTE_G_CARDS.n3plus)} for every Number of Bernoulli there is, however great n may be.`;
     const means = 'The Engine originates nothing. It did what you knew how to order it to do, and nothing else.';
-    return { headline, did, paper, means, total, held: held.length, handed: handed.length };
+    const plain = 'A few cards can do a big job, for any numbers, if one of them says “go back and do that again”. And the Engine only ever does what the cards tell it.';
+    return { headline, did, plain, paper, means, total, held: held.length, handed: handed.length };
   }
 
   // ---- the Countess's chain: Note G, Table A.2, the Numbers of Bernoulli, on this interpreter. Columns V1..V24 as hers (index = number − 1).
@@ -221,6 +269,6 @@
     return { numbers: found, chains };
   }
 
-  const M = { CONFIG, makeCols, colIndex, cardText, validCard, run, tryTask, fraction, fmt, newGame, task, hang, takeDown, go, canHandOver, finishTask, taskVerdict, verdict, word, bernoulliCards, bernoulliCols, bernoulliRun, OPSIGN };
+  const M = { CONFIG, cardSentence, stepSentence, cardsByName, DEMOS, demo, solution, makeCols, colIndex, cardText, validCard, run, tryTask, fraction, fmt, newGame, task, hang, takeDown, go, canHandOver, finishTask, taskVerdict, verdict, word, bernoulliCards, bernoulliCols, bernoulliRun, OPSIGN };
   if (typeof module !== 'undefined' && module.exports) module.exports = M; else root.MECH = M;
 })(typeof window !== 'undefined' ? window : globalThis);

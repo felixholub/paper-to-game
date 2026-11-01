@@ -1,12 +1,12 @@
 AIM: Hang the cards that make the Engine print what is wanted, for any numbers it is handed.
 
-== TASK 1 OF 3 · a · n · x   "Then the Engine will be handed other numbers."
-   STORE: [a: 5] [n: 7] [x: 98] [R: 0]   STRIP wanted: 3430
+== TASK 1 OF 3 · Three numbers multiplied   "Then the Engine will be handed other numbers."
+   STORE: [a: 5] [n: 7] [x: 98] [R: 0 (answer)]   STRIP wanted: 3430
    CHAIN (0/10): (empty rack)
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "a × n → R"
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "R × x → R"
    tap PRINT, columns…  HANG THE CARD -> card drops onto the chain: "PRINT R"
-   STORE: [a: 5] [n: 7] [x: 98] [R: 0]   STRIP wanted: 3430
+   STORE: [a: 5] [n: 7] [x: 98] [R: 0 (answer)]   STRIP wanted: 3430
    CHAIN (3/10): 1. a × n → R  |  2. R × x → R  |  3. PRINT R
    SET THE ENGINE GOING
      run on the numbers given: 2 wheels turn, 0 times the prism turns back, strip prints: 3430 -> BELL
@@ -14,8 +14,8 @@ AIM: Hang the cards that make the Engine print what is wanted, for any numbers i
    LINE: The bell rang. Three cards. It held for a = 3, n = 4, x = 10.
    [NEXT TASK]
 
-== TASK 2 OF 3 · a · xⁿ   "Then the Engine will be handed other n."
-   STORE: [a: 3] [x: 2] [n: 5] [1: 1] [R: 0]   STRIP wanted: 96
+== TASK 2 OF 3 · Doubling   "Then the Engine will be told to double a different number of times."
+   STORE: [a: 3 (start)] [x: 2 (times)] [n: 5 (how often)] [1: 1 (just 1)] [R: 0 (answer)]   STRIP wanted: 96
    CHAIN (0/10): (empty rack)
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "a × x → R"
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "R × x → R"
@@ -23,12 +23,12 @@ AIM: Hang the cards that make the Engine print what is wanted, for any numbers i
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "R × x → R"
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "R × x → R"
    tap PRINT, columns…  HANG THE CARD -> card drops onto the chain: "PRINT R"
-   STORE: [a: 3] [x: 2] [n: 5] [1: 1] [R: 0]   STRIP wanted: 96
+   STORE: [a: 3 (start)] [x: 2 (times)] [n: 5 (how often)] [1: 1 (just 1)] [R: 0 (answer)]   STRIP wanted: 96
    CHAIN (6/10): 1. a × x → R  |  2. R × x → R  |  3. R × x → R  |  4. R × x → R  |  5. R × x → R  |  6. PRINT R
    SET THE ENGINE GOING
      run on the numbers given: 5 wheels turn, 0 times the prism turns back, strip prints: 96 -> BELL
      run on n = 3: 5 wheels turn, 0 times the prism turns back, strip prints: 96 -> WRONG
-   LINE: It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24.
+   LINE: It held for the numbers given, and fell at n = 3. It printed 96 and the number wanted was 24. No card ever used n, so the cards did exactly what they did before.
    [edit the chain, SET THE ENGINE GOING again]
    (the stranger looks at the chain: no card touches n. Takes the chain down and hangs a cycle.)
    tap ×, columns…  HANG THE CARD -> card drops onto the chain: "a × 1 → R"
@@ -36,7 +36,7 @@ AIM: Hang the cards that make the Engine print what is wanted, for any numbers i
    tap −, columns…  HANG THE CARD -> card drops onto the chain: "n − 1 → n"
    tap BACK, columns…  HANG THE CARD -> card drops onto the chain: "BACK 2 WHILE n ≠ 0"
    tap PRINT, columns…  HANG THE CARD -> card drops onto the chain: "PRINT R"
-   STORE: [a: 3] [x: 2] [n: 5] [1: 1] [R: 0]   STRIP wanted: 96
+   STORE: [a: 3 (start)] [x: 2 (times)] [n: 5 (how often)] [1: 1 (just 1)] [R: 0 (answer)]   STRIP wanted: 96
    CHAIN (5/10): 1. a × 1 → R  |  2. R × x → R  |  3. n − 1 → n  |  4. BACK 2 WHILE n ≠ 0  |  5. PRINT R
    SET THE ENGINE GOING
      run on the numbers given: 11 wheels turn, 4 times the prism turns back, strip prints: 96 -> BELL
@@ -44,17 +44,17 @@ AIM: Hang the cards that make the Engine print what is wanted, for any numbers i
      run on n = 1: 3 wheels turn, 0 times the prism turns back, strip prints: 6 -> BELL
    LINE: The bell rang. Five cards. It held for n = 3 and for n = 1.
    [NEXT TASK]
-   COUNTESS: Her straight count for n = 7 is seven multiplications. Menabrea’s way is a cycle: multiply, efface a unit from a counter, and repeat “until it only marks zero”; the number of cards then does not vary with n. (Note B; Memoir pp. 12–13)
+   COUNTESS: For doubling seven times she counts seven multiplications, one card each. Menabrea describes the better way: a counter that loses one each time round, with the same cards repeated “until it only marks zero”. Then the number of cards stays the same however many times you double. (Her first card, a × 1 → R, just copies a onto R.) (Note B; Memoir pp. 12–13)
 
-== TASK 3 OF 3 · The table of squares   "Additions and subtractions only. Then the Engine will be handed another n."
-   STORE: [A: 1 (a square)] [B: 3 (next difference)] [C: 2 (second difference)] [n: 6] [1: 1]   STRIP wanted: 1 4 9 16 25 36
+== TASK 3 OF 3 · The square numbers   "Then the Engine will be asked for a different number of squares."
+   STORE: [A: 1 (square)] [B: 3 (odd no.)] [C: 2 (step)] [n: 6 (how many)] [1: 1 (just 1)]   STRIP wanted: 1 4 9 16 25 36
    CHAIN (0/10): (empty rack)
    tap PRINT, columns…  HANG THE CARD -> card drops onto the chain: "PRINT A"
    tap +, columns…  HANG THE CARD -> card drops onto the chain: "A + B → A"
    tap +, columns…  HANG THE CARD -> card drops onto the chain: "B + C → B"
    tap −, columns…  HANG THE CARD -> card drops onto the chain: "n − 1 → n"
    tap BACK, columns…  HANG THE CARD -> card drops onto the chain: "BACK 4 WHILE n ≠ 0"
-   STORE: [A: 1 (a square)] [B: 3 (next difference)] [C: 2 (second difference)] [n: 6] [1: 1]   STRIP wanted: 1 4 9 16 25 36
+   STORE: [A: 1 (square)] [B: 3 (odd no.)] [C: 2 (step)] [n: 6 (how many)] [1: 1 (just 1)]   STRIP wanted: 1 4 9 16 25 36
    CHAIN (5/10): 1. PRINT A  |  2. A + B → A  |  3. B + C → B  |  4. n − 1 → n  |  5. BACK 4 WHILE n ≠ 0
    SET THE ENGINE GOING
      run on the numbers given: 18 wheels turn, 5 times the prism turns back, strip prints: 1 4 9 16 25 36 -> BELL
@@ -63,7 +63,7 @@ AIM: Hang the cards that make the Engine print what is wanted, for any numbers i
    [NEXT TASK]
 
 VERDICT: Every chain held.
-  Thirteen cards across three tasks: three for a·n·x, five for a·xⁿ, five for the table of squares. Each chain went on working when the Engine was handed numbers you had never seen.
+  Thirteen cards across three jobs: three for three numbers multiplied, five for doubling, five for the square numbers. Each chain went on working when the Engine was handed numbers you had never seen.
   The cards carry the operations and the columns carry the numbers, and the two never mix: that is why one chain serves every n. A card that turns the prism back makes a cycle, and a cycle lets a handful of cards do the work of hundreds: three cards for three hundred and thirty in one of Lovelace’s examples, twenty-five for every Number of Bernoulli there is, however great n may be.
   The Engine originates nothing. It did what you knew how to order it to do, and nothing else.
   CODA: the Countess's chain runs: n=1: 9 operation cards, 10 steps, prints 1/6; n=2: 14 operation cards, 15 steps, prints −1/30; n=3: 25 operation cards, 26 steps, prints 1/42; n=4: 25 operation cards, 37 steps, prints −1/30
