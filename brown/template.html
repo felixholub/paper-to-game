@@ -51,6 +51,8 @@ h3{font-family:var(--sc);font-weight:400;letter-spacing:.14em;color:var(--ink);f
 /* the plate */
 .plate{width:100%;max-width:348px;margin:0 auto;display:block;position:relative}
 .plate svg{width:100%;height:auto;display:block}
+.clockbox{position:absolute;left:74.71%;top:5.45%;width:19.54%;pointer-events:none}
+.clockbox svg{width:100%;height:auto;display:block}
 .fig{font-family:var(--sc);letter-spacing:.2em;font-size:13px;color:var(--ink2);text-align:center;margin:2px 0 0}
 .yard{font-family:var(--sc);font-size:21px;letter-spacing:.06em;margin:10px 0 2px;min-height:28px}
 .what{font-size:17px;line-height:1.4;margin:2px 0 8px;min-height:24px}
@@ -222,12 +224,14 @@ ul{padding-left:20px}li{margin:4px 0}
   const dropHi = el('ellipse', { cx: CX - 50, cy: CY - 62, rx: 44, ry: 18, fill: 'url(#ghi)', opacity: .9, transform: `rotate(-30 ${CX - 50} ${CY - 62})` }, gDrop);
   const gBeads = el('g', {}, gDrop);
   // the clock
-  const gClock = el('g', { style: 'display:none' }, svg);
-  el('circle', { cx: W - 54, cy: 44, r: 24, fill: '#F6EEDC', stroke: '#2A2118', 'stroke-width': 1 }, gClock);
-  el('circle', { cx: W - 54, cy: 44, r: 21, fill: 'none', stroke: '#2A2118', 'stroke-width': .5 }, gClock);
-  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; el('line', { x1: W - 54 + Math.sin(a) * 17, y1: 44 - Math.cos(a) * 17, x2: W - 54 + Math.sin(a) * 20, y2: 44 - Math.cos(a) * 20, stroke: '#2A2118', 'stroke-width': i % 3 ? .6 : 1.2 }, gClock); }
-  const hand = el('line', { x1: W - 54, y1: 44, x2: W - 54, y2: 27, stroke: '#B8322A', 'stroke-width': 1.6, 'stroke-linecap': 'round' }, gClock);
-  const clockLabel = el('text', { x: W - 54, y: 82, 'text-anchor': 'middle', 'font-family': 'FellSC, serif', 'font-size': 9, 'letter-spacing': 1.2, fill: '#2A2118' }, gClock);
+  // the clock: an HTML layer over the plate, not part of the SVG. Safari did not paint it the first time it was shown
+  // inside the SVG; a plain element toggled by a class is drawn by every browser.
+  const clockBox = document.createElement('div'); clockBox.className = 'clockbox hidden'; clockBox.setAttribute('aria-hidden', 'true');
+  clockBox.innerHTML = `<svg viewBox="260 18 68 70" style="overflow:visible"><circle cx="294" cy="44" r="24" fill="#F6EEDC" stroke="#2A2118" stroke-width="1"/><circle cx="294" cy="44" r="21" fill="none" stroke="#2A2118" stroke-width=".5"/>${Array.from({ length: 12 }, (_, i) => { const a = i / 12 * Math.PI * 2; return `<line x1="${(294 + Math.sin(a) * 17).toFixed(2)}" y1="${(44 - Math.cos(a) * 17).toFixed(2)}" x2="${(294 + Math.sin(a) * 20).toFixed(2)}" y2="${(44 - Math.cos(a) * 20).toFixed(2)}" stroke="#2A2118" stroke-width="${i % 3 ? .6 : 1.2}"/>`; }).join('')}<line class="hand" x1="294" y1="44" x2="294" y2="27" stroke="#B8322A" stroke-width="1.6" stroke-linecap="round"/><text x="294" y="82" text-anchor="middle" font-family="FellSC, serif" font-size="9" letter-spacing="1.2" fill="#2A2118"></text></svg>`;
+  $('plate').appendChild(clockBox);
+  const hand = clockBox.querySelector('.hand'), clockLabel = clockBox.querySelector('text');
+  let clockWanted = false;
+  function showClock() { clockBox.classList.toggle('hidden', !(clockWanted && !(look && look.hold))); }
   // vignettes (engraved line, animate once)
   const gVig = el('g', { class: 'vig' }, svg);
   const VIG = {
@@ -279,8 +283,7 @@ ul{padding-left:20px}li{margin:4px 0}
     gOil.setAttribute('opacity', oil ? 1 : 0); slide.setAttribute('opacity', oil ? 0 : 1);
     gBeads.innerHTML = ''; if (st.vessel === 'inverted') for (const b of st.beads) el('circle', { cx: CX + b.x * R, cy: CY + b.y * R, r: C.DRAW.oilbead / 2, fill: 'url(#go)', stroke: '#B07A1A', 'stroke-width': 1 }, gBeads);
     // shown by display, not opacity: WebKit does not always repaint an SVG group whose opacity attribute flips from 0 to 1
-    const clockOn = st.vessel === 'oil' || st.vessel === 'oil-one' || st.vessel === 'open-wait';
-    gClock.style.display = clockOn ? '' : 'none'; gClock.setAttribute('opacity', clockOn ? 1 : 0);
+    clockWanted = st.vessel === 'oil' || st.vessel === 'oil-one' || st.vessel === 'open-wait'; showClock();
     clockLabel.textContent = st.vessel === 'open-wait' ? 'ONE MINUTE' : 'ONE HOUR';
     streams.setAttribute('opacity', 0);
   }
@@ -291,7 +294,7 @@ ul{padding-left:20px}li{margin:4px 0}
     gEngrave.setAttribute('transform', `translate(${CX} ${CY}) scale(${st.radius}) translate(${-CX} ${-CY})`); gEngrave.setAttribute('opacity', st.water ? 1 : 0);
     dropHi.setAttribute('opacity', st.water ? .9 * st.radius : 0); dropHi.setAttribute('transform', `translate(${CX} ${CY}) scale(${st.radius}) translate(${-CX} ${-CY}) rotate(-30 ${CX - 50} ${CY - 62})`);
     streams.setAttribute('opacity', st.current > 0 ? Math.min(1, st.current / C.CURRENT_MAX * 1.4) : 0);
-    if (isFinite(st.life)) { const frac = Math.min(1, st.t / st.life); hand.setAttribute('transform', `rotate(${frac * 360} ${W - 54} 44)`); }
+    if (isFinite(st.life)) { const frac = Math.min(1, st.t / st.life); hand.setAttribute('transform', `rotate(${frac * 360} 294 44)`); }
     drawSpecks(st, rad);
     if (!st.water) { gSpecks.setAttribute('opacity', 0); if (!gDry.childNodes.length) drawDry(st); } else gSpecks.setAttribute('opacity', 1);
   }
@@ -352,7 +355,7 @@ ul{padding-left:20px}li{margin:4px 0}
     vigArt.innerHTML = VIG[VIG_FOR[d.exp.id]]; gVig.classList.remove('on'); void gVig.getBoundingClientRect(); gVig.classList.add('on');
     buildSpecks(d.state); setVessel(d.state); drawDrop(d.state); lastT = 0;
     // the drop waits until the vignette has played, then runs
-    look.hold = true; setTimeout(() => { look.hold = false; lastT = 0; }, 1500);
+    look.hold = true; showClock(); setTimeout(() => { look.hold = false; lastT = 0; showClock(); }, 1500);
     window.scrollTo({ top: $('plate').offsetTop - 60, behavior: 'smooth' });
   });
   const realStep = M.step; M.step = function (st, dt) { if (look && look.hold) return st; return realStep(st, dt); };
