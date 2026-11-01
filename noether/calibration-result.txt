@@ -1,0 +1,68 @@
+Noether's Press — calibration against Noether (1918). 21 passed, 0 failed.
+PASS  N3 eq. (3): Σψδu = δf + Div A on random paths and random δu, all worlds  [worst relative residual 3.33e-4]
+      floor/clock: Lie 4.16e-4 holds; Σψδ̄u−DivB 4.16e-4 identity
+      floor/across: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
+      floor/up: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
+      floor/turn: Lie 0.00e+0 holds; Σψδ̄u−DivB 1.47e-4 identity
+      floor/warpclock: Lie 5.65e-1 fails; Σψδ̄u−DivB 8.53e-1 no
+      floor/warpfloor: Lie 1.00e+0 fails; Σψδ̄u−DivB 9.74e-1 no
+      spring/clock: Lie 1.65e-4 holds; Σψδ̄u−DivB 1.92e-4 identity
+      spring/across: Lie 1.00e+0 fails; Σψδ̄u−DivB 1.07e+0 no
+      spring/up: Lie 1.00e+0 fails; Σψδ̄u−DivB 8.82e-1 no
+      spring/turn: Lie 2.72e-16 holds; Σψδ̄u−DivB 1.45e-4 identity
+      spring/warpclock: Lie 1.25e+0 fails; Σψδ̄u−DivB 9.90e-1 no
+      spring/warpfloor: Lie 1.88e+0 fails; Σψδ̄u−DivB 1.55e+0 no
+      glass/clock: Lie 5.56e-4 holds; Σψδ̄u−DivB 2.41e-3 identity
+      glass/across: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
+      glass/up: Lie 9.99e-1 fails; Σψδ̄u−DivB 3.93e-1 no
+      glass/turn: Lie 7.96e-1 fails; Σψδ̄u−DivB 4.39e-1 no
+      glass/warpclock: Lie 4.65e-4 holds; Σψδ̄u−DivB 1.78e-3 identity
+      glass/warpfloor: Lie 1.00e+0 fails; Σψδ̄u−DivB 1.00e+0 no
+      sheet/clock: Lie 5.83e-4 holds; Σψδ̄u−DivB 2.62e-3 identity
+      sheet/across: Lie 6.48e-1 fails; Σψδ̄u−DivB 6.48e-1 no
+      sheet/up: Lie 6.36e-1 fails; Σψδ̄u−DivB 3.88e-1 no
+      sheet/turn: Lie 1.22e-16 holds; Σψδ̄u−DivB 1.49e-4 identity
+      sheet/warpclock: Lie 5.45e-4 holds; Σψδ̄u−DivB 2.32e-3 identity
+      sheet/warpfloor: Lie 1.09e+0 fails; Σψδ̄u−DivB 1.00e+0 no
+PASS  N12 eq. (12) holds exactly for the levers that pass (11), and fails for those that jam: (11) ⟺ (12), §3
+      floor {"clock":"teeth","across":"teeth","up":"teeth","turn":"teeth","warpclock":"jam","warpfloor":"jam"}
+      spring {"clock":"teeth","across":"jam","up":"jam","turn":"teeth","warpclock":"jam","warpfloor":"jam"}
+      glass {"clock":"void","across":"teeth","up":"jam","turn":"jam","warpclock":"identity","warpfloor":"jam"}
+      sheet {"clock":"void","across":"jam","up":"jam","turn":"teeth","warpclock":"identity","warpfloor":"jam"}
+PASS  N13 the floor: four parameters (clock, across, up, turn), four laws with teeth; both warps jam
+PASS  N13b the spring: two laws (clock, turn); shifts and warps jam
+PASS  N13c the glass: clock void, across teeth, warp-clock identity; up, turn, warp-across jam
+PASS  N13d the sheet: clock void, turn teeth, warp-clock identity; shifts and warp-across jam
+PASS  N13e every stamped law is a first integral: B steady along true motions over ten seeds (p. 16)  [worst relative drift 2.19e-5]
+PASS  N28 the clock shift's B is the energy ½|u'|² + V on the Newton worlds (p. 28, "Energierelationen")  [worst 2.18e-16]
+PASS  N7 the Weierstrass worlds are invariant under x → p(x) for arbitrary p (ten random p), and the Newton worlds are not  [worst Weierstrass 4.90e-4, best Newton 2.94e-1]
+PASS  N7b the identity Σψ_i u_i' = 0 holds on every path of the Weierstrass worlds and on none of the Newton worlds (p. 7)  [worst Weierstrass 1.44e-3, best Newton 6.41e-1]
+PASS  N7c the warp's δ̄u contains p but no derivative of p (σ = 0): the identity has no derivative terms  [by construction: δ̄u_i = −u_i'·p]
+      floor:teeth spring:teeth glass:void(B≡0) sheet:void(B≡0) floor:teeth spring:teeth glass:void(B≡0) sheet:void(B≡0)
+PASS  N6 on the Weierstrass worlds the energy relation is improper: B ≡ 0 on true motions and fakes alike, VOID, six seeds
+PASS  N6b on the Newton worlds the energy relation is proper: steady on true motions, catching fakes, six seeds
+PASS  N6c the shift of the clock is the warp with p ≡ 1: the displacement group is a subgroup of the infinite group (p. 28)
+      re-ticked motion ψ: floor:1.04e+1F spring:2.70e+1F glass:2.70e-4T sheet:4.58e-4T floor:1.03e+1F spring:3.01e+1F glass:7.83e-4T sheet:1.46e-4T
+PASS  R a re-ticked true motion is still true on the glass and the sheet, and a fake on the floor and the spring; bumps are always fakes
+PASS  S the glass's across-shift law is −n·sin(angle to the vertical), steady along the integrated ray: the law of refraction  [worst 5.84e-6]
+      N=200: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      N=800: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      bumps half: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      bumps double: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      retick small: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      glass steep: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      glass gentle: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      sheet deep: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      sheet shallow: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      spring stiff: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+      spring soft: glass clock void, glass warp identity, sheet clock void, floor clock teeth, spring clock teeth, glass across teeth
+PASS  ROB the verdicts (void, identity, teeth) survive changes of grid, bump size, re-tick size, glass and sheet profiles and spring constant
+PASS  D thirty random hand-drawn warps: the press holds on the glass and the sheet, jams on the floor and the spring
+PASS  Db thirty random hand-drawn sideways warps jam on every world (no world is blind to its first coordinate)
+      shifts only (clock, across, up everywhere)   teeth 5 void 2 identity 0 jams 5  → YOU SAW THE BLANK TAG.
+      clock first, then turn, then across          teeth 7 void 2 identity 0 jams 3  → YOU SAW THE BLANK TAG.
+      warps first                                  teeth 2 void 2 identity 2 jams 6  → YOU ANSWERED HILBERT.
+      reads the world (the intended path)          teeth 7 void 2 identity 2 jams 1  → YOU ANSWERED HILBERT.
+      one pull per world                           teeth 4 void 0 identity 0 jams 0  → THE PRESS KEPT ITS SECRET.
+PASS  H the obvious ways of pulling land in different places (different headlines and tag counts)
+PASS  W no decimals in anything the screen reads from the mechanism  [59 strings]

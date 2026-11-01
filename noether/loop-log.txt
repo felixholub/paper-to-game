@@ -1,0 +1,94 @@
+AIM: Stamp this world's laws. Only a tag with teeth counts.
+
+== WORLD 1 OF 4 · THE OPEN FLOOR
+   WINDOW: A bead sliding on a flat floor. Nothing pushes it. The clock ticks evenly.  [a true motion traces across the window]
+   LEVERS: SHIFT THE CLOCK / SHIFT ACROSS / SHIFT UP / TURN / WARP THE CLOCK / WARP ACROSS   BLANKS: ■■■
+
+   tap "SHIFT ACROSS" -> "Move the whole world a step sideways."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: SPEED ACROSS
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [FAKE] needle SWINGS; another true motion [true] needle still; a fake: nudged across [FAKE] needle SWINGS; a fake: nudged up [FAKE] needle still; a fake: nudged slantwise [FAKE] needle SWINGS; a fake: kicked near the end [FAKE] needle SWINGS
+   STAMP: TEETH
+   AUDITOR: "SPEED ACROSS: steady on the true motions, swinging on the fakes. A law with teeth."
+   RACK: [SPEED ACROSS: teeth]   BLANKS: ■■□
+
+   tap "WARP THE CLOCK" -> "Re-tick the clock any way you like, differently at every moment. You draw how."  [strip opens: draw the function; a wobble is drawn]  [PULL enabled]
+   PRESS: comes down, JAMS. World dial swings yellow. "THE WORLD MOVED"  (residual 5.2e-1)
+   STAMP: JAM
+   AUDITOR: "The world moved when you pulled warp the clock. Not a symmetry here. No tag."
+   RACK: [SPEED ACROSS: teeth] [bent]   BLANKS: ■□□
+
+   tap "SHIFT THE CLOCK" -> "Start the clock a moment later. Everything else as it was."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: ENERGY
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [FAKE] needle SWINGS; another true motion [true] needle still; a fake: nudged across [FAKE] needle SWINGS; a fake: nudged up [FAKE] needle still; a fake: nudged slantwise [FAKE] needle SWINGS; a fake: kicked near the end [FAKE] needle SWINGS
+   STAMP: TEETH
+   AUDITOR: "ENERGY: steady on the true motions, swinging on the fakes. A law with teeth."
+   RACK: [SPEED ACROSS: teeth] [bent] [ENERGY: teeth]   BLANKS: □□□
+
+== WORLD 2 OF 4 · THE SPRING
+   WINDOW: A bead on a flat floor, tied to the centre by a spring. The clock ticks evenly.  [a true motion traces across the window]
+   AUDITOR FIRST: "On every true motion of this world one thing holds steady: the rate at which the bead sweeps out area about the centre. Which lever stamps it?"  [picture: the sweep rate gauge, steady]
+   LEVERS: SHIFT THE CLOCK / SHIFT ACROSS / SHIFT UP / TURN / WARP THE CLOCK / WARP ACROSS   BLANKS: ■■■
+
+   tap "TURN" -> "Turn the whole world a little about the centre."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: SWEEP RATE
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [FAKE] needle SWINGS; another true motion [true] needle still; a fake: nudged across [FAKE] needle SWINGS; a fake: nudged up [FAKE] needle SWINGS; a fake: nudged slantwise [FAKE] needle SWINGS; a fake: kicked near the end [FAKE] needle SWINGS
+   STAMP: TEETH (the Auditor's target)
+   AUDITOR: "SWEEP RATE: steady on the true motions, swinging on the fakes. A law with teeth. That is mine; you found its lever."
+   RACK: [SWEEP RATE: teeth]   BLANKS: ■■□
+
+   tap "SHIFT THE CLOCK" -> "Start the clock a moment later. Everything else as it was."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: ENERGY
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [FAKE] needle SWINGS; another true motion [true] needle still; a fake: nudged across [FAKE] needle SWINGS; a fake: nudged up [FAKE] needle SWINGS; a fake: nudged slantwise [FAKE] needle SWINGS; a fake: kicked near the end [FAKE] needle SWINGS
+   STAMP: TEETH
+   AUDITOR: "ENERGY: steady on the true motions, swinging on the fakes. A law with teeth. A law, but not the one I asked for."
+   RACK: [SWEEP RATE: teeth] [ENERGY: teeth]   BLANKS: ■□□
+
+== WORLD 3 OF 4 · THE GLASS
+   WINDOW: Light crossing glass that is denser lower down. It takes the quickest path. The clock is only a label along the ray.  [a true motion traces across the window]
+   LEVERS: SHIFT THE CLOCK / SHIFT ACROSS / SHIFT UP / TURN / WARP THE CLOCK / WARP ACROSS   BLANKS: ■■■
+
+   tap "SHIFT THE CLOCK" -> "Start the clock a moment later. Everything else as it was."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: CLOCK LAW
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [true] needle still; another true motion [true] needle still; a fake: nudged across [FAKE] needle still; a fake: nudged up [FAKE] needle still; a fake: nudged slantwise [FAKE] needle still; a fake: kicked near the end [FAKE] needle still
+   STAMP: VOID
+   AUDITOR: "CLOCK LAW: the needle never moved, not on the true motions and not on the fakes. This tag holds for every motion there is. It says nothing. VOID."
+   RACK: [CLOCK LAW: void]   BLANKS: ■■□
+
+   tap "WARP THE CLOCK" -> "Re-tick the clock any way you like, differently at every moment. You draw how."  [strip opens: draw the function; a wobble is drawn]  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: IDENTITY — "The two equations of motion are not independent: one follows from the other."
+   STAMP: IDENTITY
+   AUDITOR: "A free hand: the press held, but no law came out. What came out is an identity: the equations of motion are not independent. And the shift of the clock sits inside this warp, so its tag is blank here."
+   RACK: [CLOCK LAW: void] [IDENTITY: identity]   BLANKS: ■□□
+
+   tap "SHIFT ACROSS" -> "Move the whole world a step sideways."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: LEAN × DENSITY
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [true] needle still; another true motion [true] needle still; a fake: nudged across [FAKE] needle SWINGS; a fake: nudged up [FAKE] needle SWINGS; a fake: nudged slantwise [FAKE] needle SWINGS; a fake: kicked near the end [FAKE] needle SWINGS
+   STAMP: TEETH
+   AUDITOR: "LEAN × DENSITY: steady on the true motions, swinging on the fakes. A law with teeth."
+   RACK: [CLOCK LAW: void] [IDENTITY: identity] [LEAN × DENSITY: teeth]   BLANKS: □□□
+
+== WORLD 4 OF 4 · THE SHEET
+   WINDOW: A bead rolling on a sheet with a well in the middle. It takes the straightest path the sheet allows. The clock is only a label.  [a true motion traces across the window]
+   AUDITOR FIRST: "In this world the clock tag comes out blank before you pull anything: it holds for every motion, real or fake. Pull the lever that says why."  [picture: the energy gauge, steady]
+   LEVERS: SHIFT THE CLOCK / SHIFT ACROSS / SHIFT UP / TURN / WARP THE CLOCK / WARP ACROSS   BLANKS: ■■■
+
+   tap "WARP THE CLOCK" -> "Re-tick the clock any way you like, differently at every moment. You draw how."  [strip opens: draw the function; a wobble is drawn]  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: IDENTITY — "The two equations of motion are not independent: one follows from the other."
+   STAMP: IDENTITY (the Auditor's target)
+   AUDITOR: "A free hand. The shift of the clock is inside this warp, and a warp stamps no law. That is why the clock tag was blank: this world has no clock of its own. That is my answer."
+   RACK: [IDENTITY: identity]   BLANKS: ■■□
+
+   tap "TURN" -> "Turn the whole world a little about the centre."  [PULL enabled]
+   PRESS: comes down, holds. Tag drops: SWEEP RATE
+   AUDITOR feeds: a true motion [true] needle still; the same curve, clock re-ticked [true] needle still; another true motion [true] needle still; a fake: nudged across [FAKE] needle SWINGS; a fake: nudged up [FAKE] needle SWINGS; a fake: nudged slantwise [FAKE] needle SWINGS; a fake: kicked near the end [FAKE] needle SWINGS
+   STAMP: TEETH
+   AUDITOR: "SWEEP RATE: steady on the true motions, swinging on the fakes. A law with teeth. A law, but not the one I asked for."
+   RACK: [IDENTITY: identity] [SWEEP RATE: teeth]   BLANKS: ■□□
+
+VERDICT: YOU ANSWERED HILBERT.
+  You stamped six laws with teeth.
+  On the glass, the clock tag came out blank.
+  On the glass you warped the clock, and the press stamped an identity instead of a law.
+  On the sheet you found the lever that blanks the clock tag: the free hand.
+  On the spring you found the symmetry behind the sweep-rate law: a law with teeth points back to its symmetry.
+  On the glass you stamped lean times density: the law of refraction, from a sideways shift.

@@ -1,0 +1,162 @@
+# Noether's Press — design memo
+
+## 0. Given
+
+Mine: Steffen's signature and counter. Ideas given, and binding: read the paper against its reputation. "Symmetry gives a conservation law" is Theorem I and almost the warm-up; the paper was written to answer Hilbert's question of why energy conservation seems to fail in general relativity, and the answer is Theorem II (§6). Build what the paper actually does, and note that it runs both ways: every conservation law comes from a symmetry too (§3, §4). No biography: no Göttingen, no habilitation, nothing about who was allowed to lecture; the paper stands on its own, next to Einstein's. The design: hard, steely, manly, maybe with some neon. These override precedent nowhere in position or format; in the look they pick the register (Techno, a machine hall) and the palette (steel and neon), which precedent also allowed.
+
+## 1. Paper
+
+Emmy Noether, *Invariante Variationsprobleme*. Nachrichten von der Königlichen Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-physikalische Klasse, 1918, pp. 235–257. Presented by F. Klein at the session of 26 July 1918; final manuscript submitted end of September 1918. No DOI. Available: the Wikisource transcription (German), exported as a 38-page PDF, typeset text, no scan; read in full, including the 28 notes. The paper is in German; every quoted term below is translated. Online: de.wikisource.org/wiki/Invariante_Variationsprobleme; English translation by M. A. Tavel, *Transport Theory and Statistical Physics* 1 (1971) 186–207, arXiv physics/0503066.
+
+## 2. What the paper hands over
+
+A **model**, primary: two theorems about a variational integral I = ∫ f(x, u, u', …) dx and a continuous group of transformations of the x and u, with explicit identities (eqs. 12, 13, 16) that can be computed for any concrete f and any concrete transformation. Ported: the game computes Noether's identities numerically on small integrals of the types the paper itself names (the simple integral of mechanics; the Weierstrass parametric integral, p. 7, her first example of Theorem II).
+
+An **argument**, secondary: §6, the proof of Hilbert's assertion. In a theory invariant under an infinite group that contains the displacement of the independent variables as a subgroup, the energy relations are *improper*: they are linear combinations of the identities of Theorem II plus divergences that vanish identically, so they hold whether or not the equations of motion do. Proper energy theorems exist exactly when no such infinite group is there (classical mechanics, special relativity: note 26). The game stages this on a one-coordinate miniature.
+
+## 3. The discovery, and its kind
+
+**A counterintuitive result.** Everyone knows that more symmetry means more conservation laws. The paper shows that a symmetry with a free hand in it (an infinite group, with arbitrary functions) gives no conservation law at all: it gives identities among the equations of motion (Theorem II: ρ of the Lagrange equations are consequences of the rest), and it *empties* the conservation law of any finite symmetry it contains. Energy conservation in general relativity is not violated; it is void: true for every motion, including the impossible ones, so it says nothing (§6, the "improper" energy relations). And it runs both ways: a conservation law implies a symmetry (§3), and a set of identities among the equations implies an infinite group (§4); so if your energy law is empty, your theory has a free-hand symmetry that contains the shift of time. Hilbert's "failure of proper energy theorems is characteristic of general relativity" holds only if "general relativity" means invariance under such groups (last paragraph).
+
+Secondary, a **mechanism made intelligible**: Theorem I as a press. Put a symmetry in; a conserved quantity comes out, equation 13, computed, not quoted.
+
+## 4. The core narrative
+
+There is a machine that stamps laws. You feed it a thing the world does not care about (start the clock a minute later; move the whole track a yard; turn it) and it stamps a steel tag: a quantity that never changes while the world runs. An inspector then tests every tag by feeding it fake motions, motions the world would never make. A good tag catches the fakes: its needle swings. One day you feed the machine the biggest thing of all: not shifting the clock, but re-ticking it any way you like at every moment. The machine accepts; the world does not care. But the tag that comes out is blank, and worse, the clock tag you stamped before has gone blank too: its needle no longer swings for anything, real or fake. The machine has not broken. A freedom that big does not give you a law; it takes the clock away, and with it everything a clock would have let you say. That is why energy seems to be lost in Einstein's theory. It is not lost. There is no clock in the theory to keep it by.
+
+## 5. Who lives in the paper
+
+- **The group 𝔊**: the transformations Δx, Δu, with parameters ε or arbitrary functions p(x). Controls what is done to the world; could be asked to anticipate whether the integral holds still. The player.
+- **The integral I** (the world, the action): holds still or does not. Candidate subject: the player as the world that is being transformed; declines, it only answers yes or no.
+- **The Lagrange expressions ψ** (the equations of motion): what the laws are about; dependent on each other under Theorem II. Candidate subject; too abstract to play.
+- **The divergence B** (the conserved current, the law) and the identities (16): what comes out. Candidate: the tag.
+- **Hilbert** (§6): the one with the question, and a claim to be tested. Candidate opponent.
+- **Einstein's I\*** (note 21): the integral that differs from Klein's by a divergence, introduced to simplify the energy theorems. Cut.
+
+## 6. Precedent
+
+| Game | Position | Format | Feedback device | Chassis |
+|---|---|---|---|---|
+| Brown's Restless Dust (brown) | controller (sets the conditions of one drop, aims at stillness) | impossible challenge | the live drop and the shelf of suspects | hand-coloured natural-history plate, 1828 (Austere): plate cream, ink, Prussian blue, almond gold, carmine; IM Fell English; labels with a double rule |
+| Benjamin's Veil (benjamin) | agent (keeper of one work, a timing decision) | challenge: optimal stopping | the halo and the crowd | 1930s photomontage poster (Worldly): cream, ink, red, halftone grey, gold leaf; Oswald + Libre Franklin; red slabs with an ink rule |
+| Hubble's Twelve Nights (hubble) | experimenter (the paper's own instruments, a budget of nights) | discovery under a budget | the plate (Figure 1 drawn live), with a reveal | observatory at night (Instrument): sky black, starlight, arc amber, shift red, brass; Jost + IBM Plex Mono; brass-rimmed instrument plates |
+
+**What this game does differently.**
+
+- **Position: the transformation.** The player is the group: every pull is a Δx, Δu (shift the clock, shift the track, turn it, re-tick the clock freely, re-draw the track freely), and for the free-hand pulls the player draws the arbitrary function p(x) with their thumb. Not a controller aiming at a target state of a system, not a keeper with a timing decision, not an experimenter reading noisy instruments: the player is the thing the paper's theorems are *about*. *I shifted the clock, I turned the floor, I warped the clock, and the tag went blank.*
+- **Format: strategic, a contest with the Auditor.** Every tag the press stamps is contested by an inspector who throws true motions and fakes at it and stamps it PROPER or VOID; in two of the four worlds he moves first, handing the player a law and demanding its symmetry (the converse). Brown's challenge could not be won; Benjamin's had an optimum; Hubble's was discovery under a budget. Here the player wins tags against an adversary who is trying to void them, and the tags that cannot be voided are the game's units.
+- **Device: the stamped tag and the needle (one of our own).** The press drops a steel tag with the law stamped into it; beside it a needle gauge reads the law along motions the Auditor feeds in: steady on a true motion, swinging on a fake (teeth, cyan), dead on everything (void, magenta). Nothing fills, drops onto a ruler, or is revealed under a layer.
+- **Chassis: a stamping press in a night-shift machine hall (Techno family: a cockpit, a mixing desk, a machine panel), neon on gunmetal.** The last three were a light plate (Austere), a light poster (Worldly) and a dark sky (Instrument); this is dark steel, hard bevels, neon tube light, and no brass, no stars, no engraving. Chakra Petch (squared industrial display) and Saira (text), Share Tech Mono for gauges. Buttons are levers: steel bars with a lit edge, no radius.
+
+## 7. The aim and the verdict
+
+**Aim** (start screen, top of play, first line of How to play): *Stamp this world's laws. Only a tag with teeth counts.*
+
+**Verdict** (first lines of the end screen):
+- What you did: *You stamped N laws with teeth across four worlds. On the glass, the clock tag came out blank. On the sheet, you found the lever that blanks it.* (or the lines for what was not found)
+- What the paper says: *A symmetry with a free hand in it stamps no law. It stamps an identity: the equations of motion are not all independent. And it empties the law of every smaller symmetry inside it. That is Hilbert's answer: energy in general relativity is not lost; its law is void, because the theory has no clock of its own.*
+- Both ways: *It runs backwards too. A law with teeth means a symmetry; a blank law means a free hand.*
+
+## 8. Three concepts
+
+**A. Noether's Press (the transformation; strategic).** Controls: five levers, one pull at a time, three steel blanks per world; the two free-hand levers open a strip where the player draws p(x) with a thumb. Deliberation before a pull: does this world care about this? (Does the spring care where the track starts? Does light in glass care how fast the clock ticks?) A wasted pull bends a blank. After: the press holds still and stamps, or jams and the world's dial swings (not a symmetry). Then the Auditor feeds motions: the needle, and his stamp. Discovery moment: the glass world; the clock tag's needle is dead on the fakes; VOID; then the free-hand clock lever stamps, and the tag reads not a law but an identity. Fun: anticipation (will it jam?), agency (reading the world is the skill), discovery (the void tag), mastery (world four is the same trap run backwards, and the player who understood the glass answers it in one pull). Second playthrough: the worlds are fixed, but the pulls are the player's; a second run stamps the laws the first run never reached (the floor has four, the blanks allow three) and tries the free-hand track lever, which the first run usually did not.
+
+**B. The Auditor (experimenter; discovery).** The player is Hilbert's inspector: each world comes with laws already stamped by someone else, and the player's instrument is the fake: they draw fake motions and watch which tags catch them. The player's control is the perturbation δu. Discovery: a tag that catches nothing. Deliberation: which fake would break this tag? Fun: discovery, agency. Second playthrough: different fakes. Weaker: the player never touches the symmetry, so Theorem I is told, not operated, and the converse has no place.
+
+**C. The Rubber Clock (reckless: the subject, wordless, real time).** The screen is one bead moving on one track with two clocks beside it. The player's thumb on the screen is p(x): dragging warps the clock under the bead in real time. In Newton's world the warp breaks the motion (the bead's trace and the energy dial go wrong, the screen flashes); in the glass world the warp changes nothing but the ticking, and the energy dial is pinned at zero whatever the thumb does. No levers, no words on the play screen; the discovery is felt in the thumb: the world that does not resist the warp is the world with no energy. Fun: agency, discovery. Second playthrough: none; the lesson is one gesture. Risk: a demonstration with a thumb on it; no commitment, no verdict with stakes; the converse and Theorem II's identities have nowhere to appear.
+
+## 9. The first five minutes
+
+**A, the pick.** 0:00 A dark steel panel, a neon strip, a title. *Stamp this world's laws. Only a tag with teeth counts.* Three lines: you pull levers, the press stamps, an inspector tests. BEGIN. 0:20 World one: THE OPEN FLOOR. A window shows a bead sliding across an empty floor, trace behind it. A line: *A bead on a flat floor. Nothing pushes it. The clock ticks evenly.* Five levers under it: SHIFT THE CLOCK, SHIFT THE FLOOR ACROSS, SHIFT THE FLOOR UP, TURN THE FLOOR, WARP THE CLOCK, WARP THE FLOOR. Three blanks lit. Under the levers: *Pull one. If the world does not care, the press stamps a tag.* The player thinks: an empty floor; it won't care where it starts. Pulls SHIFT THE FLOOR ACROSS. 0:40 The press comes down with a thud; a steel tag drops out: SPEED ACROSS, STEADY. The Auditor's panel lights: TRUE MOTION, the needle sits still; FAKE, the trace kinks in magenta and the needle swings; stamp: TEETH, cyan. Grin: it worked and it was mine. 1:00 Two blanks. The player wonders about the warp levers. Pulls WARP THE CLOCK; a strip opens, *draw how the clock should tick*; they drag a wobble; the press comes down and jams, the world's dial swings yellow: THE WORLD MOVED. NOT A SYMMETRY. One blank bent. Frown, then: of course, a bead at speed cares how the clock ticks. 1:30 Last blank: SHIFT THE CLOCK; tag: ENERGY, STEADY; teeth. NEXT WORLD. 1:50 World two: THE SPRING. The Auditor moves first: *On every true motion of this world, one thing holds steady. Here it is.* A picture: the bead swings about the centre, and a sector sweeps at a constant rate. *Which lever stamps it?* The player looks: a sweep about the centre, so turning. TURN THE FLOOR. Stamp: SWEEP RATE, STEADY; teeth; *That is mine. A law with teeth means a symmetry; this one was yours.* 2:30 World three: THE GLASS. A ray of light bending through layered glass. *Light crossing layers of glass, denser lower down. It takes the quickest path. The clock's tick is only a label along the ray.* The player pulls SHIFT THE CLOCK, confident. Tag drops: it is blank. The Auditor feeds a true motion: needle dead. A fake: needle dead. Stamp, magenta: VOID. *This holds for every motion, the real ones and the fakes. It says nothing.* Frown: what? 3:10 Second blank: WARP THE CLOCK, draw anything. The press comes down and holds; the tag reads not a quantity but a sentence: *the equations of motion are not all independent; one follows from the other.* The Auditor: *A free hand. That is why your clock tag was empty: the shift of the clock is inside the warp, and the warp stamps no law.* Discovery landed. 3:40 Third blank: SHIFT THE GLASS ACROSS: SIDEWAYS SPEED TIMES DENSITY, STEADY; teeth (Snell's law, unnamed). 4:00 World four: THE SHEET: a bead rolling on a curved sheet, the mini-Einstein world. The Auditor first: *Here the clock tag is blank before you pull anything. Pull the lever that says why.* The player who understood pulls WARP THE CLOCK in one; the press holds; the tag reads the identity; the Auditor: *Then this world has no clock of its own. That is Hilbert's answer.* 4:40 Verdict: words; Hilbert's question and its answer; both ways; the last line of the paper.
+
+**B, runner-up.** 0:00 The same panel; the aim: *Find the tag that catches nothing.* 0:20 World one with three tags already on the rack: ENERGY, SPEED ACROSS, SWEEP. A window with the bead; a strip under it: *draw a fake: drag the trace off its line.* The player drags; the needles of the three tags swing. Fine. 1:30 World three: the glass; four tags; the player drags fakes; three needles swing; one, CLOCK, never does. Found it. 2:30 Then what? The game tells them why. The player never operated the symmetry and the discovery is "one of these dials is dead", which is a search, not a thought. The walkthrough runs out of decisions at three minutes.
+
+## 10. The pick, and why
+
+**A, Noether's Press.** The player is inside the paper at the one place the paper puts a free choice: the transformation, including the arbitrary function drawn by hand. Theorem I is operated, not told: pull, stamp, test. The discovery lands inside play, on a tag the player stamped and expected to have teeth. Theorem II appears as a thing the press does (a stamped identity instead of a law), §6 as the blank clock tag, and the converses as the Auditor's two reverse rounds. The sentence afterwards has no "guess": *I warped the clock on the glass and the press held, and the clock tag was blank; a free hand stamps no law.* Originality: no game in the table has let the player be the transformation, or draw a function with a thumb as a move, or fight an inspector for tags.
+
+**Author test.** The author would recognise her identities (12), (13) and (16) computed on her own Weierstrass example, the displacement group and the "Energierelationen" of §6, "eigentlich" and "uneigentlich" as TEETH and VOID, the converse of Theorem I as the Auditor's second round and the converse of §6 as his fourth, and the last paragraph's caveat on the verdict screen. She would not find Göttingen anywhere. She would enjoy a player pulling SHIFT THE CLOCK on the glass with confidence.
+
+**Runner-up: B.** Switch if the author wants the inspector's seat (Hilbert's) rather than the group's: a game about testing laws rather than making them.
+
+**What the reckless concept would have given.** C's thumb-on-the-clock in real time, wordless. Kept from it: the two free-hand levers open a strip where the player draws p(x) with a thumb, so the arbitrary function is literally in the player's hand. Given up: the silence, the real time, the bead under the thumb.
+
+## 11. The shape
+
+Four worlds, three blanks each, twelve pulls at most; five to seven minutes. Screens: start; play (one per world, the same layout); the warp strip (an overlay); end; How to play; About. No presets in the paper's sense; the worlds are the paper's own cases, ordered for the player:
+
+1. **The open floor** (free particle in the plane, f = ½(u₁'² + u₂'²), x = time). Theorem I with four parameters: clock, two shifts, a turn. Every finite lever stamps with teeth; both warps jam. The warm-up; Theorem I.
+2. **The spring** (f = ½|u'|² − ½k|u|²). The Auditor moves first with the sweep-rate law (angular momentum, drawn as a sector sweeping steadily); the player finds the lever: the converse of Theorem I (§3). Shifts jam.
+3. **The glass** (Fermat: f = n(u₂)·√(u₁'² + u₂'²), the Weierstrass parametric integral of p. 7, homogeneous of first degree). Clock shift stamps VOID; WARP THE CLOCK stamps the identity Σψᵢuᵢ' = 0 (p. 7); shift across stamps with teeth (Snell); shift down, turn, warp the floor jam. The discovery.
+4. **The sheet** (geodesics on a curved surface, f = √(gᵢⱼ(u) uᵢ' uⱼ'), the one-coordinate miniature of Einstein's integral). The Auditor moves first: the clock tag is blank; find the lever that says why: the converse of §6. WARP THE CLOCK stamps the identity.
+
+Score: none shown. The rack of tags (cyan with teeth, magenta void, yellow bent blanks) is the yardstick in the aim's units; the verdict is in words.
+
+## 12. Controls, mechanism, feedback, moment
+
+- **Controls:** six levers (SHIFT THE CLOCK; SHIFT ACROSS; SHIFT UP; TURN; WARP THE CLOCK; WARP THE FLOOR), one pull per blank, three blanks per world, every world starting with all levers up; the warp levers open a strip where the player drags a curve p(x) (clock) or p(x) applied to the across-coordinate (floor); PULL. The Auditor's reverse rounds use the same levers.
+- **Mechanism (ported):** for each world an integrand f(u, u') on the plane, parameter x ∈ [0, 1], paths discretised at N points. For a pull (Δx, Δu, with p(x) where free), the mechanism forms δ̄u = Δu − u'Δx (eq. 9) and checks the Lie condition (11), δ̄f + d/dx(f·Δx) = 0, on random paths: a nonzero residual is a jam. If it holds, the current B = −(Σ ∂f/∂uᵢ' δ̄uᵢ + f Δx) (eqs. 3, 4, 12) is the tag. The Auditor integrates the Lagrange equations ψ = 0 from random starts (true motions) and perturbs them by bumps (fakes), and reads the drift of B along each: zero on true, nonzero on fakes is TEETH (proper); zero on both is VOID (improper, §6); for a free-hand pull the tag is the identity (16), checked as Σψᵢ·(coefficient) = 0 on random paths. Numbers in CONFIG with their equation numbers.
+- **Feedback:** the press (comes down, holds and stamps, or jams with the world dial swinging yellow); the tag dropping into the rack; the Auditor's needle on true and fake motions, drawn in the world window (true in white, fakes in magenta dashes); his stamp.
+- **The moment:** world three, the clock tag blank, the needle dead on a fake; then WARP THE CLOCK stamping an identity instead of a law, and the Auditor's line joining the two.
+
+## 13. The look
+
+**Register: a stamping press in a night-shift machine hall, neon-lit** (Techno family: a machine panel, a cockpit). Not from the paper's subject (it has no picture) and not from its setting (a lecture room in 1918 is barred by the brief); chosen for the play: a press stamps, an inspector stamps, levers are pulled, blanks are bent. Hard, steely, and lit by tube light: the user's brief.
+
+- **Palette:** gunmetal `#15181C` (ground) and dark steel `#23282E` (panels); brushed steel `#9AA3AB` with a highlight `#D7DDE2` (tags, levers, the press); neon cyan `#2BF0FF` (a tag with teeth, the press light, the true motion's trace is white-cyan); neon magenta `#FF2ECC` (void, the Auditor, fakes); hazard yellow `#F2CB05` (a jam, a bent blank). No other colour.
+- **Type:** Chakra Petch 700 (SIL OFL), a squared industrial display face, for the title, lever labels, stamps, in capitals with tracking; Saira 400 and 600 (SIL OFL) for text; Share Tech Mono (SIL OFL) for gauge readings. Embedded as data.
+- **Buttons:** levers: a steel bar, 56 px, flat, with a 3 px lit edge along the bottom (cyan when live, dark when the blanks are gone), no radius, Chakra Petch capitals; the chosen lever's edge goes white and the bar drops 2 px. PULL is a wide bar with a cyan edge; a pulled lever locks down for the world.
+- **The one visual rule:** steel carries no judgement; light does. Cyan is a law with teeth, magenta is void, yellow is a jam, and nothing else is ever coloured. Every tag is stamped into steel in capitals, debossed (a dark inset shadow), and its light comes from the Auditor's verdict, not from the press.
+- **Play screen at 380 px:** the aim line (two lines, 17 px) with ? at the right; the world band (cyan, "WORLD 3 OF 4 · THE GLASS"); the world window, 348 × 220, dark glass with the floor or layers drawn and the bead's true trace animating, fakes dashed in magenta when the Auditor feeds them (answers "what is this world, and does the law hold?"); the Auditor's panel, 348 × 64, a needle gauge and his stamp (answers "teeth or void?"); the rack, three tag slots, 348 × 52 (answers "what have I stamped, and how many blanks are left?"); the six levers in two columns, 56 px (answers "what can I do?"); the line of what the chosen lever does; PULL. After a pull, in the place of the levers: the result line and NEXT.
+
+## 14. What is cut
+
+The general n-fold integral and higher derivatives (κ, σ): the game runs the simple integral with first derivatives only, where (3) is the Lagrange central equation (4). The mixed groups. The §3 and §4 constructions of the finite transformations from the infinitesimal ones (eqs. 17–19): the game works with infinitesimal transformations throughout, as the proofs do. §5 (the invariance of the parts of the relations, relative invariance). The nonlinear dependency between first integrals (p. 16: u' = const and u'² = const). Einstein's I\* and the Klein notes (notes 21, 24). The caveat of note 14 (transformations with δ̄u = 0, Div(fΔx) = 0, which are split off). Four coordinates: the sheet is a surface traversed by one parameter; the diffeomorphism group of general relativity is played as the reparametrisation group of that one parameter, which is Noether's own first example (p. 7) and the case n = 1 of "the group of all transformations of the x".
+
+## 15. Divergences
+
+- **Clock:** the independent variable is called the clock in every world, including the glass and the sheet, where it is only a parameter along the path; that is the point, and the Auditor says so.
+- **Six levers, not a group:** the player pulls one infinitesimal transformation at a time; the group structure (composition, the parameter count ρ) is not played. Theorem I's count (ρ parameters, ρ laws) is on the verdict screen.
+- **Three blanks per world (ours):** so that a pull is a decision; the paper has no budget.
+- **The Auditor (ours):** the paper's "proper" and "improper" (§6) given a face and a stamp; his tests (true motions and bumped fakes) are our operationalisation of "holds only in consequence of ψ = 0" against "holds identically".
+- **The tag's words:** the conserved quantity is named by what it measures (SPEED ACROSS, SWEEP RATE, ENERGY, SIDEWAYS SPEED × DENSITY) and never written as a formula on screen; the formula is in the config block.
+- **The sheet's metric and the glass's density profile (ours):** chosen for a visible bend; the structure (homogeneous of first degree, p. 7) is the paper's.
+- **Hand-drawn p(x):** the player's curve is smoothed and used as the arbitrary function; the press also tests two random functions, so that invariance is not an accident of the drawing.
+
+---
+
+## 16. Mechanism kind and claim boundaries
+
+**Ported.** The game computes Noether's identities numerically: the Lie condition (eq. 11) on random paths decides whether a lever is a symmetry; the current B = A − f·Δx (eqs. 3, 4, 12, 13) is the tag; for a free-hand lever the identity of eq. 16 (σ = 0: Σ aᵢψᵢ = 0, which for the clock warp is Σψᵢuᵢ' = 0, p. 7) is checked on random paths. The worlds are four integrals of the two types the paper names: the ordinary integral of mechanics (§1, eq. 4; the floor and the spring) and the Weierstrass parametric integral homogeneous of first degree in u' (p. 7; the glass, which is Fermat's principle with n depending on depth, and the sheet, a geodesic in a conformally flat metric with a well).
+
+- **Demonstrates:** the theorems' identities on these worlds, computed; that the clock's current is identically zero on the homogeneous worlds (improper, §6) and the energy on the Newton worlds (proper); that the free-hand warp stamps an identity, not a law; that a re-ticked true motion is still true where the integral is homogeneous and a fake where it is not.
+- **Assumes:** the worlds and their profiles; one parameter in place of four coordinates; six levers, three blanks, the Auditor's seven test motions and the thresholds for "steady" and "swings"; the names of the tags.
+- **The paper establishes:** Theorems I and II with their converses for any number of variables and derivatives, and §6 on proper and improper energy relations. Nothing about what energy "is" in general relativity, and the game says nothing about it either.
+
+**Does the discovery come from the paper or from the rules?** The blank clock tag on the glass and the sheet is the vanishing of Σu'∂f/∂u' − f for an integrand homogeneous of first degree (Euler's theorem on homogeneous functions; Noether, p. 7 and §6), not a consequence of the budget, the Auditor's test set or the thresholds. The calibration check (ROB) varies the grid, the bump and re-tick sizes, the glass and sheet profiles and the spring constant, and every verdict stays. The three-blank budget decides only how many tags a player can collect, never which tags are void.
+
+## 17. Calibration plan and result
+
+Against the paper's own equations and statements, in `calibration.js`: eq. 3 on random paths and random δu; eq. 12 holding exactly for the levers that pass eq. 11 and failing for those that jam (the converse of §3, lever by lever); Theorem I's counts (four laws on the floor, two on the spring) and the first integrals steady along true motions (p. 16); the clock's B equal to ½|u'|² + V (p. 28); invariance of the homogeneous worlds under x → p(x) for arbitrary p and the identity Σψᵢuᵢ' = 0 (p. 7), both failing on the Newton worlds; §6, the clock relation improper (B ≡ 0) on the homogeneous worlds and proper on the others, and the shift being the warp with p ≡ 1; re-ticking; the law of refraction from the across-shift on the glass; robustness; thirty hand-drawn warps; the heuristics table; no decimals in the strings the screen reads.
+
+**Result:** 21 checks, 21 passed (`calibration-result.txt`).
+
+**Heuristics (section 3 of build.md).** The game has no score; the table records what each obvious way of pulling collects and which verdict it reaches.
+
+| Way of pulling | Teeth | Void | Identity | Jams | Verdict |
+|---|---|---|---|---|---|
+| shifts only (clock, across, up everywhere) | 5 | 2 | 0 | 5 | You saw the blank tag |
+| clock first, then turn, then across | 7 | 2 | 0 | 3 | You saw the blank tag |
+| warps first | 2 | 2 | 2 | 6 | You answered Hilbert |
+| reads the world (the intended path) | 7 | 2 | 2 | 1 | You answered Hilbert |
+| one pull per world, never the clock on the glass | 4 | 0 | 0 | 0 | The press kept its secret |
+
+The pulls matter: the same twelve blanks reach three different verdicts, and the full verdict needs both the clock on a homogeneous world and the warp on the sheet.
+
+## 18. Build log
+
+1. Mechanism headless in `mechanism.js`; first smoke test found two numerical faults, both fixed in the mechanism: the re-ticked motion was resampled by linear interpolation, which put kinks into ψ and made a true motion read as a fake on the glass (now re-integrated with a variable step); and the random test paths could reach u' = 0, where the homogeneous integrand has a cusp (amplitudes bounded). Calibration 21/21.
+2. Placeholder loop (`loop.js`, `loop-log.txt`): the intended path through four worlds; every pull changes something visible, says whether it worked, and the glass clock is the turn.
+3. Skin: template, fonts embedded (Chakra Petch 700, Saira variable, Share Tech Mono), build script with the byte-for-byte check.
+4. Browser session (`session-test.js`, `session-log.txt`): two shifts, help opened and returned mid-world with the chosen lever kept, a drawn warp through the strip, about, replay; no errors, no horizontal scroll at 380 px. Fixed from the first run: an animation frame timestamp earlier than the start time (a NaN bead position), a stray call in the Auditor-first setup, the Auditor's first-move stamp overflowing its box, and the tag slot showing its verdict colour before the Auditor had stamped.
+5. Self-review from screenshots: the aim is stated on the start screen in one sentence; the discovery is stated at the top of the end screen (the headline and the first lines); nothing in the table looks like dark steel with neon tube light. Builder's review only; no stranger has played it. Session length is an estimate (about six minutes) until someone measures it.
