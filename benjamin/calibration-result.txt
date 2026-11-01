@@ -1,5 +1,5 @@
-Benjamin's Veil — calibration result (2026-10-31)
-40 passed, 0 failed
+Benjamin's Veil — calibration result (2026-11-01)
+42 passed, 0 failed
       never lifted: the stock by age 1.00 1.00 1.00 1.00 1.00 1.00; what the eyes of the age would see of it 1.00 1.00 0.90 0.63 0.28 0.06
 PASS  P1 never lifted: the halo stays whole through all six ages
 PASS  P1b never lifted: what the eyes of the cinema can see of a whole halo is below a tenth  [0.06]
@@ -46,15 +46,17 @@ PASS  P7 under all five variants the best schedule first prints at the cathedral
 PASS  P7b under all five always veiled stays below a fifth of the best
 PASS  P7c under all five always the newest rung stays below the best
 PASS  P7d under all five the best path never narrows the veil
-PASS  S the score is the fraction out of 100: the best path scores 100, always veiled under 5  [0]
-PASS  S2 the shortfall names the cause: early opening is read as halo spent, hoarding as kept farther
+PASS  S the verdict carries no score, no fraction and no best path: it describes
+PASS  S2 the five families sort the paths: dark, cult, people, late, splash
+PASS  S3 every family's lead is a sentence about what happened, none a grade
 PASS  W no decimals in any string the screen shows
 PASS  W2 every slab has a label and a meaning, and the epilogue ends on Benjamin's line
 PASS  W3 every age has a technique, a line for what is new, and a crowd word up to its ceiling
 PASS  W4 halo words cover the range
-PASS  W5 the verdict for the wait-for-the-lithograph path names the turn
+PASS  W5 the verdict for the print-then-put-away path says the copies stayed out
 PASS  W5b the verdict for the coin path names the coin
 PASS  W7 the arrival says one thing once, at the studio: the people's eyes have changed  [silent silent silent silent said silent]
 PASS  W6 the verdict for the always-veiled path says the halo is whole and nobody saw it
-PASS  W9 the verdict for wait-then-splash names the screen that cannot carry it
+PASS  W9 the verdict for wait-then-splash names the screen that could not carry it
+PASS  W10 the painting-now line says where the halo went
 

@@ -45,11 +45,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .band{background:var(--red);color:var(--cream);font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:15px;padding:7px 10px;margin:10px -16px 0;padding-left:16px;display:flex;justify-content:space-between;align-items:baseline}
 .band b{font-size:19px;font-weight:700;letter-spacing:.06em}
 .strip{display:flex;gap:4px;margin:8px 0 6px;justify-content:space-between}
-.score{display:flex;align-items:baseline;justify-content:center;gap:6px;margin:14px 0 2px}
-.score .num{font-family:var(--display);font-weight:700;font-size:92px;line-height:1;color:var(--red)}
-.score .of{font-family:var(--display);font-weight:600;font-size:28px;color:var(--ink);letter-spacing:.06em}
-.lead2{font-size:17px;line-height:1.35;margin:-6px 0 10px;color:var(--ink)}
-.scorelab{text-align:center;font-size:14px;color:var(--grey);margin:0 0 10px;line-height:1.3}
 .facenow{display:flex;gap:12px;align-items:center;margin:8px 0 4px}
 .facenow svg{flex:0 0 150px;width:150px;height:auto}
 .facenow p{margin:0;font-size:15px;line-height:1.35}
@@ -77,9 +72,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .veil:disabled .w{font-style:italic}
 .result{margin-top:10px}
 .line{font-size:16px;line-height:1.45;margin:8px 0}
-.holdlab{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--display);font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
-.holdlab span:last-child{font-family:var(--text);font-size:14px;letter-spacing:0;text-transform:none;color:var(--grey)}
-.hold{display:block;width:100%;height:26px;border:3px solid var(--ink);background:var(--cream)}
 .lead{font-family:var(--display);font-weight:600;font-size:30px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;color:var(--red);margin:10px 0}
 .vl{margin:10px 0}
 .vl b{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:14px;display:block;color:var(--red)}
@@ -104,8 +96,8 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     <p class="lede" style="margin:0">You keep one face. It is painted, it has a halo, and hardly anyone has ever seen it. Every age brings a new way to copy a face, and the people press closer.</p>
   </div>
   <p class="lede">Each age you <b>set the veil</b> (by what means the face goes out, if at all), <b>let the age pass</b>, and see who came and what is left of the halo. Six ages, each with a new way to copy a face. Then the verdict.</p>
-  <p class="aim">Over six ages, let the face move as many people as it can.</p>
-  <p class="lede">A face moves the people who see it, and moves them more when they see its <b>halo</b>. Only the face itself carries the whole halo; a copy carries a trace, and every copy you make spends some of the original's. Kept in the dark the halo stays whole, but each age's eyes are harder to move than the last, and each age has more people.</p>
+  <p class="aim">Six ages. Decide who sees the face, and how.</p>
+  <p class="lede">A face moves the people who see it, and moves them more when they see its <b>halo</b>. Only the face itself carries the whole halo; a copy carries a trace, and every copy you make spends some of the original's. Kept in the dark the halo stays whole, but each age's eyes are harder to move than the last, and each age has more people. At the end you see what became of the face, and of the halo. Nobody keeps score.</p>
   <button class="btn" id="begin">Begin: the first age</button>
   <button class="btn quiet" id="howto">How to play</button>
   <button class="btn quiet" id="aboutbtn">About the paper</button>
@@ -114,7 +106,7 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 
 <!-- PLAY -->
 <section class="screen" id="play">
-  <div class="topbar"><div class="aimline">Over six ages, let the face move as many people as it can.</div><button class="qbtn" data-help="play">?</button></div>
+  <div class="topbar"><div class="aimline">Six ages. Decide who sees the face, and how.</div><button class="qbtn" data-help="play">?</button></div>
   <div class="band"><b id="agename">THE CAVE</b><span id="agemeta">AGE 1 OF 6 · LONG AGO</span></div>
   <div class="strip" id="strip"></div>
   <p class="orient" id="newthis"></p>
@@ -128,8 +120,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
   </div>
   <div id="result" class="result" style="display:none">
     <p class="line" id="line"></p>
-    <div class="holdlab"><span>Moved this age</span><span id="holdwords"></span></div>
-    <svg class="hold" id="hold" viewBox="0 0 340 20" preserveAspectRatio="none"></svg>
     <button class="btn" id="nextage">Next age</button>
   </div>
 </section>
@@ -137,15 +127,10 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 <!-- END -->
 <section class="screen" id="end">
   <div class="band"><b>The verdict</b><span>SIX AGES</span></div>
-  <div class="score"><span class="num" id="scorenum">0</span><span class="of">/100</span></div>
-  <p class="scorelab">The economist's tally: people moved, as a share of the most a keeper could have moved.</p>
   <p class="lead" id="lead"></p>
-  <p class="lead2" id="shortfall"></p>
   <div class="rule"></div>
   <div class="striplab">Your six ages</div>
   <div class="strip" id="endstrip"></div>
-  <div class="striplab">The most a keeper could have done</div>
-  <div class="strip" id="beststrip"></div>
   <div class="striplab">The painting, as it is now</div>
   <div class="facenow"><svg class="frame" id="endface" viewBox="0 0 340 300"></svg><p class="small" id="facenowwords"></p></div>
   <div class="vl"><b>What you did</b><span id="vdid"></span></div>
@@ -160,13 +145,13 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 <!-- HELP -->
 <section class="screen help" id="help">
   <div class="band"><b>How to play</b><span></span></div>
-  <p class="aim">Over six ages, let the face move as many people as it can.</p>
+  <p class="aim">Six ages. Decide who sees the face, and how.</p>
   <ol>
     <li><b>Each age, set the veil.</b> A ladder of red slabs: <i>in the dark</i> (only you see the face), <i>on the day</i> (the faithful, once a year, before the face itself), and then the ways of copying a face as the ages bring them: <i>on coins</i>, <i>in woodcuts</i>, <i>in lithographs</i>, <i>in photographs</i>, <i>on film</i>. Each age adds one rung, marked new; the old rungs stay. Tapping a slab shows you what the people would see by that means: the painting itself, or the copy. Nothing is spent until you let the age pass.</li>
-    <li><b>Let the age pass.</b> The crowd walks in (how many is what the means gave you), and the heads the halo moved are rimmed in gold. A copy carries only a trace of the halo, and every copy spends some of the original's. A line says what happened. The bar under it is <b>moved this age</b>: how many of the people this age could have moved you moved; gold for the part the halo did, red for the part being seen did.</li>
+    <li><b>Let the age pass.</b> The crowd walks in (how many is what the means gave you), and the heads the halo moved are rimmed in gold. A copy carries only a trace of the halo, and every copy spends some of the original's. A line says what happened.</li>
     <li><b>The halo does not grow back,</b> and it does not fade on its own: kept in the dark it stays whole. But each age's eyes are harder to move than the last: the more copying there is in the world, the less a halo moves the people, whatever you did.</li>
-    <li><b>The tally.</b> Each age counts the people it moved, and each age has more people than the last, so the late ages weigh more. There is no running total; the verdict at the end sets your six ages against the most a keeper could have done.</li>
-    <li><b>The verdict:</b> how many people your face moved, of what was possible, as a number out of 100 and in words; your six ages beside the most a keeper could have done; the painting as it is now; what Benjamin says about the path you took; and his last page, 1936, as a reading.</li>
+    <li><b>No score.</b> Nothing is counted for you. Each age has more people than the last and harder eyes; who saw the face, and with how much of its halo, is there in the picture and the line, and that is all there is.</li>
+    <li><b>The verdict:</b> what became of the face, in a sentence; your six ages; the painting as it is now; what Benjamin says about the path you took; and his last page, 1936, as a reading.</li>
   </ol>
   <p class="small">Nothing is random. The same choices give the same ages every time, so a second run is a different plan, not a different draw.</p>
   <button class="btn" id="helpback">Back</button>
@@ -383,10 +368,6 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     if (nCopies) copiesMade.push({ tech: COPYTECH[C.VEILS[picked].key], count: nCopies, note: COPYNOTE[C.VEILS[picked].key] });
     renderCopies(nCopies ? copiesMade[copiesMade.length - 1] : null);
     $('line').textContent = r.line;
-    const gold = r.hold > 0 ? r.ofAge * r.cult / r.hold * 340 : 0, red = r.hold > 0 ? r.ofAge * r.bySeen / r.hold * 340 : 0;
-    const how = r.cult > r.bySeen * 2 ? 'mostly by the halo' : r.bySeen > r.cult * 2 ? 'mostly by being seen' : 'by the halo and by being seen alike';
-    $('holdwords').textContent = r.hold <= 0 ? 'nobody' : (r.ofAge < 0.03 ? 'hardly anyone' : M.fractionWords(r.ofAge) + ' of what this age could move') + (r.ofAge < 0.03 ? '' : ', ' + how);
-    $('hold').innerHTML = `<rect x="0" y="0" width="${gold}" height="20" fill="${GOLD}"/><rect x="${gold}" y="0" width="${red}" height="20" fill="${RED}"/>`;
     $('nextage').textContent = S.age === C.AGES.length - 1 ? 'The verdict' : 'Next age';
     renderStrip($('strip'), S);
     setTimeout(() => { $('result').style.display = 'block'; }, 700);
@@ -411,13 +392,12 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
   // ---------- the verdict
   function renderEnd() {
     const v = M.verdict(S);
-    $('lead').textContent = v.lead; $('scorenum').textContent = v.score; $('shortfall').textContent = v.shortfall; $('shortfall').style.display = v.shortfall ? 'block' : 'none';
+    $('lead').textContent = v.lead;
     renderStrip($('endstrip'), S);
-    renderStrip($('beststrip'), { results: v.bestResults, age: C.AGES.length });
     drawFrame($('endface'), { tech: 'original', halo: S.halo, kind: 'leaf', n: 0.3, reach: 0, lit: 0 });   // the painting itself, curtains parted, nobody there: what is left
     $('facenowwords').textContent = v.faceNow;
     $('vdid').textContent = v.did; $('vben').textContent = v.benjamin; $('vepi').textContent = v.epilogue;
-    $('vbest').textContent = `Under this game's assumptions, that is. A second run is a different plan: open earlier, open later, or never.`
+    $('vbest').textContent = `A second run is a different fate: open earlier, open later, or never.`
     show('end');
   }
   // ---------- wiring

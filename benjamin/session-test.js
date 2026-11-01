@@ -44,7 +44,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     if (i === 3) { await shot('age4-veil-set'); await noScroll(); }
     await page.click('#commit'); await page.waitForTimeout(1200);
     say('   line: ' + await text('#line'));
-    say('   hold: ' + await text('#holdwords') + ' | copies: ' + await text('#copies'));
+    say('   copies: ' + await text('#copies'));
     copiesSoFar = await page.$eval('#copies', e => { const s = e.querySelector('svg'); return s ? +s.dataset.copies : 0; });
     lastFrame = await page.$eval('#frame', e => ({ n: +e.dataset.n, tech: e.dataset.tech, halo: e.dataset.halo, crowd: +e.dataset.crowd }));
     say('   seen: ' + await page.$eval('#frame', e => `${e.dataset.tech}, halo ${e.dataset.halo}, crowd ${e.dataset.crowd}, lit ${e.dataset.lit}`));
@@ -54,7 +54,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     await page.click('#nextage'); await page.waitForTimeout(300);
   }
   await page.waitForTimeout(300); await shot('end'); await noScroll();   // the last Next age is The verdict
-  say('\n== VERDICT: ' + await text('#scorenum') + '/100 · ' + await text('#lead') + ' ' + await text('#shortfall'));
+  say('\n== VERDICT: ' + await text('#lead') + ' | ' + await text('#facenowwords'));
   say('   ' + await text('#vdid')); say('   ' + await text('#vben')); say('   ' + await text('#vepi')); say('   ' + await text('#vbest'));
   await page.click('#aboutbtn2'); await page.waitForTimeout(200); await shot('about'); await page.click('#aboutback'); await page.waitForTimeout(200);
   say('   about opened and returned to ' + await page.$eval('.screen.on', e => e.id));

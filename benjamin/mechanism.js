@@ -306,32 +306,61 @@
     else parts.push('and never put it in print');
     return parts.join(' ') + '.';
   }
+  // The verdict describes; it does not rank. The essay sets cult value against exhibition value and does not say
+  // which is better, so neither does the game: no score, no best path. The family of the path decides the words.
+  function familyOf(s) {
+    const o = openedAt(s), last = s.cfg.AGES.length - 1;
+    let copied = -1; s.results.forEach(r => { if (copied < 0 && r.veil >= 2) copied = r.age; });
+    if (o.lifted < 0) return 'dark';
+    if (copied < 0) return 'cult';
+    if (o.lifted === last) return 'splash';
+    if (copied >= 4) return 'late';
+    return 'people';
+  }
   function verdict(s) {
-    const total = totalHold(s), best = bestSchedule(s.cfg);
-    const f = total / best.total;
-    const o = openedAt(s);
-    const bestOpen = best.sched.findIndex(v => v >= 3);
-    const ageNames = s.cfg.AGES.map(a => a.name.toLowerCase());
-    let readingOfPath;
+    const fam = familyOf(s), o = openedAt(s), last = s.cfg.AGES.length - 1;
+    const names = s.cfg.AGES.map(a => a.name.toLowerCase());
+    let copied = -1; s.results.forEach(r => { if (copied < 0 && r.veil >= 2) copied = r.age; });
     const coined = s.results.length > 1 && s.results[1].veil === 2;
-    const splash = o.lifted === s.cfg.AGES.length - 1 && s.results[o.lifted].veil >= 2;
-    if (o.lifted < 0) readingOfPath = 'The halo is whole, and nobody has seen it. A face kept from every eye holds nobody: what you kept was a painting in the dark.';
-    else if (splash) readingOfPath = 'You kept the halo whole through every age and showed it at last to everyone, ' + (s.results[o.lifted].veil === 6 ? 'on a screen, which cannot carry it' : 'in copies, which carry a trace of it') + ', to eyes that had seen a thousand faces. The crowds of five ages saw nothing; the sixth saw a copy.';
-    else if (o.printed < 0) readingOfPath = 'The faithful saw it, halo and all, and few else did; the ages of print passed with the face in the dark.';
-    else if (o.printed === bestOpen) readingOfPath = (coined ? 'You put the face on coins at the temple first, a worn god in every purse, and the halo paid for it before the woodcut came. Then you ' : 'You ') + 'put the face into the people\'s hands as soon as there was a way to print it, and followed each new way as it came.';
-    else if (o.printed === bestOpen + 1) readingOfPath = (coined ? 'You put the face on coins at the temple, a worn god in every purse, and paid for it. ' : '') + 'You waited for the lithograph, where Benjamin dates the turn; the woodcut\'s few dozen sheets were the price of waiting, and it was small.';
-    else readingOfPath = 'You opened late. The halo was whole, and the eyes of the age could no longer see it as their fathers had; the ages of print had passed without the face in them.';
+    const putAway = copied >= 0 && s.results.some(r => r.age > copied && r.veil === 0);
+    const dayFirst = copied > 0 && s.results.slice(0, copied).some(r => r.veil === 1);
+    const lastVeil = s.results[last].veil;
+    const by = ['', 'to the faithful', 'on coins', 'in woodcuts', 'in lithographs', 'in photographs', 'on film'];
+    let lead, reading, benjamin;
+    const core = 'The halo was never in the face alone. It was between the face and the people: the one place, the one time, the distance that was kept. No copy carries it whole, and the age sets what the people can see. ';
+    switch (fam) {
+      case 'dark':
+        lead = 'Nobody saw the face. The halo is whole, in the dark.';
+        reading = 'The faithful of six ages passed the curtain and never saw what was behind it. The halo survived every age; it had nothing to do.';
+        benjamin = core + 'A face kept from every eye keeps its cult value and has no other. Benjamin\'s Madonna stays veiled nearly all year; yours stayed veiled for all of them. What the ages of copying did to every other face they could not do to this one, and nobody will ever know.';
+        break;
+      case 'cult':
+        lead = 'Few saw the face, and they saw it whole.';
+        reading = 'The faithful stood before the face itself, with its halo, on the day, and nobody else ever did. The ages of copying passed with the face behind the curtain' + (o.lifted > 0 ? ', and the first ' + (o.lifted === 1 ? 'age' : ['', '', 'two', 'three', 'four', 'five'][o.lifted] + ' ages') + ' passed with nobody before it at all' : '') + '.';
+        benjamin = core + 'This is cult value: a few, before the thing itself, at a distance, once a year. It is what the halo was for. The copies of other faces went to every house and every hand; yours stayed where it was.';
+        break;
+      case 'splash':
+        lead = lastVeil === 6 ? 'You kept the halo whole for the biggest crowd, and gave it to a screen that could not carry it.' : 'You kept the halo whole for the biggest crowd, and gave it to copies that carried a trace of it.';
+        reading = 'Five crowds saw nothing. The sixth saw ' + (lastVeil === 6 ? 'the face on a screen, a thousand at a time, in the dark' : 'the face ' + by[lastVeil] + ', in their own hands') + ', with eyes that had seen a thousand faces. The halo went in one age, and what reached them of it was ' + (lastVeil === 6 ? 'almost nothing' : 'a trace') + '.';
+        benjamin = core + (lastVeil === 6 ? 'The screen is the one place the halo cannot be: there is no here and now on it, and the audience, Benjamin says, is an examiner, but an absent-minded one. You kept the whole of a thing for the one means that could carry none of it.' : 'Kept in the dark the halo stays, but the eyes change: the copies of other faces had taught the people how to see before yours came out. They saw it as they saw everything else.');
+        break;
+      case 'late':
+        lead = 'The face went out late, in copies, to eyes that had changed.';
+        reading = (dayFirst ? 'The faithful had seen the face itself on the day. ' : '') + 'The ages of print passed with the face behind the curtain; when it went out, it went to people who had a photograph of their dead and had seen a thousand faces. What reached them was a copy, and what it carried moved them less than it would have moved their fathers.';
+        benjamin = core + 'Kept in the dark the halo stays, but the eyes change: the copies of other faces had taught the people how to see before yours came out. They saw it as they saw everything else, and the halo you had kept was spent on them.';
+        break;
+      default:
+        lead = 'Many saw the face, most of them in copies, and the halo went out with them.';
+        reading = (coined ? 'You put the face on coins at the temple, a worn god in every purse, before there was any way to print it. ' : '') + (dayFirst ? 'The faithful had seen the face itself on the day; from ' : 'From ') + names[copied] + ' on, the face was in the people\'s hands, in copies, each carrying a trace of the halo and each spending some of the original\'s.' + (putAway ? ' Then you put it away again; the copies stayed out, and what they carried stayed with them.' : '');
+        benjamin = core + 'This is exhibition value, which the age of copying puts in cult value\'s place. The copy meets the people halfway, in their own rooms, and what it brings them is not the halo but the face. Benjamin does not mourn it: the halo was the mark of a distance, and the distance is gone. What comes next is on his last page.';
+    }
     return {
-      total: total, best: best.total, fraction: f, words: fractionWords(f),
-      score: Math.max(0, Math.min(100, Math.round(f * 100))),   // the economist's tally, out of 100: people moved as a share of the most a keeper could have moved
-      lead: 'Over six ages your face moved ' + fractionWords(f) + ' of the people it could have moved.',
-      shortfall: shortfallWords(s, best),
-      did: pathWords(s) + ' ' + readingOfPath + ' ' + (f >= 0.97 ? 'That is as much as any keeper could have done.' : bestPathWords(best, s.cfg)),
-      benjamin: 'The halo was never in the face alone. It was between the face and the people, and no copy carries it whole; the age sets what the people can see. Keep the face in the dark and the halo stays, but the eyes of the age change, and when you show it at last they see it as they see everything else. Show it early and the age cannot yet carry it far. Once the copies are everywhere, the face belongs to politics.',
+      family: fam, lead: lead,
+      did: pathWords(s) + ' ' + reading,
+      benjamin: benjamin,
       epilogue: s.cfg.EPILOGUE,
       faceNow: faceNowWords(s),
-      bestResults: best.state.results,
-      bestOpen: bestOpen, printed: o.printed, lifted: o.lifted
+      printed: o.printed, lifted: o.lifted, copied: copied
     };
   }
 
@@ -361,6 +390,6 @@
     return c;
   }
 
-  const api = { CONFIG, newGame, currentAge, isOver, arrive, arrivalLine, options, commit, next, verdict, totalHold, maxHold, bestSchedule, runSchedule, heuristics, withConfig, reachAt, haloAfterVeil, movedOf, ageWeights, ageMax, eyesOf, seenLine, movedScale, bestPathWords, shortfallWords, haloWords, fractionWords, openedAt };
+  const api = { CONFIG, familyOf, newGame, currentAge, isOver, arrive, arrivalLine, options, commit, next, verdict, totalHold, maxHold, bestSchedule, runSchedule, heuristics, withConfig, reachAt, haloAfterVeil, movedOf, ageWeights, ageMax, eyesOf, seenLine, movedScale, bestPathWords, shortfallWords, haloWords, fractionWords, openedAt };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.VEIL = api;
 })(typeof window !== 'undefined' ? window : globalThis);

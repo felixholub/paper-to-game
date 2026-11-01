@@ -6,9 +6,9 @@ AIM: Over six ages, let the face move as many people as it can.
    slabs: IN THE DARK — you and the spirits / ON THE DAY — the clan
    > tap IN THE DARK: the veil parts to 0%, the face comes nearer; nothing else moves
    > LET THE AGE PASS
-   crowd walks in: about 2 of 100 people, far off; halo bright -> bright
+   crowd walks in: about 0 of 100 people, far off; halo bright -> bright
    line: Nobody came; the face stayed in the dark with you and the spirits. 
-   MOVED THIS AGE [#...................] gold=by the halo, red=by being seen; crowd lit 100%
+   MOVED THIS AGE [] gold=by the halo, red=by being seen; crowd lit 100%
    strip: cave:bright
 
 == AGE 2 OF 6 · THE TEMPLE · ANTIQUITY
@@ -30,7 +30,7 @@ AIM: Over six ages, let the face move as many people as it can.
    > LET THE AGE PASS
    crowd walks in: about 0 of 100 people, far off; halo a little thinner -> a little thinner
    line: Nobody came; the face stayed in the dark with you and the saints. 
-   MOVED THIS AGE [....................] gold=by the halo, red=by being seen; crowd lit 72%
+   MOVED THIS AGE [] gold=by the halo, red=by being seen; crowd lit 72%
    strip: cave:bright | temp:a | cath:a
 
 == AGE 4 OF 6 · THE PRINT SHOP · ABOUT 1830
@@ -68,7 +68,7 @@ AIM: Over six ages, let the face move as many people as it can.
    strip: cave:bright | temp:a | cath:a | prin:a | stud:almost | cine:gone
 
 == VERDICT
-   Over six ages your face moved nearly all of the people it could have moved.
-   What you did: You kept the veil down through the cave, then lifted it in the temple and put the face in lithographs in the print shop. You waited for the lithograph, where Benjamin dates the turn; the woodcut's few dozen sheets were the price of waiting, and it was small. The most a keeper could have done: the faithful on the day from the cave to the temple; in woodcuts at the cathedral; in lithographs at the print shop; in photographs at the studio; on film at the cinema.
-   What Benjamin says: The halo was never in the face alone. It was between the face and the people, and no copy carries it whole; the age sets what the people can see. Keep the face in the dark and the halo stays, but the eyes of the age change, and when you show it at last they see it as they see everything else. Show it early and the age cannot yet carry it far. Once the copies are everywhere, the face belongs to politics.
+   Many saw the face, most of them in copies, and the halo went out with them.
+   What you did: You kept the veil down through the cave, then lifted it in the temple and put the face in lithographs in the print shop. The faithful had seen the face itself on the day; from the print shop on, the face was in the people's hands, in copies, each carrying a trace of the halo and each spending some of the original's.
+   What Benjamin says: The halo was never in the face alone. It was between the face and the people: the one place, the one time, the distance that was kept. No copy carries it whole, and the age sets what the people can see. This is exhibition value, which the age of copying puts in cult value's place. The copy meets the people halfway, in their own rooms, and what it brings them is not the halo but the face. Benjamin does not mourn it: the halo was the mark of a distance, and the distance is gone. What comes next is on his last page.
    And then, 1936: The halo is gone; the longing for it is not. Where that longing is served, Benjamin says what comes of it: the collector's certificate on a face nobody sees; the film star's "personality", a halo rebuilt to be sold; and the leader's face on every wall and over a square full of people, which is politics made beautiful, and it ends in war. "Let art be made, though the world perish."

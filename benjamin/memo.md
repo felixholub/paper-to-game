@@ -314,3 +314,21 @@ The author played once more and found small nibbles: a frozen counter in one of 
 - **The painting, as it is now.** A third panel under the two strips: the original alone, curtains parted, nobody there, with whatever halo is left, and one line: "Its halo is whole. It has never left the dark." or "Its halo is gone. It went out to the people: to the faithful on the day, in woodcuts, in lithographs, in photographs and on film." This is what the keeper is left holding, and it is the essay's last image before politics.
 
 Calibration 40/40 (W4 updated for the new halo word); session test clean; the audit reports no violation on any of the four paths, and the frame top is at the same pixel on all six ages.
+
+## 28. No score (1 Nov 2026)
+
+The author looked at the contact sheet and asked whether the best path was simply to show the face as widely as the age allowed. It was: the ladder 100, "always the newest rung" 87, opening late 94, the splash 35, the faithful forever 23, the dark 0. The eyes change whether the keeper shows or not, so a halo kept is a halo devalued, and the keeper's problem collapsed to timing. Two ways out were on the table: make the tally concave in depth, so that few people moved whole weigh against many moved a little (the essay's own polarity, cult value against exhibition value), and then the splash and the day-forever become rival ways of keeping; or drop the number. The author chose to drop it, and it is the cleaner Benjamin: the essay does not rank the two values, it says the aura goes and tells you what takes its place. A score needs an objective, the objective picks a side, and then the game says "show it" with a confidence the essay never has.
+
+Gone: the score out of 100, the tally line, the fraction in the lead, the shortfall diagnosis, the strip and sentence for "the most a keeper could have done", and the per-age "moved this age" bar. The aim is now a decision, not a maximum: "Six ages. Decide who sees the face, and how." The start screen says, in its last line, that nobody keeps score.
+
+Kept, because none of it is a number: the crowd walking in, the heads the halo moved rimmed in gold, the line after each age, the halo stock in the picture and in words, your six ages, the painting as it is now, Benjamin, and 1936. The arithmetic stays underneath so that the crowds, the rims and the lines agree with each other; `bestSchedule` and the heuristics remain in the mechanism for the calibration only.
+
+The verdict now sorts the path into one of five families and describes it in the essay's terms, ranking nothing:
+
+- **dark** (never lifted): "Nobody saw the face. The halo is whole, in the dark." Benjamin: a face kept from every eye keeps its cult value and has no other.
+- **cult** (shown only on the day, never copied): "Few saw the face, and they saw it whole." Benjamin: this is cult value, a few before the thing itself, once a year; it is what the halo was for.
+- **people** (copies from the cathedral or earlier): "Many saw the face, most of them in copies, and the halo went out with them." Benjamin: exhibition value in cult value's place; the copy meets the people halfway; he does not mourn it.
+- **late** (first copies at the studio or cinema, after some showing): "The face went out late, in copies, to eyes that had changed."
+- **splash** (nothing until the cinema): "You kept the halo whole for the biggest crowd, and gave it to a screen that could not carry it." Benjamin: the screen is the one place the halo cannot be; the audience is an examiner, but an absent-minded one.
+
+Coins at the temple, the faithful before the copies, and print-then-put-away each get a clause within their family. Calibration 42/42: S now checks that the verdict carries no score, no fraction and no best path, S2 that the five families sort the paths, S3 that every lead is a sentence about what happened with no digit and no "better", W10 that the painting-now line says where the halo went. Session test clean. The skill gains a paragraph under "The ending": where the paper does not rank, the game does not rank; and the paragraph on second halves (play them only if a second mystery is at stake) that had been pending since Hubble.
