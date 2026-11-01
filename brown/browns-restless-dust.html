@@ -480,6 +480,7 @@ ul{padding-left:20px}li{margin:4px 0}
   defs.innerHTML = `
     <radialGradient id="gw" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#EAF4F7"/><stop offset=".55" stop-color="#CFE4EC"/><stop offset="1" stop-color="#A9CBD8"/></radialGradient>
     <radialGradient id="go" cx="45%" cy="40%" r="70%"><stop offset="0" stop-color="#F4D98A"/><stop offset="1" stop-color="#D39A2B"/></radialGradient>
+    <radialGradient id="ghi" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".6" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <filter id="shimmer" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3"><animate attributeName="baseFrequency" values="0.016;0.024;0.016" dur="9s" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/></filter>
     <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.2"/></filter>
     <clipPath id="clipdrop"><circle id="clipc" cx="${CX}" cy="${CY}" r="${R}"/></clipPath>
@@ -503,7 +504,8 @@ ul{padding-left:20px}li{margin:4px 0}
   for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI * 2, p = el('path', { d: `M ${CX + Math.cos(a) * 10} ${CY + Math.sin(a) * 10} Q ${CX + Math.cos(a + .25) * 70} ${CY + Math.sin(a + .25) * 70} ${CX + Math.cos(a) * R} ${CY + Math.sin(a) * R}`, 'stroke-dasharray': '4 7' }, streams); el('animate', { attributeName: 'stroke-dashoffset', values: '0;-44', dur: '1.2s', repeatCount: 'indefinite' }, p); }
   const gSpecks = el('g', { 'clip-path': 'url(#clipdrop)' }, gDrop);
   const dropRim = el('circle', { cx: CX, cy: CY, r: R, fill: 'none', stroke: '#1D4E89', 'stroke-width': 2 }, gDrop);
-  const dropHi = el('ellipse', { cx: CX - 50, cy: CY - 62, rx: 34, ry: 14, fill: '#fff', opacity: .55, transform: `rotate(-30 ${CX - 50} ${CY - 62})` }, gDrop);
+  // the sheen on the water: a soft gradient with no edge, so it cannot be read as something in the drop
+  const dropHi = el('ellipse', { cx: CX - 50, cy: CY - 62, rx: 44, ry: 18, fill: 'url(#ghi)', opacity: .9, transform: `rotate(-30 ${CX - 50} ${CY - 62})` }, gDrop);
   const gBeads = el('g', {}, gDrop);
   // the clock
   const gClock = el('g', { opacity: 0 }, svg);
@@ -571,7 +573,7 @@ ul{padding-left:20px}li{margin:4px 0}
     [dropBody, dropRim].forEach(c => { c.setAttribute('r', Math.max(0, rad)); c.setAttribute('opacity', st.water ? 1 : 0); });
     document.getElementById('clipc').setAttribute('r', Math.max(0, rad));
     gEngrave.setAttribute('transform', `translate(${CX} ${CY}) scale(${st.radius}) translate(${-CX} ${-CY})`); gEngrave.setAttribute('opacity', st.water ? 1 : 0);
-    dropHi.setAttribute('opacity', st.water ? .55 * st.radius : 0); dropHi.setAttribute('transform', `translate(${CX} ${CY}) scale(${st.radius}) translate(${-CX} ${-CY}) rotate(-30 ${CX - 50} ${CY - 62})`);
+    dropHi.setAttribute('opacity', st.water ? .9 * st.radius : 0); dropHi.setAttribute('transform', `translate(${CX} ${CY}) scale(${st.radius}) translate(${-CX} ${-CY}) rotate(-30 ${CX - 50} ${CY - 62})`);
     streams.setAttribute('opacity', st.current > 0 ? Math.min(1, st.current / C.CURRENT_MAX * 1.4) : 0);
     if (isFinite(st.life)) { const frac = Math.min(1, st.t / st.life); hand.setAttribute('transform', `rotate(${frac * 360} ${W - 54} 44)`); }
     drawSpecks(st, rad);

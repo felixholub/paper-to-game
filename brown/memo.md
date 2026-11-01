@@ -176,3 +176,7 @@ One change, after Steffen's note that the lone speck should be discovered, not u
 5. **Help.** The bench has thirteen labels; "One look adds a fourteenth." The list of examples no longer names the one-speck drop.
 
 **Checks.** `node calibration.js`: 48 passed, 0 failed (G1 kept; G2 a fresh bench lists thirteen and never the lone speck, fourteen after the oil; G2b only the oil look announces anything; G2c the new mark is on the day after the oil only; G2d the verdict knows whether a drop was sealed). `session-test.js`, three weeks at 380 px, no errors, no horizontal scroll: week A checks the lone speck is absent on days 1–2, the note shows after the oil look and still while day 3's bench is open, the label is marked new on day 3 only; week B never seals a drop, has thirteen labels on every day, and its verdict says the one-speck drop was never found; week C unchanged. Screenshots `a-oil-new-look`, `a-day3-bench-new`; `locked-flash` removed.
+
+## 22. Revision 3
+
+Steffen, after playing: once sugar had gone in, "the sugar remains in all the other animations as a large white fleck". The fleck was the highlight on the water, a hard-edged white ellipse at the drop's upper left, there since day 0; a drop with nothing in it made it the only thing in the water, and from then on it read as a lump. The highlight is now a soft radial sheen with no edge (gradient `ghi`, white fading to nothing), so there is nothing in the drop that could be taken for a speck. No other change. Calibration 48/48; session test three weeks, errors none.
