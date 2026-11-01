@@ -46,3 +46,8 @@ His notes: (1) a retry on every loom; (2) setting a wheel by hand at the top *an
 Solver rewritten (`loom.js`): iterative deepening, execution-guided (the machine runs while the chain is written; card i is chosen when the machine first falls through to position i), and a Set card's number is fixed lazily at the first Go back that has to decide (0 now, or not yet). Cross-checked against a plain brute force on twelve orders: all agree. Library recomputed (about three seconds); every hard order still needs both wheels at par; m6 made one-wheel (one wheel reused does it at par).
 
 New messages from the chain itself: a Go back with no Set card above it ("starts at 0, −1, −2 … never 0 again"), and a Set card inside the loop it counts ("every round it puts the number back"). Retries: after every bell, "Try this loom again" (keeps your chain) or, after Show me a way, "Now try it yourself" (empty chain); the end table has "try again" on every loom and returns to the results; the best go counts (your own over shown, fewer cards over more).
+
+
+## Revision 5 (1 Nov 2026, evening): the card's name
+
+He asked whether the counter goes down by itself, and whether Go back should point at a stitch or at the counter. It doesn't: the card does the counting. The card is now called **Go back and count down** (his wording, with the main movement first). Its text gives the order of the two acts, "First take 1 off wheel A. Not 0 yet? Back to card …", and a small −1 badge pops on the wheel's rim each time the card is read, on the loom and on the switch screen. Help now says: nothing else ever counts down, and a simple loop should go back to its first stitch, not to its own Set card.

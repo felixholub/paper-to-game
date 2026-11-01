@@ -174,6 +174,9 @@ svg.arcs path.live{stroke-width:5}
 .card .rep{display:flex;flex-wrap:nowrap;white-space:nowrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:16px}
 .card .rep button{width:36px;height:32px;border:1px solid var(--ink);background:var(--paper);font-size:19px;cursor:pointer;font-family:var(--text);color:var(--ink);padding:0}
 .card .rep.wrap{flex-wrap:wrap;white-space:normal}
+.wheel span.minus,.wbox .wheel span.minus{font-size:13px!important;font-family:var(--text)!important;}
+.wheel .minus{position:absolute;top:-8px;right:-12px;background:var(--plum);color:var(--paper);border:2px solid var(--paper);border-radius:14px;padding:1px 6px;font-family:var(--text);font-weight:700;font-size:14px;line-height:1.3;pointer-events:none;animation:badge .9s ease-out forwards}
+@keyframes badge{0%{opacity:0;transform:scale(.5)}15%{opacity:1;transform:scale(1.15)}70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
 .card .rep b{font-family:var(--disp);font-weight:400;font-size:22px;min-width:26px;text-align:center}
 </style>
 <div class="wrap">
@@ -248,7 +251,7 @@ svg.arcs path.live{stroke-width:5}
   <div class="top"><span class="which">Lovelace's own chain</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
   <h2>Her chain, for numbers</h2>
   <div class="say">Lovelace wrote a chain like yours. Hers works out a famous row of numbers, one after another: the Numbers of Bernoulli. The plum card is the one the machine is reading.</div>
-  <div class="legend"><span><i></i>these cards go round again, like your Go back</span></div>
+  <div class="legend"><span><i></i>these cards go round again, like one of your loops</span></div>
   <div class="cgrid" id="cgrid"></div>
   <div class="strip" id="strip"></div>
   <div class="result" id="resultcoda"></div>
@@ -276,10 +279,10 @@ svg.arcs path.live{stroke-width:5}
   <p>Lovelace's machine never thinks. It reads your chain of cards from the top, one card at a time, and does what each card says. When it runs out of cards, it stops.</p>
   <h3>Hanging cards</h3>
   <p>Tap a card at the bottom to hang it at the end of your chain. Tap × to take a card off. Only so many cards fit. Then tap <b>Run the loom</b> and watch. The dashed squares are the order; each stitch the loom weaves fills one. A wrong stitch gets a black frame.</p>
-  <h3>Go back</h3>
-  <p>The machine counts with <b>wheels</b>: numbers inside it. Every wheel starts at 0. A <b>Set</b> card puts a number on a wheel (you choose it on the card, with − and +), whatever it showed before. That is the only way a wheel gets a number.</p><p>A <b>Go back</b> card takes 1 off its wheel and looks at the result. If the wheel isn't 0 yet, the machine goes back up the chain to the card you chose on the Go back card (“card 1”, “card 2” …); the arc on the left shows the jump. If the wheel shows 0, the machine carries on down the chain.</p>
+  <h3>Go back and count down</h3>
+  <p>The machine counts with <b>wheels</b>: numbers inside it. Every wheel starts at 0. A <b>Set</b> card puts a number on a wheel (you choose it on the card, with − and +), whatever it showed before. That is the only way a wheel gets a number.</p><p>A <b>Go back and count down</b> card first takes 1 off its wheel (you see −1 on the wheel), then looks at it. If the wheel isn't 0 yet, the machine goes back up the chain to the card you chose on it (“card 1”, “card 2” …); the arc on the left shows the jump. If the wheel shows 0, the machine carries on down the chain. Nothing else ever counts down: the wheel only goes down when this card is read.</p>
   <h3>Set cards</h3>
-  <p>A wheel that reaches 0 stays at 0 until a Set card puts a number on it again. That is what a loop inside a loop needs: the inner wheel must be set again on every round of the outer loop, so the outer Go back has to send the machine back to (or above) the inner wheel's Set card. A Go back card can jump to any card above it, a Set card included.</p>
+  <p>A wheel that reaches 0 stays at 0 until a Set card puts a number on it again. That is what a loop inside a loop needs: the inner wheel must be set again on every round of the outer loop, so the outer Go back and count down has to send the machine back to (or above) the inner wheel's Set card. It can jump to any card above it, a Set card included. But a simple loop should go back to its first stitch, not to its own Set card: that would put the number back every round, and the wheel would never get to 0.</p>
   <h3>Fewest cards</h3>
   <p>When the bell rings you are told the fewest cards that can do the job. On the hard looms there is no spare room at all.</p>
   <h3>Stuck?</h3>
@@ -292,12 +295,12 @@ svg.arcs path.live{stroke-width:5}
   <div class="top"><span class="which">About the paper</span><button class="q" data-back aria-label="Back">×</button></div>
 
 <h3>The game in one line</h3>
-<p>A machine that does exactly what its cards say. Six looms are dealt at random from a library, two easy, two harder, two hard: you hang as few cards as you can to weave each order, with wheels that hold numbers, Set cards that put a number on a wheel, and Go back cards that take one off and look, so that on the hard looms a loop sits inside a loop. Then a switch makes the same cards play a tune and do sums, and you ask the machine to make something up. It can't.</p>
+<p>A machine that does exactly what its cards say. Six looms are dealt at random from a library, two easy, two harder, two hard: you hang as few cards as you can to weave each order, with wheels that hold numbers, Set cards that put a number on a wheel, and Go back and count down cards that take one off and look, so that on the hard looms a loop sits inside a loop. Then a switch makes the same cards play a tune and do sums, and you ask the machine to make something up. It can't.</p>
 <h3>What the paper does</h3>
 <p>In 1842 L. F. Menabrea published a sketch of Charles Babbage's Analytical Engine, a calculating machine driven by punched cards. In 1843 Ada Lovelace translated it and added seven Notes, longer than the sketch itself. The Notes are the text this game is built from.</p>
 <p>Note A says the Engine <i>weaves algebraical patterns just as the Jacquard-loom weaves flowers and leaves</i>, and that it works on operations, not on any one kind of thing: it could act on anything whose relations can be written in symbols, music included. Notes C and E explain <i>backing</i>: the cards can be sent back so that a few of them do duty again and again, a cycle. Note F shows three cards doing the work of three hundred and thirty. Note G gives a full chain of cards for the Numbers of Bernoulli, twenty-five cards that serve <i>however great n may be</i>, and warns that the Engine <i>has no pretensions whatever to originate anything. It can do whatever we know how to order it to perform.</i></p>
 <h3>What is the paper's, and what is ours</h3>
-<p>The loom is Lovelace's own picture from Note A, made literal: the Engine did arithmetic, it never wove cloth. The counting is done as the Notes say an Engine counts: with a number in the Store and cards that operate on it. A wheel is such a number: every wheel starts at 0, and only a card puts a number on it. The Go back card is her Operation 7 in Note G joined to her backing in Note C: a subtraction whose result the Engine feels; if it is not yet zero, the cards are backed to an earlier card, and if it is zero, the Engine goes on (Menabrea's counter, too, has a unit taken off each time until it marks zero). A Set card is a card of numbers (Memoir p. 15): nothing resets a wheel by itself, so a loop inside a loop, her cycle of cycles (Note E), needs the outer loop to go back through the inner wheel's Set card on every round. In her own tables the subtraction and the decision are separate steps; here they share one card. Counting cards is her yardstick too: Notes D, F and G all count how few cards will do. The puzzles, the fewest-card counts (found by trying every possible chain) and the switch's tune and sums are ours.</p>
+<p>The loom is Lovelace's own picture from Note A, made literal: the Engine did arithmetic, it never wove cloth. The counting is done as the Notes say an Engine counts: with a number in the Store and cards that operate on it. A wheel is such a number: every wheel starts at 0, and only a card puts a number on it. The Go back and count down card is her Operation 7 in Note G joined to her backing in Note C: a subtraction whose result the Engine feels; if it is not yet zero, the cards are backed to an earlier card, and if it is zero, the Engine goes on (Menabrea's counter, too, has a unit taken off each time until it marks zero). A Set card is a card of numbers (Memoir p. 15): nothing resets a wheel by itself, so a loop inside a loop, her cycle of cycles (Note E), needs the outer loop to go back through the inner wheel's Set card on every round. In her own tables the subtraction and the decision are separate steps; here they share one card. Counting cards is her yardstick too: Notes D, F and G all count how few cards will do. The puzzles, the fewest-card counts (found by trying every possible chain) and the switch's tune and sums are ours.</p>
 <p>The coda is hers. It runs Lovelace's own table from Note G, operation by operation, on a working model of the Engine's card language, and prints the first four Numbers of Bernoulli: 1/6, −1/30, 1/42, −1/30, with nine, fourteen and twenty-five cards. Two small repairs: one division is done the way round her text requires (the printed table has it reversed), and a sign is flipped so the Numbers print with the sign her formula gives. Her cycle (operations 13 to 23, in brown) is simply repeated for the fourth Number.</p>
 <p>The Engine was never built. Nothing here is evidence about the machine; it is the Notes' ideas, running.</p>
 <h3>The paper</h3>
@@ -759,9 +762,9 @@ function sayText(p){
   const fit = `<b>${w(p.slots)} cards</b> fit on the chain`;
   const Fit = `<b>${w(p.slots)[0].toUpperCase() + w(p.slots).slice(1)} cards</b> fit on the chain`;
   if (p.tier === 'easy0') return `Hang cards to weave the order, stitch by stitch: tap a card at the bottom to hang it, tap × to take one off. Then run the loom. ${Fit}.`;
-  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. So the machine has to count. <b>Wheel A</b> is a number inside the machine, and it starts at 0. A <b>Set</b> card puts a number on it. A <b>Go back</b> card takes 1 off the wheel and looks: not 0 yet? Back up the chain. 0? Carry on.`;
-  if (p.tier === 'medium') return `${Fit}. A Go back card doesn't have to jump to the top: <b>tap the “card …” box on it to choose where it jumps.</b> The arc on the left shows the loop. A wheel that has reached 0 stays at 0 until a Set card puts a number on it again.`;
-  return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>, and there are now <b>two wheels</b>, A and B, one for each loop. Remember: a wheel that reaches 0 stays at 0 until a Set card puts a number on it again, and a Go back card can jump back to any card above it, a Set card too.`;
+  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. So the machine has to count. <b>Wheel A</b> is a number inside the machine, and it starts at 0. A <b>Set</b> card puts a number on it. A <b>Go back and count down</b> card first takes 1 off the wheel, then looks: not 0 yet? Back up the chain. 0? Carry on.`;
+  if (p.tier === 'medium') return `${Fit}. Going back doesn't have to be to the top: <b>tap the “card …” box on a Go back and count down card to choose where it jumps.</b> The arc on the left shows the loop. A wheel that has reached 0 stays at 0 until a Set card puts a number on it again.`;
+  return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>, and there are now <b>two wheels</b>, A and B, one for each loop. Remember: a wheel that reaches 0 stays at 0 until a Set card puts a number on it again, and Go back and count down can jump back to any card above it, a Set card too.`;
 }
 
 function startLoom(n){
@@ -800,6 +803,7 @@ function drawWheels(now){
   }
 }
 function tickWheel(k, v){ const wl = $('#wh' + k); if (!wl) return; wl.querySelector('span').textContent = v; wl.classList.remove('tick'); void wl.offsetWidth; wl.classList.add('tick'); }
+function minusOne(sel){ const wl = $(sel); if (!wl) return; const m = el('span', 'minus', '−1'); wl.appendChild(m); setTimeout(() => m.remove(), 900); }
 
 const isStitch = c => c.k === 'r' || c.k === 'b' || c.k === 'g';
 function backHTML(k){ return `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]}">↺</span>`; }
@@ -815,14 +819,14 @@ function drawTray(){
     s.innerHTML = holesSpan('back') + setHTML(k) + `<span class="t"><b>Set${P.wheels > 1 ? chip(k) : ''}</b><i>Put a number on wheel ${WNAME[k]}.</i></span>`;
     s.onclick = () => hang({ k: 'set', w: k, v: 2 }); t.appendChild(s);
     const b = el('button', 'card wide');
-    b.innerHTML = holesSpan('back') + backHTML(k) + `<span class="t"><b>Go back${P.wheels > 1 ? chip(k) : ''}</b><i>Take 1 off wheel ${WNAME[k]}. Not 0 yet? Go back up the chain.</i></span>`;
+    b.innerHTML = holesSpan('back') + backHTML(k) + `<span class="t"><b>Go back and count down${P.wheels > 1 ? chip(k) : ''}</b><i>First takes 1 off wheel ${WNAME[k]}. Not 0 yet? Goes back up the chain. 0? Carries on.</i></span>`;
     b.onclick = () => hang({ k: 'back', w: k, toId: null }); t.appendChild(b);
   }
 }
 function hang(c){
   if (running || solved) return;
   if (chain.length >= P.slots){ hint(`Only ${w(P.slots)} cards fit. Tap × on a card to take it off.`); return; }
-  if (c.k === 'back' && !chain.some(x => x.k !== 'back')){ hint('Hang another card first: Go back needs a card above it to jump back to.'); return; }
+  if (c.k === 'back' && !chain.some(x => x.k !== 'back')){ hint('Hang another card first: Go back and count down needs a card above it to jump back to.'); return; }
   c.id = ++uid; if (c.k === 'back') c.toId = (chain.find(isStitch) || chain.find(x => x.k !== 'back')).id;
   chain.push(c); clearResult(); drawChain();
 }
@@ -839,9 +843,9 @@ function chainCard(c, i, ch, mode, editable, wheels){
     const opts = ch.slice(0, i).map((x, j) => x.k !== 'back' ? `<option value="${x.id}" ${x.id === c.toId ? 'selected' : ''}>card ${j+1}</option>` : '').join('');
     const to = ch.findIndex(x => x.id === c.toId) + 1;
     b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span>` + backHTML(c.w) +
-      `<span class="t"><b>Take 1 off wheel ${WNAME[c.w]}</b>` +
-      `<span class="rep wrap">Not 0 yet? Go back to ${editable ? `<select aria-label="go back to">${opts}</select>` : '<b style="font-size:17px;font-family:var(--text);font-weight:700">card ' + to + '</b>'}</span>` +
-      `<i>If the wheel shows 0 after taking 1 off, the machine carries on down the chain.</i></span>` + del;
+      `<span class="t"><b>Go back and count down${wheels > 1 ? chip(c.w) : ''}</b>` +
+      `<span class="rep wrap">First take 1 off wheel ${WNAME[c.w]}. Not 0 yet? Back to ${editable ? `<select aria-label="go back to">${opts}</select>` : '<b style="font-size:17px;font-family:var(--text);font-weight:700">card ' + to + '</b>'}</span>` +
+      `<i>If the wheel shows 0, the machine carries on down the chain instead.</i></span>` + del;
     if (editable){ const sel = b.querySelector('select'); sel.onchange = () => { c.toId = +sel.value; clearResult(); drawChain(); }; sel.onclick = e => e.stopPropagation(); }
   } else {
     b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span>` + setHTML(c.w) +
@@ -908,11 +912,11 @@ async function animate(){
       hint(`Card ${e.i+1}: a ${CNAME[e.c]} stitch.`);
       if (woven.length > P.target.length + 4) break;
     } else if (e.t === 'back'){
-      now[e.w] = e.now; tickWheel(e.w, e.now); drawArcs(null, null, null, e.i);
+      now[e.w] = e.now; tickWheel(e.w, e.now); minusOne('#wh' + e.w); drawArcs(null, null, null, e.i);
       hint(`Card ${e.i+1}: take 1 off wheel ${WNAME[e.w]}. It shows ${e.now}: not 0, so back to card ${e.to+1}.`);
       await sleep(delay * 1.4); drawArcs(); continue;
     } else if (e.t === 'zero'){
-      now[e.w] = 0; tickWheel(e.w, 0); hint(`Card ${e.i+1}: take 1 off wheel ${WNAME[e.w]}. It shows 0, so the machine carries on.`);
+      now[e.w] = 0; tickWheel(e.w, 0); minusOne('#wh' + e.w); hint(`Card ${e.i+1}: take 1 off wheel ${WNAME[e.w]}. It shows 0, so the machine carries on.`);
       await sleep(delay * 1.4); continue;
     } else if (e.t === 'set'){
       now[e.w] = e.now; tickWheel(e.w, e.now); hint(`Card ${e.i+1}: wheel ${WNAME[e.w]} is set to ${e.now}.`);
@@ -955,10 +959,10 @@ $('#run').addEventListener('click', async () => {
   if (!j.ok){
     fails++; drawCloth(woven, j.at); drawChain(); drawWheels();
     let help = '';
-    if (P.tier === 'easy1' && !chain.some(c => c.k === 'back')) help = `<br><br>Only ${w(P.slots)} cards fit, so counting stitches out card by card can't work. Try a <b>Set</b> card and a <b>Go back</b> card.`;
+    if (P.tier === 'easy1' && !chain.some(c => c.k === 'back')) help = `<br><br>Only ${w(P.slots)} cards fit, so counting stitches out card by card can't work. Try a <b>Set</b> card and a <b>Go back and count down</b> card.`;
     else if (j.at === null && woven.length < t_len() && status !== 'cap'){
       const sets = chain.map((c, i) => [c, i]).filter(([c]) => c.k === 'set');
-      if (sets.length) help = '<br><br>' + sets.map(([c, i]) => `Card ${i+1} put <b>${c.v}</b> on wheel ${WNAME[c.w]}.`).join(' ') + ' Each Go back took 1 off until the wheel showed 0.';
+      if (sets.length) help = '<br><br>' + sets.map(([c, i]) => `Card ${i+1} put <b>${c.v}</b> on wheel ${WNAME[c.w]}.`).join(' ') + ' Each time the machine read Go back and count down, it took 1 off, until the wheel showed 0.';
     }
     showResult('#result', false, j.why + help + '<br><span class="small">Change the chain and run it again.</span>');
     if (fails >= 3) { $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; }
@@ -1047,7 +1051,7 @@ $('#run4').addEventListener('click', async () => {
   const delay = mode === 'notes' ? 230 : Math.max(70, Math.min(200, 4000 / ev.length));
   for (const e of ev){
     els.forEach(x => x.classList.remove('live')); if (els[e.i]) els[e.i].classList.add('live');
-    if (e.t !== 'stitch'){ const wl = $('#w4' + e.w); if (wl) wl.querySelector('span').textContent = e.now; await sleep(delay * .6); continue; }
+    if (e.t !== 'stitch'){ const wl = $('#w4' + e.w); if (wl) wl.querySelector('span').textContent = e.now; if (e.t !== 'set') minusOne('#w4' + e.w); await sleep(delay * .6); continue; }
     if (mode === 'threads') holder.appendChild(el('div', 'st pop ' + e.c));
     if (mode === 'notes'){ const n = el('div', 'nh ' + e.c); n.style.left = `calc(${4 + k * (92 / Math.max(1, total - 1))}% - 7px)`; n.style.top = ({ r: 26, g: 46, b: 66 }[e.c]) + 'px'; holder.appendChild(n); tone({ r: 392, g: 329.6, b: 261.6 }[e.c]); }
     if (mode === 'numbers'){ num = e.c === 'r' ? num + 1 : e.c === 'b' ? num * 2 : num - 1; holder.appendChild(el('span', e.c, String(num))); }
@@ -1070,7 +1074,7 @@ $('#next4').addEventListener('click', startLast);
 function startLast(){
   const t = $('#traylast'); t.innerHTML = '';
   ['r','b','g'].forEach(k => { const b = el('div', 'card fixed'); b.innerHTML = holesSpan(k) + swatch(k, 'threads') + `<span class="t"><b>${MEAN.threads[k][0]}</b></span>`; t.appendChild(b); });
-  const b = el('div', 'card fixed wide'); b.innerHTML = holesSpan('back') + `<span class="sw back">↺</span><span class="t"><b>Go back</b></span>`; t.appendChild(b);
+  const b = el('div', 'card fixed wide'); b.innerHTML = holesSpan('back') + `<span class="sw back">↺</span><span class="t"><b>Go back and count down</b></span>`; t.appendChild(b);
   $('#lastout').innerHTML = ''; $('#resultlast').className = 'result'; $('#nextlast').style.display = 'none'; $('#runlast').style.display = 'block';
   showScreen('s-last');
 }
