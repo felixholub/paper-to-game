@@ -26,19 +26,34 @@ PASS  B8 life is set aside only by matter never alive, dead a century, or burnt
 PASS  B8b drying and currents only by the sealed drop (and the single sealed speck); pull only by the single speck; the skin only by the inversion
 PASS  B8c every suspect has at least one experiment on the bench; the size looks answer no suspect (size is a clue, not a cause)
 PASS  B8d every experiment carries a page reference
-      300 random seven-day sequences, 2100 looks: danced whenever water held specks small enough in all; sequences that set every suspect aside: 76
+      300 random seven-day sequences, 2100 looks: danced whenever water held specks small enough in all; sequences that set every suspect aside: 30
 PASS  B9 in every look with water and specks small enough, the dust danced, whatever the order or seed
 PASS  B9b nothing in water ever lies still except in the two size looks
-PASS  B9c three days suffice to set aside every suspect (sphinx, onespeck, surface), so the budget never blocks the discovery
+PASS  B9c four days suffice to set aside every suspect (sphinx, oil, onespeck, surface), so the budget never blocks the discovery
 PASS  B9d the ordering (molecule > particle > lump at rest) and the sealed drop's undiminished dance survive doubling and halving our curve and moving the rest limit
+PASS  G1 one speck alone is locked until the oil drop has been looked at, and playing it locked is refused
+PASS  G1b no other look is locked at any time
+      legal sequences: 1752 of three looks (0 clear the shelf), 17952 of four looks (72 clear it)
+PASS  G2 the shelf cannot be cleared in three looks
+PASS  G2b the shelf can be cleared in four looks, so the cleared state is reachable on day 4 (brief item 6a, reconciled with item 7)
+PASS  S1 at the start the shelf is open, the sixth card blank ("?", one thing does change it), the bench asks what you will try
+PASS  S2 five aside, no clue: the line says find it and the bench head says nothing named is left
+PASS  S3 clue found, five not aside: the card reads Size, only fine dust dances; the bench head is unchanged
+PASS  S4 both: the line says Brown kept looking; the bench head is the normal one
+PASS  S5 the size looks are the only ones that fill the card
+      400 random weeks: the early verdict offered 8 times, first after day 5
+PASS  E1 the early verdict is offered exactly when the five are aside, the clue is found and days remain
+PASS  E1b it is never offered on day one or two (with the gate, not before day five)
+PASS  E1c never offered after the seventh day
+PASS  E2 the verdict counts the days actually used, in words
       heuristics (build.md section 3):
         the vitalist         set aside 1/5 (Life); size lever missed; quiet drops 1
         the physicist        set aside 5/5 (Life, Currents, Drying, Pull, The skin); size lever found; quiet drops 1
         Brown's own order    set aside 5/5 (Life, Currents, Drying, Pull, The skin); size lever found; quiet drops 0
         the cook             set aside 1/5 (Life); size lever missed; quiet drops 3
-        the quickest         set aside 5/5 (Life, Currents, Drying, Pull, The skin); size lever found; quiet drops 3
+        the quickest         set aside 5/5 (Life, Currents, Drying, Pull, The skin); size lever found; quiet drops 2
 PASS  H the obvious ways of spending seven days land in different places (the vitalist sets aside one; the physicist all five and the lever)
 PASS  W no decimals in any line the screen reads from the mechanism
 PASS  W2 every bench label has an act defined in words
 
-31 passed, 0 failed
+44 passed, 0 failed

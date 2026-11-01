@@ -11,7 +11,10 @@
 //   (B8) elimination: each suspect is set aside by the experiment Brown says sets it aside, and by nothing that does not (p. 480–483)
 //   (B9) the discovery does not depend on the rules: over random seven-day sequences and random seeds, the dust dances in every look
 //        that has water and specks small enough, whatever the order; only size ever changes the dance; and the budget never prevents
-//        setting every suspect aside (three days suffice)
+//        setting every suspect aside (four days suffice)
+//   (G)  the gate: one speck alone waits for the oil drop it refines (p. 482); the shelf cannot be cleared in three looks, and can in four
+//   (S)  the shelf's four states and their lines; the bench head changes only when the five are gone and the clue is not
+//   (E)  the early verdict: offered only when the five are aside and the clue found with days left; the verdict counts the days used
 //   (H)  heuristics: the obvious ways of spending seven days land in different places
 //   (W)  words: no decimals in anything the screen reads from the mechanism
 const M = require('./mechanism.js');
@@ -95,6 +98,7 @@ check('B3c vivacity never rises with size', mono);
   const ids = C.EXPERIMENTS.map(e => e.id);
   for (let trial = 0; trial < 300; trial++) {
     const order = ids.slice().sort(() => R() - 0.5), g = M.newGame(Math.floor(R() * 1e6));
+    const io = order.indexOf('oil'), is = order.indexOf('onespeck'); if (is < io) { order[is] = 'oil'; order[io] = 'onespeck'; } // respect the gate
     for (const id of order.slice(0, C.DAYS)) {
       const d = M.playDay(g, id); const st = d.state; let k = 0; while (!st.done && k++ < 3000) M.step(st, 1 / 60);
       looks++;
@@ -108,13 +112,67 @@ check('B3c vivacity never rises with size', mono);
   out.push(`      ${trials} random seven-day sequences, ${looks} looks: danced whenever water held specks small enough in all; sequences that set every suspect aside: ${cleared3}`);
   check('B9 in every look with water and specks small enough, the dust danced, whatever the order or seed', dancedWhenItShould === looks - (looks - dancedWhenItShould) && stillWhenWater === 0 && dancedWhenItShould > 0);
   check('B9b nothing in water ever lies still except in the two size looks', leverOnly);
-  check('B9c three days suffice to set aside every suspect (sphinx, onespeck, surface), so the budget never blocks the discovery', M.runSequence(['sphinx', 'onespeck', 'surface']).allAside && C.DAYS >= 3);
+  check('B9c four days suffice to set aside every suspect (sphinx, oil, onespeck, surface), so the budget never blocks the discovery', M.runSequence(['sphinx', 'oil', 'onespeck', 'surface']).allAside && C.DAYS >= 4);
   // robustness of the central discovery to our own curve: double alpha, halve it; move the rest limit; the order and the limit survive
   const alt = [[2.0, C.LUMP_REST_D], [0.5, C.LUMP_REST_D], [1.0, C.LUMP_REST_D / 2], [1.0, C.LUMP_REST_D * 2]];
   const saveA = C.VIV_ALPHA, saveL = C.LUMP_REST_D; let robust = true;
   for (const [a, l] of alt) { C.VIV_ALPHA = a; C.LUMP_REST_D = l; const vm = M.vivacity(C.MOLECULE_D_MAX), vp = M.vivacity(C.POLLEN_D_MAX), vl = M.vivacity(l * 1.2); if (!(vm === 1 && vp > 0 && vp < vm && vl === 0)) robust = false; const st = runLook('oil', 1); if (!(st.specks.every(s => s.v === 1) && st.current === 0)) robust = false; }
   C.VIV_ALPHA = saveA; C.LUMP_REST_D = saveL;
   check('B9d the ordering (molecule > particle > lump at rest) and the sealed drop\'s undiminished dance survive doubling and halving our curve and moving the rest limit', robust);
+}
+
+// ---- G: the gate
+{
+  const g = M.newGame(); let threw = false; try { M.playDay(g, 'onespeck'); } catch (e) { threw = /locked/.test(e.message); }
+  const g2 = M.newGame(); M.playDay(g2, 'oil');
+  check('G1 one speck alone is locked until the oil drop has been looked at, and playing it locked is refused', M.locked(M.newGame(), 'onespeck') && threw && g.day === 0 && !M.locked(g2, 'onespeck') && M.expById('onespeck').lockedGloss === 'first seal a drop in oil');
+  check('G1b no other look is locked at any time', C.EXPERIMENTS.filter(e => e.id !== 'onespeck').every(e => !M.locked(M.newGame(), e.id)));
+  // exhaustive: every legal sequence of three looks, then of four
+  const ids = C.EXPERIMENTS.map(e => e.id); let three = 0, threeClear = 0, four = 0, fourClear = 0;
+  const rec = (g, depth, max) => {
+    if (depth === max) { if (max === 3) { three++; if (M.verdict(g).allAside) threeClear++; } else { four++; if (M.verdict(g).allAside) fourClear++; } return; }
+    for (const id of ids) { if (g.log.some(l => l.id === id) || M.locked(g, id)) continue; const h = JSON.parse(JSON.stringify(g)); M.playDay(h, id); rec(h, depth + 1, max); }
+  };
+  rec(M.newGame(), 0, 3); rec(M.newGame(), 0, 4);
+  out.push(`      legal sequences: ${three} of three looks (${threeClear} clear the shelf), ${four} of four looks (${fourClear} clear it)`);
+  check('G2 the shelf cannot be cleared in three looks', three > 0 && threeClear === 0);
+  check('G2b the shelf can be cleared in four looks, so the cleared state is reachable on day 4 (brief item 6a, reconciled with item 7)', fourClear > 0);
+}
+// ---- S: the shelf's states
+{
+  const g = M.newGame(); const s0 = M.shelfState(g);
+  check('S1 at the start the shelf is open, the sixth card blank ("?", one thing does change it), the bench asks what you will try',
+    s0.mode === 'open' && s0.card.label === '?' && s0.card.gloss === 'one thing does change it' && s0.line === C.SHELF_LINES.open && s0.benchHead === 'Day 1 of 7 · What will you try?');
+  ['sphinx', 'oil', 'onespeck', 'surface'].forEach(id => M.playDay(g, id)); const s1 = M.shelfState(g);
+  check('S2 five aside, no clue: the line says find it and the bench head says nothing named is left', s1.mode === 'aside' && /Find it\.$/.test(s1.line) && s1.benchHead === 'Day 5 of 7 · Nothing named is left. What changes the dance?' && s1.card.label === '?');
+  const h = M.newGame(); M.playDay(h, 'coarse'); const s2 = M.shelfState(h);
+  check('S3 clue found, five not aside: the card reads Size, only fine dust dances; the bench head is unchanged', s2.mode === 'clue' && s2.card.label === 'Size' && s2.card.gloss === 'only fine dust dances' && /still to be answered/.test(s2.line) && s2.benchHead === 'Day 2 of 7 · What will you try?');
+  M.playDay(g, 'asbestos'); const s3 = M.shelfState(g);
+  check('S4 both: the line says Brown kept looking; the bench head is the normal one', s3.mode === 'both' && /Brown kept looking/.test(s3.line) && s3.benchHead === 'Day 6 of 7 · What will you try?');
+  check('S5 the size looks are the only ones that fill the card', C.EXPERIMENTS.every(e => { const k = M.newGame(); if (M.locked(k, e.id)) M.playDay(k, e.requires); M.playDay(k, e.id); return M.shelfState(k).clue === !!e.lever; }));
+}
+// ---- E: the early verdict
+{
+  const R = M.rng(2027), ids = C.EXPERIMENTS.map(e => e.id); let offers = 0, wrong = 0, earliest = 99, wordsOk = true, trials = 0;
+  for (let t = 0; t < 400; t++) {
+    const g = M.newGame(); const order = ids.slice().sort(() => R() - 0.5);
+    const io = order.indexOf('oil'), is = order.indexOf('onespeck'); if (is < io) { order[is] = 'oil'; order[io] = 'onespeck'; }
+    const stopAt = 1 + Math.floor(R() * C.DAYS);
+    for (const id of order) {
+      M.playDay(g, id); const v = M.verdict(g);
+      const should = v.allAside && v.leverFound && g.day < C.DAYS, offered = M.canStopEarly(g);
+      if (offered !== should) wrong++;
+      if (offered) { offers++; earliest = Math.min(earliest, g.day); }
+      if (offered && g.day >= stopAt) break; // a player who takes the offer
+      if (g.day >= C.DAYS) break;
+    }
+    const v = M.verdict(g); trials++; if (v.daysWord !== C.NUMBER_WORDS[g.day] || v.days !== g.day || v.early !== (g.day < C.DAYS)) wordsOk = false;
+  }
+  out.push(`      ${trials} random weeks: the early verdict offered ${offers} times, first after day ${earliest}`);
+  check('E1 the early verdict is offered exactly when the five are aside, the clue is found and days remain', wrong === 0 && offers > 0);
+  check('E1b it is never offered on day one or two (with the gate, not before day five)', earliest >= 5);
+  check('E1c never offered after the seventh day', (() => { const g = M.newGame(); ['sphinx', 'oil', 'onespeck', 'surface', 'coarse', 'glass', 'meteorite'].forEach(id => M.playDay(g, id)); return !M.canStopEarly(g) && g.day === 7; })());
+  check('E2 the verdict counts the days actually used, in words', wordsOk && (() => { const g = M.newGame(); ['sphinx', 'oil', 'onespeck', 'surface', 'coarse'].forEach(id => M.playDay(g, id)); const v = M.verdict(g); return v.daysWord === 'five' && v.early; })());
 }
 // ---- H
 {

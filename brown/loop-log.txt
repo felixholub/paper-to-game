@@ -3,24 +3,6 @@ STAGE, day 0: fresh pollen of Clarckia; 10 oblong particles turning slowly, 34 r
 SHELF: LIFE | CURRENTS | DRYING | PULL | THE SKIN   (what people have said makes it move)
 
 DAY 1 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
-  tap "Moss, a century dry" -> "You will: Take a moss from a herbarium sheet dried a hundred years ago and wet it."  [LOOK enabled]
-  LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
-  PICTURE: 44 specks (44 dancing, 0 still), vessel open-fresh, water true, beads 0
-  YARD: Dancing.
-  LINE: A moss dead a hundred years. Its dust dances as the fresh pollen's did.
-  SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
-  slips land on: life
-
-DAY 2 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / Burn it first / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
-  tap "Burn it first" -> "You will: Hold hair, linen and a splinter of wood in a candle flame, quench them, and grind what is left."  [LOOK enabled]
-  LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
-  PICTURE: 44 specks (44 dancing, 0 still), vessel open-fresh, water true, beads 0
-  YARD: Dancing.
-  LINE: Hair, linen and wood, burnt to ash and ground. The ash dances as before the fire.
-  SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
-  slips land on: life
-
-DAY 3 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
   tap "A chip of the Sphinx" -> "You will: Grind a chip of the Sphinx's granite to powder and drop it in water."  [LOOK enabled]
   LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
   PICTURE: 44 specks (44 dancing, 0 still), vessel open-fresh, water true, beads 0
@@ -29,43 +11,61 @@ DAY 3 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / London so
   SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
   slips land on: life
 
-DAY 4 OF 7. BENCH: Window glass / A meteorite / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
-  tap "Window glass" -> "You will: Crush a splinter of window glass on the slide and add water."  [LOOK enabled]
-  LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
-  PICTURE: 44 specks (44 dancing, 0 still), vessel open-fresh, water true, beads 0
-  YARD: Dancing.
-  LINE: Glass dust. It dances like the pollen's.
-  SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
-  slips land on: life
-
-DAY 5 OF 7. BENCH: A meteorite / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
-  tap "Sugar" -> "You will: Grind sugar and drop it in water."  [LOOK enabled]
-  LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
-  PICTURE: 0 specks (0 dancing, 0 still), vessel open-fresh, water true, beads 0
-  YARD: Nothing in the drop.
-  LINE: The sugar dissolved. There is nothing in the water to watch.
+DAY 2 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+  tap "Watch the open drop" -> "You will: Leave the drop open on the glass and watch until the end."  [LOOK enabled]
+  LOOK: t=15s r=0.95 cur=0.03 water=true | t=30s r=0.79 cur=0.18 water=true | t=45s r=0.52 cur=0.49 water=true | t=60s r=0.00 cur=1.00 water=false
+  PICTURE: 44 specks (44 dancing, 0 still), vessel open-wait, water false, beads 0
+  YARD: The water is gone.
+  LINE: Streams came, slow then fast, from the middle to the rim, and swept the dance away with them; then the drop was gone. The dust lies dry on the glass. Wet it, and it dances again.
   SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
   no slip lands
 
-DAY 6 OF 7. BENCH: A meteorite / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur
-  tap "Sulphur" -> "You will: Grind sulphur (or resin, or wax) and drop it in water."  [LOOK enabled]
+DAY 3 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+  tap "Seal it in almond oil" -> "You will: Shake a little of the water into almond oil, so the drop is sealed and nothing can dry. Watch for an hour."  [LOOK enabled]
+  LOOK: t=900s r=0.50 cur=0.00 water=true | t=1800s r=0.50 cur=0.00 water=true | t=2700s r=0.50 cur=0.00 water=true | t=3600s r=0.50 cur=0.00 water=true
+  PICTURE: 44 specks (44 dancing, 0 still), vessel oil, water true, beads 0
+  YARD: Dancing, an hour on.
+  LINE: Sealed in oil the drop lives an hour and more. No streams; nothing dries. The dust dances as it did in the first minute.
+  SHELF: [LIFE — set aside] | [CURRENTS — set aside] | [DRYING — set aside] | PULL | THE SKIN
+  slips land on: drying, currents
+
+DAY 4 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+  tap "One speck alone" -> "You will: Shake harder, until some sealed drops hold a single speck with no neighbour."  [LOOK enabled]
+  LOOK: t=900s r=0.22 cur=0.00 water=true | t=1800s r=0.22 cur=0.00 water=true | t=2700s r=0.22 cur=0.00 water=true | t=3600s r=0.22 cur=0.00 water=true
+  PICTURE: 1 specks (1 dancing, 0 still), vessel oil-one, water true, beads 0
+  YARD: Dancing, alone.
+  LINE: One speck in a sealed drop, with no neighbour to pull it or push it. It dances by itself.
+  SHELF: [LIFE — set aside] | [CURRENTS — set aside] | [DRYING — set aside] | [PULL — set aside] | THE SKIN
+  slips land on: pull, drying, currents
+
+DAY 5 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+  tap "Oil on the water's skin" -> "You will: Turn it round: shake a little oil into the water, so tiny oil beads sit on the skin of the water drop."  [LOOK enabled]
   LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
-  PICTURE: 0 specks (0 dancing, 0 still), vessel open-fresh, water true, beads 0
-  YARD: Nothing in the drop.
-  LINE: Nothing fine enough came off the sulphur. The drop is empty: there is nothing to watch. (Two years on, Brown got specks from sulphur, resin and wax after all, and blamed his grinding.)
-  SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
+  PICTURE: 44 specks (44 dancing, 0 still), vessel inverted, water true, beads 9
+  YARD: Dancing inside; the beads still.
+  LINE: The oil beads on the skin of the drop lie still. Inside, the dust dances as before.
+  SHELF: [LIFE — set aside] | [CURRENTS — set aside] | [DRYING — set aside] | [PULL — set aside] | [THE SKIN — set aside]
+  slips land on: skin
+
+DAY 6 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+  tap "Grind coarser" -> "You will: Stop grinding early, so the drop holds lumps with a little fine dust between them."  [LOOK enabled]
+  LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
+  PICTURE: 19 specks (14 dancing, 5 still), vessel open-fresh, water true, beads 0
+  YARD: The lumps lie still. The fine dust dances.
+  LINE: The first time anything changed: the big grains do not move at all; the fine dust between them dances as ever.
+  SHELF: [LIFE — set aside] | [CURRENTS — set aside] | [DRYING — set aside] | [PULL — set aside] | [THE SKIN — set aside]
   no slip lands
 
-DAY 7 OF 7. BENCH: A meteorite / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos
-  tap "A meteorite" -> "You will: Powder a scrap of a stone that fell from the sky."  [LOOK enabled]
+DAY 7 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / A fibre of asbestos / Sulphur / Sugar
+  tap "A fibre of asbestos" -> "You will: Tease asbestos into threads: long ones, and bits a few specks long."  [LOOK enabled]
   LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
-  PICTURE: 44 specks (44 dancing, 0 still), vessel open-fresh, water true, beads 0
-  YARD: Dancing.
-  LINE: Dust from a stone that fell from the sky. It dances like the pollen's.
-  SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
-  slips land on: life
+  PICTURE: 10 specks (7 dancing, 3 still), vessel open-fresh, water true, beads 0
+  YARD: Long threads still; short bits dancing.
+  LINE: Threads two or three specks long dance as fast as a speck; four or five, slowly; longer threads lie still.
+  SHELF: [LIFE — set aside] | [CURRENTS — set aside] | [DRYING — set aside] | [PULL — set aside] | [THE SKIN — set aside]
+  no slip lands
 
 VERDICT: The dust is still dancing.
-  You tried: Moss, a century dry; Burn it first; A chip of the Sphinx; Window glass; A meteorite.
-  Set aside: Life. Still standing: Currents, Drying, Pull, The skin.
-  Size lever never looked for. Quiet drops: Sugar (nothing in the drop), Sulphur (nothing in the drop).
+  You tried: ground a chip of the Sphinx; sealed the drop in almond oil; sealed one speck alone; put oil beads on the water's skin; ground coarser; teased a fibre of asbestos.
+  Set aside: Life, Currents, Drying, Pull, The skin. Still standing: none.
+  Size lever found. Quiet drops: Watch the open drop (no water left).
