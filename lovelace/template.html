@@ -78,7 +78,7 @@ p{margin:8px 0}
 .card .sw.back{background:none;border:2px solid var(--mahog);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--mahog);font-weight:700;border-radius:50%}
 .card .sw.note{background:none;font-size:26px;line-height:30px;text-align:center}
 .card .sw.numb{background:none;border:1.5px solid var(--ink);font-family:var(--disp);font-size:14px;line-height:27px;text-align:center}
-.card .t{flex:1}
+.card .t{flex:1;min-width:0}
 .card .t b{display:block;font-weight:700;font-size:17px}
 .card .t i{display:block;font-size:14px;color:var(--ink2);line-height:1.25}
 .card .x{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
@@ -170,6 +170,9 @@ svg.arcs path.live{stroke-width:5}
 .mini .btn{width:auto;flex:1;min-width:140px;font-size:14px;letter-spacing:.06em;text-transform:none}
 .score{display:grid;grid-template-columns:1fr auto auto;gap:4px 12px;font-size:16px;margin:10px 0}
 .score .h{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.card .rep{display:flex;flex-wrap:nowrap;white-space:nowrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:16px}
+.card .rep button{width:36px;height:32px;border:1px solid var(--ink);background:var(--paper);font-size:19px;cursor:pointer;font-family:var(--text);color:var(--ink);padding:0}
+.card .rep b{font-family:var(--disp);font-weight:400;font-size:22px;min-width:26px;text-align:center}
 </style>
 <div class="wrap">
 
@@ -274,7 +277,7 @@ svg.arcs path.live{stroke-width:5}
   <h3>Go back</h3>
   <p>A <b>Go back</b> card sends the machine back up the chain, to the card it points at. You choose that card on the Go back card itself (“to card 1”, “to card 2” …). The arc on the left shows where it jumps.</p>
   <h3>The wheels</h3>
-  <p>Every Go back card belongs to a wheel. Set the wheel with − and + to the number of times the cards in its loop should be woven. Each time the machine reaches Go back, the wheel clicks down one. When it reaches 0, the machine does not go back: it carries on down the chain, and the wheel springs back to its number, ready for next time. That is how one loop can sit inside another.</p>
+  <p>Every Go back card belongs to a wheel. On each Go back card you set, with − and +, how many times its loop is woven; its wheel keeps count. Each time the machine reaches Go back, the wheel clicks down one. When it reaches 0, the machine does not go back: it carries on down the chain, and the wheel springs back to its number, ready for next time. That is how one loop can sit inside another.</p>
   <h3>Fewest cards</h3>
   <p>When the bell rings you are told the fewest cards that can do the job. On the hard looms there is no spare room at all.</p>
   <h3>Stuck?</h3>
@@ -362,7 +365,7 @@ function sayText(p){
   const fit = `<b>${w(p.slots)} cards</b> fit on the chain`;
   const Fit = `<b>${w(p.slots)[0].toUpperCase() + w(p.slots).slice(1)} cards</b> fit on the chain`;
   if (p.tier === 'easy0') return `Hang cards to weave the order, stitch by stitch: tap a card at the bottom to hang it, tap × to take one off. Then run the loom. ${Fit}.`;
-  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. The <b>Go back</b> card sends the machine back up the chain. The wheel says how many times the cards above it are woven: set it with − and +.`;
+  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. The <b>Go back</b> card sends the machine back up the chain. The wheel says how many times the cards above it are woven: set the number of times on the Go back card itself, with − and +.`;
   if (p.tier === 'medium'){
     let s = `${Fit}. A Go back card doesn't have to jump to the top: <b>tap “to card 1” on it to choose where it jumps.</b> The arc on the left shows the loop.`;
     if (p.wheels === 2) s += ` And there are now <b>two wheels</b>, A and B: two loops can repeat different numbers of times.`;
@@ -402,7 +405,7 @@ function drawWheels(left){
     const b = el('div', 'wbox');
     const shown = left ? left[k] : set[k];
     b.innerHTML = `<div class="wheel ${k ? 'wB' : ''}" id="wh${k}"><span>${shown}</span></div>
-      <div class="wl"><b>Wheel ${WNAME[k]}</b>${running ? 'rounds left' : 'rounds'}<div class="pm"><button data-w="${k}" data-d="-1" aria-label="fewer">−</button><button data-w="${k}" data-d="1" aria-label="more">+</button></div></div>`;
+      <div class="wl"><b>Wheel ${WNAME[k]}</b>${running ? 'times still to go' : `counts to ${set[k]}<br><span class="small">set it on the Go back card</span>`}</div>`;
     box.appendChild(b);
   }
   box.querySelectorAll('.pm button').forEach(bt => bt.onclick = () => {
@@ -417,7 +420,7 @@ function drawTray(){
   cols.forEach(k => { const b = el('button', 'card'); b.innerHTML = holesSpan(k) + swatch(k, 'threads') + `<span class="t"><b>${MEAN.threads[k][0]}</b><i>${MEAN.threads[k][1]}</i></span>`; b.onclick = () => hang({ k }); t.appendChild(b); });
   for (let k = 0; k < P.wheels; k++){
     const b = el('button', 'card wide');
-    b.innerHTML = holesSpan('back') + `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]}">↺</span><span class="t"><b>Go back${P.wheels > 1 ? `<span class="wchip" style="background:${WCOL[k]}">wheel ${WNAME[k]}</span>` : ''}</b><i>Jump back up the chain while wheel ${WNAME[k]} still has rounds left.</i></span>`;
+    b.innerHTML = holesSpan('back') + `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]}">↺</span><span class="t"><b>Go back${P.wheels > 1 ? `<span class="wchip" style="background:${WCOL[k]}">wheel ${WNAME[k]}</span>` : ''}</b><i>Jumps back up the chain, so the cards above it are woven again. You choose how many times.</i></span>`;
     b.onclick = () => hang({ k: 'back', w: k, toId: null }); t.appendChild(b);
   }
 }
@@ -440,7 +443,9 @@ function chainCard(c, i, ch, mode, editable){
     const to = ch.findIndex(x => x.id === c.toId) + 1;
     b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span><span class="sw back" style="border-color:${WCOL[c.w]};color:${WCOL[c.w]}">↺</span>` +
       `<span class="t"><b>Go back to ${editable ? `<select aria-label="jump to">${opts}</select>` : 'card ' + to}${P.wheels > 1 || (mode && mode !== 'threads') ? `<span class="wchip" style="background:${WCOL[c.w]}">wheel ${WNAME[c.w]}</span>` : ''}</b>` +
-      `<i>Wheel ${WNAME[c.w]} clicks down one. At 0 it springs back to ${set[c.w]} and the machine carries on.</i></span>` + (editable ? '<button class="del" aria-label="take off">×</button>' : '');
+      (editable ? `<span class="rep">Times <button data-d="-1" aria-label="fewer times">−</button><b>${set[c.w]}</b><button data-d="1" aria-label="more times">+</button></span>` : `<span class="rep">This loop is woven <b>${set[c.w]}</b> times</span>`) +
+      `<i>Cards ${ch.findIndex(x => x.id === c.toId) + 1} to ${i} are woven ${set[c.w] === 1 ? 'once' : set[c.w] + ' times'}; wheel ${WNAME[c.w]} counts. Then the machine carries on.</i></span>` + (editable ? '<button class="del" aria-label="take off">×</button>' : '');
+    if (editable) b.querySelectorAll('.rep button').forEach(bt => bt.onclick = e => { e.stopPropagation(); if (running || solved) return; set[c.w] = Math.max(1, Math.min(Lo.WMAX, set[c.w] + +bt.dataset.d)); clearResult(); drawChain(); });
     if (editable){ const sel = b.querySelector('select'); sel.onchange = () => { c.toId = +sel.value; clearResult(); drawChain(); }; sel.onclick = e => e.stopPropagation(); }
   }
   if (editable){ const d = b.querySelector('.del'); d.onclick = () => takeOff(i); }
@@ -532,7 +537,11 @@ $('#run').addEventListener('click', async () => {
     let help = '';
     if (P.tier === 'easy1' && !chain.some(c => c.k === 'back')) help = `<br><br>Only ${w(P.slots)} cards fit, so counting stitches out card by card can't work. Try the <b>Go back</b> card.`;
     if (P.tier === 'hard' && woven.length && j.at === null) help = '<br><br>Remember: a wheel that reaches 0 springs back, so an inner loop can run again on every round of the outer one.';
-    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain or a wheel, and run it again.</span>');
+    if (!help && j.at === null && woven.length < P.target.length){
+      const backs = chain.map((c, i) => [c, i]).filter(([c]) => c.k === 'back');
+      if (backs.length) help = '<br><br>' + backs.map(([c, i]) => `The Go back on card ${i+1} was set to <b>${set[c.w]}</b> time${set[c.w] === 1 ? '' : 's'}, so cards ${chain.findIndex(x => x.id === c.toId) + 1} to ${i} were woven ${set[c.w] === 1 ? 'once' : set[c.w] + ' times'}.`).join(' ');
+    }
+    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain or the number of times, and run it again.</span>');
     if (fails >= 3) { $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; }
     $('#run').disabled = false;
     return;
