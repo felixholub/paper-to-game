@@ -1,4 +1,4 @@
-Noether's Press — calibration against Noether (1918). 11 passed, 0 failed.
+Noether's Ball — calibration against Noether (1918). 11 passed, 0 failed.
       c1 ball/clock: residual 3.14e-4 → does not matter; teeth
       c2 grow/clock: residual 2.05e-1 → matters; none
       c3 ball/across: residual 0.00e+0 → does not matter; teeth
@@ -9,7 +9,7 @@ Noether's Press — calibration against Noether (1918). 11 passed, 0 failed.
       c8 slide/clock: residual 5.38e-4 → does not matter; empty
       c9 slide/warpclock: residual 4.45e-4 → does not matter; rule
 PASS  A every card's computed answer is the paper's: clock, step and turn do not matter for the ball and the spring; growing gravity, the magnet, the wind and re-ticking the ball do; the slide cares about neither the later start nor any re-ticking
-PASS  P the plate agrees: the formula's number is the same before and after exactly when the change does not matter  [c1 1000→1000 c2 716→664 c3 1000→1000 c4 1000→976 c5 135→135 c6 1000→617 c7 1000→1089 c8 1000→1000 c9 1000→1000]
+PASS  P the plate agrees: the formula's number is the same before and after exactly when the change does not matter  [c1 1000→1000 c2 716→664 c3 1000→1000 c4 1000→976 c5 135→135 c6 1000→617 c7 1000→1326 c8 1000→1000 c9 1000→1000]
 PASS  V the picture agrees: the new trip lands on the dashed "if it did not matter" trip exactly when it does not matter (a visible gap otherwise)  [c1 0.000 c2 1.120 c3 0.000 c4 0.452 c5 0.000 c6 0.444 c8 0.000]
 PASS  T1 Theorem I: the energy, the sideways speed and the spin have teeth (steady on every true motion, caught by a fake)
 PASS  E the clock's prize on the ball is ½|u′|² + g·y on any path (p. 28)  [worst 8.88e-16]
@@ -31,4 +31,4 @@ PASS  D thirty random hand-drawn re-tickings: the slide never cares, the ball al
       spring soft: all right (teeth,teeth,teeth,empty)
       slide high: all right (teeth,teeth,teeth,empty)
 PASS  ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide
-PASS  W no decimals in anything the screen reads from the mechanism  [63 strings]
+PASS  W no decimals in anything the screen reads from the mechanism  [90 strings]

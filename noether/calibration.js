@@ -1,4 +1,4 @@
-// Noether's Press — calibration against Noether (1918). Run: node calibration.js  (prints every check; exit code 1 on a failure)
+// Noether's Ball — calibration against Noether (1918). Run: node calibration.js  (prints every check; exit code 1 on a failure)
 //   (A)   every card's answer, computed from eq. 11, is the one the paper and mechanics give
 //   (P)   the plate's two numbers agree with the answer on every card: the same exactly when the change does not matter
 //   (V)   the picture agrees: the new trip lands on "where it would go if the change did not matter" exactly when it does not matter
@@ -59,9 +59,9 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   trial('wind light', { WIND: 3 }); trial('spring soft', { PEG_K: 15 }); trial('slide high', { SLIDE_H: 1.6 });
   det.forEach(d => out.push('      ' + d)); check('ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide', ok); }
 // ---- (W)
-{ const strings = []; for (const k in M.WORLDS) { const w = M.WORLDS[k]; strings.push(w.name, w.formula, w.words); } for (const c of M.CARDS) strings.push(c.setup, c.change, c.reveal); for (const k in M.PRIZES) strings.push(k, M.PRIZES[k].formula, M.PRIZES[k].gloss); for (const k in M.LEVERS) strings.push(M.LEVERS[k].label);
+{ const strings = []; for (const k in M.WORLDS) { const w = M.WORLDS[k]; strings.push(w.name, w.formula, w.words); } for (const c of M.CARDS) strings.push(c.setup, c.change, c.reveal); for (const k in M.PRIZES) strings.push(k, M.PRIZES[k].formula, M.PRIZES[k].gloss); for (const k in M.LEVERS) strings.push(M.LEVERS[k].label); for (const k in M.BADGES) strings.push(M.BADGES[k].name, M.BADGES[k].sub, M.BADGES[k].missed);
   const v = M.verdict({ c1: 'not', c2: 'not', c4: 'matters' }); strings.push(v.headline, v.line);
   check('W no decimals in anything the screen reads from the mechanism', strings.every(s => !/\d\.\d/.test(s)), strings.length + ' strings'); }
 
-const head = `Noether's Press — calibration against Noether (1918). ${out.filter(l => l.startsWith('PASS')).length} passed, ${fails} failed.`;
+const head = `Noether's Ball — calibration against Noether (1918). ${out.filter(l => l.startsWith('PASS')).length} passed, ${fails} failed.`;
 console.log([head].concat(out).join('\n')); fs.writeFileSync(__dirname + '/calibration-result.txt', [head].concat(out).join('\n') + '\n'); process.exitCode = fails ? 1 : 0;

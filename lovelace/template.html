@@ -12,7 +12,7 @@
 @font-face{font-family:'Old';font-weight:700;font-style:normal;src:url(data:font/woff2;base64,/*__FONT_OLD_B__*/) format('woff2');font-display:block}
 :root{
   --buff:#EDE2C4; --card:#F4ECD6; --edge:#C9B98F; --ink:#1E1A17; --ink2:#5A5047; --plum:#8B2252; --verd:#2E7D6B; --mahog:#6B3A22; --paper:#F9F4E7;
-  --red:#B8323C; --blue:#2C4F91;
+  --red:#B8323C; --blue:#2C4F91; --gold:#C99A1E;
   --disp:'Abril',Georgia,'Times New Roman',serif; --text:'Old','Times New Roman',Georgia,serif;
 }
 *{box-sizing:border-box}
@@ -48,7 +48,7 @@ p{margin:8px 0}
 .order .lbl{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px;display:flex;justify-content:space-between}
 .cloth{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
 .st{aspect-ratio:1/1;border:1.5px dashed var(--edge);border-radius:3px;position:relative}
-.st.wr{border-color:rgba(184,50,60,.55)} .st.wb{border-color:rgba(44,79,145,.55)}
+.st.wr{border:1.5px dashed rgba(184,50,60,.8);background:rgba(184,50,60,.2)} .st.wb{border:1.5px dashed rgba(44,79,145,.8);background:rgba(44,79,145,.2)}
 .st.r{background:var(--red);border:1.5px solid var(--red)} .st.b{background:var(--blue);border:1.5px solid var(--blue)}
 .st.r,.st.b{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.16) 0 2px,transparent 2px 5px)}
 .st.bad{outline:3px solid var(--ink);outline-offset:1px}
@@ -78,7 +78,7 @@ p{margin:8px 0}
 .card .sw.back{background:none;border:2px solid var(--mahog);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--mahog);font-weight:700;border-radius:50%}
 .card .sw.note{background:none;font-size:26px;line-height:30px;text-align:center}
 .card .sw.numb{background:none;border:1.5px solid var(--ink);font-family:var(--disp);font-size:14px;line-height:27px;text-align:center}
-.card .t{flex:1}
+.card .t{flex:1;min-width:0}
 .card .t b{display:block;font-weight:700;font-size:17px}
 .card .t i{display:block;font-size:14px;color:var(--ink2);line-height:1.25}
 .card .x{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
@@ -134,60 +134,93 @@ p{margin:8px 0}
 </style>
 </head>
 <body>
+<style>
+.st.wg{border:1.5px dashed rgba(184,140,30,.9);background:rgba(201,154,30,.25)} .st.g{background:var(--gold);border:1.5px solid var(--gold);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.2) 0 2px,transparent 2px 5px)}
+.card .sw.g{background:var(--gold)}
+.nh.g{background:var(--gold)} .nums span.g{border-color:var(--gold)}
+.chainwrap{position:relative;padding-left:34px}
+.chainwrap .chain{padding-left:0}
+.chainwrap .chain:before{display:none}
+svg.arcs{position:absolute;left:0;top:0;width:34px;height:100%;overflow:visible;pointer-events:none}
+svg.arcs path{fill:none;stroke-width:3;stroke-linecap:round}
+svg.arcs path.live{stroke-width:5}
+.card .num{position:static;transform:none;width:auto;font-size:12px;color:var(--ink2);align-self:flex-start;margin-top:2px;min-width:12px}
+.slot .num{position:static;transform:none;width:auto;margin-right:10px}
+.card .del{border:1px solid var(--edge);background:var(--paper);width:34px;height:34px;flex:none;font-size:18px;color:var(--ink2);cursor:pointer;font-family:var(--text)}
+.card .t select{font-family:var(--text);font-size:16px;padding:3px 4px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);margin-left:2px}
+.card .wchip{display:inline-block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:1px 6px;color:var(--paper);margin-left:4px;vertical-align:2px}
+.wheels{display:flex;gap:12px;margin:12px 0 4px;flex-wrap:wrap}
+.wbox{flex:1;min-width:150px;border:1px solid var(--edge);background:var(--paper);padding:8px;display:flex;align-items:center;gap:10px}
+.wbox .wheel{width:62px;height:62px}
+.wbox .wheel span{font-size:28px}
+.wbox .wl{font-size:14px;line-height:1.25}
+.wbox .wl b{display:block;font-size:15px}
+.wbox .pm{display:flex;gap:6px;margin-top:4px}
+.wbox .pm button{width:38px;height:34px;border:1px solid var(--ink);background:var(--card);font-size:20px;cursor:pointer;font-family:var(--text);color:var(--ink);padding:0}
+.wheel.wB{background:var(--verd);border-color:#1C4F43}
+.tray{grid-template-columns:1fr 1fr}
+.tray .card{padding:12px 8px 8px;gap:8px;overflow:hidden}
+.tray .card .t i{display:none}
+.tray .card.wide{grid-column:span 2}
+.tray .card.wide .t i{display:block}
+.par{font-size:15px;color:var(--ink2)}
+.tag{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid currentColor;padding:1px 6px;margin-left:6px;vertical-align:3px}
+.tag.easy{color:var(--verd)} .tag.medium{color:var(--mahog)} .tag.hard{color:var(--plum)}
+.mini{display:flex;gap:8px;flex-wrap:wrap}
+.mini .btn{width:auto;flex:1;min-width:140px;font-size:14px;letter-spacing:.06em;text-transform:none}
+.score{display:grid;grid-template-columns:1fr auto auto;gap:4px 12px;font-size:16px;margin:10px 0}
+.score .h{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.card .rep{display:flex;flex-wrap:nowrap;white-space:nowrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:16px}
+.card .rep button{width:36px;height:32px;border:1px solid var(--ink);background:var(--paper);font-size:19px;cursor:pointer;font-family:var(--text);color:var(--ink);padding:0}
+.card .rep b{font-family:var(--disp);font-weight:400;font-size:22px;min-width:26px;text-align:center}
+</style>
 <div class="wrap">
 
 <!-- START -->
 <section class="screen on" id="s-start">
   <h1 class="title"><small>London, 1843</small>Lovelace's Cards</h1>
   <p class="lead">This machine can't think. It does exactly what its cards tell it, one card at a time, and nothing else.</p>
-  <p class="lead">You hang the cards. Can you make it weave the pattern?</p>
-  <p class="small">Four looms, then one last order. About five minutes.</p>
-  <button class="btn go" data-go="loom" data-n="0">Begin</button>
+  <p class="lead">You hang the cards. Can you make it weave the pattern, with only a few cards?</p>
+  <p class="small">Six looms, dealt at random each game: two easy ones, then two harder, then two hard. About ten minutes.</p>
+  <button class="btn go" data-go="loom">Begin</button>
   <button class="btn quiet" data-page="help">How to play</button>
   <button class="btn quiet" data-page="about">About the paper</button>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
-<!-- LOOM (one screen, four looms) -->
+<!-- LOOM -->
 <section class="screen" id="s-loom">
-  <div class="top"><span class="which" id="which">Loom 1 of 4</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
+  <div class="top"><span class="which" id="which">Loom 1 of 6</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
   <h2 id="ltitle"></h2>
   <div class="say" id="lsay"></div>
   <div class="order">
-    <div class="lbl"><span id="olbl">The order</span><span id="ocount"></span></div>
+    <div class="lbl"><span>The order</span><span id="ocount"></span></div>
     <div class="cloth" id="cloth"></div>
   </div>
-  <div class="wheelrow" id="wheelrow">
-    <div class="wheel" id="wheel"><span id="wheeln">0</span></div>
-    <div class="wheeltxt" id="wheeltxt"></div>
-  </div>
+  <div class="wheels" id="wheels"></div>
   <div class="chainlbl" id="chainlbl">Your chain</div>
-  <div class="chain" id="chain"><div class="backarc" id="backarc"></div></div>
+  <div class="chainwrap"><svg class="arcs" id="arcs"></svg><div class="chain" id="chain"></div></div>
   <div class="hint" id="hint"></div>
-  <div class="chainlbl" id="traylbl">Cards you can hang</div>
+  <div class="chainlbl" id="traylbl">Cards you can hang · tap one</div>
   <div class="tray" id="tray"></div>
   <div class="result" id="result"></div>
-  <div id="bet"></div>
+  <div class="mini" id="after"></div>
   <button class="btn go" id="run">Run the loom</button>
-  <button class="btn verd" id="next" style="display:none">Next loom</button>
 </section>
 
-<!-- LOOM 4: same cards, other things -->
+<!-- SAME CARDS, OTHER THINGS -->
 <section class="screen" id="s-switch">
-  <div class="top"><span class="which">Loom 4 of 4</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
-  <h2>Same cards, other things</h2>
-  <div class="say">These are your cards from the last loom. A card is only holes in pasteboard. <b>The switch decides what the holes mean.</b> Flip it and run the cards again.</div>
+  <div class="top"><span class="which">Same cards, other things</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
+  <h2>What do the holes mean?</h2>
+  <div class="say">This is your chain from the last loom. A card is only holes in pasteboard. <b>The switch decides what the holes mean.</b> Flip it and run the same cards again.</div>
   <div class="switch" id="switch">
     <button data-m="threads"><span class="ck"></span>Threads</button>
     <button data-m="notes"><span class="ck"></span>Notes</button>
     <button data-m="numbers"><span class="ck"></span>Numbers</button>
   </div>
   <div class="chainlbl">Your chain, read as <span id="mword">threads</span></div>
-  <div class="chain" id="chain4"></div>
-  <div class="wheelrow">
-    <div class="wheel"><span id="wheel4">5</span></div>
-    <div class="wheeltxt">The wheel is set to 5 rounds.</div>
-  </div>
+  <div class="chainwrap"><svg class="arcs" id="arcs4"></svg><div class="chain" id="chain4"></div></div>
+  <div class="wheels" id="wheels4"></div>
   <div class="order out"><div class="lbl"><span id="outlbl">What came out</span><span id="outcount"></span></div><div id="out"></div></div>
   <div class="result" id="result4"></div>
   <button class="btn go" id="run4">Run the cards</button>
@@ -221,11 +254,15 @@ p{margin:8px 0}
   <button class="btn verd" id="nextcoda" style="display:none">How did you do?</button>
 </section>
 
+
+
+
+
 <!-- END -->
 <section class="screen" id="s-end">
   <div class="top"><span class="which">The end</span><span></span></div>
   <div class="verdict" id="verdict"></div>
-  <button class="btn go" data-go="restart">Play again</button>
+  <button class="btn go" data-go="restart">Play again: six new looms</button>
   <button class="btn quiet" data-page="about">About the paper</button>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
@@ -234,15 +271,17 @@ p{margin:8px 0}
 <section class="screen page" id="s-help">
   <div class="top"><span class="which">How to play</span><button class="q" data-back aria-label="Back">×</button></div>
   <h3>The machine</h3>
-  <p>Lovelace's machine never thinks. It reads a chain of cards from the top, one at a time, and does what each card says. Then it stops.</p>
+  <p>Lovelace's machine never thinks. It reads your chain of cards from the top, one card at a time, and does what each card says. When it runs out of cards, it stops.</p>
   <h3>Hanging cards</h3>
-  <p>Tap a card at the bottom to hang it at the end of your chain. Tap a card on the chain to take it off. Then tap <b>Run the loom</b> and watch.</p>
-  <h3>The order</h3>
-  <p>The dashed squares show the pattern that was ordered. Each stitch the loom weaves fills one square. If a stitch is wrong, it gets a black frame.</p>
-  <h3>The wheel and Go back</h3>
-  <p>The wheel says how many rounds are ordered. The <b>Go back</b> card sends the machine back to the top of the chain. Each time, the wheel clicks down one. When it shows 0, Go back does nothing, and the machine carries on to the end.</p>
-  <h3>The switch</h3>
-  <p>On the fourth loom, the same cards are read as threads, as musical notes, or as sums. A card is just holes: what they mean is up to whoever sets the machine.</p>
+  <p>Tap a card at the bottom to hang it at the end of your chain. Tap × to take a card off. Only so many cards fit. Then tap <b>Run the loom</b> and watch. The dashed squares are the order; each stitch the loom weaves fills one. A wrong stitch gets a black frame.</p>
+  <h3>Go back</h3>
+  <p>A <b>Go back</b> card sends the machine back up the chain, to the card it points at. You choose that card on the Go back card itself (“to card 1”, “to card 2” …). The arc on the left shows where it jumps.</p>
+  <h3>The wheels</h3>
+  <p>Every Go back card belongs to a wheel. On each Go back card you set, with − and +, how many times its loop is woven; its wheel keeps count. Each time the machine reaches Go back, the wheel clicks down one. When it reaches 0, the machine does not go back: it carries on down the chain, and the wheel springs back to its number, ready for next time. That is how one loop can sit inside another.</p>
+  <h3>Fewest cards</h3>
+  <p>When the bell rings you are told the fewest cards that can do the job. On the hard looms there is no spare room at all.</p>
+  <h3>Stuck?</h3>
+  <p>After three runs that don't ring the bell, you can ask to see a way. It's one way, not the only one.</p>
   <button class="btn" data-back>Back to the game</button>
 </section>
 
@@ -259,6 +298,12 @@ p{margin:8px 0}
 /*__MECHANISM__*/
 </script>
 <script>
+/*__LOOM__*/
+</script>
+<script>
+const PUZZLES = /*__PUZZLES__*/;
+</script>
+<script>
 (function(){
 'use strict';
 const $ = s => document.querySelector(s);
@@ -266,285 +311,328 @@ const el = (t, cls, html) => { const e = document.createElement(t); if (cls) e.c
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const words = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
 const w = n => words[n] || String(n);
+const Lo = window.LOOM;
 
-// punched holes, a fixed pattern per card kind (the holes are what the machine reads)
-const HOLES = { r: [1,0,1,1,0,0,1,0,1,0,0,1], b: [0,1,1,0,1,0,0,1,1,0,1,0], back: [1,1,0,0,1,1,0,1,0,1,1,1] };
-
-// what a card says, by kind and by what the switch makes it mean
-const CARD = {
-  threads: { r: ['Red stitch', 'Weave one red stitch.'], b: ['Blue stitch', 'Weave one blue stitch.'] },
-  notes:   { r: ['High note', 'Play the note G.'], b: ['Low note', 'Play the note C.'] },
-  numbers: { r: ['Add one', 'Add 1 to the number.'], b: ['Double', 'Multiply the number by 2.'] },
+const CNAME = { r: 'red', b: 'blue', g: 'gold' };
+const WNAME = ['A', 'B'];
+const WCOL = ['var(--mahog)', 'var(--verd)'];
+const HOLES = { r: [1,0,1,1,0,0,1,0,1,0,0,1], b: [0,1,1,0,1,0,0,1,1,0,1,0], g: [1,1,0,1,0,1,1,0,0,1,0,1], back: [1,1,0,0,1,1,0,1,0,1,1,1] };
+const MEAN = {
+  threads: { r: ['Red stitch', 'Weave one red stitch.'], b: ['Blue stitch', 'Weave one blue stitch.'], g: ['Gold stitch', 'Weave one gold stitch.'] },
+  notes:   { r: ['High note', 'Play G.'], b: ['Low note', 'Play C.'], g: ['Middle note', 'Play E.'] },
+  numbers: { r: ['Add one', 'Add 1 to the number.'], b: ['Double', 'Multiply the number by 2.'], g: ['Take one', 'Take 1 from the number.'] },
 };
-const BACK = ['Go back', 'Back to the top card. The wheel clicks down one. If it shows 0, carry on instead.'];
-function swatch(kind, mode){
-  if (kind === 'back') return '<span class="sw back">↺</span>';
-  if (mode === 'notes') return `<span class="sw note" style="color:var(--${kind==='r'?'red':'blue'})">${kind==='r'?'♪':'♩'}</span>`;
-  if (mode === 'numbers') return `<span class="sw numb" style="border-color:var(--${kind==='r'?'red':'blue'})">${kind==='r'?'+1':'×2'}</span>`;
-  return `<span class="sw ${kind}"></span>`;
-}
-function cardHTML(kind, mode, extra){
-  const [t, i] = kind === 'back' ? BACK : CARD[mode || 'threads'][kind];
-  return `${swatch(kind, mode)}<span class="t"><b>${t}</b><i>${i}</i></span>${extra || ''}`;
-}
-function makeCard(kind, mode, extra){
-  const b = el('button', 'card'); b.innerHTML = cardHTML(kind, mode, extra); b.style.setProperty('--holes', 'none');
-  const h = HOLES[kind];
-  b.insertAdjacentHTML('afterbegin', `<span style="position:absolute;left:10px;top:4px;height:5px;width:${h.length*14}px;background:${h.map((on,i)=>`radial-gradient(circle at ${i*14+7}px 2.5px, ${on?'#1E1A17':'rgba(30,26,23,.15)'} 0 2.2px, transparent 2.8px)`).join(',')}"></span>`);
-  return b;
+function holesSpan(kind){ const h = HOLES[kind]; return `<span style="position:absolute;left:10px;top:4px;height:5px;width:${h.length*14}px;background:${h.map((on,i)=>`radial-gradient(circle at ${i*14+7}px 2.5px, ${on?'#1E1A17':'rgba(30,26,23,.15)'} 0 2.2px, transparent 2.8px)`).join(',')}"></span>`; }
+function swatch(k, mode){
+  if (k === 'back') return '';
+  if (mode === 'notes') return `<span class="sw note" style="color:var(--${{r:'red',b:'blue',g:'gold'}[k]})">${{r:'♪',b:'♩',g:'♫'}[k]}</span>`;
+  if (mode === 'numbers') return `<span class="sw numb" style="border-color:var(--${{r:'red',b:'blue',g:'gold'}[k]})">${{r:'+1',b:'×2',g:'−1'}[k]}</span>`;
+  return `<span class="sw ${k}"></span>`;
 }
 
-// ---- the looms
-const LOOMS = [
-  { title: 'Doing as it is told', unit: ['r','b','r','b'], rounds: null, slots: 6, tray: ['r','b'],
-    say: 'The order is a strip of four stitches: <b>red, blue, red, blue</b>. Hang the cards that weave it.',
-    hint0: 'Tap a card below to hang it on your chain.' },
-  { title: 'The card that goes back', unit: ['r','b'], rounds: 12, slots: 4, tray: ['r','b','back'], newCard: 'back',
-    say: 'Now the order is <b>red, blue</b>, twelve times over: 24 stitches. But only <b>4 cards</b> fit on the chain. There is a new card: <b>Go back</b>.',
-    hint0: 'Tap a card below to hang it on your chain.' },
-  { title: 'A new order', unit: ['r','r','b'], rounds: 5, slots: 4, tray: ['r','b','back'],
-    say: 'This order is <b>red, red, blue</b>, five times over. The wheel shows 5. Hang the cards, then see what happens when a different order comes in.',
-    hint0: 'Tap a card below to hang it on your chain.' },
-];
-let L = 0, chain = [], running = false, solved = false, totalHung = 0, runsByLoom = [0,0,0], cardsAt = [], loom3 = { bet: null, nine: false, thirty: false };
-let rounds = 0;
-
-function want(lm, r){ const out = []; const n = r == null ? 1 : r; for (let k = 0; k < n; k++) out.push(...lm.unit); return out; }
-
-// the machine: read cards top to bottom; Go back sends it to the top while the wheel is above 0
-function weave(cards, wheel){
-  const ev = []; let pc = 0, wh = wheel || 0, steps = 0;
-  while (pc < cards.length && steps < 2000){
-    steps++;
-    const c = cards[pc];
-    if (c === 'back'){
-      if (wh > 1){ wh--; ev.push({ t: 'back', i: pc, wheel: wh }); pc = 0; continue; }
-      if (wh === 1){ wh = 0; ev.push({ t: 'last', i: pc, wheel: 0 }); pc++; continue; }
-      ev.push({ t: 'pass', i: pc, wheel: 0 }); pc++; continue;
-    }
-    ev.push({ t: 'stitch', i: pc, c }); pc++;
-  }
-  return ev;
+// ---- the deal: two easy, two medium, two hard, colours shuffled
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function deal(){
+  const pick = (tier, n) => shuffle(PUZZLES.filter(p => p.tier === tier)).slice(0, n);
+  const ps = [...pick('easy0', 1), ...pick('easy1', 1), ...pick('medium', 2), ...pick('hard', 2)];
+  return ps.map(p => {
+    const perm = shuffle(['r','b','g']); const map = { R: perm[0], B: perm[1], G: perm[2] };
+    return { ...p, target: p.p.split('').map(x => map[x]), sol: p.sol.map(c => c.k === 'back' ? { ...c } : { k: map[c.k] }) };
+  });
 }
+
+let looms = [], L = 0, P = null, chain = [], set = [2, 2], running = false, solved = false, fails = 0, uid = 0, results = [], lastChain = null, lastSet = null;
+let seenTarget = false, seenB = false;
 
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
 let lastScreen = 's-start';
 document.addEventListener('click', e => {
   const p = e.target.closest('[data-page]'); if (p){ lastScreen = document.querySelector('.screen.on').id; showScreen('s-' + p.dataset.page); return; }
-  if (e.target.closest('[data-back]')){ showScreen(lastScreen); return; }
+  if (e.target.closest('[data-back]')){ showScreen(lastScreen); setTimeout(drawArcs, 0); return; }
   const g = e.target.closest('[data-go]');
-  if (g){ if (g.dataset.go === 'loom') startLoom(0); if (g.dataset.go === 'restart'){ reset(); showScreen('s-start'); } }
+  if (g){ if (g.dataset.go === 'loom'){ newGame(); startLoom(0); } if (g.dataset.go === 'restart'){ newGame(); showScreen('s-start'); } }
 });
-function reset(){ L = 0; chain = []; totalHung = 0; runsByLoom = [0,0,0]; cardsAt = []; loom3 = { bet: null, nine: false, thirty: false }; tried = {}; codaDone = false; }
+window.LOVELACE = { looms: () => looms, loom: () => L };
+function newGame(){ looms = deal(); results = []; seenTarget = false; seenB = false; lastChain = null; }
+
+function heading(p){
+  if (p.tier === 'easy0') return 'Doing as it is told';
+  if (p.tier === 'easy1') return 'The card that goes back';
+  if (p.tier === 'medium') return p.wheels === 2 ? 'Two wheels' : 'Going back, but not to the top';
+  return 'A loop inside a loop';
+}
+function sayText(p){
+  const fit = `<b>${w(p.slots)} cards</b> fit on the chain`;
+  const Fit = `<b>${w(p.slots)[0].toUpperCase() + w(p.slots).slice(1)} cards</b> fit on the chain`;
+  if (p.tier === 'easy0') return `Hang cards to weave the order, stitch by stitch: tap a card at the bottom to hang it, tap × to take one off. Then run the loom. ${Fit}.`;
+  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. The <b>Go back</b> card sends the machine back up the chain. The wheel says how many times the cards above it are woven: set the number of times on the Go back card itself, with − and +.`;
+  if (p.tier === 'medium'){
+    let s = `${Fit}. A Go back card doesn't have to jump to the top: <b>tap “to card 1” on it to choose where it jumps.</b> The arc on the left shows the loop.`;
+    if (p.wheels === 2) s += ` And there are now <b>two wheels</b>, A and B: two loops can repeat different numbers of times.`;
+    return s;
+  }
+  return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>. The trick: when a wheel reaches 0 it <b>springs back</b> to its number, so an inner loop can run again on the next round of the outer one.`;
+}
 
 function startLoom(n){
-  L = n; const lm = LOOMS[L]; chain = n === 0 ? [] : []; solved = false;
-  rounds = lm.rounds;
-  $('#which').textContent = `Loom ${L+1} of 4`;
-  $('#ltitle').textContent = lm.title;
-  $('#lsay').innerHTML = lm.say;
-  $('#wheelrow').style.display = lm.rounds ? 'flex' : 'none';
-  setWheel(rounds, false);
-  $('#wheeltxt').innerHTML = lm.rounds ? `The order is <b>${lm.rounds}</b> rounds, so the wheel starts at ${lm.rounds}. Each Go back clicks it down one.` : '';
-  $('#result').className = 'result'; $('#bet').innerHTML = '';
-  $('#next').style.display = 'none'; $('#run').style.display = 'block';
-  drawCloth(want(lm, lm.rounds), []);
+  L = n; P = looms[L]; chain = []; set = [2, 2]; solved = false; fails = 0; running = false;
+  $('#which').innerHTML = `Loom ${L+1} of ${looms.length}<span class="tag ${P.tier.startsWith('easy') ? 'easy' : P.tier}">${P.tier.startsWith('easy') ? 'easy' : P.tier}</span>`;
+  $('#ltitle').textContent = heading(P);
+  $('#lsay').innerHTML = sayText(P);
+  $('#result').className = 'result'; $('#after').innerHTML = '';
+  $('#run').style.display = 'block';
   $('#tray').style.display = ''; $('#traylbl').style.display = '';
-  drawTray(); drawChain(); showScreen('s-loom');
+  drawCloth([]); drawWheels(); drawTray(); drawChain(); showScreen('s-loom');
 }
-function setWheel(n, tick){ const wn = $('#wheeln'); wn.textContent = n == null ? '' : n; const wl = $('#wheel'); if (tick){ wl.classList.remove('tick'); void wl.offsetWidth; wl.classList.add('tick'); } }
 
-function drawCloth(wanted, woven, badAt){
-  const cl = $('#cloth'); cl.innerHTML = '';
-  const n = Math.max(wanted.length, woven.length);
-  cl.style.gridTemplateColumns = `repeat(${wanted.length <= 4 ? 6 : 12},1fr)`;
+function drawCloth(woven, badAt){
+  const cl = $('#cloth'); cl.innerHTML = ''; const t = P.target;
+  cl.style.gridTemplateColumns = `repeat(${t.length <= 4 ? 4 : 8},1fr)`;
+  const n = Math.max(t.length, woven.length);
   for (let k = 0; k < n; k++){
     const s = el('div', 'st');
-    if (k < wanted.length) s.classList.add('w' + wanted[k]); else s.classList.add('extra');
+    if (k < t.length) s.classList.add('w' + t[k]); else s.classList.add('extra');
     if (k < woven.length) s.classList.add(woven[k]);
     if (badAt === k) s.classList.add('bad');
     cl.appendChild(s);
   }
-  $('#olbl').textContent = 'The order';
-  $('#ocount').textContent = woven.length ? `${woven.length} of ${wanted.length} stitches` : `${wanted.length} stitches`;
+  $('#ocount').textContent = woven.length ? `${woven.length} of ${t.length} stitches` : `${t.length} stitches`;
 }
 
-function drawTray(){
-  const lm = LOOMS[L]; const t = $('#tray'); t.innerHTML = '';
-  lm.tray.forEach(k => {
-    const b = makeCard(k, 'threads');
-    if (lm.newCard === k) b.classList.add('new');
-    b.addEventListener('click', () => { if (running) return; if (chain.length >= lm.slots){ hint(`Only ${w(lm.slots)} cards fit. Tap a card on your chain to take it off.`); return; } chain.push(k); totalHung++; clearResult(); drawChain(); });
-    t.appendChild(b);
+function drawWheels(left){
+  const box = $('#wheels'); box.innerHTML = '';
+  for (let k = 0; k < P.wheels; k++){
+    const b = el('div', 'wbox');
+    const shown = left ? left[k] : set[k];
+    b.innerHTML = `<div class="wheel ${k ? 'wB' : ''}" id="wh${k}"><span>${shown}</span></div>
+      <div class="wl"><b>Wheel ${WNAME[k]}</b>${running ? 'times still to go' : `counts to ${set[k]}<br><span class="small">set it on the Go back card</span>`}</div>`;
+    box.appendChild(b);
+  }
+  box.querySelectorAll('.pm button').forEach(bt => bt.onclick = () => {
+    if (running || solved) return; const k = +bt.dataset.w; set[k] = Math.max(1, Math.min(Lo.WMAX, set[k] + +bt.dataset.d)); clearResult(); drawWheels();
   });
 }
-function drawChain(){
-  const lm = LOOMS[L]; const c = $('#chain'); c.querySelectorAll('.card,.slot').forEach(n => n.remove());
-  for (let k = 0; k < lm.slots; k++){
-    if (k < chain.length){
-      const b = makeCard(chain[k], 'threads', '<span class="x">take off</span>'); b.insertAdjacentHTML('beforeend', `<span class="num">${k+1}</span>`);
-      b.addEventListener('click', () => { if (running || solved) return; chain.splice(k, 1); clearResult(); drawChain(); });
-      c.appendChild(b);
-    } else { const s = el('div', 'slot', `<span class="num">${k+1}</span>empty`); c.appendChild(s); }
-  }
-  $('#chainlbl').textContent = `Your chain · ${w(lm.slots)} cards fit`;
-  if (!chain.length) hint(lm.hint0);
-  else if (chain.length < lm.slots) hint('Hang more cards, or run the loom to see what it weaves.');
-  else hint('The chain is full. Run the loom, or tap a card to take it off.');
-  $('#run').disabled = !chain.length;
-}
-function hint(t){ $('#hint').textContent = t; }
-function clearResult(){ $('#result').className = 'result'; const lm = LOOMS[L]; drawCloth(want(lm, rounds), []); setWheel(rounds, false); }
+function tickWheel(k, v){ const wl = $('#wh' + k); if (!wl) return; wl.querySelector('span').textContent = v; wl.classList.remove('tick'); void wl.offsetWidth; wl.classList.add('tick'); }
 
+function drawTray(){
+  const t = $('#tray'); t.innerHTML = '';
+  const cols = [...new Set(P.target)].sort((a, b) => 'rbg'.indexOf(a) - 'rbg'.indexOf(b));
+  cols.forEach(k => { const b = el('button', 'card'); b.innerHTML = holesSpan(k) + swatch(k, 'threads') + `<span class="t"><b>${MEAN.threads[k][0]}</b><i>${MEAN.threads[k][1]}</i></span>`; b.onclick = () => hang({ k }); t.appendChild(b); });
+  for (let k = 0; k < P.wheels; k++){
+    const b = el('button', 'card wide');
+    b.innerHTML = holesSpan('back') + `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]}">↺</span><span class="t"><b>Go back${P.wheels > 1 ? `<span class="wchip" style="background:${WCOL[k]}">wheel ${WNAME[k]}</span>` : ''}</b><i>Jumps back up the chain, so the cards above it are woven again. You choose how many times.</i></span>`;
+    b.onclick = () => hang({ k: 'back', w: k, toId: null }); t.appendChild(b);
+  }
+}
+function hang(c){
+  if (running || solved) return;
+  if (chain.length >= P.slots){ hint(`Only ${w(P.slots)} cards fit. Tap × on a card to take it off.`); return; }
+  if (c.k === 'back' && !chain.length){ hint('Hang a stitch card first: Go back needs a card to jump back to.'); return; }
+  c.id = ++uid; if (c.k === 'back') c.toId = chain[0].id;
+  chain.push(c); clearResult(); drawChain();
+}
+function engineChain(ch){ ch = ch || chain; return ch.map(c => c.k === 'back' ? { k: 'back', w: c.w, to: Math.max(0, ch.findIndex(x => x.id === c.toId)) } : { k: c.k }); }
+
+function chainCard(c, i, ch, mode, editable){
+  const b = el('div', 'card' + (editable ? '' : ' fixed')); b.dataset.i = i;
+  if (c.k !== 'back'){
+    const [t, s] = MEAN[mode][c.k];
+    b.innerHTML = holesSpan(c.k) + `<span class="num">${i+1}</span>` + swatch(c.k, mode) + `<span class="t"><b>${t}</b><i>${s}</i></span>` + (editable ? '<button class="del" aria-label="take off">×</button>' : '');
+  } else {
+    const opts = ch.slice(0, i).map((x, j) => x.k === 'back' ? '' : `<option value="${x.id}" ${x.id === c.toId ? 'selected' : ''}>card ${j+1}</option>`).join('');
+    const to = ch.findIndex(x => x.id === c.toId) + 1;
+    b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span><span class="sw back" style="border-color:${WCOL[c.w]};color:${WCOL[c.w]}">↺</span>` +
+      `<span class="t"><b>Go back to ${editable ? `<select aria-label="jump to">${opts}</select>` : 'card ' + to}${P.wheels > 1 || (mode && mode !== 'threads') ? `<span class="wchip" style="background:${WCOL[c.w]}">wheel ${WNAME[c.w]}</span>` : ''}</b>` +
+      (editable ? `<span class="rep">Times <button data-d="-1" aria-label="fewer times">−</button><b>${set[c.w]}</b><button data-d="1" aria-label="more times">+</button></span>` : `<span class="rep">This loop is woven <b>${set[c.w]}</b> times</span>`) +
+      `<i>Cards ${ch.findIndex(x => x.id === c.toId) + 1} to ${i} are woven ${set[c.w] === 1 ? 'once' : set[c.w] + ' times'}; wheel ${WNAME[c.w]} counts. Then the machine carries on.</i></span>` + (editable ? '<button class="del" aria-label="take off">×</button>' : '');
+    if (editable) b.querySelectorAll('.rep button').forEach(bt => bt.onclick = e => { e.stopPropagation(); if (running || solved) return; set[c.w] = Math.max(1, Math.min(Lo.WMAX, set[c.w] + +bt.dataset.d)); clearResult(); drawChain(); });
+    if (editable){ const sel = b.querySelector('select'); sel.onchange = () => { c.toId = +sel.value; clearResult(); drawChain(); }; sel.onclick = e => e.stopPropagation(); }
+  }
+  if (editable){ const d = b.querySelector('.del'); d.onclick = () => takeOff(i); }
+  return b;
+}
+function takeOff(i){
+  if (running || solved) return;
+  const gone = chain[i]; chain.splice(i, 1);
+  chain.forEach((c, j) => { if (c.k === 'back' && (c.toId === gone.id || chain.findIndex(x => x.id === c.toId) >= j)) c.toId = chain[0] ? chain[0].id : null; });
+  while (chain.length && chain[0].k === 'back') chain.shift();
+  clearResult(); drawChain();
+}
+function drawChain(){
+  const c = $('#chain'); c.innerHTML = '';
+  chain.forEach((x, i) => c.appendChild(chainCard(x, i, chain, 'threads', !solved && !running)));
+  if (!solved) for (let k = chain.length; k < P.slots; k++) c.appendChild(el('div', 'slot', `<span class="num">${k+1}</span>empty`));
+  $('#chainlbl').textContent = `Your chain · ${w(P.slots)} cards fit`;
+  if (!chain.length) hint('Tap a card below to hang it on your chain.');
+  else if (!solved) hint(chain.length < P.slots ? 'Hang more cards, or run the loom to see what it weaves.' : 'The chain is full. Run it, or tap × to take a card off.');
+  $('#run').disabled = !chain.length;
+  requestAnimationFrame(() => drawArcs());
+}
+function drawArcs(svgSel, chainSel, ch, liveIdx){
+  const svg = $(svgSel || '#arcs'), cont = $(chainSel || '#chain'); ch = ch || chain; if (!svg || !cont) return;
+  const cards = [...cont.querySelectorAll('.card')]; svg.innerHTML = '';
+  svg.setAttribute('height', cont.offsetHeight);
+  ch.forEach((c, i) => {
+    if (c.k !== 'back' || !cards[i]) return;
+    const j = Math.max(0, ch.findIndex(x => x.id === c.toId)); const a = cards[j], b = cards[i]; if (!a) return;
+    const y1 = a.offsetTop + a.offsetHeight / 2, y2 = b.offsetTop + b.offsetHeight / 2;
+    // deeper (outer) loops further left
+    const span = i - j; const x = Math.max(4, 28 - span * 4 - c.w * 3);
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', `M33 ${y2} H${x + 8} Q${x} ${y2} ${x} ${y2 - 8} V${y1 + 8} Q${x} ${y1} ${x + 8} ${y1} H30`);
+    p.setAttribute('stroke', c.w ? '#2E7D6B' : '#6B3A22'); if (liveIdx === i) p.classList.add('live');
+    p.setAttribute('marker-end', ''); svg.appendChild(p);
+    const head = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    head.setAttribute('d', `M26 ${y1 - 5} L33 ${y1} L26 ${y1 + 5}`); head.setAttribute('stroke', c.w ? '#2E7D6B' : '#6B3A22'); svg.appendChild(head);
+  });
+}
+window.addEventListener('resize', () => drawArcs());
+function hint(t){ $('#hint').textContent = t; }
+function clearResult(){ if (solved) return; $('#result').className = 'result'; $('#after').innerHTML = ''; drawCloth([]); drawWheels(); }
 function showResult(id, ok, html){ const r = $(id); r.className = 'result on ' + (ok ? 'ok' : 'no'); r.innerHTML = html; }
 
-async function animate(cards, wheel, wanted, opts){
-  opts = opts || {};
-  const ev = weave(cards, wheel); const woven = []; const chainEls = [...$('#chain').querySelectorAll('.card')];
-  const arc = $('#backarc');
-  let speed = opts.fast ? 45 : 260; let lap = 0;
-  setWheel(wheel, false);
+async function animate(){
+  const eng = engineChain(); const res = Lo.weave(eng, set, null, true);
+  const ev = res.ev; const woven = []; const left = set.slice();
+  const cards = [...$('#chain').querySelectorAll('.card')];
+  const delay = Math.max(70, Math.min(300, 6000 / Math.max(1, ev.length)));
+  drawWheels(left);
   for (const e of ev){
-    chainEls.forEach(x => x.classList.remove('live'));
-    const ce = chainEls[e.i]; if (ce) ce.classList.add('live');
-    if (e.t === 'stitch'){ woven.push(e.c); drawCloth(wanted, woven); const sts = $('#cloth').children; const last = sts[woven.length-1]; if (last) last.classList.add('pop'); hint(`Card ${e.i+1}: ${e.c==='r'?'a red':'a blue'} stitch.`); }
-    if (e.t === 'back'){
-      setWheel(e.wheel, true); lap++;
-      if (ce){ const top = chainEls[0].offsetTop, bot = ce.offsetTop + ce.offsetHeight; arc.style.top = (top + 14) + 'px'; arc.style.height = (bot - top - 28) + 'px'; arc.classList.add('on'); }
-      hint(`Card ${e.i+1}: Go back to the top. The wheel clicks down to ${e.wheel}.`);
-      await sleep(speed * 1.6); arc.classList.remove('on');
-      if (lap >= 2 && !opts.fast) speed = 80;
-      continue;
+    cards.forEach(x => x.classList.remove('live')); if (cards[e.i]) cards[e.i].classList.add('live');
+    if (e.t === 'stitch'){
+      woven.push(e.c); drawCloth(woven); const s = $('#cloth').children[woven.length - 1]; if (s) s.classList.add('pop');
+      hint(`Card ${e.i+1}: a ${CNAME[e.c]} stitch.`);
+      if (woven.length > P.target.length + 4) break;
+    } else if (e.t === 'back'){
+      tickWheel(e.w, e.left); drawArcs(null, null, null, e.i);
+      hint(`Card ${e.i+1}: wheel ${WNAME[e.w]} clicks down to ${e.left}. Back to card ${e.to+1}.`);
+      await sleep(delay * 1.4); drawArcs(); continue;
+    } else if (e.t === 'spring'){
+      tickWheel(e.w, 0); hint(`Card ${e.i+1}: wheel ${WNAME[e.w]} reaches 0. It springs back to ${e.set}, and the machine carries on.`);
+      await sleep(delay * 1.4); tickWheel(e.w, e.set); continue;
     }
-    if (e.t === 'last'){ setWheel(0, true); hint(`Card ${e.i+1}: the wheel clicks down to 0, so no going back. The loom carries on.`); }
-    if (e.t === 'pass'){ hint(`Card ${e.i+1}: the wheel shows 0, so no going back. The loom carries on.`); }
-    await sleep(speed);
+    await sleep(delay);
   }
-  chainEls.forEach(x => x.classList.remove('live'));
-  return woven;
+  cards.forEach(x => x.classList.remove('live'));
+  return { woven, status: res.status };
 }
-
-function judge(wanted, woven){
-  for (let k = 0; k < Math.min(wanted.length, woven.length); k++) if (wanted[k] !== woven[k]) return { ok: false, at: k, why: `Stitch ${k+1} came out ${woven[k]==='r'?'red':'blue'}. The order wanted ${wanted[k]==='r'?'red':'blue'}.` };
-  if (woven.length < wanted.length) return { ok: false, at: null, why: woven.length ? `The loom wove ${w(woven.length)} stitch${woven.length>1?'es':''} and stopped: it had read every card. The order needs ${wanted.length}.` : 'The loom wove nothing.' };
-  if (woven.length > wanted.length) return { ok: false, at: wanted.length, why: `The loom wove ${woven.length} stitches. The order wanted ${wanted.length}.` };
+function judge(woven, status){
+  const t = P.target;
+  if (status === 'cap') return { ok: false, at: null, why: 'The loom ran on and on, and the attendant stopped it.' };
+  for (let k = 0; k < Math.min(t.length, woven.length); k++) if (t[k] !== woven[k]) return { ok: false, at: k, why: `Stitch ${k+1} came out ${CNAME[woven[k]]}. The order wanted ${CNAME[t[k]]}.` };
+  if (woven.length < t.length) return { ok: false, at: null, why: `The loom wove ${woven.length} stitch${woven.length === 1 ? '' : 'es'} and stopped: it had read every card. The order needs ${t.length}.` };
+  if (woven.length > t.length) return { ok: false, at: t.length, why: `The loom wove more than the order's ${t.length} stitches.` };
   return { ok: true };
 }
 
 $('#run').addEventListener('click', async () => {
   if (running || !chain.length) return;
-  const lm = LOOMS[L]; running = true; $('#run').disabled = true; $('#result').className = 'result';
-  runsByLoom[L]++;
-  const wanted = want(lm, rounds);
-  const woven = await animate(chain, rounds, wanted);
-  const j = judge(wanted, woven);
-  if (!j.ok) drawCloth(wanted, woven, j.at);
-  running = false; $('#run').disabled = false;
-  if (j.ok){
-    solved = true; cardsAt[L] = chain.length;
-    showResult('#result', true, `<span class="bell">Bell!</span> The loom wove all ${wanted.length} stitches, just as ordered, with ${w(chain.length)} card${chain.length>1?'s':''}.` +
-      (L === 1 ? `<br><br>Three cards, twenty-four stitches. Go back did the rest.` : ''));
-    hint(''); $('#tray').style.display = 'none'; $('#traylbl').style.display = 'none';
-    $('#chain').querySelectorAll('.x').forEach(x => x.remove()); $('#chain').querySelectorAll('.slot').forEach(x => x.remove());
-    if (L === 2){ $('#run').style.display = 'none'; offerBet(); }
-    else { $('#run').style.display = 'none'; $('#next').style.display = 'block'; $('#next').textContent = L === 1 ? 'Next loom' : 'Next loom'; }
-  } else {
-    let extra = '';
-    if (L === 1 && !chain.includes('back') && woven.length < wanted.length) extra = `<br><br>Only four cards fit, so counting the stitches out one card at a time can't work. Try the new card, <b>Go back</b>.`;
-    else if (chain.includes('back') && lm.rounds && woven.length > wanted.length) extra = '<br><br>Everything above Go back is woven again on each round.';
-    showResult('#result', false, j.why + extra + '<br><span class="small">Change the chain and run it again.</span>');
-    hint('');
+  running = true; $('#run').disabled = true; $('#result').className = 'result'; $('#after').innerHTML = '';
+  drawChain();
+  const { woven, status } = await animate();
+  running = false;
+  const j = judge(woven, status);
+  if (!j.ok){
+    fails++; drawCloth(woven, j.at); drawWheels(); drawChain();
+    let help = '';
+    if (P.tier === 'easy1' && !chain.some(c => c.k === 'back')) help = `<br><br>Only ${w(P.slots)} cards fit, so counting stitches out card by card can't work. Try the <b>Go back</b> card.`;
+    if (P.tier === 'hard' && woven.length && j.at === null) help = '<br><br>Remember: a wheel that reaches 0 springs back, so an inner loop can run again on every round of the outer one.';
+    if (!help && j.at === null && woven.length < P.target.length){
+      const backs = chain.map((c, i) => [c, i]).filter(([c]) => c.k === 'back');
+      if (backs.length) help = '<br><br>' + backs.map(([c, i]) => `The Go back on card ${i+1} was set to <b>${set[c.w]}</b> time${set[c.w] === 1 ? '' : 's'}, so cards ${chain.findIndex(x => x.id === c.toId) + 1} to ${i} were woven ${set[c.w] === 1 ? 'once' : set[c.w] + ' times'}.`).join(' ');
+    }
+    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain or the number of times, and run it again.</span>');
+    if (fails >= 3) { $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; }
+    $('#run').disabled = false;
+    return;
   }
+  win(false);
 });
-$('#next').addEventListener('click', () => { if (L < 2) startLoom(L + 1); else startSwitch(); });
-
-// loom 3: a new order arrives
-function offerBet(){
-  const b = $('#bet');
-  b.innerHTML = `<div class="bet"><p><b>A new order comes in:</b> the same pattern, but <b>9 times</b> over. The wheel will show 9.</p><p>Will your cards still work as they are?</p>
-    <button class="btn half" id="betyes">Yes, the same cards</button><button class="btn half" id="betno">No, I'll need new ones</button></div>`;
-  $('#betyes').onclick = () => runNew(9, 'yes'); $('#betno').onclick = () => runNew(9, 'no');
+function win(shown){
+  solved = true; hint('');
+  const n = chain.length;
+  results[L] = { cards: n, par: P.par, shown, tier: P.tier };
+  lastChain = chain.map(c => ({ ...c })); lastSet = set.slice();
+  $('#tray').style.display = 'none'; $('#traylbl').style.display = 'none'; $('#run').style.display = 'none';
+  drawChain(); drawWheels();
+  const parLine = shown ? `That was ${w(P.par)} cards, the fewest it can be done in.` : n === P.par ? `${w(n)[0].toUpperCase() + w(n).slice(1)} cards: <b>the fewest possible.</b>` : `${w(n)[0].toUpperCase() + w(n).slice(1)} cards. It can be done in ${w(P.par)}.`;
+  showResult('#result', true, `<span class="bell">Bell!</span> All ${P.target.length} stitches, just as ordered. ${parLine}`);
+  const a = $('#after'); a.innerHTML = '';
+  if (!shown && n > P.par){ const t = el('button', 'btn quiet', 'Try it in fewer cards'); t.onclick = () => { solved = false; $('#tray').style.display = ''; $('#traylbl').style.display = ''; $('#run').style.display = 'block'; $('#result').className = 'result'; a.innerHTML = ''; drawCloth([]); drawChain(); drawWheels(); }; a.appendChild(t); }
+  const nx = el('button', 'btn verd', L + 1 < looms.length ? 'Next loom' : 'Same cards, other things'); nx.onclick = () => L + 1 < looms.length ? startLoom(L + 1) : startSwitch(); a.appendChild(nx);
 }
-async function runNew(n, bet){
-  if (running) return; running = true; if (bet) loom3.bet = bet;
-  $('#bet').innerHTML = ''; $('#result').className = 'result';
-  rounds = n; setWheel(n, true);
-  $('#wheeltxt').innerHTML = `The new order: <b>${n}</b> rounds. Your chain has not changed.`;
-  const wanted = want(LOOMS[2], n);
-  drawCloth(wanted, []); await sleep(500);
-  const woven = await animate(chain, n, wanted, { fast: n > 9 });
-  running = false; hint('');
-  const j = judge(wanted, woven);
-  if (n === 9){
-    loom3.nine = true;
-    const said = loom3.bet === 'yes' ? 'You said they would. They did.' : 'You thought it would need new cards. It didn\'t.';
-    showResult('#result', true, `<span class="bell">Bell!</span> ${wanted.length} stitches, and not one card changed. ${said}<br><br>Look at your cards: none of them says 5 or 9. Only the wheel knew the number.`);
-    $('#bet').innerHTML = `<button class="btn" id="b30">Try a huge order: 30 rounds</button>`;
-    $('#b30').onclick = () => runNew(30);
-  } else {
-    loom3.thirty = true;
-    showResult('#result', j.ok, `<span class="bell">Bell!</span> Ninety stitches. Still the same ${w(chain.length)} cards.`);
-  }
-  $('#next').style.display = 'block'; $('#next').textContent = 'Next loom';
+async function showMe(){
+  if (running) return;
+  chain = P.sol.map(c => ({ ...c, id: ++uid }));
+  chain.forEach(c => { if (c.k === 'back') c.toId = chain[c.to].id; });
+  set = P.set.map(v => Math.max(1, v)); $('#after').innerHTML = ''; $('#result').className = 'result';
+  drawChain(); drawWheels(); drawCloth([]);
+  hint('Here is one way. Watch it run.'); running = true; await sleep(700);
+  const { woven } = await animate(); running = false; drawCloth(woven); win(true);
 }
 
-// ---- loom 4: the switch
+// ---- same cards, other things (Note A)
 let mode = 'threads', tried = {};
 function startSwitch(){
   mode = 'threads'; tried = {};
+  if (!lastChain){ lastChain = [{k:'r',id:1},{k:'r',id:2},{k:'b',id:3},{k:'back',w:0,toId:1}]; lastSet = [3, 2]; }
   $('#result4').className = 'result'; $('#next4').style.display = 'none'; $('#run4').style.display = 'block';
   $('#out').innerHTML = ''; $('#outcount').textContent = '';
   drawSwitch(); showScreen('s-switch');
 }
-function chain4(){ return cardsAt[2] ? chain.slice() : ['r','r','b','back']; }
 function drawSwitch(){
   document.querySelectorAll('#switch button').forEach(b => { b.classList.toggle('on', b.dataset.m === mode); b.querySelector('.ck').textContent = tried[b.dataset.m] ? '✓ run' : ''; });
   $('#mword').textContent = mode === 'threads' ? 'threads' : mode === 'notes' ? 'notes' : 'sums';
-  const c = $('#chain4'); c.innerHTML = '';
-  chain4().forEach((k, i) => { const b = makeCard(k, mode); b.classList.add('fixed'); b.insertAdjacentHTML('beforeend', `<span class="num">${i+1}</span>`); c.appendChild(b); });
-  $('#outlbl').textContent = mode === 'threads' ? 'What came out: cloth' : mode === 'notes' ? 'What came out: a tune' : 'What came out: numbers (the number starts at 0)';
-  $('#wheel4').textContent = '5';
+  const c = $('#chain4'); c.innerHTML = ''; const saveP = P; P = { wheels: Math.max(...lastChain.map(x => x.k === 'back' ? x.w + 1 : 0), 0) };
+  const saveSet = set; set = lastSet;
+  lastChain.forEach((k, i) => c.appendChild(chainCard(k, i, lastChain, mode, false)));
+  const wb = $('#wheels4'); wb.innerHTML = '';
+  for (let k = 0; k < P.wheels; k++) wb.insertAdjacentHTML('beforeend', `<div class="wbox"><div class="wheel ${k ? 'wB' : ''}" id="w4${k}"><span>${lastSet[k]}</span></div><div class="wl"><b>Wheel ${WNAME[k]}</b>set to ${lastSet[k]}</div></div>`);
+  P = saveP; set = saveSet;
+  $('#outlbl').textContent = mode === 'threads' ? 'What came out: cloth' : mode === 'notes' ? 'What came out: a tune' : 'What came out: numbers (starting from 0)';
+  requestAnimationFrame(() => drawArcs('#arcs4', '#chain4', lastChain));
 }
 document.querySelectorAll('#switch button').forEach(b => b.addEventListener('click', () => { if (running) return; mode = b.dataset.m; $('#out').innerHTML = ''; $('#outcount').textContent = ''; $('#result4').className = 'result'; drawSwitch(); }));
 
 let actx = null;
-function tone(f){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); const o = actx.createOscillator(), g = actx.createGain(); o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, actx.currentTime); g.gain.exponentialRampToValueAtTime(0.18, actx.currentTime + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.28); o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime + 0.3); } catch (e) {} }
+function tone(f){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); const o = actx.createOscillator(), g = actx.createGain(); o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, actx.currentTime); g.gain.exponentialRampToValueAtTime(0.16, actx.currentTime + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.22); o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime + 0.25); } catch (e) {} }
 
 $('#run4').addEventListener('click', async () => {
   if (running) return; running = true; $('#run4').disabled = true; $('#result4').className = 'result';
-  const cards = chain4(); const ev = weave(cards, 5); const els = [...$('#chain4').querySelectorAll('.card')];
+  const eng = engineChain(lastChain); const ev = Lo.weave(eng, lastSet, null, true).ev; const els = [...$('#chain4').querySelectorAll('.card')];
   const out = $('#out'); out.innerHTML = '';
   let holder;
-  if (mode === 'threads'){ holder = el('div', 'cloth'); holder.style.gridTemplateColumns = 'repeat(12,1fr)'; out.appendChild(holder); }
+  if (mode === 'threads'){ holder = el('div', 'cloth'); holder.style.gridTemplateColumns = 'repeat(8,1fr)'; out.appendChild(holder); }
   if (mode === 'notes'){ holder = el('div', 'stave', '<div class="lines"></div>'); out.appendChild(holder); }
   if (mode === 'numbers'){ holder = el('div', 'nums'); out.appendChild(holder); }
   let num = 0, k = 0; const total = ev.filter(e => e.t === 'stitch').length;
+  const delay = mode === 'notes' ? 230 : Math.max(70, Math.min(200, 4000 / ev.length));
   for (const e of ev){
     els.forEach(x => x.classList.remove('live')); if (els[e.i]) els[e.i].classList.add('live');
-    if (e.t === 'back' || e.t === 'last'){ $('#wheel4').textContent = e.wheel; await sleep(120); continue; }
-    if (e.t !== 'stitch'){ await sleep(80); continue; }
-    if (mode === 'threads'){ const s = el('div', 'st pop ' + e.c); holder.appendChild(s); }
-    if (mode === 'notes'){ const n = el('div', 'nh ' + e.c); const x = 8 + k * (100 / (total + 1)); n.style.left = `calc(${x}% )`; n.style.top = (e.c === 'r' ? 26 : 66) + 'px'; holder.appendChild(n); tone(e.c === 'r' ? 392 : 261.6); }
-    if (mode === 'numbers'){ num = e.c === 'r' ? num + 1 : num * 2; const s = el('span', e.c, String(num)); holder.appendChild(s); }
-    k++; $('#outcount').textContent = `${k}`;
-    await sleep(mode === 'notes' ? 300 : 200);
+    if (e.t === 'back' || e.t === 'spring'){ const wl = $('#w4' + e.w); if (wl) wl.querySelector('span').textContent = e.t === 'spring' ? e.set : e.left; await sleep(delay * .6); continue; }
+    if (mode === 'threads') holder.appendChild(el('div', 'st pop ' + e.c));
+    if (mode === 'notes'){ const n = el('div', 'nh ' + e.c); n.style.left = `calc(${4 + k * (92 / Math.max(1, total - 1))}% - 7px)`; n.style.top = ({ r: 26, g: 46, b: 66 }[e.c]) + 'px'; holder.appendChild(n); tone({ r: 392, g: 329.6, b: 261.6 }[e.c]); }
+    if (mode === 'numbers'){ num = e.c === 'r' ? num + 1 : e.c === 'b' ? num * 2 : num - 1; holder.appendChild(el('span', e.c, String(num))); }
+    k++; $('#outcount').textContent = String(k);
+    await sleep(delay);
   }
   els.forEach(x => x.classList.remove('live'));
   running = false; $('#run4').disabled = false; tried[mode] = true; drawSwitch();
-  const msg = mode === 'threads' ? `Cloth: ${total} stitches, red, red, blue, five times.` :
-              mode === 'notes' ? `A tune: ${total} notes, high, high, low, five times. Same holes, same order. Only the meaning changed.` :
-              `Sums: the number went from 0 to ${num}. The same cards that wove cloth just did arithmetic.`;
-  const left = ['threads','notes','numbers'].filter(m => !tried[m]);
-  showResult('#result4', true, msg + (left.length ? `<br><span class="small">Flip the switch to ${left.map(m => m === 'numbers' ? 'Numbers' : m === 'notes' ? 'Notes' : 'Threads').join(' or ')} and run again.</span>` :
-    '<br><br>Lovelace said the machine could work on anything you can write down in symbols: numbers, but also music. The cards don\'t care what the holes stand for.'));
-  if (!left.length){ $('#run4').style.display = 'none'; $('#next4').style.display = 'block'; }
+  const msg = mode === 'threads' ? `Cloth: ${total} stitches, as on the loom.` :
+              mode === 'notes' ? `A tune of ${total} notes. Same holes, same order, same wheels. Only the meaning changed.` :
+              `Sums: the number went from 0 to ${num}. The cards that wove cloth just did arithmetic.`;
+  const done = Object.keys(tried).length;
+  showResult('#result4', true, msg + (done < 2 ? '<br><span class="small">Flip the switch and run them again.</span>' :
+    '<br><br>Lovelace said the machine could work on anything you can write in symbols: numbers, but also music. The cards don\'t care what the holes stand for.'));
+  if (done >= 2){ $('#next4').style.display = 'block'; }
 });
 $('#next4').addEventListener('click', startLast);
 
 // ---- the last order
 function startLast(){
   const t = $('#traylast'); t.innerHTML = '';
-  ['r','b','back'].forEach(k => { const b = makeCard(k, 'threads'); b.classList.add('fixed'); t.appendChild(b); });
+  ['r','b','g'].forEach(k => { const b = el('div', 'card fixed'); b.innerHTML = holesSpan(k) + swatch(k, 'threads') + `<span class="t"><b>${MEAN.threads[k][0]}</b></span>`; t.appendChild(b); });
+  const b = el('div', 'card fixed wide'); b.innerHTML = holesSpan('back') + `<span class="sw back">↺</span><span class="t"><b>Go back</b></span>`; t.appendChild(b);
   $('#lastout').innerHTML = ''; $('#resultlast').className = 'result'; $('#nextlast').style.display = 'none'; $('#runlast').style.display = 'block';
   showScreen('s-last');
 }
@@ -555,14 +643,13 @@ $('#runlast').addEventListener('click', async () => {
   o.innerHTML = '<div class="nothing">nothing</div>';
   await sleep(600);
   running = false; $('#runlast').disabled = false; $('#runlast').style.display = 'none';
-  showResult('#resultlast', true, `The machine wove nothing. There was no card to read, so it did nothing at all.<br><br>Everything it made today, the cloth, the tune, the sums, came from cards you hung. Lovelace put it like this in 1843: <i>“It can do whatever we know how to order it to perform.”</i> And nothing else.`);
+  showResult('#resultlast', true, `The machine wove nothing. There was no card to read, so it did nothing at all.<br><br>Everything it made today, the cloth, the tune, the sums, came from cards you hung. Even your cleverest chain was your idea, not the machine's. Lovelace put it like this in 1843: <i>“It can do whatever we know how to order it to perform.”</i> And nothing else.`);
   $('#nextlast').style.display = 'block';
 });
 $('#nextlast').addEventListener('click', startCoda);
 
 // ---- the coda: Lovelace's chain for the Numbers of Bernoulli, run by the ported mechanism
 const M = window.MECH;
-let codaDone = false;
 function startCoda(){
   const g = $('#cgrid'); g.innerHTML = '';
   for (let k = 1; k <= 25; k++){ const c = el('div', 'cc' + (k >= 13 && k <= 23 ? ' loop' : ''), String(k)); c.id = 'cc' + k; g.appendChild(c); }
@@ -575,30 +662,34 @@ $('#runcoda').addEventListener('click', async () => {
   if (running) return; running = true; $('#runcoda').disabled = true;
   const res = M.bernoulliRun(4); const strip = $('#strip'); strip.innerHTML = '';
   for (let n = 1; n <= 4; n++){
-    const seq = opSequence(n); const used = new Set();
-    for (const op of seq){
+    for (const op of opSequence(n)){
       document.querySelectorAll('.cc.lit').forEach(x => x.classList.remove('lit'));
-      if (op === 'print'){ continue; }
-      used.add(op); const c = $('#cc' + op); if (c) c.classList.add('lit');
+      if (op === 'print') continue;
+      const c = $('#cc' + op); if (c) c.classList.add('lit');
       await sleep(70);
     }
     document.querySelectorAll('.cc.lit').forEach(x => x.classList.remove('lit'));
-    const row = el('div', 'row', `<span>Number&nbsp;${n}</span><b>${M.fmt(res.numbers[n-1])}</b><span class="small">${res.chains[n-1].opCards} cards${n === 4 ? ', the brown ones read twice' : ''}</span>`);
-    strip.appendChild(row);
+    strip.appendChild(el('div', 'row', `<span>Number&nbsp;${n}</span><b>${M.fmt(res.numbers[n-1])}</b><span class="small">${res.chains[n-1].opCards} cards${n === 4 ? ', the brown ones read twice' : ''}</span>`));
     await sleep(500);
   }
   running = false; $('#runcoda').style.display = 'none';
-  showResult('#resultcoda', true, `Each number is worked out from the ones before. From the third number on she needs <b>25 cards</b>, and never more: for the hundredth number, the cards in brown just go round more times. It is your Go back card, in numbers.`);
-  codaDone = true; $('#nextcoda').style.display = 'block';
+  showResult('#resultcoda', true, `Each number is worked out from the ones before. The brown cards go round inside her chain, and the whole chain goes round again for each new number: a loop inside a loop. From the third number on she needs <b>25 cards</b>, and never more. For the hundredth number, the loops just go round more times.`);
+  $('#nextcoda').style.display = 'block';
 });
 $('#nextcoda').addEventListener('click', () => { drawVerdict(); showScreen('s-end'); });
 
 function drawVerdict(){
-  const c3 = cardsAt[2] || 4;
-  const did = `You made a machine weave, play a tune and do sums. Your last chain had just ${w(c3)} cards, and it wove 15 stitches, then 27${loom3.thirty ? ', then 90,' : ''} without one card changing.`;
-  const paper = `That is what Lovelace's Notes are about. A card that sends the machine back lets a few cards do a job of any size: twenty-five cards for every Number of Bernoulli, however far you go. And the same cards work on anything written in symbols, numbers or notes.`;
-  const means = `But the machine never thought of anything. Everything it did, someone ordered.`;
-  $('#verdict').innerHTML = `<p class="head">The machine did exactly what you told it.</p><p>${did}</p><p>${paper}</p><p><b>${means}</b></p>`;
+  const done = results.filter(Boolean);
+  const own = done.filter(r => !r.shown);
+  const cards = own.reduce((s, r) => s + r.cards, 0), par = own.reduce((s, r) => s + r.par, 0);
+  const atPar = own.filter(r => r.cards === r.par).length;
+  const hard = done.filter(r => r.tier === 'hard'), hardOwn = hard.filter(r => !r.shown).length;
+  const rows = looms.map((p, i) => { const r = results[i]; return `<span>Loom ${i+1} <span class="small">${p.tier.startsWith('easy') ? 'easy' : p.tier}</span></span><span>${r ? (r.shown ? 'shown' : r.cards + ' cards') : '—'}</span><span class="small">fewest ${p.par}</span>`; }).join('');
+  const head = hardOwn === 2 ? 'You built loops inside loops.' : own.length === looms.length ? 'Every order woven.' : 'The machine did exactly what you told it.';
+  const did = `You wove ${w(own.length)} of the ${w(looms.length)} orders yourself, ${atPar === own.length && own.length ? 'every one in the fewest cards possible' : `${w(atPar)} of them in the fewest cards possible`}${hardOwn ? `, including ${hardOwn === 2 ? 'both' : 'one'} of the hard ones` : ''}. ${own.length ? (cards === par ? `${cards} cards in all, the least possible.` : `${cards} cards in all, where ${par} was the least.`) : ''}`;
+  const paper = `That is what Lovelace's Notes are about. A card that sends the machine back lets a few cards do a job of any size, and loops can sit inside loops: her chain for the Numbers of Bernoulli needs twenty-five cards, however far you go. And the same cards work on anything written in symbols, numbers or notes.`;
+  const means = `But the machine never thought of anything. Every clever chain was someone's idea.`;
+  $('#verdict').innerHTML = `<p class="head">${head}</p><p>${did}</p><div class="score"><span class="h">Loom</span><span class="h">You</span><span class="h"></span>${rows}</div><p>${paper}</p><p><b>${means}</b></p>`;
 }
 })();
 </script>
