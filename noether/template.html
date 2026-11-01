@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noether's Press</title>
+<script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<meta name="description" content="Emmy Noether (1918) as a stamping press: pull a symmetry, the press stamps a law, an inspector tests it with fakes. Then warp the clock and watch the energy tag come out blank. Hilbert's question, answered.">
+<style>
+@font-face{font-family:'Chakra';font-weight:700;src:url(data:font/woff2;base64,/*__FONT_CHAKRA__*/) format('woff2');font-display:block}
+@font-face{font-family:'Saira';font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_SAIRA__*/) format('woff2');font-display:block}
+@font-face{font-family:'Tech';font-weight:400;src:url(data:font/woff2;base64,/*__FONT_MONO__*/) format('woff2');font-display:block}
+:root{
+  --gun:#15181C; --steel:#23282E; --steel2:#2C323A; --brush:#9AA3AB; --brush2:#D7DDE2; --dim:#5C656E;
+  --cyan:#2BF0FF; --mag:#FF2ECC; --haz:#F2CB05;
+  --disp:'Chakra','Arial Narrow',Impact,sans-serif; --text:'Saira','Helvetica Neue',Arial,sans-serif; --mono:'Tech','Courier New',monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--gun)}
+body{color:var(--brush2);font-family:var(--text);font-size:17px;line-height:1.4;min-height:100vh;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px),linear-gradient(180deg,#1A1E23,#111417 60%,#0E1013)}
+.screen{display:none;max-width:460px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
+.screen.on{display:block}
+p{margin:.5em 0}
+a{color:var(--cyan)}
+.disp{font-family:var(--disp);letter-spacing:.08em;text-transform:uppercase}
+h1.title{font-family:var(--disp);font-weight:700;text-transform:uppercase;color:var(--brush2);font-size:46px;line-height:.95;margin:26px 0 4px;letter-spacing:.04em}
+h1.title small{display:block;font-size:14px;letter-spacing:.3em;color:var(--cyan);margin-bottom:10px;text-shadow:0 0 8px rgba(43,240,255,.7)}
+h2{font-family:var(--disp);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);font-size:15px;margin:20px 0 6px;text-shadow:0 0 8px rgba(43,240,255,.5)}
+h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brush2);font-size:16px;margin:16px 0 4px}
+.rule{height:2px;background:linear-gradient(90deg,var(--cyan),rgba(43,240,255,.1));box-shadow:0 0 10px rgba(43,240,255,.5);margin:10px 0}
+.lede{font-size:17px;margin:8px 0;color:var(--brush2)}
+.aim{font-family:var(--disp);font-size:19px;line-height:1.25;letter-spacing:.06em;text-transform:uppercase;margin:12px 0;padding:10px 12px;border-left:4px solid var(--cyan);background:rgba(43,240,255,.06);color:#fff;position:relative}
+.small{font-size:15px;color:var(--brush)}
+.sig{padding:14px 0 18px;font-size:15px;text-align:center;font-family:var(--text)}
+.sig a{color:var(--dim);font-style:italic;text-decoration:none}
+/* levers and buttons: steel bars with a lit edge */
+.btn{display:block;width:100%;min-height:56px;padding:12px 14px;margin:10px 0;background:linear-gradient(180deg,#3A4149,#262B31 55%,#1E2227);color:var(--brush2);border:1px solid #0B0D0F;border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 12px rgba(43,240,255,.25);border-radius:0;font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;user-select:none;text-align:center}
+.btn:active,.btn.pressed{transform:translateY(2px);border-bottom-width:2px;color:#fff}
+.btn:disabled{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);cursor:default;transform:none}
+.btn.small-btn{min-height:44px;font-size:15px;padding:9px 12px}
+.btn.go{color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 18px rgba(43,240,255,.5)}
+.row{display:flex;gap:10px}.row .btn{flex:1}
+.help-q{position:absolute;right:0;top:0;width:40px;height:40px;border:1px solid #0B0D0F;border-bottom:3px solid var(--cyan);background:linear-gradient(180deg,#3A4149,#262B31);color:var(--brush2);font-family:var(--disp);font-weight:700;font-size:22px;line-height:36px;text-align:center;cursor:pointer}
+.top{position:relative;padding-right:48px;margin-top:10px}
+.top .aim{font-size:16px;padding:8px 10px}
+.band{font-family:var(--disp);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:14px;color:var(--cyan);text-shadow:0 0 8px rgba(43,240,255,.7);margin:8px 0 4px}
+.line{font-size:16px;color:var(--brush2);margin:0 0 8px;min-height:22px}
+/* the world window */
+.window{width:100%;max-width:348px;margin:0 auto;display:block;position:relative;background:#0B0D10;border:1px solid #0B0D0F;box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08)}
+.window svg{width:100%;height:auto;display:block}
+/* the Auditor's panel */
+.panel{width:100%;max-width:348px;margin:8px auto 0;background:linear-gradient(180deg,#2A3037,#1E2227);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);display:flex;align-items:stretch;height:84px;position:relative}
+.panel .gauge{width:150px;flex:none;position:relative}
+.panel .gauge svg{width:150px;height:84px;display:block}
+.panel .stampbox{flex:1;display:flex;align-items:center;justify-content:center;position:relative;border-left:1px solid #0B0D0F}
+.plabel{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.stamp{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border:3px solid currentColor;transform:scale(0) rotate(-6deg);transition:transform .35s cubic-bezier(.2,1.6,.4,1);color:var(--dim)}
+.stamp.on{transform:scale(1) rotate(-6deg)}
+.stamp.teeth{color:var(--cyan);text-shadow:0 0 10px rgba(43,240,255,.9);box-shadow:0 0 14px rgba(43,240,255,.5),inset 0 0 14px rgba(43,240,255,.2)}
+.stamp.void{color:var(--mag);text-shadow:0 0 10px rgba(255,46,204,.9);box-shadow:0 0 14px rgba(255,46,204,.5),inset 0 0 14px rgba(255,46,204,.2)}
+.stamp.jam{color:var(--haz);text-shadow:0 0 10px rgba(242,203,5,.9);box-shadow:0 0 14px rgba(242,203,5,.5)}
+.stamp.identity{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.8);font-size:20px}
+.stamp.notlaw{color:var(--haz)}
+.stamp.law{font-size:15px;letter-spacing:.1em;padding:3px 8px;border-width:2px}
+.feed{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--brush);position:absolute;left:8px;bottom:4px;right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed.fake{color:var(--mag)}
+/* the rack: three blanks */
+.rack{width:100%;max-width:348px;margin:8px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slot{height:58px;position:relative;background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -2px 0 rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:2px 4px;overflow:hidden}
+.slot .tagtext{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.08em;line-height:1.05;text-transform:uppercase;color:#2A3036;text-shadow:0 1px 0 rgba(255,255,255,.5),0 -1px 0 rgba(0,0,0,.35)}
+.slot.teeth{border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(43,240,255,.6)}
+.slot.void{border-bottom:4px solid var(--mag);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(255,46,204,.6)}
+.slot.identity{border-bottom:4px solid #fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(255,255,255,.5)}
+.slot.jam{background:linear-gradient(170deg,#6E6A52,#4A4634);border-bottom:4px solid var(--haz);transform:skewX(-8deg) rotate(-3deg)}
+.slot.jam .tagtext{color:var(--haz);text-shadow:none}
+.slot.hole{background:#0E1013;box-shadow:inset 0 2px 8px #000;border-color:#0B0D0F}
+.press{position:absolute;left:-2px;right:-2px;top:-70px;height:62px;background:linear-gradient(180deg,#3A4149,#1C2025);border:1px solid #0B0D0F;box-shadow:0 6px 10px rgba(0,0,0,.6);transition:transform .22s cubic-bezier(.6,0,.9,.3);z-index:2}
+.press:after{content:"";position:absolute;left:30%;right:30%;bottom:-8px;height:8px;background:#0B0D0F}
+.slot.pressing .press{transform:translateY(60px)}
+/* the levers */
+.levers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 6px}
+.lever{min-height:56px;padding:6px 6px;background:linear-gradient(180deg,#3A4149,#262B31 55%,#1E2227);color:var(--brush2);border:1px solid #0B0D0F;border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 10px rgba(43,240,255,.18);font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1;text-align:center;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative}
+.lever small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--brush);text-transform:none;margin-top:3px}
+.lever.free{border-bottom-color:var(--mag);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 10px rgba(255,46,204,.18)}
+.lever.chosen{border-bottom-color:#fff;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 16px rgba(255,255,255,.5);transform:translateY(2px);border-bottom-width:2px}
+.lever.down{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:inset 0 2px 6px rgba(0,0,0,.6);cursor:default;transform:translateY(2px)}
+.lever.down small{color:var(--dim)}
+.levers.off .lever{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:none;cursor:default}
+.willdo{font-size:16px;line-height:1.35;min-height:44px;margin:4px 0;color:var(--brush2)}
+.say{font-size:16px;line-height:1.4;margin:8px 0;padding:10px 12px;border-left:4px solid var(--mag);background:rgba(255,46,204,.06);color:#fff}
+.say b{font-family:var(--disp);font-weight:700;letter-spacing:.14em;color:var(--mag);font-size:13px;display:block;margin-bottom:2px}
+.hidden{display:none !important}
+.verdict{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 10px;color:var(--cyan);text-shadow:0 0 12px rgba(43,240,255,.8),0 0 30px rgba(43,240,255,.4)}
+.did{margin:6px 0;padding-left:18px}.did li{margin:4px 0}
+.coda{border-top:1px solid var(--dim);margin-top:22px;padding-top:12px}
+ul{padding-left:20px}li{margin:4px 0}
+.about p,.help p{font-size:16px}
+/* the strip for drawing a free function */
+.overlay{position:fixed;inset:0;background:rgba(10,12,15,.92);z-index:10;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.on{display:flex}
+.sheetbox{width:100%;max-width:380px;background:var(--steel);border:1px solid #0B0D0F;padding:14px;box-shadow:0 0 30px rgba(255,46,204,.25)}
+.strip{width:100%;height:150px;background:#0B0D10;border:1px solid #0B0D0F;position:relative;touch-action:none;box-shadow:inset 0 0 30px rgba(0,0,0,.8)}
+.strip svg{width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+
+<section class="screen on" id="start">
+  <h1 class="title"><small>Emmy Noether · 1918</small>Noether's<br>Press</h1>
+  <div class="rule"></div>
+  <p class="lede">A press that stamps laws. Six levers in front of it. An inspector behind it who feeds fakes to everything it stamps.</p>
+  <p class="lede">You will pull a lever, draw a warp with your thumb, and watch the inspector try to void your tag.</p>
+  <p class="aim">Stamp this world's laws.<br>Only a tag with teeth counts.</p>
+  <p class="small">Four worlds, three steel blanks each. A pull that the world does not accept bends a blank. About six minutes.</p>
+  <button class="btn go" id="begin">Begin</button>
+  <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<section class="screen" id="play">
+  <div class="top"><p class="aim" style="margin-top:0">Stamp this world's laws.<br>Only a tag with teeth counts.</p><button class="help-q" aria-label="How to play">?</button></div>
+  <div class="band" id="band">WORLD 1 OF 4 · THE OPEN FLOOR</div>
+  <p class="line" id="worldline"></p>
+  <div class="window" id="window"></div>
+  <div class="panel" id="panel">
+    <div class="gauge"><span class="plabel">THE NEEDLE</span><svg viewBox="0 0 150 84" id="gaugesvg"></svg></div>
+    <div class="stampbox"><span class="plabel">THE AUDITOR</span><div class="stamp" id="stamp"></div><div class="feed" id="feed"></div></div>
+  </div>
+  <div class="rack" id="rack"></div>
+  <div class="say" id="first"></div>
+  <div id="choose">
+    <p class="line" id="benchhead" style="margin-top:10px">Pull one lever. If the world does not care, the press stamps a tag.</p>
+    <div class="levers" id="levers"></div>
+    <p class="willdo" id="willdo">Tap a lever to see what it does.</p>
+    <button class="btn go" id="pull" disabled>Pull</button>
+  </div>
+  <div id="after" class="hidden">
+    <div class="say" id="say"></div>
+    <div class="row"><button class="btn" id="again">Pull again</button><button class="btn go" id="next">Next world</button></div>
+  </div>
+</section>
+
+<section class="screen" id="end">
+  <div class="band" style="margin-top:22px">THE SHIFT IS OVER</div>
+  <div class="verdict" id="headline"></div>
+  <ul class="did" id="did"></ul>
+  <div class="coda">
+    <h2>What the paper says</h2>
+    <p>A symmetry with a parameter in it stamps a law. Start the clock later, shift the world, turn it: each one the world does not notice gives a quantity that holds steady on every true motion and on nothing else. That is Theorem I, and it runs backwards: a law with teeth points to a symmetry.</p>
+    <p>A symmetry with a free hand in it, one you can apply differently at every moment, stamps no law. It stamps an identity: the equations of motion are not all independent, and as many of them as there are free hands follow from the rest. That is Theorem II, and it also runs backwards.</p>
+    <p>Now put the two together. If the free hand contains the shift of the clock, the clock's law is inside the identity: it holds for every motion, fake or true, and says nothing. The paper calls such a law <i>improper</i>. That is the answer to Hilbert's question. In Einstein's theory of gravity the coordinates can be relabelled freely, moment by moment; the shift of the time coordinate is inside that freedom; so the energy law it yields is empty. Energy is not lost. There is no clock in the theory to keep it by.</p>
+    <p>The paper's last word: Hilbert said this failure is characteristic of general relativity. It is, exactly when "general relativity" means invariance under a group with free hands in it; and it holds for any such theory, in any number of dimensions.</p>
+    <h2>Both ways</h2>
+    <p>A tag with teeth means a symmetry with a parameter. A blank tag means a free hand that contains the shift you pulled. Either way, the world and its laws are the same thing seen from two sides.</p>
+  </div>
+  <button class="btn go" id="replay">Play again</button>
+  <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<section class="screen help" id="help">
+  <h2 style="margin-top:22px">How to play</h2>
+  <p class="aim">Stamp this world's laws.<br>Only a tag with teeth counts.</p>
+  <p><b>The world.</b> The window shows one world: a bead on a floor, a bead on a spring, light in glass, a bead on a curved sheet. A line under the band says what the world is. A white trace is a true motion: something the world really does.</p>
+  <p><b>The levers.</b> Each lever changes the whole world in one way: start the clock a moment later; move everything sideways or up; turn everything; or, the two magenta levers, re-tick the clock or shift the world by an amount <i>you draw</i>, different at every moment. Tap a lever to read what it does, then PULL.</p>
+  <p><b>The press.</b> If the world does not notice the change, the press holds and stamps a steel tag with the law that follows: the thing that will now stay steady on every true motion. If the world does notice, the press jams, the blank bends, and the needle swings yellow.</p>
+  <p><b>The Auditor.</b> He feeds the tag seven motions: true ones (white), and fakes (magenta, dashed) that the world would never make. The needle reads the tag's quantity along each. Steady on the true motions and swinging on the fakes: a law with teeth, cyan. Steady on everything, fakes included: VOID, magenta. A void tag holds for every motion there is, so it says nothing.</p>
+  <p><b>The drawn levers.</b> When the press holds for a drawn change, what comes out is not a law but an identity: the equations of motion are not all independent. Watch what that does to the clock tag.</p>
+  <p><b>Blanks.</b> Three per world. Every pull uses one, jam or not. Pull again while you have blanks, or go to the next world. In two worlds the Auditor moves first and asks for a lever; find it.</p>
+  <p><b>The end.</b> After four worlds the verdict is in words: what you stamped, what came out blank, and what the paper says it means.</p>
+  <button class="btn go" id="helpback">Back</button>
+</section>
+
+<section class="screen about" id="about">
+  <h2 style="margin-top:22px">About</h2>
+  /*__ABOUT__*/
+  <button class="btn go" id="aboutback">Back</button>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="sheetbox">
+    <div class="band" id="striphead">WARP THE CLOCK</div>
+    <p class="line" id="stripline">Draw how the clock should tick: drag your finger across the strip, up for faster, down for slower. Any shape you like.</p>
+    <div class="strip" id="strip"><svg viewBox="0 0 348 150" id="stripsvg"><line x1="0" y1="75" x2="348" y2="75" stroke="#3A4149" stroke-width="1"/><path id="stroke" d="" fill="none" stroke="#FF2ECC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(255,46,204,.8))"/></svg></div>
+    <div class="row"><button class="btn small-btn" id="stripcancel">Cancel</button><button class="btn go small-btn" id="strippull" disabled>Pull</button></div>
+  </div>
+</div>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+(function(){
+'use strict';
+const M = window.NOETHER, C = M.CONFIG;
+const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
+const SVG = 'http://www.w3.org/2000/svg';
+const el = (t, a, parent) => { const e = document.createElementNS(SVG, t); for (const k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; };
+let g, lastScreen = 'start', chosen = null, busy = false, anim = null, pendingP = null, strokeSamples = null;
+const timers = [];
+const wait = ms => new Promise(r => { const t = setTimeout(r, ms); timers.push(t); });
+
+// ---------- screens
+function show(id) { $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+$$('[data-go]').forEach(b => b.addEventListener('click', () => { lastScreen = $$('.screen').find(s => s.classList.contains('on')).id; show(b.dataset.go); }));
+$('#play .help-q').addEventListener('click', () => { lastScreen = 'play'; show('help'); });
+$('#helpback').addEventListener('click', () => show(lastScreen === 'help' ? 'start' : lastScreen));
+$('#aboutback').addEventListener('click', () => show(lastScreen === 'about' ? 'start' : lastScreen));
+$('#begin').addEventListener('click', start);
+$('#replay').addEventListener('click', start);
+
+// ---------- the world window
+const W = 348, H = 220, S = 100, cx = W / 2, cy = H / 2;
+const px = u => cx + u * S, py = v => cy - v * S;
+let win, traceLayer, beadEl, motionLayer;
+function drawWorld(w) {
+  const box = $('#window'); box.innerHTML = '';
+  win = el('svg', { viewBox: `0 0 ${W} ${H}` }, box);
+  const bg = el('g', {}, win);
+  if (w.id === 'floor' || w.id === 'spring') {
+    for (let x = -1.5; x <= 1.5; x += 0.5) el('line', { x1: px(x), y1: 0, x2: px(x), y2: H, stroke: '#1E2329', 'stroke-width': 1 }, bg);
+    for (let y = -1; y <= 1; y += 0.5) el('line', { x1: 0, y1: py(y), x2: W, y2: py(y), stroke: '#1E2329', 'stroke-width': 1 }, bg);
+  }
+  if (w.id === 'spring') { el('circle', { cx: px(0), cy: py(0), r: 7, fill: '#3A4149', stroke: '#9AA3AB', 'stroke-width': 2 }, bg); }
+  if (w.id === 'glass') {
+    for (let i = 0; i < 12; i++) { const y0 = -1.1 + i * 2.2 / 12, d = M.density(w, 0, -(y0 + 0.09)).n; const a = 0.06 + (d - 0.8) * 0.22; el('rect', { x: 0, y: py(y0 + 2.2 / 12), width: W, height: H / 12 + 0.5, fill: `rgba(43,240,255,${a.toFixed(3)})` }, bg); }
+    for (let i = 1; i < 12; i++) el('line', { x1: 0, y1: py(-1.1 + i * 2.2 / 12), x2: W, y2: py(-1.1 + i * 2.2 / 12), stroke: 'rgba(0,0,0,.5)', 'stroke-width': 1 }, bg);
+  }
+  if (w.id === 'sheet') {
+    for (let r = 0.15; r < 1.9; r += 0.15) { const n = M.density(w, r, 0).n; const a = 0.08 + (n - 1) * 0.6; el('circle', { cx: px(0), cy: py(0), r: r * S, fill: 'none', stroke: `rgba(43,240,255,${a.toFixed(3)})`, 'stroke-width': 1.2 }, bg); }
+    el('circle', { cx: px(0), cy: py(0), r: 5, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, bg);
+  }
+  motionLayer = el('g', {}, win); traceLayer = el('g', {}, win);
+  beadEl = el('circle', { cx: -10, cy: -10, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
+}
+function pathD(p) { let d = ''; for (let i = 0; i < p.u1.length; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }
+let liveMotion = null, liveT = 0, liveRAF = null;
+function playMotion(path, opts) { // animates a bead along a path; opts: {fake, onFrame, speed}
+  if (liveRAF) cancelAnimationFrame(liveRAF);
+  traceLayer.innerHTML = '';
+  const tr = el('path', { d: '', fill: 'none', stroke: opts.fake ? '#FF2ECC' : '#DDF6FF', 'stroke-width': opts.fake ? 2.5 : 2, 'stroke-dasharray': opts.fake ? '7 5' : 'none', style: opts.fake ? 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' : 'filter:drop-shadow(0 0 4px rgba(43,240,255,.6))' }, traceLayer);
+  beadEl.setAttribute('fill', opts.fake ? '#FF2ECC' : '#fff');
+  const n = path.u1.length, dur = opts.dur || 1800, t0 = performance.now();
+  return new Promise(res => {
+    const frame = now => {
+      const t = Math.max(0, Math.min(1, (now - t0) / dur)), i = Math.floor(t * (n - 1));
+      let d = ''; for (let k = 0; k <= i; k += 2) d += (k ? 'L' : 'M') + px(path.u1[k]).toFixed(1) + ' ' + py(path.u2[k]).toFixed(1);
+      tr.setAttribute('d', d); beadEl.setAttribute('cx', px(path.u1[i])); beadEl.setAttribute('cy', py(path.u2[i]));
+      if (opts.onFrame) opts.onFrame(i, t);
+      if (t < 1) liveRAF = requestAnimationFrame(frame); else res();
+    };
+    liveRAF = requestAnimationFrame(frame);
+  });
+}
+function loopMotion(path) { // idle: the true motion traced over and over
+  let stop = false; const run = async () => { while (!stop) { await playMotion(path, { dur: 2600 }); await wait(700); } };
+  run(); return () => { stop = true; if (liveRAF) cancelAnimationFrame(liveRAF); };
+}
+let stopIdle = null;
+
+// ---------- the needle
+let needle, needleGlow;
+function drawGauge() {
+  const s = $('#gaugesvg'); s.innerHTML = '';
+  el('path', { d: 'M20 76 A55 55 0 0 1 130 76', fill: 'none', stroke: '#0B0D0F', 'stroke-width': 10 }, s);
+  el('path', { d: 'M20 76 A55 55 0 0 1 130 76', fill: 'none', stroke: '#3A4149', 'stroke-width': 6 }, s);
+  for (let a = -60; a <= 60; a += 30) { const r1 = 48, r2 = 56, ra = (a - 90) * Math.PI / 180; el('line', { x1: 75 + r1 * Math.cos(ra), y1: 76 + r1 * Math.sin(ra), x2: 75 + r2 * Math.cos(ra), y2: 76 + r2 * Math.sin(ra), stroke: '#9AA3AB', 'stroke-width': a === 0 ? 2 : 1 }, s); }
+  needleGlow = el('line', { x1: 75, y1: 76, x2: 75, y2: 24, stroke: '#2BF0FF', 'stroke-width': 6, opacity: 0, 'stroke-linecap': 'round' }, s);
+  needle = el('line', { x1: 75, y1: 76, x2: 75, y2: 24, stroke: '#D7DDE2', 'stroke-width': 3, 'stroke-linecap': 'round' }, s);
+  el('circle', { cx: 75, cy: 76, r: 6, fill: '#0B0D0F', stroke: '#9AA3AB', 'stroke-width': 2 }, s);
+  setNeedle(0, null);
+}
+function setNeedle(v, colour) { // v in [-1, 1]
+  const a = Math.max(-1, Math.min(1, v)) * 60, ra = (a - 90) * Math.PI / 180, x2 = 75 + 52 * Math.cos(ra), y2 = 76 + 52 * Math.sin(ra);
+  needle.setAttribute('x2', x2); needle.setAttribute('y2', y2); needleGlow.setAttribute('x2', x2); needleGlow.setAttribute('y2', y2);
+  needleGlow.setAttribute('stroke', colour || '#2BF0FF'); needleGlow.setAttribute('opacity', colour ? 0.7 : 0);
+}
+function setStamp(kind, text) { const st = $('#stamp'); st.className = 'stamp'; st.textContent = text || ''; if (kind) { st.classList.add(kind); requestAnimationFrame(() => st.classList.add('on')); } }
+function setFeed(text, fake) { const f = $('#feed'); f.textContent = text || ''; f.classList.toggle('fake', !!fake); }
+
+// ---------- the rack
+function drawRack(pending) { // pending: the index of a tag the Auditor has not yet stamped (shown in bare steel)
+  const r = $('#rack'); r.innerHTML = '';
+  for (let i = 0; i < C.BLANKS; i++) {
+    const e = g.rack[i], s = document.createElement('div'); s.className = 'slot'; s.dataset.i = i;
+    if (e && i === pending) { s.innerHTML = `<span class="tagtext">${e.kind === 'void' ? '' : e.tag}</span>`; }
+    else if (e) { s.classList.add(e.kind === 'notlaw' ? 'jam' : e.kind); s.innerHTML = `<span class="tagtext">${e.kind === 'jam' ? 'BENT' : e.kind === 'void' ? '' : e.tag}</span>`; }
+    else { s.innerHTML = '<span class="tagtext" style="color:#6A737B;text-shadow:none">BLANK</span>'; }
+    const p = document.createElement('div'); p.className = 'press'; s.appendChild(p); r.appendChild(s);
+  }
+}
+
+// ---------- the levers
+function drawLevers() {
+  const L = $('#levers'); L.innerHTML = ''; chosen = null;
+  for (const lv of M.LEVERS) {
+    const b = document.createElement('button'); b.className = 'lever' + (lv.free ? ' free' : '') + (g.pulled[lv.id] ? ' down' : ''); b.dataset.id = lv.id;
+    b.innerHTML = lv.label + (lv.free ? '<small>you draw it</small>' : '');
+    b.addEventListener('click', () => { if (busy || g.pulled[lv.id]) return; chosen = lv.id; $$('.lever').forEach(x => x.classList.toggle('chosen', x.dataset.id === lv.id)); $('#willdo').textContent = lv.does; $('#pull').disabled = false; });
+    L.appendChild(b);
+  }
+  $('#willdo').textContent = 'Tap a lever to see what it does.'; $('#pull').disabled = true;
+}
+
+// ---------- a world
+function enterWorld() {
+  const w = M.world(g); busy = false;
+  $('#band').textContent = `WORLD ${g.wi + 1} OF ${C.WORLD_ORDER.length} · ${w.name.toUpperCase()}`;
+  $('#worldline').textContent = w.line;
+  drawWorld(w); drawGauge(); setStamp(null, ''); setFeed('', false); drawRack(); drawLevers();
+  $('#choose').classList.remove('hidden'); $('#after').classList.add('hidden');
+  const seed = g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length;
+  const batch = M.auditorBatch(w, seed), base = batch[0].path;
+  if (stopIdle) stopIdle();
+  const first = $('#first');
+  if (w.first) {
+    first.classList.remove('hidden'); first.innerHTML = `<b>THE AUDITOR MOVES FIRST</b>${w.first.say}`;
+    $('#benchhead').textContent = 'Pull the lever you think it is. A wrong pull still uses a blank.';
+    // his picture: the law's needle, steady, while the true motion runs; a blank tag for the sheet
+    if (w.first.target === 'warpclock') { setStamp('void', 'VOID'); setFeed('the clock tag, before any pull', false); }
+    else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('his law, on a true motion', false); }
+    let stop = false; const run = async () => { while (!stop) { await playMotion(base, { dur: 2600, onFrame: i => { setNeedle(0, null); } }); await wait(700); } }; run(); stopIdle = () => { stop = true; if (liveRAF) cancelAnimationFrame(liveRAF); };
+  } else { first.classList.add('hidden'); $('#benchhead').textContent = 'Pull one lever. If the world does not care, the press stamps a tag.'; stopIdle = loopMotion(base); }
+}
+
+// ---------- the pull
+$('#pull').addEventListener('click', () => {
+  if (!chosen || busy) return; const lv = M.leverById(chosen);
+  if (lv.free) openStrip(lv); else doPull(null);
+});
+async function doPull(p) {
+  if (busy) return; busy = true; if (stopIdle) stopIdle();
+  const w = M.world(g), slotIndex = g.rack.length;
+  $('#levers').classList.add('off'); $('#pull').disabled = true;
+  const res = M.playPull(g, chosen, p); if (!res) { busy = false; return; }
+  // the press comes down on the blank
+  const slot = $$('.slot')[slotIndex]; slot.classList.add('pressing'); setStamp(null, ''); setFeed('', false);
+  await wait(260); $('#rack').style.transform = 'translateY(2px)'; await wait(80); $('#rack').style.transform = '';
+  if (res.kind === 'jam') {
+    slot.classList.remove('pressing'); await wait(200); drawRack();
+    setStamp('jam', 'JAM'); setFeed('the world moved', true);
+    for (let k = 0; k < 10; k++) { setNeedle((k % 2 ? 1 : -1) * (1 - k / 12), '#F2CB05'); await wait(90); } setNeedle(0.35, '#F2CB05');
+  } else {
+    await wait(220); slot.classList.remove('pressing'); await wait(200); drawRack(slotIndex);
+    if (res.kind === 'identity') {
+      setStamp('identity', 'IDENTITY'); setFeed('no law came out', false); setNeedle(0, null);
+      await playMotion(res.batch[0].path, { dur: 1600 }); drawRack();
+    } else {
+      const sc = res.audit.scale; let order = res.audit.rows.map((r, i) => i);
+      for (const i of order) {
+        const row = res.audit.rows[i], path = res.batch[i].path, B0 = row.B[C.EDGE];
+        setFeed(row.how, !row.isTrue);
+        await playMotion(path, { fake: !row.isTrue, dur: row.isTrue ? 1300 : 1500, onFrame: j => { const v = res.audit.blank ? 0 : (row.B[Math.max(C.EDGE, Math.min(j, row.B.length - 1 - C.EDGE))] - B0) / sc * 2.5; setNeedle(v, row.steady ? null : (row.isTrue ? '#F2CB05' : '#FF2ECC')); } });
+        await wait(250);
+      }
+      drawRack(); setStamp(res.kind, res.kind === 'teeth' ? 'TEETH' : res.kind === 'void' ? 'VOID' : 'NOT A LAW');
+      setFeed(res.kind === 'void' ? 'steady on everything' : res.kind === 'teeth' ? 'steady on true, swings on fakes' : 'drifted on a true motion', res.kind === 'void');
+      setNeedle(res.kind === 'teeth' ? 0.5 : 0, res.kind === 'teeth' ? '#2BF0FF' : res.kind === 'void' ? '#FF2ECC' : null);
+      if (res.kind === 'void') { for (let k = 0; k < 3; k++) { setNeedle(0, '#FF2ECC'); await wait(120); setNeedle(0, null); await wait(120); } setNeedle(0, '#FF2ECC'); }
+    }
+  }
+  $('#say').innerHTML = `<b>THE AUDITOR</b>${res.say}`;
+  $('#choose').classList.add('hidden'); $('#after').classList.remove('hidden');
+  $('#again').classList.toggle('hidden', g.blanks <= 0);
+  $('#next').textContent = g.wi >= C.WORLD_ORDER.length - 1 ? 'The verdict' : 'Next world';
+  busy = false;
+  const base = res.batch[0].path; stopIdle = loopMotion(base);
+}
+$('#again').addEventListener('click', () => { $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); });
+$('#next').addEventListener('click', () => { const w = M.nextWorld(g); if (!w) return finish(); enterWorld(); });
+
+// ---------- the strip
+function openStrip(lv) {
+  $('#striphead').textContent = lv.label;
+  $('#stripline').textContent = lv.id === 'warpclock' ? 'Draw how the clock should tick: drag across the strip, up for faster, down for slower, any shape at all. Then pull.' : 'Draw how far the world shifts sideways at each moment: drag across the strip, up for right, down for left, any shape at all. Then pull.';
+  strokeSamples = new Array(24).fill(null); $('#stroke').setAttribute('d', ''); $('#strippull').disabled = true; $('#overlay').classList.add('on');
+}
+(function () {
+  const strip = $('#strip'); let down = false, pts = [];
+  const pos = e => { const r = strip.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * 348, (e.clientY - r.top) / r.height * 150]; };
+  const add = e => { const [x, y] = pos(e); pts.push([x, y]); const b = Math.max(0, Math.min(23, Math.floor(x / 348 * 24))); strokeSamples[b] = (75 - y) / 75; $('#stroke').setAttribute('d', pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('')); if (strokeSamples.filter(v => v !== null).length >= 6) $('#strippull').disabled = false; };
+  strip.addEventListener('pointerdown', e => { down = true; strip.setPointerCapture(e.pointerId); pts = []; add(e); });
+  strip.addEventListener('pointermove', e => { if (down) add(e); });
+  strip.addEventListener('pointerup', () => { down = false; }); strip.addEventListener('pointercancel', () => { down = false; });
+  $('#stripcancel').addEventListener('click', () => $('#overlay').classList.remove('on'));
+  $('#strippull').addEventListener('click', () => {
+    let last = 0; const filled = strokeSamples.map(v => { if (v !== null) last = v; return last; }); // fill the undrawn bins from the left
+    let first = filled.findIndex((v, i) => strokeSamples[i] !== null); for (let i = 0; i < first; i++) filled[i] = strokeSamples[first];
+    $('#overlay').classList.remove('on'); doPull(M.smoothCurve(filled));
+  });
+})();
+
+// ---------- start and end
+function start() { timers.forEach(clearTimeout); if (stopIdle) stopIdle(); g = M.newGame(1); show('play'); enterWorld(); }
+function finish() {
+  if (stopIdle) stopIdle(); const v = M.verdict(g);
+  $('#headline').textContent = v.headline; $('#did').innerHTML = v.did.map(d => `<li>${d}</li>`).join('');
+  show('end');
+}
+})();
+</script>
+</body>
+</html>

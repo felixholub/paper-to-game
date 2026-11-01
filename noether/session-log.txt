@@ -1,0 +1,104 @@
+  shot start
+== WORLD 1 OF 4 · THE OPEN FLOOR · A bead sliding on a flat floor. Nothing pushes it. The clock ticks evenly.
+  shot a-floor
+   tapped "across": Move the whole world a step sideways.
+  shot a-floor-feeding
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: SPEED ACROSS] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | SPEED ACROSS: steady on the true motions, swinging on the fakes. A law with teeth.
+   buttons: PULL AGAIN + NEXT WORLD
+  shot a-floor-across
+   tapped "warpclock": Re-tick the clock any way you like, differently at every moment. You draw how.
+  shot a-strip
+   stamp: JAM · feed: the world moved
+   rack: [teeth: SPEED ACROSS] [jam: BENT] [blank: BLANK]
+   auditor: THE AUDITOR | The world moved when you pulled warp the clock. Not a symmetry here. No tag.
+   buttons: PULL AGAIN + NEXT WORLD
+  shot a-floor-jam
+   tapped "clock": Start the clock a moment later. Everything else as it was.
+  shot help
+   help opened and returned: on play=true, choice kept=true
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: SPEED ACROSS] [jam: BENT] [teeth: ENERGY]
+   auditor: THE AUDITOR | ENERGY: steady on the true motions, swinging on the fakes. A law with teeth.
+   buttons: NEXT WORLD
+  shot a-floor-clock
+
+== WORLD 2 OF 4 · THE SPRING · A bead on a flat floor, tied to the centre by a spring. The clock ticks evenly.
+   THE AUDITOR MOVES FIRST | On every true motion of this world one thing holds steady: the rate at which the bead sweeps out area about the centre. Which lever stamps it?
+  shot a-spring-first
+   tapped "turn": Turn the whole world a little about the centre.
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: SWEEP RATE] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | SWEEP RATE: steady on the true motions, swinging on the fakes. A law with teeth. That is mine; you found its lever.
+   buttons: PULL AGAIN + NEXT WORLD
+  shot a-spring-turn
+
+== WORLD 3 OF 4 · THE GLASS · Light crossing glass that is denser lower down. It takes the quickest path. The clock is only a label along the ray.
+  shot a-glass
+   tapped "clock": Start the clock a moment later. Everything else as it was.
+  shot a-glass-feeding
+   stamp: VOID · feed: steady on everything
+   rack: [void: ] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | CLOCK LAW: the needle never moved, not on the true motions and not on the fakes. This tag holds for every motion there is. It says nothing. VOID.
+   buttons: PULL AGAIN + NEXT WORLD
+  shot a-glass-void
+   tapped "warpclock": Re-tick the clock any way you like, differently at every moment. You draw how.
+   stamp: IDENTITY · feed: no law came out
+   rack: [void: ] [identity: IDENTITY] [blank: BLANK]
+   auditor: THE AUDITOR | A free hand: the press held, but no law came out. What came out is an identity: the equations of motion are not independent. And the shift of the clock sits inside this warp, so its tag is blank here.
+   buttons: PULL AGAIN + NEXT WORLD
+  shot a-glass-identity
+   tapped "across": Move the whole world a step sideways.
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [void: ] [identity: IDENTITY] [teeth: LEAN × DENSITY]
+   auditor: THE AUDITOR | LEAN × DENSITY: steady on the true motions, swinging on the fakes. A law with teeth.
+   buttons: NEXT WORLD
+  shot a-glass-across
+
+== WORLD 4 OF 4 · THE SHEET · A bead rolling on a sheet with a well in the middle. It takes the straightest path the sheet allows. The clock is only a label.
+   THE AUDITOR MOVES FIRST | In this world the clock tag comes out blank before you pull anything: it holds for every motion, real or fake. Pull the lever that says why.
+  shot a-sheet-first
+   tapped "warpclock": Re-tick the clock any way you like, differently at every moment. You draw how.
+   stamp: IDENTITY · feed: no law came out
+   rack: [identity: IDENTITY] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | A free hand. The shift of the clock is inside this warp, and a warp stamps no law. That is why the clock tag was blank: this world has no clock of its own. That is my answer.
+   buttons: PULL AGAIN + THE VERDICT
+  shot a-sheet-answer
+
+VERDICT: YOU ANSWERED HILBERT.
+  You stamped four laws with teeth. | On the glass, the clock tag came out blank. | On the glass you warped the clock, and the press stamped an identity instead of a law. | On the sheet you found the lever that blanks the clock tag: the free hand. | On the spring you found the symmetry behind the sweep-rate law: a law with teeth points back to its symmetry. | On the glass you stamped lean times density: the law of refraction, from a sideways shift.
+  shot a-end
+  shot about
+
+==== SHIFT B
+== WORLD 1 OF 4 · THE OPEN FLOOR
+   tapped "clock": Start the clock a moment later. Everything else as it was.
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: ENERGY] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | ENERGY: steady on the true motions, swinging on the fakes. A law with teeth.
+   buttons: PULL AGAIN + NEXT WORLD
+== WORLD 2 OF 4 · THE SPRING
+   tapped "clock": Start the clock a moment later. Everything else as it was.
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: ENERGY] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | ENERGY: steady on the true motions, swinging on the fakes. A law with teeth. A law, but not the one I asked for.
+   buttons: PULL AGAIN + NEXT WORLD
+== WORLD 3 OF 4 · THE GLASS
+   tapped "across": Move the whole world a step sideways.
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: LEAN × DENSITY] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | LEAN × DENSITY: steady on the true motions, swinging on the fakes. A law with teeth.
+   buttons: PULL AGAIN + NEXT WORLD
+== WORLD 4 OF 4 · THE SHEET
+   tapped "turn": Turn the whole world a little about the centre.
+   stamp: TEETH · feed: steady on true, swings on fakes
+   rack: [teeth: SWEEP RATE] [blank: BLANK] [blank: BLANK]
+   auditor: THE AUDITOR | SWEEP RATE: steady on the true motions, swinging on the fakes. A law with teeth. A law, but not the one I asked for.
+   buttons: PULL AGAIN + THE VERDICT
+
+VERDICT B: THE PRESS KEPT ITS SECRET.
+  You stamped four laws with teeth. | You never stamped the clock on the glass or the sheet, so you never saw a tag come out blank. | On the sheet you did not find the lever that blanks the clock tag. | On the glass you stamped lean times density: the law of refraction, from a sideways shift.
+  shot b-end
+
+errors: none
