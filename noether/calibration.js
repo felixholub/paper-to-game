@@ -13,7 +13,9 @@
 //   (Y)   every "why, in the formula" line is true of the formula, checked point by point on random states: no t in the ball's
 //         formula and a t in the growing one; no x in the ball's but x in the magnet's; the swing's unchanged by a turn and the
 //         wind's changed; the slide's formula scales with the speed (twice as fast, twice the number per unit time) and the ball's
-//         does not; and the badge 'real energy' rests on the ball caring about re-ticking (card 7) where the slide does not (card 9)
+//         does not; and the badge 'energy catches fakes' rests on the ball caring about its timing (card 7) where the slide does not (card 9)
+//   (F)   card 7's graph is honest: the ball's energy is steady along the real throw and wobbles along the re-timed one (a fake)
+//   (Q)   the setup's word "the quickest slide" is true: the real slide beats the straight slide and hundreds of bent slides from A to B
 //   (D)   thirty random wobbly re-tickings: the slide never cares, the ball always does
 //   (ROB) every answer survives changes of grid, bump size, gravity, the growth rate, the magnet, the wind, the spring and the slide
 //   (W)   no decimals in anything the screen reads from the mechanism
@@ -64,7 +66,18 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   const sl = states.map(s => [s[0], Math.min(s[1], 1.0), s[2], s[3]]), h0 = Math.max(...sl.map(s => Math.abs(f(W.slide, 0, [s[0], s[1], 2 * s[2], 2 * s[3]]) - 2 * f(W.slide, 0, s)))), h1 = maxDiff(s => Math.abs(f(W.ball, 0, [s[0], s[1], 2 * s[2], 2 * s[3]]) - 2 * f(W.ball, 0, s)));
   det.push(`no t: ball ${ex(t0)}, growing ${ex(t1)}`, `no x: ball ${ex(x0)}, magnet ${ex(x1)}`, `turn: swing ${ex(r0)}, wind ${ex(r1)}`, `twice as fast: slide ${ex(h0)}, ball ${ex(h1)}`);
   ok = t0 < 1e-12 && t1 > 0.1 && x0 < 1e-12 && x1 > 1e-3 && r0 < 1e-9 && r1 > 0.1 && h0 < 1e-9 && h1 > 0.1 && res.c7.matters && !res.c9.matters && M.BADGES.c7.tier === 'red';
-  det.forEach(d => out.push('      ' + d)); check('Y every "why, in the formula" line is true of the formula, point by point; real energy rests on card 7 against card 9', ok); }
+  det.forEach(d => out.push('      ' + d)); check('Y every "why, in the formula" line is true of the formula, point by point; the badge for energy catching a fake rests on card 7 against card 9', ok); }
+// ---- (F)
+{ const w = M.WORLDS.ball, ch = M.showChange(w, 'warpclock'), E = C.EDGE, n = ch.base.u1.length, range = B => { let lo = Infinity, hi = -Infinity; for (let i = E; i < n - E; i++) { lo = Math.min(lo, B[i]); hi = Math.max(hi, B[i]); } return hi - lo; };
+  const e0 = Math.abs(M.current(w, ch.base, 'clock', null)[E]), r = range(M.current(w, ch.base, 'clock', null)) / e0, f = range(M.current(w, ch.fresh, 'clock', null)) / e0;
+  check('F card 7\'s graph is honest: the ball\'s energy is steady along the real throw and wobbles along the re-timed throw', r < 1e-9 && f > 0.5 && res.c7.matters, `real ${ex(r)}, re-timed ${f.toFixed(2)} of the energy`); }
+// ---- (Q)
+{ const w = M.WORLDS.slide, T = M.trueMotion(w, null), n = T.u1.length, S0 = M.score(w, T), Sst = M.score(w, M.straightBetween(T)); let tried = 0, quicker = 0, best = Infinity; const r = M.rng(5);
+  const tryPath = (u1, u2) => { for (let i = 0; i < n; i++) if (u2[i] > C.SLIDE_H - 0.05) return; const s = M.score(w, { x: T.x, u1, u2 }); tried++; if (s < S0 - 1e-9) quicker++; best = Math.min(best, s); };
+  for (let k = 0; k < 400; k++) { const a = (r() - 0.5) * 0.5, b = (r() - 0.5) * 0.5, m = 1 + Math.floor(r() * 3), c2 = (r() - 0.5) * 0.3, d = (r() - 0.5) * 0.3, u1 = new Float64Array(n), u2 = new Float64Array(n);
+    for (let i = 0; i < n; i++) { const t = i / (n - 1); u1[i] = T.u1[i] + a * Math.sin(Math.PI * t) * Math.cos(m * t) + c2 * Math.sin(2 * Math.PI * t); u2[i] = T.u2[i] + b * Math.sin(Math.PI * t) + d * Math.sin(m * Math.PI * t); } tryPath(u1, u2); }
+  for (const amp of [0.02, 0.05, 0.1, 0.2]) for (const ce of [0.3, 0.5, 0.7]) for (const [d1, d2] of [[0, 1], [0, -1], [1, 0], [-1, 0], [0.7, 0.7]]) { const p = M.bump(T, amp, d1, d2, ce, 0.25); tryPath(p.u1, p.u2); }
+  check('Q "the quickest slide" is true: the real slide is quicker than the straight slide and than every bent slide tried from A to B', Sst > S0 && quicker === 0 && tried > 400, `real ${S0.toFixed(3)}, straight ${Sst.toFixed(3)}; ${tried} bent slides, none quicker`); }
 // ---- (D)
 { let ok = true; for (let s = 0; s < 30; s++) { const r = M.rng(800 + s), p = M.smoothCurve(Array.from({ length: 24 }, () => (r() - 0.5) * 2)); if (!(M.lieResidual(M.WORLDS.slide, M.randomPath(M.WORLDS.slide, r), 'warpclock', p) < C.LIE_TOL && M.lieResidual(M.WORLDS.ball, M.randomPath(M.WORLDS.ball, r), 'warpclock', p) > C.LIE_TOL)) ok = false; }
   check('D thirty random wobbly re-tickings: the slide never cares, the ball always does', ok); }
@@ -77,7 +90,7 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   trial('wind light', { WIND: 3 }); trial('spring soft', { PEG_K: 15 }); trial('slide high', { SLIDE_H: 1.6 });
   det.forEach(d => out.push('      ' + d)); check('ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide', ok); }
 // ---- (W)
-{ const strings = []; for (const k in M.WORLDS) { const w = M.WORLDS[k]; strings.push(w.name, w.formula, w.words); } for (const c of M.CARDS) strings.push(c.setup, c.change, c.reveal, c.why); for (const k in M.PRIZES) strings.push(k, M.PRIZES[k].formula, M.PRIZES[k].gloss); for (const k in M.LEVERS) strings.push(M.LEVERS[k].label); for (const k in M.BADGES) strings.push(M.BADGES[k].name, M.BADGES[k].sub, M.BADGES[k].missed, M.BADGES[k].short || '', M.BADGES[k].why || '');
+{ const strings = []; for (const k in M.WORLDS) { const w = M.WORLDS[k]; strings.push(w.name, w.formula, w.words); } for (const c of M.CARDS) strings.push(c.setup, c.change, c.reveal, c.why, c.rule || ''); for (const k in M.PRIZES) strings.push(k, M.PRIZES[k].formula, M.PRIZES[k].gloss); for (const k in M.LEVERS) strings.push(M.LEVERS[k].label); for (const k in M.BADGES) strings.push(M.BADGES[k].name, M.BADGES[k].sub, M.BADGES[k].missed, M.BADGES[k].short || '', M.BADGES[k].why || '');
   const v = M.verdict({ c1: 'not', c2: 'not', c4: 'matters' }); strings.push(v.headline, v.line);
   check('W no decimals in anything the screen reads from the mechanism', strings.every(s => !/\d\.\d/.test(s)), strings.length + ' strings'); }
 

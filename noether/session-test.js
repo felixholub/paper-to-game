@@ -18,7 +18,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     if (await vis('#window2')) say('  !! the second picture shows before the answer');
     if (await vis('#graph')) say('  !! a graph shows before the answer');
     if (opts.shotQ) { await page.waitForTimeout(1500); await shot(opts.shotQ); }
-    if (opts.help) { await page.click('#play .help-q'); await page.waitForTimeout(200); await shot('help'); await page.click('#helpback'); await page.waitForTimeout(200); say(`   help opened and returned: question still shown=${await vis('#question')}`); }
+    if (opts.help) { await page.click('#play .help-q'); await page.waitForTimeout(200); await shot('help'); await noScroll(); await page.click('#helpback'); await page.waitForTimeout(200); say(`   help opened and returned: question still shown=${await vis('#question')}`); }
     await page.click('#window'); await page.waitForTimeout(300); // watch again
     await page.click(answer === 'matters' ? '#saymatters' : '#saynot');
     await page.waitForTimeout(400); if (!(await vis('#window2'))) say('  !! the second picture did not appear');
@@ -45,7 +45,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   await card('not', { shotQ: 'a-c8-question', shot: 'a-c8-answer' });
   await card('matters', { shot: 'a-c9-answer' });
   await page.waitForTimeout(400); say('\nEND: ' + await text('#headline')); say('   ' + await text('#endline')); say('   shelf: ' + await text('#endtiles')); await shot('a-end'); await noScroll();
-  await page.click('#end [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await page.click('#aboutback'); await page.waitForTimeout(200);
+  await page.click('#end [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await noScroll(); await page.click('#aboutback'); await page.waitForTimeout(200);
   // ---- shift B
   say('\n==== SHIFT B'); await page.click('#replay'); await page.waitForTimeout(800);
   if ((await text('#tiles')).replace(/[?| ]/g, '') !== '') say('  !! the shelf was not cleared for a new game');
