@@ -37,8 +37,8 @@
     //      latest pure-uranium reading on the page (the player's own yardstick); u the uranium share on the jar's label.
     //      Things that hold uranium are read by q = x / (u·U); things without uranium by v = x / U.
     BAND_NONE: 1 / 20,             // ours: below a twentieth of the yardstick, the air carried nothing you could see
-    BAND_LOW: 0.5,                 // ours: q under a half: far less than its uranium could give
-    BAND_HIGH: 1.3,                // ours: q above 1.3: more than its uranium could give. Her salts read 0.62–0.88 of their
+    BAND_LOW: 0.5,                 // ours: q under a half: far less than the uranium in it could give
+    BAND_HIGH: 1.3,                // ours: q above 1.3: more than the uranium in it could give. Her salts read 0.62–0.88 of their
                                    //   share; her rocks 4.3–5.3; any threshold from 1.1 to 4 sorts her table the same way
     BAND_FAINT: 1 / 6,             // ours: v from a twentieth to a sixth: a whisper (her tantalum salt is 0.083)
     BAND_STRONG: 1.3,              // ours: v above 1.3: stronger than pure uranium (her thick thorium oxide is 2.21)
@@ -139,7 +139,7 @@
   }
 
   // ---------- a game
-  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], clashed: {} }; }
+  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], used: {}, shouted: {}, pool: {} }; }
   function panelsLeft(g) { return CONFIG.PANELS - g.panels.length; }
   function over(g) { return g.panels.length >= CONFIG.PANELS; }
   function available(g) { return g.panels.length ? CONFIG.SUBSTANCES.slice() : [sub(CONFIG.FIRST)]; }
@@ -233,35 +233,65 @@
     return settle(bands, () => null);
   }
 
-  // ---------- the ideas (ours): a big speech balloon for each reading, planted with the page as it stands.
-  //            Each is { i: the comic word that leads it ("WOW!", "HMMM…"), t: the thought }.
-  function idea(g, p, b) {
-    const W = WORDS.ideas, grp = GROUP[p.id], s = sub(p.id), ph = physics(g), again = g.panels.filter(q => q.id === p.id).length > 1;
-    let t;
-    if (grp === 'uranium') t = p.x < 0.15 ? W.uraniumWeak : again ? W.uraniumAgain : W.uranium;
-    else if (grp === 'salt') t = W.salt[b];
-    else if (grp === 'thorium') t = p.id === 'thOthick' && b === 'STRONG' ? W.thoriumThick : W.thorium[b];
-    else if (grp === 'heavy') { const h = W.heavy[b]; t = { i: h.i, t: h.t.replace('{X}', b === 'NONE' || b === 'STRONG' ? s.name : low(s.name)) + (p.id === 'gold' && ACT(b) ? ' ' + W.goldToo : '') }; }
-    else if (grp === 'copper') t = W.copper[b];
-    else if (grp === 'tantal') t = W.tantal[b];
-    else if (grp === 'whiteP') t = W.whiteP[b];
-    else if (grp === 'control') { const L = latest(g); const w = L.whiteP && ACT(band('whiteP', L.whiteP.x, yard(g)));
-      const c = ACT(b) ? W.control.on : w ? W.control.offAfterWhite : W.control.off; t = { i: c.i, t: c.t.replace('{X}', s.name) }; }
-    else if (grp === 'rock') t = b === 'HIGH' ? (ph.energy === 'sky' ? W.rock.highSky : ph.energy === 'slow' ? W.rock.highSlow : W.rock.high) : b === 'ABOUT' ? W.rock.about : W.rock.low;
-    else if (grp === 'chalc') t = b === 'HIGH' ? W.chalcHigh : b === 'ABOUT' ? W.rock.about : W.rock.low;
-    else if (grp === 'copy') { const L = latest(g), m = L.chalc && band('chalc', L.chalc.x, yard(g)) === 'HIGH';
-      t = b === 'HIGH' ? W.copy.high : m ? W.copy.ordinaryAfterMine : W.copy.ordinary; }
-    return { i: t.i, t: (again && grp !== 'uranium' ? 'Second look. ' : '') + t.t };
+  // ---------- the voice (ours): Marie Curie, off-panel and never drawn. Each reading plants a belief on the page, and she says
+  //            so in a speech balloon (an exclamation), a thought cloud (musing) or a jagged shout (a clash). She remembers:
+  //            a belief met again on another jar is greeted ("Didn't I know it!"); one that clashes with another jar is
+  //            shouted at, once per pair; a jar measured again is compared with itself; no line is said twice in an album.
+  //            Confidence ("I'm on to something") comes from readings agreeing with each other, never from agreeing with her.
+  const SHARE_SHORT = u => u >= 0.99 ? 'all uranium' : u >= 0.8 ? 'mostly uranium' : u >= 0.6 ? 'two-thirds uranium' : u >= 0.4 ? 'half uranium' : 'a little uranium';
+  const EXPECT = u => u >= 0.99 ? 'as strong as pure uranium' : u >= 0.8 ? 'almost as strong as pure uranium' : u >= 0.6 ? 'about two-thirds as strong as pure uranium' : u >= 0.4 ? 'about half as strong as pure uranium' : 'much weaker than pure uranium';
+  function strongWords(v) {
+    if (v < CONFIG.BAND_NONE) return 'nothing at all';
+    const w = share(v); if (!w) return 'hardly anything';
+    if (w === 'about the same') return 'about as strong as pure uranium';
+    if (w === 'a little more') return 'a bit stronger than pure uranium';
+    return w + ' as strong as pure uranium';
   }
-  function clashes(g) {  // clashes present on the page now that have not fired yet
-    const L = latest(g), U = yard(g), B = id => L[id] ? band(id, L[id].x, U) : undefined, out = [];
-    const rules = [
-      ['mines', () => L.pbJG && L.pbJo && ((B('pbJG') === 'HIGH') !== (B('pbJo') === 'HIGH'))],
-      ['heavy', () => L.lead && L.gold && (ACT(B('lead')) !== ACT(B('gold')))],
-      ['salts', () => L.greenox && L.nitrate && ((B('greenox') === 'ABOUT') !== (B('nitrate') === 'ABOUT'))],
-      ['thlead', () => ['thO', 'thOthick'].some(id => L[id]) && !['thO', 'thOthick'].some(id => L[id] && ACT(B(id))) && ['lead', 'gold'].some(id => L[id] && ACT(B(id)))],
-    ];
-    rules.forEach(([k, f]) => { if (!g.clashed[k] && f()) { g.clashed[k] = true; out.push(WORDS.clash[k]); } });
+  const OPPOSITE = { atom: 'slow', slow: 'atom', heavy: 'notweight', notweight: 'heavy', hidden: 'nohidden', nohidden: 'hidden', thorium: 'alone', alone: 'thorium', metals: 'notmetals', notmetals: 'metals' };
+  function beliefOf(g, p, b, ph) {  // { key: the belief planted (null for none), line: the WORDS.voice entry, force: say it even if held }
+    const grp = GROUP[p.id], L = latest(g), U = yard(g), act = id => L[id] && L[id] !== p && ACT(band(id, L[id].x, U));
+    if (grp === 'uranium') return { key: null, line: p.x < 0.15 ? 'uraniumWeak' : 'uranium' };
+    if (grp === 'salt') return { key: b === 'ABOUT' ? 'atom' : 'slow', line: 'salt' + b };
+    if (grp === 'copy') {
+      const mine = L.chalc && band('chalc', L.chalc.x, U) === 'HIGH';
+      if (b === 'HIGH') return { key: 'crystal', line: 'copyHIGH' };
+      if (b === 'ABOUT') return mine ? { key: 'hidden', line: 'copyAfterMine', force: true } : { key: 'atom', line: 'copyABOUT' };
+      return { key: 'slow', line: 'salt' + b };
+    }
+    if (grp === 'thorium') return ACT(b) ? { key: 'thorium', line: p.id === 'thOthick' && b === 'STRONG' ? 'thoriumThick' : 'thorium' } : b === 'NONE' ? { key: 'alone', line: 'thoriumNONE' } : { key: null, line: 'thoriumFAINT' };
+    if (grp === 'heavy') return ACT(b) ? { key: 'heavy', line: 'heavy' } : b === 'NONE' ? { key: 'notweight', line: 'heavyNONE' } : { key: null, line: 'heavyFAINT' };
+    if (grp === 'copper') return ACT(b) ? { key: 'metals', line: 'copper' } : b === 'NONE' ? { key: 'notmetals', line: 'copperNONE' } : { key: null, line: 'copperFAINT' };
+    if (grp === 'tantal') return b === 'NONE' ? { key: null, line: 'tantalNONE' } : { key: 'rare', line: ACT(b) ? 'tantal' : 'tantalFAINT' };
+    if (grp === 'whiteP') return ACT(b) ? { key: 'life', line: 'whiteP' } : { key: null, line: 'whitePNONE' };
+    if (grp === 'control') return ACT(b) ? { key: 'life', line: 'controlON', force: true } : act('whiteP') ? { key: 'phoschem', line: 'controlAfterWhite', force: true } : { key: null, line: 'controlOFF' };
+    if (grp === 'rock') return b === 'HIGH' ? { key: 'hidden', line: ph.energy === 'sky' ? 'rockHIGHsky' : ph.energy === 'slow' ? 'rockHIGHslow' : 'rockHIGH' } : { key: 'nohidden', line: b === 'ABOUT' ? 'rockABOUT' : 'rockLOW' };
+    if (grp === 'chalc') return b === 'HIGH' ? { key: 'hidden', line: 'chalcHIGH' } : { key: 'nohidden', line: b === 'ABOUT' ? 'rockABOUT' : 'rockLOW' };
+    return { key: null, line: 'controlOFF' };
+  }
+  function utter(g, entry, vars) {  // the first variant of an entry not yet said in this album, with its blanks filled
+    const V = WORDS.voice[entry], variants = Array.isArray(V) ? V : [V];
+    let k = variants.findIndex((_, j) => !g.used[entry + '#' + j]); if (k < 0) k = variants.length - 1;
+    g.used[entry + '#' + k] = true;
+    const fill = s => s.replace(/\{(\w)\}/g, (m, c) => vars[c] !== undefined ? vars[c] : m);
+    let i = variants[k].i; const pool = WORDS.pools[i];   // the comic word rotates through its pool within an album
+    if (pool) { g.pool[i] = (g.pool[i] || 0); i = pool[g.pool[i] % pool.length]; g.pool[variants[k].i]++; }
+    return { kind: variants[k].k || 'speech', i, t: fill(variants[k].t) };
+  }
+  function voice(g, p, b) {
+    const s = sub(p.id), ph = physics(g), U = yard(g) || 1;
+    const vars = { N: low(s.name), M: s.name, S: SHARE_SHORT(s.u), C: cap(SHARE_SHORT(s.u)), E: EXPECT(s.u), X: strongWords(p.x / Math.max(U, 0.02)) };
+    const bel = beliefOf(g, p, b, ph); p.belief = bel.key;
+    const others = {}; g.panels.forEach(q => { if (q !== p) others[q.id] = q; });
+    const prev = others[p.id]; delete others[p.id];
+    const held = k => Object.values(others).filter(q => q.belief === k).map(q => q.n);
+    const out = [];
+    if (prev && p.id === CONFIG.FIRST) out.push(utter(g, 'uraniumAgain', vars));
+    else if (prev && prev.belief === bel.key) out.push(utter(g, 'retestSame', vars));
+    else if (prev) { const c = utter(g, 'retestChanged', vars), f = utter(g, bel.line, vars); out.push({ kind: f.kind, i: c.i, t: c.t + ' ' + f.t }); }
+    else if (bel.key && !bel.force && held(bel.key).length) out.push(utter(g, 'confirm_' + bel.key, Object.assign({ P: held(bel.key).slice(-1)[0] }, vars)));
+    else out.push(utter(g, bel.line, vars));
+    const opp = bel.key && OPPOSITE[bel.key], against = opp ? held(opp) : [], pair = bel.key && opp ? [bel.key, opp].sort().join('|') : null;
+    if (against.length && !g.shouted[pair]) { g.shouted[pair] = true; out.push(utter(g, 'shout', Object.assign({ P: against.slice(-1)[0], Q: WORDS.clashQ[pair] }, vars))); }
     return out;
   }
 
@@ -275,15 +305,14 @@
     if (s.id === CONFIG.FIRST) {
       const w = share(x); p.vsHer = x < CONFIG.BAND_NONE ? 'you pushed hardly at all' : 'you pushed ' + (w === 'about the same' ? 'about as hard as she measured' : w === 'a little more' ? 'a little harder than she measured' : /times|twice/.test(w || '') ? w + ' as hard as she measured' : (w || 'hardly') + ' as hard as she measured');
       p.words = 'your yardstick';
-      p.caption = 'Pure uranium: this is how much electricity it lets the air carry. Everything else is measured against it.';
+      p.caption = 'Pure uranium: your yardstick.';
     } else {
-      p.words = 'the air carried ' + asMuch(x / Math.max(U, 0.02), 'with your pure uranium');
+      p.words = asMuch(x / Math.max(U, 0.02), 'pure uranium').replace('no electricity you could see', 'no electricity at all');
       p.caption = s.name + ': ' + p.words + '.';
     }
-    const d = idea(g, p, b); p.ideaI = d.i; p.ideaT = d.t; p.idea = d.i + ' ' + d.t;
-    p.clash = clashes(g);
-    g.ideas.push({ n: p.n, id: s.id, i: d.i, t: d.t, text: p.idea, clash: false });
-    p.clash.forEach(c => g.ideas.push({ n: p.n, id: s.id, i: c.i, t: c.t, text: c.i + ' ' + c.t, clash: true }));
+    const said = voice(g, p, b);
+    p.ideaI = said[0].i; p.ideaT = said[0].t; p.idea = said[0].i + ' ' + said[0].t; p.kind = said[0].kind; p.clash = said.slice(1);
+    said.forEach((v, j) => g.ideas.push({ n: p.n, id: s.id, i: v.i, t: v.t, kind: v.kind, text: v.i + ' ' + v.t, clash: j > 0 }));
     return p;
   }
   function ideasLine(g) { return g.ideas.length ? g.ideas.length + ' idea' + (g.ideas.length === 1 ? '' : 's') + ' so far' : 'No ideas yet.'; }
@@ -353,73 +382,61 @@
 
   // ---------- every word the bench thinks and every world it draws (ours: the game's fiction, labelled as such on screen)
   const WORDS = {
-    ideas: {
-      uranium: { i: 'SO!', t: 'This is what pure uranium does to the air. Everything else gets measured against this.' },
-      uraniumAgain: { i: 'SECOND LOOK!', t: 'From now on, everything is measured against this pure uranium.' },
-      uraniumWeak: { i: 'HMMM…', t: 'Pure uranium hardly does anything. Maybe it isn’t the uranium at all?' },
-      salt: {
-        NONE: { i: 'WHAT?!', t: 'A uranium salt that does nothing? Then maybe uranium was never the point. Maybe it’s all chemistry!' },
-        LOW: { i: 'HMMM…', t: 'Much weaker than its uranium. Maybe joining uranium to other atoms smothers it, like a fire under a blanket?' },
-        ABOUT: { i: 'AHA!', t: 'About what its uranium gives. That means it’s the uranium itself, whatever it’s joined to!' },
-        HIGH: { i: 'WOW!', t: 'Stronger than its uranium could be! That means uranium burns brighter when it’s joined to oxygen. A slow fire!' },
-      },
-      thorium: {
-        NONE: { i: 'HMMM…', t: 'Thorium does nothing. Maybe uranium is just a freak, the only one of its kind?' },
-        FAINT: { i: 'HMMM…', t: 'A tiny whisper from thorium. Maybe something, maybe nothing.' },
-        ACTIVE: { i: 'WOW!', t: 'Thorium does it too, with no uranium in it! The two heaviest atoms there are… maybe the table of elements ends where atoms start to leak?' },
-        STRONG: { i: 'WOW!', t: 'Thorium beats pure uranium, with no uranium in it! The two heaviest atoms there are… maybe heavy atoms leak?' },
-      },
-      thoriumThick: { i: 'OH!', t: 'A thicker layer, and more electricity than pure uranium! That means thorium lets its own rays through.' },
-      heavy: {
-        NONE: { i: 'HMMM…', t: '{X} is heavy, and does nothing. So maybe it isn’t weight after all.' },
-        FAINT: { i: 'HMMM…', t: 'A faint leak near {X}? Maybe every heavy atom does it, just a little…' },
-        ACTIVE: { i: 'WOW!', t: 'Electricity near {X}! That means every heavy atom does it, the heavier the more. Something must be raining down on them from space!' },
-        STRONG: { i: 'WOW!', t: '{X} beats uranium! That means every heavy atom does it, the heavier the more. Something must be raining down on them from space!' },
-      },
-      goldToo: 'Every bank vault must be crackling!',
-      copper: {
-        NONE: { i: 'GOOD.', t: 'Copper does nothing. So it isn’t just any metal.' },
-        FAINT: { i: 'HMMM…', t: 'A faint leak from copper? Surely not… maybe?' },
-        ACTIVE: { i: 'WOW!', t: 'Copper too! That means every metal leaks electricity. The telegraph wires must be humming!' },
-        STRONG: { i: 'WOW!', t: 'Copper beats uranium! That means every metal leaks electricity. The telegraph wires must be humming!' },
-      },
-      tantal: {
-        NONE: { i: 'HMMM.', t: 'Tantalum: nothing that I can see.' },
-        FAINT: { i: 'HMMM…', t: 'A faint leak from tantalum. Maybe the rare metals do it, just a little?' },
-        ACTIVE: { i: 'WOW!', t: 'Tantalum, nearly as strong as uranium! That means the rare metals all do it!' },
-        STRONG: { i: 'WOW!', t: 'Tantalum beats uranium! That means the rare metals all do it!' },
-      },
-      whiteP: {
-        NONE: { i: 'HMMM.', t: 'White phosphorus: nothing.' },
-        FAINT: { i: 'HMMM…', t: 'A whisper from white phosphorus… maybe?' },
-        ACTIVE: { i: 'WOW!', t: 'White phosphorus does it! And there is phosphorus in every bone… that means the stuff of life is electric!' },
-        STRONG: { i: 'WOW!', t: 'White phosphorus beats uranium! And there is phosphorus in every bone… that means the stuff of life is electric!' },
-      },
-      control: {
-        offAfterWhite: { i: 'AHA!', t: '{X} does nothing, and it’s the same element as white phosphorus! So it was never the phosphorus: the white kind is just burning slowly in the air.' },
-        off: { i: 'HMMM.', t: '{X}: nothing.' },
-        on: { i: 'WOW!', t: '{X} too! That means it’s the phosphorus atom itself, a light one. So weight has nothing to do with it!' },
-      },
-      rock: {
-        low: { i: 'HMMM…', t: 'Less than its uranium. That rock is just uranium and dirt.' },
-        about: { i: 'HMMM…', t: 'Just about its uranium: there’s nothing else in that rock. So uranium shines on and on and never changes… maybe it never runs out?' },
-        high: { i: 'WOW!', t: 'More than its uranium can give! That means something else is hiding in that rock, something far stronger than uranium!' },
-        highSky: { i: 'WOW!', t: 'More than its uranium can give! Something heavier than uranium must be hiding in that rock: a bigger sail!' },
-        highSlow: { i: 'WOW!', t: 'More than its uranium can give! That means a fiercer fuel is hiding in that rock!' },
-      },
-      chalcHigh: { i: 'HMMM…', t: 'More than its uranium! Maybe something is hiding in the rock… or maybe it’s the way the crystal is built?' },
-      copy: {
-        ordinaryAfterMine: { i: 'AHA!', t: 'My own chalcolite is ordinary! So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!' },
-        ordinary: { i: 'HMMM.', t: 'My own chalcolite: about what its uranium gives. Just another uranium salt.' },
-        high: { i: 'WOW!', t: 'My chalcolite beats its uranium too! That means it’s the crystal itself: build it right and uranium shines!' },
-      },
+    voice: {
+      uranium: { k: 'speech', i: 'So!', t: 'This is how much electricity pure uranium lets the air carry. Everything else gets measured against it.' },
+      uraniumWeak: { k: 'thought', i: 'Hmmm…', t: 'Pure uranium hardly does anything. Is it really the uranium that does it?' },
+      uraniumAgain: [{ k: 'thought', i: 'Second look.', t: 'From now on, everything is measured against this pure uranium.' }, { k: 'thought', i: 'Once more.', t: 'Pure uranium again. This is my yardstick now.' }],
+      saltABOUT: { k: 'speech', i: 'Aha!', t: '{C}, and {X}: no more than the uranium in it should give. It must be the uranium doing the work, whatever it’s mixed with!' },
+      saltHIGH: { k: 'speech', i: 'Wow!', t: 'Only {S}, and yet {X}! Mixed with other things, uranium burns brighter… is it a kind of fire?' },
+      saltLOW: { k: 'thought', i: 'Hmmm…', t: '{C}, so it should be {E}. But it’s only {X}. Maybe mixing smothers the uranium, like a fire under a blanket?' },
+      saltNONE: { k: 'speech', i: 'What?!', t: 'A uranium salt, and nothing at all? Then maybe uranium was never the point. Maybe it’s all chemistry!' },
+      copyABOUT: { k: 'thought', i: 'Hmmm.', t: 'My home-made chalcolite is just as strong as the uranium in it, no more. Just another uranium salt.' },
+      copyAfterMine: { k: 'speech', i: 'Aha!', t: 'My home-made chalcolite is just as strong as the uranium in it, no more. So the one from the mine really has something extra hiding in it!' },
+      copyHIGH: { k: 'speech', i: 'Wow!', t: 'My home-made chalcolite is {X}, as strong as the one from the mine! So it’s the way the crystal is built, not anything hidden.' },
+      thorium: { k: 'speech', i: 'Wow!', t: 'Not a speck of uranium in it, and the air still carries electricity! Thorium does it too. The two heaviest atoms there are… maybe the table of elements ends where atoms start to leak?' },
+      thoriumThick: { k: 'speech', i: 'Oh!', t: 'A thicker layer, and {X}! Not a speck of uranium in it, and it beats pure uranium. Thorium must let its own rays through.' },
+      thoriumNONE: { k: 'thought', i: 'Hmmm…', t: 'Thorium: nothing at all. So uranium is alone? A freak, the only one of its kind?' },
+      thoriumFAINT: { k: 'thought', i: 'Hmmm…', t: 'A tiny whisper from thorium. Something, or nothing?' },
+      heavy: { k: 'speech', i: 'Wow!', t: 'The air carries electricity near {N}, and there’s no uranium in it! Every heavy atom must do it, the heavier the more… as if something were raining down on them from space!' },
+      heavyNONE: { k: 'thought', i: 'Hmmm…', t: '{M} is heavy, and does nothing at all. So it isn’t weight alone.' },
+      heavyFAINT: { k: 'thought', i: 'Hmmm…', t: 'A faint leak near {N}? Maybe every heavy atom does it, just a little…' },
+      copper: { k: 'speech', i: 'Wow!', t: 'Copper too, and copper isn’t even heavy! Then every metal leaks electricity. The telegraph wires must be humming!' },
+      copperNONE: { k: 'thought', i: 'Good.', t: 'Copper does nothing at all. So it isn’t just any metal.' },
+      copperFAINT: { k: 'thought', i: 'Hmmm…', t: 'A faint leak from copper? Surely not… or?' },
+      tantal: { k: 'speech', i: 'Wow!', t: 'Tantalum, nearly as strong as uranium! Then the rare metals all do it!' },
+      tantalFAINT: { k: 'thought', i: 'Hmmm…', t: 'A faint leak from tantalum. Maybe the rare metals do it, just a little?' },
+      tantalNONE: { k: 'thought', i: 'Hmmm.', t: 'Tantalum: nothing that I can see.' },
+      whiteP: { k: 'speech', i: 'Wow!', t: 'White phosphorus does it, and there’s no uranium in it! There is phosphorus in every bone… is the stuff of life electric?' },
+      whitePNONE: { k: 'thought', i: 'Hmmm.', t: 'White phosphorus: nothing at all.' },
+      controlON: { k: 'speech', i: 'Wow!', t: '{M} too! Then it really is the phosphorus itself, a light atom. So weight has nothing to do with it!' },
+      controlAfterWhite: { k: 'speech', i: 'Aha!', t: '{M}: nothing at all, and it’s the same element as white phosphorus! So it was never the phosphorus. The white kind is just burning slowly in the air.' },
+      controlOFF: { k: 'thought', i: 'Hmmm.', t: '{M}: nothing at all.' },
+      rockHIGH: { k: 'speech', i: 'Wow!', t: 'Only {S}, so it should be weaker than pure uranium. But it’s {X}! It can’t just be the uranium in it: something else is hiding in this rock!' },
+      rockHIGHsky: { k: 'speech', i: 'Wow!', t: 'Only {S}, and yet {X}! It can’t just be the uranium in it: something heavier than uranium must be hiding in this rock. A bigger sail!' },
+      rockHIGHslow: { k: 'speech', i: 'Wow!', t: 'Only {S}, and yet {X}! It can’t just be the uranium in it: a fiercer fuel must be hiding in this rock!' },
+      rockABOUT: { k: 'thought', i: 'Hmmm…', t: '{C}, and {X}: just the uranium in it, nothing more. So uranium shines on and on and never changes… maybe it never runs out?' },
+      rockLOW: { k: 'thought', i: 'Hmmm…', t: 'Even weaker than the uranium in it should make it. That rock is just uranium and dirt.' },
+      chalcHIGH: { k: 'thought', i: 'Hmmm…', t: 'These crystals are only {S}, and yet {X}! Is something hiding in the rock… or is it the way the crystal is built?' },
+      confirm_atom: [{ i: 'Didn’t I know it!', t: '{C}, {X}: the uranium in it, and nothing else. Just like panel {P}.' }, { i: 'Again!', t: 'Same story as panel {P}: it’s the uranium every time. I think I’m on to something!' }, { i: 'There it is again.', t: 'Whatever it’s mixed with, it’s the uranium that counts.' }],
+      confirm_slow: [{ i: 'Didn’t I know it!', t: 'Just like panel {P}: the mixture changes everything. It’s chemistry, a slow fire!' }, { i: 'Again!', t: 'How the uranium is mixed decides how it burns. Everything fits!' }, { i: 'There it is again.', t: 'Not the uranium: the recipe.' }],
+      confirm_crystal: [{ i: 'Didn’t I know it!', t: 'It’s all in how the crystal is built.' }],
+      confirm_thorium: [{ i: 'Didn’t I know it!', t: 'Thorium again, with not a speck of uranium. It’s the heaviest atoms that do it!' }, { i: 'There it is again!', t: 'Thorium, just like panel {P}. I’m on to something.' }],
+      confirm_alone: [{ k: 'thought', i: 'Nothing again.', t: 'Uranium really is alone in the world.' }],
+      confirm_heavy: [{ i: 'Didn’t I know it!', t: '{M} too, just like panel {P}! Every heavy atom does it. Every bank vault must be crackling!' }, { i: 'There it is again!', t: 'Heavy metal, electric air. Everything fits!' }],
+      confirm_notweight: [{ k: 'thought', i: 'Again, nothing.', t: '{M} is heavy too, and does nothing. Weight is not the answer.' }],
+      confirm_metals: [{ i: 'Didn’t I know it!', t: 'Every metal leaks!' }],
+      confirm_notmetals: [{ k: 'thought', i: 'As I thought.', t: '{M}: nothing at all.' }],
+      confirm_life: [{ i: 'Didn’t I know it!', t: '{M} too! The phosphorus in every bone must be electric!' }, { i: 'There it is again!', t: 'Phosphorus, just like panel {P}. The stuff of life is electric!' }],
+      confirm_phoschem: [{ i: 'As I thought!', t: '{M}: nothing at all, again. White phosphorus is only burning. I’m on to something!' }],
+      confirm_hidden: [{ i: 'Didn’t I know it!', t: 'Another rock, and again far more than the uranium in it! Something is hiding in these old rocks.' }, { i: 'There it is again!', t: 'Just like panel {P}: more than the uranium in it can give. I’m on to something!' }, { i: 'Again!', t: 'Every old uranium rock has something extra in it.' }],
+      confirm_nohidden: [{ k: 'thought', i: 'Again.', t: 'Just the uranium in it, nothing more. These rocks hide nothing.' }, { k: 'thought', i: 'Same again.', t: 'Uranium and dirt. Uranium never runs out, it seems!' }],
+      confirm_rare: [{ k: 'thought', i: 'As I thought.', t: 'The rare metals, a little.' }],
+      retestSame: [{ k: 'thought', i: 'Same again.', t: 'So I wasn’t dreaming.' }, { k: 'thought', i: 'Second look:', t: 'just the same. Good.' }, { k: 'thought', i: 'Once more,', t: 'and the same answer. I trust it now.' }],
+      retestChanged: [{ k: 'thought', i: 'Oh…', t: 'a different answer this time! The first one must have been a slip.' }, { k: 'thought', i: 'Hmm!', t: 'Not what I wrote last time. I’ll believe this one.' }, { k: 'thought', i: 'Second look,', t: 'and it’s changed!' }],
+      shout: [{ k: 'shout', i: 'Wait!', t: 'Panel {P} said the opposite. {Q}' }, { k: 'shout', i: 'Wait…', t: 'That doesn’t fit panel {P}! {Q}' }, { k: 'shout', i: 'Hold on!', t: 'This and panel {P} can’t both be right. {Q}' }],
     },
-    clash: {
-      mines: { i: 'WAIT…', t: 'Two mines, two answers?!' },
-      heavy: { i: 'WAIT…', t: 'Lead and gold are both heavy, and they disagree. Is it weight or isn’t it?' },
-      salts: { i: 'WAIT…', t: 'One salt follows its uranium and the other doesn’t. Is it the atom or the chemistry?' },
-      thlead: { i: 'WAIT…', t: 'Lead does it but thorium doesn’t? Thorium is heavier than lead!' },
-    },
+    pools: { 'Wow!': ['Wow!', 'Look at that!', 'Good heavens!', 'Well, well!'], 'Hmmm\u2026': ['Hmmm\u2026', 'Now then\u2026', 'Strange\u2026'], 'Aha!': ['Aha!', 'There!', 'I see!'] },
+    clashQ: { 'atom|slow': 'Is it the uranium, or the mixture?', 'heavy|notweight': 'Is it weight or isn’t it?', 'hidden|nohidden': 'Two rocks, two answers?!', 'alone|thorium': 'Does thorium do it or not?', 'metals|notmetals': 'Does copper do it or not?' },
     energy: {
       restless: { name: 'THE RESTLESS ATOM', landmark: 'dome', own: ['rockclock', 'hospital', 'table118'],
         law: 'The energy comes from inside the heaviest atoms, and an atom that spends it turns into another element.',
@@ -449,7 +466,7 @@
       yes_atom: 'Old uranium rocks are full of what uranium turned into: new elements, far stronger than uranium.',
       yes_sky: 'Something heavier than uranium hides in the rocks: a bigger sail.',
       yes_slow: 'A fiercer fuel hides in the rocks, and burns out faster.',
-      no: 'Old rocks hold nothing but their uranium.',
+      no: 'Old rocks hold nothing but the uranium in them.',
       crystal: 'Nothing is hidden in the rocks: the mine’s crystals are just well made.',
       unlooked: 'Your page never looked in the rocks. As in ours, someone else finds what is hidden there.',
     },
@@ -508,9 +525,9 @@
         slow: 'Where the energy comes from: in your world, a slow chemical fire; in ours, the inside of the atom, whatever it is joined to.',
         sky: 'Where the energy comes from: in your world, a wind from space caught by heavy atoms; in ours, the inside of the atom. Lead and gold do nothing, and uranium is as busy at the bottom of a mine.',
         crystal: 'Where the energy comes from: in your world, the order of a crystal; in ours, the inside of the atom. Her chalcolite made from pure chemicals was as weak as any uranium salt.',
-        bottomless: 'Where the energy comes from: in your world, from nowhere, because your page has the atom spending energy and old rocks holding nothing but their uranium. In ours an atom that spends energy must turn into something, and in a rock a billion years old the somethings pile up: that is exactly why her pitchblende was three and a half times as strong as pure uranium.',
+        bottomless: 'Where the energy comes from: in your world, from nowhere, because your page has the atom spending energy and old rocks holding nothing but the uranium in them. In ours an atom that spends energy must turn into something, and in a rock a billion years old the somethings pile up: that is exactly why her pitchblende was three and a half times as strong as pure uranium.',
       },
-      yardstick: 'It began with your pure uranium: {W}. Against that yardstick, every salt looked brighter or dimmer than its uranium.',
+      yardstick: 'It began with your pure uranium: {W}. Against that yardstick, every salt looked brighter or dimmer than the uranium in it should make it.',
       carriers: {
         alone: 'Which matter does it: in your world, uranium alone; in ours, thorium too.',
         weight: 'Which matter does it: in your world, every heavy atom by its weight; in ours, only uranium and thorium.',
@@ -519,7 +536,7 @@
         heaviest: 'Which matter does it: as in ours.',
       },
       hidden: {
-        no: 'What is in the rocks: in your world, nothing but their uranium; in ours, two new elements, polonium and radium.',
+        no: 'What is in the rocks: in your world, nothing but the uranium in them; in ours, two new elements, polonium and radium.',
         crystal: 'What is in the rocks: in your world, nothing, just well-made crystals; in ours, two new elements.',
       },
       unlooked: { rocks: 'Your page never looked in the rocks, where her discovery was.', thorium: 'Your page never tried thorium.' },
@@ -530,6 +547,6 @@
   };
 
   return { CONFIG, WORDS, sub, strength, share, asMuch, shareWords, newGame, panelsLeft, over, available, canTest,
-    benchStart, benchStep, canCommit, tolerance, running, movingAt, latest, yard, band, settle, physics, herPhysics, idea, clashes,
+    benchStart, benchStep, canCommit, tolerance, running, movingAt, latest, yard, band, settle, physics, herPhysics, beliefOf, voice, strongWords,
     commit, ideasLine, worldOf, world, ours, part, verdict, mulberry32 };
 });

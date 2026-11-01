@@ -134,10 +134,18 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .prose p,.prose li{font-size:18px}
 .prose ol{padding-left:22px}
 /* thought balloons rising from the bench, tail to the bottom edge (the unseen person at the bench) */
-.benchwrap.said svg{opacity:.45}
+.benchwrap.said #benchsvg{opacity:.5}
 .benchwrap.said .thoughts{position:relative;inset:auto;margin-top:-256px;padding-bottom:34px;min-height:256px}
 .thoughts{position:absolute;inset:0;padding:6px;line-height:1.18;display:flex;flex-direction:column;gap:10px;pointer-events:none;background:transparent}
-.narr{align-self:flex-start;max-width:86%;background:#FFFBEA;border:2px solid var(--ink);padding:4px 8px;font-size:14.5px;line-height:1.2;animation:rise .3s ease-out}
+.narr{position:relative;z-index:3;align-self:flex-start;max-width:86%;background:#FFFBEA;border:2px solid var(--ink);padding:4px 8px 3px;font-size:13.5px;line-height:1.2;text-transform:uppercase;letter-spacing:.02em;animation:rise .3s ease-out}
+.bal{position:relative;width:fit-content;max-width:300px;margin:18px auto 30px;padding:22px 28px 24px;animation:pop2 .45s cubic-bezier(.2,1.5,.4,1)}
+.bal .balsvg{position:absolute;left:0;top:0;overflow:visible;z-index:0}
+.baltext{position:relative;z-index:1;font-family:var(--text);text-transform:uppercase;font-size:16px;line-height:1.16;text-align:center;letter-spacing:.01em}
+.baltext .ij{font-style:italic;font-weight:700;letter-spacing:.02em}
+.bal.thought{padding:28px 32px 30px}.bal.shout{padding:28px 34px;max-width:290px;margin-top:-8px;transform:rotate(-2deg)}.bal.shout .ij{color:var(--red)}
+.bal.mini{max-width:none;margin:0 0 14px;padding:16px 22px 18px;animation:none}.bal.mini .baltext{font-size:13.5px}
+.bal.mini.thought{padding:20px 24px 22px}.bal.mini.shout{padding:20px 26px;transform:none;margin-top:0}
+.bal .pn{font-family:var(--display);font-style:normal;font-weight:400;font-size:12px;background:var(--ink);color:#fff;padding:0 4px;margin-right:4px;vertical-align:1px}
 .bigb{position:relative;background:#fff;border:3.5px solid var(--ink);border-radius:40px;padding:14px 20px 18px;font-size:21px;text-align:center;animation:pop2 .5s cubic-bezier(.2,1.6,.4,1)}
 .bigb .ij{display:block;font-family:var(--display);font-size:34px;line-height:1;letter-spacing:.02em;margin-bottom:4px}
 .bigb.wow .ij{color:var(--red)}.bigb.hmm .ij{color:var(--blue)}.bigb.aha .ij{color:var(--ink)}
@@ -149,15 +157,9 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 @keyframes rise{0%{transform:translateY(16px);opacity:0}100%{transform:none;opacity:1}}
 .ideasstrip{margin:10px 0}
 .ideasstrip .ih{font-family:var(--display);font-size:16px;letter-spacing:.03em;margin-bottom:4px}
-.mini{background:#fff;border:2px solid var(--ink);border-radius:16px;padding:5px 10px;margin:6px 0;font-size:15px;line-height:1.2}
-.mini i,.ib i{font-style:normal;font-family:var(--display);margin-right:4px}
-.mini b,.ib b{font-family:var(--display);font-weight:400;font-size:13px;background:var(--ink);color:#fff;padding:0 5px;margin-right:5px}
-.mini.clash,.ib.clash{border-color:var(--red);border-style:dashed;border-radius:4px;color:var(--red)}
 /* the last pages */
 .pagehead{font-family:var(--display);font-weight:400;font-size:24px;margin:22px 0 6px;letter-spacing:.02em}
-.ideaboard{border:var(--line) solid var(--ink);background:#FBF6EC;padding:8px;display:flex;flex-wrap:wrap;gap:8px}
-.ib{background:#fff;border:2.2px solid var(--ink);border-radius:18px;padding:7px 11px;font-size:15.5px;line-height:1.2;flex:1 1 140px}
-.ib:nth-child(2n){transform:rotate(-1deg)}.ib:nth-child(3n){transform:rotate(1deg)}
+.ideaboard{border:var(--line) solid var(--ink);background:#FBF6EC;padding:12px 8px 0;display:flex;flex-wrap:wrap;gap:0 10px;justify-content:center}
 .physcard{border:3.5px solid var(--ink);background:var(--sky);padding:12px}
 .physname{font-family:var(--display);font-size:32px;line-height:1;text-align:center;background:#fff;border:var(--line) solid var(--ink);padding:10px 6px 6px;margin-bottom:10px}
 .laws{margin:0;padding-left:24px}.laws li{font-size:17.5px;margin:8px 0}
@@ -216,7 +218,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="topbar"><div class="aimline">Uranium makes the air carry electricity. Find what else does.</div><button class="qbtn help-q" aria-label="How to play">?</button></div>
   <div class="band" id="pageband">YOUR PAGE <small></small></div>
   <div class="page" id="page"></div>
-  <div class="key"><span><i class="ky"></i>what its uranium alone could give</span><span><i class="kb"></i>the number you wrote</span><span><i class="kd"></i>your pure uranium</span></div>
+  <div class="key"><span><i class="ky"></i>what the uranium in it should give</span><span><i class="kb"></i>the number you wrote</span><span><i class="kd"></i>your pure uranium</span></div>
   <div class="ideasstrip" id="ideasstrip"></div>
   <div id="shelfpart">
     <div class="band" id="shelfband">THE SHELF <small></small></div>
@@ -241,7 +243,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 <div id="end" class="screen">
   <div class="band">THE LAST PAGES <small>your note, and hers</small></div>
   <h2 class="pagehead">1 · Your ideas</h2>
-  <p style="font-size:17px;margin:4px 0">Every number you wrote planted a thought. Here they all are, pinned up.</p>
+  <p style="font-size:17px;margin:4px 0">Every number you wrote planted a thought. Here they all are, pinned up, with their panel numbers.</p>
   <div class="ideaboard" id="ideaboard"></div>
   <h2 class="pagehead">2 · Your physics</h2>
   <p style="font-size:17px;margin:4px 0">Put together, your ideas make three laws of nature.</p>
@@ -261,7 +263,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="page" id="endpage"></div>
   <div class="band">HER MEASUREMENTS <small>from her table</small></div>
   <div class="her" id="her"></div>
-  <div class="key"><span><i class="ky"></i>its uranium</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span></div>
+  <div class="key"><span><i class="ky"></i>the uranium in it</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span></div>
   <div class="unseen" id="unseen"></div>
   <button class="btn go" id="again">Start a new album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -275,8 +277,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <ol>
     <li><b>The bench.</b> Whatever lies on the lower brass plate, if it sends out rays, lets the air between the two plates carry a tiny electric current. The current pushes the spot of light along the scale, to the right.</li>
     <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz sends back the opposite electricity and pushes the spot to the left. The faster you let the weight down, the harder it pushes.</li>
-    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and a big balloon rises from the bench: what your page now believes, right or wrong.</li>
-    <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the thing's uranium alone could give, the blue bar the number you wrote, the dashed line your own pure uranium. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
+    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and Marie Curie, just off the panel, says what your page now believes, right or wrong: in a speech balloon, a thought cloud, or a jagged shout when two readings clash. She remembers what your page said before.</li>
+    <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the uranium in it should give, the blue bar the number you wrote, the dashed line your own pure uranium. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
     <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again; your page believes the latest number.</li>
     <li><b>The last pages.</b> After nine panels your ideas are put together into a physics, three laws, and drawn as a world: what life would look like if your note were true. Then ours, and where the two part.</li>
   </ol>
@@ -406,8 +408,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   }
 
   // ---------- an album panel (112 × 124): the number written down, against your own pure uranium, with her triangle
-  const BADGE_WORDS = b => ({ YARD: [['YOUR', 'YARDSTICK'], INK], NONE: [['NOTHING'], INK], LOW: [['LESS THAN', 'ITS', 'URANIUM'], INK], ABOUT: [['ABOUT', 'ITS', 'URANIUM'], INK],
-    HIGH: [['MORE', 'THAN ITS', 'URANIUM!'], RED], FAINT: [['A', 'WHISPER'], INK], ACTIVE: [['NO URANIUM,', 'AND IT', 'DOES IT!'], BLUE], STRONG: [['NO URANIUM,', 'STRONGER', 'THAN IT!'], BLUE] })[b];
+  const BADGE_WORDS = b => ({ YARD: [['YOUR', 'YARDSTICK'], INK], NONE: [['NOTHING'], INK], LOW: [['WEAKER', 'THAN', 'EXPECTED'], INK], ABOUT: [['AS', 'EXPECTED'], INK],
+    HIGH: [['STRONGER', 'THAN', 'EXPECTED!'], RED], FAINT: [['A', 'WHISPER'], INK], ACTIVE: [['NO URANIUM,', 'AND IT', 'DOES IT!'], BLUE], STRONG: [['NO URANIUM,', 'STRONGER', 'THAN IT!'], BLUE] })[b];
   function panelSVG(p, n) {
     if (!p) return `<rect x="1.5" y="1.5" width="109" height="121" fill="#fff" stroke="${INK}" stroke-width="2" stroke-dasharray="6 5"/><text x="56" y="70" text-anchor="middle" font-family="Lilita, sans-serif" font-size="30" fill="#E2E6EA">${n}</text>`;
     const U = M.yard(g), b = M.band(p.id, p.x, U);
@@ -551,6 +553,55 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     return s;
   }
 
+  // ---------- comic balloons: the words are laid out first, then a hand-drawn outline is fitted around them.
+  //            speech: a rounded oval with a pointed tail toward the speaker off the panel's bottom edge;
+  //            thought: a scalloped cloud with a trail of bubbles; shout: a jagged burst.
+  function superPt(a, b, n, t) { const c = Math.cos(t), s = Math.sin(t); return [a * Math.sign(c) * Math.pow(Math.abs(c), 2 / n), b * Math.sign(s) * Math.pow(Math.abs(s), 2 / n)]; }
+  function smooth(pts) {  // a closed Catmull-Rom curve through the points, as cubic Béziers
+    let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+    for (let i = 0; i < pts.length; i++) {
+      const p0 = pts[(i - 1 + pts.length) % pts.length], p1 = pts[i], p2 = pts[(i + 1) % pts.length], p3 = pts[(i + 2) % pts.length];
+      d += ` C${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(1)},${(p1[1] + (p2[1] - p0[1]) / 6).toFixed(1)} ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(1)},${(p2[1] - (p3[1] - p1[1]) / 6).toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+    }
+    return d + 'Z';
+  }
+  function drawBalloon(wrap, kind, target) {
+    const W = wrap.offsetWidth, H = wrap.offsetHeight, cx = W / 2, cy = H / 2, a = W / 2, b = H / 2, svg = wrap.querySelector('svg');
+    const wob = k => 1 + 0.006 * Math.sin(k * 2.7 + W * 0.13) + 0.004 * Math.sin(k * 5.3 + H);
+    const ang = Math.atan2(target[1] - cy, target[0] - cx);
+    const onShape = t => { const [x, y] = superPt(a, b, 3, t); return [cx + x, cy + y]; };
+    let g = '';
+    if (kind === 'speech') {
+      const pts = []; for (let k = 0; k < 28; k++) { const t = k / 28 * Math.PI * 2, [x, y] = superPt(a, b, 3, t); pts.push([cx + x * wob(k), cy + y * wob(k)]); }
+      const b1 = onShape(ang - 0.16), b2 = onShape(ang + 0.16), edge = onShape(ang);
+      const dx = target[0] - edge[0], dy = target[1] - edge[1], dist = Math.hypot(dx, dy), len = Math.min(dist, 42);
+      const tip = [edge[0] + dx / dist * len, edge[1] + dy / dist * len];
+      const tail = `M${b1[0].toFixed(1)},${b1[1].toFixed(1)} Q${((b1[0] + tip[0]) / 2 + 4).toFixed(1)},${((b1[1] + tip[1]) / 2).toFixed(1)} ${tip[0].toFixed(1)},${tip[1].toFixed(1)} Q${((b2[0] + tip[0]) / 2 - 2).toFixed(1)},${((b2[1] + tip[1]) / 2).toFixed(1)} ${b2[0].toFixed(1)},${b2[1].toFixed(1)}`;
+      g = `<path d="${smooth(pts)}" fill="#fff" stroke="${INK}" stroke-width="2.6"/><path d="${tail} Z" fill="#fff" stroke="none"/><path d="${tail}" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linejoin="round"/>`;
+    } else if (kind === 'thought') {
+      const N = 14, pts = []; for (let k = 0; k < N; k++) pts.push(onShape(k / N * Math.PI * 2));
+      let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+      for (let k = 0; k < N; k++) { const p = pts[(k + 1) % N], q = pts[k], r = Math.hypot(p[0] - q[0], p[1] - q[1]) * 0.62; d += ` A${r.toFixed(1)},${r.toFixed(1)} 0 0 1 ${p[0].toFixed(1)},${p[1].toFixed(1)}`; }
+      const edge = onShape(ang), dx = target[0] - edge[0], dy = target[1] - edge[1], dist = Math.hypot(dx, dy) || 1;
+      const bub = [[14, 7], [30, 5], [44, 3.5]].map(([s, r]) => `<circle cx="${(edge[0] + dx / dist * s).toFixed(1)}" cy="${(edge[1] + dy / dist * s + 4).toFixed(1)}" r="${r}" fill="#fff" stroke="${INK}" stroke-width="2.2"/>`).join('');
+      g = `<path d="${d}Z" fill="#fff" stroke="${INK}" stroke-width="2.4" stroke-linejoin="round"/>` + bub;
+    } else {
+      const N = 22, pts = []; for (let k = 0; k < N * 2; k++) { const t = k / (N * 2) * Math.PI * 2, [x, y] = superPt(a, b, 3, t), f = k % 2 ? 1.0 : 1.14 + 0.05 * Math.sin(k * 1.7); pts.push([cx + x * f, cy + y * f]); }
+      g = `<path d="M${pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' L')}Z" fill="#fff" stroke="${INK}" stroke-width="2.4" stroke-linejoin="miter"/>`;
+    }
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H); svg.innerHTML = g;
+  }
+  function balloonHTML(kind, i, t, cls) {
+    return `<div class="bal ${kind} ${cls || ''}"><svg class="balsvg" aria-hidden="true"></svg><div class="baltext"><b class="ij">${esc(i)}</b> ${esc(t)}</div></div>`;
+  }
+  function fitBalloons(container, frame) {
+    const fr = frame.getBoundingClientRect();
+    container.querySelectorAll('.bal').forEach(w => {
+      const r = w.getBoundingClientRect();
+      drawBalloon(w, w.classList.contains('thought') ? 'thought' : w.classList.contains('shout') ? 'shout' : 'speech', [fr.left + fr.width * 0.8 - r.left, fr.bottom + 30 - r.top]);
+    });
+  }
+
   // ---------- state and navigation
   let g = M.newGame(Math.floor(Math.random() * 1e6) + 1), bench = null, raf = 0, last = 0, cardId = null, back = 'cover', lastNew = -1, handPhase = 0;
   const show = id => { $$('.screen').forEach(e => e.classList.toggle('on', e.id === id)); window.scrollTo(0, 0); if (id === 'bench' && bench && !bench.committed) loop(); };
@@ -618,11 +669,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     cancelAnimationFrame(raf); bench.committed = true;
     const p = M.commit(g, bench); lastNew = p.n - 1;
     $('#push').disabled = true; $('#write').disabled = true;
-    const mood = /WOW|WHAT/.test(p.ideaI) ? 'wow' : /HMM/.test(p.ideaI) ? 'hmm' : 'aha';
-    $('#thoughts').innerHTML = `<div class="narr">${esc(p.caption)}</div><div class="bigb ${mood}"><span class="ij">${esc(p.ideaI)}</span>${esc(p.ideaT)}</div>` + p.clash.map(c => `<div class="burst"><span class="ij">${esc(c.i)}</span>${esc(c.t)}</div>`).join('');
+    $('#thoughts').innerHTML = `<div class="narr">${esc(p.caption)}</div>` + balloonHTML(p.kind, p.ideaI, p.ideaT) + p.clash.map(c => balloonHTML('shout', c.i, c.t)).join('');
     $('#thoughts').classList.remove('hidden'); document.querySelector('.benchwrap').classList.add('said');
+    requestAnimationFrame(() => fitBalloons($('#thoughts'), document.querySelector('.benchwrap')));
     $('#respanel').innerHTML = panelSVG(p);
-    const B = BADGE_WORDS(p.band); $('#resbadge').textContent = B[0].join(' '); $('#resbadge').className = 'badge ' + ({ HIGH: 'more', STRONG: 'without', ACTIVE: 'without', YARD: 'yardstick' }[p.band] || '');
+    $('#resbadge').className = 'badge hidden';
     $('#rescap').textContent = '';
     $('#topage').textContent = M.over(g) ? 'Draw the last panel' : 'On to the page';
     $('#benchplay').classList.add('hidden'); $('#benchres').classList.remove('hidden');
@@ -640,7 +691,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     renderPage($('#page'), true); lastNew = -1;
     $('#pageband').innerHTML = `YOUR PAGE <small>${g.panels.length} of ${C.PANELS} panels drawn</small>`;
     const ideas = g.ideas.slice(-3).reverse();
-    $('#ideasstrip').innerHTML = g.ideas.length ? `<div class="ih">YOUR IDEAS SO FAR <small style="font-family:var(--text);font-size:14px">(${g.ideas.length}; the latest first)</small></div>` + ideas.map(i => `<div class="mini${i.clash ? ' clash' : ''}"><b>${i.n}</b><i>${esc(i.i)}</i>${esc(i.t)}</div>`).join('') : '';
+    $('#ideasstrip').innerHTML = g.ideas.length ? `<div class="ih">YOUR IDEAS SO FAR <small style="font-family:var(--text);font-size:14px">(${g.ideas.length}; the latest first)</small></div>` + ideas.map(i => balloonHTML(i.kind || 'speech', i.i, i.t, 'mini').replace('<b class="ij">', `<b class="pn">${i.n}</b><b class="ij">`)).join('') : '';
+    requestAnimationFrame(() => fitBalloons($('#ideasstrip'), $('#ideasstrip')));
     const over = M.over(g);
     $('#shelfpart').classList.toggle('hidden', over); $('#turnpart').classList.toggle('hidden', !over);
     $('#shelfband').innerHTML = `THE SHELF <small>${M.panelsLeft(g)} panel${M.panelsLeft(g) === 1 ? '' : 's'} left</small>`;
@@ -679,7 +731,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   const fromLabel = f => f && f.length ? `<span class="from">from panel${f.length > 1 ? 's' : ''} ${[...new Set(f)].sort((a, b) => a - b).join(', ')}</span>` : '<span class="from">as in hers</span>';
   function renderEnd() {
     const v = M.verdict(g), w = v.world, o = v.ours;
-    $('#ideaboard').innerHTML = v.ideas.map(i => `<div class="ib${i.clash ? ' clash' : ''}"><b>${i.n}</b><i>${esc(i.i)}</i> ${esc(i.t)}</div>`).join('');
+    $('#ideaboard').innerHTML = v.ideas.map(i => balloonHTML(i.kind || 'speech', i.i, i.t, 'mini').replace('<b class="ij">', `<b class="pn">${i.n}</b><b class="ij">`)).join('');
+    requestAnimationFrame(() => fitBalloons($('#ideaboard'), $('#ideaboard')));
     $('#physname').textContent = w.name;
     $('#laws').innerHTML = w.laws.map(l => `<li>${esc(l.text)} ${fromLabel(l.from)}</li>`).join('');
     $('#worldsvg').innerHTML = worldSVG(w);

@@ -44,7 +44,7 @@ check(rhoShelf > 0.5, '"…et le sont, en général, d\'autant plus qu\'ils cont
 const ALL = [[1.0, 24], [0.856, 27], [0.848, 18], [0.68, 12], [0.74, 6], [0.47, 7], [0.5, 9]];
 const rhoAll = spearman(ALL.map(a => a[0]), ALL.map(a => a[1]));
 check(rhoAll > 0.3, '…and over all seven uranium-compound rows of the table (shares from formulas, ours)', `Spearman ρ = ${rhoAll.toFixed(2)}; the rule holds "en général", with exceptions (black oxide above the metal, uranic acid low)`);
-check(compounds.every(s => M.strength(s) <= s.u * 1.0 + 1e-9), 'every uranium compound on the shelf reads at most its uranium share (the panel says ABOUT ITS URANIUM)',
+check(compounds.every(s => M.strength(s) <= s.u * 1.0 + 1e-9), 'every uranium compound on the shelf reads at most its uranium share (the panel says AS EXPECTED)',
   compounds.map(s => `${s.id} ${(M.strength(s) / s.u).toFixed(2)}`).join(', '));
 check(x('thO') > 0.5 && x('thOthick') > 0.5, '"Les composés du thorium sont très actifs"');
 check(x('thOthick') > x('uranium'), '"L\'oxyde de thorium dépasse même en activité l\'uranium métallique"', `thick layer ${x('thOthick').toFixed(2)} × uranium`);
@@ -103,12 +103,12 @@ const PLANS = [
   ['lead written as active', [['uranium', 1], ['lead', 0.5]], { energy: 'sky', carriers: 'weight' }, /raining down on them from space/],
   ['copper written as active', [['uranium', 1], ['copper', 0.4]], { carriers: 'everything' }, /telegraph/],
   ['white phosphorus without a control', [['uranium', 1], ['whiteP', 1.3]], { carriers: 'living', phos: 'atom' }, /stuff of life/],
-  ['white phosphorus, red phosphorus written active', [['uranium', 1], ['whiteP', 1.3], ['redP', 0.5]], { carriers: 'living', phos: 'atom' }, /phosphorus atom itself/],
+  ['white phosphorus, red phosphorus written active', [['uranium', 1], ['whiteP', 1.3], ['redP', 0.5]], { carriers: 'living', phos: 'atom' }, /phosphorus itself/],
   ['white phosphorus, red phosphorus none (hers)', [['uranium', 1], ['whiteP', 1.3], ['redP', 0]], { carriers: 'heaviest', phos: 'chemistry' }, /never the phosphorus/],
   ['thorium written as nothing', [['uranium', 1], ['thO', 0]], { carriers: 'alone' }, /freak/],
-  ['the copy as strong as the mine’s', [['uranium', 1], ['chalc', 2.2], ['chalcArt', 1.5]], { energy: 'crystal', hidden: 'crystal' }, /crystal itself/],
-  ['the copy ordinary after the mine’s (hers)', [['uranium', 1], ['chalc', 2.2], ['chalcArt', 0.38]], { energy: 'restless', hidden: 'yes' }, /holds something mine doesn/],
-  ['pitchblende written at its uranium', [['uranium', 1], ['pbJG', 0.65]], { energy: 'bottomless', hidden: 'no' }, /nothing else in that rock/],
+  ['the copy as strong as the mine’s', [['uranium', 1], ['chalc', 2.2], ['chalcArt', 1.5]], { energy: 'crystal', hidden: 'crystal' }, /way the crystal is built/],
+  ['the copy ordinary after the mine’s (hers)', [['uranium', 1], ['chalc', 2.2], ['chalcArt', 0.38]], { energy: 'restless', hidden: 'yes' }, /something extra/],
+  ['pitchblende written at its uranium', [['uranium', 1], ['pbJG', 0.65]], { energy: 'bottomless', hidden: 'no' }, /never runs out/],
   ['pitchblende high in a sky-wind page', [['uranium', 1], ['lead', 0.5], ['pbJG', 3.4]], { energy: 'sky', hidden: 'yes' }, /bigger sail/],
   ['pitchblende high in a slow-fire page', [['uranium', 0.5], ['greenox', 0.8], ['pbJG', 3.4]], { energy: 'slow', hidden: 'yes' }, /fiercer fuel/],
   ['lead and white phosphorus', [['uranium', 1], ['lead', 0.5], ['whiteP', 1.3]], { energy: 'sky', carriers: 'everything' }, /stuff of life/],
@@ -153,12 +153,20 @@ say('\n7. A retest replaces the earlier reading; a clash fires once');
 {
   const g = M.newGame(5); write(g, 'uranium', 1); write(g, 'lead', 0.5);
   const before = M.physics(g).energy; const p = write(g, 'lead', 0);
-  check(before === 'sky' && M.physics(g).energy !== 'sky' && /Second look/.test(p.idea), 'lead written active, then measured again as nothing: the sky wind is gone, and the balloon says "Second look"');
+  check(before === 'sky' && M.physics(g).energy !== 'sky' && /different answer|Not what I wrote|changed/.test(p.idea), 'lead written active, then measured again as nothing: the sky wind is gone, and the balloon notices the answer changed', p.idea.slice(0, 60));
   write(g, 'pbJG', 3.4); const a = write(g, 'pbJo', 0.6); const b = write(g, 'pbJo', 0.5);
   check(a.clash.length === 1 && b.clash.length === 0, 'two mines, two answers: the clash fires once');
-  const flat = v => typeof v === 'string' ? [v] : v.i !== undefined ? [v.i + ' ' + v.t] : Object.values(v).flatMap(flat);
-  const lens = flat(M.WORDS.ideas).concat(flat(M.WORDS.clash)).map(s => s.length);
-  check(Math.max(...lens) <= 200, 'every balloon fits a big bench balloon (at most 200 characters)', `longest ${Math.max(...lens)}`);
+  check(!/\b(its|their) uranium\b/i.test(JSON.stringify(M.WORDS)), 'the words never say "its uranium" or "their uranium"; they say "the uranium in it"');
+  { const rng = M.mulberry32(23), shelf = C.SUBSTANCES.map(s => s.id); let balloons = 0, repeats = 0, longest = 0, unknown = 0;
+    for (let a = 0; a < 2000; a++) {
+      const h = M.newGame(a + 1); write(h, 'uranium', 0.3 + rng() * 1.4); const seen = {};
+      while (!M.over(h)) { const id = shelf[Math.floor(rng() * shelf.length)], x = rng() < 0.5 ? M.strength(M.sub(id)) * (0.5 + rng()) : rng() * 3; write(h, id, x); }
+      h.ideas.forEach(i => { balloons++; if (/\{\w\}|undefined/.test(i.text)) unknown++; longest = Math.max(longest, i.text.length); if (seen[i.text]) repeats++; seen[i.text] = 1; });
+    }
+    check(unknown === 0, 'every balloon in 2 000 random albums is filled in (no blank left, no missing entry)', `${unknown} of ${balloons}`);
+    check(longest <= 280, 'every balloon fits a big bench balloon (at most 280 characters; the longest is a changed retest, two sentences)', `longest ${longest}`);
+    check(repeats / balloons < 0.03, 'within an album, a line is almost never said twice (only when a belief is met more often than it has variants)', `${repeats} repeats in ${balloons} balloons`);
+  }
   const all = JSON.stringify(M.WORDS); check(!/\d\.\d/.test(all), 'no decimals anywhere in the words');
 }
 
