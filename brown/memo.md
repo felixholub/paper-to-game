@@ -180,3 +180,7 @@ One change, after Steffen's note that the lone speck should be discovered, not u
 ## 22. Revision 3
 
 Steffen, after playing: once sugar had gone in, "the sugar remains in all the other animations as a large white fleck". The fleck was the highlight on the water, a hard-edged white ellipse at the drop's upper left, there since day 0; a drop with nothing in it made it the only thing in the water, and from then on it read as a lump. The highlight is now a soft radial sheen with no edge (gradient `ghi`, white fading to nothing), so there is nothing in the drop that could be taken for a speck. No other change. Calibration 48/48; session test three weeks, errors none.
+
+## 23. Revision 4
+
+Steffen: the clock that counts the minute does not always appear. In Chromium it always did (the clock group's opacity is 1 for the open drop and the two sealed drops at every probe), so the fault is a phone browser's: WebKit does not always repaint an SVG group whose `opacity` attribute flips from 0 to 1. The clock is now shown and hidden by `display`, with the opacity set alongside. No other change. Calibration 48/48; session test three weeks, errors none.

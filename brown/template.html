@@ -222,7 +222,7 @@ ul{padding-left:20px}li{margin:4px 0}
   const dropHi = el('ellipse', { cx: CX - 50, cy: CY - 62, rx: 44, ry: 18, fill: 'url(#ghi)', opacity: .9, transform: `rotate(-30 ${CX - 50} ${CY - 62})` }, gDrop);
   const gBeads = el('g', {}, gDrop);
   // the clock
-  const gClock = el('g', { opacity: 0 }, svg);
+  const gClock = el('g', { style: 'display:none' }, svg);
   el('circle', { cx: W - 54, cy: 44, r: 24, fill: '#F6EEDC', stroke: '#2A2118', 'stroke-width': 1 }, gClock);
   el('circle', { cx: W - 54, cy: 44, r: 21, fill: 'none', stroke: '#2A2118', 'stroke-width': .5 }, gClock);
   for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; el('line', { x1: W - 54 + Math.sin(a) * 17, y1: 44 - Math.cos(a) * 17, x2: W - 54 + Math.sin(a) * 20, y2: 44 - Math.cos(a) * 20, stroke: '#2A2118', 'stroke-width': i % 3 ? .6 : 1.2 }, gClock); }
@@ -278,7 +278,9 @@ ul{padding-left:20px}li{margin:4px 0}
     const oil = st.vessel === 'oil' || st.vessel === 'oil-one';
     gOil.setAttribute('opacity', oil ? 1 : 0); slide.setAttribute('opacity', oil ? 0 : 1);
     gBeads.innerHTML = ''; if (st.vessel === 'inverted') for (const b of st.beads) el('circle', { cx: CX + b.x * R, cy: CY + b.y * R, r: C.DRAW.oilbead / 2, fill: 'url(#go)', stroke: '#B07A1A', 'stroke-width': 1 }, gBeads);
-    gClock.setAttribute('opacity', st.vessel === 'oil' || st.vessel === 'oil-one' || st.vessel === 'open-wait' ? 1 : 0);
+    // shown by display, not opacity: WebKit does not always repaint an SVG group whose opacity attribute flips from 0 to 1
+    const clockOn = st.vessel === 'oil' || st.vessel === 'oil-one' || st.vessel === 'open-wait';
+    gClock.style.display = clockOn ? '' : 'none'; gClock.setAttribute('opacity', clockOn ? 1 : 0);
     clockLabel.textContent = st.vessel === 'open-wait' ? 'ONE MINUTE' : 'ONE HOUR';
     streams.setAttribute('opacity', 0);
   }
