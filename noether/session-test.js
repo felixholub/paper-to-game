@@ -1,7 +1,7 @@
 // Full session in a real headless browser at phone width. Run: node session-test.js  (writes session-log.txt and screenshots)
 // Shift A: the intended path. Free dot: the opening draw (a bulge, then the straight line), then MOVE RIGHT (prize, tested with a drawn path),
 //          RE-TICK THE CLOCK (drawn; the formula cares), CLOCK LATER (help opened mid-formula). Spring: TURN (the Auditor's prize).
-//          Glass: CLOCK LATER (empty), RE-TICK THE CLOCK (a rule), MOVE RIGHT (a prize). Sheet: RE-TICK THE CLOCK (the answer). Verdict. About.
+//          Slide: CLOCK LATER (empty), RE-TICK THE CLOCK (a rule), MOVE RIGHT (a prize). Sheet: RE-TICK THE CLOCK (the answer). Verdict. About.
 // Shift B: play again, the opening draw once, one pull per formula, no free levers; the verdict that keeps the secret.
 const { chromium } = require('playwright'); const path = require('path'), fs = require('fs');
 const L = []; const say = s => { L.push(s); console.log(s); };
@@ -79,10 +79,10 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   if (await vis('#again')) say('  !! PULL AGAIN offered with no blanks');
   await next('bulge', 'a-spring-opening'); await shot('a-spring-first');
   await pull('turn', { shot: 'a-spring-turn' });
-  await next('line', 'a-glass-opening'); await shot('a-glass');
-  await pull('clock', { shotTap: 'a-glass-tap', shotDrawn: 'a-glass-drawn', shot: 'a-glass-empty' }); await again();
-  await pull('warpclock', { shot: 'a-glass-rule' }); await again();
-  await pull('across', { shot: 'a-glass-across' });
+  await next('line', 'a-slide-opening'); await shot('a-slide');
+  await pull('clock', { shotTap: 'a-slide-tap', shotDrawn: 'a-slide-drawn', shot: 'a-slide-empty' }); await again();
+  await pull('warpclock', { shot: 'a-slide-rule' }); await again();
+  await pull('across', { shot: 'a-slide-across' });
   await next('bulge', 'a-sheet-opening'); await shot('a-sheet-first');
   await pull('warpclock', { shot: 'a-sheet-answer' });
   await page.click('#next'); await page.waitForTimeout(500); say('\nVERDICT: ' + await text('#headline')); say('  ' + await text('#did')); await shot('a-end'); await noScroll();
@@ -90,7 +90,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   // ---- shift B
   say('\n==== SHIFT B'); await page.click('#replay'); await page.waitForTimeout(900);
   await opening(['line'], null);
-  for (const id of ['clock', 'clock', 'across', 'turn']) { say(`== ${await text('#band')}`); await pull(id); await page.click('#next'); await page.waitForTimeout(900); if (await vis('#opening')) await opening(['line'], null); }
+  for (const id of ['clock', 'clock', 'across', 'across']) { say(`== ${await text('#band')}`); await pull(id); await page.click('#next'); await page.waitForTimeout(900); if (await vis('#opening')) await opening(['line'], null); }
   say('\nVERDICT B: ' + await text('#headline')); say('  ' + await text('#did')); await shot('b-end');
   say('\nerrors: ' + (errors.length ? errors.join(' | ') : 'none'));
   fs.writeFileSync(path.join(__dirname, 'session-log.txt'), L.join('\n') + '\n'); await browser.close();

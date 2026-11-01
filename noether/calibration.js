@@ -10,9 +10,9 @@
 //   (N6)  §6: on the Weierstrass worlds the clock shift's energy relation is improper (B vanishes identically, true motions and fakes
 //         alike); on the Newton worlds it is proper (steady on true motions, catching fakes); the shift group sits inside the warp
 //   (R)   re-ticked true motions stay true on the Weierstrass worlds (p. 7) and become fakes on the Newton worlds
-//   (S)   the glass's across-shift law is n·sin(angle to the vertical), steady along the ray (the law of refraction; eq. 13 applied)
+//   (S)   the slide's across-shift law is n·sin(angle to the vertical), steady along the ray (the law of refraction; eq. 13 applied)
 //   (ROB) robustness: random density profiles, spring constants, grid sizes and bump sizes leave every verdict unchanged
-//   (D)   the player's hand: random drawn curves warp the clock without a jam on the glass and the sheet, and jam on the floor and the spring
+//   (D)   the player's hand: random drawn curves warp the clock without a jam on the slide and the sheet, and jam on the floor and the spring
 //   (H)   heuristics: the obvious ways of spending twelve pulls land in different places
 //   (W)   words: no decimals in anything the screen reads from the mechanism
 const M = require('./mechanism.js'); const C = M.CONFIG, fs = require('fs');
@@ -60,15 +60,15 @@ const E = C.EDGE;
 // ---- N13: Theorem I counts
 {
   const kinds = w => Object.fromEntries(M.LEVERS.map(L => [L.id, M.pull(w, L.id, null, 11).kind]));
-  const kf = kinds(M.WORLDS.floor), ks = kinds(M.WORLDS.spring), kg = kinds(M.WORLDS.glass), kh = kinds(M.WORLDS.sheet);
+  const kf = kinds(M.WORLDS.floor), ks = kinds(M.WORLDS.spring), kg = kinds(M.WORLDS.slide), kh = kinds(M.WORLDS.sheet);
   out.push('      floor ' + JSON.stringify(kf) + '\n      spring ' + JSON.stringify(ks) + '\n      glass ' + JSON.stringify(kg) + '\n      sheet ' + JSON.stringify(kh));
   check('N13 the floor: four parameters (clock, across, up, turn), four laws with teeth; both warps jam', ['clock', 'across', 'up', 'turn'].every(k => kf[k] === 'teeth') && kf.warpclock === 'jam' && kf.warpfloor === 'jam');
   check('N13b the spring: two laws (clock, turn); shifts and warps jam', ks.clock === 'teeth' && ks.turn === 'teeth' && ['across', 'up', 'warpclock', 'warpfloor'].every(k => ks[k] === 'jam'));
-  check('N13c the glass: clock void, across teeth, warp-clock identity; up, turn, warp-across jam', kg.clock === 'void' && kg.across === 'teeth' && kg.warpclock === 'identity' && ['up', 'turn', 'warpfloor'].every(k => kg[k] === 'jam'));
-  check('N13d the sheet: clock void, turn teeth, warp-clock identity; shifts and warp-across jam', kh.clock === 'void' && kh.turn === 'teeth' && kh.warpclock === 'identity' && ['across', 'up', 'warpfloor'].every(k => kh[k] === 'jam'));
+  check('N13c the slide: clock void, across teeth, warp-clock identity; up, turn, warp-across jam', kg.clock === 'void' && kg.across === 'teeth' && kg.warpclock === 'identity' && ['up', 'turn', 'warpfloor'].every(k => kg[k] === 'jam'));
+  check('N13d the sheet: clock void, across teeth, warp-clock identity; up, turn, warp-across jam', kh.clock === 'void' && kh.across === 'teeth' && kh.warpclock === 'identity' && ['up', 'turn', 'warpfloor'].every(k => kh[k] === 'jam'));
   // first integrals on true motions, several seeds
   let worst = 0;
-  for (const [w, levers] of [[M.WORLDS.floor, ['clock', 'across', 'up', 'turn']], [M.WORLDS.spring, ['clock', 'turn']], [M.WORLDS.glass, ['across']], [M.WORLDS.sheet, ['turn']]])
+  for (const [w, levers] of [[M.WORLDS.floor, ['clock', 'across', 'up', 'turn']], [M.WORLDS.spring, ['clock', 'turn']], [M.WORLDS.slide, ['across']], [M.WORLDS.sheet, ['across']]])
     for (let s = 0; s < 10; s++) { const path = M.trueMotion(w, M.rng(200 + s)); for (const l of levers) { const B = M.current(w, path, l, null); let lo = Infinity, hi = -Infinity, m = 0; for (let i = E; i < B.length - E; i++) { lo = Math.min(lo, B[i]); hi = Math.max(hi, B[i]); m = Math.max(m, Math.abs(B[i])); } worst = Math.max(worst, (hi - lo) / Math.max(m, 1e-9)); } }
   check('N13e every stamped law is a first integral: B steady along true motions over ten seeds (p. 16)', worst < 1e-3, 'worst relative drift ' + ex(worst));
 }
@@ -82,7 +82,7 @@ const E = C.EDGE;
 {
   let wW = 0, wN = Infinity, idW = 0, idN = Infinity;
   for (let s = 0; s < 10; s++) { const r = M.rng(400 + s);
-    for (const w of [M.WORLDS.glass, M.WORLDS.sheet]) { const path = M.randomPath(w, r), p = M.randomFree(r); wW = Math.max(wW, M.lieResidual(w, path, 'warpclock', p)); idW = Math.max(idW, M.identityResidual(w, path, 'warpclock')); }
+    for (const w of [M.WORLDS.slide, M.WORLDS.sheet]) { const path = M.randomPath(w, r), p = M.randomFree(r); wW = Math.max(wW, M.lieResidual(w, path, 'warpclock', p)); idW = Math.max(idW, M.identityResidual(w, path, 'warpclock')); }
     for (const w of [M.WORLDS.floor, M.WORLDS.spring]) { const path = M.randomPath(w, r), p = M.randomFree(r); wN = Math.min(wN, M.lieResidual(w, path, 'warpclock', p)); idN = Math.min(idN, M.identityResidual(w, path, 'warpclock')); }
   }
   check('N7 the Weierstrass worlds are invariant under x → p(x) for arbitrary p (ten random p), and the Newton worlds are not', wW < C.LIE_TOL && wN > 0.1, `worst Weierstrass ${ex(wW)}, best Newton ${ex(wN)}`);
@@ -96,46 +96,46 @@ const E = C.EDGE;
   out.push('      ' + detail.slice(0, 8).join(' '));
   check('N6 on the Weierstrass worlds the energy relation is improper: B ≡ 0 on true motions and fakes alike, VOID, six seeds', okV);
   check('N6b on the Newton worlds the energy relation is proper: steady on true motions, catching fakes, six seeds', okP);
-  check('N6c the shift of the clock is the warp with p ≡ 1: the displacement group is a subgroup of the infinite group (p. 28)', (() => { const w = M.WORLDS.glass, path = M.randomPath(w, M.rng(9)), p = new Float64Array(path.u1.length).fill(1); const a = M.current(w, path, 'clock', null), b = M.current(w, path, 'warpclock', p); let d = 0; for (let i = 0; i < a.length; i++) d = Math.max(d, Math.abs(a[i] - b[i])); return d < 1e-12; })());
+  check('N6c the shift of the clock is the warp with p ≡ 1: the displacement group is a subgroup of the infinite group (p. 28)', (() => { const w = M.WORLDS.slide, path = M.randomPath(w, M.rng(9)), p = new Float64Array(path.u1.length).fill(1); const a = M.current(w, path, 'clock', null), b = M.current(w, path, 'warpclock', p); let d = 0; for (let i = 0; i < a.length; i++) d = Math.max(d, Math.abs(a[i] - b[i])); return d < 1e-12; })());
 }
 // ---- R: re-ticking
 {
   let ok = true, det = [];
   for (let s = 0; s < 6; s++) for (const w of Wk) { const b = M.auditorBatch(w, 600 + s); const t = b[1]; det.push(`${w.id}:${ex(t.psi)}${t.isTrue ? 'T' : 'F'}`); if ((w.type === 'weierstrass') !== t.isTrue) ok = false; if (!b[0].isTrue || !b[2].isTrue) ok = false; if (b.slice(3).some(o => o.isTrue)) ok = false; }
   out.push('      re-ticked motion ψ: ' + det.slice(0, 8).join(' '));
-  check('R a re-ticked true motion is still true on the glass and the sheet, and a fake on the floor and the spring; bumps are always fakes', ok);
+  check('R a re-ticked true motion is still true on the slide and the sheet, and a fake on the floor and the spring; bumps are always fakes', ok);
 }
 // ---- S: Snell
 {
   let worst = 0;
-  for (let s = 0; s < 6; s++) { const w = M.WORLDS.glass, path = M.trueMotion(w, M.rng(700 + s)), F = M.fields(w, path), B = M.current(w, path, 'across', null); let lo = Infinity, hi = -Infinity; for (let i = E; i < B.length - E; i++) { const sn = M.density(w, path.u1[i], path.u2[i]).n * F.v1[i] / Math.hypot(F.v1[i], F.v2[i]); worst = Math.max(worst, Math.abs(B[i] + sn)); lo = Math.min(lo, sn); hi = Math.max(hi, sn); } worst = Math.max(worst, hi - lo); }
-  check('S the glass\'s across-shift law is −n·sin(angle to the vertical), steady along the integrated ray: the law of refraction', worst < 1e-3, 'worst ' + ex(worst));
+  for (let s = 0; s < 6; s++) { const w = M.WORLDS.slide, path = M.trueMotion(w, M.rng(700 + s)), F = M.fields(w, path), B = M.current(w, path, 'across', null); let lo = Infinity, hi = -Infinity; for (let i = E; i < B.length - E; i++) { const sn = M.density(w, path.u1[i], path.u2[i]).n * F.v1[i] / Math.hypot(F.v1[i], F.v2[i]); worst = Math.max(worst, Math.abs(B[i] + sn)); lo = Math.min(lo, sn); hi = Math.max(hi, sn); } worst = Math.max(worst, hi - lo); }
+  check('S the slide\'s across-shift law is −n·sin(angle to the vertical), steady along the integrated path: the law of refraction', worst < 1e-3, 'worst ' + ex(worst));
 }
 // ---- ROB: robustness of the central discovery to our choices
 {
   const saved = { ...C }; let ok = true, det = [];
-  const trial = (name, mut) => { Object.assign(C, mut); const g = M.pull(M.WORLDS.glass, 'clock', null, 3).kind, gi = M.pull(M.WORLDS.glass, 'warpclock', null, 3).kind, h = M.pull(M.WORLDS.sheet, 'clock', null, 3).kind, f = M.pull(M.WORLDS.floor, 'clock', null, 3).kind, sp = M.pull(M.WORLDS.spring, 'clock', null, 3).kind, ga = M.pull(M.WORLDS.glass, 'across', null, 3).kind; det.push(`${name}: glass clock ${g}, glass warp ${gi}, sheet clock ${h}, floor clock ${f}, spring clock ${sp}, glass across ${ga}`); if (!(g === 'void' && gi === 'identity' && h === 'void' && f === 'teeth' && sp === 'teeth' && ga === 'teeth')) ok = false; Object.assign(C, saved); };
+  const trial = (name, mut) => { Object.assign(C, mut); const g = M.pull(M.WORLDS.slide, 'clock', null, 3).kind, gi = M.pull(M.WORLDS.slide, 'warpclock', null, 3).kind, h = M.pull(M.WORLDS.sheet, 'clock', null, 3).kind, f = M.pull(M.WORLDS.floor, 'clock', null, 3).kind, sp = M.pull(M.WORLDS.spring, 'clock', null, 3).kind, ga = M.pull(M.WORLDS.slide, 'across', null, 3).kind; det.push(`${name}: slide clock ${g}, slide warp ${gi}, sheet clock ${h}, floor clock ${f}, spring clock ${sp}, slide across ${ga}`); if (!(g === 'void' && gi === 'identity' && h === 'void' && f === 'teeth' && sp === 'teeth' && ga === 'teeth')) ok = false; Object.assign(C, saved); };
   trial('N=200', { N: 200 }); trial('N=800', { N: 800 }); trial('bumps half', { BUMP_AMP: 0.075 }); trial('bumps double', { BUMP_AMP: 0.3 }); trial('retick small', { RETICK_AMP: 0.04 });
-  trial('glass steep', { GLASS_SLOPE: 5, GLASS_DN: 0.3 }); trial('glass gentle', { GLASS_SLOPE: 1, GLASS_DN: 0.7 }); trial('sheet deep', { SHEET_DN: 1.2, SHEET_R: 0.5 }); trial('sheet shallow', { SHEET_DN: 0.2, SHEET_R: 0.25 }); trial('spring stiff', { SPRING_K: 60 }); trial('spring soft', { SPRING_K: 4 });
+  trial('slide high', { SLIDE_H: 1.5 }); trial('slide low', { SLIDE_H: 1.2 }); trial('sheet thick', { SHEET_C: 1.6 }); trial('sheet thin', { SHEET_C: 1.12 }); trial('spring stiff', { SPRING_K: 60 }); trial('spring soft', { SPRING_K: 4 });
   out.push('      ' + det.join('\n      '));
-  check('ROB the verdicts (void, identity, teeth) survive changes of grid, bump size, re-tick size, glass and sheet profiles and spring constant', ok);
+  check('ROB the verdicts (void, identity, teeth) survive changes of grid, bump size, re-tick size, slide and sheet profiles and spring constant', ok);
 }
 // ---- D: the player's hand
 {
   let ok = true, det = [];
-  for (let s = 0; s < 30; s++) { const r = M.rng(800 + s), samples = Array.from({ length: 24 }, () => (r() - 0.5) * 2); const p = M.smoothCurve(samples); const g = M.pressTest(M.WORLDS.glass, 'warpclock', p, s), h = M.pressTest(M.WORLDS.sheet, 'warpclock', p, s), f = M.pressTest(M.WORLDS.floor, 'warpclock', p, s), sp = M.pressTest(M.WORLDS.spring, 'warpclock', p, s); if (!(g.holds && h.holds && !f.holds && !sp.holds)) { ok = false; det.push(`seed ${s}: ${ex(g.residual)} ${ex(h.residual)} ${ex(f.residual)} ${ex(sp.residual)}`); } }
-  check('D thirty random hand-drawn warps: the press holds on the glass and the sheet, jams on the floor and the spring', ok, det.join('; '));
+  for (let s = 0; s < 30; s++) { const r = M.rng(800 + s), samples = Array.from({ length: 24 }, () => (r() - 0.5) * 2); const p = M.smoothCurve(samples); const g = M.pressTest(M.WORLDS.slide, 'warpclock', p, s), h = M.pressTest(M.WORLDS.sheet, 'warpclock', p, s), f = M.pressTest(M.WORLDS.floor, 'warpclock', p, s), sp = M.pressTest(M.WORLDS.spring, 'warpclock', p, s); if (!(g.holds && h.holds && !f.holds && !sp.holds)) { ok = false; det.push(`seed ${s}: ${ex(g.residual)} ${ex(h.residual)} ${ex(f.residual)} ${ex(sp.residual)}`); } }
+  check('D thirty random hand-drawn warps: the press holds on the slide and the sheet, jams on the floor and the spring', ok, det.join('; '));
   let okA = true; for (let s = 0; s < 30; s++) { const r = M.rng(900 + s), p = M.smoothCurve(Array.from({ length: 24 }, () => (r() - 0.5) * 2)); for (const w of Wk) if (M.pressTest(w, 'warpfloor', p, s).holds) okA = false; }
   check('Db thirty random hand-drawn sideways warps jam on every world (no world is blind to its first coordinate)', okA);
 }
 // ---- H: heuristics
 {
   const plans = {
-    'shifts only (clock, across, up everywhere)': { floor: ['clock', 'across', 'up'], spring: ['clock', 'across', 'up'], glass: ['clock', 'across', 'up'], sheet: ['clock', 'across', 'up'] },
-    'clock first, then turn, then across': { floor: ['clock', 'turn', 'across'], spring: ['clock', 'turn', 'across'], glass: ['clock', 'turn', 'across'], sheet: ['clock', 'turn', 'across'] },
-    'warps first': { floor: ['warpclock', 'warpfloor', 'clock'], spring: ['warpclock', 'warpfloor', 'clock'], glass: ['warpclock', 'warpfloor', 'clock'], sheet: ['warpclock', 'warpfloor', 'clock'] },
-    'reads the world (the intended path)': { floor: ['across', 'clock', 'turn'], spring: ['turn', 'clock', 'across'], glass: ['clock', 'warpclock', 'across'], sheet: ['warpclock', 'turn', 'clock'] },
-    'one pull per world': { floor: ['clock'], spring: ['turn'], glass: ['across'], sheet: ['turn'] },
+    'shifts only (clock, across, up everywhere)': { floor: ['clock', 'across', 'up'], spring: ['clock', 'across', 'up'], slide: ['clock', 'across', 'up'], sheet: ['clock', 'across', 'up'] },
+    'clock first, then turn, then across': { floor: ['clock', 'turn', 'across'], spring: ['clock', 'turn', 'across'], slide: ['clock', 'turn', 'across'], sheet: ['clock', 'turn', 'across'] },
+    'warps first': { floor: ['warpclock', 'warpfloor', 'clock'], spring: ['warpclock', 'warpfloor', 'clock'], slide: ['warpclock', 'warpfloor', 'clock'], sheet: ['warpclock', 'warpfloor', 'clock'] },
+    'reads the world (the intended path)': { floor: ['across', 'clock', 'turn'], spring: ['turn', 'clock', 'across'], slide: ['clock', 'warpclock', 'across'], sheet: ['warpclock', 'across', 'clock'] },
+    'one pull per world': { floor: ['clock'], spring: ['turn'], slide: ['across'], sheet: ['across'] },
   };
   const rows = [];
   for (const [name, plan] of Object.entries(plans)) {

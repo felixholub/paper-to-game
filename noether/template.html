@@ -266,18 +266,18 @@ function drawWorld(w) {
     for (let y = -1; y <= 1; y += 0.5) el('line', { x1: 0, y1: py(y), x2: W, y2: py(y), stroke: '#1E2329', 'stroke-width': 1 }, bg);
   }
   if (w.id === 'spring') { el('circle', { cx: px(0), cy: py(0), r: 7, fill: '#3A4149', stroke: '#9AA3AB', 'stroke-width': 2 }, bg); }
-  if (w.id === 'glass') {
-    for (let i = 0; i < 12; i++) { const y0 = -1.1 + i * 2.2 / 12, d = M.density(w, 0, -(y0 + 0.09)).n; const a = 0.06 + (d - 0.8) * 0.22; el('rect', { x: 0, y: py(y0 + 2.2 / 12), width: W, height: H / 12 + 0.5, fill: `rgba(43,240,255,${a.toFixed(3)})` }, bg); }
-    for (let i = 1; i < 12; i++) el('line', { x1: 0, y1: py(-1.1 + i * 2.2 / 12), x2: W, y2: py(-1.1 + i * 2.2 / 12), stroke: 'rgba(0,0,0,.5)', 'stroke-width': 1 }, bg);
-  }
-  if (w.id === 'sheet') {
-    for (let r = 0.15; r < 1.9; r += 0.15) { const n = M.density(w, r, 0).n; const a = 0.08 + (n - 1) * 0.6; el('circle', { cx: px(0), cy: py(0), r: r * S, fill: 'none', stroke: `rgba(43,240,255,${a.toFixed(3)})`, 'stroke-width': 1.2 }, bg); }
-    el('circle', { cx: px(0), cy: py(0), r: 5, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, bg);
+  if (w.id === 'slide' || w.id === 'sheet') { // horizontal bands shaded by the formula's n(y): brighter where distance counts for more
+    const rows = 14; let ns = [];
+    for (let i = 0; i < rows; i++) { const yc = 1.1 - (i + 0.5) * 2.2 / rows; ns.push(M.density(w, 0, yc).n); }
+    const lo = Math.min(...ns), hi = Math.max(...ns);
+    for (let i = 0; i < rows; i++) { const a = 0.05 + 0.3 * (ns[i] - lo) / ((hi - lo) || 1); el('rect', { x: 0, y: i * H / rows, width: W, height: H / rows + 0.5, fill: `rgba(43,240,255,${a.toFixed(3)})` }, bg); }
+    for (let i = 1; i < rows; i++) el('line', { x1: 0, y1: i * H / rows, x2: W, y2: i * H / rows, stroke: 'rgba(0,0,0,.45)', 'stroke-width': 1 }, bg);
+    const lab = el('text', { x: W - 8, y: w.id === 'slide' ? 30 : H - 10, 'text-anchor': 'end', class: 'caption', style: 'fill:#9AA3AB;font-size:10px' }, bg); lab.textContent = w.id === 'slide' ? 'SLOW UP HERE · EVERY STEP COSTS MORE' : 'THICK DOWN HERE · EVERY STEP COSTS MORE';
   }
   ghostLayer = el('g', {}, win); fanLayer = el('g', {}, win); markLayer = el('g', {}, win); traceLayer = el('g', {}, win);
   strokeEl = el('path', { d: '', fill: 'none', stroke: '#FF2ECC', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' }, win);
   beadEl = el('circle', { cx: -10, cy: -10, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
-  captionEl = el('text', { x: 8, y: 16, class: 'caption' }, win); captionEl.textContent = '';
+  captionEl = el('text', { x: 8, y: w.id === 'slide' ? H - 8 : 16, class: 'caption' }, win); captionEl.textContent = '';
 }
 function setCaption(text, kind) { captionEl.textContent = text || ''; captionEl.setAttribute('class', 'caption' + (kind ? ' ' + kind : '')); }
 function pathD(p) { let d = ''; for (let i = 0; i < p.u1.length; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }
