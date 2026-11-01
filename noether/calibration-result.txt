@@ -20,7 +20,7 @@ PASS  S the comparison slide is honest: the straight slide fails the equations o
       no x: ball 0.00e+0, magnet 2.63e+0
       turn: swing 8.88e-15, wind 6.44e+0
       twice as fast: slide 0.00e+0, ball 2.19e+1
-PASS  Y every "why, in the formula" line is true of the formula, point by point; the badge for energy catching a fake rests on card 7 against card 9
+PASS  Y every "why, in the formula" line is true of the formula, point by point; the badge for a real law of energy rests on card 7 against card 9
 PASS  F card 7's graph is honest: the ball's energy is steady along the real throw and wobbles along the re-timed throw  [real 3.27e-14, re-timed 5.35 of the energy]
 PASS  Q "the quickest slide" is true: the real slide is quicker than the straight slide and than every bent slide tried from A to B  [real 2.661, straight 3.005; 460 bent slides, none quicker]
 PASS  D thirty random wobbly re-tickings: the slide never cares, the ball always does

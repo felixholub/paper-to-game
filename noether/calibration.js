@@ -13,7 +13,7 @@
 //   (Y)   every "why, in the formula" line is true of the formula, checked point by point on random states: no t in the ball's
 //         formula and a t in the growing one; no x in the ball's but x in the magnet's; the swing's unchanged by a turn and the
 //         wind's changed; the slide's formula scales with the speed (twice as fast, twice the number per unit time) and the ball's
-//         does not; and the badge 'energy catches fakes' rests on the ball caring about its timing (card 7) where the slide does not (card 9)
+//         does not; and the badge 'a real law' rests on the ball caring about its timing (card 7) where the slide does not (card 9)
 //   (F)   card 7's graph is honest: the ball's energy is steady along the real throw and wobbles along the re-timed one (a fake)
 //   (Q)   the setup's word "the quickest slide" is true: the real slide beats the straight slide and hundreds of bent slides from A to B
 //   (D)   thirty random wobbly re-tickings: the slide never cares, the ball always does
@@ -66,7 +66,7 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   const sl = states.map(s => [s[0], Math.min(s[1], 1.0), s[2], s[3]]), h0 = Math.max(...sl.map(s => Math.abs(f(W.slide, 0, [s[0], s[1], 2 * s[2], 2 * s[3]]) - 2 * f(W.slide, 0, s)))), h1 = maxDiff(s => Math.abs(f(W.ball, 0, [s[0], s[1], 2 * s[2], 2 * s[3]]) - 2 * f(W.ball, 0, s)));
   det.push(`no t: ball ${ex(t0)}, growing ${ex(t1)}`, `no x: ball ${ex(x0)}, magnet ${ex(x1)}`, `turn: swing ${ex(r0)}, wind ${ex(r1)}`, `twice as fast: slide ${ex(h0)}, ball ${ex(h1)}`);
   ok = t0 < 1e-12 && t1 > 0.1 && x0 < 1e-12 && x1 > 1e-3 && r0 < 1e-9 && r1 > 0.1 && h0 < 1e-9 && h1 > 0.1 && res.c7.matters && !res.c9.matters && M.BADGES.c7.tier === 'red';
-  det.forEach(d => out.push('      ' + d)); check('Y every "why, in the formula" line is true of the formula, point by point; the badge for energy catching a fake rests on card 7 against card 9', ok); }
+  det.forEach(d => out.push('      ' + d)); check('Y every "why, in the formula" line is true of the formula, point by point; the badge for a real law of energy rests on card 7 against card 9', ok); }
 // ---- (F)
 { const w = M.WORLDS.ball, ch = M.showChange(w, 'warpclock'), E = C.EDGE, n = ch.base.u1.length, range = B => { let lo = Infinity, hi = -Infinity; for (let i = E; i < n - E; i++) { lo = Math.min(lo, B[i]); hi = Math.max(hi, B[i]); } return hi - lo; };
   const e0 = Math.abs(M.current(w, ch.base, 'clock', null)[E]), r = range(M.current(w, ch.base, 'clock', null)) / e0, f = range(M.current(w, ch.fresh, 'clock', null)) / e0;
