@@ -2,17 +2,15 @@
 day 0 shelf: Life | Currents | Drying | Pull | The skin | ?
   shot a-day0
 
-== Day 1 of 7 · What will you try?   (dimmed: onespeck)
+== Day 1 of 7 · What will you try?   bench: 13 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
-   tapped the dimmed "One speck alone": gloss flashed=true, LOOK enabled=false, chosen=false, line="Tap a label. It says what you will do, not what you will see."
-  shot locked-flash
    tapped "sphinx": You will: Grind a chip of the Sphinx's granite to powder and drop it in water.
    DAY 1 OF 7 · yard: Dancing.
    shelf: [Life — set aside] | Currents | Drying | Pull | The skin | ?
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    buttons: Next day
 
-== Day 2 of 7 · What will you try?   (dimmed: onespeck)
+== Day 2 of 7 · What will you try?   bench: 13 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "oil": You will: Shake a little of the water into almond oil, so the drop is sealed and nothing can dry. Watch for an hour.
   shot help
@@ -20,9 +18,12 @@ day 0 shelf: Life | Currents | Drying | Pull | The skin | ?
    DAY 2 OF 7 · yard: Dancing, an hour on.
    shelf: [Life — set aside] | [Currents — set aside] | [Drying — set aside] | Pull | The skin | ?
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
+   new look: New look | Among the sealed drops is one so small it holds a single speck, nothing beside it. That is a new look.
    buttons: Next day
+  shot a-oil-new-look
+  shot a-day3-bench-new
 
-== Day 3 of 7 · What will you try?
+== Day 3 of 7 · What will you try?   bench: 14 labels, new: onespeck (new)
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "onespeck": You will: Shake harder, until some sealed drops hold a single speck with no neighbour.
    DAY 3 OF 7 · yard: Dancing, alone.
@@ -30,7 +31,7 @@ day 0 shelf: Life | Currents | Drying | Pull | The skin | ?
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    buttons: Next day
 
-== Day 4 of 7 · What will you try?
+== Day 4 of 7 · What will you try?   bench: 14 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "surface": You will: Turn it round: shake a little oil into the water, so tiny oil beads sit on the skin of the water drop.
    DAY 4 OF 7 · yard: Dancing inside; the beads still.
@@ -39,7 +40,7 @@ day 0 shelf: Life | Currents | Drying | Pull | The skin | ?
    buttons: Next day
   shot a-shelf-cleared
 
-== Day 5 of 7 · Nothing named is left. What changes the dance?
+== Day 5 of 7 · Nothing named is left. What changes the dance?   bench: 14 labels
    shelf line: Nothing you can name is left, and it still dances. Something does change the dance. Find it.
    tapped "coarse": You will: Stop grinding early, so the drop holds lumps with a little fine dust between them.
    DAY 5 OF 7 · yard: The lumps lie still. The fine dust dances.
@@ -56,7 +57,7 @@ about returned to: end
 
 play again: shelf cleared=true, card blank=true
 
-== Day 1 of 7 · What will you try?   (dimmed: onespeck)
+== Day 1 of 7 · What will you try?   bench: 13 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "coarse": You will: Stop grinding early, so the drop holds lumps with a little fine dust between them.
    DAY 1 OF 7 · yard: The lumps lie still. The fine dust dances.
@@ -65,7 +66,7 @@ play again: shelf cleared=true, card blank=true
    buttons: Next day
   shot b-clue-only
 
-== Day 2 of 7 · What will you try?   (dimmed: onespeck)
+== Day 2 of 7 · What will you try?   bench: 13 labels
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    tapped "herbarium": You will: Take a moss from a herbarium sheet dried a hundred years ago and wet it.
    DAY 2 OF 7 · yard: Dancing.
@@ -73,7 +74,7 @@ play again: shelf cleared=true, card blank=true
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    buttons: Next day
 
-== Day 3 of 7 · What will you try?   (dimmed: onespeck)
+== Day 3 of 7 · What will you try?   bench: 13 labels
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    tapped "burn": You will: Hold hair, linen and a splinter of wood in a candle flame, quench them, and grind what is left.
    DAY 3 OF 7 · yard: Dancing.
@@ -81,7 +82,7 @@ play again: shelf cleared=true, card blank=true
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    buttons: Next day
 
-== Day 4 of 7 · What will you try?   (dimmed: onespeck)
+== Day 4 of 7 · What will you try?   bench: 13 labels
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    tapped "glass": You will: Crush a splinter of window glass on the slide and add water.
    DAY 4 OF 7 · yard: Dancing.
@@ -89,7 +90,7 @@ play again: shelf cleared=true, card blank=true
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    buttons: Next day
 
-== Day 5 of 7 · What will you try?   (dimmed: onespeck)
+== Day 5 of 7 · What will you try?   bench: 13 labels
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    tapped "sugar": You will: Grind sugar and drop it in water.
    DAY 5 OF 7 · yard: Nothing in the drop.
@@ -97,7 +98,7 @@ play again: shelf cleared=true, card blank=true
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    buttons: Next day
 
-== Day 6 of 7 · What will you try?   (dimmed: onespeck)
+== Day 6 of 7 · What will you try?   bench: 13 labels
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    tapped "meteorite": You will: Powder a scrap of a stone that fell from the sky.
    DAY 6 OF 7 · yard: Dancing.
@@ -105,7 +106,7 @@ play again: shelf cleared=true, card blank=true
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    buttons: Next day
 
-== Day 7 of 7 · What will you try?   (dimmed: onespeck)
+== Day 7 of 7 · What will you try?   bench: 13 labels
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    tapped "soot": You will: Scrape the soot off a London windowsill into water.
    DAY 7 OF 7 · yard: Dancing.
@@ -113,10 +114,10 @@ play again: shelf cleared=true, card blank=true
    shelf line: You found what changes it: how small the specks are. The five on the shelf are still to be answered.
    buttons: See the verdict
 
-END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair, linen and wood first, crushed window glass, powdered a meteorite and scraped up London soot. It danced through all of it. | You set aside life. Still standing on the shelf: currents, drying, pull and the skin. Brown's drop of
+END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair, linen and wood first, crushed window glass, powdered a meteorite and scraped up London soot. It danced through all of it. | You set aside life. Still standing on the shelf: currents, drying, pull and the skin. Brown's drop of water sealed in almond oil, with one speck in it, set aside drying, currents and pull in a single look, and the oil beads on the water's skin set aside the skin. Brown found the one-speck drop by loo
   shot b-end
 
-== Day 1 of 7 · What will you try?   (dimmed: onespeck)
+== Day 1 of 7 · What will you try?   bench: 13 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "sphinx": You will: Grind a chip of the Sphinx's granite to powder and drop it in water.
    DAY 1 OF 7 · yard: Dancing.
@@ -124,15 +125,16 @@ END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    buttons: Next day
 
-== Day 2 of 7 · What will you try?   (dimmed: onespeck)
+== Day 2 of 7 · What will you try?   bench: 13 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "oil": You will: Shake a little of the water into almond oil, so the drop is sealed and nothing can dry. Watch for an hour.
    DAY 2 OF 7 · yard: Dancing, an hour on.
    shelf: [Life — set aside] | [Currents — set aside] | [Drying — set aside] | Pull | The skin | ?
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
+   new look: New look | Among the sealed drops is one so small it holds a single speck, nothing beside it. That is a new look.
    buttons: Next day
 
-== Day 3 of 7 · What will you try?
+== Day 3 of 7 · What will you try?   bench: 14 labels, new: onespeck (new)
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "onespeck": You will: Shake harder, until some sealed drops hold a single speck with no neighbour.
    DAY 3 OF 7 · yard: Dancing, alone.
@@ -140,7 +142,7 @@ END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    buttons: Next day
 
-== Day 4 of 7 · What will you try?
+== Day 4 of 7 · What will you try?   bench: 14 labels
    shelf line: Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.
    tapped "surface": You will: Turn it round: shake a little oil into the water, so tiny oil beads sit on the skin of the water drop.
    DAY 4 OF 7 · yard: Dancing inside; the beads still.
@@ -150,7 +152,7 @@ END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair
    (day 5 bench head: Day 5 of 7 · Nothing named is left. What changes the dance?)
   shot c-day5-bench
 
-== Day 5 of 7 · Nothing named is left. What changes the dance?
+== Day 5 of 7 · Nothing named is left. What changes the dance?   bench: 14 labels
    shelf line: Nothing you can name is left, and it still dances. Something does change the dance. Find it.
    tapped "glass": You will: Crush a splinter of window glass on the slide and add water.
    DAY 5 OF 7 · yard: Dancing.
@@ -158,7 +160,7 @@ END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair
    shelf line: Nothing you can name is left, and it still dances. Something does change the dance. Find it.
    buttons: Next day
 
-== Day 6 of 7 · Nothing named is left. What changes the dance?
+== Day 6 of 7 · Nothing named is left. What changes the dance?   bench: 14 labels
    shelf line: Nothing you can name is left, and it still dances. Something does change the dance. Find it.
    tapped "meteorite": You will: Powder a scrap of a stone that fell from the sky.
    DAY 6 OF 7 · yard: Dancing.
@@ -166,7 +168,7 @@ END B: In seven days you ground coarser, wetted a moss a century dry, burnt hair
    shelf line: Nothing you can name is left, and it still dances. Something does change the dance. Find it.
    buttons: Next day
 
-== Day 7 of 7 · Nothing named is left. What changes the dance?
+== Day 7 of 7 · Nothing named is left. What changes the dance?   bench: 14 labels
    shelf line: Nothing you can name is left, and it still dances. Something does change the dance. Find it.
    tapped "soot": You will: Scrape the soot off a London windowsill into water.
    DAY 7 OF 7 · yard: Dancing.

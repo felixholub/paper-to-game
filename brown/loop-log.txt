@@ -2,7 +2,7 @@ AIM: Dust is dancing in a drop of water. Make it lie still.
 STAGE, day 0: fresh pollen of Clarckia; 10 oblong particles turning slowly, 34 round specks trembling fast.  [Dancing.]
 SHELF: LIFE | CURRENTS | DRYING | PULL | THE SKIN   (what people have said makes it move)
 
-DAY 1 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+DAY 1 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Watch the open drop / Seal it in almond oil / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
   tap "A chip of the Sphinx" -> "You will: Grind a chip of the Sphinx's granite to powder and drop it in water."  [LOOK enabled]
   LOOK: t=2s r=1.00 cur=0.00 water=true | t=4s r=1.00 cur=0.00 water=true | t=6s r=1.00 cur=0.00 water=true | t=8s r=1.00 cur=0.00 water=true
   PICTURE: 44 specks (44 dancing, 0 still), vessel open-fresh, water true, beads 0
@@ -11,7 +11,7 @@ DAY 1 OF 7. BENCH: A chip of the Sphinx / Window glass / A meteorite / Moss, a c
   SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
   slips land on: life
 
-DAY 2 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Watch the open drop / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+DAY 2 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Watch the open drop / Seal it in almond oil / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
   tap "Watch the open drop" -> "You will: Leave the drop open on the glass and watch until the end."  [LOOK enabled]
   LOOK: t=15s r=0.95 cur=0.03 water=true | t=30s r=0.79 cur=0.18 water=true | t=45s r=0.52 cur=0.49 water=true | t=60s r=0.00 cur=1.00 water=false
   PICTURE: 44 specks (44 dancing, 0 still), vessel open-wait, water false, beads 0
@@ -20,7 +20,7 @@ DAY 2 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it fi
   SHELF: [LIFE — set aside] | CURRENTS | DRYING | PULL | THE SKIN
   no slip lands
 
-DAY 3 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Seal it in almond oil / One speck alone / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
+DAY 3 OF 7. BENCH: Window glass / A meteorite / Moss, a century dry / Burn it first / London soot / Seal it in almond oil / Oil on the water's skin / Grind coarser / A fibre of asbestos / Sulphur / Sugar
   tap "Seal it in almond oil" -> "You will: Shake a little of the water into almond oil, so the drop is sealed and nothing can dry. Watch for an hour."  [LOOK enabled]
   LOOK: t=900s r=0.50 cur=0.00 water=true | t=1800s r=0.50 cur=0.00 water=true | t=2700s r=0.50 cur=0.00 water=true | t=3600s r=0.50 cur=0.00 water=true
   PICTURE: 44 specks (44 dancing, 0 still), vessel oil, water true, beads 0

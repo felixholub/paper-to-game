@@ -66,10 +66,11 @@ h3{font-family:var(--sc);font-weight:400;letter-spacing:.14em;color:var(--ink);f
 .sus.clue.found{border-style:solid;outline-style:solid}
 .stamp{position:absolute;right:-4px;top:-17px;padding:1px 7px;background:var(--cream);color:var(--green);border:3px double var(--green);font-family:var(--sc);font-size:13px;letter-spacing:.16em;line-height:18px;transform:rotate(8deg) scale(0);transition:transform .5s cubic-bezier(.2,1.6,.4,1)}
 .sus.found .stamp{transform:rotate(8deg) scale(1)}
-.exp.locked{color:#A89A86;border-color:#A89A86;outline-color:#A89A86;background:var(--cream2);flex-direction:column;cursor:default}
-.exp.locked small{display:block;font-family:var(--text);font-style:italic;font-size:12px;letter-spacing:0;margin-top:3px;color:var(--ink2);transition:color .2s}
-.exp.locked.flash small{color:var(--carmine);animation:gloss .7s ease}
-@keyframes gloss{0%{transform:scale(1)}30%{transform:scale(1.12)}100%{transform:scale(1)}}
+/* a look found inside another: announced under the reading, then marked new on the bench for one day */
+.found{margin:0 0 10px;padding:8px 10px;border-left:3px solid var(--carmine);font-size:16px;line-height:1.4;font-style:italic}
+.found b{display:block;font-style:normal;font-family:var(--sc);font-size:12px;letter-spacing:.2em;color:var(--carmine);margin-bottom:2px}
+.exp{position:relative}
+.exp .newtag{position:absolute;right:-4px;top:-9px;padding:1px 6px;background:var(--carmine);color:var(--cream);font-family:var(--sc);font-style:normal;font-size:11px;letter-spacing:.16em;line-height:16px;transform:rotate(6deg)}
 /* the bench */
 .bench{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
 .exp{min-height:58px;padding:8px 6px;background:var(--cream);color:var(--ink);border:1px solid var(--ink);outline:1px solid var(--ink);outline-offset:-4px;font-family:var(--sc);font-size:15px;letter-spacing:.05em;line-height:1.15;text-align:center;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center}
@@ -125,6 +126,7 @@ ul{padding-left:20px}li{margin:4px 0}
   <p class="fig" id="figline">PLATE I · FIG. 1 · POLLEN OF CLARCKIA PULCHELLA</p>
   <p class="yard" id="yard">Dancing.</p>
   <p class="what" id="what">Dust from the pollen of a flower, in a drop of water, under Brown's lens. The big oblong grains are the pollen's own particles, turning slowly. The small round specks are what Brown called molecules: the smallest things he could see, trembling fast.</p>
+  <p class="found hidden" id="found"></p>
   <div class="shelf" id="shelf"></div>
   <p class="shelfline" id="shelfline">Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.</p>
   <div id="benchwrap">
@@ -161,7 +163,7 @@ ul{padding-left:20px}li{margin:4px 0}
   <p class="aim">Dust is dancing in a drop of water. Make it lie still.</p>
   <p>You sit at Robert Brown's microscope in London in 1827. On the stage is a drop of water with dust in it, and the dust will not keep still: it trembles, turns and wanders. The drop is the blue circle; the dust is the specks in it. While there is water and the specks are small, they dance.</p>
   <p><b>The shelf.</b> Under the drop are five labels: Life, Currents, Drying, Pull, The skin. They are the five things people said made the dust move: that it is alive; that streams in the water carry it; that the drop drying up stirs it; that the specks pull and push each other; that something at the surface of the drop acts on it. When a look answers one of them, a red slip lands on its label: set aside. The sixth card is blank. One look will fill it: the one thing that does change the dance.</p>
-  <p><b>The bench.</b> Fourteen labels, each one thing Brown actually did: grind a chip of the Sphinx, burn hair in a candle, seal the drop in almond oil, make a drop with one speck in it, and so on. Tap one and a line says what you will do. Tap LOOK and the plate shows the act, then the drop as it is afterwards. Then a line says what you saw, and slips land if the look answered anything.</p>
+  <p><b>The bench.</b> Thirteen labels, each one thing Brown actually did: grind a chip of the Sphinx, burn hair in a candle, seal the drop in almond oil, watch an open drop dry, and so on. Tap one and a line says what you will do. Tap LOOK and the plate shows the act, then the drop as it is afterwards. Then a line says what you saw, and slips land if the look answered anything. One look adds a fourteenth.</p>
   <p><b>Seven days.</b> One look a day. Think before you tap: which of the five do you believe, and which look would remove it? Some looks answer more than one; some answer none. When nothing on the shelf is left and the blank card is filled, you may go to the verdict early, or keep looking as Brown did.</p>
   <p><b>Play again</b> to spend the seven days differently.</p>
   <button class="btn go" id="helpback">Back</button>
@@ -317,9 +319,9 @@ ul{padding-left:20px}li{margin:4px 0}
     $('benchhead').textContent = M.shelfState(game).benchHead;
     for (const e of C.EXPERIMENTS) {
       const b = document.createElement('button'); b.className = 'exp'; b.textContent = e.label; b.dataset.id = e.id;
+      if (M.isNew(game, e.id)) { b.classList.add('fresh'); b.insertAdjacentHTML('beforeend', '<i class="newtag">new</i>'); }
       if (game.log.some(l => l.id === e.id)) { b.classList.add('done'); b.disabled = true; }
-      else if (M.locked(game, e.id)) { b.classList.add('locked'); b.innerHTML = `${e.label}<small>${e.lockedGloss}</small>`; b.setAttribute('aria-disabled', 'true');
-        b.addEventListener('click', () => { b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); setTimeout(() => b.classList.remove('flash'), 700); }); }
+      else if (M.locked(game, e.id)) continue;
       else b.addEventListener('click', () => { document.querySelectorAll('.exp.chosen').forEach(x => x.classList.remove('chosen')); b.classList.add('chosen'); chosen = e.id; $('willdo').textContent = 'You will: ' + e.act; $('look').disabled = false; });
       $('bench').appendChild(b);
     }
@@ -332,6 +334,7 @@ ul{padding-left:20px}li{margin:4px 0}
     $('dayband').textContent = 'THE STAGE · JUNE 1827'; $('figline').textContent = 'PLATE I · FIG. 1 · POLLEN OF CLARCKIA PULCHELLA';
     $('yard').textContent = 'Dancing.';
     $('what').textContent = 'Dust from the pollen of a flower, in a drop of water, under Brown\'s lens. The big oblong grains are the pollen\'s own particles, turning slowly. The small round specks are what Brown called molecules: the smallest things he could see, trembling fast.';
+    $('found').classList.add('hidden');
     if (!suspectsBuilt) { buildShelf(); suspectsBuilt = true; } refreshShelf();
     $('benchwrap').classList.remove('hidden'); $('afterwrap').classList.add('hidden'); $('enough').classList.add('hidden'); buildBench();
     if (!raf) raf = requestAnimationFrame(animate);
@@ -340,7 +343,7 @@ ul{padding-left:20px}li{margin:4px 0}
   $('look').addEventListener('click', () => {
     if (!chosen) return; const d = M.playDay(game, chosen); look = d; figN += 1;
     $('benchwrap').classList.add('hidden'); $('dayband').textContent = `DAY ${game.day} OF ${C.DAYS}`; $('figline').textContent = `PLATE I · FIG. ${figN} · ${FIG[d.exp.id]}`;
-    $('yard').textContent = 'Looking.'; $('what').textContent = d.exp.act;
+    $('yard').textContent = 'Looking.'; $('what').textContent = d.exp.act; $('found').classList.add('hidden');
     // vignette, then the drop
     vigArt.innerHTML = VIG[VIG_FOR[d.exp.id]]; gVig.classList.remove('on'); void gVig.getBoundingClientRect(); gVig.classList.add('on');
     buildSpecks(d.state); setVessel(d.state); drawDrop(d.state); lastT = 0;
@@ -351,6 +354,7 @@ ul{padding-left:20px}li{margin:4px 0}
   const realStep = M.step; M.step = function (st, dt) { if (look && look.hold) return st; return realStep(st, dt); };
   function onLookDone() {
     const r = look.reading; $('yard').textContent = r.yard; $('what').textContent = r.what; refreshShelf();
+    if (r.found) { $('found').innerHTML = '<b>New look</b>' + r.found; $('found').classList.remove('hidden'); }
     $('afterwrap').classList.remove('hidden'); $('next').textContent = game.day >= C.DAYS ? 'See the verdict' : 'Next day';
     $('enough').classList.toggle('hidden', !M.canStopEarly(game));
   }
@@ -366,10 +370,10 @@ ul{padding-left:20px}li{margin:4px 0}
     const list = a => a.length === 1 ? a[0] : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
     if (v.tried.length) P.push(`<p>In ${v.daysWord} days you ${list(v.tried)}. It danced through all of it.</p>`);
     if (v.allAside) P.push(`<p>You set aside every cause on the shelf: ${list(v.aside.map(a => a.toLowerCase()))}. Nothing you could name was left to blame.</p>`);
-    else if (v.aside.length) P.push(`<p>You set aside ${list(v.aside.map(a => a.toLowerCase()))}. Still standing on the shelf: ${list(v.standing.map(a => a.toLowerCase()))}. Brown's drop of water sealed in almond oil, with one speck in it, set aside drying, currents and pull in a single look, and the oil beads on the water's skin set aside the skin.</p>`);
-    else P.push(`<p>You set aside nothing on the shelf: every look you chose answered none of the five. Brown's drop of water sealed in almond oil, with one speck in it, set aside drying, currents and pull in a single look; a chip of the Sphinx set aside life.</p>`);
+    else if (v.aside.length) P.push(`<p>You set aside ${list(v.aside.map(a => a.toLowerCase()))}. Still standing on the shelf: ${list(v.standing.map(a => a.toLowerCase()))}. Brown's drop of water sealed in almond oil, with one speck in it, set aside drying, currents and pull in a single look, and the oil beads on the water's skin set aside the skin.${v.standing.includes('Pull') && !v.sealed ? ' Brown found the one-speck drop by looking closer at the drops in oil; you never sealed one.' : ''}</p>`);
+    else P.push(`<p>You set aside nothing on the shelf: every look you chose answered none of the five. Brown's drop of water sealed in almond oil, with one speck in it, set aside drying, currents and pull in a single look; a chip of the Sphinx set aside life.${v.sealed ? '' : ' He found the one-speck drop by looking closer at the drops in oil; you never sealed one.'}</p>`);
     if (v.allAside && !v.leverFound) P.push(`<p>You never found the one thing that does change the dance. Brown did, grinding coarser: the big grains lie still, the fine dust between them dances. Size is the clue he wrote down and could not read.</p>`);
-    else if (v.leverFound) P.push(`<p>You found the one thing that changes the dance: how small the specks are. Big grains and long threads lie still; fine dust dances, the finest fastest. That is not a cause. It is the clue Brown wrote down and could not read.</p>`);
+    else if (v.leverFound) P.push(`<p>You found the one thing that changes the dance: how small the specks are. Big grains and long threads lie still; fine dust dances, the finest fastest. It was in the first drop too: the big pollen grains turning slowly, the fine dust between them trembling. That is not a cause. It is the clue Brown wrote down and could not read.</p>`);
     else P.push(`<p>You never looked at the one thing that changes the dance: how small the specks are. Ground coarse, the big grains lie still while the fine dust between them dances; a thread of asbestos lies still beyond four or five specks long. Brown wrote that down, and could not say why.</p>`);
     if (v.quiet.length) P.push(`<p>The only quiet you got came when you ${list(v.quiet.map(q => q.did + ' (' + q.how + ')'))}. A drop with nothing in it, or no drop at all, is not dust lying still.</p>`);
     $('verdictbody').innerHTML = P.join(''); show('end');

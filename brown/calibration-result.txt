@@ -33,6 +33,10 @@ PASS  B9c four days suffice to set aside every suspect (sphinx, oil, onespeck, s
 PASS  B9d the ordering (molecule > particle > lump at rest) and the sealed drop's undiminished dance survive doubling and halving our curve and moving the rest limit
 PASS  G1 one speck alone is locked until the oil drop has been looked at, and playing it locked is refused
 PASS  G1b no other look is locked at any time
+PASS  G2 a fresh bench lists thirteen looks and never the lone speck; after the oil look it lists fourteen
+PASS  G2b the oil look carries the announcement of the lone speck, and no other look announces anything
+PASS  G2c the lone speck is marked new on the bench the day after the oil look only
+PASS  G2d the verdict knows whether a drop was ever sealed
       legal sequences: 1752 of three looks (0 clear the shelf), 17952 of four looks (72 clear it)
 PASS  G2 the shelf cannot be cleared in three looks
 PASS  G2b the shelf can be cleared in four looks, so the cleared state is reachable on day 4 (brief item 6a, reconciled with item 7)
@@ -56,4 +60,4 @@ PASS  H the obvious ways of spending seven days land in different places (the vi
 PASS  W no decimals in any line the screen reads from the mechanism
 PASS  W2 every bench label has an act defined in words
 
-44 passed, 0 failed
+48 passed, 0 failed

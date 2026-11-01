@@ -82,8 +82,9 @@
       { id: 'wait', did: "watched an open drop to its end",      label: 'Watch the open drop',      act: 'Leave the drop open on the glass and watch until the end.',
         specks: 'molecules', tint: 'pollen', vessel: 'open-wait', answers: [], src: 'p. 482: currents centre to rim, then the drop dissipated in less than a minute; p. 467: evaporated, both kinds found on the stage' },
       { id: 'oil', did: "sealed the drop in almond oil",       label: 'Seal it in almond oil',    act: 'Shake a little of the water into almond oil, so the drop is sealed and nothing can dry. Watch for an hour.',
-        specks: 'molecules', tint: 'pollen', vessel: 'oil', answers: ['drying', 'currents'], src: 'p. 482: evaporation "absolutely null", motion "with undiminished activity"; currents "wholly prevented in drops of small size immersed in oil"' },
-      { id: 'onespeck', requires: 'oil', lockedGloss: 'first seal a drop in oil', did: "sealed one speck alone",  label: 'One speck alone',          act: 'Shake harder, until some sealed drops hold a single speck with no neighbour.',
+        specks: 'molecules', tint: 'pollen', vessel: 'oil', answers: ['drying', 'currents'], src: 'p. 482: evaporation "absolutely null", motion "with undiminished activity"; currents "wholly prevented in drops of small size immersed in oil"',
+        reveals: 'onespeck', found: 'Among the sealed drops is one so small it holds a single speck, nothing beside it. That is a new look.' },
+      { id: 'onespeck', requires: 'oil', did: "sealed one speck alone",  label: 'One speck alone',          act: 'Shake harder, until some sealed drops hold a single speck with no neighbour.',
         specks: 'one', tint: 'pollen', vessel: 'oil-one', answers: ['pull', 'drying', 'currents'], src: 'p. 482: "some may be occasionally observed with one particle only"; mutual attraction and repulsion "materially reduced or absolutely null"' },
       { id: 'surface', did: "put oil beads on the water's skin",   label: 'Oil on the water\'s skin', act: 'Turn it round: shake a little oil into the water, so tiny oil beads sit on the skin of the water drop.',
         specks: 'molecules', tint: 'pollen', vessel: 'inverted', answers: ['skin'], src: 'p. 483: oil drops on the surface "nearly or altogether at rest", particles within "continue to move"' },
@@ -202,15 +203,18 @@
       case 'sulphur': yard = 'Nothing in the drop.'; what = 'Nothing fine enough came off the sulphur. The drop is empty: there is nothing to watch. (Two years on, Brown got specks from sulphur, resin and wax after all, and blamed his grinding.)'; break;
       case 'sugar': yard = 'Nothing in the drop.'; what = 'The sugar dissolved. There is nothing in the water to watch.'; break;
     }
-    return { yard, what, moving, still, dancing, lever, answers: exp.answers.slice() };
+    return { yard, what, moving, still, dancing, lever, answers: exp.answers.slice(), found: exp.found || null };
   }
 
   // ---- a game: seven days
   function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, day: 0, log: [], setAside: {}, leverFound: false, emptyDays: 0, dryDays: 0 }; }
   function expById(id) { return CONFIG.EXPERIMENTS.find(e => e.id === id); }
-  function available(g) { return CONFIG.EXPERIMENTS.filter(e => !g.log.some(l => l.id === e.id)); }
-  // a look is locked until the look it refines has been taken (the one-particle drop refines the oil drop, p. 482)
+  // a look that refines another is not on the bench until the look it refines has been taken (the one-particle drop
+  // was found inside the oil drop, p. 482): it is hidden, not greyed, and the oil reading announces it
   function locked(g, id) { const e = expById(id); return !!(e && e.requires && !g.log.some(l => l.id === e.requires)); }
+  function available(g) { return CONFIG.EXPERIMENTS.filter(e => !g.log.some(l => l.id === e.id) && !locked(g, e.id)); }
+  // new on the bench: revealed by the look just taken (marked for that day only)
+  function isNew(g, id) { const e = expById(id), last = g.log[g.log.length - 1]; return !!(e && e.requires && last && last.id === e.requires); }
   // the shelf's state, from the suspects set aside and whether the size clue has been found
   function shelfState(g) {
     const allAside = CONFIG.SUSPECTS.every(s => g.setAside[s.id]), clue = g.leverFound;
@@ -246,7 +250,7 @@
       headline: 'The dust is still dancing.',
       tried, aside: aside.map(s => s.label), standing: standing.map(s => s.label),
       leverFound: g.leverFound, quiet: quiet.map(l => ({ label: l.label, did: l.did, how: l.dry ? 'no water left' : 'nothing in the drop' })),
-      allAside: standing.length === 0, days: g.day, daysWord: CONFIG.NUMBER_WORDS[g.day] || String(g.day), early: g.day < CONFIG.DAYS,
+      allAside: standing.length === 0, sealed: g.log.some(l => l.id === 'oil'), days: g.day, daysWord: CONFIG.NUMBER_WORDS[g.day] || String(g.day), early: g.day < CONFIG.DAYS,
     };
   }
 
@@ -263,5 +267,5 @@
     return H.map(h => Object.assign({}, h, { v: runSequence(h.ids) }));
   }
 
-  return { CONFIG, rng, vivacity, fibrilVivacity, current, makeSpecks, startLook, step, readLook, newGame, expById, available, locked, shelfState, canStopEarly, playDay, verdict, runSequence, heuristics };
+  return { CONFIG, rng, vivacity, fibrilVivacity, current, makeSpecks, startLook, step, readLook, newGame, expById, available, locked, isNew, shelfState, canStopEarly, playDay, verdict, runSequence, heuristics };
 });
