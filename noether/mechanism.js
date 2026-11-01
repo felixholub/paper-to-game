@@ -52,26 +52,26 @@
     ball: { id: 'ball', type: 'newton', name: 'The thrown ball',
       V: (t, x, y) => [C.G * y, 0, C.G],
       start: { p: [-0.95, -0.85], v: [2.1, 3.7], jit: 0.15 },
-      formula: 'S = ∫ ½(x′² + y′²) − g·y dt', words: 'speed² minus height, added up along the trip (x′ is how fast x changes; g is the pull of gravity)' },
+      formula: 'S = ∫ ½(x′² + y′²) − g·y dt', words: '½·speed² minus g·height, added up along the trip (x, y: where the ball is; x′, y′: how fast they change; g: the pull of gravity)' },
     grow: { id: 'grow', type: 'newton', name: 'Gravity that grows',
       V: (t, x, y) => { const g = C.G * (1 + C.GROW * t); return [g * y, 0, g]; },
       start: { p: [-0.95, -0.85], v: [2.1, 4.8], jit: 0.15 },
-      formula: 'S = ∫ ½(x′² + y′²) − g·(1 + a·t)·y dt', words: 'the same, but the pull of gravity grows with the time t on the clock' },
+      formula: 'S = ∫ ½(x′² + y′²) − g·(1 + a·t)·y dt', words: 'the same, but the pull of gravity grows with t, the time on the clock (a: how fast it grows)' },
     magnet: { id: 'magnet', type: 'newton', name: 'The ball and the magnet',
       V: (t, x, y) => { const M = C.MAGNET, dx = x - M.x, dy = y - M.y, e = Math.exp(-(dx * dx + dy * dy) / (M.s * M.s)), k = 2 * M.m / (M.s * M.s) * e; return [C.G * y - M.m * e, k * dx, C.G + k * dy]; },
       start: { p: [-0.95, -0.85], v: [2.1, 3.7], jit: 0.12 },
-      formula: 'S = ∫ ½(x′² + y′²) − g·y + m·e^(−r²/s²) dt', words: 'the thrown ball, plus a magnet: r is the ball\'s distance to it, s how far its pull reaches' },
+      formula: 'S = ∫ ½(x′² + y′²) − g·y + m·e^(−r²/s²) dt', words: 'the thrown ball, plus a magnet\'s pull (r: the ball\'s distance to the magnet; s: how far the pull reaches)' },
     peg: { id: 'peg', type: 'newton', name: 'The swing round the peg',
       V: (t, x, y) => [0.5 * C.PEG_K * (x * x + y * y), C.PEG_K * x, C.PEG_K * y],
       start: { p: [0.85, 0], v: [0, 3.2], jit: 0.1 },
-      formula: 'S = ∫ ½(x′² + y′²) − ½k·(x² + y²) dt', words: 'speed² minus the stretch of a spring tied to the peg (k is how stiff it is)' },
+      formula: 'S = ∫ ½(x′² + y′²) − ½k·(x² + y²) dt', words: '½·speed² minus the spring\'s stretch, added up along the trip (x² + y²: the distance to the peg, squared; k: how stiff the spring is)' },
     wind: { id: 'wind', type: 'newton', name: 'The swing in the wind',
       V: (t, x, y) => [0.5 * C.PEG_K * (x * x + y * y) - C.WIND * x, C.PEG_K * x - C.WIND, C.PEG_K * y],
       start: { p: [0.85, 0], v: [0, 3.2], jit: 0.1 },
-      formula: 'S = ∫ ½(x′² + y′²) − ½k·(x² + y²) + w·x dt', words: 'the same swing, plus a wind blowing east (w is how strong it is)' },
+      formula: 'S = ∫ ½(x′² + y′²) − ½k·(x² + y²) + w·x dt', words: 'the same swing, plus a wind blowing east (w: how strong it is; x: how far east the dot is)' },
     slide: { id: 'slide', type: 'weierstrass', name: 'The slide',
       start: { p: [-0.95, 0.9], ang: -0.8, speed: 2.2, jit: 0.04 },
-      formula: 'S = ∫ √(x′² + y′²) / √(h − y) dt', words: 'distance ÷ √drop: the time it takes to slide, where h − y is how far the dot has dropped' },
+      formula: 'S = ∫ √(x′² + y′²) / √(h − y) dt', words: 'the time the slide takes: each bit of the way, divided by the dot\'s speed there; the speed grows as the dot drops (h − y: how far it has dropped)' },
   };
   function density(w, u1, u2) { const d = Math.max(1e-3, C.SLIDE_H - u2); return { n: 1 / Math.sqrt(d), n1: 0, n2: 0.5 * Math.pow(d, -1.5) }; }
   // f, ∂f/∂u, ∂f/∂u′ at one point
@@ -96,7 +96,7 @@
     clock: { id: 'clock', label: 'START THE CLOCK LATER', free: false },
     across: { id: 'across', label: 'MOVE IT', free: false },
     turn: { id: 'turn', label: 'TURN IT', free: false },
-    warpclock: { id: 'warpclock', label: 'RE-TICK THE CLOCK', free: true },
+    warpclock: { id: 'warpclock', label: 'CHANGE THE TIMING', free: true },
   };
   function transformation(leverId, path, p) {
     const n = path.u1.length, dx = new Float64Array(n), du1 = new Float64Array(n), du2 = new Float64Array(n);
@@ -234,23 +234,24 @@
     'SPIN': { formula: 'x·y′ − y·x′', gloss: 'how fast the dot sweeps round the peg' },
     'SLIDE ENERGY': { formula: 'x′·∂f/∂x′ + y′·∂f/∂y′ − f', gloss: 'the slide\'s energy, built from its formula exactly as the ball\'s energy is built from the ball\'s' },
   };
-  // reveal: what happened and what follows; why: where the answer sits in the formula on the plate (checked in calibration, Y)
+  // reveal: what happened and what follows; why: the part of the formula that decides the card (checked in calibration, Y);
+  // rule: card 9's second paragraph, the rule the slide gets instead of a prize
   const CARDS = [
     { id: 'c1', world: 'ball', lever: 'clock', prize: 'ENERGY',
       setup: 'A ball is thrown at three o\'clock.', change: 'Throw it again, exactly the same way, at five past three.',
       reveal: 'It doesn\'t matter. The 3:05 throw flies exactly the same arc, and the formula gives it the same number. A change that doesn\'t matter wins a prize: energy.',
-      why: 'There is no t in it: nothing in the formula depends on the time on the clock. So starting later can\'t change the number of any throw, not just this one.' },
+      why: 'There is no t in it, apart from the dt that only says "add up along the trip". Nothing in the formula depends on the time on the clock, so starting later can\'t change the number of any throw, not just this one.' },
     { id: 'c2', world: 'grow', lever: 'clock', prize: null,
       setup: 'The same ball, but here gravity grows a little stronger every minute.', change: 'Throw it again, exactly the same way, at five past three.',
-      reveal: 'It matters. At 3:05 gravity is stronger, so the later throw falls short, and the formula gives it a different number. Here no energy stays the same: no prize.',
-      why: 'It has a t in it: g·(1 + a·t). The time on the clock is written into the rules.' },
+      reveal: 'It matters. At 3:05 gravity is stronger, so the later throw falls short, and the formula gives it a different number. No prize: with gravity growing, the ball\'s energy doesn\'t stay the same.',
+      why: 'It has a t in it: g·(1 + a·t). The time on the clock is part of the formula.' },
     { id: 'c3', world: 'ball', lever: 'across', prize: 'SIDEWAYS SPEED',
       setup: 'A ball is thrown from here.', change: 'Throw it the same way from one step to the left.',
       reveal: 'It doesn\'t matter. Thrown from one step to the left, the ball flies the same arc, one step to the left, with the same number. The prize: its sideways speed.',
-      why: 'x appears only as x′, how fast the ball moves sideways, never as where it is.' },
+      why: 'x, where the ball is from left to right, appears only as x′, how fast it moves sideways. So moving the throw sideways changes nothing.' },
     { id: 'c4', world: 'magnet', lever: 'across', prize: null,
       setup: 'The same throw, but now a magnet stands to the right and pulls the ball.', change: 'Throw it the same way from one step to the left.',
-      reveal: 'It matters. One step to the left, the ball passes the magnet at a different distance and bends differently; a different number. With the magnet there, the sideways speed changes in flight: no prize.',
+      reveal: 'It matters. One step to the left, the ball passes the magnet at a different distance and bends differently, and the formula gives it a different number. No prize: the magnet pulls the ball sideways, so its sideways speed changes in flight.',
       why: 'The magnet\'s part, m·e^(−r²/s²), depends on where the ball is: r is its distance to the magnet.' },
     { id: 'c5', world: 'peg', lever: 'turn', prize: 'SPIN',
       setup: 'A dot on a spring swings round a peg.', change: 'Turn the whole picture a little round the peg.',
@@ -258,20 +259,21 @@
       why: 'It only uses x² + y², the distance from the peg squared, and x′² + y′², the speed squared. A turn changes neither.' },
     { id: 'c6', world: 'wind', lever: 'turn', prize: null,
       setup: 'The same swing, but a wind blows east.', change: 'Turn the whole picture a little round the peg.',
-      reveal: 'It matters. The wind still blows east after the turn, so the turned swing drifts differently; a different number. While the wind blows, no spin stays the same: no prize.',
-      why: 'The wind\'s part, w·x, knows which way is east, and a turn changes it.' },
+      reveal: 'It matters. The wind still blows east after the turn, so the turned swing drifts differently, and the formula gives it a different number. No prize: the wind keeps pushing the dot east, wherever it is, so its spin doesn\'t stay the same.',
+      why: 'The wind\'s part, w·x, depends on which way is east, and a turn changes that.' },
     { id: 'c7', world: 'ball', lever: 'warpclock', prize: null,
-      setup: 'Back to the thrown ball.', change: 'Re-tick the clock: let it run fast here and slow there. The same arc, but the ball now speeds up and slows down along it.',
-      reveal: 'It matters. A ball that speeds up and slows down for no reason is not a thrown ball, and the formula gives it a different number. So the ball\'s clock can\'t be re-ticked, and that is what makes its energy real. Remember this for the slide.',
-      why: 'It squares the speed: ½(x′² + y′²). Run the clock twice as fast and the speed doubles, its square quadruples, but the time only halves: the number changes.' },
+      setup: 'Back to the thrown ball.', change: 'Change the timing: the same arc, but the ball speeds up here and slows down there.',
+      reveal: 'It matters. A ball that speeds up and slows down for no reason is not a real throw, and the formula notices: it gives a different number. The ball\'s formula cares about timing.',
+      why: 'It squares the speed: ½(x′² + y′²). Run the ball twice as fast and its speed doubles, the square of the speed quadruples, but the time only halves: the number changes.' },
     { id: 'c8', world: 'slide', lever: 'clock', prize: 'SLIDE ENERGY',
-      setup: 'A dot slides from A down to B. Its formula counts the time the slide takes.', change: 'Start the slide five minutes later.',
-      reveal: 'It doesn\'t matter. The slide started at 3:05 is the same slide, with the same number. So there should be a prize: the slide\'s energy. Watch it.',
-      why: 'Like the ball\'s formula, this one has no t in it.' },
+      setup: 'A dot slides from A down to B. The formula counts the time a slide takes, and the dot takes the quickest slide.', change: 'Start the slide five minutes later.',
+      reveal: 'It doesn\'t matter. Started at 3:05, it is the same slide, with the same number. So, as with the ball, there should be a prize: the slide\'s energy. Watch it.',
+      why: 'Like the ball\'s formula, this one has no t in it, apart from the dt that says "add up along the trip".' },
     { id: 'c9', world: 'slide', lever: 'warpclock', prize: null,
-      setup: 'The same slide.', change: 'Re-tick the clock: fast here, slow there. The same curve, with the ticks bunched and spread.',
-      reveal: 'It doesn\'t matter: re-tick the slide any way you like and the number stays the same. A change you can make differently at every moment wins no prize. It wins a rule: the slide\'s two equations of motion, ψ₁ = 0 and ψ₂ = 0, are not independent, because ψ₁x′ + ψ₂y′ = 0 on every path. And starting the clock later is just one way of re-ticking it. That is why the slide\'s energy was empty: its clock is free.',
-      why: 'It doesn\'t square the speed: √(x′² + y′²) is the speed itself. Run the clock twice as fast and the speed doubles while the time halves: the same number.' },
+      setup: 'The same slide.', change: 'Change the timing: the same curve, but the dot speeds up here and slows down there.',
+      reveal: 'It doesn\'t matter. Change the slide\'s timing any way you like: the number stays the same. The slide\'s formula cares only about the shape of the slide, not about how fast the dot moves along it. And starting five minutes later is just one more change of timing. That is why the slide\'s energy was empty: energy is a rule about speed, and this formula has nothing to say about speed.',
+      why: 'It doesn\'t square the speed: √(x′² + y′²) is the speed itself. Run the dot twice as fast and the speed doubles while the time halves: the same number.',
+      rule: 'No prize, then, but a rule. The slide has two equations of motion, the rules for how the dot moves: one for left and right, one for up and down; call them ψ₁ = 0 and ψ₂ = 0. On every path, real or not, ψ₁x′ + ψ₂y′ = 0. So the two are not independent: once one holds, the other follows. Between them they fix only the shape of the slide, never its timing.' },
   ];
   // the badge each card awards for a right answer: red for the paper's lessons, pink for the traps (a law breaking because the change matters)
   const BADGES = {
@@ -281,9 +283,9 @@
     c4: { tier: 'pink', name: 'SIDEWAYS SPEED', strike: true, sub: 'the magnet', why: 'because of the magnet', missed: 'the magnet' },
     c5: { tier: 'red', name: 'SPIN', sub: 'x·y′ − y·x′', short: 'spin', missed: 'spin: turning the swing didn\'t matter' },
     c6: { tier: 'pink', name: 'SPIN', strike: true, sub: 'the wind', why: 'because of the wind', missed: 'the wind' },
-    c7: { tier: 'red', name: 'REAL ENERGY', sub: 'the ball\'s clock is fixed', short: 'real energy', missed: 'real energy: re-ticking the ball did matter' },
-    c8: { tier: 'red', name: 'SLIDE ENERGY', sub: 'EMPTY', short: 'the empty slide energy', missed: 'the empty slide energy: starting the slide later didn\'t matter' },
-    c9: { tier: 'red', name: 'A RULE', sub: 'ψ₁x′ + ψ₂y′ = 0', short: 'the rule', missed: 'the rule: re-ticking the slide didn\'t matter' },
+    c7: { tier: 'red', name: 'ENERGY CATCHES FAKES', sub: 'timing matters', short: 'energy catching a fake', missed: 'energy catching a fake: changing the ball\'s timing did matter' },
+    c8: { tier: 'red', name: 'SLIDE ENERGY', sub: 'zero on every slide', short: 'the slide\'s empty energy', missed: 'the slide\'s empty energy: starting the slide later didn\'t matter' },
+    c9: { tier: 'red', name: 'A RULE', sub: 'ψ₁x′ + ψ₂y′ = 0', short: 'the slide\'s rule', missed: 'the slide\'s rule: changing the slide\'s timing didn\'t matter' },
   };
   // the computed answer and prize kind for every card
   function playCard(card, seed) {
@@ -319,7 +321,7 @@
       const parts = [];
       if (redWon.length) parts.push(`Your red badges: ${list(redWon.map(id => BADGES[id].short))}.`);
       if (redMissed.length === 1) parts.push(`You missed ${BADGES[redMissed[0]].missed}.`); else if (redMissed.length) parts.push(`You missed ${list(redMissed.map(id => BADGES[id].short))}.`);
-      if (!pinkMissed.length) parts.push('Your pink badges show you can spot when a law breaks; the paper itself is in the red ones.');
+      if (!pinkMissed.length) parts.push('Your pink badges show you can spot when a law breaks; the paper\'s lessons are the red ones.');
       else if (pinkWon.length) parts.push(`Your pink badges show you can spot when a law breaks, though ${list(pinkMissed.map(id => BADGES[id].missed))} caught you.`);
       else parts.push('Every trap caught you: no pink badges.');
       line = parts.join(' ');

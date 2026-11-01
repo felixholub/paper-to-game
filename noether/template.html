@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Noether's Ball</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="Emmy Noether (1918) as nine changes to a picture: say whether each one matters to the picture's formula. Every change that doesn't matter wins a prize (energy, momentum, spin), and one prize comes out empty: Hilbert's question, answered.">
+<meta name="description" content="Emmy Noether (1918) as nine changes to a picture: say whether each one matters to the picture's formula. Every change that doesn't matter wins a prize (energy, momentum, spin); on the slide, energy comes out empty, which answers Hilbert's question about energy in Einstein's gravity.">
 <style>
 @font-face{font-family:'Chakra';font-weight:700;src:url(data:font/woff2;base64,/*__FONT_CHAKRA__*/) format('woff2');font-display:block}
 @font-face{font-family:'Saira';font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_SAIRA__*/) format('woff2');font-display:block}
@@ -90,7 +90,7 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 .hidden{display:none !important}
 .verdict{font-family:var(--disp);font-weight:700;font-size:32px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 8px;color:var(--cyan);text-shadow:0 0 12px rgba(43,240,255,.8),0 0 30px rgba(43,240,255,.4)}
 .coda{border-top:1px solid var(--dim);margin-top:18px;padding-top:8px}
-.about p,.help p{font-size:16px}
+.about p,.help p{font-size:16px;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -98,8 +98,8 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 <section class="screen on" id="start">
   <h1 class="title"><small>Emmy Noether · 1918</small>Noether's<br>Ball</h1>
   <div class="rule"></div>
-  <p class="lede">Emmy Noether studied formulas that give every possible trip a number, and so pick out the trip nature takes: the arc of a thrown ball, the swing of a spring, the curve of a slide.</p>
-  <p class="lede">Change the picture and ask the formula again: start the clock later, move everything one step, turn it. If the formula gives the same number, it doesn't care about that change. And every change it doesn't care about hands you a prize: a number that stays the same all along the trip. Energy is one of them.</p>
+  <p class="lede">Emmy Noether studied formulas that give every possible trip a number, and so pick out the trip nature takes: the arc of a thrown ball, the swing of a spring, the quickest slide from A to B.</p>
+  <p class="lede">Change the picture and ask the formula again: start the clock later, move everything one step, turn it. If the formula gives the same number, the change doesn't matter to it. And every change that doesn't matter hands you a prize: a number that stays the same all along the trip. Energy is one of them.</p>
   <p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p>
   <p class="small">Nine changes, one answer each. Right answers earn badges: <span class="red-t">red</span> for the paper's lessons, <span class="pink-t">pink</span> for its traps. About five minutes.</p>
   <button class="btn go" id="begin">Begin</button>
@@ -124,26 +124,26 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
     <div class="verdictline" id="verdictline"></div>
     <p class="note" id="badgenote"></p>
     <p class="reveal" id="reveal"></p>
-    <div class="plate inform"><span class="plabel">WHY · IN THE FORMULA</span><div class="formula" id="formula2"></div><p class="why" id="why"></p><div class="nums" id="nums"></div></div>
+    <div class="plate inform"><span class="plabel">THE REASON, IN THE FORMULA</span><div class="formula" id="formula2"></div><p class="why" id="why"></p><div class="nums" id="nums"></div></div>
     <p class="note" id="prizenote"></p>
     <button class="btn go" id="next">Next change</button>
   </div>
-  <div class="shelf"><span class="plabel">THE SHELF · <span class="red-t">RED: THE PAPER</span> · <span class="pink-t">PINK: THE TRAPS</span></span><div class="tiles" id="tiles"></div></div>
+  <div class="shelf"><span class="plabel">THE SHELF · <span class="red-t">RED: LESSONS</span> · <span class="pink-t">PINK: TRAPS</span></span><div class="tiles" id="tiles"></div></div>
 </section>
 
 <section class="screen" id="end">
   <div class="band" style="margin-top:22px">THE SHELF</div>
   <div class="verdict" id="headline"></div>
   <p class="lede" id="endline"></p>
-  <div class="shelf"><span class="plabel"><span class="red-t">RED: THE PAPER</span> · <span class="pink-t">PINK: THE TRAPS</span></span><div class="tiles" id="endtiles"></div></div>
+  <div class="shelf"><span class="plabel"><span class="red-t">RED: THE PAPER'S LESSONS</span> · <span class="pink-t">PINK: ITS TRAPS</span></span><div class="tiles" id="endtiles"></div></div>
   <div class="coda">
     <h2>What the paper says</h2>
     <p>Noether's paper is about formulas that give every possible trip a number, and so pick out the trip nature takes. She proved two things.</p>
-    <p>First: whenever the formula doesn't care about a change, such as moving the picture, turning it, or starting the clock later, there is a number that stays the same all along nature's trip. That is where energy, momentum (the sideways speed) and spin come from. It works backwards too: every such number comes from a change the formula doesn't care about. And you can read it off the formula itself, as the cards showed: no t in it, no energy lost.</p>
-    <p>Second: when the formula doesn't care about a much bigger change, one you can make differently at every moment, like re-ticking the clock fast here and slow there, there is no such number. You get a rule instead: the equations of motion are not independent. And a prize that sits inside the bigger change, like the energy that comes from starting the clock later, becomes empty: it holds on every trip, the impossible ones too, so it tells you nothing.</p>
-    <p>That answers a question David Hilbert had asked: why does energy seem to go missing in Einstein's theory of gravity? Because Einstein's formula is of the second kind. You may relabel space and time freely, moment by moment, and it doesn't care. So its energy is like the slide's: empty. Nothing is lost; the theory has no clock of its own to count energy with.</p>
+    <p>First: whenever the formula doesn't care about a change, such as moving the picture, turning it or starting the clock later, there is a number that stays the same all along nature's trip. That is where energy, momentum (the sideways speed) and spin come from. It works backwards too: every such number comes from a change the formula doesn't care about. And you can read it off the formula itself, as the cards showed: no t in it, no energy lost.</p>
+    <p>Second: some formulas don't care about a much bigger change, one you can make differently at every moment, such as changing the timing of a trip. Such a change wins no prize but a rule: the equations of motion are not independent, as the slide's two equations fix only its shape. And since starting the clock later is just one change of timing, the energy it should give comes out empty: it holds on every trip, impossible ones too, so it tells you nothing.</p>
+    <p>That answers a question David Hilbert had asked: why does energy seem to go missing in Einstein's theory of gravity? Because Einstein's formula is like the slide's: it doesn't care how you set the clocks, differently at every place and moment. So its energy law comes out empty, like the slide's. It holds whatever happens, so it says nothing. Nothing goes missing; there was never a law to break.</p>
     <h2>In one line</h2>
-    <p>The ball's clock is fixed, so its energy is real. The slide's clock is free, so its energy is empty. Einstein's gravity is like the slide.</p>
+    <p>The ball's formula notices when you change the ball's timing, so its energy catches a fake throw. The slide's formula doesn't, so its energy is zero on every slide and catches nothing. Einstein's gravity is like the slide, and that is why its energy puzzled Hilbert.</p>
   </div>
   <button class="btn go" id="replay">Play again</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
@@ -153,11 +153,11 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 <section class="screen help" id="help">
   <h2 style="margin-top:22px">How to play</h2>
   <p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p>
-  <p><b>The formula.</b> Each picture has a formula, shown in symbols and in words. It gives every possible trip a number, and so picks out the trip nature takes. <span class="f">x′</span> means how fast <span class="f">x</span> changes. The dots on a trail are the ticks of a clock.</p>
-  <p><b>A card.</b> Each of the nine cards shows a trip, which you can watch again as often as you like by tapping it, and a change: start the clock later, move the picture one step, turn it, or re-tick the clock so it runs fast here and slow there. You give one answer: it matters, or it doesn't.</p>
-  <p><b>The answer.</b> A second picture appears below the first, showing the trip after the change; tap either to run both again. Its camera moves or turns with the change, so a change that doesn't matter gives two identical pictures. Then the formula's number for both trips, and where in the formula the answer sits: every answer can be read off the formula.</p>
+  <p><b>The formula.</b> Each picture has a formula, in symbols and in words. It gives every possible trip a number, <span class="f">S</span>, and so picks out the trip nature takes. <span class="f">x</span> and <span class="f">y</span> say where the dot is (<span class="f">x</span> across, <span class="f">y</span> up); <span class="f">x′</span> and <span class="f">y′</span> say how fast they change; <span class="f">∫ … dt</span> means: add up along the trip. The dots on a trail are the ticks of a clock: far apart where the dot is fast, close together where it is slow.</p>
+  <p><b>A card.</b> Each of the nine cards shows a trip, which you can watch again as often as you like by tapping it, and a change: start the clock later, move everything one step to the left, turn everything round the peg, or change the timing so the dot speeds up here and slows down there. You give one answer: it matters (the formula gives a different number), or it doesn't (the same number).</p>
+  <p><b>The answer.</b> A second picture appears below the first: the trip after the change. Tap either picture to run both again. The second camera moves or turns with the change, so if the change doesn't matter, the two pictures look the same. Below them: the formula's number before and after, and the part of the formula that decides the answer. Every answer can be read off the formula.</p>
   <p><b>The prizes.</b> A change that doesn't matter wins a prize: a number that stays the same all along the trip. A graph shows it next to things that do change, such as speed and height.</p>
-  <p><b>The badges.</b> Every right answer earns a badge. <span class="red-t">Red</span> badges are the paper: energy, sideways speed and spin; the ball's clock that can't be re-ticked, which makes its energy real; the slide's energy, which comes out empty; and the rule the slide wins instead. <span class="pink-t">Pink</span> badges are the traps: a change that does matter, and the law that breaks because of it. A wrong answer leaves its badge dull.</p>
+  <p><b>The badges.</b> Every right answer earns a badge. <span class="red-t">Red</span> badges are the paper's lessons: energy, sideways speed and spin; energy catching a fake throw; the slide's energy, which comes out empty; and the rule the slide gets instead. <span class="pink-t">Pink</span> badges are the traps: a change that does matter, and the law that breaks because of it. A wrong answer leaves its badge grey.</p>
   <p><b>The end.</b> Your shelf, a sentence about it, and what the paper says.</p>
   <button class="btn go" id="helpback">Back</button>
 </section>
@@ -216,7 +216,7 @@ function drawBg(g, w) { // drawn wide, so a moved or turned camera shows no bare
 function makePicture(box, w, transform) {
   box.innerHTML = ''; const svg = el('svg', { viewBox: `0 0 ${W} ${H}` }, box), g = el('g', { transform: transform || '' }, svg);
   drawBg(el('g', {}, g), w);
-  if (w.id === 'slide') { const t = el('text', { x: W - 8, y: 14, 'text-anchor': 'end', class: 'caption dim' }, svg); t.textContent = 'SLOW UP HERE'; }
+  if (w.id === 'slide') { const t = el('text', { x: W - 8, y: 14, 'text-anchor': 'end', class: 'caption dim' }, svg); t.textContent = 'SLOW UP HIGH, FAST LOW DOWN'; }
   if (w.id === 'wind') { const t = el('text', { x: 14, y: H - 6, class: 'caption dim' }, svg); t.textContent = 'WIND BLOWING EAST'; }
   if (w.id === 'grow') { const t = el('text', { x: W - 8, y: 14, 'text-anchor': 'end', class: 'caption dim' }, svg); t.textContent = 'GRAVITY GROWS EVERY MINUTE'; }
   const ghost = el('g', {}, g), trace = el('g', {}, g), dot = el('circle', { cx: -20, cy: -20, r: 6, fill: '#fff' }, g);
@@ -261,7 +261,7 @@ function series(vals, end, colour, opts) { // returns a function that draws the 
 }
 function ingredients(card, w, path) { // the prize and what it is made of, along a real trip
   const F = M.fields(w, path), n = path.u1.length, E = C.EDGE, cl = i => Math.max(E, Math.min(n - 1 - E, i)), arr = f => Float64Array.from({ length: n }, (_, i) => f(cl(i)));
-  if (card.prize === 'ENERGY') { const T = arr(i => 0.5 * (F.v1[i] ** 2 + F.v2[i] ** 2)), V = arr(i => C.G * path.u2[i]), Etot = arr(i => T[i] + V[i]); return { legend: [['ENERGY', CYAN], [' = ', DIM], ['SPEED²', MAG], [' + ', DIM], ['HEIGHT', HAZ]], lines: [[T, MAG], [V, HAZ], [Etot, CYAN]] }; }
+  if (card.prize === 'ENERGY') { const T = arr(i => 0.5 * (F.v1[i] ** 2 + F.v2[i] ** 2)), V = arr(i => C.G * path.u2[i]), Etot = arr(i => T[i] + V[i]); return { legend: [['ENERGY', CYAN], [' = ', DIM], ['½·SPEED²', MAG], [' + ', DIM], ['g·HEIGHT', HAZ]], lines: [[T, MAG], [V, HAZ], [Etot, CYAN]] }; }
   if (card.prize === 'SIDEWAYS SPEED') { const up = arr(i => F.v2[i]), side = arr(i => F.v1[i]); return { legend: [['SIDEWAYS SPEED x′', CYAN], [' · ', DIM], ['UPWARD SPEED y′', MAG]], lines: [[up, MAG], [side, CYAN]] }; }
   const r = arr(i => Math.hypot(path.u1[i], path.u2[i])), s = arr(i => Math.hypot(F.v1[i], F.v2[i])), L = arr(i => path.u1[i] * F.v2[i] - path.u2[i] * F.v1[i]);
   const nm = a => { let m = 0; for (const v of a) m = Math.max(m, Math.abs(v)); return Float64Array.from(a, v => v / m); };
@@ -285,7 +285,7 @@ const LABELS = (lever, w) => {
   return { clock: { one: `THE 3:00 ${noun}`, two: `THE 3:05 ${noun}`, f1: '3:00', f2: '3:05' },
     across: { one: 'THE THROW FROM HERE', two: 'ONE STEP LEFT · THE CAMERA FOLLOWS' },
     turn: { one: 'THE SWING', two: 'TURNED · THE CAMERA TURNS WITH IT' },
-    warpclock: { one: 'THE CLOCK AS IT IS', two: 'RE-TICKED · WATCH THE DOTS BUNCH AND SPREAD' } }[lever];
+    warpclock: { one: `THE ${noun} AS IT IS`, two: 'NEW TIMING · THE DOTS BUNCH AND SPREAD' } }[lever];
 };
 function nextCard() {
   ci++; if (ci >= M.CARDS.length) return finish();
@@ -319,17 +319,20 @@ async function judge(saidMatters) {
   // the verdict
   $('#verdictline').textContent = right ? 'Right.' : saidMatters ? 'You said it matters. It doesn’t.' : 'You said it doesn’t matter. It does.';
   $('#verdictline').className = 'verdictline ' + (right ? 'right' : 'wrong');
-  const named = card.id === 'c8' ? 'the slide’s energy' : b.name.toLowerCase();
-  $('#badgenote').textContent = right ? (b.tier === 'red' ? `A red badge: ${named}. This is the paper.` : `A pink badge: ${b.strike ? 'no ' + b.name.toLowerCase() + ' here, ' + b.why : named}. A trap spotted.`) : `No badge this time: the ${b.tier} one stays dull.`;
+  const named = card.id === 'c8' ? 'the slide’s energy' : b.short;
+  $('#badgenote').textContent = right ? (b.tier === 'red' ? `A red badge: ${named}, one of the paper’s lessons.` : `A pink badge: no ${b.name.toLowerCase()} here, ${b.why}. A trap spotted.`) : `No badge this time: this card’s ${b.tier} badge stays grey.`;
   $('#badgenote').style.color = right ? (b.tier === 'red' ? '#FF5A6A' : '#F7A8C8') : 'var(--dim)';
   $('#reveal').textContent = card.reveal;
   setFormula($('#formula2'), w.formula); setMath($('#why'), card.why);
   const nums = $('#nums'); nums.innerHTML = '';
-  for (const [label, val, cls] of [['the trip before', ch.before, 'same'], ['the trip after', ch.after, res.matters ? 'diff' : 'same']]) { const a = document.createElement('span'); a.textContent = label; nums.appendChild(a); const v = document.createElement('span'); v.className = 'n ' + cls; v.textContent = val; nums.appendChild(v); }
+  for (const [label, val, cls] of [[' before the change', ch.before, 'same'], [' after the change', ch.after, res.matters ? 'diff' : 'same']]) { const a = document.createElement('span'), s = document.createElement('span'); s.className = 'f'; s.textContent = 'S'; a.appendChild(s); a.appendChild(document.createTextNode(label)); nums.appendChild(a); const v = document.createElement('span'); v.className = 'n ' + cls; v.textContent = val; nums.appendChild(v); }
   const word = document.createElement('span'); word.className = 'word'; word.style.color = res.matters ? 'var(--haz)' : 'var(--cyan)'; word.textContent = res.matters ? 'DIFFERENT NUMBERS: THE FORMULA CARES' : 'THE SAME NUMBER: THE FORMULA DOESN’T CARE'; nums.appendChild(word);
   $('#prizenote').textContent = ''; $('#next').classList.add('hidden'); $('#answer').classList.remove('hidden');
   shelfState[card.id] = right ? 'won' : 'missed';
-  if (card.prize) await prize(card, w, ch, myRun); if (myRun !== run) return;
+  if (card.prize) await prize(card, w, ch, myRun);
+  else if (card.lever === 'warpclock' && w.type === 'newton') await fakeCaught(w, ch, myRun);
+  if (myRun !== run) return;
+  if (card.rule) $('#prizenote').textContent = card.rule;
   drawShelf($('#tiles'), card.id);
   $('#next').textContent = ci >= M.CARDS.length - 1 ? 'The shelf' : 'Next change'; $('#next').classList.remove('hidden');
   busy = false;
@@ -343,23 +346,36 @@ async function prize(card, w, ch, myRun) { // the prize along the trip, in the l
     caps(P2, 'THE PRIZE ALONG THE TRIP: THE GRAPH BELOW', null, '', null);
     await play(P2, w, ch.fresh, { colour: CYAN, dur: 2600, onFrame: i => draws.forEach(d => d(i)) }); if (myRun !== run) return;
     $('#prizenote').textContent = {
-      'ENERGY': 'The graph, as the ball flies: its speed² falls as it climbs and its height rises, and the two always add up to the same number. That sum is the prize, energy: ½(x′² + y′²) + g·y.',
+      'ENERGY': 'The graph, as the ball flies: going up, ½·speed² falls and g·height rises; coming down, the other way round. Their sum never changes. That sum is the prize: energy, ½(x′² + y′²) + g·y.',
       'SIDEWAYS SPEED': 'The graph: the upward speed y′ changes all the time; the sideways speed x′ never does. That is the prize.',
       'SPIN': 'The graph: the dot’s distance from the peg changes, and so does its speed; its spin, x·y′ − y·x′, stays the same. That is the prize.' }[card.prize];
     return;
   }
-  // the slide's energy: zero along the real slide, and zero along a straight slide the dot would never take
-  const real = ch.fresh, straight = M.straightBetween(real), a = M.current(w, real, 'clock', null), b = M.current(w, straight, 'clock', null), n = real.u1.length;
-  graphOpen([['THE SLIDE’S ENERGY', CYAN], [' · ALONG TWO SLIDES', DIM]]);
-  const laneH = (GH - GT - GB) / 2 - 6, lab = (y, text, col) => { const t = el('text', { x: GW - 8, y, 'text-anchor': 'end', class: 'caption', style: `fill:${col};font-size:10px` }, gsvg); t.textContent = text; };
-  for (const k of [0, 1]) { const top = GT + k * (laneH + 12); el('line', { x1: 8, y1: top + laneH / 2, x2: GW - 8, y2: top + laneH / 2, stroke: '#2A3037', 'stroke-dasharray': '3 3' }, gsvg); }
-  lab(GT + 8, 'THE REAL SLIDE · ZERO', CYAN); lab(GT + laneH + 12 + 8, 'A STRAIGHT SLIDE · ZERO', HAZ);
-  const scale = Math.max(...Array.from(M.fields(w, real).f).map(Math.abs)), zero = arr => Float64Array.from(arr, v => v / scale);
-  const d1 = series(zero(a), n, CYAN, { lo: -1, hi: 1, top: GT, h: laneH, width: 3, glow: true }), d2 = series(zero(b), n, HAZ, { lo: -1, hi: 1, top: GT + laneH + 12, h: laneH, width: 3, dash: '6 4' });
-  caps(P2, 'THE REAL SLIDE', null, '', null); await play(P2, w, real, { colour: CYAN, dur: 2200, onFrame: d1 }); if (myRun !== run) return;
-  still(P2, real, w, DIM, 0.5); await wait(300);
-  caps(P2, 'A STRAIGHT SLIDE THE DOT WOULD NEVER TAKE', 'dim', '', null); await play(P2, w, straight, { colour: HAZ, dash: '7 5', dur: 2200, onFrame: d2 }); if (myRun !== run) return;
-  $('#prizenote').textContent = 'Along the real slide, the slide’s energy is zero all the way. Along a straight slide the dot would never take: zero again. A number that is zero on every slide can’t tell the real slide from a wrong one, so it tells you nothing. The prize is empty. The next card shows why.';
+  // the slide's energy: zero along the real slide, and zero along a straight slide, a slower one the dot never takes
+  const real = ch.fresh, straight = M.straightBetween(real), scale = Math.max(...Array.from(M.fields(w, real).f).map(Math.abs)), rel = p => Float64Array.from(M.current(w, p, 'clock', null), v => v / scale);
+  if (!(await twoTrips(w, { legend: [['THE SLIDE’S ENERGY', CYAN], [' · ALONG TWO SLIDES', DIM]], real, fake: straight, vals: [rel(real), rel(straight)], labels: ['THE REAL SLIDE · ZERO', 'A STRAIGHT SLIDE · ZERO'], caps: ['THE REAL SLIDE: THE QUICKEST', 'A STRAIGHT SLIDE: SLOWER, NEVER TAKEN'] }, myRun))) return;
+  $('#prizenote').textContent = 'The slide’s energy is zero along the real slide, and zero again along a straight slide, a slower one the dot never takes. A number that is zero on every slide can’t catch a fake: it tells you nothing. This prize is empty. The next card shows why.';
+}
+// card 7: the ball's energy along the real throw (steady) and along the re-timed throw, which is a fake (it wobbles)
+async function fakeCaught(w, ch, myRun) {
+  await wait(700); if (myRun !== run) return;
+  const real = ch.base, fake = ch.fresh, n = real.u1.length, E = C.EDGE, cl = i => Math.max(E, Math.min(n - 1 - E, i));
+  const Br = M.current(w, real, 'clock', null), Bf = M.current(w, fake, 'clock', null), e0 = Br[E];
+  let m = 0; for (let i = 0; i < landed(w, fake); i++) m = Math.max(m, Math.abs(Bf[cl(i)] - e0));
+  const rel = B => Float64Array.from({ length: n }, (_, i) => (B[cl(i)] - e0) / (m || 1));
+  if (!(await twoTrips(w, { legend: [['THE BALL’S ENERGY', CYAN], [' · ALONG TWO THROWS', DIM]], real, fake, vals: [rel(Br), rel(Bf)], labels: ['THE REAL THROW · STEADY', 'THE RE-TIMED THROW · WOBBLES'], caps: ['THE REAL THROW', 'THE RE-TIMED THROW: A FAKE'] }, myRun))) return;
+  $('#prizenote').textContent = 'The graph: the ball’s energy, ½(x′² + y′²) + g·y. Along the real throw it stays the same. Along the re-timed throw, a fake, it wobbles. So the ball’s energy catches a fake. Remember this for the slide.';
+}
+// a real trip and a fake on two lanes of the graph, played one after the other in the lower picture
+async function twoTrips(w, o, myRun) { // o: legend, real, fake, vals (two arrays scaled to ±1), labels and caps (two each); false if the card was left
+  const laneH = (GH - GT - GB) / 2 - 6, tops = [GT, GT + laneH + 12];
+  graphOpen(o.legend);
+  for (const top of tops) el('line', { x1: 8, y1: top + laneH / 2, x2: GW - 8, y2: top + laneH / 2, stroke: '#2A3037', 'stroke-dasharray': '3 3' }, gsvg);
+  const d1 = series(o.vals[0], landed(w, o.real), CYAN, { lo: -1, hi: 1, top: tops[0], h: laneH, width: 3, glow: true }), d2 = series(o.vals[1], landed(w, o.fake), HAZ, { lo: -1, hi: 1, top: tops[1], h: laneH, width: 3, dash: '6 4' });
+  o.labels.forEach((text, k) => { const t = el('text', { x: GW - 8, y: tops[k] + 8, 'text-anchor': 'end', class: 'caption', style: `fill:${k ? HAZ : CYAN};font-size:10px` }, gsvg); t.textContent = text; });
+  caps(P2, o.caps[0], null, '', null); await play(P2, w, o.real, { colour: CYAN, dur: 2200, onFrame: d1 }); if (myRun !== run) return false;
+  still(P2, o.real, w, DIM, 0.5); await wait(300); if (myRun !== run) return false;
+  caps(P2, o.caps[1], 'dim', '', null); await play(P2, w, o.fake, { colour: HAZ, dash: '7 5', dur: 2200, onFrame: d2 }); return myRun === run;
 }
 $('#saymatters').addEventListener('click', () => judge(true));
 $('#saynot').addEventListener('click', () => judge(false));

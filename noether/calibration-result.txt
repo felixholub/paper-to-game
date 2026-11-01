@@ -1,4 +1,4 @@
-Noether's Ball — calibration against Noether (1918). 12 passed, 0 failed.
+Noether's Ball — calibration against Noether (1918). 14 passed, 0 failed.
       c1 ball/clock: residual 3.14e-4 → does not matter; teeth
       c2 grow/clock: residual 2.05e-1 → matters; none
       c3 ball/across: residual 0.00e+0 → does not matter; teeth
@@ -20,7 +20,9 @@ PASS  S the comparison slide is honest: the straight slide fails the equations o
       no x: ball 0.00e+0, magnet 2.63e+0
       turn: swing 8.88e-15, wind 6.44e+0
       twice as fast: slide 0.00e+0, ball 2.19e+1
-PASS  Y every "why, in the formula" line is true of the formula, point by point; real energy rests on card 7 against card 9
+PASS  Y every "why, in the formula" line is true of the formula, point by point; the badge for energy catching a fake rests on card 7 against card 9
+PASS  F card 7's graph is honest: the ball's energy is steady along the real throw and wobbles along the re-timed throw  [real 3.27e-14, re-timed 5.35 of the energy]
+PASS  Q "the quickest slide" is true: the real slide is quicker than the straight slide and than every bent slide tried from A to B  [real 2.661, straight 3.005; 460 bent slides, none quicker]
 PASS  D thirty random wobbly re-tickings: the slide never cares, the ball always does
       N=200: all right (teeth,teeth,teeth,empty)
       N=800: all right (teeth,teeth,teeth,empty)
@@ -36,4 +38,4 @@ PASS  D thirty random wobbly re-tickings: the slide never cares, the ball always
       spring soft: all right (teeth,teeth,teeth,empty)
       slide high: all right (teeth,teeth,teeth,empty)
 PASS  ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide
-PASS  W no decimals in anything the screen reads from the mechanism  [117 strings]
+PASS  W no decimals in anything the screen reads from the mechanism  [126 strings]
