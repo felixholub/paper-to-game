@@ -213,6 +213,9 @@
     const s = sub(st.id), x = st.reading, k = kind(s);
     const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, reading: x, paper: strength(s), u: s.u,
       kind: k, badge: BADGE[k], words: times(x), caption: caption(s, x, k), seconds: st.t };
+    // the two chalcolites: whichever comes second says what the first one took, so the comparison is made on the bench
+    const twin = { chalc: 'chalcArt', chalcArt: 'chalc' }[s.id], other = twin && g.panels.find(q => q.id === twin);
+    if (other) p.caption += s.id === 'chalcArt' ? ' The same crystal from the mine took ' + other.words + '.' : ' Your copy, made from pure chemicals, took ' + other.words + '.';
     g.panels.push(p); g.tested[s.id] = true; return p;
   }
   const low = s => s.charAt(0).toLowerCase() + s.slice(1);

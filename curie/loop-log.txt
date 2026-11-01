@@ -77,7 +77,7 @@ BENCH · PANEL 8 OF 9 · CHALCOLITE MADE BY YOU
   BALANCED after 2.4 s. PANEL 8: ABOUT ITS URANIUM
     its uranium [░░░                       ]
     it gave     [██                        ]  (paper 0.38, you 0.36)
-    caption: Chalcolite made by you is about half uranium, and it took about a third of the push of pure uranium: about what its uranium gives, or a little less.
+    caption: Chalcolite made by you is about half uranium, and it took about a third of the push of pure uranium: about what its uranium gives, or a little less. The same crystal from the mine took twice the push of pure uranium.
   Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.  Panels left: 1.
 
 BENCH · PANEL 9 OF 9 · THICK THORIUM OXIDE

@@ -3,33 +3,33 @@ START: YOUR AIM | URANIUM MAKES THE AIR CARRY ELECTRICITY. FIND WHAT ELSE DOES.
 
 == PANEL 1 OF 9 | uranium (on bench)
   shot a-bench-uranium-start
-   real drag: slider 1098, push seen by the mechanism 1.10, spot 0.31
+   real drag: slider 1098, push seen by the mechanism 1.10, spot 0.33
   shot help
-   help opened mid-measurement: bench clock 2.08 → 2.08 while away (should not move)
+   help opened mid-measurement: bench clock 2.12 → 2.12 while away (should not move)
    back on bench, slider kept at 1098
-   balanced in 3.294s: THE YARDSTICK — Pure uranium. However hard you had to push for it is the yardstick: every other panel is measured against it.
+   balanced in 2.276s: THE YARDSTICK — Pure uranium. However hard you had to push for it is the yardstick: every other panel is measured against it.
   shot a-bench-uranium-balanced
    page: YOUR PAGE | 1 of 9 panels drawn · Found so far, besides uranium: nothing yet.
   shot a-shelf-1
 
 -- card: Lead | A heavy metal. No uranium. | Uranium in it: none
 == PANEL 2 OF 9 | lead
-   balanced in 2.013s: NOTHING — Lead: nothing. The spot never moved. Less than a hundredth of uranium, if anything.
+   balanced in 2.02s: NOTHING — Lead: nothing. The spot never moved. Less than a hundredth of uranium, if anything.
    page: YOUR PAGE | 2 of 9 panels drawn · Found so far, besides uranium: nothing yet.
 
 -- card: Thin thorium oxide | A white powder of thorium, another rare metal. No uranium. Spread a quarter of a millimetre thick. | Uranium in it: none
 == PANEL 3 OF 9 | thorium, thin
-   balanced in 5.135s: NO URANIUM IN IT! — Thin thorium oxide has no uranium in it, and the spot moved: it took about the push of pure uranium.
+   balanced in 6.115s: NO URANIUM IN IT! — Thin thorium oxide has no uranium in it, and the spot moved: it took about the push of pure uranium.
    page: YOUR PAGE | 3 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide.
 
 -- card: White phosphorus | Waxy white sticks. They smoke in the air. No uranium. | Uranium in it: none
 == PANEL 4 OF 9 | white phosphorus
-   balanced in 5.34s: NO URANIUM IN IT! — White phosphorus has no uranium in it, and the spot moved: it took a little more than the push of pure uranium. Stronger than pure uranium, with no uranium at all.
+   balanced in 5.313s: NO URANIUM IN IT! — White phosphorus has no uranium in it, and the spot moved: it took a little more than the push of pure uranium. Stronger than pure uranium, with no uranium at all.
    page: YOUR PAGE | 4 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide and white phosphorus.
 
 -- card: Red phosphorus | The same element as white phosphorus, in another form: a dark red powder. No uranium. | Uranium in it: none
 == PANEL 5 OF 9 | red phosphorus
-   balanced in 2.017s: NOTHING — Red phosphorus: nothing. The spot never moved. Less than a hundredth of uranium, if anything.
+   balanced in 2.032s: NOTHING — Red phosphorus: nothing. The spot never moved. Less than a hundredth of uranium, if anything.
    page: YOUR PAGE | 5 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide and white phosphorus.
   shot a-shelf-5
 
@@ -39,24 +39,24 @@ START: YOUR AIM | URANIUM MAKES THE AIR CARRY ELECTRICITY. FIND WHAT ELSE DOES.
   shot a-bench-pitchblende-start
   shot a-bench-pitchblende-chase
    mid-chase: !? shown = true
-   balanced in 4.343s: MORE THAN ITS URANIUM! — Pitchblende from Saxony is only about two-thirds uranium, and it took three and a half times the push of pure uranium. Far more than its uranium can give.
+   balanced in 5.015s: MORE THAN ITS URANIUM! — Pitchblende from Saxony is only about two-thirds uranium, and it took three and a half times the push of pure uranium. Far more than its uranium can give.
   shot a-bench-pitchblende-balanced
    page: YOUR PAGE | 6 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide, white phosphorus and something in pitchblende from Saxony.
 
 -- card: Chalcolite from a mine | Bright green crystals from a mine: copper, uranium and phosphate. No thorium. | Uranium in it: about half uranium
 == PANEL 7 OF 9 | chalcolite, mined
-   balanced in 5.418s: MORE THAN ITS URANIUM! — Chalcolite from a mine is only about half uranium, and it took twice the push of pure uranium. Far more than its uranium can give.
+   balanced in 6.707s: MORE THAN ITS URANIUM! — Chalcolite from a mine is only about half uranium, and it took twice the push of pure uranium. Far more than its uranium can give.
    page: YOUR PAGE | 7 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.
 
 -- card: Chalcolite made by you | You make the same green crystal yourself, from pure copper, pure phosphoric acid and a pure uranium salt. About half uranium, like the one from the mine. | Uranium in it: about half uranium
 == PANEL 8 OF 9 | chalcolite, made
-   balanced in 2.44s: ABOUT ITS URANIUM — Chalcolite made by you is about half uranium, and it took about a third of the push of pure uranium: about what its uranium gives, or a little less.
+   balanced in 2.455s: ABOUT ITS URANIUM — Chalcolite made by you is about half uranium, and it took about a third of the push of pure uranium: about what its uranium gives, or a little less. The same crystal from the mine took twice the push of pure uranium.
   shot a-bench-copy-balanced
    page: YOUR PAGE | 8 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony and something in chalcolite from a mine.
 
 -- card: Thick thorium oxide | The same white thorium powder, spread six millimetres thick. No uranium. | Uranium in it: none
 == PANEL 9 OF 9 | thorium, thick
-   balanced in 7.744s: NO URANIUM IN IT! — Thick thorium oxide has no uranium in it, and the spot moved: it took twice the push of pure uranium. Stronger than pure uranium, with no uranium at all.
+   balanced in 5.389s: NO URANIUM IN IT! — Thick thorium oxide has no uranium in it, and the spot moved: it took twice the push of pure uranium. Stronger than pure uranium, with no uranium at all.
    page: YOUR PAGE | 9 of 9 panels drawn · Found so far, besides uranium: thin thorium oxide, white phosphorus, something in pitchblende from Saxony, something in chalcolite from a mine and thick thorium oxide.
   shot a-page-full
 
