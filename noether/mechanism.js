@@ -33,13 +33,16 @@
     BUMP_AMP: 0.15,            // our choice: size of a fake's bump in floor units (the window is 2 by 2)
     RETICK_AMP: 0.12,          // our choice: the Auditor's re-ticking of the clock, x → x + a·sin(2πx)
     // ---- the worlds (ours: profiles chosen for a visible bend; the forms are the paper's two types)
-    SPRING_K: Math.pow(2 * Math.PI * 0.75, 2),   // a spring back to the centre: three quarters of a swing in the window's tick
+    SPRING_K: Math.pow(2 * Math.PI * 0.4, 2),    // a spring back to the centre: four tenths of a swing in the window's tick, short of the half swing beyond which the true path stops being the path of smallest S
     GLASS_N0: 1.3, GLASS_DN: 0.5, GLASS_SLOPE: 2.5,  // glass density n(u2) = N0 − DN·tanh(SLOPE·u2): denser lower down, 0.8 to 1.8
     SHEET_N0: 1.0, SHEET_DN: 0.6, SHEET_R: 0.35,     // sheet stretch n(r) = N0 + DN/(1 + (r/R)^2): a well at the centre
     SPEED: 2.2,                // our choice: path length a true motion covers in one window tick on the floor, the glass and the sheet
     PREVIEW_SIZE: 0.25,        // our choice (display only): how far the window's preview of a lever moves the world, in floor units; the press tests the infinitesimal change
     TICK_EVERY: 20,            // our choice (display only): grid points between the clock ticks drawn on a trail (twenty ticks per motion)
-    SHOWN_MOTIONS: [0, 1, 3, 4, 6], // our choice (display only): which of the Auditor's seven motions are played in the window; all seven are read
+    SHOWN_MOTIONS: [0, 4],      // our choice (display only): which of the Auditor's seven motions are played in the window after the player's own test path; all seven are read
+    RETICK_SHOW: 0.12,         // our choice (display only): how far the shown re-ticking moves the clock, in trip units; kept monotone
+    PLATE_UNIT: 1000,          // our choice (display only): the best path's size reads 1000 on the numbers plate, so a change of a few parts in a thousand is visible without decimals
+    OPENING_TRIES: 3,          // our choice: how many paths the player may draw against the best path in the first formula
     // ---- words (ours)
     WORLD_ORDER: ['floor', 'spring', 'glass', 'sheet'],
   };
@@ -57,36 +60,42 @@
 
   // ---------- the worlds: f(u, u'), its partials, and the equation of motion used to make true motions
   // Newton type (eq. 4 with f = ½|u'|² − V(u)); Weierstrass type (p. 7: f = n(u)·|u'|, homogeneous of first degree in u')
-  // line: what the world is and what it never does (the player needs the rule to judge a change); rule: the same, for the jam line
+  // Each world is one formula S = ∫ f dt: the plate shows it (formula), the line under it says it in words and what it draws.
+  // rule: what the drawing never does (used when the formula cares). first: the Auditor's opening move, where he has one.
   const WORLDS = {
-    floor: { id: 'floor', name: 'The open floor', type: 'newton', k: 0,
-      line: 'A bead sliding on a flat floor. Nothing pushes it, so it keeps one straight line at one steady speed. The dots on its trail are the ticks of its clock.',
-      rule: 'A bead nothing pushes keeps one straight line at one steady speed.',
-      laws: { clock: 'ENERGY', across: 'SPEED ACROSS', up: 'SPEED UP', turn: 'SWEEP RATE' } },
+    floor: { id: 'floor', name: 'The free dot', type: 'newton', k: 0,
+      formula: 'S = ∫ ½(x′² + y′²) dt', words: 'it adds up speed² along the path (x′ is how fast x changes)',
+      line: 'This formula adds up speed² along a path. It draws a dot that nothing pushes: a straight line at a steady pace. The dots on the trail are the clock ticks.',
+      rule: 'A dot nothing pushes keeps a straight line at a steady pace.',
+      laws: { clock: 'ENERGY', across: 'SPEED RIGHT', up: 'SPEED UP', turn: 'SWEEP RATE' } },
     spring: { id: 'spring', name: 'The spring', type: 'newton', k: CONFIG.SPRING_K,
-      line: 'A bead tied to the centre peg by a spring. It swings round the peg at the tempo the spring sets. The dots are its clock ticks.',
+      formula: 'S = ∫ ½(x′² + y′²) − ½k(x² + y²) dt', words: 'speed² minus stretch² (k is how stiff the spring is)',
+      line: 'This formula adds up speed² minus stretch². It draws a dot tied to the centre peg by a spring, swinging round the peg at the tempo the spring sets.',
       rule: 'The spring is tied to the centre peg: the swing must sit on the peg, at the tempo the spring sets.',
-      first: { target: 'turn', law: 'SWEEP RATE', say: 'I already hold a law for this world. On every real motion, the bead sweeps out area round the peg at one steady rate: watch the shaded fan grow evenly as it swings. A law always comes from a change the world does not notice. Which lever is it? Pull it.' },
+      first: { target: 'turn', law: 'SWEEP RATE', say: 'I already hold a prize for this formula: SWEEP RATE, x·y′ − y·x′. Watch the shaded fan the dot sweeps round the peg: it grows evenly. Every prize comes from a change the formula does not care about. Which change is this one? Pull it.' },
       laws: { clock: 'ENERGY', turn: 'SWEEP RATE' } },
     glass: { id: 'glass', name: 'The glass', type: 'weierstrass',
-      line: 'Light crossing glass that gets denser lower down. It takes the quickest route, so the ray bends. The dots are clock ticks, but to the glass they are only labels on the ray.',
+      formula: 'S = ∫ n(y) · √(x′² + y′²) dt', words: 'density × distance, with n(y) the density of the glass at height y',
+      line: 'This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.',
       rule: 'The ray must bend the way the density says; only the clock labels along it are free.',
       laws: { across: 'LEAN × DENSITY' } },
     sheet: { id: 'sheet', name: 'The sheet', type: 'weierstrass',
-      line: 'A bead rolling on a stretched sheet with a well in the middle. It takes the straightest route the sheet allows. The dots are clock ticks, but to the sheet they are only labels on the route.',
+      formula: 'S = ∫ n(x, y) · √(x′² + y′²) dt', words: 'density × distance, with n thickest at the well in the middle',
+      line: 'This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.',
       rule: 'The route must follow the stretch of the sheet; only the clock labels along it are free.',
-      first: { target: 'warpclock', law: 'ENERGY', say: 'In this world the clock tag is blank before you pull anything: its needle never moves, not on real motions, not on fakes. A blank tag means the clock shift is only one piece of a larger freedom this world has. Pull the lever that is that larger freedom.' },
+      first: { target: 'warpclock', law: 'ENERGY', say: 'Here the clock prize is empty before you do anything: its number comes out the same on every path, good or bad. An empty prize means "start the clock later" is only one piece of a bigger change this formula does not care about. Pull that bigger change.' },
       laws: { turn: 'SWEEP RATE' } },
   };
-  // what each tag measures, in plain words, for the result line
-  const GLOSS = {
-    'ENERGY': 'its energy',
-    'SPEED ACROSS': 'its sideways speed',
-    'SPEED UP': 'its upward speed',
-    'SWEEP RATE': 'the rate at which it sweeps out area round the centre',
-    'LEAN × DENSITY': 'the lean of the ray times the density of the glass (the law of refraction)',
-    'CLOCK LAW': 'the quantity the clock shift gives',
+  // what each prize's number is: a formula and plain words
+  const LAWS = {
+    'ENERGY': { formula: '½(x′² + y′²) + ½k(x² + y²)', gloss: 'speed² plus stretch²' },
+    'SPEED RIGHT': { formula: 'x′', gloss: 'how fast the dot moves to the right' },
+    'SPEED UP': { formula: 'y′', gloss: 'how fast the dot moves up' },
+    'SWEEP RATE': { formula: 'x·y′ − y·x′', gloss: 'how fast the dot sweeps out area round the centre' },
+    'LEAN × DENSITY': { formula: 'n(y) · x′ / √(x′² + y′²)', gloss: 'the lean of the ray times the density of the glass (the law of refraction)' },
+    'CLOCK LAW': { formula: 'x′·∂f/∂x′ + y′·∂f/∂y′ − f', gloss: 'the number "start the clock later" gives' },
   };
+  const GLOSS = {}; for (const k in LAWS) GLOSS[k] = LAWS[k].gloss;
   function density(w, u1, u2) { // n(u) and its gradient, for the Weierstrass worlds
     if (w.id === 'glass') { const t = Math.tanh(CONFIG.GLASS_SLOPE * u2); return { n: CONFIG.GLASS_N0 - CONFIG.GLASS_DN * t, n1: 0, n2: -CONFIG.GLASS_DN * CONFIG.GLASS_SLOPE * (1 - t * t) }; }
     const r2 = u1 * u1 + u2 * u2, R2 = CONFIG.SHEET_R * CONFIG.SHEET_R, q = 1 + r2 / R2, n = CONFIG.SHEET_N0 + CONFIG.SHEET_DN / q;
@@ -109,14 +118,14 @@
   }
 
   // ---------- the levers: infinitesimal transformations Δx, Δu (§2, p. 9), linear in a parameter ε or an arbitrary function p(x)
-  // does: what the lever does to the world, in the words under the levers; shows: what the preview in the window is showing
+  // does: what the lever does to the drawing; shows: what the window's preview is showing
   const LEVERS = [
-    { id: 'clock', label: 'SHIFT THE CLOCK', does: 'Start the clock a moment later. The same motion, every tick a little later.', shows: 'the clock started later', free: false },
-    { id: 'across', label: 'SHIFT ACROSS', does: 'Slide the whole world a step sideways.', shows: 'the whole world slid sideways', free: false },
-    { id: 'up', label: 'SHIFT UP', does: 'Slide the whole world a step up.', shows: 'the whole world slid up', free: false },
-    { id: 'turn', label: 'TURN', does: 'Turn the whole world a little round the centre.', shows: 'the whole world turned', free: false },
-    { id: 'warpclock', label: 'WARP THE CLOCK', does: 'Re-tick the clock any way you like: faster here, slower there. You draw how; the ticks bunch and spread.', shows: 'one way to re-tick the clock', free: true },
-    { id: 'warpfloor', label: 'WARP ACROSS', does: 'Push the world sideways by a different amount at every moment. You draw how.', shows: 'one way to push the world about', free: true },
+    { id: 'clock', label: 'CLOCK LATER', does: 'Start the clock a little later. The same drawing, every tick a little later.', shows: 'clock later', free: false },
+    { id: 'across', label: 'MOVE RIGHT', does: 'Move the whole drawing one step to the right.', shows: 'moved right', free: false },
+    { id: 'up', label: 'MOVE UP', does: 'Move the whole drawing one step up.', shows: 'moved up', free: false },
+    { id: 'turn', label: 'TURN', does: 'Turn the whole drawing a little round the centre.', shows: 'turned', free: false },
+    { id: 'warpclock', label: 'RE-TICK THE CLOCK', does: 'Let the clock run fast here and slow there, any way you like. You draw how; the ticks bunch and spread.', shows: 'clock re-ticked, one way', free: true },
+    { id: 'warpfloor', label: 'WOBBLE SIDEWAYS', does: 'Push the drawing right or left by a different amount at every moment. You draw how.', shows: 'wobbled, one way', free: true },
   ];
   const leverById = id => LEVERS.find(l => l.id === id);
   // Δx(x), Δu(x, u) for a lever; p is the arbitrary function sampled on the grid (free levers only)
@@ -165,6 +174,51 @@
       res = Math.max(res, Math.abs(s)); scale = Math.max(scale, sc);
     }
     return res / scale;
+  }
+
+  // ---------- the number the formula gives a path: S = ∫ f dt (trapezoid on the grid), and the paths the player draws
+  function score(w, path) { const F = fields(w, path), n = F.f.length; let s = 0; for (let i = 1; i < n; i++) s += (F.f[i] + F.f[i - 1]) / 2 * F.h; return s; }
+  function strokeToPath(points, n, ends) { // a drawn stroke (array of [u1, u2]) → a path on the grid, traced at a steady pace (uniform in arc length), lightly smoothed
+    n = n || CONFIG.N; let pts = points.slice();
+    if (ends) pts = [ends[0]].concat(pts, [ends[1]]);   // the opening draw goes from A to B: the ends are glued on
+    const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    const L = cum[cum.length - 1] || 1e-9, u1 = new Float64Array(n), u2 = new Float64Array(n); let j = 0;
+    for (let i = 0; i < n; i++) { const t = i / (n - 1) * L; while (j < cum.length - 2 && cum[j + 1] < t) j++; const seg = (cum[j + 1] - cum[j]) || 1e-9, fr = Math.max(0, Math.min(1, (t - cum[j]) / seg)); u1[i] = pts[j][0] + (pts[j + 1][0] - pts[j][0]) * fr; u2[i] = pts[j][1] + (pts[j + 1][1] - pts[j][1]) * fr; }
+    for (let pass = 0; pass < 8; pass++) { const a = Float64Array.from(u1), b = Float64Array.from(u2); for (let i = 1; i < n - 1; i++) { u1[i] = (a[i - 1] + 2 * a[i] + a[i + 1]) / 4; u2[i] = (b[i - 1] + 2 * b[i] + b[i + 1]) / 4; } }
+    return { x: grid(n), u1, u2, length: L };
+  }
+  // the drawing after a change, traced as the change says (display, and the numbers plate): the same curve for the clock levers,
+  // read against the changed clock; moved, turned or wobbled curves for the others. A free function is tapered to zero at the ends
+  // so the trip still runs from the same start to the same finish and the two numbers compare like with like.
+  function changedPath(leverId, path, p, size) {
+    const n = path.u1.length, u1 = new Float64Array(n), u2 = new Float64Array(n), a = size || CONFIG.PREVIEW_SIZE;
+    const sample = s => { const j = Math.max(0, Math.min(n - 1, s * (n - 1))), k = Math.min(n - 2, Math.floor(j)), fr = j - k; return [path.u1[k] * (1 - fr) + path.u1[k + 1] * fr, path.u2[k] * (1 - fr) + path.u2[k + 1] * fr]; };
+    const taper = t => Math.sin(Math.PI * t) ** 2;
+    let clock = null;
+    if (leverId === 'warpclock') { // the re-ticked clock s(t): the same curve read at a new pace; kept monotone so the curve is never retraced
+      clock = new Float64Array(n); const minStep = 0.15 / (n - 1);
+      for (let i = 0; i < n; i++) { const t = i / (n - 1), q = p ? p[i] : Math.sin(2 * Math.PI * t); clock[i] = t - CONFIG.RETICK_SHOW * q * taper(t); if (i && clock[i] < clock[i - 1] + minStep) clock[i] = clock[i - 1] + minStep; }
+      const c0 = clock[0], c1 = clock[n - 1]; for (let i = 0; i < n; i++) clock[i] = (clock[i] - c0) / (c1 - c0);
+    }
+    for (let i = 0; i < n; i++) {
+      const t = i / (n - 1), q = p ? p[i] : Math.sin(2 * Math.PI * t); let r;
+      switch (leverId) {
+        case 'clock': u1[i] = path.u1[i]; u2[i] = path.u2[i]; break;                                             // the same trip, counted from a later zero
+        case 'across': u1[i] = path.u1[i] + a; u2[i] = path.u2[i]; break;
+        case 'up': u1[i] = path.u1[i]; u2[i] = path.u2[i] + a; break;
+        case 'turn': { const c = Math.cos(a * 1.2), sn = Math.sin(a * 1.2); u1[i] = c * path.u1[i] - sn * path.u2[i]; u2[i] = sn * path.u1[i] + c * path.u2[i]; break; }
+        case 'warpclock': r = sample(clock[i]); u1[i] = r[0]; u2[i] = r[1]; break;
+        case 'warpfloor': u1[i] = path.u1[i] + a * q * taper(t); u2[i] = path.u2[i]; break;
+      }
+    }
+    return { x: path.x, u1, u2 };
+  }
+  // the numbers the plate shows: the formula's number for each path before and after a change, scaled so the best path's size reads 1000.
+  // Whether the formula cares is decided by the press itself (the Lie condition on random paths), never by these two numbers.
+  function plateScale(w, path) { const F = fields(w, path), n = F.f.length; let s = 0; for (let i = 1; i < n; i++) s += (Math.abs(F.f[i]) + Math.abs(F.f[i - 1])) / 2 * F.h; return CONFIG.PLATE_UNIT / (s || 1e-9); }
+  function numbers(w, leverId, paths, p, scale, seed) {
+    const holds = pressTest(w, leverId, p, seed || 1).holds;
+    return { holds, rows: paths.map(path => { const b = score(w, path), c = leverId === 'clock' ? b : score(w, changedPath(leverId, path, p)); return { before: Math.round(b * scale), after: Math.round(c * scale) }; }) };
   }
 
   // ---------- paths: random smooth test paths, true motions (RK4 on the Lagrange equations), fakes
@@ -272,26 +326,27 @@
   }
   // the game's own account of what just happened, in plain words, before the Auditor comments
   function plainResult(w, res) {
-    const L = res.lever.label.toLowerCase(), gl = GLOSS[res.tag] || 'its quantity';
-    if (res.kind === 'jam') return `The press jammed: this world notices ${L}. ${w.rule} After ${L} it would not. One blank bent, no law.`;
+    const L = res.lever.label.toLowerCase(); let law = LAWS[res.tag] || { formula: '', gloss: 'its number' };
+    if (res.tag === 'ENERGY' && !w.k) law = { formula: '½(x′² + y′²)', gloss: 'speed² (there is no spring here, so no stretch²)' };
+    if (res.kind === 'jam') return `The formula cares about ${L}: the numbers changed. ${w.rule} No prize; one blank spent.`;
     if (res.kind === 'identity') {
-      const which = res.lever.id === 'warpclock' ? 'a clock re-ticked any way you like' : 'a push you draw any way you like';
-      return `The press held: this world does not notice ${which}. But no law came out. A change with a free hand in it gives a rule about the equations of motion themselves: they are not independent, one follows from the other. ` +
-        (res.lever.id === 'warpclock' ? 'And the plain clock shift is one special way of re-ticking, so its tag is blank in this world.' : '');
+      const which = res.lever.id === 'warpclock' ? 'a clock re-ticked any way you like' : 'a wobble drawn any way you like';
+      return `The formula does not care about ${which}: the numbers stayed the same. But no prize came out. A change with a free hand in it gives a rule instead of a number: the formula's two equations of motion are not independent, one follows from the other. ` +
+        (res.lever.id === 'warpclock' ? 'And "start the clock later" is one special way of re-ticking, so its prize is empty here.' : '');
     }
-    if (res.kind === 'void') return `The press held: this world does not notice ${L}, so it stamped a tag. But the tag is blank: the needle never moved, not on the real motions and not on the fakes. A law that no fake can break rules nothing out. It is empty.`;
-    if (res.kind === 'teeth') return `The press held: this world does not notice ${L}. So one thing stays fixed on every real motion: ${gl}. The needle held still on the real motions and swung on a fake. This law can tell a fake from the real thing.`;
-    return `The press held, but ${gl} drifted on a real motion. Not a law.`;
+    if (res.kind === 'void') return `The formula does not care about ${L}, so a prize was stamped: ${law.gloss}. But its number came out the same on the best path, on your path, and on every path the Auditor tried. A number that never changes on any path, even the bad ones, tells you nothing. The prize is empty.`;
+    if (res.kind === 'teeth') return `The formula does not care about ${L}, so you win a prize: ${law.gloss}, ${law.formula}. Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.`;
+    return `The formula did not care, but ${law.gloss} changed along the best path. Not a prize.`;
   }
   function auditorSays(w, res) {
-    if (res.kind === 'jam') return 'Not a symmetry of this world. No tag.';
+    if (res.kind === 'jam') return 'The formula noticed. Nothing to stamp.';
     if (res.kind === 'identity') {
-      if (w.id === 'sheet' && res.isTarget) return 'That is my answer. The clock shift sits inside this free hand, and a free hand stamps no law. This world has no clock of its own.';
-      return 'An identity, not a law. Watch what that does to the clock tag.';
+      if (w.id === 'sheet' && res.isTarget) return 'That is my answer. "Start the clock later" sits inside this free hand, and a free hand wins no prize. This formula has no clock of its own.';
+      return 'A rule, not a number. Watch what that does to the clock prize.';
     }
-    if (res.kind === 'void') return 'Void. It holds for everything, so it tells me nothing.';
-    if (res.kind === 'teeth') return 'Teeth. That one bites; keep it.' + (res.isTarget ? ' That is mine; you found its lever.' : (w.first && !res.isTarget ? ' A law, but not the one I asked for.' : ''));
-    return 'Not a law.';
+    if (res.kind === 'void') return 'Empty. It holds on every path, so it tells me nothing.';
+    if (res.kind === 'teeth') return 'A real prize. Keep it.' + (res.isTarget ? ' That is mine; you found its change.' : (w.first && !res.isTarget ? ' A prize, but not the one I asked about.' : ''));
+    return 'Not a prize.';
   }
   function nextWorld(g) { if (g.wi >= CONFIG.WORLD_ORDER.length - 1) { g.over = true; return null; } g.wi++; g.blanks = CONFIG.BLANKS; g.pulled = {}; g.rack = []; return world(g); }
   function verdict(g) {
@@ -299,37 +354,20 @@
     const teeth = H.filter(e => e.kind === 'teeth').length, voids = H.filter(e => e.kind === 'void').length, jams = H.filter(e => e.kind === 'jam').length, ids = H.filter(e => e.kind === 'identity').length;
     const sawVoid = has('glass', 'clock', 'void') || has('sheet', 'clock', 'void'), warpGlass = has('glass', 'warpclock', 'identity'), answered = has('sheet', 'warpclock', 'identity');
     const sweep = has('spring', 'turn', 'teeth'), snell = has('glass', 'across', 'teeth');
-    const headline = answered && sawVoid ? 'YOU ANSWERED HILBERT.' : answered ? 'YOU FOUND THE FREE HAND.' : sawVoid ? 'YOU SAW THE BLANK TAG.' : 'THE PRESS KEPT ITS SECRET.';
+    const headline = answered && sawVoid ? 'YOU ANSWERED HILBERT.' : answered ? 'YOU FOUND THE FREE HAND.' : sawVoid ? 'YOU SAW THE EMPTY PRIZE.' : 'THE PRESS KEPT ITS SECRET.';
     const did = [];
-    did.push(teeth === 0 ? 'You stamped no law with teeth.' : teeth === 1 ? 'You stamped one law with teeth.' : `You stamped ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][teeth] || teeth} laws with teeth.`);
-    if (sawVoid) did.push('On the glass, the clock tag came out blank.'); else did.push('You never stamped the clock on the glass or the sheet, so you never saw a tag come out blank.');
-    if (warpGlass) did.push('On the glass you warped the clock, and the press stamped an identity instead of a law.');
-    if (answered) did.push('On the sheet you found the lever that blanks the clock tag: the free hand.'); else did.push('On the sheet you did not find the lever that blanks the clock tag.');
-    if (sweep) did.push('On the spring you found the symmetry behind the sweep-rate law: a law with teeth points back to its symmetry.');
-    if (snell) did.push('On the glass you stamped lean times density: the law of refraction, from a sideways shift.');
+    did.push(teeth === 0 ? 'You won no real prize.' : teeth === 1 ? 'You won one real prize.' : `You won ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][teeth] || teeth} real prizes: numbers that stay the same along the best path and on no other.`);
+    if (sawVoid) did.push('On the glass, the clock prize came out empty: a number that stays the same on every path.'); else did.push('You never tried the clock on the glass or the sheet, so you never saw a prize come out empty.');
+    if (warpGlass) did.push('On the glass you re-ticked the clock freely, and the formula did not care: a rule came out instead of a number.');
+    if (answered) did.push('On the sheet you found the change that empties the clock prize: the free hand.'); else did.push('On the sheet you did not find the change that empties the clock prize.');
+    if (sweep) did.push('On the spring you found the change behind the sweep-rate prize: a real prize points back to a change the formula does not care about.');
+    if (snell) did.push('On the glass you won lean times density: the law of refraction, from moving the drawing sideways.');
     return { headline, did, teeth, voids, jams, ids, sawVoid, warpGlass, answered, sweep, snell };
   }
 
   // ---------- for drawing: the Auditor's first-move picture and gauge values
   function lawValues(w, leverId, path, p) { return current(w, path, leverId, p); }
-  // the preview shown when a lever is tapped: the true motion with the lever's change applied at a visible size (display only;
-  // the press itself tests the infinitesimal transformation on random paths). Returns a path whose ticks are the clock's.
-  function previewPath(leverId, path, p, size) {
-    const n = path.u1.length, u1 = new Float64Array(n), u2 = new Float64Array(n), a = size || CONFIG.PREVIEW_SIZE;
-    const sample = s => { const j = Math.max(0, Math.min(n - 1, s * (n - 1))), k = Math.min(n - 2, Math.floor(j)), fr = j - k; return [path.u1[k] * (1 - fr) + path.u1[k + 1] * fr, path.u2[k] * (1 - fr) + path.u2[k + 1] * fr]; };
-    for (let i = 0; i < n; i++) {
-      const t = i / (n - 1); let q;
-      switch (leverId) {
-        case 'clock': q = sample(Math.max(0, t - a * 0.6)); u1[i] = q[0]; u2[i] = q[1]; break;                      // the same curve, read a moment later
-        case 'across': u1[i] = path.u1[i] + a; u2[i] = path.u2[i]; break;
-        case 'up': u1[i] = path.u1[i]; u2[i] = path.u2[i] + a; break;
-        case 'turn': { const c = Math.cos(a * 1.2), s = Math.sin(a * 1.2); u1[i] = c * path.u1[i] - s * path.u2[i]; u2[i] = s * path.u1[i] + c * path.u2[i]; break; }
-        case 'warpclock': q = sample(Math.max(0, Math.min(1, t - a * 1.6 * (p ? p[i] : Math.sin(2 * Math.PI * t))))); u1[i] = q[0]; u2[i] = q[1]; break; // the same curve, ticks bunched and spread
-        case 'warpfloor': u1[i] = path.u1[i] + a * (p ? p[i] : Math.sin(2 * Math.PI * t)); u2[i] = path.u2[i]; break;
-      }
-    }
-    return { x: path.x, u1, u2 };
-  }
+  const previewPath = changedPath;
   function smoothCurve(samples, n) { // the player's drawn curve → p(x) on the grid, lightly smoothed, normalised to max 1
     n = n || CONFIG.N; const m = samples.length, p = new Float64Array(n); if (m < 2) return randomFree(rng(5), n);
     for (let i = 0; i < n; i++) { const j = i / (n - 1) * (m - 1), k = Math.min(m - 2, Math.floor(j)), fr = j - k; p[i] = samples[k] * (1 - fr) + samples[k + 1] * fr; }
@@ -337,5 +375,5 @@
     let mx = 0; for (let i = 0; i < n; i++) mx = Math.max(mx, Math.abs(p[i])); if (mx > 0) for (let i = 0; i < n; i++) p[i] /= mx; return p;
   }
 
-  return { CONFIG, WORLDS, GLOSS, LEVERS, leverById, rng, fields, fParts, density, lieResidual, current, identityResidual, randomPath, randomFree, trueMotion, integrate, retick, bump, auditorBatch, pressTest, audit, pull, newGame, world, playPull, nextWorld, verdict, lawValues, previewPath, smoothCurve };
+  return { CONFIG, WORLDS, LAWS, GLOSS, LEVERS, score, strokeToPath, changedPath, numbers, plateScale, leverById, rng, fields, fParts, density, lieResidual, current, identityResidual, randomPath, randomFree, trueMotion, integrate, retick, bump, auditorBatch, pressTest, audit, pull, newGame, world, playPull, nextWorld, verdict, lawValues, previewPath, smoothCurve };
 });
