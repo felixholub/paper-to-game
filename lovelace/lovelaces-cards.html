@@ -275,9 +275,9 @@ svg.arcs path.live{stroke-width:5}
   <h3>Hanging cards</h3>
   <p>Tap a card at the bottom to hang it at the end of your chain. Tap × to take a card off. Only so many cards fit. Then tap <b>Run the loom</b> and watch. The dashed squares are the order; each stitch the loom weaves fills one. A wrong stitch gets a black frame.</p>
   <h3>Go back</h3>
-  <p>A <b>Go back</b> card sends the machine back up the chain, to the card it points at. You choose that card on the Go back card itself (“to card 1”, “to card 2” …). The arc on the left shows where it jumps.</p>
-  <h3>The wheels</h3>
-  <p>Every Go back card belongs to a wheel. On each Go back card you set, with − and +, how many times its loop is woven; its wheel keeps count. Each time the machine reaches Go back, the wheel clicks down one. When it reaches 0, the machine does not go back: it carries on down the chain, and the wheel springs back to its number, ready for next time. That is how one loop can sit inside another.</p>
+  <p>The machine counts with <b>wheels</b>: numbers inside it. Before you run the loom, put a number on each wheel with − and +.</p><p>A <b>Go back</b> card takes 1 off its wheel and looks at the result. If the wheel isn't 0 yet, the machine goes back up the chain to the card you chose on the Go back card (“card 1”, “card 2” …); the arc on the left shows the jump. If the wheel shows 0, the machine carries on down the chain.</p>
+  <h3>Set cards</h3>
+  <p>A wheel that reaches 0 stays at 0. A <b>Set</b> card puts a new number on a wheel. That is what a loop inside a loop needs: the inner wheel must be set again before every round of the outer loop.</p>
   <h3>Fewest cards</h3>
   <p>When the bell rings you are told the fewest cards that can do the job. On the hard looms there is no spare room at all.</p>
   <h3>Stuck?</h3>
@@ -290,12 +290,12 @@ svg.arcs path.live{stroke-width:5}
   <div class="top"><span class="which">About the paper</span><button class="q" data-back aria-label="Back">×</button></div>
 
 <h3>The game in one line</h3>
-<p>A machine that does exactly what its cards say. Six looms are dealt at random from a library, two easy, two harder, two hard: you hang as few cards as you can to weave each order, using Go back cards and wheels to make a few cards do a long job, and on the hard looms a loop inside a loop. Then a switch makes the same cards play a tune and do sums, and you ask the machine to make something up. It can't.</p>
+<p>A machine that does exactly what its cards say. Six looms are dealt at random from a library, two easy, two harder, two hard: you hang as few cards as you can to weave each order, with wheels that hold numbers, Go back cards that take one off and look, and Set cards that put a number back, so that on the hard looms a loop sits inside a loop. Then a switch makes the same cards play a tune and do sums, and you ask the machine to make something up. It can't.</p>
 <h3>What the paper does</h3>
 <p>In 1842 L. F. Menabrea published a sketch of Charles Babbage's Analytical Engine, a calculating machine driven by punched cards. In 1843 Ada Lovelace translated it and added seven Notes, longer than the sketch itself. The Notes are the text this game is built from.</p>
 <p>Note A says the Engine <i>weaves algebraical patterns just as the Jacquard-loom weaves flowers and leaves</i>, and that it works on operations, not on any one kind of thing: it could act on anything whose relations can be written in symbols, music included. Notes C and E explain <i>backing</i>: the cards can be sent back so that a few of them do duty again and again, a cycle. Note F shows three cards doing the work of three hundred and thirty. Note G gives a full chain of cards for the Numbers of Bernoulli, twenty-five cards that serve <i>however great n may be</i>, and warns that the Engine <i>has no pretensions whatever to originate anything. It can do whatever we know how to order it to perform.</i></p>
 <h3>What is the paper's, and what is ours</h3>
-<p>The loom is Lovelace's own picture from Note A, made literal: the Engine did arithmetic, it never wove cloth. The Go back card is her backing (Note C: the cards can be backed to any particular card), and its wheel is the counter Menabrea describes, which marks how often an operation must be repeated and is cleared one unit at a time until it shows zero. A wheel that springs back to its number when it reaches zero is our simplification of how her chains restore their counters, and it is what lets a loop sit inside a loop, her cycle of cycles (Note E). Counting cards is her yardstick too: Notes D, F and G all count how few cards will do. The puzzles, the fewest-card counts (found by trying every possible chain) and the switch's tune and sums are ours.</p>
+<p>The loom is Lovelace's own picture from Note A, made literal: the Engine did arithmetic, it never wove cloth. The counting is done as the Notes say an Engine counts: with a number in the Store and cards that operate on it. A wheel is such a number, put on by hand before the run, as Note B inscribes the data on the columns. The Go back card is her Operation 7 in Note G joined to her backing in Note C: a subtraction whose result the Engine feels; if it is not yet zero, the cards are backed to an earlier card, and if it is zero, the Engine goes on (Menabrea's counter, too, has a unit taken off each time until it marks zero). A Set card is a card of numbers (Memoir p. 15): nothing resets a wheel by itself, so a loop inside a loop, her cycle of cycles (Note E), needs a card that puts the inner number back. In her own tables the subtraction and the decision are separate steps; here they share one card. Counting cards is her yardstick too: Notes D, F and G all count how few cards will do. The puzzles, the fewest-card counts (found by trying every possible chain) and the switch's tune and sums are ours.</p>
 <p>The coda is hers. It runs Lovelace's own table from Note G, operation by operation, on a working model of the Engine's card language, and prints the first four Numbers of Bernoulli: 1/6, −1/30, 1/42, −1/30, with nine, fourteen and twenty-five cards. Two small repairs: one division is done the way round her text requires (the printed table has it reversed), and a sign is flipped so the Numbers print with the sign her formula gives. Her cycle (operations 13 to 23, in brown) is simply repeated for the fourth Number.</p>
 <p>The Engine was never built. Nothing here is evidence about the machine; it is the Notes' ideas, running.</p>
 <h3>The paper</h3>
@@ -586,63 +586,82 @@ svg.arcs path.live{stroke-width:5}
 </script>
 <script>
 // Lovelace's Cards — the loom. The only copy: solve.js runs it in Node to compute every puzzle's par, build.py inlines it.
-// A chain of cards is read from the top. A stitch card weaves one stitch. A Go back card belongs to a wheel and points at a card
-// above it (Note C: the cards can be backed "to any particular card"). When the machine reaches it, the wheel clicks down one;
-// if the wheel still shows more than nothing, the machine goes back to that card; if it shows nothing, the wheel springs back to
-// its number and the machine carries on. So a Go back card makes the cards between its target and itself run exactly as many
-// times as its wheel is set to, and a loop can sit inside a loop (Note E: the cycle of cycles).
+// The machine counts the way the Notes say an Engine counts: with numbers in the Store and cards that operate on them.
+//   - A wheel (A or B) is a number in the Store. Its starting value is put on by hand before the run, as Note B inscribes
+//     the data on the columns.
+//   - A stitch card weaves one stitch.
+//   - A Go back card is Lovelace's Operation 7 joined to her backing (Note G; Note C): it takes 1 from its wheel, and the
+//     machine "feels" the result: if the wheel is not yet 0 it goes back to the card named; if it is 0 it carries on.
+//     (Menabrea's counter, likewise, has a unit taken off each time "until it only marks zero".)
+//   - A Set card puts a number on a wheel (a card of numbers, Memoir p. 15). Nothing resets a wheel by itself: a loop inside
+//     a loop needs the inner wheel set again by a card on every round of the outer one.
+// A wheel taken below 0 never comes back to 0, so a Go back on it sends the machine round for ever; the attendant stops it.
 (function (root) {
   'use strict';
-  const CAP = 4000;
-  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1, to:index}] ; set: [wheelA, wheelB]
-  function weave(chain, set, target, wantEvents) {
-    const left = set.slice(); const out = []; const ev = wantEvents ? [] : null;
+  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1, to:index} | {k:'set', w:0|1, v:n}] ; start: [A, B]
+  function weave(chain, start, target, wantEvents, cap) {
+    const wh = start.slice(); const out = []; const ev = wantEvents ? [] : null;
+    cap = cap || 4000;
     let pc = 0, steps = 0;
     while (pc < chain.length) {
-      if (++steps > CAP) return { out, ev, status: 'cap' };
+      if (++steps > cap) return { out, ev, status: 'cap', wheels: wh };
       const c = chain[pc];
       if (c.k === 'back') {
-        left[c.w]--;
-        if (left[c.w] > 0) { if (ev) ev.push({ t: 'back', i: pc, w: c.w, left: left[c.w], to: c.to }); pc = c.to; }
-        else { left[c.w] = set[c.w]; if (ev) ev.push({ t: 'spring', i: pc, w: c.w, left: 0, set: set[c.w] }); pc++; }
+        wh[c.w]--;
+        if (wh[c.w] !== 0) { if (ev) ev.push({ t: 'back', i: pc, w: c.w, now: wh[c.w], to: c.to }); pc = c.to; }
+        else { if (ev) ev.push({ t: 'zero', i: pc, w: c.w, now: 0 }); pc++; }
         continue;
       }
+      if (c.k === 'set') { wh[c.w] = c.v; if (ev) ev.push({ t: 'set', i: pc, w: c.w, now: c.v }); pc++; continue; }
       out.push(c.k); if (ev) ev.push({ t: 'stitch', i: pc, c: c.k });
-      if (target) { const n = out.length - 1; if (n >= target.length || out[n] !== target[n]) return { out, ev, status: 'wrong' }; }
+      if (target) { const n = out.length - 1; if (n >= target.length || out[n] !== target[n]) return { out, ev, status: 'wrong', wheels: wh }; }
       pc++;
     }
-    return { out, ev, status: target ? (out.length === target.length ? 'ok' : 'short') : 'done' };
+    return { out, ev, status: target ? (out.length === target.length ? 'ok' : 'short') : 'done', wheels: wh };
   }
 
-  // Fewest cards that weave the target exactly, with at most `wheels` wheels (each set 1..WMAX). Exhaustive, with one sound prune:
-  // until the first Go back card, stitch cards are woven straight, so they must match the target's opening.
+  // Fewest cards that weave the target exactly, with at most `wheels` wheels; every number (a wheel's start, a Set card's value)
+  // tried from 1 to WMAX. Exhaustive, with sound prunes: before the first Go back card, stitches are woven straight, so they must
+  // match the target's opening; a Go back may only name a stitch card; a Set card is only useful on a wheel some Go back uses.
   const WMAX = 12;
   function solve(target, wheels, maxLen) {
     const cols = [...new Set(target)];
+    const cap = 40 * target.length + 50;
+    const vmax = Math.min(WMAX, target.length);
     for (let L = 1; L <= maxLen; L++) {
       const chain = new Array(L); let found = null;
-      const tryWheels = () => {
+      const tryNumbers = () => {
         const used = [...new Set(chain.filter(c => c.k === 'back').map(c => c.w))];
-        if (!used.length) { if (weave(chain, [1, 1], target).status === 'ok') return [1, 1]; return null; }
-        const set = [1, 1];
+        if (chain.some(c => c.k === 'set' && !used.includes(c.w))) return null;
+        const sets = chain.filter(c => c.k === 'set');
+        const slots = [...used.map(w => ({ kind: 'start', w })), ...sets.map(c => ({ kind: 'set', c }))];
+        const start = [1, 1];
         const rec = j => {
-          if (j === used.length) return weave(chain, set, target).status === 'ok' ? set.slice() : null;
-          for (let v = 2; v <= Math.min(WMAX, target.length); v++) { set[used[j]] = v; const r = rec(j + 1); if (r) return r; }
-          set[used[j]] = 1; return null;
+          if (j === slots.length) return weave(chain, start, target, false, cap).status === 'ok' ? { start: start.slice(), vals: sets.map(c => c.v) } : null;
+          const s = slots[j];
+          for (let v = 1; v <= vmax; v++) {
+            if (s.kind === 'start') start[s.w] = v; else s.c.v = v;
+            const r = rec(j + 1); if (r) return r;
+          }
+          return null;
         };
         return rec(0);
       };
       const dfs = (i, sawBack) => {
         if (found) return;
-        if (i === L) { const s = tryWheels(); if (s) found = { chain: chain.map(c => ({ ...c })), set: s }; return; }
+        if (i === L) {
+          if (!sawBack && chain.some(c => c.k === 'set')) return;
+          const r = tryNumbers(); if (r) found = { chain: chain.map(c => ({ ...c })), start: r.start }; return;
+        }
         for (const c of cols) {
           if (!sawBack && (i >= target.length || target[i] !== c)) continue;
           chain[i] = { k: c }; dfs(i + 1, sawBack); if (found) return;
         }
         if (i === 0) return;
         for (let w = 0; w < wheels; w++) {
-          if (w === 1 && !chain.slice(0, i).some(c => c.k === 'back' && c.w === 0)) continue; // wheel B only after A is in use (symmetry)
-          for (let to = 0; to < i; to++) { if (chain[to].k === 'back') continue; chain[i] = { k: 'back', w, to }; dfs(i + 1, true); if (found) return; }
+          if (w === 1 && !chain.slice(0, i).some(c => (c.k === 'back' || c.k === 'set') && c.w === 0)) continue; // B only after A (symmetry)
+          for (let to = 0; to < i; to++) { if (chain[to].k === 'back' || chain[to].k === 'set') continue; chain[i] = { k: 'back', w, to }; dfs(i + 1, true); if (found) return; }
+          chain[i] = { k: 'set', w, v: 1 }; dfs(i + 1, sawBack); if (found) return;
         }
       };
       dfs(0, false);
@@ -657,7 +676,7 @@ svg.arcs path.live{stroke-width:5}
 
 </script>
 <script>
-const PUZZLES = [{"id":"e0a","tier":"easy0","p":"RBRB","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"R"},{"k":"B"}],"set":[1,1],"flatPar":null},{"id":"e0b","tier":"easy0","p":"RGBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"B"},{"k":"R"}],"set":[1,1],"flatPar":null},{"id":"e0c","tier":"easy0","p":"BBRG","wheels":0,"par":4,"slots":5,"sol":[{"k":"B"},{"k":"B"},{"k":"R"},{"k":"G"}],"set":[1,1],"flatPar":null},{"id":"e0d","tier":"easy0","p":"RBBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"B"},{"k":"R"}],"set":[1,1],"flatPar":null},{"id":"e1a","tier":"easy1","p":"RBRBRBRBRBRBRBRB","wheels":1,"par":3,"slots":4,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0}],"set":[8,1],"flatPar":null},{"id":"e1b","tier":"easy1","p":"RGBRGBRGBRGBRGB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"B"},{"k":"back","w":0,"to":0}],"set":[5,1],"flatPar":null},{"id":"e1c","tier":"easy1","p":"RRRRRRRRRR","wheels":1,"par":2,"slots":3,"sol":[{"k":"R"},{"k":"back","w":0,"to":0}],"set":[10,1],"flatPar":null},{"id":"e1d","tier":"easy1","p":"RRBRRBRRBRRBRRB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0}],"set":[5,1],"flatPar":null},{"id":"m1","tier":"medium","p":"BRRRRRRRRR","wheels":1,"par":3,"slots":4,"sol":[{"k":"B"},{"k":"R"},{"k":"back","w":0,"to":1}],"set":[9,1],"flatPar":null},{"id":"m2","tier":"medium","p":"GRBRBRBRBRBG","wheels":1,"par":5,"slots":6,"sol":[{"k":"G"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"G"}],"set":[5,1],"flatPar":null},{"id":"m3","tier":"medium","p":"RRRRRRBBBBBB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"back","w":0,"to":0},{"k":"B"},{"k":"back","w":0,"to":2}],"set":[6,1],"flatPar":null},{"id":"m4","tier":"medium","p":"GGRBRBRBRBRB","wheels":1,"par":5,"slots":6,"sol":[{"k":"G"},{"k":"G"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":2}],"set":[5,1],"flatPar":null},{"id":"m5","tier":"medium","p":"RGGGGGGGGB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"back","w":0,"to":1},{"k":"B"}],"set":[8,1],"flatPar":null},{"id":"m6","tier":"medium","p":"RBRBRBRBGGGGGG","wheels":2,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0},{"k":"G"},{"k":"back","w":1,"to":3}],"set":[4,6],"flatPar":7},{"id":"m7","tier":"medium","p":"RRGGRRGGRRGGRRGG","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"R"},{"k":"G"},{"k":"G"},{"k":"back","w":0,"to":0}],"set":[4,1],"flatPar":null},{"id":"m8","tier":"medium","p":"RBBRBBRBBRBBG","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"B"},{"k":"B"},{"k":"back","w":0,"to":0},{"k":"G"}],"set":[4,1],"flatPar":null},{"id":"h1","tier":"hard","p":"RRRBRRRBRRRBRRRB","wheels":2,"par":4,"slots":4,"sol":[{"k":"R"},{"k":"back","w":0,"to":0},{"k":"B"},{"k":"back","w":1,"to":0}],"set":[3,4],"flatPar":5},{"id":"h2","tier":"hard","p":"RBBBRBBBRBBBRBBB","wheels":2,"par":4,"slots":4,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"back","w":1,"to":0}],"set":[3,4],"flatPar":5},{"id":"h3","tier":"hard","p":"BRRRRBRRRRBRRRRB","wheels":2,"par":5,"slots":5,"sol":[{"k":"B"},{"k":"R"},{"k":"back","w":0,"to":1},{"k":"B"},{"k":"back","w":1,"to":1}],"set":[4,3],"flatPar":7},{"id":"h4","tier":"hard","p":"GRBRBRBGGRBRBRBG","wheels":2,"par":6,"slots":6,"sol":[{"k":"G"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"G"},{"k":"back","w":1,"to":0}],"set":[3,2],"flatPar":null},{"id":"h7","tier":"hard","p":"RGRGBRGRGBRGRGB","wheels":2,"par":5,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"back","w":0,"to":0},{"k":"B"},{"k":"back","w":1,"to":0}],"set":[2,3],"flatPar":6},{"id":"h8","tier":"hard","p":"GRRRBRRRBRRRBG","wheels":2,"par":6,"slots":6,"sol":[{"k":"G"},{"k":"R"},{"k":"back","w":0,"to":1},{"k":"B"},{"k":"back","w":1,"to":1},{"k":"G"}],"set":[3,3],"flatPar":7}];
+const PUZZLES = [{"id":"e0a","tier":"easy0","p":"RBRB","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"R"},{"k":"B"}],"set":[1,1]},{"id":"e0b","tier":"easy0","p":"RGBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"B"},{"k":"R"}],"set":[1,1]},{"id":"e0c","tier":"easy0","p":"BBRG","wheels":0,"par":4,"slots":5,"sol":[{"k":"B"},{"k":"B"},{"k":"R"},{"k":"G"}],"set":[1,1]},{"id":"e0d","tier":"easy0","p":"RBBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"B"},{"k":"R"}],"set":[1,1]},{"id":"e1a","tier":"easy1","p":"RBRBRBRBRBRBRBRB","wheels":1,"par":3,"slots":4,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0}],"set":[8,1]},{"id":"e1b","tier":"easy1","p":"RGBRGBRGBRGBRGB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"B"},{"k":"back","w":0,"to":0}],"set":[5,1]},{"id":"e1c","tier":"easy1","p":"RRRRRRRRRR","wheels":1,"par":2,"slots":3,"sol":[{"k":"R"},{"k":"back","w":0,"to":0}],"set":[10,1]},{"id":"e1d","tier":"easy1","p":"RRBRRBRRBRRBRRB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0}],"set":[5,1]},{"id":"m1","tier":"medium","p":"BRRRRRRRRR","wheels":1,"par":3,"slots":4,"sol":[{"k":"B"},{"k":"R"},{"k":"back","w":0,"to":1}],"set":[9,1]},{"id":"m2","tier":"medium","p":"GRBRBRBRBRBG","wheels":1,"par":5,"slots":6,"sol":[{"k":"G"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"G"}],"set":[5,1]},{"id":"m3","tier":"medium","p":"RRRRRRBBBBBB","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"back","w":0,"to":0},{"k":"set","w":0,"v":6},{"k":"B"},{"k":"back","w":0,"to":3}],"set":[6,1]},{"id":"m4","tier":"medium","p":"GGRBRBRBRBRB","wheels":1,"par":5,"slots":6,"sol":[{"k":"G"},{"k":"G"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":2}],"set":[5,1]},{"id":"m5","tier":"medium","p":"RGGGGGGGGB","wheels":1,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"back","w":0,"to":1},{"k":"B"}],"set":[8,1]},{"id":"m6","tier":"medium","p":"RBRBRBRBGGGGGG","wheels":2,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0},{"k":"G"},{"k":"back","w":1,"to":3}],"set":[4,6]},{"id":"m7","tier":"medium","p":"RRGGRRGGRRGGRRGG","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"R"},{"k":"G"},{"k":"G"},{"k":"back","w":0,"to":0}],"set":[4,1]},{"id":"m8","tier":"medium","p":"RBBRBBRBBRBBG","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"B"},{"k":"B"},{"k":"back","w":0,"to":0},{"k":"G"}],"set":[4,1]},{"id":"h1","tier":"hard","p":"RRRRRBRRRRRBRRRRRBRRRRRB","wheels":2,"par":5,"slots":5,"sol":[{"k":"R"},{"k":"back","w":0,"to":0},{"k":"B"},{"k":"set","w":0,"v":5},{"k":"back","w":1,"to":0}],"set":[5,4]},{"id":"h2","tier":"hard","p":"RBBBBBBRBBBBBBRBBBBBB","wheels":2,"par":5,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":6},{"k":"back","w":1,"to":0}],"set":[6,3]},{"id":"h3","tier":"hard","p":"BRRRRRBRRRRRBRRRRRB","wheels":2,"par":6,"slots":6,"sol":[{"k":"B"},{"k":"R"},{"k":"back","w":0,"to":1},{"k":"B"},{"k":"set","w":0,"v":5},{"k":"back","w":1,"to":1}],"set":[5,3]},{"id":"h5","tier":"hard","p":"RBRBRBRBGRBRBRBRBGRBRBRBRBG","wheels":2,"par":6,"slots":6,"sol":[{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":0},{"k":"G"},{"k":"set","w":0,"v":4},{"k":"back","w":1,"to":0}],"set":[4,3]},{"id":"h6","tier":"hard","p":"RGGGGGRGGGGGRGGGGG","wheels":2,"par":5,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":5},{"k":"back","w":1,"to":0}],"set":[5,3]},{"id":"h8","tier":"hard","p":"GRRRRGRRRRGRRRRGRRRR","wheels":2,"par":5,"slots":5,"sol":[{"k":"G"},{"k":"R"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":4},{"k":"back","w":1,"to":0}],"set":[4,4]}];
 </script>
 <script>
 (function(){
@@ -693,11 +712,11 @@ function deal(){
   const ps = [...pick('easy0', 1), ...pick('easy1', 1), ...pick('medium', 2), ...pick('hard', 2)];
   return ps.map(p => {
     const perm = shuffle(['r','b','g']); const map = { R: perm[0], B: perm[1], G: perm[2] };
-    return { ...p, target: p.p.split('').map(x => map[x]), sol: p.sol.map(c => c.k === 'back' ? { ...c } : { k: map[c.k] }) };
+    return { ...p, target: p.p.split('').map(x => map[x]), sol: p.sol.map(c => (c.k === 'back' || c.k === 'set') ? { ...c } : { k: map[c.k] }) };
   });
 }
 
-let looms = [], L = 0, P = null, chain = [], set = [2, 2], running = false, solved = false, fails = 0, uid = 0, results = [], lastChain = null, lastSet = null;
+let looms = [], L = 0, P = null, chain = [], set = [2, 2], running = false, solved = false, fails = 0, uid = 0, results = [], lastChain = null, lastSet = null, lastWheels = 1;
 let seenTarget = false, seenB = false;
 
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
@@ -713,7 +732,7 @@ function newGame(){ looms = deal(); results = []; seenTarget = false; seenB = fa
 
 function heading(p){
   if (p.tier === 'easy0') return 'Doing as it is told';
-  if (p.tier === 'easy1') return 'The card that goes back';
+  if (p.tier === 'easy1') return 'The machine counts';
   if (p.tier === 'medium') return p.wheels === 2 ? 'Two wheels' : 'Going back, but not to the top';
   return 'A loop inside a loop';
 }
@@ -721,13 +740,13 @@ function sayText(p){
   const fit = `<b>${w(p.slots)} cards</b> fit on the chain`;
   const Fit = `<b>${w(p.slots)[0].toUpperCase() + w(p.slots).slice(1)} cards</b> fit on the chain`;
   if (p.tier === 'easy0') return `Hang cards to weave the order, stitch by stitch: tap a card at the bottom to hang it, tap × to take one off. Then run the loom. ${Fit}.`;
-  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. The <b>Go back</b> card sends the machine back up the chain. The wheel says how many times the cards above it are woven: set the number of times on the Go back card itself, with − and +.`;
+  if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. So the machine has to count. <b>Wheel A</b> is a number inside the machine: put a number on it with − and +. The <b>Go back</b> card takes 1 off the wheel and looks at it. Not 0 yet? Back up the chain. 0? Carry on.`;
   if (p.tier === 'medium'){
-    let s = `${Fit}. A Go back card doesn't have to jump to the top: <b>tap “to card 1” on it to choose where it jumps.</b> The arc on the left shows the loop.`;
-    if (p.wheels === 2) s += ` And there are now <b>two wheels</b>, A and B: two loops can repeat different numbers of times.`;
+    let s = `${Fit}. A Go back card doesn't have to jump to the top: <b>tap “card 1” on it to choose where it jumps.</b> The arc on the left shows the loop. A wheel that has reached 0 stays at 0; a <b>Set</b> card puts a new number on it.`;
+    if (p.wheels === 2) s += ` And there are now <b>two wheels</b>, A and B, so two loops can count separately.`;
     return s;
   }
-  return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>. The trick: when a wheel reaches 0 it <b>springs back</b> to its number, so an inner loop can run again on the next round of the outer one.`;
+  return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>: an inner loop that runs again on every round of an outer one. But a wheel that reaches 0 stays at 0. Something has to put the inner wheel's number back before each round: a <b>Set</b> card.`;
 }
 
 function startLoom(n){
@@ -755,20 +774,27 @@ function drawCloth(woven, badAt){
   $('#ocount').textContent = woven.length ? `${woven.length} of ${t.length} stitches` : `${t.length} stitches`;
 }
 
-function drawWheels(left){
+// the wheels: numbers in the machine's store, put on by hand before the run
+function drawWheels(now){
   const box = $('#wheels'); box.innerHTML = '';
+  const edit = !running && !solved;
   for (let k = 0; k < P.wheels; k++){
     const b = el('div', 'wbox');
-    const shown = left ? left[k] : set[k];
+    const shown = now ? now[k] : set[k];
     b.innerHTML = `<div class="wheel ${k ? 'wB' : ''}" id="wh${k}"><span>${shown}</span></div>
-      <div class="wl"><b>Wheel ${WNAME[k]}</b>${running ? 'times still to go' : `counts to ${set[k]}<br><span class="small">set it on the Go back card</span>`}</div>`;
+      <div class="wl"><b>Wheel ${WNAME[k]}</b>${now ? 'now shows this number' : 'starts at this number'}${edit ? `<div class="pm"><button data-w="${k}" data-d="-1" aria-label="less">−</button><button data-w="${k}" data-d="1" aria-label="more">+</button></div>` : ''}</div>`;
     box.appendChild(b);
   }
   box.querySelectorAll('.pm button').forEach(bt => bt.onclick = () => {
-    if (running || solved) return; const k = +bt.dataset.w; set[k] = Math.max(1, Math.min(Lo.WMAX, set[k] + +bt.dataset.d)); clearResult(); drawWheels();
+    if (running || solved) return; const k = +bt.dataset.w; set[k] = Math.max(1, Math.min(Lo.WMAX, set[k] + +bt.dataset.d)); clearResult(); drawWheels(); drawChain();
   });
 }
 function tickWheel(k, v){ const wl = $('#wh' + k); if (!wl) return; wl.querySelector('span').textContent = v; wl.classList.remove('tick'); void wl.offsetWidth; wl.classList.add('tick'); }
+
+const isStitch = c => c.k === 'r' || c.k === 'b' || c.k === 'g';
+function backHTML(k){ return `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]}">↺</span>`; }
+function setHTML(k){ return `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]};border-radius:4px;font-size:15px">=</span>`; }
+function chip(k){ return `<span class="wchip" style="background:${WCOL[k]}">wheel ${WNAME[k]}</span>`; }
 
 function drawTray(){
   const t = $('#tray'); t.innerHTML = '';
@@ -776,33 +802,45 @@ function drawTray(){
   cols.forEach(k => { const b = el('button', 'card'); b.innerHTML = holesSpan(k) + swatch(k, 'threads') + `<span class="t"><b>${MEAN.threads[k][0]}</b><i>${MEAN.threads[k][1]}</i></span>`; b.onclick = () => hang({ k }); t.appendChild(b); });
   for (let k = 0; k < P.wheels; k++){
     const b = el('button', 'card wide');
-    b.innerHTML = holesSpan('back') + `<span class="sw back" style="border-color:${WCOL[k]};color:${WCOL[k]}">↺</span><span class="t"><b>Go back${P.wheels > 1 ? `<span class="wchip" style="background:${WCOL[k]}">wheel ${WNAME[k]}</span>` : ''}</b><i>Jumps back up the chain, so the cards above it are woven again. You choose how many times.</i></span>`;
+    b.innerHTML = holesSpan('back') + backHTML(k) + `<span class="t"><b>Go back${P.wheels > 1 ? chip(k) : ''}</b><i>Take 1 off wheel ${WNAME[k]}. Not 0 yet? Go back up the chain.</i></span>`;
     b.onclick = () => hang({ k: 'back', w: k, toId: null }); t.appendChild(b);
+  }
+  if (P.tier === 'medium' || P.tier === 'hard') for (let k = 0; k < P.wheels; k++){
+    const b = el('button', 'card wide');
+    b.innerHTML = holesSpan('back') + setHTML(k) + `<span class="t"><b>Set${P.wheels > 1 ? chip(k) : ''}</b><i>Put a number on wheel ${WNAME[k]}.</i></span>`;
+    b.onclick = () => hang({ k: 'set', w: k, v: 2 }); t.appendChild(b);
   }
 }
 function hang(c){
   if (running || solved) return;
   if (chain.length >= P.slots){ hint(`Only ${w(P.slots)} cards fit. Tap × on a card to take it off.`); return; }
-  if (c.k === 'back' && !chain.length){ hint('Hang a stitch card first: Go back needs a card to jump back to.'); return; }
-  c.id = ++uid; if (c.k === 'back') c.toId = chain[0].id;
+  if (!isStitch(c) && !chain.length){ hint('Hang a stitch card first.'); return; }
+  c.id = ++uid; if (c.k === 'back') c.toId = (chain.find(isStitch) || chain[0]).id;
   chain.push(c); clearResult(); drawChain();
 }
-function engineChain(ch){ ch = ch || chain; return ch.map(c => c.k === 'back' ? { k: 'back', w: c.w, to: Math.max(0, ch.findIndex(x => x.id === c.toId)) } : { k: c.k }); }
+function engineChain(ch){ ch = ch || chain; return ch.map(c => c.k === 'back' ? { k: 'back', w: c.w, to: Math.max(0, ch.findIndex(x => x.id === c.toId)) } : c.k === 'set' ? { k: 'set', w: c.w, v: c.v } : { k: c.k }); }
 
-function chainCard(c, i, ch, mode, editable){
+function chainCard(c, i, ch, mode, editable, wheels){
+  wheels = wheels || P.wheels;
   const b = el('div', 'card' + (editable ? '' : ' fixed')); b.dataset.i = i;
-  if (c.k !== 'back'){
+  const del = editable ? '<button class="del" aria-label="take off">×</button>' : '';
+  if (isStitch(c)){
     const [t, s] = MEAN[mode][c.k];
-    b.innerHTML = holesSpan(c.k) + `<span class="num">${i+1}</span>` + swatch(c.k, mode) + `<span class="t"><b>${t}</b><i>${s}</i></span>` + (editable ? '<button class="del" aria-label="take off">×</button>' : '');
-  } else {
-    const opts = ch.slice(0, i).map((x, j) => x.k === 'back' ? '' : `<option value="${x.id}" ${x.id === c.toId ? 'selected' : ''}>card ${j+1}</option>`).join('');
+    b.innerHTML = holesSpan(c.k) + `<span class="num">${i+1}</span>` + swatch(c.k, mode) + `<span class="t"><b>${t}</b><i>${s}</i></span>` + del;
+  } else if (c.k === 'back'){
+    const opts = ch.slice(0, i).map((x, j) => isStitch(x) ? `<option value="${x.id}" ${x.id === c.toId ? 'selected' : ''}>card ${j+1}</option>` : '').join('');
     const to = ch.findIndex(x => x.id === c.toId) + 1;
-    b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span><span class="sw back" style="border-color:${WCOL[c.w]};color:${WCOL[c.w]}">↺</span>` +
-      `<span class="t"><b>Go back to ${editable ? `<select aria-label="jump to">${opts}</select>` : 'card ' + to}${P.wheels > 1 || (mode && mode !== 'threads') ? `<span class="wchip" style="background:${WCOL[c.w]}">wheel ${WNAME[c.w]}</span>` : ''}</b>` +
-      (editable ? `<span class="rep">Times <button data-d="-1" aria-label="fewer times">−</button><b>${set[c.w]}</b><button data-d="1" aria-label="more times">+</button></span>` : `<span class="rep">This loop is woven <b>${set[c.w]}</b> times</span>`) +
-      `<i>Cards ${ch.findIndex(x => x.id === c.toId) + 1} to ${i} are woven ${set[c.w] === 1 ? 'once' : set[c.w] + ' times'}; wheel ${WNAME[c.w]} counts. Then the machine carries on.</i></span>` + (editable ? '<button class="del" aria-label="take off">×</button>' : '');
-    if (editable) b.querySelectorAll('.rep button').forEach(bt => bt.onclick = e => { e.stopPropagation(); if (running || solved) return; set[c.w] = Math.max(1, Math.min(Lo.WMAX, set[c.w] + +bt.dataset.d)); clearResult(); drawChain(); });
+    b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span>` + backHTML(c.w) +
+      `<span class="t"><b>Take 1 off wheel ${WNAME[c.w]}</b>` +
+      `<span class="rep">Not 0 yet? Go back to ${editable ? `<select aria-label="go back to">${opts}</select>` : '<b style="font-size:17px;font-family:var(--text);font-weight:700">card ' + to + '</b>'}</span>` +
+      `<i>If the wheel shows 0 after taking 1 off, the machine carries on down the chain.</i></span>` + del;
     if (editable){ const sel = b.querySelector('select'); sel.onchange = () => { c.toId = +sel.value; clearResult(); drawChain(); }; sel.onclick = e => e.stopPropagation(); }
+  } else {
+    b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span>` + setHTML(c.w) +
+      `<span class="t"><b>Set wheel ${WNAME[c.w]}</b>` +
+      (editable ? `<span class="rep">to <button data-d="-1" aria-label="less">−</button><b>${c.v}</b><button data-d="1" aria-label="more">+</button></span>` : `<span class="rep">to <b>${c.v}</b></span>`) +
+      `<i>Put this number on the wheel, whatever it showed before.</i></span>` + del;
+    if (editable) b.querySelectorAll('.rep button').forEach(bt => bt.onclick = e => { e.stopPropagation(); if (running || solved) return; c.v = Math.max(1, Math.min(Lo.WMAX, c.v + +bt.dataset.d)); clearResult(); drawChain(); });
   }
   if (editable){ const d = b.querySelector('.del'); d.onclick = () => takeOff(i); }
   return b;
@@ -810,8 +848,8 @@ function chainCard(c, i, ch, mode, editable){
 function takeOff(i){
   if (running || solved) return;
   const gone = chain[i]; chain.splice(i, 1);
-  chain.forEach((c, j) => { if (c.k === 'back' && (c.toId === gone.id || chain.findIndex(x => x.id === c.toId) >= j)) c.toId = chain[0] ? chain[0].id : null; });
-  while (chain.length && chain[0].k === 'back') chain.shift();
+  while (chain.length && !isStitch(chain[0])) chain.shift();
+  chain.forEach((c, j) => { if (c.k === 'back'){ const t = chain.findIndex(x => x.id === c.toId); if (c.toId === gone.id || t < 0 || t >= j) c.toId = chain[0] ? chain[0].id : null; } });
   clearResult(); drawChain();
 }
 function drawChain(){
@@ -820,7 +858,7 @@ function drawChain(){
   if (!solved) for (let k = chain.length; k < P.slots; k++) c.appendChild(el('div', 'slot', `<span class="num">${k+1}</span>empty`));
   $('#chainlbl').textContent = `Your chain · ${w(P.slots)} cards fit`;
   if (!chain.length) hint('Tap a card below to hang it on your chain.');
-  else if (!solved) hint(chain.length < P.slots ? 'Hang more cards, or run the loom to see what it weaves.' : 'The chain is full. Run it, or tap × to take a card off.');
+  else if (!solved && !running) hint(chain.length < P.slots ? 'Hang more cards, or run the loom to see what it weaves.' : 'The chain is full. Run it, or tap × to take a card off.');
   $('#run').disabled = !chain.length;
   requestAnimationFrame(() => drawArcs());
 }
@@ -832,14 +870,13 @@ function drawArcs(svgSel, chainSel, ch, liveIdx){
     if (c.k !== 'back' || !cards[i]) return;
     const j = Math.max(0, ch.findIndex(x => x.id === c.toId)); const a = cards[j], b = cards[i]; if (!a) return;
     const y1 = a.offsetTop + a.offsetHeight / 2, y2 = b.offsetTop + b.offsetHeight / 2;
-    // deeper (outer) loops further left
-    const span = i - j; const x = Math.max(4, 28 - span * 4 - c.w * 3);
+    const span = i - j; const x = Math.max(4, 28 - span * 4 - c.w * 3);   // longer (outer) loops further left
+    const col = c.w ? '#2E7D6B' : '#6B3A22';
     const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     p.setAttribute('d', `M33 ${y2} H${x + 8} Q${x} ${y2} ${x} ${y2 - 8} V${y1 + 8} Q${x} ${y1} ${x + 8} ${y1} H30`);
-    p.setAttribute('stroke', c.w ? '#2E7D6B' : '#6B3A22'); if (liveIdx === i) p.classList.add('live');
-    p.setAttribute('marker-end', ''); svg.appendChild(p);
+    p.setAttribute('stroke', col); if (liveIdx === i) p.classList.add('live'); svg.appendChild(p);
     const head = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    head.setAttribute('d', `M26 ${y1 - 5} L33 ${y1} L26 ${y1 + 5}`); head.setAttribute('stroke', c.w ? '#2E7D6B' : '#6B3A22'); svg.appendChild(head);
+    head.setAttribute('d', `M26 ${y1 - 5} L33 ${y1} L26 ${y1 + 5}`); head.setAttribute('stroke', col); svg.appendChild(head);
   });
 }
 window.addEventListener('resize', () => drawArcs());
@@ -848,36 +885,44 @@ function clearResult(){ if (solved) return; $('#result').className = 'result'; $
 function showResult(id, ok, html){ const r = $(id); r.className = 'result on ' + (ok ? 'ok' : 'no'); r.innerHTML = html; }
 
 async function animate(){
-  const eng = engineChain(); const res = Lo.weave(eng, set, null, true);
-  const ev = res.ev; const woven = []; const left = set.slice();
+  const eng = engineChain(); const res = Lo.weave(eng, set, null, true, 600);
+  const ev = res.ev; const woven = []; const now = set.slice();
+  drawWheels(now);
   const cards = [...$('#chain').querySelectorAll('.card')];
-  const delay = Math.max(70, Math.min(300, 6000 / Math.max(1, ev.length)));
-  drawWheels(left);
+  const delay = Math.max(60, Math.min(300, 6500 / Math.max(1, ev.length)));
+  let shown = 0;
   for (const e of ev){
+    if (++shown > 160) break;
     cards.forEach(x => x.classList.remove('live')); if (cards[e.i]) cards[e.i].classList.add('live');
     if (e.t === 'stitch'){
       woven.push(e.c); drawCloth(woven); const s = $('#cloth').children[woven.length - 1]; if (s) s.classList.add('pop');
       hint(`Card ${e.i+1}: a ${CNAME[e.c]} stitch.`);
       if (woven.length > P.target.length + 4) break;
     } else if (e.t === 'back'){
-      tickWheel(e.w, e.left); drawArcs(null, null, null, e.i);
-      hint(`Card ${e.i+1}: wheel ${WNAME[e.w]} clicks down to ${e.left}. Back to card ${e.to+1}.`);
+      now[e.w] = e.now; tickWheel(e.w, e.now); drawArcs(null, null, null, e.i);
+      hint(`Card ${e.i+1}: take 1 off wheel ${WNAME[e.w]}. It shows ${e.now}: not 0, so back to card ${e.to+1}.`);
       await sleep(delay * 1.4); drawArcs(); continue;
-    } else if (e.t === 'spring'){
-      tickWheel(e.w, 0); hint(`Card ${e.i+1}: wheel ${WNAME[e.w]} reaches 0. It springs back to ${e.set}, and the machine carries on.`);
-      await sleep(delay * 1.4); tickWheel(e.w, e.set); continue;
+    } else if (e.t === 'zero'){
+      now[e.w] = 0; tickWheel(e.w, 0); hint(`Card ${e.i+1}: take 1 off wheel ${WNAME[e.w]}. It shows 0, so the machine carries on.`);
+      await sleep(delay * 1.4); continue;
+    } else if (e.t === 'set'){
+      now[e.w] = e.now; tickWheel(e.w, e.now); hint(`Card ${e.i+1}: wheel ${WNAME[e.w]} is set to ${e.now}.`);
+      await sleep(delay * 1.2); continue;
     }
     await sleep(delay);
   }
   cards.forEach(x => x.classList.remove('live'));
-  return { woven, status: res.status };
+  return { woven, status: res.status, wheels: res.wheels };
 }
-function judge(woven, status){
+function judge(woven, status, wheels){
   const t = P.target;
-  if (status === 'cap') return { ok: false, at: null, why: 'The loom ran on and on, and the attendant stopped it.' };
   for (let k = 0; k < Math.min(t.length, woven.length); k++) if (t[k] !== woven[k]) return { ok: false, at: k, why: `Stitch ${k+1} came out ${CNAME[woven[k]]}. The order wanted ${CNAME[t[k]]}.` };
-  if (woven.length < t.length) return { ok: false, at: null, why: `The loom wove ${woven.length} stitch${woven.length === 1 ? '' : 'es'} and stopped: it had read every card. The order needs ${t.length}.` };
+  if (status === 'cap'){
+    const neg = (wheels || []).map((v, k) => v < 0 ? WNAME[k] : null).filter(Boolean);
+    return { ok: false, at: null, why: neg.length ? `Wheel ${neg[0]} went below 0, so taking 1 off never brought it to 0 again. The machine went round and round until the attendant stopped it.` : 'The machine went round and round until the attendant stopped it.' };
+  }
   if (woven.length > t.length) return { ok: false, at: t.length, why: `The loom wove more than the order's ${t.length} stitches.` };
+  if (woven.length < t.length) return { ok: false, at: null, why: `The loom wove ${woven.length} stitch${woven.length === 1 ? '' : 'es'} and stopped: it had read every card. The order needs ${t.length}.` };
   return { ok: true };
 }
 
@@ -885,19 +930,18 @@ $('#run').addEventListener('click', async () => {
   if (running || !chain.length) return;
   running = true; $('#run').disabled = true; $('#result').className = 'result'; $('#after').innerHTML = '';
   drawChain();
-  const { woven, status } = await animate();
+  const { woven, status, wheels } = await animate();
   running = false;
-  const j = judge(woven, status);
+  const j = judge(woven, status, wheels);
   if (!j.ok){
-    fails++; drawCloth(woven, j.at); drawWheels(); drawChain();
+    fails++; drawCloth(woven, j.at); drawChain(); drawWheels();
     let help = '';
     if (P.tier === 'easy1' && !chain.some(c => c.k === 'back')) help = `<br><br>Only ${w(P.slots)} cards fit, so counting stitches out card by card can't work. Try the <b>Go back</b> card.`;
-    if (P.tier === 'hard' && woven.length && j.at === null) help = '<br><br>Remember: a wheel that reaches 0 springs back, so an inner loop can run again on every round of the outer one.';
-    if (!help && j.at === null && woven.length < P.target.length){
-      const backs = chain.map((c, i) => [c, i]).filter(([c]) => c.k === 'back');
-      if (backs.length) help = '<br><br>' + backs.map(([c, i]) => `The Go back on card ${i+1} was set to <b>${set[c.w]}</b> time${set[c.w] === 1 ? '' : 's'}, so cards ${chain.findIndex(x => x.id === c.toId) + 1} to ${i} were woven ${set[c.w] === 1 ? 'once' : set[c.w] + ' times'}.`).join(' ');
+    else if (j.at === null && woven.length < P.target.length && status !== 'cap'){
+      const used = [...new Set(chain.filter(c => c.k === 'back').map(c => c.w))];
+      if (used.length) help = '<br><br>' + used.map(k => `Wheel ${WNAME[k]} started at <b>${set[k]}</b>.`).join(' ') + (P.tier === 'hard' ? ' Remember: a wheel at 0 stays at 0 unless a Set card puts a number back.' : ' Each Go back took 1 off it until it showed 0.');
     }
-    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain or the number of times, and run it again.</span>');
+    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain or the wheels, and run it again.</span>');
     if (fails >= 3) { $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; }
     $('#run').disabled = false;
     return;
@@ -908,7 +952,7 @@ function win(shown){
   solved = true; hint('');
   const n = chain.length;
   results[L] = { cards: n, par: P.par, shown, tier: P.tier };
-  lastChain = chain.map(c => ({ ...c })); lastSet = set.slice();
+  lastChain = chain.map(c => ({ ...c })); lastSet = set.slice(); lastWheels = P.wheels;
   $('#tray').style.display = 'none'; $('#traylbl').style.display = 'none'; $('#run').style.display = 'none';
   drawChain(); drawWheels();
   const parLine = shown ? `That was ${w(P.par)} cards, the fewest it can be done in.` : n === P.par ? `${w(n)[0].toUpperCase() + w(n).slice(1)} cards: <b>the fewest possible.</b>` : `${w(n)[0].toUpperCase() + w(n).slice(1)} cards. It can be done in ${w(P.par)}.`;
@@ -921,7 +965,7 @@ async function showMe(){
   if (running) return;
   chain = P.sol.map(c => ({ ...c, id: ++uid }));
   chain.forEach(c => { if (c.k === 'back') c.toId = chain[c.to].id; });
-  set = P.set.map(v => Math.max(1, v)); $('#after').innerHTML = ''; $('#result').className = 'result';
+  set = P.set.slice(); $('#after').innerHTML = ''; $('#result').className = 'result';
   drawChain(); drawWheels(); drawCloth([]);
   hint('Here is one way. Watch it run.'); running = true; await sleep(700);
   const { woven } = await animate(); running = false; drawCloth(woven); win(true);
@@ -931,7 +975,7 @@ async function showMe(){
 let mode = 'threads', tried = {};
 function startSwitch(){
   mode = 'threads'; tried = {};
-  if (!lastChain){ lastChain = [{k:'r',id:1},{k:'r',id:2},{k:'b',id:3},{k:'back',w:0,toId:1}]; lastSet = [3, 2]; }
+  if (!lastChain){ lastChain = [{k:'r',id:1},{k:'r',id:2},{k:'b',id:3},{k:'back',w:0,toId:1}]; lastSet = [3, 2]; lastWheels = 1; }
   $('#result4').className = 'result'; $('#next4').style.display = 'none'; $('#run4').style.display = 'block';
   $('#out').innerHTML = ''; $('#outcount').textContent = '';
   drawSwitch(); showScreen('s-switch');
@@ -939,12 +983,10 @@ function startSwitch(){
 function drawSwitch(){
   document.querySelectorAll('#switch button').forEach(b => { b.classList.toggle('on', b.dataset.m === mode); b.querySelector('.ck').textContent = tried[b.dataset.m] ? '✓ run' : ''; });
   $('#mword').textContent = mode === 'threads' ? 'threads' : mode === 'notes' ? 'notes' : 'sums';
-  const c = $('#chain4'); c.innerHTML = ''; const saveP = P; P = { wheels: Math.max(...lastChain.map(x => x.k === 'back' ? x.w + 1 : 0), 0) };
-  const saveSet = set; set = lastSet;
-  lastChain.forEach((k, i) => c.appendChild(chainCard(k, i, lastChain, mode, false)));
+  const c = $('#chain4'); c.innerHTML = '';
+  lastChain.forEach((k, i) => c.appendChild(chainCard(k, i, lastChain, mode, false, lastWheels)));
   const wb = $('#wheels4'); wb.innerHTML = '';
-  for (let k = 0; k < P.wheels; k++) wb.insertAdjacentHTML('beforeend', `<div class="wbox"><div class="wheel ${k ? 'wB' : ''}" id="w4${k}"><span>${lastSet[k]}</span></div><div class="wl"><b>Wheel ${WNAME[k]}</b>set to ${lastSet[k]}</div></div>`);
-  P = saveP; set = saveSet;
+  for (let k = 0; k < lastWheels; k++) wb.insertAdjacentHTML('beforeend', `<div class="wbox"><div class="wheel ${k ? 'wB' : ''}" id="w4${k}"><span>${lastSet[k]}</span></div><div class="wl"><b>Wheel ${WNAME[k]}</b>starts at ${lastSet[k]}</div></div>`);
   $('#outlbl').textContent = mode === 'threads' ? 'What came out: cloth' : mode === 'notes' ? 'What came out: a tune' : 'What came out: numbers (starting from 0)';
   requestAnimationFrame(() => drawArcs('#arcs4', '#chain4', lastChain));
 }
@@ -965,7 +1007,7 @@ $('#run4').addEventListener('click', async () => {
   const delay = mode === 'notes' ? 230 : Math.max(70, Math.min(200, 4000 / ev.length));
   for (const e of ev){
     els.forEach(x => x.classList.remove('live')); if (els[e.i]) els[e.i].classList.add('live');
-    if (e.t === 'back' || e.t === 'spring'){ const wl = $('#w4' + e.w); if (wl) wl.querySelector('span').textContent = e.t === 'spring' ? e.set : e.left; await sleep(delay * .6); continue; }
+    if (e.t !== 'stitch'){ const wl = $('#w4' + e.w); if (wl) wl.querySelector('span').textContent = e.now; await sleep(delay * .6); continue; }
     if (mode === 'threads') holder.appendChild(el('div', 'st pop ' + e.c));
     if (mode === 'notes'){ const n = el('div', 'nh ' + e.c); n.style.left = `calc(${4 + k * (92 / Math.max(1, total - 1))}% - 7px)`; n.style.top = ({ r: 26, g: 46, b: 66 }[e.c]) + 'px'; holder.appendChild(n); tone({ r: 392, g: 329.6, b: 261.6 }[e.c]); }
     if (mode === 'numbers'){ num = e.c === 'r' ? num + 1 : e.c === 'b' ? num * 2 : num - 1; holder.appendChild(el('span', e.c, String(num))); }

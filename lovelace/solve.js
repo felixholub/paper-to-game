@@ -22,26 +22,27 @@ const LIB = [
   { id: 'm6', tier: 'medium', p: rep('RB', 4) + rep('G', 6), wheels: 2 },
   { id: 'm7', tier: 'medium', p: rep('RRGG', 4), wheels: 1 },
   { id: 'm8', tier: 'medium', p: rep('RBB', 4) + 'G', wheels: 1 },
-  { id: 'h1', tier: 'hard', p: rep('RRRB', 4), wheels: 2 },
-  { id: 'h2', tier: 'hard', p: rep('RBBB', 4), wheels: 2 },
-  { id: 'h3', tier: 'hard', p: rep('BRRRR', 3) + 'B', wheels: 2 },
-  { id: 'h4', tier: 'hard', p: rep('G' + rep('RB', 3) + 'G', 2), wheels: 2 },
-  { id: 'h7', tier: 'hard', p: rep('RGRGB', 3), wheels: 2 },
-  { id: 'h8', tier: 'hard', p: 'G' + rep('RRRB', 3) + 'G', wheels: 2 },
+  { id: 'h1', tier: 'hard', p: rep(rep('R', 5) + 'B', 4), wheels: 2 },
+  { id: 'h2', tier: 'hard', p: rep('R' + rep('B', 6), 3), wheels: 2 },
+  { id: 'h3', tier: 'hard', p: rep('B' + rep('R', 5), 3) + 'B', wheels: 2 },
+  { id: 'h5', tier: 'hard', p: rep(rep('RB', 4) + 'G', 3), wheels: 2 },
+  { id: 'h6', tier: 'hard', p: rep('R' + rep('G', 5), 3), wheels: 2 },
+  { id: 'h8', tier: 'hard', p: rep('G' + rep('R', 4), 4), wheels: 2 },
 ];
 const out = [];
 for (const z of LIB) {
   const t0 = Date.now();
   const s = L.solve(z.p.split(''), z.wheels, 8);
-  const flat = z.wheels === 2 ? L.solve(z.p.split(''), 1, 8) : null;
+  const s0 = null;
   if (!s) { console.log('UNSOLVED', z.id); continue; }
-  if (z.tier === 'hard' && flat && flat.par <= s.par) { console.log('NOT HARD', z.id); process.exitCode = 1; }
+  const flat = z.wheels === 2 ? L.solve(z.p.split(''), 1, s.par) : null;   // can one wheel do it as cheaply?
+  if (z.tier === 'hard' && flat) { console.log('NOT HARD', z.id); process.exitCode = 1; }
   const slots = z.tier === 'hard' ? s.par : s.par + 1;   // hard: no spare slot, so the loop inside a loop is the only way
   // check: the found solution really weaves it
-  const chk = L.weave(s.chain, s.set, z.p.split(''));
-  console.log(z.id.padEnd(4), z.tier.padEnd(7), z.p.padEnd(26), 'par', s.par, flat ? 'one-wheel par ' + flat.par : '', chk.status, (Date.now() - t0) + 'ms',
-    JSON.stringify(s.chain.map(c => c.k === 'back' ? `↺${'AB'[c.w]}→${c.to + 1}` : c.k)), JSON.stringify(s.set));
-  out.push({ ...z, par: s.par, slots, sol: s.chain, set: s.set, flatPar: flat ? flat.par : null });
+  const chk = L.weave(s.chain, s.start, z.p.split(''));
+  console.log(z.id.padEnd(4), z.tier.padEnd(7), z.p.padEnd(26), 'par', s.par, z.wheels === 2 ? (flat ? 'one wheel does it too' : 'needs both wheels') : '', chk.status, (Date.now() - t0) + 'ms',
+    JSON.stringify(s.chain.map(c => c.k === 'back' ? `↺${'AB'[c.w]}→${c.to + 1}` : c.k === 'set' ? `${'AB'[c.w]}=${c.v}` : c.k)), JSON.stringify(s.start));
+  out.push({ ...z, par: s.par, slots, sol: s.chain, set: s.start,  });
 }
 fs.writeFileSync('puzzles.json', JSON.stringify(out));
 console.log('wrote', out.length, 'puzzles');

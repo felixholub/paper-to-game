@@ -30,3 +30,10 @@ Verdict on the loom version: lovely, and trivial. Every loom had one obvious ans
 **Deal.** Each game draws 1 easy0, 1 easy1, 2 medium, 2 hard at random, and shuffles which colour is which. After three runs that don't ring the bell, "Show me a way" loads the solver's chain and runs it (the paper's answer after the player's). After a win above par: "Try it in fewer cards".
 
 **Kept.** The switch (now reading the player's last, nested chain as threads, notes or sums; two modes needed to go on), the last order, the coda, which now says out loud that her chain is a loop inside a loop. End screen: a table of the six looms, the player's cards against the fewest.
+
+
+## Revision 3 (1 Nov 2026, evening): the machine counts with numbers, not with magic
+
+His objection: a Go back card that can count is a cheat; counting needs different programming. Right, and it is the Notes' own point. The spring-back wheel is gone. A wheel is now a number in the Store, put on by hand before the run (Note B inscribes the data). The Go back card is Operation 7 joined to backing: it takes 1 off its wheel and the machine feels the result; not 0, back to the named card; 0, carry on. A wheel at 0 stays at 0 (and a wheel taken below 0 never returns to 0, so the machine runs on until the attendant stops it). A new Set card (a card of numbers, Memoir p. 15) puts a number on a wheel; a loop inside a loop needs one to restore the inner wheel each round. Lovelace's tables separate the subtraction from the decision; here they share a card, declared on the About screen.
+
+Consequences: Set cards appear from the medium tier on; resetting costs a card, so nesting pays only when the inner loop is long, and the hard tier was replaced with orders where it does (solver check: no one-wheel chain at par). Library recomputed (`solve.js`, about a second). The deal now carries Set cards through the colour shuffle (a bug the scripted playthrough caught).
