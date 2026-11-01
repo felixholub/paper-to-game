@@ -262,16 +262,16 @@
       reveal: 'It matters. The wind still blows east after the turn, so the turned swing drifts differently, and the formula gives it a different number. No prize: the wind keeps pushing the dot east, wherever it is, so its spin doesn\'t stay the same.',
       why: 'The wind\'s part, w·x, depends on which way is east, and a turn changes that.' },
     { id: 'c7', world: 'ball', lever: 'warpclock', prize: null,
-      setup: 'Back to the thrown ball.', change: 'Change the timing: the same arc, but the ball speeds up here and slows down there.',
-      reveal: 'It matters. A ball that speeds up and slows down for no reason is not a real throw, and the formula notices: it gives a different number. The ball\'s formula cares about timing.',
+      setup: 'Back to the thrown ball.', change: 'Change the timing: let the clock run fast here and slow there. The same arc, but the ball now speeds up and slows down along it.',
+      reveal: 'It matters. A ball that speeds up and slows down for no reason is not a real throw, and the formula notices: it gives a different number. The ball\'s formula cares how fast the clock runs.',
       why: 'It squares the speed: ½(x′² + y′²). Run the ball twice as fast and its speed doubles, the square of the speed quadruples, but the time only halves: the number changes.' },
     { id: 'c8', world: 'slide', lever: 'clock', prize: 'SLIDE ENERGY',
       setup: 'A dot slides from A down to B. The formula counts the time a slide takes, and the dot takes the quickest slide.', change: 'Start the slide five minutes later.',
       reveal: 'It doesn\'t matter. Started at 3:05, it is the same slide, with the same number. So, as with the ball, there should be a prize: the slide\'s energy. Watch it.',
       why: 'Like the ball\'s formula, this one has no t in it, apart from the dt that says "add up along the trip".' },
     { id: 'c9', world: 'slide', lever: 'warpclock', prize: null,
-      setup: 'The same slide.', change: 'Change the timing: the same curve, but the dot speeds up here and slows down there.',
-      reveal: 'It doesn\'t matter. Change the slide\'s timing any way you like: the number stays the same. The slide\'s formula cares only about the shape of the slide, not about how fast the dot moves along it. And starting five minutes later is just one more change of timing. That is why the slide\'s energy was empty: energy is a rule about speed, and this formula has nothing to say about speed.',
+      setup: 'The same slide.', change: 'Change the timing: let the clock run fast here and slow there. The same curve, but the dot now speeds up and slows down along it.',
+      reveal: 'It doesn\'t matter. Change the slide\'s timing any way you like: the number stays the same. The slide\'s formula cares only about the shape of the slide, not about how fast the clock runs. And starting five minutes later is just one more change of timing. That is why the slide\'s energy was empty: energy is a rule about speed, and this formula has nothing to say about speed.',
       why: 'It doesn\'t square the speed: √(x′² + y′²) is the speed itself. Run the dot twice as fast and the speed doubles while the time halves: the same number.',
       rule: 'No prize, then, but a rule. The slide has two equations of motion, the rules for how the dot moves: one for left and right, one for up and down; call them ψ₁ = 0 and ψ₂ = 0. On every path, real or not, ψ₁x′ + ψ₂y′ = 0. So the two are not independent: once one holds, the other follows. Between them they fix only the shape of the slide, never its timing.' },
   ];
@@ -283,7 +283,7 @@
     c4: { tier: 'pink', name: 'SIDEWAYS SPEED', strike: true, sub: 'the magnet', why: 'because of the magnet', missed: 'the magnet' },
     c5: { tier: 'red', name: 'SPIN', sub: 'x·y′ − y·x′', short: 'spin', missed: 'spin: turning the swing didn\'t matter' },
     c6: { tier: 'pink', name: 'SPIN', strike: true, sub: 'the wind', why: 'because of the wind', missed: 'the wind' },
-    c7: { tier: 'red', name: 'ENERGY CATCHES FAKES', sub: 'timing matters', short: 'energy catching a fake', missed: 'energy catching a fake: changing the ball\'s timing did matter' },
+    c7: { tier: 'red', name: 'A REAL LAW', sub: 'a fake breaks energy', short: 'a real law of energy', missed: 'a real law of energy: changing the ball\'s timing did matter' },
     c8: { tier: 'red', name: 'SLIDE ENERGY', sub: 'zero on every slide', short: 'the slide\'s empty energy', missed: 'the slide\'s empty energy: starting the slide later didn\'t matter' },
     c9: { tier: 'red', name: 'A RULE', sub: 'ψ₁x′ + ψ₂y′ = 0', short: 'the slide\'s rule', missed: 'the slide\'s rule: changing the slide\'s timing didn\'t matter' },
   };
@@ -321,8 +321,8 @@
       const parts = [];
       if (redWon.length) parts.push(`Your red badges: ${list(redWon.map(id => BADGES[id].short))}.`);
       if (redMissed.length === 1) parts.push(`You missed ${BADGES[redMissed[0]].missed}.`); else if (redMissed.length) parts.push(`You missed ${list(redMissed.map(id => BADGES[id].short))}.`);
-      if (!pinkMissed.length) parts.push('Your pink badges show you can spot when a law breaks; the paper\'s lessons are the red ones.');
-      else if (pinkWon.length) parts.push(`Your pink badges show you can spot when a law breaks, though ${list(pinkMissed.map(id => BADGES[id].missed))} caught you.`);
+      if (!pinkMissed.length) parts.push('Your pink badges show you can spot a trap; the paper\'s lessons are the red ones.');
+      else if (pinkWon.length) parts.push(`Your pink badges show you can spot a trap, though ${list(pinkMissed.map(id => BADGES[id].missed))} caught you.`);
       else parts.push('Every trap caught you: no pink badges.');
       line = parts.join(' ');
     }
