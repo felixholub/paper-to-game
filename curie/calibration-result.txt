@@ -1,0 +1,88 @@
+1. The shelf against the table (p. 1101–1102)
+PASS  uranium = Uranium légèrement carburé  — 24 vs 24
+PASS  greenox = Oxyde vert d'uranium U3O8  — 18 vs 18
+PASS  nitrate = Azotate d'uranyle, sulfate uraneux, sulfate d'uranyle et de potassium, environ  — 7 vs 7
+PASS  chalcArt = Chalcolite artificielle (phosphate de cuivre et d'uranyle)  — 9 vs 9
+PASS  thO = Oxyde de thorium en couche de 0mm,25  — 22 vs 22
+PASS  thOthick = Oxyde de thorium en couche de 6mm  — 53 vs 53
+PASS  tantal = Fluoxytantalate de potassium  — 2 vs 2
+PASS  pbJG = Pechblende de Johanngeorgenstadt  — 83 vs 83
+PASS  pbJo = Pechblende de Joachimsthal et de Pzibran  — 67 vs 67
+PASS  chalc = Chalcolite naturelle  — 52 vs 52
+PASS  lead below the paper's threshold (not in the table: "at least 100 times less active")
+PASS  gold below the paper's threshold (not in the table: "at least 100 times less active")
+PASS  copper below the paper's threshold (not in the table: "at least 100 times less active")
+PASS  redP below the paper's threshold (not in the table: "at least 100 times less active")
+PASS  phosphate below the paper's threshold (not in the table: "at least 100 times less active")
+PASS  the yardstick is the table's metallic uranium
+PASS  white phosphorus has a number, declared ours (the paper: "très actif", no number)
+
+2. The paper's statements, on the game's shelf and on the whole table
+PASS  "Tous les composés de l'uranium étudiés sont actifs"
+PASS  "…et le sont, en général, d'autant plus qu'ils contiennent plus d'uranium" (shelf)  — Spearman ρ = 1.00 over 4 compounds
+PASS  …and over all seven uranium-compound rows of the table (shares from formulas, ours)  — Spearman ρ = 0.75; the rule holds "en général", with exceptions (black oxide above the metal, uranic acid low)
+PASS  every uranium compound on the shelf reads at most its uranium share (the panel says ABOUT ITS URANIUM)  — uranium 1.00, greenox 0.88, nitrate 0.62, chalcArt 0.75
+PASS  "Les composés du thorium sont très actifs"
+PASS  "L'oxyde de thorium dépasse même en activité l'uranium métallique"  — thick layer 2.21 × uranium
+PASS  "Les effets … augmentent avec l'épaisseur … considérable pour l'oxyde de thorium"  — 22 → 53
+PASS  "Le cérium, le niobium et le tantale semblent être légèrement actifs"  — tantalum salt 0.083 × uranium
+PASS  "Le phosphore blanc est très actif … n'est actif ni à l'état de phosphore rouge ni à l'état de phosphates"
+PASS  "pechblende … et chalcolite … sont beaucoup plus actifs que l'uranium lui-même"  — pbJG 3.46, pbJo 2.79, chalc 2.17
+PASS  "cette chalcolite artificielle n'est pas plus active qu'un autre sel d'uranium"  — 9 within the salts' 6–27
+PASS  the same crystal: from the mine against made from pure products  — 52 vs 9: ×5.8
+
+3. The balance: every thumb reads the paper's value (charge balance over the held seconds)
+PASS  steady thumb: every substance balances, reading within 4.5 σ of the paper  — worst 3.01 σ (pbJo); slowest 18.0 s; unfinished 0
+PASS  eager thumb: every substance balances, reading within 4.5 σ of the paper  — worst 3.18 σ (thOthick); slowest 24.3 s; unfinished 0
+PASS  sweeper thumb: every substance balances, reading within 4.5 σ of the paper  — worst 2.88 σ (tantal); slowest 20.9 s; unfinished 0
+PASS  wobbler thumb: every substance balances, reading within 4.5 σ of the paper  — worst 2.88 σ (tantal); slowest 18.0 s; unfinished 0
+PASS  a still thumb: "nothing" is recorded after the watching seconds, and nothing active is ever recorded without a push  — inactive plates record at 2.4 s
+PASS  the spot stands in the band only when the push is within a tenth of uranium of the plate  — tolerance 0.067 × uranium
+
+4. Every reading the balance can return gives the same kind of panel (4.5 σ either side)
+PASS  uranium: yardstick  — reading 1.000 ± 0.137 → about the push of pure uranium
+PASS  greenox: about  — reading 0.750 ± 0.119 → about three-quarters of the push of pure uranium
+PASS  nitrate: about  — reading 0.292 ± 0.074 → about a third of the push of pure uranium
+PASS  pbJG: more  — reading 3.458 ± 0.255 → three and a half times the push of pure uranium
+PASS  pbJo: more  — reading 2.792 ± 0.229 → three times the push of pure uranium
+PASS  chalc: more  — reading 2.167 ± 0.202 → twice the push of pure uranium
+PASS  thO: without  — reading 0.917 ± 0.131 → about the push of pure uranium
+PASS  thOthick: without  — reading 2.208 ± 0.203 → twice the push of pure uranium
+PASS  tantal: without  — reading 0.083 ± 0.040 → hardly any push
+PASS  lead: nothing  — reading 0.000 ± 0.000 → no push at all
+PASS  gold: nothing  — reading 0.000 ± 0.000 → no push at all
+PASS  copper: nothing  — reading 0.000 ± 0.000 → no push at all
+PASS  whiteP: without  — reading 1.292 ± 0.156 → a little more than the push of pure uranium
+PASS  redP: nothing  — reading 0.000 ± 0.000 → no push at all
+PASS  phosphate: nothing  — reading 0.000 ± 0.000 → no push at all
+PASS  chalcArt: about  — reading 0.375 ± 0.084 → about a third of the push of pure uranium
+
+5. Robustness: the rocks are MORE THAN THEIR URANIUM under any plausible share and threshold; the copy is not
+PASS  pitchblende at 40 % uranium (pure uraninite is about 88 %)  — more, more
+PASS  pitchblende at 50 % uranium (pure uraninite is about 88 %)  — more, more
+PASS  pitchblende at 65 % uranium (pure uraninite is about 88 %)  — more, more
+PASS  pitchblende at 75 % uranium (pure uraninite is about 88 %)  — more, more
+PASS  pitchblende at 88 % uranium (pure uraninite is about 88 %)  — more, more
+PASS  chalcolite at 45 % uranium: mine more, made about
+PASS  chalcolite at 50 % uranium: mine more, made about
+PASS  chalcolite at 55 % uranium: mine more, made about
+PASS  the MORE THAN ITS URANIUM threshold (ours, 1.3) can be anything from 1.1 to 4 without changing a panel
+PASS  white phosphorus at 12 (ours; the paper gives no number): still the phosphorus lesson  — without
+PASS  white phosphorus at 24 (ours; the paper gives no number): still the phosphorus lesson  — without
+PASS  white phosphorus at 50 (ours; the paper gives no number): still the phosphorus lesson  — without
+PASS  white phosphorus at 72 (ours; the paper gives no number): still the phosphorus lesson  — without
+   note: natural chalcolite (52) and a thick layer of thorium oxide (53) read level; the rocks are not explained by thorium because they hold none (their cards say so).
+
+6. The shelf in numbers: eight picks from fifteen, 20 000 random albums and five plans
+   strategy                          | meets a rock | makes the copy | rock + copy | both chalcolites | phosphorus test | thorium
+   random                            | 92 %         | 53 %           | 48 %        | 27 %             | 41 %            | 80 %
+   drawers top to bottom             | yes          | no             | no          | no               | no              | yes
+   drawers bottom to top             | no           | yes            | no          | no               | yes             | no
+   heavy metals and rare things first| no           | no             | no          | no               | yes             | yes
+   the paper's path                  | yes          | yes            | yes         | yes              | yes             | yes
+   rocks only, then the copy         | yes          | yes            | yes         | yes              | no              | yes
+PASS  a random album meets a rock that beats its uranium in most plays  — 92 %
+PASS  the paper's own path fits in eight panels, with both logical tests
+PASS  a player who never opens the Muséum's drawer misses the rock (the verdict says where it was)
+
+67 passed, 0 failed.
