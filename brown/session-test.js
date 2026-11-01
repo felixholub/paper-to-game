@@ -1,6 +1,8 @@
 // Full session in a real headless browser at phone width. Run: node session-test.js  (writes session-log.txt and screenshots)
-// Strategy: the physicist's week (Sphinx, open drop, oil, one speck, skin, coarse, asbestos), help opened mid-play and returned from,
-// the verdict, About, then a second week (the vitalist's) to the verdict.
+// Week A: tap the gated label on day 1 (it only flashes), then the Sphinx, the oil drop (help opened mid-play), one speck, the skin
+//         (shelf cleared on day 4), the coarse grind (clue found), and ENOUGH to an early verdict in five days. About.
+// Week B: play again; the coarse grind first (clue found, shelf open), then matter only, to day 7; ENOUGH never offered.
+// Week C: play again; the shelf cleared by day 4, then matter only to day 7 without the clue: the unfinished verdict.
 const { chromium } = require('playwright'); const path = require('path'), fs = require('fs');
 const L = []; const say = s => { L.push(s); console.log(s); };
 (async () => {
@@ -10,43 +12,68 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   const shot = async (name, full) => { await page.screenshot({ path: path.join(__dirname, `screenshot-${name}.png`), fullPage: full !== false }); say('  shot ' + name); };
   const noScroll = async () => { const w = await page.evaluate(() => document.documentElement.scrollWidth); if (w > 380) say(`  !! horizontal scroll: ${w}px`); };
   const text = async sel => (await page.$eval(sel, e => e.innerText)).replace(/\n+/g, ' | ');
-  const t0 = Date.now();
+  const vis = async sel => page.$eval(sel, e => !e.classList.contains('hidden') && e.offsetParent !== null);
+  const shelf = async () => page.$$eval('.sus', es => es.map(e => { const t = e.innerText.split('\n')[0]; return e.classList.contains('aside') ? `[${t} — set aside]` : e.classList.contains('found') ? `[${t} — FOUND]` : t; }).join(' | '));
   await shot('start'); await noScroll();
-  await page.click('#begin'); await page.waitForTimeout(800);
-  say('day 0: ' + await text('#yard') + ' — ' + (await text('#what')).slice(0, 80) + '…'); await noScroll();
-  const week = async (plan, tag) => {
-    for (let i = 0; i < plan.length; i++) {
-      const id = plan[i];
-      if (await page.$eval('#look', b => !b.disabled)) say('  !! LOOK enabled before a label was tapped');
-      if (await page.$('.exp.chosen')) say('  !! a label is pre-chosen at the start of the day');
-      await page.click(`.exp[data-id="${id}"]`); await page.waitForTimeout(150);
-      say(`\n== ${await text('#benchhead')} → tapped "${id}": ${await text('#willdo')}`);
-      if (i === 0 && tag === 'a') { await shot(`${tag}-day1-chosen`); }
-      if (i === 2 && tag === 'a') { // help mid-play and back
-        await page.click('#play .help-q'); await page.waitForTimeout(200); await shot('help'); await page.click('#helpback'); await page.waitForTimeout(200);
-        const back = await page.$eval('#play', e => e.classList.contains('on')), stillChosen = await page.$('.exp.chosen');
-        say(`  help opened and returned: on play=${back}, choice kept=${!!stillChosen}`);
-      }
-      await page.click('#look'); await page.waitForTimeout(900); await shot(`${tag}-day${i + 1}-vignette`, false);
-      await page.waitForTimeout(3600); await shot(`${tag}-day${i + 1}-mid`, false);
-      const bodyEarly = await page.$eval('#afterwrap', e => !e.classList.contains('hidden')); if (bodyEarly) say('  !! NEXT shown before the look ended');
-      await page.waitForTimeout(6000);
-      const shown = await page.$eval('#afterwrap', e => !e.classList.contains('hidden')); if (!shown) say('  !! NEXT not shown after the look');
-      say('  yard: ' + await text('#yard')); say('  line: ' + await text('#what'));
-      say('  shelf: ' + await page.$$eval('.sus', es => es.map(e => (e.classList.contains('aside') ? '[' : '') + e.innerText.split('\n')[0] + (e.classList.contains('aside') ? ' — set aside]' : '')).join(' | ')));
-      await shot(`${tag}-day${i + 1}-result`); await noScroll();
-      say('  button: ' + await text('#next')); await page.click('#next'); await page.waitForTimeout(400);
+  const day = async (id, opts = {}) => {
+    if (await page.$eval('#look', b => !b.disabled)) say('  !! LOOK enabled before a label was tapped');
+    if (await page.$('.exp.chosen')) say('  !! a label is pre-chosen at the start of the day');
+    const locked = await page.$$eval('.exp.locked', bs => bs.map(b => b.dataset.id));
+    say(`\n== ${await text('#benchhead')}${locked.length ? '   (dimmed: ' + locked.join(', ') + ')' : ''}`);
+    say('   shelf line: ' + await text('#shelfline'));
+    if (opts.tryLocked) {
+      await page.click('.exp[data-id="onespeck"]', { force: true }); await page.waitForTimeout(120);
+      const flashing = await page.$eval('.exp[data-id="onespeck"]', b => b.classList.contains('flash')), lookOn = await page.$eval('#look', b => !b.disabled), chosen = await page.$('.exp.chosen');
+      say(`   tapped the dimmed "One speck alone": gloss flashed=${flashing}, LOOK enabled=${lookOn}, chosen=${!!chosen}, line="${await text('#willdo')}"`);
+      await shot('locked-flash');
+      if (lookOn || chosen) say('  !! the locked label did more than flash');
     }
+    await page.click(`.exp[data-id="${id}"]`); await page.waitForTimeout(150);
+    say(`   tapped "${id}": ${await text('#willdo')}`);
+    if (opts.help) { await page.click('#play .help-q'); await page.waitForTimeout(200); await shot('help'); await page.click('#helpback'); await page.waitForTimeout(200); say(`   help opened and returned: on play=${await page.$eval('#play', e => e.classList.contains('on'))}, choice kept=${!!(await page.$('.exp.chosen'))}`); }
+    await page.click('#look'); await page.waitForTimeout(1500);
+    if (await vis('#afterwrap')) say('  !! NEXT shown before the look ended');
+    await page.waitForTimeout(9000);
+    if (!(await vis('#afterwrap'))) say('  !! NEXT not shown after the look');
+    say('   ' + await text('#dayband') + ' · yard: ' + await text('#yard'));
+    say('   shelf: ' + await shelf()); say('   shelf line: ' + await text('#shelfline'));
+    const enough = await vis('#enough'); say(`   buttons: ${await text('#next')}${enough ? ' + ' + await text('#enough') : ''}`);
+    if (opts.shot) await shot(opts.shot);
+    await noScroll(); return enough;
   };
-  await week(['sphinx', 'wait', 'oil', 'onespeck', 'surface', 'coarse', 'asbestos'], 'a');
-  say('\nEND: ' + await text('#headline')); say((await text('#verdictbody')).slice(0, 600)); await shot('a-end'); await noScroll();
+  const next = async () => { await page.click('#next'); await page.waitForTimeout(400); };
+  // ---- week A
+  await page.click('#begin'); await page.waitForTimeout(800); say('day 0 shelf: ' + await shelf()); await shot('a-day0');
+  const A = [['sphinx', { tryLocked: true }], ['oil', { help: true }], ['onespeck', {}], ['surface', { shot: 'a-shelf-cleared' }], ['coarse', { shot: 'a-clue-found' }]];
+  const enoughA = [];
+  for (let i = 0; i < A.length; i++) { enoughA.push(await day(A[i][0], A[i][1])); if (i < A.length - 1) await next(); }
+  if (enoughA.slice(0, 4).some(x => x)) say('  !! ENOUGH offered before both halves were done'); if (!enoughA[4]) say('  !! ENOUGH not offered after both halves');
+  // the bench head after the shelf is cleared and before the clue: open day 5's bench in a scratch look by reading it on the way
+  await page.click('#enough'); await page.waitForTimeout(400);
+  say('\nEND A (early): ' + await text('#headline')); say('   ' + (await text('#verdictbody')).slice(0, 400));
+  if (!/^In five days/.test(await text('#verdictbody'))) say('  !! verdict does not say five days');
+  if (await text('#endband') !== 'AFTER FIVE DAYS') say('  !! end band does not say five days: ' + await text('#endband'));
+  if (/days? (left|remain)|spare day|to spare/i.test(await text('#verdictbody'))) say('  !! verdict mentions days left');
+  await shot('a-end'); await noScroll();
   await page.click('#end [data-go="about"]'); await page.waitForTimeout(200); await shot('about'); await page.click('#aboutback'); await page.waitForTimeout(200);
   say('about returned to: ' + await page.$eval('.screen.on', e => e.id));
-  say(`session a: ${((Date.now() - t0) / 1000).toFixed(0)} s of script time (eight-second looks; a person reads between)`);
+  // ---- week B
+  await page.click('#again'); await page.waitForTimeout(600); say('\nplay again: shelf cleared=' + !(await page.$('.sus.aside')) + ', card blank=' + !(await page.$('.sus.found')));
+  const B = ['coarse', 'herbarium', 'burn', 'glass', 'sugar', 'meteorite', 'soot']; let enoughB = false;
+  for (let i = 0; i < B.length; i++) { enoughB = (await day(B[i], i === 0 ? { shot: 'b-clue-only' } : {})) || enoughB; if (i < B.length - 1) await next(); }
+  if (enoughB) say('  !! ENOUGH offered in week B'); await next();
+  say('\nEND B: ' + (await text('#verdictbody')).slice(0, 300)); await shot('b-end');
+  // ---- week C
   await page.click('#again'); await page.waitForTimeout(600);
-  say('\nplay again: ' + await text('#dayband') + ' / ' + await text('#benchhead') + ' / shelf cleared=' + !(await page.$('.sus.aside')));
-  await week(['herbarium', 'burn', 'glass', 'sugar', 'sulphur', 'meteorite', 'soot'], 'b');
-  say('\nEND B: ' + await text('#headline')); say((await text('#verdictbody')).slice(0, 700)); await shot('b-end');
+  const Cw = ['sphinx', 'oil', 'onespeck', 'surface', 'glass', 'meteorite', 'soot']; let enoughC = false;
+  for (let i = 0; i < Cw.length; i++) { enoughC = (await day(Cw[i])) || enoughC; if (i === 3) { await next(); say('   (day 5 bench head: ' + await text('#benchhead') + ')'); await shot('c-day5-bench'); continue; } if (i < Cw.length - 1) await next(); }
+  if (enoughC) say('  !! ENOUGH offered in week C'); await next();
+  const vc = await text('#verdictbody'); say('\nEND C: ' + vc.slice(0, 600));
+  if (!/You never found the one thing that does change the dance\. Brown did, grinding coarser/.test(vc)) say('  !! unfinished paragraph missing');
+  if (/You never looked at/.test(vc)) say('  !! both missed-clue paragraphs shown');
+  if (!/^In seven days/.test(vc)) say('  !! week C verdict does not say seven days');
+  if (await text('#endband') !== 'AFTER SEVEN DAYS') say('  !! week C end band wrong');
+  await shot('c-end');
   say('\nerrors: ' + (errors.length ? errors.join(' / ') : 'none'));
   fs.writeFileSync(path.join(__dirname, 'session-log.txt'), L.join('\n') + '\n'); await browser.close();
 })();

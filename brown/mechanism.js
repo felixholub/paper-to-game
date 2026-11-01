@@ -54,6 +54,16 @@
       { id: 'pull',     label: 'Pull',          long: 'the specks attract and repel each other',                        src: 'p. 482: "attractions and repulsions among the particles themselves"' },
       { id: 'skin',     label: 'The skin',      long: 'something acting at the surface of the drop',                    src: 'p. 482–483: capillary and hygrometric action; the inverted experiment' },
     ],
+    // ---- the sixth card: blank until a size look fills it (our presentation of Brown's ordering by size, p. 466–468, 472)
+    CLUE_CARD: { blank: { label: '?', gloss: 'one thing does change it' }, found: { label: 'Size', gloss: 'only fine dust dances' }, stamp: 'Found' },
+    SHELF_LINES: {
+      open:  'Five things people have said make it move: a look that answers one lays a slip over it. Something does change the dance; the blank card is for it.',
+      aside: 'Nothing you can name is left, and it still dances. Something does change the dance. Find it.',
+      clue:  'You found what changes it: how small the specks are. The five on the shelf are still to be answered.',
+      both:  'Nothing named is left, and you know the one thing that changes it. Brown kept looking. You may, or stop here.',
+    },
+    BENCH_HEADS: { normal: 'What will you try?', aside: 'Nothing named is left. What changes the dance?' },
+    NUMBER_WORDS: ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'],
     // ---- the bench: Brown's own experiments. `answers` lists the suspects the result sets aside, by his own reasoning (tagged).
     //      `specks` says what the drop holds; `vessel` how the drop is prepared; `lever` marks the two looks that change the dance.
     EXPERIMENTS: [
@@ -73,7 +83,7 @@
         specks: 'molecules', tint: 'pollen', vessel: 'open-wait', answers: [], src: 'p. 482: currents centre to rim, then the drop dissipated in less than a minute; p. 467: evaporated, both kinds found on the stage' },
       { id: 'oil', did: "sealed the drop in almond oil",       label: 'Seal it in almond oil',    act: 'Shake a little of the water into almond oil, so the drop is sealed and nothing can dry. Watch for an hour.',
         specks: 'molecules', tint: 'pollen', vessel: 'oil', answers: ['drying', 'currents'], src: 'p. 482: evaporation "absolutely null", motion "with undiminished activity"; currents "wholly prevented in drops of small size immersed in oil"' },
-      { id: 'onespeck', did: "sealed one speck alone",  label: 'One speck alone',          act: 'Shake harder, until some sealed drops hold a single speck with no neighbour.',
+      { id: 'onespeck', requires: 'oil', lockedGloss: 'first seal a drop in oil', did: "sealed one speck alone",  label: 'One speck alone',          act: 'Shake harder, until some sealed drops hold a single speck with no neighbour.',
         specks: 'one', tint: 'pollen', vessel: 'oil-one', answers: ['pull', 'drying', 'currents'], src: 'p. 482: "some may be occasionally observed with one particle only"; mutual attraction and repulsion "materially reduced or absolutely null"' },
       { id: 'surface', did: "put oil beads on the water's skin",   label: 'Oil on the water\'s skin', act: 'Turn it round: shake a little oil into the water, so tiny oil beads sit on the skin of the water drop.',
         specks: 'molecules', tint: 'pollen', vessel: 'inverted', answers: ['skin'], src: 'p. 483: oil drops on the surface "nearly or altogether at rest", particles within "continue to move"' },
@@ -199,11 +209,23 @@
   function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, day: 0, log: [], setAside: {}, leverFound: false, emptyDays: 0, dryDays: 0 }; }
   function expById(id) { return CONFIG.EXPERIMENTS.find(e => e.id === id); }
   function available(g) { return CONFIG.EXPERIMENTS.filter(e => !g.log.some(l => l.id === e.id)); }
+  // a look is locked until the look it refines has been taken (the one-particle drop refines the oil drop, p. 482)
+  function locked(g, id) { const e = expById(id); return !!(e && e.requires && !g.log.some(l => l.id === e.requires)); }
+  // the shelf's state, from the suspects set aside and whether the size clue has been found
+  function shelfState(g) {
+    const allAside = CONFIG.SUSPECTS.every(s => g.setAside[s.id]), clue = g.leverFound;
+    const mode = allAside && clue ? 'both' : allAside ? 'aside' : clue ? 'clue' : 'open';
+    const head = mode === 'aside' ? CONFIG.BENCH_HEADS.aside : CONFIG.BENCH_HEADS.normal;
+    return { mode, allAside, clue, line: CONFIG.SHELF_LINES[mode], benchHead: `Day ${g.day + 1} of ${CONFIG.DAYS} · ${head}`, card: clue ? CONFIG.CLUE_CARD.found : CONFIG.CLUE_CARD.blank };
+  }
+  // the early verdict: offered only when both halves are done and days remain; days left are not penalised
+  function canStopEarly(g) { return CONFIG.SUSPECTS.every(s => g.setAside[s.id]) && g.leverFound && g.day < CONFIG.DAYS; }
   // commit a day's experiment; returns the look state to animate and the reading
   function playDay(g, id) {
     const exp = expById(id); if (!exp) throw new Error('no such experiment ' + id);
     if (g.day >= CONFIG.DAYS) throw new Error('no days left');
     if (g.log.some(l => l.id === id)) throw new Error('already done ' + id);
+    if (locked(g, id)) throw new Error('locked ' + id + ': needs ' + exp.requires);
     const st = startLook(exp, g.seed + g.day);
     // run the look to its end headlessly so the reading is settled before the screen animates it
     const probe = startLook(exp, g.seed + g.day); let guard = 0; while (!probe.done && guard++ < 2000) step(probe, 1 / 60);
@@ -224,7 +246,7 @@
       headline: 'The dust is still dancing.',
       tried, aside: aside.map(s => s.label), standing: standing.map(s => s.label),
       leverFound: g.leverFound, quiet: quiet.map(l => ({ label: l.label, did: l.did, how: l.dry ? 'no water left' : 'nothing in the drop' })),
-      allAside: standing.length === 0, days: g.day,
+      allAside: standing.length === 0, days: g.day, daysWord: CONFIG.NUMBER_WORDS[g.day] || String(g.day), early: g.day < CONFIG.DAYS,
     };
   }
 
@@ -236,10 +258,10 @@
       { name: 'the physicist', ids: ['wait', 'oil', 'onespeck', 'surface', 'coarse', 'asbestos', 'sphinx'] },
       { name: 'Brown\'s own order', ids: ['herbarium', 'burn', 'sphinx', 'asbestos', 'oil', 'onespeck', 'surface'] },
       { name: 'the cook', ids: ['sugar', 'sulphur', 'wait', 'glass', 'soot', 'meteorite', 'herbarium'] },
-      { name: 'the quickest', ids: ['sphinx', 'onespeck', 'surface', 'coarse', 'wait', 'sugar', 'sulphur'] },
+      { name: 'the quickest', ids: ['sphinx', 'oil', 'onespeck', 'surface', 'coarse', 'wait', 'sugar'] },
     ];
     return H.map(h => Object.assign({}, h, { v: runSequence(h.ids) }));
   }
 
-  return { CONFIG, rng, vivacity, fibrilVivacity, current, makeSpecks, startLook, step, readLook, newGame, expById, available, playDay, verdict, runSequence, heuristics };
+  return { CONFIG, rng, vivacity, fibrilVivacity, current, makeSpecks, startLook, step, readLook, newGame, expById, available, locked, shelfState, canStopEarly, playDay, verdict, runSequence, heuristics };
 });
