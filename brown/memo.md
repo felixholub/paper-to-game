@@ -184,3 +184,7 @@ Steffen, after playing: once sugar had gone in, "the sugar remains in all the ot
 ## 23. Revision 4
 
 Steffen: the clock that counts the minute does not always appear. In Chromium it always did (the clock group's opacity is 1 for the open drop and the two sealed drops at every probe), so the fault is a phone browser's: WebKit does not always repaint an SVG group whose `opacity` attribute flips from 0 to 1. The clock is now shown and hidden by `display`, with the opacity set alongside. No other change. Calibration 48/48; session test three weeks, errors none.
+
+## 24. Revision 5
+
+The clock still did not show on day 1 on Steffen's MacBook, whatever he picked (Chromium showed it every time). The first time an SVG group inside the animated plate is shown, Safari may not paint it. The clock is no longer part of the SVG: it is a small HTML layer over the plate's top right corner, toggled by a class, hidden on day 0 and during the vignette, shown for the open drop and the two sealed drops. Same drawing, same place. Calibration 48/48; session test three weeks, errors none.
