@@ -148,8 +148,8 @@ const E = C.EDGE;
 // ---- W: words
 {
   const strings = []; for (const w of Wk) { strings.push(w.line, w.name); if (w.first) strings.push(w.first.say); for (const k in w.laws) strings.push(w.laws[k]); }
-  for (const L of M.LEVERS) strings.push(L.label, L.does);
-  const g = M.newGame(2); for (const wid of C.WORLD_ORDER) { for (const L of M.LEVERS.slice(0, 3)) { const r = M.playPull(g, L.id, null); if (r) strings.push(r.say, r.law || ''); } M.nextWorld(g); }
+  for (const L of M.LEVERS) strings.push(L.label, L.does, L.shows); for (const k in M.GLOSS) strings.push(M.GLOSS[k]); for (const w of Wk) strings.push(w.rule);
+  const g = M.newGame(2); for (const wid of C.WORLD_ORDER) { for (const L of M.LEVERS.slice(0, 3)) { const r = M.playPull(g, L.id, null); if (r) strings.push(r.say, r.plain, r.law || ''); } M.nextWorld(g); }
   const v = M.verdict(g); strings.push(v.headline, ...v.did);
   check('W no decimals in anything the screen reads from the mechanism', strings.every(s => !/\d\.\d/.test(s)), strings.length + ' strings');
 }

@@ -65,4 +65,4 @@ PASS  Db thirty random hand-drawn sideways warps jam on every world (no world is
       reads the world (the intended path)          teeth 7 void 2 identity 2 jams 1  → YOU ANSWERED HILBERT.
       one pull per world                           teeth 4 void 0 identity 0 jams 0  → THE PRESS KEPT ITS SECRET.
 PASS  H the obvious ways of pulling land in different places (different headlines and tag counts)
-PASS  W no decimals in anything the screen reads from the mechanism  [59 strings]
+PASS  W no decimals in anything the screen reads from the mechanism  [87 strings]
