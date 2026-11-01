@@ -14,24 +14,24 @@
    change: Throw it again, exactly the same way, at five past three.
    formula: S = ∫ ½(x′² + y′²) − g·y dt
   shot a-c1-question
-   guessed "not"; You guessed: it doesn’t matter. Here are the trip before the change (top) and after it (bottom). Change your mind?
   shot a-c1-both
-   said "not": RIGHT.
+   said "not": RIGHT. A red badge: energy. This is the paper.
    plate: the trip before | 1000 | the trip after | 1000 | THE SAME NUMBER: THE FORMULA DOESN’T CARE
    reveal: It doesn't matter. The throw at five past three flies exactly the same arc, and the formula gives the trip the same number. When the formula doesn't care when the trip starts, there is a prize: energy, speed² plus height, the same at every moment of the flight.
-   prize: The prize: speed² plus height, ½(x′² + y′²) + g·y. Watch its line along the real trip, then along a fake one the formula would never pick. Flat on the real trip, wobbly on the fake: the prize tells the real trip from all the others. It goes on the shelf.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | ? | ? | ?
+   prize: The prize: speed² plus height, ½(x′² + y′²) + g·y. Its line along the real trip: flat. The number stays the same all along the trip. Only along the real trip, though: draw any other path in the top picture and watch the line wobble.
+   wobble: There: along your path the energy wobbles. Only the real trip keeps it flat. That is what makes it a prize: it tells the real trip from every other path. Remember this when you reach the slide.
+  shot a-c1-wobble
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ? | ? | ? | ? | ? | ? | ? | ?
   shot a-c1-answer
 
 == CHANGE 2 OF 9 · GRAVITY THAT GROWS
    The same ball, but here gravity grows a little stronger every minute.
    change: Throw it again, exactly the same way, at five past three.
    formula: S = ∫ ½(x′² + y′²) − g·(1 + a·t)·y dt
-   guessed "matters"; You guessed: it matters. Here are the trip before the change (top) and after it (bottom). Change your mind?
-   said "matters": RIGHT.
+   said "matters": RIGHT. A pink badge: no energy here, because gravity grows. A trap spotted.
    plate: the trip before | 716 | the trip after | 664 | DIFFERENT NUMBERS: THE FORMULA CARES
    reveal: It matters. At five past three gravity is stronger, so the later throw falls short, and the formula gives the trip a different number. When the rules change with the clock, no energy stays the same. No prize.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | ? | ? | ?
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | ? | ? | ? | ? | ? | ? | ?
   shot a-c2-answer
 
 == CHANGE 3 OF 9 · THE THROWN BALL
@@ -40,24 +40,22 @@
    formula: S = ∫ ½(x′² + y′²) − g·y dt
   shot help
    help opened and returned: question still shown=true
-   guessed "not"; You guessed: it doesn’t matter. Here are the trip before the change (top) and after it (bottom). Change your mind?
   shot a-c3-both
-   said "not": RIGHT.
+   said "not": RIGHT. A red badge: sideways speed. This is the paper.
    plate: the trip before | 1000 | the trip after | 1000 | THE SAME NUMBER: THE FORMULA DOESN’T CARE
    reveal: It doesn't matter. From one step to the left the ball flies the same arc, one step to the left, and gets the same number. When the formula doesn't care where the trip happens, there is a prize: the sideways speed x′, the same all along the flight.
-   prize: The prize: how fast the ball moves sideways, x′. Watch its line along the real trip, then along a fake one the formula would never pick. Flat on the real trip, wobbly on the fake: the prize tells the real trip from all the others. It goes on the shelf.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | ? | ?
+   prize: The prize: how fast the ball moves sideways, x′. Its line along the real trip: flat. The number stays the same all along the trip.
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | ? | ? | ? | ? | ? | ?
   shot a-c3-answer
 
 == CHANGE 4 OF 9 · THE BALL AND THE MAGNET
    The same throw, but now a magnet stands to the right and pulls the ball.
    change: Throw it the same way from one step to the left.
    formula: S = ∫ ½(x′² + y′²) − g·y + m·e^(−r²) dt
-   guessed "matters"; You guessed: it matters. Here are the trip before the change (top) and after it (bottom). Change your mind?
-   said "not": YOU SAID IT DOESN’T MATTER. IT DOES. THE FIRST GUESS WAS RIGHT.
+   said "not": YOU SAID IT DOESN’T MATTER. IT DOES. No badge this time: the pink one stays dull.
    plate: the trip before | 1000 | the trip after | 976 | DIFFERENT NUMBERS: THE FORMULA CARES
    reveal: It matters. From one step to the left the ball passes farther from the magnet and bends differently; a different number. With the magnet there, the sideways speed changes in flight. No prize.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | ? | ?
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | ? | ? | ? | ? | ?
   shot a-c4-answer
 
 == CHANGE 5 OF 9 · THE SWING ROUND THE PEG
@@ -65,24 +63,22 @@
    change: Turn the whole picture a little round the peg.
    formula: S = ∫ ½(x′² + y′²) − ½k·(x² + y²) dt
   shot a-c5-question
-   guessed "not"; You guessed: it doesn’t matter. Here are the trip before the change (top) and after it (bottom). Change your mind?
   shot a-c5-both
-   said "not": RIGHT.
+   said "not": RIGHT. A red badge: spin. This is the paper.
    plate: the trip before | 135 | the trip after | 135 | THE SAME NUMBER: THE FORMULA DOESN’T CARE
    reveal: It doesn't matter. Turned round the peg, the swing is the same swing, turned, with the same number. When the formula doesn't care which way the picture faces, there is a prize: spin, x·y′ − y·x′, how fast the dot sweeps round the peg.
-   prize: The prize: how fast the dot sweeps round the peg, x·y′ − y·x′. Watch its line along the real trip, then along a fake one the formula would never pick. Flat on the real trip, wobbly on the fake: the prize tells the real trip from all the others. It goes on the shelf.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | ?
+   prize: The prize: how fast the dot sweeps round the peg, x·y′ − y·x′. Its line along the real trip: flat. The number stays the same all along the trip.
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | ? | ? | ? | ?
   shot a-c5-answer
 
 == CHANGE 6 OF 9 · THE SWING IN THE WIND
    The same swing, but a wind blows east.
    change: Turn the whole picture a little round the peg.
    formula: S = ∫ ½(x′² + y′²) − ½k·(x² + y²) + w·x dt
-   guessed "matters"; You guessed: it matters. Here are the trip before the change (top) and after it (bottom). Change your mind?
-   said "matters": RIGHT.
+   said "matters": RIGHT. A pink badge: no spin here, because of the wind. A trap spotted.
    plate: the trip before | 1000 | the trip after | 617 | DIFFERENT NUMBERS: THE FORMULA CARES
    reveal: It matters. The wind still blows east after you turn the picture, so the turned swing drifts differently; a different number. While the wind blows, no spin prize.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | ?
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | SPIN | the wind | ? | ? | ?
   shot a-c6-answer
 
 == CHANGE 7 OF 9 · THE THROWN BALL
@@ -90,12 +86,11 @@
    change: Re-tick the clock: let it run fast here and slow there. The same arc, but the ball now speeds up and slows down along it.
    formula: S = ∫ ½(x′² + y′²) − g·y dt
   shot a-c7-question
-   guessed "not"; You guessed: it doesn’t matter. Here are the trip before the change (top) and after it (bottom). Change your mind?
   shot a-c7-both
-   said "matters": RIGHT. GOOD SWITCH.
+   said "matters": RIGHT. A pink badge: the ball's clock is real. A trap spotted.
    plate: the trip before | 1000 | the trip after | 1326 | DIFFERENT NUMBERS: THE FORMULA CARES
    reveal: It matters. A ball that speeds up and slows down for no reason is not a thrown ball, and the formula gives it a different number. For the ball the ticking of the clock is real, and so its energy prize is real.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | ?
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | SPIN | the wind | THE BALL'S CLOCK | is real | ? | ?
   shot a-c7-answer
 
 == CHANGE 8 OF 9 · THE SLIDE
@@ -103,38 +98,36 @@
    change: Start the slide five minutes later.
    formula: S = ∫ √(x′² + y′²) / √(h − y) dt
   shot a-c8-question
-   guessed "not"; You guessed: it doesn’t matter. Here are the trip before the change (top) and after it (bottom). Change your mind?
-   said "not": RIGHT.
+   said "not": RIGHT. A red badge: slide energy, empty. This is the paper.
    plate: the trip before | 1000 | the trip after | 1000 | THE SAME NUMBER: THE FORMULA DOESN’T CARE
    reveal: It doesn't matter: the same slide, started later, is the same slide, with the same number. So there should be a prize, the slide's energy. Watch its line.
-   prize: Both lines are flat. The slide’s energy is zero on the real slide and zero on the fake. Draw any path you like in the window and try to make its line move.
-   after a drawn path: Flat again. The slide’s energy is the same, zero, on your path too. Try another, as wild as you like.
-   after a drawn path: Flat, whatever you draw. A number that is the same on every path, the real one and the impossible ones, rules nothing out. The prize is empty. The next card shows why.
+   prize: The prize’s formula: x′·∂f/∂x′ + y′·∂f/∂y′ − f. Its line along the real slide: flat, and at zero. Is that a prize? Draw any path you like in the top picture and try to make its line move.
+   after a drawn path: Flat again, at zero, on your path too. Try another, as wild as you like.
+   after a drawn path: Flat, whatever you draw. Unlike the ball’s energy, this number is the same on every path, the real one and the impossible ones, so it rules nothing out. The prize is empty. The next card shows why.
   shot a-c8-drawn
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | SLIDE ENERGY | EMPTY
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | SPIN | the wind | THE BALL'S CLOCK | is real | SLIDE ENERGY | EMPTY | ?
   shot a-c8-answer
 
 == CHANGE 9 OF 9 · THE SLIDE
    The same slide.
    change: Re-tick the clock: fast here, slow there. The same curve, with the ticks bunched and spread.
    formula: S = ∫ √(x′² + y′²) / √(h − y) dt
-   guessed "matters"; You guessed: it matters. Here are the trip before the change (top) and after it (bottom). Change your mind?
-   said "matters": YOU SAID IT MATTERS. IT DOESN’T.
+   said "matters": YOU SAID IT MATTERS. IT DOESN’T. No badge this time: the red one stays dull.
    plate: the trip before | 1000 | the trip after | 1000 | THE SAME NUMBER: THE FORMULA DOESN’T CARE
    reveal: It doesn't matter. The slide's formula reads only the shape of the curve, never how fast it is traced, so re-tick it any way you like and the number stays the same. A change you can make differently at every moment wins no prize; it wins a rule instead: the two equations of motion are not independent (ψ₁x′ + ψ₂y′ = 0). And "start the clock later" is just one way of re-ticking. That is why the slide's energy was empty.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | SLIDE ENERGY | EMPTY
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | SPIN | the wind | THE BALL'S CLOCK | is real | SLIDE ENERGY | EMPTY | A RULE | ψ₁x′ + ψ₂y′ = 0
   shot a-c9-answer
 
-END: THREE REAL PRIZES AND ONE EMPTY ONE.
-   You were fooled by the magnet and the re-ticked slide. You changed your mind twice: once for the better, once not.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | SLIDE ENERGY | EMPTY
+END: PART OF THE PAPER, IN RED.
+   Your red badges: energy, sideways speed, spin and the empty slide energy. You missed the rule: re-ticking the slide didn't matter. Your pink badges show you can spot when a law breaks, though the magnet caught you.
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | SPIN | the wind | THE BALL'S CLOCK | is real | SLIDE ENERGY | EMPTY | A RULE | ψ₁x′ + ψ₂y′ = 0
   shot a-end
   shot about
 
 ==== SHIFT B
-END B: THREE REAL PRIZES AND ONE EMPTY ONE.
-   You were fooled by the later throw, the step to the left, the turned swing, the later slide and the re-ticked slide.
-   shelf: ENERGY | ½(x′² + y′²) + g·y | SIDEWAYS SPEED | x′ | SPIN | x·y′ − y·x′ | SLIDE ENERGY | EMPTY
+END B: THE PAPER GOT AWAY.
+   You missed energy, sideways speed, spin, the empty slide energy and the rule: each time the change didn't matter. Your pink badges show you can spot when a law breaks; the paper itself is in the red ones.
+   shelf: ENERGY | ½(x′² + y′²) + g·y | ENERGY | gravity grows | SIDEWAYS SPEED | x′ | SIDEWAYS SPEED | the magnet | SPIN | x·y′ − y·x′ | SPIN | the wind | THE BALL'S CLOCK | is real | SLIDE ENERGY | EMPTY | A RULE | ψ₁x′ + ψ₂y′ = 0
   shot b-end
 
 errors: none

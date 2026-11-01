@@ -31,4 +31,4 @@ PASS  D thirty random hand-drawn re-tickings: the slide never cares, the ball al
       spring soft: all right (teeth,teeth,teeth,empty)
       slide high: all right (teeth,teeth,teeth,empty)
 PASS  ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide
-PASS  W no decimals in anything the screen reads from the mechanism  [63 strings]
+PASS  W no decimals in anything the screen reads from the mechanism  [90 strings]

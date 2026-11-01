@@ -73,15 +73,17 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
 /* the shelf */
 .shelf{width:100%;max-width:348px;margin:12px auto 0}
 .shelf .plabel{margin-bottom:4px}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.tile{height:62px;position:relative;background:linear-gradient(180deg,#3A4149,#262B31);border:1px solid #0B0D0F;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2px 3px;overflow:hidden;transition:transform .3s}
-.tile .tn{font-family:var(--disp);font-weight:700;font-size:10.5px;letter-spacing:.06em;line-height:1.05;text-transform:uppercase;color:var(--dim)}
-.tile .tf{font-family:var(--math);font-style:italic;font-size:11px;color:var(--brush);margin-top:3px;white-space:nowrap}
-.tile.won{background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border-bottom:4px solid var(--cyan);box-shadow:0 0 12px rgba(43,240,255,.6);transform:scale(1.04)}
-.tile.won .tn{color:#1E2328;text-shadow:0 1px 0 rgba(255,255,255,.5)}.tile.won .tf{color:#2A3036}
-.tile.missed{border-bottom:4px solid var(--haz)}.tile.missed .tn{color:var(--brush)}
-.tile.empty{background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border-bottom:4px solid var(--mag);box-shadow:0 0 12px rgba(255,46,204,.6)}
-.tile.empty .tn{color:#1E2328}.tile.empty .tf{color:#B0127F;font-family:var(--disp);font-style:normal;font-weight:700;letter-spacing:.1em}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tile{height:54px;position:relative;background:linear-gradient(180deg,#30363E,#22272D);border:1px solid #0B0D0F;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2px 3px;overflow:hidden;transition:transform .3s}
+.tile .tn{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.06em;line-height:1.05;text-transform:uppercase;color:var(--dim)}
+.tile .tf{font-family:var(--math);font-style:italic;font-size:11px;color:var(--dim);margin-top:3px;white-space:nowrap}
+.tile.tred,.tile.tpink{border-bottom:3px solid var(--dim)}
+.tile.red{background:linear-gradient(180deg,#3A1418,#24090C);border:1px solid #FF3B4E;box-shadow:0 0 14px rgba(255,59,78,.75),inset 0 0 10px rgba(255,59,78,.3);transform:scale(1.03)}
+.tile.red .tn{color:#FF5A6A;text-shadow:0 0 8px rgba(255,59,78,.9)}.tile.red .tf{color:#FFB3BA}
+.tile.pink{background:linear-gradient(180deg,#33252C,#251B20);border:1px solid #F7A8C8}
+.tile.pink .tn{color:#F7A8C8}.tile.pink .tf{color:#D9A3BA}
+.tile.dull .tn,.tile.dull .tf{color:#5C656E}
+.tile .strike{text-decoration:line-through;text-decoration-thickness:2px}
 .hidden{display:none !important}
 .verdict{font-family:var(--disp);font-weight:700;font-size:32px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 8px;color:var(--cyan);text-shadow:0 0 12px rgba(43,240,255,.8),0 0 30px rgba(43,240,255,.4)}
 .coda{border-top:1px solid var(--dim);margin-top:18px;padding-top:8px}
@@ -118,23 +120,23 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
   <!-- a card: the question -->
   <div id="question" class="hidden">
     <div class="ask"><b>THE CHANGE</b><span id="change"></span></div>
-    <p class="note" id="qnote">Tap the picture to watch the trip again, as often as you like. Then guess: does the change matter to the formula? If it doesn't, it wins a prize.</p>
-    <div class="row" id="guessrow"><button class="btn mag" id="saymatters">Guess: it matters</button><button class="btn go" id="saynot">Guess: it doesn't</button></div>
-    <div id="mind" class="hidden"><p class="note" id="mindnote"></p><div class="row"><button class="btn" id="keep"></button><button class="btn" id="switch"></button></div></div>
+    <p class="note" id="qnote">Tap the picture to watch the trip again, as often as you like. Then say: does the change matter to the formula? One answer; then you see the changed trip.</p>
+    <div class="row" id="guessrow"><button class="btn mag" id="saymatters">It matters</button><button class="btn go" id="saynot">It doesn't matter</button></div>
   </div>
   <!-- a card: the answer -->
   <div id="answer" class="hidden">
     <div class="verdictline" id="verdictline"></div>
+    <p class="note" id="badgenote"></p>
     <p class="reveal" id="reveal"></p>
     <p class="note" id="prizenote"></p>
     <div class="row hidden" id="drawrow"><button class="btn" id="drawtry">Draw a path</button></div>
     <button class="btn go" id="next">Next change</button>
   </div>
-  <div class="shelf"><span class="plabel">THE SHELF · PRIZES</span><div class="tiles" id="tiles"></div></div>
+  <div class="shelf"><span class="plabel">THE SHELF · RED: THE PAPER · PINK: THE TRAPS</span><div class="tiles" id="tiles"></div></div>
 </section>
 
 <section class="screen" id="end">
-  <div class="band" style="margin-top:22px">THE SHELF</div>
+  <div class="band" style="margin-top:22px">THE SHELF · RED: THE PAPER · PINK: THE TRAPS</div>
   <div class="verdict" id="headline"></div>
   <p class="lede" id="endline"></p>
   <div class="shelf"><div class="tiles" id="endtiles"></div></div>
@@ -155,9 +157,9 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
   <p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p>
   <p><b>The formula.</b> Each picture has a formula, shown on the plate in symbols and in words. It gives every path a number; nature takes the path with the smallest one. <span class="f">x′</span> means how fast <span class="f">x</span> changes. The dots on a trail are the ticks of a clock.</p>
   <p><b>The slide.</b> First you draw the slide you think is fastest from A to B. The formula gives your slide a number, then shows the real fastest slide and its number.</p>
-  <p><b>The changes.</b> Nine cards. Each shows a trip and a change: start the clock later, move the picture, turn it, or re-tick the clock fast here and slow there. You say: it matters, or it doesn't. Then you see the new trip in blue next to a dashed line showing where it would go if the change didn't matter, and the formula's number before and after.</p>
-  <p><b>The prizes.</b> A change that doesn't matter wins a prize: a number you can work out at every moment of the trip that stays the same all along it. The graph under the picture draws that number along the real trip (flat) and along a fake one (wobbly). Prizes go on the shelf. If you said "it matters" when it didn't, the prize still goes on the shelf, marked yellow.</p>
-  <p><b>The empty prize.</b> One prize stays flat on every path. You can draw paths and try to make its line move. You can't.</p>
+  <p><b>The changes.</b> Nine cards. Each shows a trip, which you can watch again as often as you like by tapping it, and a change: start the clock later, move the picture, turn it, or re-tick the clock fast here and slow there. You give one answer: it matters, or it doesn't. Then a second picture shows the trip after the change, the two running side by side in time. Where the change doesn't matter, the two pictures look the same. Then the formula's number for both trips.</p>
+  <p><b>The badges.</b> Every right answer earns a badge. Red badges are the paper: a change that doesn't matter wins a prize, a number that stays the same all along the trip (energy, sideways speed, spin); one prize comes out empty; and one change wins a rule instead. Pink badges are the traps: a change that does matter, and the law that breaks because of it. A wrong answer leaves the badge dull.</p>
+  <p><b>The prize's line.</b> Under the pictures a graph draws the prize's number along the real trip: a flat line. On the first prize you can draw any other path and watch the line wobble. On the slide you can draw paths too, and the line won't move.</p>
   <p><b>The end.</b> Your shelf, one sentence, and what the paper says.</p>
   <button class="btn go" id="helpback">Back</button>
 </section>
@@ -287,15 +289,13 @@ function plate(w) { $('#formula').textContent = w.formula; $('#words').textConte
 function numRow(label, a, b, cls) { const box = $('#nums'); const s = document.createElement('span'); s.textContent = label; box.appendChild(s); const x = document.createElement('span'); x.className = 'n'; x.textContent = a; box.appendChild(x); const ar = document.createElement('span'); ar.textContent = b === null ? '' : '→'; ar.style.color = 'var(--dim)'; box.appendChild(ar); const y = document.createElement('span'); y.className = 'n ' + (cls || ''); y.textContent = b === null ? '' : b; box.appendChild(y); }
 function numWord(text, cls) { const s = document.createElement('span'); s.className = 'word'; s.style.color = cls === 'same' ? 'var(--cyan)' : 'var(--haz)'; s.textContent = text; $('#nums').appendChild(s); }
 
-// ---------- the shelf
-const PRIZE_CARDS = M.CARDS.filter(c => c.prize);
+// ---------- the shelf: nine badges, red for the paper's lessons, pink for the traps
 function drawShelf(box) {
   box.innerHTML = '';
-  for (const c of PRIZE_CARDS) {
-    const t = document.createElement('div'); t.className = 'tile'; t.dataset.card = c.id; const st = shelfState[c.id];
-    const name = c.prize === 'SLIDE ENERGY' ? 'SLIDE ENERGY' : c.prize;
+  for (const c of M.CARDS) {
+    const b = M.BADGES[c.id], st = shelfState[c.id], t = document.createElement('div'); t.className = 'tile t' + b.tier; t.dataset.card = c.id;
     if (!st) t.innerHTML = '<span class="tn">?</span>';
-    else { t.classList.add(st.kind === 'empty' ? 'empty' : st.mine ? 'won' : 'missed'); t.innerHTML = `<span class="tn">${name}</span><span class="tf">${st.kind === 'empty' ? 'EMPTY' : M.PRIZES[c.prize].formula}</span>`; }
+    else { t.classList.add(st === 'won' ? b.tier : 'dull'); t.innerHTML = `<span class="tn${b.strike ? ' strike' : ''}">${b.name}</span><span class="tf">${b.sub}</span>`; }
     box.appendChild(t);
   }
 }
@@ -343,71 +343,63 @@ function drawMode(fn) { onStroke = fn; $('#window').classList.toggle('drawing', 
   box.addEventListener('pointerup', up); box.addEventListener('pointercancel', up);
 })();
 
-// ---------- a card: watch, guess, see both pictures, keep or switch, the verdict
-let res = null, phase = null, guesses = {};
+// ---------- a card: watch the trip, one answer, then the changed trip in a second picture, then the verdict
+let res = null, phase = null;
 const WORDS = {
-  clock: { one: 'THE 3:00 THROW', two: 'THE 3:05 THROW', b1: '3:00', b2: '3:05', go: 'Throw it again at 3:05' },
+  clock: { one: 'THE 3:00 THROW', two: 'THE 3:05 THROW', b1: '3:00', b2: '3:05' },
   across: { one: 'THE THROW FROM HERE', two: 'ONE STEP LEFT · THE CAMERA FOLLOWS', b1: '', b2: '' },
   turn: { one: 'THE SWING', two: 'TURNED · THE CAMERA TURNS WITH IT', b1: '', b2: '' },
   warpclock: { one: 'THE CLOCK AS IT IS', two: 'RE-TICKED · WATCH THE DOTS BUNCH AND SPREAD', b1: '', b2: '' },
 };
 function nextCard() {
   ci++; if (ci >= M.CARDS.length) return finish();
-  run++; stopLoop(); graphHide(); hidePane2(); drawMode(null);
+  run++; stopLoop(); graphHide(); hidePane2(); drawMode(null); draws = 0;
   const card = M.CARDS[ci], w = M.WORLDS[card.world]; res = M.playCard(card, 1);
   $('#band').textContent = `CHANGE ${ci + 1} OF ${M.CARDS.length} · ${w.name.toUpperCase()}`;
   $('#setup').textContent = card.setup; $('#change').textContent = card.change;
   drawWorld(w); badge = null; plate(w);
-  ['#opening', '#answer', '#mind'].forEach(s => $(s).classList.add('hidden')); $('#question').classList.remove('hidden'); $('#guessrow').classList.remove('hidden'); $('#qnote').classList.remove('hidden');
+  ['#opening', '#answer'].forEach(s => $(s).classList.add('hidden')); $('#question').classList.remove('hidden');
   const Wd = WORDS[card.lever]; caps(Wd.one, 'true', 'TAP TO WATCH AGAIN', 'dim'); if (Wd.b1) clockBadge(Wd.b1);
   phase = 'question'; watch();
 }
-async function watch() { // the first picture, and in the second phase both pictures in step
-  if (busy) return; const card = M.CARDS[ci], w = M.WORLDS[card.world], ch = res.change; run++; const myRun = run;
-  if (phase === 'question') { await play(w, ch.base, { dur: 2400 }); }
-  else if (phase === 'mind' || phase === 'done') { await Promise.all([play(w, ch.base, { dur: 2400 }), play2(w, ch.fresh, { dur: 2400 })]); }
+async function watch() { // the first picture; after the answer, both pictures in step
+  if (busy) return; const card = M.CARDS[ci], w = M.WORLDS[card.world], ch = res.change; run++;
+  if (phase === 'question') await play(w, ch.base, { dur: 2400 });
+  else if (phase === 'done') await Promise.all([play(w, ch.base, { dur: 2400 }), play2(w, ch.fresh, { dur: 2400 })]);
 }
-$('#window').addEventListener('click', () => { if (onStroke || busy || drawing) return; if (['question', 'mind', 'done'].includes(phase) && ci >= 0) watch(); });
-$('#window2').addEventListener('click', () => { if (busy) return; if (['mind', 'done'].includes(phase)) watch(); });
-async function guess(saidMatters) {
-  if (busy || phase !== 'question') return; busy = true;
-  const card = M.CARDS[ci], w = M.WORLDS[card.world], Wd = WORDS[card.lever]; guesses[card.id] = saidMatters ? 'matters' : 'not';
-  $('#guessrow').classList.add('hidden'); $('#qnote').classList.add('hidden');
+$('#window').addEventListener('click', () => { if (onStroke || busy || drawing) return; if (['question', 'done'].includes(phase) && ci >= 0) watch(); });
+$('#window2').addEventListener('click', () => { if (busy) return; if (phase === 'done') watch(); });
+async function judge(saidMatters) {
+  if (busy || phase !== 'question') return; busy = true; phase = 'reveal'; run++;
+  const card = M.CARDS[ci], w = M.WORLDS[card.world], ch = res.change, Wd = WORDS[card.lever], right = saidMatters === res.matters, myRun = run, b = M.BADGES[card.id];
+  answers[card.id] = saidMatters ? 'matters' : 'not';
+  $('#question').classList.add('hidden');
+  // the reveal: the changed trip in the second picture, both running in step
   drawPane2(w, card.lever); caps2(Wd.two, null, 'TAP TO WATCH BOTH AGAIN', 'dim'); if (Wd.b2) badge2(Wd.b2, '#2BF0FF');
   try { $('#window').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
-  phase = 'mind'; busy = false; await watch();
-  $('#mindnote').textContent = `You guessed: it ${saidMatters ? 'matters' : 'doesn’t matter'}. Here are the trip before the change (top) and after it (bottom). Change your mind?`;
-  $('#keep').textContent = saidMatters ? 'Keep: it matters' : 'Keep: it doesn’t'; $('#switch').textContent = saidMatters ? 'Switch: it doesn’t' : 'Switch: it matters';
-  $('#keep').className = 'btn ' + (saidMatters ? 'mag' : 'go'); $('#switch').className = 'btn ' + (saidMatters ? 'go' : 'mag');
-  $('#mind').classList.remove('hidden');
-}
-async function judge(saidMatters) {
-  if (busy || phase !== 'mind') return; busy = true; phase = 'done'; run++;
-  const card = M.CARDS[ci], w = M.WORLDS[card.world], ch = res.change, right = saidMatters === res.matters, myRun = run;
-  answers[card.id] = saidMatters ? 'matters' : 'not'; const switched = answers[card.id] !== guesses[card.id];
-  $('#question').classList.add('hidden'); $('#answer').classList.remove('hidden'); $('#next').classList.add('hidden'); $('#drawrow').classList.add('hidden');
-  $('#verdictline').textContent = (right ? 'Right.' : saidMatters ? 'You said it matters. It doesn’t.' : 'You said it doesn’t matter. It does.') + (switched ? (right ? ' Good switch.' : ' The first guess was right.') : '');
+  await Promise.all([play(w, ch.base, { dur: 2400 }), play2(w, ch.fresh, { dur: 2400 })]); if (myRun !== run) { busy = false; return; }
+  phase = 'done';
+  $('#answer').classList.remove('hidden'); $('#next').classList.add('hidden'); $('#drawrow').classList.add('hidden');
+  $('#verdictline').textContent = right ? 'Right.' : saidMatters ? 'You said it matters. It doesn’t.' : 'You said it doesn’t matter. It does.';
   $('#verdictline').className = 'verdictline ' + (right ? 'right' : 'wrong');
+  shelfState[card.id] = right ? 'won' : 'missed'; drawShelf($('#tiles'));
+  $('#badgenote').textContent = right ? (b.tier === 'red' ? `A red badge: ${b.name.toLowerCase()}${b.sub === 'EMPTY' ? ', empty' : ''}. This is the paper.` : `A pink badge: ${b.strike ? 'no ' + b.name.toLowerCase() + ' here, ' + b.why : b.name.toLowerCase() + ' ' + b.sub}. A trap spotted.`) : `No badge this time: the ${b.tier} one stays dull.`;
+  $('#badgenote').style.color = right ? (b.tier === 'red' ? '#FF5A6A' : '#F7A8C8') : 'var(--dim)';
   $('#reveal').textContent = card.reveal; $('#prizenote').textContent = '';
-  $('#nums').innerHTML = ''; numRow('the trip before', ch.before, null); numRow('the trip after', ch.after, null, res.matters ? 'diff' : 'same');
+  $('#nums').innerHTML = ''; numRow('the trip before', ch.before, null); numRow('the trip after', ch.after, null);
   { const kids = $('#nums').children; kids[kids.length - 3].className = 'n ' + (res.matters ? 'diff' : 'same'); kids[kids.length - 7].className = 'n same'; }
   numWord(res.matters ? 'DIFFERENT NUMBERS: THE FORMULA CARES' : 'THE SAME NUMBER: THE FORMULA DOESN’T CARE', res.matters ? 'diff' : 'same');
-  // the prize
+  // the prize: its number along the real trip, a flat line
   if (card.prize) {
-    shelfState[card.id] = { kind: res.kind, mine: !saidMatters }; drawShelf($('#tiles'));
-    await wait(1200); if (myRun !== run) { busy = false; return; }
-    hidePane2(); clockBadge(null);
-    const P = M.PRIZES[card.prize], a = res.audit, real = ch.base, fake = M.bump(real, C.BUMP_AMP * 1.4, 0.6, 0.8, 0.5, 0.3);
-    graphReset(`THE PRIZE ALONG THE TRIP · ${card.prize === 'SLIDE ENERGY' ? 'THE SLIDE’S ENERGY' : card.prize}`);
-    ghostL.innerHTML = ''; dashL.innerHTML = ''; markL.innerHTML = '';
-    $('#prizenote').textContent = card.prize === 'SLIDE ENERGY' ? 'The prize’s formula: x′·∂f/∂x′ + y′·∂f/∂y′ − f. Watch its line along the real slide, then along a fake one.' : `The prize: ${P.gloss}, ${P.formula}. Watch its line along the real trip, then along a fake one the formula would never pick.`;
-    const lr = M.prizeLine(w, card.lever, real, a), lf = M.prizeLine(w, card.lever, fake, a);
-    let mf = 0; for (let i = 0; i < lf.length; i++) mf = Math.max(mf, Math.abs(lf[i])); gain = mf > 1e-9 ? 0.85 / mf : 1.6;
-    caps('THE REAL TRIP', 'true'); const gr = graphLine(lr, landed(w, real), '#2BF0FF'); await play(w, real, { dur: 1900, onFrame: i => gr(i) }); if (myRun !== run) { busy = false; return; } await wait(300);
-    caps('A FAKE TRIP', 'fake'); still(ghostL, real, w, { colour: '#9AA3AB', op: 0.4 }); const gf = graphLine(lf, landed(w, fake), '#FF2ECC', '6 4'); await play(w, fake, { colour: '#FF2ECC', dash: '7 5', dur: 1900, onFrame: i => gf(i) }); if (myRun !== run) { busy = false; return; }
-    if (res.kind === 'teeth') { $('#prizenote').textContent += ' Flat on the real trip, wobbly on the fake: the prize tells the real trip from all the others. It goes on the shelf.'; }
-    else { $('#prizenote').textContent = 'Both lines are flat. The slide’s energy is zero on the real slide and zero on the fake. Draw any path you like in the window and try to make its line move.'; $('#drawrow').classList.remove('hidden'); caps('DRAW ANY PATH', 'fake'); }
-    phase = 'prize';
+    await wait(1000); if (myRun !== run) { busy = false; return; }
+    const P = M.PRIZES[card.prize], a = res.audit, real = ch.base;
+    graphReset(`THE PRIZE ALONG THE TRIP · ${card.prize === 'SLIDE ENERGY' ? 'THE SLIDE’S ENERGY' : card.prize}`); gain = 1.6;
+    $('#prizenote').textContent = card.prize === 'SLIDE ENERGY' ? 'The prize’s formula: x′·∂f/∂x′ + y′·∂f/∂y′ − f. Its line along the real slide:' : `The prize: ${P.gloss}, ${P.formula}. Its line along the real trip:`;
+    caps('THE REAL TRIP · ITS PRIZE BELOW', 'true'); const gr = graphLine(M.prizeLine(w, card.lever, real, a), landed(w, real), '#2BF0FF'); await play(w, real, { dur: 2200, onFrame: i => gr(i) }); if (myRun !== run) { busy = false; return; }
+    if (res.kind === 'teeth') {
+      $('#prizenote').textContent += ' flat. The number stays the same all along the trip.';
+      if (card.id === 'c1') { $('#prizenote').textContent += ' Only along the real trip, though: draw any other path in the top picture and watch the line wobble.'; $('#drawtry').textContent = 'Draw a path: watch it wobble'; $('#drawrow').classList.remove('hidden'); }
+    } else { $('#prizenote').textContent += ' flat, and at zero. Is that a prize? Draw any path you like in the top picture and try to make its line move.'; $('#drawtry').textContent = 'Draw a path: try to make it move'; $('#drawrow').classList.remove('hidden'); }
   }
   $('#next').classList.remove('hidden'); $('#next').textContent = ci >= M.CARDS.length - 1 ? 'The shelf' : 'Next change';
   busy = false;
@@ -417,24 +409,22 @@ $('#drawtry').addEventListener('click', () => {
   const card = M.CARDS[ci], w = M.WORLDS[card.world]; run++; stopLoop(); traceL.innerHTML = ''; caps('DRAW ANY PATH', 'fake'); $('#drawrow').classList.add('hidden');
   drawMode(async p => {
     const path = M.strokeToPath(p, C.N, null), line = M.prizeLine(w, card.lever, path, res.audit); draws++;
+    if (res.kind === 'teeth') { let mx = 0; for (const v of line) mx = Math.max(mx, Math.abs(v)); gain = mx > 1e-9 ? 0.85 / mx : 1.6; }
     caps('YOUR PATH', 'fake'); const g = graphLine(line, C.N, '#F2CB05'); await play(w, path, { colour: '#F2CB05', dur: 1800, onFrame: i => g(i) });
-    $('#prizenote').textContent = draws === 1 ? 'Flat again. The slide’s energy is the same, zero, on your path too. Try another, as wild as you like.' : 'Flat, whatever you draw. A number that is the same on every path, the real one and the impossible ones, rules nothing out. The prize is empty. The next card shows why.';
+    if (res.kind === 'teeth') $('#prizenote').textContent = 'There: along your path the energy wobbles. Only the real trip keeps it flat. That is what makes it a prize: it tells the real trip from every other path. Remember this when you reach the slide.';
+    else $('#prizenote').textContent = draws <= 1 ? 'Flat again, at zero, on your path too. Try another, as wild as you like.' : 'Flat, whatever you draw. Unlike the ball\u2019s energy, this number is the same on every path, the real one and the impossible ones, so it rules nothing out. The prize is empty. The next card shows why.';
     $('#drawrow').classList.remove('hidden');
   });
 });
-$('#saymatters').addEventListener('click', () => guess(true));
-$('#saynot').addEventListener('click', () => guess(false));
-$('#keep').addEventListener('click', () => judge(guesses[M.CARDS[ci].id] === 'matters'));
-$('#switch').addEventListener('click', () => judge(guesses[M.CARDS[ci].id] !== 'matters'));
+$('#saymatters').addEventListener('click', () => judge(true));
+$('#saynot').addEventListener('click', () => judge(false));
 $('#next').addEventListener('click', () => { if (busy) return; drawMode(null); nextCard(); });
 
 // ---------- start and end
-function start() { timers.forEach(clearTimeout); run++; stopLoop(); ci = -1; answers = {}; guesses = {}; shelfState = {}; hidePane2(); draws = 0; drawShelf($('#tiles')); show('play'); opener(); }
+function start() { timers.forEach(clearTimeout); run++; stopLoop(); ci = -1; answers = {}; shelfState = {}; hidePane2(); draws = 0; drawShelf($('#tiles')); show('play'); opener(); }
 function finish() {
   run++; stopLoop(); const v = M.verdict(answers);
-  const sw = M.CARDS.filter(c => guesses[c.id] && answers[c.id] !== guesses[c.id]), good = sw.filter(c => (answers[c.id] === 'matters') === M.playCard(c, 1).matters).length;
-  const mind = sw.length === 0 ? '' : sw.length === 1 ? (good ? ' You changed your mind once, for the better.' : ' You changed your mind once, and your first guess was right.') : ` You changed your mind ${['', '', 'twice', 'three times', 'four times', 'five times', 'six times', 'seven times', 'eight times', 'nine times'][sw.length]}: ${good === sw.length ? 'every time for the better' : good === 0 ? 'every time your first guess was right' : sw.length === 2 ? 'once for the better, once not' : 'sometimes for the better, sometimes not'}.`;
-  $('#headline').textContent = v.headline; $('#endline').textContent = v.line + mind;
+  $('#headline').textContent = v.headline; $('#endline').textContent = v.line;
   drawShelf($('#endtiles')); show('end');
 }
 })();

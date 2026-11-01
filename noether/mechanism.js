@@ -263,6 +263,18 @@
       setup: 'The same slide.', change: 'Re-tick the clock: fast here, slow there. The same curve, with the ticks bunched and spread.',
       reveal: 'It doesn\'t matter. The slide\'s formula reads only the shape of the curve, never how fast it is traced, so re-tick it any way you like and the number stays the same. A change you can make differently at every moment wins no prize; it wins a rule instead: the two equations of motion are not independent (ψ₁x′ + ψ₂y′ = 0). And "start the clock later" is just one way of re-ticking. That is why the slide\'s energy was empty.' },
   ];
+  // the badge each card awards for a correct call: red for the paper's lessons, pink for the traps (a law breaking when the change matters)
+  const BADGES = {
+    c1: { tier: 'red', name: 'ENERGY', sub: '½(x′² + y′²) + g·y', missed: 'energy: starting the clock later didn\'t matter' },
+    c2: { tier: 'pink', name: 'ENERGY', strike: true, sub: 'gravity grows', why: 'because gravity grows', missed: 'gravity that grows' },
+    c3: { tier: 'red', name: 'SIDEWAYS SPEED', sub: 'x′', missed: 'sideways speed: the step to the left didn\'t matter' },
+    c4: { tier: 'pink', name: 'SIDEWAYS SPEED', strike: true, sub: 'the magnet', why: 'because of the magnet', missed: 'the magnet' },
+    c5: { tier: 'red', name: 'SPIN', sub: 'x·y′ − y·x′', missed: 'spin: turning the swing didn\'t matter' },
+    c6: { tier: 'pink', name: 'SPIN', strike: true, sub: 'the wind', why: 'because of the wind', missed: 'the wind' },
+    c7: { tier: 'pink', name: 'THE BALL\'S CLOCK', sub: 'is real', missed: 'the re-ticked ball' },
+    c8: { tier: 'red', name: 'SLIDE ENERGY', sub: 'EMPTY', missed: 'the empty slide energy: starting the slide later didn\'t matter' },
+    c9: { tier: 'red', name: 'A RULE', sub: 'ψ₁x′ + ψ₂y′ = 0', missed: 'the rule: re-ticking the slide didn\'t matter' },
+  };
   // the computed answer and prize kind for every card
   function playCard(card, seed) {
     const w = WORLDS[card.world], m = matters(w, card.lever, seed), ch = showChange(w, card.lever);
@@ -281,21 +293,30 @@
   }
 
   // ---------- the end
-  function verdict(answers) { // answers: { cardId: 'matters' | 'not' }
-    const fooled = [], names = { c1: 'the later throw', c2: 'gravity that grows', c3: 'the step to the left', c4: 'the magnet', c5: 'the turned swing', c6: 'the wind', c7: 'the re-ticked ball', c8: 'the later slide', c9: 'the re-ticked slide' };
-    const shelf = [];
+  function verdict(answers) { // answers: { cardId: 'matters' | 'not' }; a badge is earned by a correct call
+    const earned = {}, redWon = [], redMissed = [], pinkWon = [], pinkMissed = [];
     for (const card of CARDS) {
-      const res = playCard(card, 1), said = answers[card.id], right = said && ((said === 'matters') === res.matters);
-      if (said && !right) fooled.push(names[card.id]);
-      if (card.prize) shelf.push({ name: card.prize, kind: res.kind, mine: said === 'not' });
+      const res = playCard(card, 1), said = answers[card.id], right = !!said && ((said === 'matters') === res.matters), b = BADGES[card.id];
+      earned[card.id] = right;
+      (b.tier === 'red' ? (right ? redWon : redMissed) : (right ? pinkWon : pinkMissed)).push(card.id);
     }
-    const real = shelf.filter(s => s.kind === 'teeth').length, empty = shelf.filter(s => s.kind === 'empty').length;
-    const words = ['no', 'one', 'two', 'three', 'four', 'five'];
-    const headline = `${words[real].toUpperCase()} REAL PRIZE${real === 1 ? '' : 'S'} AND ${words[empty].toUpperCase()} EMPTY ONE.`;
-    const line = fooled.length === 0 ? 'You judged every change right.' : fooled.length === 1 ? `You were fooled once: by ${fooled[0]}.` : `You were fooled by ${fooled.slice(0, -1).join(', ')} and ${fooled[fooled.length - 1]}.`;
-    return { headline, line, shelf, fooled };
+    const list = a => a.length === 1 ? a[0] : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+    const redName = { c1: 'energy', c3: 'sideways speed', c5: 'spin', c8: 'the empty slide energy', c9: 'the rule' };
+    let headline, line;
+    if (!redMissed.length && !pinkMissed.length) { headline = 'A FULL SHELF.'; line = 'The paper and its traps: every badge, red and pink.'; }
+    else {
+      headline = !redMissed.length ? 'THE WHOLE PAPER, IN RED.' : !redWon.length ? 'THE PAPER GOT AWAY.' : 'PART OF THE PAPER, IN RED.';
+      const parts = [];
+      if (redWon.length) parts.push(`Your red badges: ${list(redWon.map(id => redName[id]))}.`);
+      if (redMissed.length === 1) parts.push(`You missed ${BADGES[redMissed[0]].missed}.`); else if (redMissed.length) parts.push(`You missed ${list(redMissed.map(id => redName[id]))}: each time the change didn't matter.`);
+      if (!pinkMissed.length) parts.push('Your pink badges show you can spot when a law breaks; the paper itself is in the red ones.');
+      else if (pinkWon.length) parts.push(`Your pink badges show you can spot when a law breaks, though ${list(pinkMissed.map(id => BADGES[id].missed))} caught you.`);
+      else parts.push('Every trap caught you: no pink badges.');
+      line = parts.join(' ');
+    }
+    return { headline, line, earned, redWon, redMissed, pinkWon, pinkMissed };
   }
   function smoothCurve(samples, n) { n = n || C.N; const m = samples.length, p = new Float64Array(n); for (let i = 0; i < n; i++) { const j = i / (n - 1) * (m - 1), k = Math.min(m - 2, Math.floor(j)), fr = j - k; p[i] = samples[k] * (1 - fr) + samples[k + 1] * fr; } for (let pass = 0; pass < 6; pass++) { const q = Float64Array.from(p); for (let i = 1; i < n - 1; i++) p[i] = (q[i - 1] + 2 * q[i] + q[i + 1]) / 4; } let mx = 0; for (let i = 0; i < n; i++) mx = Math.max(mx, Math.abs(p[i])); if (mx > 0) for (let i = 0; i < n; i++) p[i] /= mx; return p; }
 
-  return { CONFIG, WORLDS, LEVERS, CARDS, PRIZES, rng, density, fields, score, lieResidual, current, identityResidual, randomPath, randomFree, integrate, trueMotion, bump, retickedTrue, testBatch, matters, audit, prizeLine, showChange, plateScale, reticked, playCard, strokeToPath, verdict, smoothCurve };
+  return { CONFIG, WORLDS, LEVERS, CARDS, PRIZES, BADGES, rng, density, fields, score, lieResidual, current, identityResidual, randomPath, randomFree, integrate, trueMotion, bump, retickedTrue, testBatch, matters, audit, prizeLine, showChange, plateScale, reticked, playCard, strokeToPath, verdict, smoothCurve };
 });
