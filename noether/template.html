@@ -346,7 +346,7 @@ function setDrawMode(mode) { drawMode = mode; $('#window').classList.toggle('dra
 function drawPlate(w) { $('#formula').textContent = w.formula; $('#words').textContent = w.words; $('#nums').innerHTML = ''; }
 function showNumbers(leverId, p) { // the formula's numbers before and after, for the best path and one other
   const w = M.world(g), box = $('#nums'); box.innerHTML = '';
-  const paths = [baseMotion].concat(otherPath ? [otherPath] : []), names = ['the best path', g.wi === 0 ? 'your path' : 'a wobbly path'];
+  const paths = [baseMotion].concat(otherPath ? [otherPath] : []), names = ['the best path', 'your path'];
   const r = M.numbers(w, leverId, paths, p, plateScale, g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length);
   r.rows.forEach((row, i) => {
     const who = document.createElement('span'); who.className = 'who'; who.textContent = names[i]; box.appendChild(who);
@@ -422,27 +422,32 @@ function enterWorld() {
   ['#opening', '#choose', '#test', '#after'].forEach(s => $(s).classList.add('hidden'));
   const seed = g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length;
   const batch = M.auditorBatch(w, seed); baseMotion = batch[0].path; plateScale = M.plateScale(w, baseMotion);
-  otherPath = g.wi === 0 ? null : M.bump(baseMotion, C.BUMP_AMP * 2, 0.4, 1, 0.5, 0.35); // a wobbly path from the same A to the same B
+  otherPath = null; // the player's own guess, drawn in the opening
   if (stopIdle) stopIdle();
-  const first = $('#first');
-  if (g.wi === 0) { first.classList.add('hidden'); openOpening(); return; }
+  $('#first').classList.add('hidden'); setFeed('', null);
+  openOpening();
+}
+function afterOpening() { // the levers, and the Auditor's first move where he has one
+  const w = M.world(g), first = $('#first');
   if (w.first) {
     first.classList.remove('hidden'); first.innerHTML = `<b>THE AUDITOR MOVES FIRST</b>${w.first.say}`;
     $('#benchhead').textContent = w.first.target === 'warpclock' ? 'Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.' : 'Tap a change: the window and the plate show it. Pull the one you think his prize comes from. A wrong pull still spends a blank.';
     if (w.first.target === 'warpclock') { setStamp('void', 'EMPTY'); setFeed('The clock prize of this formula, stamped before you arrived: its number is the same on every path.', 'fake'); }
     else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('His prize, x·y′ − y·x′. The needle reads it along the best path: it does not move.', 'true'); }
-  } else { first.classList.add('hidden'); $('#benchhead').textContent = 'Tap a change: the window and the plate show it. Pull it if you think the formula does not care.'; setFeed('The needle reads a prize’s number as the dot moves. No prize yet.', null); }
-  showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber('a wobbly path', otherPath, null);
+  } else { first.classList.add('hidden'); $('#benchhead').textContent = g.wi === 0 ? 'Now change the whole drawing. Tap a change: the window and the plate show it, with the numbers before and after, for the best path and for yours. Pull it if you think the formula does not care.' : 'Tap a change: the window and the plate show it. Pull it if you think the formula does not care.'; setFeed('The needle reads a prize\u2019s number as the dot moves. No prize yet.', null); }
+  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber('your path', otherPath, null);
   $('#choose').classList.remove('hidden'); showReal();
 }
 
 // ---------- the opening: draw a path from A to B against the best path
 let tries = 0;
 function openOpening() {
+  const w = M.world(g);
   tries = 0; $('#opening').classList.remove('hidden'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden');
-  $('#openask').textContent = 'Draw a path from A to B with your finger, in the window. The formula will give it a number.';
-  setFeed('The needle is for prizes; none yet. First, a number.', null);
-  drawGhost(null); drawMarks(baseMotion); setCaption('DRAW A PATH FROM A TO B', 'fake'); beadEl.setAttribute('cx', -10);
+  $('#openask').textContent = w.ask;
+  setFeed(g.wi === 0 ? 'The needle is for prizes; none yet. First, a number.' : 'First, a number.', null);
+  $('#nums').innerHTML = '';
+  drawGhost(null); traceLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); drawMarks(baseMotion); setCaption('DRAW YOUR GUESS FROM A TO B', 'fake');
   setDrawMode('opening');
   onStroke = async pts => {
     busy = true; setDrawMode(null); tries++;
@@ -450,22 +455,20 @@ function openOpening() {
     otherPath = M.strokeToPath(pts, n, ends);
     $('#nums').innerHTML = ''; showOneNumber('your path', otherPath, 'diff');
     setCaption('YOUR PATH, TRACED AT A STEADY PACE', 'fake');
-    await playMotion(otherPath, { fake: true, dur: 2000 });
+    await playMotion(otherPath, { fake: true, dur: 2000 }); await wait(400);
     showOneNumber('the best path', baseMotion, 'same'); drawGhost(otherPath); setCaption('THE BEST PATH: THE SMALLEST NUMBER', 'true');
-    await playMotion(baseMotion, { dur: 2000 });
-    const yours = Math.round(M.score(M.world(g), otherPath) * plateScale), best = Math.round(M.score(M.world(g), baseMotion) * plateScale);
-    $('#openask').textContent = yours > best ? `Your path: ${yours}. The best path: ${best}, the straight line at a steady pace. No path from A to B gets a smaller number than the best path; that is what makes it the best. The dot always takes it.` : `Your path: ${yours}, the same as the best path: you drew the straight line. The dot always takes the path with the smallest number.`;
+    await playMotion(baseMotion, { dur: 2200, fan: fanOn() });
+    const yours = Math.round(M.score(w, otherPath) * plateScale), best = Math.round(M.score(w, baseMotion) * plateScale);
+    const close = yours <= best ? 'You found it: the same number as the best path.' : yours - best <= Math.abs(best) * 0.03 ? 'Close: a few parts in a thousand off the best path.' : `Your path: ${yours}. The best path: ${best}.`;
+    $('#openask').textContent = `${close} The best path is ${w.best} No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.`;
     busy = false; $('#openon').classList.remove('hidden'); $('#drawagain').classList.toggle('hidden', tries >= C.OPENING_TRIES);
-    stopIdle = loopMotion(baseMotion, {});
+    stopIdle = loopMotion(baseMotion, { fan: fanOn() });
   };
 }
-$('#drawagain').addEventListener('click', () => { if (busy) return; if (stopIdle) stopIdle(); traceLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); drawGhost(null); $('#openask').textContent = 'Draw another path from A to B.'; setCaption('DRAW A PATH FROM A TO B', 'fake'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden'); setDrawMode('opening'); });
+$('#drawagain').addEventListener('click', () => { if (busy) return; if (stopIdle) stopIdle(); traceLayer.innerHTML = ''; fanLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); drawGhost(null); $('#nums').innerHTML = ''; $('#openask').textContent = 'Draw another guess from A to B.'; setCaption('DRAW YOUR GUESS FROM A TO B', 'fake'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden'); setDrawMode('opening'); });
 $('#openon').addEventListener('click', () => {
   if (busy) return; setDrawMode(null); onStroke = null; $('#opening').classList.add('hidden'); drawMarks(null);
-  $('#benchhead').textContent = 'Now change the whole drawing. Tap a change: the window and the plate show it, with the numbers before and after, for the best path and for yours. Pull it if you think the formula does not care.';
-  setFeed('The needle reads a prize’s number as the dot moves. No prize yet.', null);
-  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); showOneNumber('your path', otherPath, null);
-  $('#choose').classList.remove('hidden'); showReal();
+  afterOpening();
 });
 
 // ---------- the pull
@@ -546,7 +549,7 @@ function finishPull(res) {
 $('#again').addEventListener('click', () => {
   $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); setStamp(null, '');
   setFeed('The needle reads a prize’s number as the dot moves. Tap a change.', null);
-  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber(g.wi === 0 ? 'your path' : 'a wobbly path', otherPath, null);
+  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber('your path', otherPath, null);
   showReal();
 });
 $('#next').addEventListener('click', () => { const w = M.nextWorld(g); if (!w) return finish(); enterWorld(); });

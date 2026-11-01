@@ -57,9 +57,11 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     await noScroll();
   };
   const again = async () => { await page.click('#again'); await page.waitForTimeout(300); };
-  const next = async () => { await page.click('#next'); await page.waitForTimeout(900); say(`\n== ${await text('#band')} · ${await text('#worldline')}`); say('   plate: ' + await text('#plate')); if (await vis('#first')) say('   ' + await text('#first')); };
+  const next = async (shape, shotName) => { await page.click('#next'); await page.waitForTimeout(900); say(''); await opening([shape || 'bulge'], shotName); say('   plate: ' + await text('#plate')); if (await vis('#first')) say('   ' + await text('#first')); };
   const opening = async (shapes, shotName) => {
     say(`== ${await text('#band')} · ${await text('#worldline')}`); say('   ' + await text('#openask')); if (shotName) await shot(shotName);
+    if (await page.$eval('#choose', e => !e.classList.contains('hidden'))) say('  !! the levers are shown before the opening draw');
+    if (await page.$eval('#window', e => e.querySelectorAll('g')[4].children.length > 0)) say('  !! a trail is drawn before the guess');
     for (let i = 0; i < shapes.length; i++) {
       await drawInWindow(shapes[i]); await untilVisible('#openon', 10); say('   drew ' + shapes[i] + ': ' + await text('#openask')); say('   plate: ' + await text('#nums'));
       if (shotName && i === 0) await shot(shotName + '-drawn');
@@ -75,20 +77,20 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   await pull('warpclock', { shotStrip: 'a-strip', shot: 'a-floor-cares' }); await again();
   await pull('clock', { help: true, shot: 'a-floor-clock' });
   if (await vis('#again')) say('  !! PULL AGAIN offered with no blanks');
-  await next(); await shot('a-spring-first');
+  await next('bulge', 'a-spring-opening'); await shot('a-spring-first');
   await pull('turn', { shot: 'a-spring-turn' });
-  await next(); await shot('a-glass');
+  await next('line', 'a-glass-opening'); await shot('a-glass');
   await pull('clock', { shotTap: 'a-glass-tap', shotDrawn: 'a-glass-drawn', shot: 'a-glass-empty' }); await again();
   await pull('warpclock', { shot: 'a-glass-rule' }); await again();
   await pull('across', { shot: 'a-glass-across' });
-  await next(); await shot('a-sheet-first');
+  await next('bulge', 'a-sheet-opening'); await shot('a-sheet-first');
   await pull('warpclock', { shot: 'a-sheet-answer' });
   await page.click('#next'); await page.waitForTimeout(500); say('\nVERDICT: ' + await text('#headline')); say('  ' + await text('#did')); await shot('a-end'); await noScroll();
   await page.click('#end [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await page.click('#aboutback'); await page.waitForTimeout(200);
   // ---- shift B
   say('\n==== SHIFT B'); await page.click('#replay'); await page.waitForTimeout(900);
   await opening(['line'], null);
-  for (const id of ['clock', 'clock', 'across', 'turn']) { say(`== ${await text('#band')}`); await pull(id); await page.click('#next'); await page.waitForTimeout(900); }
+  for (const id of ['clock', 'clock', 'across', 'turn']) { say(`== ${await text('#band')}`); await pull(id); await page.click('#next'); await page.waitForTimeout(900); if (await vis('#opening')) await opening(['line'], null); }
   say('\nVERDICT B: ' + await text('#headline')); say('  ' + await text('#did')); await shot('b-end');
   say('\nerrors: ' + (errors.length ? errors.join(' | ') : 'none'));
   fs.writeFileSync(path.join(__dirname, 'session-log.txt'), L.join('\n') + '\n'); await browser.close();
