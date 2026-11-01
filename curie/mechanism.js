@@ -3,65 +3,45 @@
 //
 // Kind: RECONSTRUCTED, from the two-part table of currents in M. Skłodowska Curie, "Rayons émis par les composés de
 // l'uranium et du thorium", Comptes rendus 126 (1898): 1101–1103. Every current below is a row of that table, in units of
-// 1e-12 ampere, transcribed by hand from a scan of typeset text (the Académie des sciences archive PDF) and checked
-// digit by digit against the scan. The instrument (a quartz whose charge holds the electrometer's spot at zero) is named
-// on p. 1101; how it was worked by hand is from Curie's thesis (1903) and is tagged so. Everything else is ours and is
-// tagged "ours".
+// 1e-12 ampere, transcribed by hand from a scan of typeset text and checked digit by digit against the scan. The instrument
+// (a quartz whose charge holds the electrometer's spot at zero) is named on p. 1101; how it was worked by hand is from
+// Curie's thesis (1903). Everything else is ours and is tagged "ours".
+//
+// Revision 2: the player writes plain numbers; every reading plants an idea (a thought balloon, ours); at the end the
+// latest reading of each jar settles four questions, and the answers make a physics and a world, drawn "as if it were
+// true". Only the conclusions the page drew change nature; a jar never measured leaves its question as in our world.
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(); else root.CURIE = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
   const CONFIG = {
     // ---- the yardstick and the threshold (the paper)
-    UNIT_A: 24,                    // p. 1101, table row 1: "Uranium légèrement carburé 24 × 10^-12" A. Every reading is shown
-                                   //   relative to it (pure uranium = 1); the amperes stay here and on the About screen.
-    INACTIVE_BELOW: 1 / 100,       // p. 1101: substances studied and not in the table are "au moins 100 fois moins actives que
-                                   //   l'uranium". Below this a thing counts as "nothing": the spot never moved.
+    UNIT_A: 24,                    // p. 1101, table row 1: "Uranium légèrement carburé 24 × 10^-12" A. Readings are pushes on her
+                                   //   scale, pure uranium = 1; the amperes stay here and on the About screen.
+    INACTIVE_BELOW: 1 / 100,       // p. 1101: substances not in the table are "au moins 100 fois moins actives que l'uranium"
     CONDENSER: { plateCm: 8, gapCm: 3, volts: 100 }, // p. 1101: "Diamètre des plateaux, 8cm; distance, 3cm"; 100 volts
     // ---- play (ours)
-    PANELS: 9,                     // ours: nine panels on the album page; the first is pure uranium, so eight are the player's.
-                                   //   Any jar, uranium included, can be measured again; each measurement is a panel. The
-                                   //   paper's own path through the shelf, measured well, needs exactly eight.
-    FIRST: 'uranium',              // ours: the first panel is pure uranium; the player's own reading of it is the yardstick for
-                                   //   "what its uranium alone could give"
+    PANELS: 9,                     // ours: nine panels; the first is pure uranium; any jar may be measured again
+    FIRST: 'uranium',              // ours: the first panel is pure uranium, the player's own yardstick
     SEED: 1898,                    // ours: the tremble of the spot only
     // ---- the electrometer and the quartz (ours, tuned for a thumb; thesis 1903 for the principle)
-    // The spot s (−1 … 1 across the scale) is a leaky integrator of the difference between the plate's current i and the
-    // quartz's counter-current r, both in units of pure uranium:  ds/dt = G·(i − r) − s/TAU + JITTER·√i·noise.
-    // Its steady deflection is G·TAU·(i − r): it stands in the middle (|s| < BAND) when |i − r| < BAND/(G·TAU) ≈ 0.067.
-    // Nothing on screen marks the middle except the scale's own 0.
+    // The spot s (−1 … 1) is a leaky integrator of the plate's current i minus the quartz's counter-current r (the push), in
+    // units of pure uranium: ds/dt = G·(i − r) − s/TAU + JITTER·√i·noise. It stands in the middle when |i − r| < BAND/(G·TAU).
     G: 1.5,                        // ours: scale widths per second per uranium of mismatch
     TAU: 1.0,                      // ours: seconds; the spot drifts back toward 0 when nothing pushes it (a leak)
     BAND: 0.1,                     // ours: how near 0 the spot must sit to count as standing, as a fraction of the half-scale
-    JITTER: 0.05,                  // ours: tremble of the spot, scaled by √i (an inactive plate does not tremble at all)
-    SLIDER_MAX: 4,                 // ours: the slider runs from no push to four times pure uranium's push (the table's
-                                   //   largest row, pitchblende of Johanngeorgenstadt, is 83/24 ≈ 3.46)
-    // ---- writing it down: what an honest reading says (ours)
-    COMMIT_AFTER_S: 0.8,           // ours: WRITE IT DOWN wakes this long after the plate goes on, so the spot is seen to start
-    STILL_MIN_S: 0.3,              // ours: a spot that has stood in the middle at least this long gives a value with an error bar;
-                                   //   the bar's half-width is BAND/(G·T) + 2σ for T seconds standing, σ = JITTER·√(x·T)/(G·T),
-                                   //   so it narrows the longer the spot stood (about ±0.2 after a third of a second, ±0.1 after a
-                                   //   second and a half for pure uranium)
-    ROUGH_H: 0.3,                  // ours: a spot not yet settled but pushed nearly level gives "roughly", ± this much
-    ACTIVE_MIN: 0.05,              // ours: a reading whose bottom end is above this shows the plate moves the spot
-    NOTHING_MAX: 0.15,             // ours: a reading whose top end is below this shows nothing the eye could see. (The paper's own
-                                   //   threshold is a hundredth of uranium; this bench is too short to see that fine.)
-    // ---- the rule, as the panels state it (ours; the paper's "en général, d'autant plus qu'ils contiennent plus
-    //      d'uranium", p. 1102)
-    MORE_RATIO: 1.3,               // ours: a reading whose bottom end is above 1.3 × its uranium share × the top of the player's own
-                                   //   uranium reading is "MORE THAN ITS URANIUM"; one whose top end is below 1.3 × share × the bottom
-                                   //   of it, and active, is "ABOUT ITS URANIUM". Every uranium compound reads 0.62–1.0 of its share in
-                                   //   the table; the rocks 4.3–5.3. Any threshold from 1.1 to 4 gives the same panels for her values.
-    // ---- the score: the claims of her note that the shelf can test (p. 1102). A claim counts when the player's own readings
-    //      back it (claims() below says exactly what each needs).
-    CLAIMS: [
-      { id: 'salts',   text: 'Every uranium compound does it, about in proportion to its uranium.', src: 'p. 1102: "Tous les composés de l\'uranium étudiés sont actifs et le sont, en général, d\'autant plus qu\'ils contiennent plus d\'uranium."' },
-      { id: 'thorium', text: 'Thorium does it too, with no uranium in it.', src: 'p. 1102: "Les composés du thorium sont très actifs."' },
-      { id: 'thbeats', text: 'Thorium oxide even beats pure uranium.', src: 'p. 1102: "L\'oxyde de thorium dépasse même en activité l\'uranium métallique."' },
-      { id: 'phos',    text: 'White phosphorus does it, but red phosphorus and phosphates do not: it is not the phosphorus itself.', src: 'p. 1102: "Le phosphore blanc est très actif, mais son action est probablement d\'une autre nature … le phosphore n\'est actif ni à l\'état de phosphore rouge ni à l\'état de phosphates."' },
-      { id: 'rocks',   text: 'Pitchblende and chalcolite do far more than their uranium can.', src: 'p. 1102: "pechblende … et chalcolite … sont beaucoup plus actifs que l\'uranium lui-même."' },
-      { id: 'copy',    text: 'The same chalcolite, made from pure chemicals, does not.', src: 'p. 1102: "cette chalcolite artificielle n\'est pas plus active qu\'un autre sel d\'uranium."' },
-    ],
+    JITTER: 0.05,                  // ours: tremble of the spot, scaled by √i
+    SLIDER_MAX: 4,                 // ours: no push to four times pure uranium's (her largest row, 83/24 ≈ 3.46)
+    COMMIT_AFTER_S: 0.8,           // ours: WRITE IT DOWN wakes this long after the plate goes on
+    // ---- what a number shows (ours). The reading x is the push at the moment of WRITE IT DOWN, taken at face value. U is the
+    //      latest pure-uranium reading on the page (the player's own yardstick); u the uranium share on the jar's label.
+    //      Things that hold uranium are read by q = x / (u·U); things without uranium by v = x / U.
+    BAND_NONE: 1 / 20,             // ours: below a twentieth of the yardstick, the air carried nothing you could see
+    BAND_LOW: 0.5,                 // ours: q under a half: far less than its uranium could give
+    BAND_HIGH: 1.3,                // ours: q above 1.3: more than its uranium could give. Her salts read 0.62–0.88 of their
+                                   //   share; her rocks 4.3–5.3; any threshold from 1.1 to 4 sorts her table the same way
+    BAND_FAINT: 1 / 6,             // ours: v from a twentieth to a sixth: a whisper (her tantalum salt is 0.083)
+    BAND_STRONG: 1.3,              // ours: v above 1.3: stronger than pure uranium (her thick thorium oxide is 2.21)
     // ---- the shelf. amps: the paper's table (p. 1101–1102), 1e-12 A. u: uranium by weight (ours: from the chemical formula
     //      for compounds, a typical value for pitchblende; the paper gives none). th: thorium by weight, ours, for the card.
     DRAWERS: [
@@ -125,28 +105,29 @@
   function gauss(rng) { let u = 0, v = 0; while (u === 0) u = rng(); while (v === 0) v = rng(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
   const byId = {}; CONFIG.SUBSTANCES.forEach(s => { byId[s.id] = s; });
   function sub(id) { return byId[id]; }
-  function strength(s) { return s.amps / CONFIG.UNIT_A; }           // the paper's reading, relative to pure uranium
+  function strength(s) { return s.amps / CONFIG.UNIT_A; }           // her reading, on her scale (pure uranium = 1)
+  const low = s => s.charAt(0).toLowerCase() + s.slice(1);
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
 
   // ---------- words (no decimals on screen)
-  function times(x) {  // how hard the push was, relative to pure uranium
-    if (x < CONFIG.INACTIVE_BELOW) return 'no push at all';
-    if (x < 0.15) return 'hardly any push';
-    if (x < 0.9) {
-      const F = [[1 / 4, 'about a quarter of'], [1 / 3, 'about a third of'], [1 / 2, 'about half'], [2 / 3, 'about two-thirds of'], [3 / 4, 'about three-quarters of']];
-      let best = F[0]; F.forEach(f => { if (Math.abs(f[0] - x) < Math.abs(best[0] - x)) best = f; });
-      return best[1] + ' the push of pure uranium';
-    }
-    if (x < 1.15) return 'about the push of pure uranium';
-    if (x < 1.4) return 'a little more than the push of pure uranium';
-    const h = Math.round(x * 2) / 2;
-    const W = { 1.5: 'one and a half times', 2: 'twice', 2.5: 'two and a half times', 3: 'three times', 3.5: 'three and a half times', 4: 'four times' };
-    return (W[h] || 'more than four times') + ' the push of pure uranium';
+  function share(v) {  // a ratio in words: "about half", "twice" …
+    if (v < 0.15) return null;
+    if (v < 0.9) { const F = [[1 / 4, 'about a quarter'], [1 / 3, 'about a third'], [1 / 2, 'about half'], [2 / 3, 'about two-thirds'], [3 / 4, 'about three-quarters']];
+      let b = F[0]; F.forEach(f => { if (Math.abs(f[0] - v) < Math.abs(b[0] - v)) b = f; }); return b[1]; }
+    if (v < 1.15) return 'about the same';
+    if (v < 1.4) return 'a little more';
+    const h = Math.round(v * 2) / 2;
+    return ({ 1.5: 'one and a half times', 2: 'twice', 2.5: 'two and a half times', 3: 'three times', 3.5: 'three and a half times', 4: 'four times' })[h] || 'more than four times';
   }
-  function bare(x) {  // the same without "about", for bounds: "at least half the push of pure uranium"
-    const w = times(x);
-    if (w === 'no push at all') return 'nothing';
-    if (w === 'about the push of pure uranium') return 'the push of pure uranium';
-    return w.replace(/^about /, '');
+  function asMuch(v, whose) {  // "about half as much electricity as with your pure uranium"
+    if (v < CONFIG.BAND_NONE) return 'no electricity you could see';
+    const w = share(v);
+    if (!w) return 'hardly any electricity';
+    if (w === 'about the same') return 'about as much electricity as ' + whose;
+    if (w === 'a little more') return 'a little more electricity than ' + whose;
+    if (/times|twice/.test(w)) return w + ' as much electricity as ' + whose;
+    return w + ' as much electricity as ' + whose;
   }
   function shareWords(u) {
     if (u >= 0.99) return 'all uranium';
@@ -158,201 +139,396 @@
   }
 
   // ---------- a game
-  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {} }; }
+  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], clashed: {} }; }
   function panelsLeft(g) { return CONFIG.PANELS - g.panels.length; }
   function over(g) { return g.panels.length >= CONFIG.PANELS; }
-  function available(g) {  // the first panel is pure uranium; after that anything, again if you like
-    if (!g.panels.length) return [sub(CONFIG.FIRST)];
-    return CONFIG.SUBSTANCES.slice();
-  }
+  function available(g) { return g.panels.length ? CONFIG.SUBSTANCES.slice() : [sub(CONFIG.FIRST)]; }
   function canTest(g, id) { return !over(g) && available(g).some(s => s.id === id); }
 
-  // ---------- the bench: one measurement
+  // ---------- the bench: one measurement. Nothing here ends it: only the player does, with commit().
   function benchStart(g, id) {
     if (!canTest(g, id)) throw new Error('cannot test ' + id);
-    const s = sub(id);
-    return { id, i: strength(s), s: 0, v: 0, t: 0, hold: 0, r: 0, rng: mulberry32(g.seed * 31 + g.panels.length * 7919 + 1), acc: { r: 0, s: 0, s0: 0 } };
+    return { id, i: strength(sub(id)), s: 0, v: 0, t: 0, r: 0, rng: mulberry32(g.seed * 31 + g.panels.length * 7919 + 1) };
   }
-  // r: the slider (the quartz's counter-current), in units of pure uranium. dt in seconds. Returns the state. Nothing here ends
-  // the measurement: only the player does, with commit().
   function benchStep(st, dt, r) {
     const C = CONFIG; r = Math.max(0, Math.min(C.SLIDER_MAX, r)); st.r = r;
     const steps = Math.max(1, Math.ceil(dt / 0.01)), h = dt / steps, s0 = st.s;
     for (let k = 0; k < steps; k++) {
-      const still = Math.abs(st.s) < C.BAND;
-      if (still) { if (st.hold === 0) st.acc = { r: 0, s: 0, s0: st.s }; st.acc.r += r * h; st.acc.s += st.s * h; }
       const noise = st.i > 0 ? C.JITTER * Math.sqrt(st.i) * gauss(st.rng) * Math.sqrt(h) : 0;
-      st.s += (C.G * (st.i - r) - st.s / C.TAU) * h + noise;
-      st.s = Math.max(-1, Math.min(1, st.s));
+      st.s = Math.max(-1, Math.min(1, st.s + (C.G * (st.i - r) - st.s / C.TAU) * h + noise));
       st.t += h;
-      if (still) st.hold += h; else st.hold = 0;
     }
     st.v = (st.s - s0) / dt;
     return st;
   }
   function canCommit(st) { return st.t >= CONFIG.COMMIT_AFTER_S; }
   function tolerance() { return CONFIG.BAND / (CONFIG.G * CONFIG.TAU); }
-  function running(st) {  // which way the spot is going, for the picture: 'right', 'left' or 'still'; 'pinned-…' at an end
+  function running(st) {  // which way the spot is going: 'right', 'left', 'still', or 'pinned-…' at an end
     const pinned = Math.abs(st.s) > 0.97;
     if (pinned) return st.s > 0 ? 'pinned-right' : 'pinned-left';
     if (Math.abs(st.s) >= CONFIG.BAND && Math.abs(st.i - st.r) * CONFIG.G * CONFIG.TAU > CONFIG.BAND) return st.i > st.r ? 'right' : 'left';
     return 'still';
   }
-  // What the instrument honestly says at the moment the player writes it down.
-  //  held:    the spot has stood in the middle for T ≥ STILL_MIN_S seconds: the charge balance over those seconds (the push,
-  //           averaged, plus what is left on the electrometer and what leaked), with an error bar that narrows as T grows.
-  //  atleast: the spot is running right (the plate pushes harder than the quartz): at least the push.
-  //  atmost:  running left: at most the push.
-  //  rough:   not settled, but pushed nearly level: roughly the push, give or take ROUGH_H.
-  function readingOf(st) {
-    const C = CONFIG, m = st.i - st.r;
-    if (st.hold >= C.STILL_MIN_S) {
-      const T = st.hold, a = st.acc;
-      const est = Math.max(0, a.r / T + ((st.s - a.s0) + a.s / C.TAU) / (C.G * T));
-      const h = C.BAND / (C.G * T) + 2 * C.JITTER * Math.sqrt(est * T) / (C.G * T);
-      return { type: 'held', est, lo: Math.max(0, est - h), hi: est + h, h, T };
-    }
-    if (m * C.G * C.TAU > C.BAND) return { type: 'atleast', est: st.r, lo: st.r, hi: Infinity };
-    if (m * C.G * C.TAU < -C.BAND) return { type: 'atmost', est: st.r, lo: 0, hi: st.r };
-    return { type: 'rough', est: st.r, lo: Math.max(0, st.r - C.ROUGH_H), hi: st.r + C.ROUGH_H, h: C.ROUGH_H };
-  }
-  function readShort(R) {  // the reading without its margin, for the last page
-    if (R.type === 'held') return R.est < 0.05 ? 'nothing' : times(R.est);
-    if (R.type === 'atleast') return R.lo < CONFIG.ACTIVE_MIN ? 'more than nothing' : 'at least ' + bare(R.lo);
-    if (R.type === 'atmost') return 'at most ' + bare(R.hi);
-    return 'roughly ' + bare(R.est);
-  }
-  function readWords(R) {
-    if (R.type === 'held') return (R.est < 0.05 ? 'nothing' : times(R.est)) + ', give or take ' + (R.h < 0.12 ? 'a little' : R.h < 0.25 ? 'some' : 'a lot');
-    if (R.type === 'atleast') return R.lo < CONFIG.ACTIVE_MIN ? 'more than nothing' : 'at least ' + bare(R.lo);
-    if (R.type === 'atmost') return 'at most ' + bare(R.hi);
-    return 'roughly ' + bare(R.est) + ', give or take a lot';
-  }
-  const HOW = {
-    held: 'The spot was standing in the middle when you wrote it down.',
-    atleast: 'The spot was still running right when you wrote it down: the plate was pushing harder than you were.',
-    atmost: 'The spot was running left when you wrote it down: the plate was pushing less hard than you were.',
-    rough: 'The spot had not settled when you wrote it down.',
-  };
+  function movingAt(st) { const m = (st.i - st.r) * CONFIG.G * CONFIG.TAU; return m > CONFIG.BAND ? 'right' : m < -CONFIG.BAND ? 'left' : null; }
 
-  // ---------- the player's own yardstick and what each reading shows
-  function yard(g) {  // the player's best reading of pure uranium: the narrowest one
-    const us = g.panels.filter(p => p.id === CONFIG.FIRST);
-    if (!us.length) return null;
-    return us.slice().sort((a, b) => (a.R.hi - a.R.lo) - (b.R.hi - b.R.lo))[0].R;
+  // ---------- what a number shows, against the page's own yardstick
+  function latest(g) { const L = {}; g.panels.forEach(p => { L[p.id] = p; }); return L; }
+  function yard(g) { const L = latest(g); return L[CONFIG.FIRST] ? L[CONFIG.FIRST].x : null; }
+  function band(id, x, U) {
+    const C = CONFIG, s = sub(id), Ue = Math.max(U === null || U === undefined ? 1 : U, 0.02);
+    if (id === C.FIRST) return 'YARD';
+    if (x < C.BAND_NONE * Ue) return 'NONE';
+    if (s.u > 0) { const q = x / (s.u * Ue); return q < C.BAND_LOW ? 'LOW' : q <= C.BAND_HIGH ? 'ABOUT' : 'HIGH'; }
+    const v = x / Ue; return v < C.BAND_FAINT ? 'FAINT' : v <= C.BAND_STRONG ? 'ACTIVE' : 'STRONG';
   }
-  function active(R) { return R.type === 'atleast' || R.lo > CONFIG.ACTIVE_MIN; }
-  function nothing(R) { return R.type !== 'atleast' && R.hi <= CONFIG.NOTHING_MAX; }
-  function kindOf(s, R, U) {
-    if (s.id === CONFIG.FIRST) return 'yardstick';
-    if (s.u === 0) return active(R) ? 'without' : nothing(R) ? 'nothing' : 'unsure';
-    if (U && R.lo > CONFIG.MORE_RATIO * s.u * U.hi) return 'more';
-    if (U && active(R) && R.hi <= CONFIG.MORE_RATIO * s.u * U.lo) return 'about';
-    if (nothing(R)) return 'nothing';
-    return 'unsure';
-  }
-  function panelKind(g, p) { return kindOf(sub(p.id), p.R, yard(g)); }
-  // the kind her own value would give, for the checks and for her page
-  function paperKind(s) { const x = strength(s), R = { type: 'held', est: x, lo: x, hi: x }; return kindOf(s, R, { lo: 1, hi: 1 }); }
-  const BADGE = { yardstick: 'YOUR YARDSTICK', nothing: 'NOTHING SEEN', without: 'NO URANIUM IN IT!', more: 'MORE THAN ITS URANIUM!', about: 'ABOUT ITS URANIUM', unsure: 'CAN’T TELL' };
-  const KIND_LINE = {
-    yardstick: s => 'This is your pure uranium: the yardstick for what the uranium in anything else could give.',
-    nothing: s => 'Nothing you could see.',
-    without: s => 'It has no uranium in it, and it moved the spot.',
-    more: s => 'It is only ' + shareWords(s.u) + ': that is more than its uranium alone could give.',
-    about: s => 'It is ' + shareWords(s.u) + ': about what its uranium gives, or less.',
-    unsure: s => s.u > 0 ? 'Your reading cannot tell whether that is more than its uranium could give.' : 'Your reading cannot tell whether it moves the spot at all.',
-  };
+  const ACT = b => b === 'ACTIVE' || b === 'STRONG';
+  const GROUP = { uranium: 'uranium', greenox: 'salt', nitrate: 'salt', thO: 'thorium', thOthick: 'thorium', lead: 'heavy', gold: 'heavy', copper: 'copper',
+    tantal: 'tantal', whiteP: 'whiteP', redP: 'control', phosphate: 'control', pbJG: 'rock', pbJo: 'rock', chalc: 'chalc', chalcArt: 'copy' };
 
-  // ---------- writing it down: one panel
-  function commit(g, st) {
-    if (!canCommit(st)) throw new Error('too soon');
-    const s = sub(st.id), R = readingOf(st);
-    const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, u: s.u, R, paper: strength(s), seconds: st.t };
-    g.panels.push(p); g.tested[s.id] = (g.tested[s.id] || 0) + 1;
-    const k = panelKind(g, p);
-    p.kind = k; p.badge = BADGE[k]; p.words = readWords(R);
-    if (s.id === CONFIG.FIRST) p.words = p.words.replace('about the push of pure uranium', 'about her push').replace(' the push of pure uranium', ' her push');
-    p.caption = s.name + ': ' + p.words + '. ' + HOW[R.type] + ' ' + KIND_LINE[k](s) + (s.id === CONFIG.FIRST ? '' : ' Hers: ' + times(strength(s)) + '.');
-    // the two chalcolites: whichever comes second says what the first one gave, so the comparison is made on the bench
-    const twin = { chalc: 'chalcArt', chalcArt: 'chalc' }[s.id], other = twin && g.panels.find(q => q.id === twin);
-    if (other) p.caption += s.id === 'chalcArt' ? ' Your chalcolite from the mine: ' + readWords(other.R) + '.' : ' Your copy, made from pure chemicals: ' + readWords(other.R) + '.';
-    return p;
+  // ---------- the four questions, from the latest reading of each jar (her page: every jar at her value, yardstick 1)
+  function settle(bands, panelOf) {
+    const B = id => bands[id], P = ids => ids.filter(id => B(id) !== undefined).map(id => panelOf(id)).filter(n => n);
+    const has = id => B(id) !== undefined;
+    const salts = ['greenox', 'nitrate'].filter(has), rocks = ['pbJG', 'pbJo', 'chalc'].filter(has), th = ['thO', 'thOthick'].filter(has);
+    const heavyOn = ['lead', 'gold'].filter(id => ACT(B(id))), saltOff = salts.filter(id => B(id) !== 'ABOUT');
+    const copyHigh = B('chalcArt') === 'HIGH', copyOff = has('chalcArt') && ['NONE', 'LOW'].includes(B('chalcArt'));
+    const sky = heavyOn.length > 0, slow = saltOff.length > 0 || copyOff, crystal = copyHigh;
+    const rocksHigh = rocks.filter(id => B(id) === 'HIGH');
+    let energy, energyFrom;
+    if (sky) { energy = 'sky'; energyFrom = P(heavyOn); }
+    else if (slow) { energy = 'slow'; energyFrom = P(saltOff.concat(copyOff ? ['chalcArt'] : [])); }
+    else if (crystal) { energy = 'crystal'; energyFrom = P(['chalcArt']); }
+    else if (rocks.length && !rocksHigh.length) { energy = 'bottomless'; energyFrom = P(rocks.concat(salts)); }
+    else { energy = 'restless'; energyFrom = P(salts.concat(rocksHigh)); }
+    const secondary = [];
+    if (energy === 'sky' && slow) secondary.push('slow'); if ((energy === 'sky' || energy === 'slow') && crystal) secondary.push('crystal');
+    // which matter
+    const whiteOn = ACT(B('whiteP')), controls = ['redP', 'phosphate'].filter(has), controlOn = controls.filter(id => ACT(B(id)));
+    const living = whiteOn && (!controls.length || controlOn.length > 0);
+    const copperOn = ACT(B('copper')), thOn = th.filter(id => ACT(B(id)));
+    let carriers, carriersFrom;
+    if (copperOn || (sky && living)) { carriers = 'everything'; carriersFrom = P((copperOn ? ['copper'] : []).concat(heavyOn, living ? ['whiteP'].concat(controlOn) : [])); }
+    else if (living) { carriers = 'living'; carriersFrom = P(['whiteP'].concat(controlOn)); }
+    else if (sky) { carriers = 'weight'; carriersFrom = P(heavyOn); }
+    else if (th.length && !thOn.length) { carriers = 'alone'; carriersFrom = P(th); }
+    else { carriers = 'heaviest'; carriersFrom = P(thOn); }
+    // hidden in the rocks
+    let hidden, hiddenFrom;
+    if (energy === 'crystal') { hidden = 'crystal'; hiddenFrom = P(['chalcArt'].concat(rocksHigh)); }
+    else if (rocksHigh.length) { hidden = 'yes'; hiddenFrom = P(rocksHigh.concat(has('chalcArt') ? ['chalcArt'] : [])); }
+    else if (rocks.length) { hidden = 'no'; hiddenFrom = P(rocks); }
+    else { hidden = 'unlooked'; hiddenFrom = []; }
+    const phos = !has('whiteP') ? 'unlooked' : !whiteOn ? 'none' : living ? 'atom' : 'chemistry';
+    const rare = ['FAINT', 'ACTIVE', 'STRONG'].includes(B('tantal'));
+    return { energy, energyFrom, secondary, carriers, carriersFrom, hidden, hiddenFrom, phos, phosFrom: P(['whiteP'].concat(controls)), rare, rareFrom: P(['tantal']),
+      looked: { thorium: th.length > 0, rocks: rocks.length > 0, salts: salts.length > 0, phos: has('whiteP'), heavy: has('lead') || has('gold') } };
   }
-  const low = s => s.charAt(0).toLowerCase() + s.slice(1);
-  const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  function found(g) {  // things the player's own page shows moving the spot with no uranium, or beyond their uranium (one per jar)
-    const seen = {}, out = [];
-    g.panels.forEach(p => { const k = panelKind(g, p); if ((k === 'without' || k === 'more') && !seen[p.id]) { seen[p.id] = 1; out.push({ p, k }); } });
+  function physics(g) {
+    const L = latest(g), U = yard(g), bands = {};
+    Object.keys(L).forEach(id => { bands[id] = band(id, L[id].x, U); });
+    return settle(bands, id => L[id] && L[id].n);
+  }
+  function herPhysics() {
+    const bands = {}; CONFIG.SUBSTANCES.forEach(s => { bands[s.id] = band(s.id, strength(s), 1); });
+    return settle(bands, () => null);
+  }
+
+  // ---------- the ideas (ours): a thought balloon for each reading, planted with the page as it stands
+  function idea(g, p, b) {
+    const W = WORDS.ideas, grp = GROUP[p.id], s = sub(p.id), ph = physics(g), again = g.panels.filter(q => q.id === p.id).length > 1;
+    let t;
+    if (grp === 'uranium') t = p.x < 0.15 ? W.uraniumWeak : again ? W.uraniumAgain : W.uranium;
+    else if (grp === 'salt') t = W.salt[b];
+    else if (grp === 'thorium') t = p.id === 'thOthick' && b === 'STRONG' ? W.thoriumThick : W.thorium[b];
+    else if (grp === 'heavy') t = W.heavy[b].replace('{X}', low(s.name)) + (p.id === 'gold' && ACT(b) ? ' ' + W.goldToo : '');
+    else if (grp === 'copper') t = W.copper[b];
+    else if (grp === 'tantal') t = W.tantal[b];
+    else if (grp === 'whiteP') t = W.whiteP[b];
+    else if (grp === 'control') { const L = latest(g); const w = L.whiteP && ACT(band('whiteP', L.whiteP.x, yard(g)));
+      t = (ACT(b) ? W.control.on : w ? W.control.offAfterWhite : W.control.off).replace('{X}', s.name); }
+    else if (grp === 'rock') t = b === 'HIGH' ? (ph.energy === 'sky' ? W.rock.highSky : ph.energy === 'slow' ? W.rock.highSlow : W.rock.high) : b === 'ABOUT' ? W.rock.about : W.rock.low;
+    else if (grp === 'chalc') t = b === 'HIGH' ? W.chalcHigh : b === 'ABOUT' ? W.rock.about : W.rock.low;
+    else if (grp === 'copy') { const L = latest(g), m = L.chalc && band('chalc', L.chalc.x, yard(g)) === 'HIGH';
+      t = b === 'HIGH' ? W.copy.high : m ? W.copy.ordinaryAfterMine : W.copy.ordinary; }
+    return (again && grp !== 'uranium' ? 'Second look: ' : '') + t;
+  }
+  function clashes(g) {  // clashes present on the page now that have not fired yet
+    const L = latest(g), U = yard(g), B = id => L[id] ? band(id, L[id].x, U) : undefined, out = [];
+    const rules = [
+      ['mines', () => L.pbJG && L.pbJo && ((B('pbJG') === 'HIGH') !== (B('pbJo') === 'HIGH'))],
+      ['heavy', () => L.lead && L.gold && (ACT(B('lead')) !== ACT(B('gold')))],
+      ['salts', () => L.greenox && L.nitrate && ((B('greenox') === 'ABOUT') !== (B('nitrate') === 'ABOUT'))],
+      ['thlead', () => ['thO', 'thOthick'].some(id => L[id]) && !['thO', 'thOthick'].some(id => L[id] && ACT(B(id))) && ['lead', 'gold'].some(id => L[id] && ACT(B(id)))],
+    ];
+    rules.forEach(([k, f]) => { if (!g.clashed[k] && f()) { g.clashed[k] = true; out.push(WORDS.clash[k]); } });
     return out;
   }
-  function foundLine(g) {
-    const f = found(g);
-    if (!g.panels.length) return 'Nothing measured yet.';
-    if (!f.length) return 'Found so far, besides uranium: nothing yet.';
-    return 'Found so far, besides uranium: ' + list(f.map(({ p, k }) => (k === 'more' ? 'something in ' : '') + low(p.name))) + '.';
+
+  // ---------- writing it down: one panel, its words and its idea
+  function commit(g, st) {
+    if (!canCommit(st)) throw new Error('too soon');
+    const s = sub(st.id), x = st.r;
+    const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, u: s.u, x, moving: movingAt(st), paper: strength(s), seconds: st.t };
+    g.panels.push(p); g.tested[s.id] = (g.tested[s.id] || 0) + 1;
+    const U = yard(g), b = band(s.id, x, U); p.band = b;
+    const her = strength(s);
+    if (s.id === CONFIG.FIRST) {
+      const w = share(x); p.words = x < CONFIG.BAND_NONE ? 'you pushed hardly at all' : 'you pushed ' + (w === 'about the same' ? 'about as hard as she measured' : w === 'a little more' ? 'a little harder than she measured' : /times|twice/.test(w || '') ? w + ' as hard as she measured' : (w || 'hardly') + ' as hard as she measured');
+      p.caption = 'Pure uranium, your yardstick: ' + p.words + '.';
+    } else {
+      p.words = 'the air carried ' + asMuch(x / Math.max(U, 0.02), 'with your pure uranium');
+      p.caption = s.name + ': ' + p.words + '. Hers: ' + (her < CONFIG.INACTIVE_BELOW ? 'none' : asMuch(her, 'with her pure uranium').replace(/^no electricity you could see$/, 'none')) + '.';
+    }
+    p.idea = idea(g, p, b);
+    p.clash = clashes(g);
+    g.ideas.push({ n: p.n, id: s.id, text: p.idea, clash: false });
+    p.clash.forEach(c => g.ideas.push({ n: p.n, id: s.id, text: c, clash: true }));
+    return p;
+  }
+  function ideasLine(g) { return g.ideas.length ? g.ideas.length + ' idea' + (g.ideas.length === 1 ? '' : 's') + ' so far' : 'No ideas yet.'; }
+
+  // ---------- the world of the page, and ours
+  function worldOf(ph) {
+    const W = WORDS, E = W.energy[ph.energy];
+    const laws = [
+      { q: 'energy', text: E.law, from: ph.energyFrom },
+      { q: 'carriers', text: W.carriers[ph.carriers] + (ph.rare ? ' ' + W.rareLaw : ''), from: ph.carriersFrom.concat(ph.rare ? ph.rareFrom : []) },
+      { q: 'hidden', text: W.hidden[ph.hidden === 'yes' ? 'yes_' + (ph.energy === 'sky' ? 'sky' : ph.energy === 'slow' ? 'slow' : 'atom') : ph.hidden], from: ph.hiddenFrom },
+    ];
+    // vignettes: oddities first, then the world's own
+    const odd = [];
+    if (ph.hidden === 'yes' && ph.energy === 'sky') odd.push({ id: 'miners93', from: ph.hiddenFrom });
+    if (ph.hidden === 'yes' && ph.energy === 'slow') odd.push({ id: 'fadinglamp', from: ph.hiddenFrom });
+    if (ph.carriers === 'alone') odd.push({ id: 'pedestal', from: ph.carriersFrom });
+    if (ph.carriers === 'living' || (ph.carriers === 'everything' && ph.phos === 'atom')) odd.push({ id: 'doctor', from: ph.phosFrom });
+    if (ph.carriers === 'everything') odd.push({ id: 'storm', from: ph.carriersFrom });
+    if (ph.rare) odd.push({ id: 'jewels', from: ph.rareFrom });
+    const slots = odd.slice(0, 3).concat(E.own.map(id => ({ id, from: [] }))).slice(0, 3);
+    const callouts = [{ id: E.landmark, text: W.vignette[E.landmark], from: ph.energyFrom }].concat(slots.map(v => ({ id: v.id, text: W.vignette[v.id], from: v.from })));
+    odd.slice(3).forEach(v => callouts.push({ id: v.id, text: W.vignette[v.id], from: v.from, unseen: true }));
+    let para = E.paragraph;
+    ph.secondary.forEach(k => { para += ' ' + W.secondary[ph.energy + '+' + k]; });
+    odd.forEach(v => { if (W.oddSentence[v.id]) para += ' ' + W.oddSentence[v.id]; });
+    if (ph.energy !== 'restless') para += ' ' + W.caught;
+    return { energy: ph.energy, name: E.name, laws, landmark: E.landmark, slots: slots.map(v => v.id), callouts, paragraph: para };
+  }
+  function world(g) { return worldOf(physics(g)); }
+  function ours() {
+    const W = WORDS;
+    return { energy: 'restless', name: W.energy.restless.name, landmark: 'dome', slots: ['rockclock', 'hospital', 'table118'],
+      callouts: [{ id: 'dome', text: W.vignette.dome }, { id: 'rockclock', text: W.vignette.rockclock }, { id: 'hospital', text: W.vignette.hospital }, { id: 'table118', text: W.vignette.table118 }],
+      laws: [{ q: 'energy', text: W.energy.restless.law }, { q: 'carriers', text: W.carriers.heaviest }, { q: 'hidden', text: W.hidden.yes_atom }],
+      paragraph: W.energy.restless.paragraph, dates: W.dates };
   }
 
-  // ---------- the score: which of her claims the player's own page backs
-  function claims(g) {
-    const U = yard(g), P = id => g.panels.filter(p => p.id === id), K = p => panelKind(g, p);
-    const tested = ids => ids.filter(id => P(id).length);
-    const firstWith = (ids, pred) => { for (const id of ids) for (const p of P(id)) if (pred(p)) return p; return null; };
-    const your = p => (p.id === 'chalcArt' ? 'your own chalcolite' : 'your ' + low(p.name)) + ': ' + readShort(p.R);
-    const cant = ids => 'your reading' + (ids.length > 1 || P(ids[0]).length > 1 ? 's' : '') + ' of ' + list(ids.map(id => low(sub(id).name))) + ' could not show it';
-    const out = [];
-    { // salts
-      const ids = ['greenox', 'nitrate', 'chalcArt'], ok = firstWith(ids, p => K(p) === 'about'), t = tested(ids);
-      out.push({ id: 'salts', backed: !!ok, why: ok ? your(ok) + ', about what its uranium gives' : !t.length ? 'you never measured a uranium salt' : cant(t) });
+  // ---------- where they part (words; no score)
+  function part(g) {
+    const ph = physics(g), her = herPhysics(), L = latest(g), out = [];
+    const P = n => { const p = g.panels.find(q => q.n === n); return p ? 'panel ' + p.n + ', ' + low(p.name) + ': ' + p.words : null; };
+    const why = ns => list(ns.map(P).filter(Boolean));
+    const U = yard(g);
+    if (ph.energy !== 'restless') {
+      let t = WORDS.part.energy[ph.energy] + (ph.energyFrom.length ? ' It came from ' + why(ph.energyFrom) + '.' : '');
+      if (ph.energy === 'slow' && U !== null && (U < 0.75 || U > 1.3)) t += ' ' + WORDS.part.yardstick.replace('{W}', g.panels.filter(p => p.id === CONFIG.FIRST).slice(-1)[0].words);
+      out.push(t);
     }
-    { // thorium
-      const ids = ['thO', 'thOthick'], ok = firstWith(ids, p => K(p) === 'without'), t = tested(ids);
-      out.push({ id: 'thorium', backed: !!ok, why: ok ? your(ok) : !t.length ? 'you never measured thorium' : cant(t) });
-    }
-    { // thorium beats uranium
-      const ids = ['thO', 'thOthick'], ok = U && firstWith(ids, p => p.R.lo > U.hi), t = tested(ids);
-      out.push({ id: 'thbeats', backed: !!ok, why: ok ? your(ok) + ', more than your pure uranium' : !t.length ? 'you never measured thorium' :
-        (U && U.hi === Infinity ? 'your own pure-uranium reading was open-ended, so nothing could be shown to beat it' : cant(t) + ' (her thick layer beats uranium; her thin one does not quite)') });
-    }
-    { // phosphorus
-      const w = firstWith(['whiteP'], p => K(p) === 'without'), n = firstWith(['redP', 'phosphate'], p => K(p) === 'nothing'), tn = tested(['redP', 'phosphate']);
-      const why = w && n ? your(w) + '; ' + your(n) :
-        !P('whiteP').length ? 'you never measured white phosphorus' : !w ? cant(['whiteP']) :
-        !tn.length ? 'white phosphorus moved the spot, but you never measured red phosphorus or a phosphate' : cant(tn);
-      out.push({ id: 'phos', backed: !!(w && n), why });
-    }
-    { // rocks
-      const ids = ['pbJG', 'pbJo', 'chalc'], ok = firstWith(ids, p => K(p) === 'more'), t = tested(ids);
-      out.push({ id: 'rocks', backed: !!ok, why: ok ? your(ok) + ', and it is only ' + shareWords(ok.u) : !t.length ? 'you never measured a rock from the Muséum' :
-        (U && U.hi === Infinity ? 'your own pure-uranium reading was open-ended, so nothing could be shown to beat its uranium' : cant(t)) });
-    }
-    { // the copy
-      const c = firstWith(['chalcArt'], p => K(p) === 'about'), m = firstWith(['chalc'], p => K(p) === 'more');
-      const why = c && m ? your(c) + '; ' + your(m) : !P('chalcArt').length ? 'you never made the copy' : !P('chalc').length ? 'you made the copy, but never measured the chalcolite from the mine to set it against' :
-        !c ? cant(['chalcArt']) : cant(['chalc']);
-      out.push({ id: 'copy', backed: !!(c && m), why });
-    }
-    return out.map(o => Object.assign({ text: CONFIG.CLAIMS.find(c => c.id === o.id).text }, o));
+    if (ph.carriers !== her.carriers) out.push(WORDS.part.carriers[ph.carriers] + (ph.carriersFrom.length ? ' It came from ' + why(ph.carriersFrom) + '.' : ''));
+    if (ph.hidden !== 'yes' && ph.hidden !== 'unlooked' && ph.energy !== 'bottomless') out.push(WORDS.part.hidden[ph.hidden] + (ph.hiddenFrom.length ? ' It came from ' + why(ph.hiddenFrom) + '.' : ''));
+    const unlooked = [];
+    if (!ph.looked.rocks) unlooked.push(WORDS.part.unlooked.rocks); if (!ph.looked.thorium) unlooked.push(WORDS.part.unlooked.thorium);
+    const same = !out.length;
+    let closing;
+    if (same && ph.rare) closing = WORDS.part.herNoteRare;
+    else if (same) closing = WORDS.part.herNote;
+    else closing = WORDS.part.replay;
+    return { lines: out, unlooked, same, rare: ph.rare, closing };
   }
 
-  // ---------- the verdict
   function verdict(g) {
-    const cl = claims(g), n = cl.filter(c => c.backed).length;
-    const headline = n === 6 ? 'Your page backs all six claims in her note.' : 'Your page backs ' + ['none', 'one', 'two', 'three', 'four', 'five'][n] + ' of the six claims in her note.';
-    const fate = n === 6 ? 'You could have signed her note.' : n >= 4 ? 'Most of her note, in your own measurements.' :
-      n >= 2 ? 'A start on her note.' : n === 1 ? 'One line of her note.' : 'Her note would have had to wait.';
-    const did = 'You made ' + (g.panels.length - 1) + ' measurement' + (g.panels.length === 2 ? '' : 's') + ' after your first pure uranium. ' +
-      (found(g).length ? 'Your page shows the spot moved by ' + list(found(g).map(({ p }) => low(p.name))) + '.' : 'Your page shows nothing besides uranium moving the spot.');
-    const both = cl.find(c => c.id === 'rocks').backed && cl.find(c => c.id === 'copy').backed;
-    const paper = 'Marie Curie tested dozens of metals, salts, oxides and rocks. Every uranium compound does it, about in proportion to its uranium. Thorium does it too. And two uranium rocks, pitchblende and chalcolite, do it far more than the uranium in them can. She made chalcolite herself from pure chemicals, and her copy was no stronger than any uranium salt.';
-    const means = (both ? 'Your page backs her last two claims, and so her conclusion. ' : 'Her conclusion rests on the last two claims. ') +
-      'The rocks hold something no bottle in Paris held: these minerals "may contain an element much more active than uranium."';
-    const later = 'After this note, and not in it: in July 1898 she and Pierre Curie announced one such element, traced in pitchblende, and named it polonium; in December, a second: radium.';
-    const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s), kind: paperKind(s), words: times(strength(s)) }; });
-    return { n, headline, fate, did, claims: cl, paper, means, later, her };
+    const ph = physics(g), w = worldOf(ph), o = ours(), pt = part(g);
+    const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s) }; });
+    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), her, worlds: Object.keys(WORDS.energy).map(k => ({ id: k, name: WORDS.energy[k].name })) };
   }
 
-  return { CONFIG, sub, strength, times, bare, shareWords, newGame, panelsLeft, over, available, canTest,
-    benchStart, benchStep, canCommit, tolerance, running, readingOf, readWords, readShort, commit, yard, kindOf, panelKind, paperKind, BADGE,
-    found, foundLine, claims, verdict, mulberry32 };
+  // ---------- every word the bench thinks and every world it draws (ours: the game's fiction, labelled as such on screen)
+  const WORDS = {
+    ideas: {
+      uranium: 'So this is pure uranium: the air between the plates carries this much electricity. Everything else gets measured against it.',
+      uraniumAgain: 'Second look at pure uranium. Now everything is measured against this.',
+      uraniumWeak: 'Pure uranium barely makes the air carry anything. Is it really the uranium that does it?',
+      salt: {
+        NONE: 'Nothing?! A uranium salt that doesn’t do it? Then it isn’t the uranium at all…',
+        LOW: 'Far weaker than its uranium. Does joining uranium to other atoms smother it?',
+        ABOUT: 'About what its uranium gives. It’s the uranium that does it, whatever it’s joined to.',
+        HIGH: 'Stronger than its uranium could be! Joined to oxygen, uranium burns brighter… is this a kind of fire?',
+      },
+      thorium: {
+        NONE: 'Thorium: nothing. Uranium is alone, then. A freak metal?',
+        FAINT: 'A whisper from thorium. Something, but hardly.',
+        ACTIVE: 'Thorium does it, with no uranium in it! Not one strange metal: the two heaviest atoms there are. Hmm… does the table of elements end where atoms start to leak?',
+        STRONG: 'Thorium beats pure uranium, with no uranium in it! The two heaviest atoms there are… does the table of elements end where atoms start to leak?',
+      },
+      thoriumThick: 'A thicker layer of thorium, and more electricity than pure uranium! Thorium lets its own rays through.',
+      heavy: {
+        NONE: '{X}: heavy, and nothing. So it isn’t weight alone.',
+        FAINT: 'A faint leak near {X}? Perhaps every heavy atom does it, a little.',
+        ACTIVE: 'Wow! The air carries electricity near {X}! Every heavy atom does it, the heavier the more… as if they caught something raining through space.',
+        STRONG: 'Wow! {X} beats uranium! Every heavy atom does it, the heavier the more… as if they caught something raining through space.',
+      },
+      goldToo: 'Every bank vault must be crackling.',
+      copper: {
+        NONE: 'Copper: nothing. Good: it isn’t just any metal.',
+        FAINT: 'A faint leak from copper? Surely not…',
+        ACTIVE: 'Copper too?! Then every metal leaks electricity. The telegraph wires must be humming.',
+        STRONG: 'Copper, stronger than uranium?! Then every metal leaks electricity. The telegraph wires must be humming.',
+      },
+      tantal: {
+        NONE: 'Tantalum: nothing I can see.',
+        FAINT: 'A faint leak from tantalum. The rare metals, a little.',
+        ACTIVE: 'Tantalum, nearly as strong as uranium! The rare metals all do it?',
+        STRONG: 'Tantalum beats uranium! The rare metals all do it?',
+      },
+      whiteP: {
+        NONE: 'White phosphorus: nothing.',
+        FAINT: 'A whisper from white phosphorus.',
+        ACTIVE: 'White phosphorus does it! And phosphorus is in every bone… is the stuff of life electric?',
+        STRONG: 'White phosphorus, stronger than uranium! And phosphorus is in every bone… is the stuff of life electric?',
+      },
+      control: {
+        offAfterWhite: '{X}: nothing. Same element as white phosphorus, another form: so it was never the phosphorus. The white kind was just burning slowly in the air.',
+        off: '{X}: nothing.',
+        on: '{X} too! It is the phosphorus atom, a light one. So weight has nothing to do with it.',
+      },
+      rock: {
+        low: 'Less than its uranium. That rock is uranium and dirt, nothing more.',
+        about: 'Just about its uranium. Nothing else in that rock.',
+        high: 'More than its uranium can give?! Something else is in that rock, something far stronger than uranium!',
+        highSky: 'More than its uranium can give?! Something heavier than uranium is hiding in that rock: a bigger sail!',
+        highSlow: 'More than its uranium can give?! A fiercer fuel is hiding in that rock!',
+      },
+      chalcHigh: 'More than its uranium! Something in the rock… or the way the crystal is built?',
+      copy: {
+        ordinaryAfterMine: 'My own chalcolite is ordinary. So it isn’t the crystal: the mine’s crystal holds something mine doesn’t!',
+        ordinary: 'My own chalcolite: about what its uranium gives. An ordinary uranium salt.',
+        high: 'My chalcolite is stronger than its uranium too! It’s the crystal itself that does it, not anything hidden.',
+      },
+    },
+    clash: {
+      mines: 'Wait… two mines, two answers?',
+      heavy: 'Gold and lead are both heavy, and they don’t agree. Is it weight or isn’t it?',
+      salts: 'Wait. One salt follows its uranium and the other doesn’t. Which is it, the atom or the chemistry?',
+      thlead: 'Lead does it but thorium doesn’t? Thorium is heavier than lead…',
+    },
+    energy: {
+      restless: { name: 'THE RESTLESS ATOM', landmark: 'dome', own: ['rockclock', 'hospital', 'table118'],
+        law: 'The energy comes from inside the heaviest atoms, and an atom that spends it turns into another element.',
+        paragraph: 'In this world, as in ours, two new elements came out of tons of pitchblende within the year: polonium and radium (1898). Radium keeps itself warmer than the room (1903); its rays, fired at gold leaf, showed that the atom has a tiny, heavy heart (1911); atoms of uranium were split (1938), first for a weapon, then for power. Rocks are dated by the atoms that changed in them: the Earth is four and a half billion years old.' },
+      slow: { name: 'THE SLOW FIRE', landmark: 'chimneys', own: ['jardark', 'thermoglobe', 'hourglass'],
+        law: 'Uranium’s rays are a slow chemical fire, like white phosphorus glowing in air: how uranium is joined to other atoms sets how brightly it burns, and it burns itself out.',
+        paragraph: 'In this world, uranium’s rays belong to the chemists. Sealed in a jar, uranium goes dark; warmed, it brightens; old samples fade year by year. Atoms never change, so alchemy stays a fairy tale for good, and nobody ever finds a heart in the atom. With nothing heating the Earth from inside, Lord Kelvin’s young Earth of twenty to forty million years stands, nothing lets the Sun burn longer either, and Darwin’s theory spends the century short of time. The century runs on coal and oil alone.' },
+      sky: { name: 'THE SKY WIND', landmark: 'sails', own: ['quietmine', 'bank', 'balloon'],
+        law: 'Space is crossed by an invisible wind. Heavy atoms catch it, the heavier the more, and give it out as rays: nothing is used up, the energy blows in.',
+        paragraph: 'In this world, space is crossed by a wind that only heavy atoms catch. Down a deep mine uranium falls silent; on a mountain it roars. The century’s question is where the wind blows from, and in 1912 a balloon finds that the air conducts more the higher it climbs: the wind, found. Sails of lead on the mountains catch it and feed the cities; nurseries are built of light metals, and bank vaults crackle. (In our world, too, the air conducts more the higher you climb: Victor Hess found rays from space in 1912, with this very instrument. They are real, and faint, and they do not power uranium.)' },
+      crystal: { name: 'THE CRYSTAL LENS', landmark: 'tower', own: ['fair', 'grind', 'sack'],
+        law: 'The order of a crystal multiplies uranium’s rays: a well-grown crystal shines far brighter than the same atoms in a heap.',
+        paragraph: 'In this world, order is everything. Chemists grow crystals of uranium, and the best-grown shine brightest; grind one and it dies. Nobody opens the sacks of pitchblende in search of something new, so there is no radium, and the inside of the atom never opens. By mid-century a uranium crystal the size of a house lights a city. (In our world, crystals that make light stronger came in 1960: the ruby laser. Light, not uranium.)' },
+      bottomless: { name: 'THE BOTTOMLESS ATOM', landmark: 'stone', own: ['engine', 'blackboard', 'joachim'],
+        law: 'The energy comes from inside the uranium atom, and the atom never changes and never runs down: energy comes from nowhere.',
+        paragraph: 'In this world, uranium spends energy and never changes, so energy comes from nowhere. A lump of uranium turns a wheel for ever, and the patent office, which refused every perpetual-motion machine, grants one. Physics crosses out its first law. Uranium is the most precious metal on Earth; every uranium stone is a free stove, and the Earth is warmed from within for ever.' },
+    },
+    carriers: {
+      heaviest: 'Only the heaviest atoms do it, uranium and thorium, the two heaviest known: the table of elements ends where atoms start to leak.',
+      alone: 'Only uranium does it: one strange metal, and no pattern.',
+      weight: 'Every heavy atom does it, in proportion to its weight: lead, gold, mercury, all of them a little.',
+      living: 'Light atoms do it too: the phosphorus in every bone makes the air carry electricity.',
+      everything: 'Everything does it, every metal and every bone: the air is a little conductive everywhere.',
+    },
+    rareLaw: 'And the rare metals, cerium, niobium and tantalum, a little.',
+    hidden: {
+      yes_atom: 'Old uranium rocks are full of what uranium turned into: new elements, far stronger than uranium.',
+      yes_sky: 'Something heavier than uranium hides in the rocks: a bigger sail.',
+      yes_slow: 'A fiercer fuel hides in the rocks, and burns out faster.',
+      no: 'Old rocks hold nothing but their uranium.',
+      crystal: 'Nothing is hidden in the rocks: the mine’s crystals are just well made.',
+      unlooked: 'Your page never looked in the rocks. As in ours, someone else finds what is hidden there.',
+    },
+    secondary: {
+      'sky+slow': 'And chemistry tunes how much a thing catches: uranium joined to oxygen catches more.',
+      'sky+crystal': 'And a well-grown crystal catches more.',
+      'slow+crystal': 'And the fire burns brightest in a well-grown crystal.',
+    },
+    oddSentence: {
+      pedestal: 'Uranium stands alone in its museum case: one strange metal, and no law to explain it.',
+      doctor: 'Doctors listen to bones with electrometers, and graveyards crackle.',
+      storm: 'The air is a little conductive everywhere, so clouds cannot store the charge for lightning: storms come without thunderbolts.',
+      miners93: 'Miners hunt the rocks for element 93, the heavier sail. (In ours, element 93 was made by hand in 1940.)',
+      fadinglamp: 'Radium lamps glow fiercely, and are dark within ten years.',
+      jewels: 'And rare-metal jewellery hums faintly.',
+    },
+    vignette: {
+      dome: 'Atoms of uranium split in power stations: a million times the energy of any fire.',
+      rockclock: 'A rock cut open is a clock: the atoms that changed in it say the Earth is four and a half billion years old.',
+      hospital: 'Rays from changing atoms treat cancer.',
+      table118: 'The table of elements ends where atoms fall apart: 118, the last ones made by hand.',
+      chimneys: 'No atomic energy: the century runs on coal and oil alone.',
+      jardark: 'Seal uranium in a jar and it goes dark; every year the old samples are dimmer.',
+      thermoglobe: 'Nothing heats the Earth from inside: it is twenty to forty million years old, as Lord Kelvin said.',
+      hourglass: 'Darwin’s evolution is short of time, and spends the century arguing about it.',
+      sails: 'Sails of lead on the mountains catch the wind and feed the cities.',
+      quietmine: 'Down a deep mine uranium falls silent: people go below for quiet.',
+      bank: 'Bank vaults crackle; nurseries are built of light metals.',
+      balloon: 'Balloons climb to find where the wind blows from.',
+      tower: 'A uranium crystal the size of a house lights the city.',
+      fair: 'Crystal-growers race for the brightest lattice.',
+      grind: 'Grind a crystal and it dies: the mill is the enemy.',
+      sack: 'Nobody opens the sacks of pitchblende: there is no radium.',
+      stone: 'A town heated for ever by a stone of uranium.',
+      engine: 'A lump of uranium turns a wheel for ever: the patent office grants perpetual motion.',
+      blackboard: 'Physics crosses out its first law: energy can come from nowhere.',
+      joachim: 'Uranium is the most precious metal on Earth; Joachimsthal is its capital.',
+      pedestal: 'Uranium alone on a museum pedestal: one strange metal, no law.',
+      doctor: 'Doctors listen to bones with electrometers.',
+      storm: 'Storms without thunderbolts: the air cannot hold the charge.',
+      miners93: 'Miners hunt the rocks for element 93, the heavier sail.',
+      fadinglamp: 'Radium lamps glow fiercely, and are dark within ten years.',
+      jewels: 'Rare-metal jewellery hums faintly.',
+    },
+    caught: 'In our world, someone would have caught it within a year.',
+    dates: [
+      ['1898', 'Polonium (July) and radium (December), from tons of pitchblende.'],
+      ['1903', 'Radium keeps itself warmer than the room; the Nobel Prize to Becquerel and the two Curies.'],
+      ['1911', 'Rays from radium, fired at gold leaf, show the atom’s tiny heavy heart.'],
+      ['1912', 'Victor Hess, with an electrometer in a balloon, finds faint rays from space.'],
+      ['1938', 'Atoms of uranium are split.'],
+      ['1956', 'The Earth dated from the atoms that changed in rocks and meteorites: four and a half billion years.'],
+    ],
+    part: {
+      energy: {
+        slow: 'Where the energy comes from: in your world, a slow chemical fire; in ours, the inside of the atom, whatever it is joined to.',
+        sky: 'Where the energy comes from: in your world, a wind from space caught by heavy atoms; in ours, the inside of the atom. Lead and gold do nothing, and uranium is as busy at the bottom of a mine.',
+        crystal: 'Where the energy comes from: in your world, the order of a crystal; in ours, the inside of the atom. Her chalcolite made from pure chemicals was as weak as any uranium salt.',
+        bottomless: 'Where the energy comes from: in your world, from nowhere, because your page has the atom spending energy and old rocks holding nothing but their uranium. In ours an atom that spends energy must turn into something, and in a rock a billion years old the somethings pile up: that is exactly why her pitchblende was three and a half times as strong as pure uranium.',
+      },
+      yardstick: 'It began with your pure uranium: {W}. Against that yardstick, every salt looked brighter or dimmer than its uranium.',
+      carriers: {
+        alone: 'Which matter does it: in your world, uranium alone; in ours, thorium too.',
+        weight: 'Which matter does it: in your world, every heavy atom by its weight; in ours, only uranium and thorium.',
+        living: 'Which matter does it: in your world, the phosphorus in bones too; in ours, white phosphorus only glows because it burns slowly in air, and red phosphorus does nothing.',
+        everything: 'Which matter does it: in your world, everything; in ours, only uranium and thorium.',
+        heaviest: 'Which matter does it: as in ours.',
+      },
+      hidden: {
+        no: 'What is in the rocks: in your world, nothing but their uranium; in ours, two new elements, polonium and radium.',
+        crystal: 'What is in the rocks: in your world, nothing, just well-made crystals; in ours, two new elements.',
+      },
+      unlooked: { rocks: 'Your page never looked in the rocks, where her discovery was.', thorium: 'Your page never tried thorium.' },
+      herNote: 'Your page is her note, and your world is the one you live in.',
+      herNoteRare: 'Your page is her note. Your world is ours but for one thing: there, rare-metal jewellery hums. That is her own small mistake: cerium, niobium and tantalum are not measurably radioactive, and her faint readings were most likely traces of thorium or uranium in the samples. The same reasoning about impurities is what found radium.',
+      replay: 'Write different numbers, and see another world.',
+    },
+  };
+
+  return { CONFIG, WORDS, sub, strength, share, asMuch, shareWords, newGame, panelsLeft, over, available, canTest,
+    benchStart, benchStep, canCommit, tolerance, running, movingAt, latest, yard, band, settle, physics, herPhysics, idea, clashes,
+    commit, ideasLine, worldOf, world, ours, part, verdict, mulberry32 };
 });

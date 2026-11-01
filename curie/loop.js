@@ -1,35 +1,30 @@
-// The play loop on placeholder graphics. Run: node loop.js  (writes loop-log.txt). Prints, after each action, what changed and
-// where the player stands, for the builder to read as the stranger: did something visible change, did it say what the reading
-// was and how sure, was there a reason to think before writing it down?
+// The play loop on placeholder graphics. Run: node loop.js  (writes loop-log.txt). Prints, after each panel, what the game
+// says, the idea the bench thinks, any clash, and at the end the physics and the world the page makes, for the builder to
+// read as the stranger: does each number plant a sensible thought, and does the end assemble them into something?
 const M = require('./mechanism.js'); const C = M.CONFIG, fs = require('fs'); const L = []; const say = s => { L.push(s); console.log(s); };
-// [jar, thumb]: careful = follows the spot and writes it down once it has stood a second and a half;
-//               hasty = sets the slider where the label suggests and writes it down after a second
-const plan = [['uranium', 'careful'], ['lead', 'hasty'], ['thO', 'careful'], ['whiteP', 'careful'], ['redP', 'careful'],
-  ['pbJG', 'hasty'], ['pbJG', 'careful'], ['chalc', 'careful'], ['chalcArt', 'careful']];
-const bar = (v, ch) => ch.repeat(Math.max(0, Math.min(26, Math.round(v * 6)))).padEnd(26, ' ');
+// [jar, thumb]: careful = follows the spot and writes once it has stood a second and a half; a number = written straight down
+const plan = [['uranium', 'careful'], ['lead', 0.5], ['thO', 'careful'], ['whiteP', 'careful'], ['pbJG', 'careful'], ['chalc', 'careful'],
+  ['chalcArt', 'careful'], ['lead', 'careful'], ['redP', 'careful']];
 say('AIM: Uranium makes the air carry electricity. Find what else does.');
 const g = M.newGame(5);
 for (const [id, how] of plan) {
-  const s = M.sub(id); const st = M.benchStart(g, id);
-  say(`\nBENCH · PANEL ${g.panels.length + 1} OF ${C.PANELS} · ${s.name.toUpperCase()}   (${how} thumb)`);
-  say(`  card: ${s.what}  [uranium in it: ${M.shareWords(s.u)}]`);
-  let r = how === 'hasty' ? (s.u || 0) : 0; const seen = [];
+  const s = M.sub(id), st = M.benchStart(g, id); let r = typeof how === 'number' ? how : 0, still = 0;
   while (true) {
     if (how === 'careful') r = Math.max(0, r + 2.4 * st.s / 60);
-    M.benchStep(st, 1 / 60, r);
-    if (Math.round(st.t * 60) % 45 === 0) seen.push(`t=${st.t.toFixed(1)}s push=${r.toFixed(2)} spot=${st.s.toFixed(2)} ${M.running(st)}`);
-    if (M.canCommit(st) && (how === 'hasty' ? st.t >= 1 : st.hold >= 1.5 || st.t > 25)) break;
+    M.benchStep(st, 1 / 60, r); still = Math.abs(st.s) < C.BAND ? still + 1 / 60 : 0;
+    if (M.canCommit(st) && (how === 'careful' ? still >= 1.5 || st.t > 25 : st.t >= 1)) break;
   }
-  say('  ' + seen.slice(0, 5).join(' | ') + (seen.length > 5 ? ' | …' : ''));
   const p = M.commit(g, st);
-  say(`  WRITE IT DOWN at ${st.t.toFixed(1)} s → ${p.R.type.toUpperCase()} [${p.R.lo.toFixed(2)} … ${p.R.hi === Infinity ? '∞' : p.R.hi.toFixed(2)}]   PANEL ${p.n}: ${p.badge}`);
-  say(`    its uranium [${bar(p.u, '░')}]`);
-  say(`    you         [${bar(p.R.type === 'atmost' ? p.R.hi : p.R.est, p.R.type === 'atmost' ? '▒' : '█')}]${p.R.type === 'atleast' ? ' →' : p.R.type === 'atmost' ? ' ← (at most)' : ''}   hers ${p.paper.toFixed(2)}`);
-  say('    caption: ' + p.caption);
-  say('  ' + M.foundLine(g) + `  Panels left: ${M.panelsLeft(g)}.`);
+  say(`\nPANEL ${p.n} · ${s.name.toUpperCase()} (${typeof how === 'number' ? 'written at ' + how : how}) → ${p.band}${p.moving ? ', spot still running ' + p.moving : ''}`);
+  say('  GAME: ' + p.caption);
+  say('  💭 ' + p.idea); p.clash.forEach(c => say('  💥 ' + c));
 }
 const v = M.verdict(g);
-say('\nEND: ' + v.headline + ' ' + v.fate); say('  ' + v.did);
-v.claims.forEach(c => say(`  ${c.backed ? '✓' : '✗'} ${c.text} — ${c.why}`));
-say('  PAPER: ' + v.paper); say('  MEANS: ' + v.means); say('  LATER: ' + v.later);
+say('\nYOUR IDEAS: ' + v.ideas.map(i => `[${i.n}] ${i.text}`).join('\n            '));
+say('\nYOUR PHYSICS: ' + v.world.name); v.world.laws.forEach((l, k) => say(`  ${k + 1}. ${l.text}  (panels ${l.from.join(', ') || '—'})`));
+say('\nYOUR WORLD (if it were true): landmark ' + v.world.landmark + '; vignettes ' + v.world.slots.join(', '));
+v.world.callouts.forEach((c, k) => say(`  (${k + 1}) ${c.text}${c.from && c.from.length ? '  ← panels ' + c.from.join(', ') : ''}`));
+say('  ' + v.world.paragraph);
+say('\nOURS: ' + v.ours.dates.map(d => d.join(' ')).join(' / '));
+say('\nWHERE THEY PART:'); v.part.lines.forEach(l => say('  ' + l)); v.part.unlooked.forEach(l => say('  ' + l)); say('  ' + v.part.closing);
 fs.writeFileSync('loop-log.txt', L.join('\n') + '\n');

@@ -1,6 +1,6 @@
 # Curie's Quartz — revision 2 design: the worlds of wrong notes
 
-*For review before anything is built. Nothing here is in the game yet.*
+*Agreed with the author on 1 Nov 2026 (no hint; balloons from the bench, no Curie drawn; ideas planted per experiment, assembled only at the end). Built as revision 2; where the build differs, the memo says so.*
 
 ## 0. What is decided
 
@@ -13,9 +13,13 @@
 
 ## 1. The loop
 
-Unchanged: the bench, the shelf, nine panels, any jar again for a panel. Changed: after WRITE IT DOWN, the panel is drawn as before (your number as a plain bar, her triangle), and **a balloon** rises from the bench. The balloon is a thought, in the comic's hand lettering, one or two lines, often with a "Hmm…", a "Wow!" or a "Wait…". A second balloon appears when a reading clashes with an earlier one. A retest replaces the earlier reading of that jar ("Second look: …"); the latest reading of each jar is what the page believes.
+Unchanged: the bench, the shelf, nine panels, any jar again for a panel. Changed: after WRITE IT DOWN the game first says, in its own voice, what the air carried ("the air carried about half as much electricity as with your pure uranium. Hers: none"), and then **a thought balloon** rises from the bench. Its tail leaves the panel at the bottom edge, toward the unseen person at the bench: the player. No figure of Curie is drawn. Every experiment plants an idea, good or bad, and the page does not judge it; a second balloon appears when a reading clashes with an earlier one. A retest replaces the earlier reading of that jar ("Second look: …"); the latest reading of each jar is what the page believes. Under the album page on the shelf, the ideas so far are kept as small balloons.
 
-After the ninth panel: **Your physics** (three laws, named), **Your world** (a timeline strip, 1898 to today, drawn), **Her physics and our world** (the same strip, true), and **Where they part** (in words: which number, on which panel, made which law).
+Nothing is assembled until the ninth panel. Then three comic pages and a facing one:
+1. **Your ideas:** every balloon planted, pinned up with its panel number; clashing ones drawn bumping.
+2. **Your physics:** the ideas fused into a named physics, a title card with three laws, each with call-outs to the panels that made it.
+3. **Your world:** one big splash panel, a ligne claire panorama of life under those laws. The landmark comes from where the energy comes from; three framed vignettes beneath it come from your other ideas (or, where you planted none, from that world's own life); numbered call-outs tie each oddity to its panel; a paragraph says how life goes there. Titled **THE WORLD OF YOUR NOTE (IF IT WERE TRUE)**.
+4. **Ours:** the same composition drawn true, with a few dated captions, and **where they part**, in words. Then the worlds this browser has not seen yet, as greyed titles, and START A NEW ALBUM. No hint.
 
 ## 2. From a number to what it shows
 
@@ -128,7 +132,7 @@ A lower-precedence finding is not lost. It enters the world as a secondary law (
 
 ## 5. The worlds
 
-Each world has a name, **three laws**, and a **timeline strip of five panels**, each with a drawing and two or three lines: **1898 · 1903 · 1912 · 1945 · today**. Secondary laws and modifiers swap a line or add an inset to the panel they touch. Every world ends with the same small caption: *"In our world, someone would have caught it within a year."*
+Each world has a name, three laws, a landmark, three vignettes of its own, and a paragraph. The dates below feed the paragraphs and, for ours, the captions; the panorama is one picture, not a strip. Oddities from the modifiers take the vignette slots first. Every world ends with the same small caption: *"In our world, someone would have caught it within a year."*
 
 ### Hers, and ours: **The restless atom**
 *Laws:* the energy comes from inside the heaviest atoms; atoms spend it and turn into other elements; old rocks are full of what they turned into.
@@ -200,27 +204,17 @@ When the page is hers, the closing text says so: *"Your page is her note. Your w
 
 ## 8. Pictures
 
-About 18 ligne claire scenes, in the bench's register:
-- **Ours (5):** shed; radium and thermometer; gold foil; power-station dome; rock with a clock.
-- **Slow fire (4):** glowing flasks; jar going dark; atom on pedestal; Kelvin and Darwin.
-- **Sky wind (4):** sparking coins; silent mine; balloon; lead sails.
-- **Crystal (3):** crystal flask; crystal fair; crystal tower.
-- **Bottomless (2):** uranium engine; heated town.
-- **Insets (4):** pedestal; electrometer doctor; storm without lightning; rare-metal jar.
-
-The 1945 and "today" panels share scenes where they can.
+One panorama per physics (5 landmarks: ours, the slow fire, the sky wind, the crystal lens, the bottomless atom), each with three vignettes of its own (15), and six oddities that can stand in any world: uranium on a pedestal (uranium alone), the electrometer doctor (living light), the storm without lightning (everything), the element-93 miners (a hidden element in a sky-wind world), the fading radium lamps (a hidden fuel in a slow-fire world), humming rare-metal jewellery (the rare metals). No real person is drawn: Kelvin's young Earth is a thermometer in a globe, Darwin's shortage of time an hourglass.
 
 ## 9. Checks (calibration.js, extended)
 
-- Her own readings give her physics, our world, and the "your page is her note" text, for every seed.
-- Each wrong number in section 3 triggers its balloon and its law; each law produces its strip.
-- Every reachable combination of the four questions (precedence included) yields a strip with no panel contradicting its laws. A table in the memo lists all of them.
+- The paper's table and statements, as before.
+- Her own readings give her physics, our world, and "your page is her note", for every seed.
+- Each wrong number in section 3 plants its balloon and its law; each law yields its landmark, vignettes and paragraph.
+- Every reachable combination of the four questions yields a panorama whose slots and call-outs agree with its laws; a table in the memo lists them.
 - Retests replace; clashes fire once.
-- No decimals on screen; every balloon at most two lines at phone width.
-- Session: three albums in the browser: hers (careful), the slow fire (yardstick read low), and the sky wind with living light (lead read high, white phosphorus without its control).
+- Browser: three albums (hers; the slow fire, with pure uranium read low; the sky wind with living light).
 
-## 10. Open
+## 10. Settled
 
-- Five eras, or four (dropping 1912)? Five reads better, but costs four more scenes.
-- The bottomless atom is the deepest lesson and the hardest to reach: it needs the rocks read low on purpose. Should the replay line hint at it ("Try writing a rock down at its uranium")? That would be the only hint in the game.
-- Should the balloon speak as Marie Curie, or as the bench? The bench is safer: no words put in a real person's mouth, which matters more now that the words are wrong.
+Five dated beats survive as the paragraph and the captions of ours, not as a strip. No hint: the last page shows the worlds not yet seen as greyed titles. The balloons come from the bench, with no Curie drawn.
