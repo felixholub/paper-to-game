@@ -1,68 +1,34 @@
-Noether's Press — calibration against Noether (1918). 21 passed, 0 failed.
-PASS  N3 eq. (3): Σψδu = δf + Div A on random paths and random δu, all worlds  [worst relative residual 3.33e-4]
-      floor/clock: Lie 4.16e-4 holds; Σψδ̄u−DivB 4.16e-4 identity
-      floor/across: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
-      floor/up: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
-      floor/turn: Lie 0.00e+0 holds; Σψδ̄u−DivB 1.47e-4 identity
-      floor/warpclock: Lie 5.65e-1 fails; Σψδ̄u−DivB 8.53e-1 no
-      floor/warpfloor: Lie 1.00e+0 fails; Σψδ̄u−DivB 9.74e-1 no
-      spring/clock: Lie 3.04e-4 holds; Σψδ̄u−DivB 3.55e-4 identity
-      spring/across: Lie 1.00e+0 fails; Σψδ̄u−DivB 8.09e-1 no
-      spring/up: Lie 1.00e+0 fails; Σψδ̄u−DivB 4.73e-1 no
-      spring/turn: Lie 1.96e-16 holds; Σψδ̄u−DivB 1.47e-4 identity
-      spring/warpclock: Lie 1.19e+0 fails; Σψδ̄u−DivB 9.91e-1 no
-      spring/warpfloor: Lie 1.30e+0 fails; Σψδ̄u−DivB 1.00e+0 no
-      slide/clock: Lie 6.59e-4 holds; Σψδ̄u−DivB 3.66e-3 identity
-      slide/across: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
-      slide/up: Lie 4.42e-1 fails; Σψδ̄u−DivB 2.59e-1 no
-      slide/turn: Lie 4.18e-1 fails; Σψδ̄u−DivB 2.77e-1 no
-      slide/warpclock: Lie 4.76e-4 holds; Σψδ̄u−DivB 1.69e-3 identity
-      slide/warpfloor: Lie 1.00e+0 fails; Σψδ̄u−DivB 1.00e+0 no
-      sheet/clock: Lie 4.56e-4 holds; Σψδ̄u−DivB 2.02e-3 identity
-      sheet/across: Lie 0.00e+0 holds; Σψδ̄u−DivB 0.00e+0 identity
-      sheet/up: Lie 9.68e-1 fails; Σψδ̄u−DivB 4.63e-1 no
-      sheet/turn: Lie 6.95e-1 fails; Σψδ̄u−DivB 4.66e-1 no
-      sheet/warpclock: Lie 4.65e-4 holds; Σψδ̄u−DivB 1.78e-3 identity
-      sheet/warpfloor: Lie 1.00e+0 fails; Σψδ̄u−DivB 1.00e+0 no
-PASS  N12 eq. (12) holds exactly for the levers that pass (11), and fails for those that jam: (11) ⟺ (12), §3
-      floor {"clock":"teeth","across":"teeth","up":"teeth","turn":"teeth","warpclock":"jam","warpfloor":"jam"}
-      spring {"clock":"teeth","across":"jam","up":"jam","turn":"teeth","warpclock":"jam","warpfloor":"jam"}
-      glass {"clock":"void","across":"teeth","up":"jam","turn":"jam","warpclock":"identity","warpfloor":"jam"}
-      sheet {"clock":"void","across":"teeth","up":"jam","turn":"jam","warpclock":"identity","warpfloor":"jam"}
-PASS  N13 the floor: four parameters (clock, across, up, turn), four laws with teeth; both warps jam
-PASS  N13b the spring: two laws (clock, turn); shifts and warps jam
-PASS  N13c the slide: clock void, across teeth, warp-clock identity; up, turn, warp-across jam
-PASS  N13d the sheet: clock void, across teeth, warp-clock identity; up, turn, warp-across jam
-PASS  N13e every stamped law is a first integral: B steady along true motions over ten seeds (p. 16)  [worst relative drift 6.22e-6]
-PASS  N28 the clock shift's B is the energy ½|u'|² + V on the Newton worlds (p. 28, "Energierelationen")  [worst 2.21e-16]
-PASS  N7 the Weierstrass worlds are invariant under x → p(x) for arbitrary p (ten random p), and the Newton worlds are not  [worst Weierstrass 4.96e-4, best Newton 2.94e-1]
-PASS  N7b the identity Σψ_i u_i' = 0 holds on every path of the Weierstrass worlds and on none of the Newton worlds (p. 7)  [worst Weierstrass 1.44e-3, best Newton 5.42e-1]
-PASS  N7c the warp's δ̄u contains p but no derivative of p (σ = 0): the identity has no derivative terms  [by construction: δ̄u_i = −u_i'·p]
-      floor:teeth spring:teeth slide:void(B≡0) sheet:void(B≡0) floor:teeth spring:teeth slide:void(B≡0) sheet:void(B≡0)
-PASS  N6 on the Weierstrass worlds the energy relation is improper: B ≡ 0 on true motions and fakes alike, VOID, six seeds
-PASS  N6b on the Newton worlds the energy relation is proper: steady on true motions, catching fakes, six seeds
-PASS  N6c the shift of the clock is the warp with p ≡ 1: the displacement group is a subgroup of the infinite group (p. 28)
-      re-ticked motion ψ: floor:1.04e+1F spring:7.71e+0F slide:1.26e-3T sheet:2.30e-4T floor:1.03e+1F spring:8.58e+0F slide:1.89e-3T sheet:2.30e-4T
-PASS  R a re-ticked true motion is still true on the slide and the sheet, and a fake on the floor and the spring; bumps are always fakes
-PASS  S the slide's across-shift law is −n·sin(angle to the vertical), steady along the integrated path: the law of refraction  [worst 4.04e-6]
-      N=200: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      N=800: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      bumps half: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      bumps double: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      retick small: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      slide high: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      slide low: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      sheet thick: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      sheet thin: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      spring stiff: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-      spring soft: slide clock void, slide warp identity, sheet clock void, floor clock teeth, spring clock teeth, slide across teeth
-PASS  ROB the verdicts (void, identity, teeth) survive changes of grid, bump size, re-tick size, slide and sheet profiles and spring constant
-PASS  D thirty random hand-drawn warps: the press holds on the slide and the sheet, jams on the floor and the spring
-PASS  Db thirty random hand-drawn sideways warps jam on every world (no world is blind to its first coordinate)
-      shifts only (clock, across, up everywhere)   teeth 6 void 2 identity 0 jams 4  → YOU SAW THE EMPTY PRIZE.
-      clock first, then turn, then across          teeth 7 void 2 identity 0 jams 3  → YOU SAW THE EMPTY PRIZE.
-      warps first                                  teeth 2 void 2 identity 2 jams 6  → YOU ANSWERED HILBERT.
-      reads the world (the intended path)          teeth 7 void 2 identity 2 jams 1  → YOU ANSWERED HILBERT.
-      one pull per world                           teeth 4 void 0 identity 0 jams 0  → THE PRESS KEPT ITS SECRET.
-PASS  H the obvious ways of pulling land in different places (different headlines and tag counts)
-PASS  W no decimals in anything the screen reads from the mechanism  [104 strings]
+Noether's Press — calibration against Noether (1918). 11 passed, 0 failed.
+      c1 ball/clock: residual 3.14e-4 → does not matter; teeth
+      c2 grow/clock: residual 2.05e-1 → matters; none
+      c3 ball/across: residual 0.00e+0 → does not matter; teeth
+      c4 magnet/across: residual 1.00e+0 → matters; none
+      c5 peg/turn: residual 1.57e-16 → does not matter; teeth
+      c6 wind/turn: residual 2.85e-1 → matters; none
+      c7 ball/warpclock: residual 9.99e-1 → matters; none
+      c8 slide/clock: residual 5.38e-4 → does not matter; empty
+      c9 slide/warpclock: residual 4.45e-4 → does not matter; rule
+PASS  A every card's computed answer is the paper's: clock, step and turn do not matter for the ball and the spring; growing gravity, the magnet, the wind and re-ticking the ball do; the slide cares about neither the later start nor any re-ticking
+PASS  P the plate agrees: the formula's number is the same before and after exactly when the change does not matter  [c1 1000→1000 c2 716→664 c3 1000→1000 c4 1000→976 c5 135→135 c6 1000→617 c7 1000→1089 c8 1000→1000 c9 1000→1000]
+PASS  V the picture agrees: the new trip lands on the dashed "if it did not matter" trip exactly when it does not matter (a visible gap otherwise)  [c1 0.000 c2 1.120 c3 0.000 c4 0.452 c5 0.000 c6 0.444 c8 0.000]
+PASS  T1 Theorem I: the energy, the sideways speed and the spin have teeth (steady on every true motion, caught by a fake)
+PASS  E the clock's prize on the ball is ½|u′|² + g·y on any path (p. 28)  [worst 8.88e-16]
+PASS  T2 Theorem II on the slide: invariant under any re-ticking, and Σψᵢuᵢ′ = 0 on every path; on the ball neither  [slide 8.27e-4, 1.21e-3; ball 2.90e-1, 7.16e-1]
+PASS  §6 the slide's clock prize is improper: B ≡ 0 on true motions, fakes and random paths; and the clock shift is the re-tick with p ≡ 1  [|B| 1.33e-15 against |f| 3.5]
+PASS  O the opener is honest: the slide's revealed path has a smaller number than the straight line and every detour tried  [best 2.6608, smallest rival 2.7341]
+PASS  D thirty random hand-drawn re-tickings: the slide never cares, the ball always does
+      N=200: all right (teeth,teeth,teeth,empty)
+      N=800: all right (teeth,teeth,teeth,empty)
+      bumps half: all right (teeth,teeth,teeth,empty)
+      bumps double: all right (teeth,teeth,teeth,empty)
+      gravity weak: all right (teeth,teeth,teeth,empty)
+      gravity strong: all right (teeth,teeth,teeth,empty)
+      growth slow: all right (teeth,teeth,teeth,empty)
+      growth fast: all right (teeth,teeth,teeth,empty)
+      magnet weak: all right (teeth,teeth,teeth,empty)
+      magnet wide: all right (teeth,teeth,teeth,empty)
+      wind light: all right (teeth,teeth,teeth,empty)
+      spring soft: all right (teeth,teeth,teeth,empty)
+      slide high: all right (teeth,teeth,teeth,empty)
+PASS  ROB every answer and every prize survives changes of grid, bumps, gravity, growth, magnet, wind, spring and slide
+PASS  W no decimals in anything the screen reads from the mechanism  [63 strings]

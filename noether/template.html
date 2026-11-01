@@ -5,125 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Noether's Press</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="Emmy Noether (1918) as a game about a formula: draw paths, find the changes the formula does not care about, win the numbers that never change, and watch the clock's prize come out empty. Hilbert's question, answered.">
+<meta name="description" content="Emmy Noether (1918) as a deck of changes: watch a change, say whether it matters, and win the prize each change that doesn't matter brings. Energy, momentum, spin, and the one prize that comes out empty: Hilbert's question, answered.">
 <style>
 @font-face{font-family:'Chakra';font-weight:700;src:url(data:font/woff2;base64,/*__FONT_CHAKRA__*/) format('woff2');font-display:block}
 @font-face{font-family:'Saira';font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_SAIRA__*/) format('woff2');font-display:block}
 @font-face{font-family:'Tech';font-weight:400;src:url(data:font/woff2;base64,/*__FONT_MONO__*/) format('woff2');font-display:block}
 :root{
-  --gun:#15181C; --steel:#23282E; --steel2:#2C323A; --brush:#9AA3AB; --brush2:#D7DDE2; --dim:#5C656E;
+  --gun:#15181C; --steel:#23282E; --brush:#9AA3AB; --brush2:#D7DDE2; --dim:#5C656E;
   --cyan:#2BF0FF; --mag:#FF2ECC; --haz:#F2CB05;
-  --disp:'Chakra','Arial Narrow',Impact,sans-serif; --text:'Saira','Helvetica Neue',Arial,sans-serif; --mono:'Tech','Courier New',monospace;
-  --math:'Times New Roman','Georgia',serif;
+  --disp:'Chakra','Arial Narrow',Impact,sans-serif; --text:'Saira','Helvetica Neue',Arial,sans-serif; --mono:'Tech','Courier New',monospace; --math:'Times New Roman','Georgia',serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--gun)}
-body{color:var(--brush2);font-family:var(--text);font-size:17px;line-height:1.4;min-height:100vh;
-  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px),linear-gradient(180deg,#1A1E23,#111417 60%,#0E1013)}
+body{color:var(--brush2);font-family:var(--text);font-size:17px;line-height:1.4;min-height:100vh;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px),linear-gradient(180deg,#1A1E23,#111417 60%,#0E1013)}
 .screen{display:none;max-width:460px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
 .screen.on{display:block}
 p{margin:.5em 0}
 a{color:var(--cyan)}
-.disp{font-family:var(--disp);letter-spacing:.08em;text-transform:uppercase}
 h1.title{font-family:var(--disp);font-weight:700;text-transform:uppercase;color:var(--brush2);font-size:46px;line-height:.95;margin:26px 0 4px;letter-spacing:.04em}
 h1.title small{display:block;font-size:14px;letter-spacing:.3em;color:var(--cyan);margin-bottom:10px;text-shadow:0 0 8px rgba(43,240,255,.7)}
 h2{font-family:var(--disp);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);font-size:15px;margin:20px 0 6px;text-shadow:0 0 8px rgba(43,240,255,.5)}
 h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brush2);font-size:16px;margin:16px 0 4px}
 .rule{height:2px;background:linear-gradient(90deg,var(--cyan),rgba(43,240,255,.1));box-shadow:0 0 10px rgba(43,240,255,.5);margin:10px 0}
-.lede{font-size:17px;margin:8px 0;color:var(--brush2)}
+.lede{font-size:17px;margin:8px 0}
 .aim{font-family:var(--disp);font-size:19px;line-height:1.25;letter-spacing:.06em;text-transform:uppercase;margin:12px 0;padding:10px 12px;border-left:4px solid var(--cyan);background:rgba(43,240,255,.06);color:#fff;position:relative}
 .small{font-size:15px;color:var(--brush)}
-.sig{padding:14px 0 18px;font-size:15px;text-align:center;font-family:var(--text)}
+.sig{padding:14px 0 18px;font-size:15px;text-align:center}
 .sig a{color:var(--dim);font-style:italic;text-decoration:none}
-/* formulas: the one place in the Pantheon where the symbols are on screen */
-.f{font-family:var(--math);font-style:italic;font-size:1.15em;color:#fff;white-space:nowrap}
-.startf{font-family:var(--math);font-style:italic;font-size:30px;color:#fff;text-align:center;margin:14px 0 2px;text-shadow:0 0 14px rgba(43,240,255,.55)}
-.startf small{display:block;font-family:var(--text);font-style:normal;font-size:14px;color:var(--brush);text-shadow:none;letter-spacing:.02em;margin-top:2px}
-/* levers and buttons: steel bars with a lit edge */
+.f{font-family:var(--math);font-style:italic;font-size:1.12em;color:#fff;white-space:nowrap}
 .btn{display:block;width:100%;min-height:56px;padding:12px 14px;margin:10px 0;background:linear-gradient(180deg,#3A4149,#262B31 55%,#1E2227);color:var(--brush2);border:1px solid #0B0D0F;border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 12px rgba(43,240,255,.25);border-radius:0;font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;user-select:none;text-align:center}
-.btn:active,.btn.pressed{transform:translateY(2px);border-bottom-width:2px;color:#fff}
-.btn:disabled{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);cursor:default;transform:none}
+.btn:active{transform:translateY(2px);border-bottom-width:2px;color:#fff}
+.btn:disabled{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:none;cursor:default;transform:none}
 .btn.small-btn{min-height:44px;font-size:15px;padding:9px 12px}
 .btn.go{color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 18px rgba(43,240,255,.5)}
+.btn.mag{border-bottom-color:var(--mag);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 14px rgba(255,46,204,.35)}
 .row{display:flex;gap:10px}.row .btn{flex:1}
 .help-q{position:absolute;right:0;top:0;width:40px;height:40px;border:1px solid #0B0D0F;border-bottom:3px solid var(--cyan);background:linear-gradient(180deg,#3A4149,#262B31);color:var(--brush2);font-family:var(--disp);font-weight:700;font-size:22px;line-height:36px;text-align:center;cursor:pointer}
 .top{position:relative;padding-right:48px;margin-top:10px}
-.top .aim{font-size:16px;padding:8px 10px}
+.top .aim{font-size:15px;padding:8px 10px;margin-top:0}
 .band{font-family:var(--disp);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:14px;color:var(--cyan);text-shadow:0 0 8px rgba(43,240,255,.7);margin:8px 0 4px}
-.line{font-size:16px;color:var(--brush2);margin:0 0 8px;min-height:22px}
-/* the formula plate: the formula, its words, and the numbers before and after a change */
-.plate{width:100%;max-width:348px;margin:6px auto 0;background:linear-gradient(180deg,#2A3037,#1E2227);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);padding:8px 10px 6px;position:relative}
-.plate .plabel{position:static;display:block;margin-bottom:2px}
-.plate .formula{font-family:var(--math);font-style:italic;font-size:22px;color:#fff;line-height:1.2;text-shadow:0 0 10px rgba(43,240,255,.45);white-space:nowrap;overflow-x:auto}
-.plate .words{font-size:13px;color:var(--brush);line-height:1.3;margin-top:2px}
+.line{font-size:16px;margin:0 0 6px}
+/* the formula plate */
+.plate{width:100%;max-width:348px;margin:6px auto 0;background:linear-gradient(180deg,#2A3037,#1E2227);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);padding:8px 10px 6px}
+.plabel{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.formula{font-family:var(--math);font-style:italic;font-size:21px;color:#fff;line-height:1.25;text-shadow:0 0 10px rgba(43,240,255,.45);white-space:nowrap;overflow-x:auto}
+.words{font-size:13px;color:var(--brush);line-height:1.3;margin-top:2px}
 .nums{display:grid;grid-template-columns:1fr auto auto auto;gap:2px 8px;align-items:baseline;margin-top:6px;font-family:var(--mono);font-size:13px;color:var(--brush)}
 .nums .n{color:#fff;font-size:16px;text-align:right}
-.nums .arrow{color:var(--dim)}
 .nums .n.same{color:var(--cyan);text-shadow:0 0 8px rgba(43,240,255,.7)}
 .nums .n.diff{color:var(--haz);text-shadow:0 0 8px rgba(242,203,5,.7)}
-.nums .who{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* the drawing window */
-.window{width:100%;max-width:348px;margin:8px auto 0;display:block;position:relative;background:#0B0D10;border:1px solid #0B0D0F;box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08);touch-action:none}
-.window svg{width:100%;height:auto;display:block}
+.nums .word{grid-column:1 / 5;font-size:12px;letter-spacing:.08em}
+/* the window and the graph */
+.window{width:100%;max-width:348px;margin:8px auto 0;display:block;position:relative;background:#0B0D10;border:1px solid #0B0D0F;box-shadow:inset 0 0 40px rgba(0,0,0,.8);touch-action:none}
+.window svg,.graph svg{width:100%;height:auto;display:block}
 .window.drawing{box-shadow:inset 0 0 40px rgba(0,0,0,.8),0 0 0 2px var(--mag),0 0 18px rgba(255,46,204,.5)}
-.caption{font-family:var(--mono);font-size:12px;letter-spacing:.08em;fill:#2BF0FF;text-transform:uppercase}
-.caption.fake{fill:#FF2ECC}.caption.true{fill:#DDF6FF}
-/* the needle and the stamp */
-.panel{width:100%;max-width:348px;margin:8px auto 0;background:linear-gradient(180deg,#2A3037,#1E2227);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);display:flex;align-items:stretch;height:84px;position:relative}
-.panel .gauge{width:150px;flex:none;position:relative}
-.panel .gauge svg{width:150px;height:84px;display:block}
-.panel .stampbox{flex:1;display:flex;align-items:center;justify-content:center;position:relative;border-left:1px solid #0B0D0F}
-.plabel{position:absolute;left:8px;top:4px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
-.stamp{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border:3px solid currentColor;transform:scale(0) rotate(-6deg);transition:transform .35s cubic-bezier(.2,1.6,.4,1);color:var(--dim)}
-.stamp.on{transform:scale(1) rotate(-6deg)}
-.stamp.teeth{color:var(--cyan);text-shadow:0 0 10px rgba(43,240,255,.9);box-shadow:0 0 14px rgba(43,240,255,.5),inset 0 0 14px rgba(43,240,255,.2)}
-.stamp.void{color:var(--mag);text-shadow:0 0 10px rgba(255,46,204,.9);box-shadow:0 0 14px rgba(255,46,204,.5),inset 0 0 14px rgba(255,46,204,.2)}
-.stamp.jam{color:var(--haz);text-shadow:0 0 10px rgba(242,203,5,.9);box-shadow:0 0 14px rgba(242,203,5,.5);font-size:18px}
-.stamp.identity{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.8);font-size:22px}
-.stamp.notlaw{color:var(--haz);font-size:18px}
-.stamp.law{font-size:15px;letter-spacing:.1em;padding:3px 8px;border-width:2px;color:var(--brush2)}
-.stamp.teeth.law{color:var(--cyan)}
-.feedline{width:100%;max-width:348px;margin:4px auto 0;font-family:var(--mono);font-size:13px;letter-spacing:.04em;line-height:1.3;color:var(--brush);min-height:34px}
-.feedline.fake{color:var(--mag)}
-.feedline.true{color:#DDF6FF}
-.result{font-size:16px;line-height:1.4;margin:10px 0 6px;color:#fff}
-/* the rack: three blanks */
-.rack{width:100%;max-width:348px;margin:8px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.slot{height:58px;position:relative;background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border:1px solid #0B0D0F;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -2px 0 rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:2px 4px;overflow:hidden}
-.slot .tagtext{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.08em;line-height:1.05;text-transform:uppercase;color:#2A3036;text-shadow:0 1px 0 rgba(255,255,255,.5),0 -1px 0 rgba(0,0,0,.35)}
-.slot.teeth{border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(43,240,255,.6)}
-.slot.void{border-bottom:4px solid var(--mag);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(255,46,204,.6)}
-.slot.identity{border-bottom:4px solid #fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 12px rgba(255,255,255,.5)}
-.slot.jam{background:linear-gradient(170deg,#6E6A52,#4A4634);border-bottom:4px solid var(--haz);transform:skewX(-8deg) rotate(-3deg)}
-.slot.jam .tagtext{color:var(--haz);text-shadow:none}
-.press{position:absolute;left:-2px;right:-2px;top:-70px;height:62px;background:linear-gradient(180deg,#3A4149,#1C2025);border:1px solid #0B0D0F;box-shadow:0 6px 10px rgba(0,0,0,.6);transition:transform .22s cubic-bezier(.6,0,.9,.3);z-index:2}
-.press:after{content:"";position:absolute;left:30%;right:30%;bottom:-8px;height:8px;background:#0B0D0F}
-.slot.pressing .press{transform:translateY(60px)}
-/* the levers */
-.levers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 6px}
-.lever{min-height:56px;padding:6px 6px;background:linear-gradient(180deg,#3A4149,#262B31 55%,#1E2227);color:var(--brush2);border:1px solid #0B0D0F;border-bottom:4px solid var(--cyan);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 10px rgba(43,240,255,.18);font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1;text-align:center;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative}
-.lever small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--brush);text-transform:none;margin-top:3px}
-.lever.free{border-bottom-color:var(--mag);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 10px rgba(255,46,204,.18)}
-.lever.chosen{border-bottom-color:#fff;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 16px rgba(255,255,255,.5);transform:translateY(2px);border-bottom-width:2px}
-.lever.down{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:inset 0 2px 6px rgba(0,0,0,.6);cursor:default;transform:translateY(2px)}
-.lever.down small{color:var(--dim)}
-.levers.off .lever{color:var(--dim);border-bottom-color:#0B0D0F;box-shadow:none;cursor:default}
-.willdo{font-size:16px;line-height:1.35;min-height:44px;margin:4px 0;color:var(--brush2)}
-.say{font-size:16px;line-height:1.4;margin:8px 0;padding:10px 12px;border-left:4px solid var(--mag);background:rgba(255,46,204,.06);color:#fff}
-.say b{font-family:var(--disp);font-weight:700;letter-spacing:.14em;color:var(--mag);font-size:13px;display:block;margin-bottom:2px}
-.ask{font-size:16px;line-height:1.4;margin:8px 0;padding:10px 12px;border-left:4px solid var(--cyan);background:rgba(43,240,255,.06);color:#fff}
+.caption{font-family:var(--mono);font-size:11px;letter-spacing:.08em;fill:#2BF0FF;text-transform:uppercase}
+.caption.fake{fill:#FF2ECC}.caption.true{fill:#DDF6FF}.caption.dim{fill:#9AA3AB}
+.graph{width:100%;max-width:348px;margin:6px auto 0;background:#0B0D10;border:1px solid #0B0D0F;box-shadow:inset 0 0 30px rgba(0,0,0,.8)}
+/* the question */
+.ask{font-size:16px;line-height:1.4;margin:10px 0 6px;padding:10px 12px;border-left:4px solid var(--cyan);background:rgba(43,240,255,.06);color:#fff}
+.ask b{font-family:var(--disp);font-weight:700;letter-spacing:.14em;color:var(--cyan);font-size:13px;display:block;margin-bottom:2px}
+.verdictline{font-family:var(--disp);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:18px;margin:12px 0 2px}
+.verdictline.right{color:var(--cyan);text-shadow:0 0 8px rgba(43,240,255,.6)}
+.verdictline.wrong{color:var(--haz);text-shadow:0 0 8px rgba(242,203,5,.6)}
+.reveal{font-size:16px;line-height:1.4;margin:4px 0 6px;color:#fff}
+.note{font-size:15px;line-height:1.35;margin:6px 0;color:var(--brush2)}
+/* the shelf */
+.shelf{width:100%;max-width:348px;margin:12px auto 0}
+.shelf .plabel{margin-bottom:4px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tile{height:62px;position:relative;background:linear-gradient(180deg,#3A4149,#262B31);border:1px solid #0B0D0F;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2px 3px;overflow:hidden;transition:transform .3s}
+.tile .tn{font-family:var(--disp);font-weight:700;font-size:10.5px;letter-spacing:.06em;line-height:1.05;text-transform:uppercase;color:var(--dim)}
+.tile .tf{font-family:var(--math);font-style:italic;font-size:11px;color:var(--brush);margin-top:3px;white-space:nowrap}
+.tile.won{background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border-bottom:4px solid var(--cyan);box-shadow:0 0 12px rgba(43,240,255,.6);transform:scale(1.04)}
+.tile.won .tn{color:#1E2328;text-shadow:0 1px 0 rgba(255,255,255,.5)}.tile.won .tf{color:#2A3036}
+.tile.missed{border-bottom:4px solid var(--haz)}.tile.missed .tn{color:var(--brush)}
+.tile.empty{background:linear-gradient(180deg,#B9C1C8,#8E979F 50%,#A5ADB4);border-bottom:4px solid var(--mag);box-shadow:0 0 12px rgba(255,46,204,.6)}
+.tile.empty .tn{color:#1E2328}.tile.empty .tf{color:#B0127F;font-family:var(--disp);font-style:normal;font-weight:700;letter-spacing:.1em}
 .hidden{display:none !important}
-.verdict{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 10px;color:var(--cyan);text-shadow:0 0 12px rgba(43,240,255,.8),0 0 30px rgba(43,240,255,.4)}
-.did{margin:6px 0;padding-left:18px}.did li{margin:4px 0}
-.coda{border-top:1px solid var(--dim);margin-top:22px;padding-top:12px}
-ul{padding-left:20px}li{margin:4px 0}
+.verdict{font-family:var(--disp);font-weight:700;font-size:32px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 8px;color:var(--cyan);text-shadow:0 0 12px rgba(43,240,255,.8),0 0 30px rgba(43,240,255,.4)}
+.coda{border-top:1px solid var(--dim);margin-top:18px;padding-top:8px}
 .about p,.help p{font-size:16px}
-/* the strip for drawing a free function */
-.overlay{position:fixed;inset:0;background:rgba(10,12,15,.92);z-index:10;display:none;align-items:center;justify-content:center;padding:16px}
-.overlay.on{display:flex}
-.sheetbox{width:100%;max-width:380px;background:var(--steel);border:1px solid #0B0D0F;padding:14px;box-shadow:0 0 30px rgba(255,46,204,.25)}
-.strip{width:100%;height:150px;background:#0B0D10;border:1px solid #0B0D0F;position:relative;touch-action:none;box-shadow:inset 0 0 30px rgba(0,0,0,.8)}
-.strip svg{width:100%;height:100%;display:block}
 </style>
 </head>
 <body>
@@ -131,69 +93,55 @@ ul{padding-left:20px}li{margin:4px 0}
 <section class="screen on" id="start">
   <h1 class="title"><small>Emmy Noether · 1918</small>Noether's<br>Press</h1>
   <div class="rule"></div>
-  <p class="lede">Emmy Noether studied a kind of formula. You give it a drawing of a path from A to B; it gives you back a number. Of all the paths, one has the smallest number: the best path. To see the formula, we draw a dot that runs along the best path.</p>
-  <p class="startf">S = ∫ ½(x′² + y′²) dt<small>the first formula: it adds up speed² along a path</small></p>
-  <p class="lede">Now move the whole drawing one step to the right and ask the formula again. Same number? Then the formula doesn't care where the drawing is. Each time you find something the formula doesn't care about, you win a prize: a number you can work out from the dot at any moment, and it comes out the same at every moment of the trip. A press stamps each prize on a steel tag; an auditor tests it.</p>
-  <p class="aim">Find what the formula doesn't care about.<br>Each one wins a number that never changes.</p>
-  <p class="small">You will draw paths with a finger, pull six changes, and test prizes. Four formulas, three steel blanks each; a change the formula cares about spends a blank. About seven minutes.</p>
+  <p class="lede">Emmy Noether studied formulas that give every possible path a number. Nature always takes the path with the smallest number.</p>
+  <p class="lede">Then she asked: what if you change the picture, and the formula doesn't care? Throw a ball at three o'clock, throw it the same way at five past three: same flight. Every change that doesn't matter hands you a prize, a number that stays the same all along the trip. That is where energy comes from.</p>
+  <p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p>
+  <p class="small">First you draw a slide. Then nine changes, one at a time. About five minutes.</p>
   <button class="btn go" id="begin">Begin</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
 <section class="screen" id="play">
-  <div class="top"><p class="aim" style="margin-top:0">Find what the formula doesn't care about.<br>Each one wins a number that never changes.</p><button class="help-q" aria-label="How to play">?</button></div>
-  <div class="band" id="band">FORMULA 1 OF 4 · THE FREE DOT</div>
-  <p class="line" id="worldline"></p>
-  <div class="plate" id="plate">
-    <span class="plabel">THE FORMULA</span>
-    <div class="formula" id="formula"></div>
-    <div class="words" id="words"></div>
-    <div class="nums" id="nums"></div>
-  </div>
+  <div class="top"><p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p><button class="help-q" aria-label="How to play">?</button></div>
+  <div class="band" id="band"></div>
+  <p class="line" id="setup"></p>
+  <div class="plate"><span class="plabel">THE FORMULA</span><div class="formula" id="formula"></div><div class="words" id="words"></div><div class="nums" id="nums"></div></div>
   <div class="window" id="window"></div>
-  <div class="panel" id="panel">
-    <div class="gauge"><span class="plabel">THE NEEDLE</span><svg viewBox="0 0 150 84" id="gaugesvg"></svg></div>
-    <div class="stampbox"><span class="plabel">THE STAMP</span><div class="stamp" id="stamp"></div></div>
-  </div>
-  <p class="feedline" id="feed"></p>
-  <div class="rack" id="rack"></div>
-  <!-- the opening: draw a path against the best path -->
+  <div class="graph hidden" id="graph"></div>
+  <!-- the opener -->
   <div id="opening" class="hidden">
-    <div class="ask" id="openask">Draw a path from A to B with your finger, in the window. The formula will give it a number.</div>
+    <div class="ask" id="openask"></div>
     <div class="row"><button class="btn" id="drawagain">Draw another</button><button class="btn go" id="openon">On to the changes</button></div>
   </div>
-  <div class="say" id="first"></div>
-  <div id="choose" class="hidden">
-    <p class="line" id="benchhead" style="margin-top:10px"></p>
-    <div class="levers" id="levers"></div>
-    <p class="willdo" id="willdo">Tap a change to see it.</p>
-    <button class="btn go" id="pull" disabled>Pull</button>
+  <!-- a card: the question -->
+  <div id="question" class="hidden">
+    <div class="ask"><b>THE CHANGE</b><span id="change"></span></div>
+    <p class="note">Does this change matter to the formula? If it doesn't, it wins a prize.</p>
+    <div class="row"><button class="btn mag" id="saymatters">It matters</button><button class="btn go" id="saynot">It doesn't matter</button></div>
   </div>
-  <!-- the test: draw any path and read the prize's number along it -->
-  <div id="test" class="hidden">
-    <div class="ask" id="testask">Now draw any path you like, in the window. The needle reads the prize's number along it. Try to make the needle move.</div>
-    <div class="row"><button class="btn" id="testagain">Draw another</button><button class="btn go" id="testdone">Let the Auditor stamp</button></div>
+  <!-- a card: the answer -->
+  <div id="answer" class="hidden">
+    <div class="verdictline" id="verdictline"></div>
+    <p class="reveal" id="reveal"></p>
+    <p class="note" id="prizenote"></p>
+    <div class="row hidden" id="drawrow"><button class="btn" id="drawtry">Draw a path</button></div>
+    <button class="btn go" id="next">Next change</button>
   </div>
-  <div id="after" class="hidden">
-    <p class="result" id="result"></p>
-    <div class="say" id="say"></div>
-    <div class="row"><button class="btn" id="again">Pull again</button><button class="btn go" id="next">Next formula</button></div>
-  </div>
+  <div class="shelf"><span class="plabel">THE SHELF · PRIZES</span><div class="tiles" id="tiles"></div></div>
 </section>
 
 <section class="screen" id="end">
-  <div class="band" style="margin-top:22px">THE SHIFT IS OVER</div>
+  <div class="band" style="margin-top:22px">THE SHELF</div>
   <div class="verdict" id="headline"></div>
-  <ul class="did" id="did"></ul>
+  <p class="lede" id="endline"></p>
+  <div class="shelf"><div class="tiles" id="endtiles"></div></div>
   <div class="coda">
     <h2>What the paper says</h2>
-    <p>Every formula here gives each path a number, and the dot takes the best path. Each time the formula does not care about a change with a knob on it (how far right, how much turned, how much later), you win a prize: a number that stays the same along the best path and on no other. That is Noether's first theorem, and it runs backwards too: a real prize always points to a change the formula does not care about.</p>
-    <p>Then the sneakiest change: let the clock run fast, then slow, then fast again, any way you like, a change with a free hand in it instead of a knob. Some formulas do not care even about that. But then there is no prize. What comes out is a rule: the formula's own equations of motion are not independent, and as many of them as there are free hands follow from the rest. That is her second theorem, and it also runs backwards.</p>
-    <p>Put the two together. If the free hand contains "start the clock later", then the clock's prize is inside the rule: its number comes out the same on every path, the bad ones too, so it tells you nothing. The paper calls such a prize <i>improper</i>. That is the answer to Hilbert's question. In Einstein's formula for gravity the coordinates can be relabelled freely, moment by moment; "start the clock later" sits inside that freedom; so the energy it gives is empty. Energy is not lost. That formula has no clock of its own to count it with.</p>
-    <p>The paper's last word: Hilbert said this failure is characteristic of general relativity. It is, exactly when "general relativity" means a formula that does not care about changes with free hands in them; and it holds for every such formula, in any number of dimensions.</p>
-    <h2>Both ways</h2>
-    <p>A real prize means a change with a knob the formula does not care about. An empty prize means a free hand that contains the change you pulled. Either way, the formula and its prizes are the same thing seen from two sides.</p>
+    <p>Noether's paper is about formulas that give every path a number, where nature takes the path with the smallest one. She proved two things.</p>
+    <p>First: whenever the formula doesn't care about a change, such as moving the picture, turning it, or starting the clock later, there is a number that stays the same all along nature's path, and on no other path. That is where energy, momentum and spin come from. It works backwards too: every such number comes from a change the formula doesn't care about.</p>
+    <p>Second: when the formula doesn't care about a much bigger change, one you can make differently at every moment, like re-ticking the clock fast here and slow there, there is no such number. You get a rule instead: the equations of motion are not independent. And any prize that sits inside the bigger change becomes empty. It stays the same on every path, the impossible ones too, so it tells you nothing.</p>
+    <p>That answers a question Hilbert had asked. Einstein's theory of gravity is a formula of the second kind: you may relabel space and time freely, moment by moment, and it doesn't care. So its energy is like the slide's: empty. That is why energy seems to go missing in Einstein's theory. Nothing is lost; the theory has no clock of its own to count energy with.</p>
   </div>
   <button class="btn go" id="replay">Play again</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
@@ -202,16 +150,13 @@ ul{padding-left:20px}li{margin:4px 0}
 
 <section class="screen help" id="help">
   <h2 style="margin-top:22px">How to play</h2>
-  <p class="aim">Find what the formula doesn't care about.<br>Each one wins a number that never changes.</p>
-  <p><b>The formula.</b> Each of the four formulas takes a path and gives it a number. The plate shows the formula and says it in words; <span class="f">x′</span> means how fast <span class="f">x</span> changes. Of all the paths from A to B, one has the smallest number: the best path. The dot in the window runs along it. The dots on its trail are the ticks of a clock, one per tick.</p>
-  <p><b>Drawing a path.</b> In the first formula you draw a path from A to B with your finger and see its number next to the best path's. Later, after each prize, you draw any path you like to test the prize.</p>
-  <p><b>The changes.</b> Six levers each change the whole drawing in one way: move it right or up, turn it, start the clock later; or, the two magenta levers, re-tick the clock or wobble the drawing by an amount you draw. Tap a lever and the window shows the changed drawing in blue over the old one in grey, and the plate shows the formula's numbers before and after, for the best path and for one other.</p>
-  <p><b>The question.</b> Does the formula care? If the numbers stay the same for every path, it does not, and you win a prize. If you think it does not care, PULL. If the formula does care, the press jams, a blank is spent, and no prize comes.</p>
-  <p><b>The prize.</b> A number you can work out from the dot at any moment, where it is and how fast it goes. The press stamps it on a steel tag with its formula. The needle reads that number as a dot runs along a path.</p>
-  <p><b>The Auditor.</b> A real prize keeps its number along the best path and changes it along paths the dot would never take. An empty prize keeps its number on every path, so it tells you nothing. You test each prize by drawing paths and watching the needle; then the Auditor runs his own paths and stamps PRIZE or EMPTY.</p>
-  <p><b>The free hand.</b> When the formula does not care about a change you drew, no prize comes out. The tag reads RULE: the formula's two equations of motion are not independent. Watch what that does to the clock's prize in that formula.</p>
-  <p><b>The Auditor moves first.</b> In two formulas he already holds a prize and asks which change it comes from, or holds an empty prize and asks which change explains it. Pull the change you think it is; a wrong pull still spends a blank.</p>
-  <p><b>The end.</b> After four formulas the verdict is in words: what you won, what came out empty, and what the paper says it means.</p>
+  <p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p>
+  <p><b>The formula.</b> Each picture has a formula, shown on the plate in symbols and in words. It gives every path a number; nature takes the path with the smallest one. <span class="f">x′</span> means how fast <span class="f">x</span> changes. The dots on a trail are the ticks of a clock.</p>
+  <p><b>The slide.</b> First you draw the slide you think is fastest from A to B. The formula gives your slide a number, then shows the real fastest slide and its number.</p>
+  <p><b>The changes.</b> Nine cards. Each shows a trip and a change: start the clock later, move the picture, turn it, or re-tick the clock fast here and slow there. You say: it matters, or it doesn't. Then you see the new trip in blue next to a dashed line showing where it would go if the change didn't matter, and the formula's number before and after.</p>
+  <p><b>The prizes.</b> A change that doesn't matter wins a prize: a number you can work out at every moment of the trip that stays the same all along it. The graph under the picture draws that number along the real trip (flat) and along a fake one (wobbly). Prizes go on the shelf. If you said "it matters" when it didn't, the prize still goes on the shelf, marked yellow.</p>
+  <p><b>The empty prize.</b> One prize stays flat on every path. You can draw paths and try to make its line move. You can't.</p>
+  <p><b>The end.</b> Your shelf, one sentence, and what the paper says.</p>
   <button class="btn go" id="helpback">Back</button>
 </section>
 
@@ -220,15 +165,6 @@ ul{padding-left:20px}li{margin:4px 0}
   /*__ABOUT__*/
   <button class="btn go" id="aboutback">Back</button>
 </section>
-
-<div class="overlay" id="overlay">
-  <div class="sheetbox">
-    <div class="band" id="striphead">RE-TICK THE CLOCK</div>
-    <p class="line" id="stripline"></p>
-    <div class="strip" id="strip"><svg viewBox="0 0 348 150" id="stripsvg"><line x1="0" y1="75" x2="348" y2="75" stroke="#3A4149" stroke-width="1"/><path id="stroke" d="" fill="none" stroke="#FF2ECC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(255,46,204,.8))"/></svg></div>
-    <div class="row"><button class="btn small-btn" id="stripcancel">Cancel</button><button class="btn go small-btn" id="strippull" disabled>Pull</button></div>
-  </div>
-</div>
 
 <script>
 /*__MECHANISM__*/
@@ -240,9 +176,8 @@ const M = window.NOETHER, C = M.CONFIG;
 const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
 const SVG = 'http://www.w3.org/2000/svg';
 const el = (t, a, parent) => { const e = document.createElementNS(SVG, t); for (const k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; };
-let g, lastScreen = 'start', chosen = null, busy = false, strokeSamples = null, lastRes = null, lastP = null;
-const timers = [];
-const wait = ms => new Promise(r => { const t = setTimeout(r, ms); timers.push(t); });
+const timers = []; const wait = ms => new Promise(r => { const t = setTimeout(r, ms); timers.push(t); });
+let lastScreen = 'start', ci = -1, answers = {}, busy = false, run = 0;
 
 // ---------- screens
 function show(id) { $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
@@ -250,337 +185,203 @@ $$('[data-go]').forEach(b => b.addEventListener('click', () => { lastScreen = $$
 $('#play .help-q').addEventListener('click', () => { lastScreen = 'play'; show('help'); });
 $('#helpback').addEventListener('click', () => show(lastScreen === 'help' ? 'start' : lastScreen));
 $('#aboutback').addEventListener('click', () => show(lastScreen === 'about' ? 'start' : lastScreen));
-$('#begin').addEventListener('click', start);
-$('#replay').addEventListener('click', start);
+$('#begin').addEventListener('click', start); $('#replay').addEventListener('click', start);
 
-// ---------- the drawing window
-const W = 348, H = 220, S = 100, cx = W / 2, cy = H / 2;
+// ---------- the window
+const W = 348, H = 220, S = 100, cx = W / 2, cy = H / 2, GROUND = -0.95;
 const px = u => cx + u * S, py = v => cy - v * S, ux = X => (X - cx) / S, uy = Y => (cy - Y) / S;
-let win, traceLayer, beadEl, ghostLayer, fanLayer, markLayer, captionEl, strokeEl;
+let win, bgL, ghostL, dashL, traceL, markL, dot, cap1, cap2, strokeEl;
 function drawWorld(w) {
-  const box = $('#window'); box.innerHTML = '';
-  win = el('svg', { viewBox: `0 0 ${W} ${H}` }, box);
-  const bg = el('g', {}, win);
-  if (w.id === 'floor' || w.id === 'spring') {
-    for (let x = -1.5; x <= 1.5; x += 0.5) el('line', { x1: px(x), y1: 0, x2: px(x), y2: H, stroke: '#1E2329', 'stroke-width': 1 }, bg);
-    for (let y = -1; y <= 1; y += 0.5) el('line', { x1: 0, y1: py(y), x2: W, y2: py(y), stroke: '#1E2329', 'stroke-width': 1 }, bg);
-  }
-  if (w.id === 'spring') { el('circle', { cx: px(0), cy: py(0), r: 7, fill: '#3A4149', stroke: '#9AA3AB', 'stroke-width': 2 }, bg); }
-  if (w.id === 'slide' || w.id === 'sheet') { // horizontal bands shaded by the formula's n(y): brighter where distance counts for more
-    const rows = 14; let ns = [];
-    for (let i = 0; i < rows; i++) { const yc = 1.1 - (i + 0.5) * 2.2 / rows; ns.push(M.density(w, 0, yc).n); }
-    const lo = Math.min(...ns), hi = Math.max(...ns);
-    for (let i = 0; i < rows; i++) { const a = 0.05 + 0.3 * (ns[i] - lo) / ((hi - lo) || 1); el('rect', { x: 0, y: i * H / rows, width: W, height: H / rows + 0.5, fill: `rgba(43,240,255,${a.toFixed(3)})` }, bg); }
-    for (let i = 1; i < rows; i++) el('line', { x1: 0, y1: i * H / rows, x2: W, y2: i * H / rows, stroke: 'rgba(0,0,0,.45)', 'stroke-width': 1 }, bg);
-    const lab = el('text', { x: W - 8, y: w.id === 'slide' ? 30 : H - 10, 'text-anchor': 'end', class: 'caption', style: 'fill:#9AA3AB;font-size:10px' }, bg); lab.textContent = w.id === 'slide' ? 'SLOW UP HERE · EVERY STEP COSTS MORE' : 'THICK DOWN HERE · EVERY STEP COSTS MORE';
-  }
-  ghostLayer = el('g', {}, win); fanLayer = el('g', {}, win); markLayer = el('g', {}, win); traceLayer = el('g', {}, win);
-  strokeEl = el('path', { d: '', fill: 'none', stroke: '#FF2ECC', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' }, win);
-  beadEl = el('circle', { cx: -10, cy: -10, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
-  captionEl = el('text', { x: 8, y: w.id === 'slide' ? H - 8 : 16, class: 'caption' }, win); captionEl.textContent = '';
+  const box = $('#window'); box.innerHTML = ''; win = el('svg', { viewBox: `0 0 ${W} ${H}` }, box); bgL = el('g', {}, win);
+  if (w.type === 'newton') { for (let x = -1.5; x <= 1.5; x += 0.5) el('line', { x1: px(x), y1: 0, x2: px(x), y2: H, stroke: '#1E2329' }, bgL); for (let y = -1; y <= 1; y += 0.5) el('line', { x1: 0, y1: py(y), x2: W, y2: py(y), stroke: '#1E2329' }, bgL); }
+  if (['ball', 'grow', 'magnet'].includes(w.id)) el('rect', { x: 0, y: py(GROUND), width: W, height: H - py(GROUND), fill: '#1A1F25' }, bgL);
+  if (w.id === 'grow') { const t = el('text', { x: W - 8, y: H - 6, 'text-anchor': 'end', class: 'caption dim' }, bgL); t.textContent = 'GRAVITY GROWS EVERY MINUTE'; }
+  if (w.id === 'magnet') { const X = px(C.MAGNET.x), Y = py(C.MAGNET.y); for (const r of [34, 22]) el('circle', { cx: X, cy: Y, r, fill: 'none', stroke: 'rgba(255,46,204,.25)' }, bgL); el('path', { d: `M${X - 9} ${Y - 10} v10 a9 9 0 0 0 18 0 v-10`, fill: 'none', stroke: '#FF2ECC', 'stroke-width': 5 }, bgL); const t = el('text', { x: X, y: Y + 30, 'text-anchor': 'middle', class: 'caption fake' }, bgL); t.textContent = 'MAGNET'; }
+  if (w.id === 'peg' || w.id === 'wind') el('circle', { cx: px(0), cy: py(0), r: 7, fill: '#3A4149', stroke: '#9AA3AB', 'stroke-width': 2 }, bgL);
+  if (w.id === 'wind') { for (let k = 0; k < 4; k++) { const Y = 30 + k * 50; el('path', { d: `M14 ${Y} h40 m-8 -6 l8 6 l-8 6`, fill: 'none', stroke: 'rgba(43,240,255,.35)', 'stroke-width': 2 }, bgL); } const t = el('text', { x: 14, y: H - 6, class: 'caption dim' }, bgL); t.textContent = 'WIND BLOWING EAST'; }
+  if (w.id === 'slide') { const rows = 14, ns = []; for (let i = 0; i < rows; i++) ns.push(M.density(w, 0, 1.1 - (i + 0.5) * 2.2 / rows).n); const lo = Math.min(...ns), hi = Math.max(...ns); for (let i = 0; i < rows; i++) el('rect', { x: 0, y: i * H / rows, width: W, height: H / rows + 0.5, fill: `rgba(43,240,255,${(0.04 + 0.32 * (ns[i] - lo) / (hi - lo)).toFixed(3)})` }, bgL); const t = el('text', { x: W - 8, y: 14, 'text-anchor': 'end', class: 'caption dim' }, bgL); t.textContent = 'SLOW UP HERE'; }
+  ghostL = el('g', {}, win); dashL = el('g', {}, win); traceL = el('g', {}, win); markL = el('g', {}, win);
+  strokeEl = el('path', { d: '', fill: 'none', stroke: '#FF2ECC', 'stroke-width': 3, 'stroke-linecap': 'round', style: 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' }, win);
+  dot = el('circle', { cx: -20, cy: -20, r: 6, fill: '#fff', style: 'filter:drop-shadow(0 0 6px rgba(255,255,255,.9))' }, win);
+  cap1 = el('text', { x: 8, y: w.id === 'slide' ? H - 22 : 15, class: 'caption' }, win); cap2 = el('text', { x: 8, y: w.id === 'slide' ? H - 8 : 29, class: 'caption' }, win);
 }
-function setCaption(text, kind) { captionEl.textContent = text || ''; captionEl.setAttribute('class', 'caption' + (kind ? ' ' + kind : '')); }
-function pathD(p) { let d = ''; for (let i = 0; i < p.u1.length; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }
-function drawGhost(path) { // the best path, faint and still, under a preview or a drawn path
-  ghostLayer.innerHTML = ''; if (!path) return;
-  el('path', { d: pathD(path), fill: 'none', stroke: '#9AA3AB', 'stroke-width': 1.5, opacity: 0.45 }, ghostLayer);
-  for (let k = 0; k < path.u1.length; k += C.TICK_EVERY) el('circle', { cx: px(path.u1[k]), cy: py(path.u2[k]), r: 1.8, fill: '#9AA3AB', opacity: 0.45 }, ghostLayer);
+function caps(a, ka, b, kb) { cap1.textContent = a || ''; cap1.setAttribute('class', 'caption' + (ka ? ' ' + ka : '')); cap2.textContent = b || ''; cap2.setAttribute('class', 'caption' + (kb ? ' ' + kb : '')); }
+const isBall = w => ['ball', 'grow', 'magnet'].includes(w.id);
+function landed(w, p) { // a thrown ball stops at the ground
+  if (!isBall(w)) return p.u1.length; for (let i = 20; i < p.u1.length; i++) if (p.u2[i] < GROUND) return i; return p.u1.length;
 }
-function drawMarks(path) { // A and B
-  markLayer.innerHTML = ''; if (!path) return; const n = path.u1.length;
-  for (const [i, L] of [[0, 'A'], [n - 1, 'B']]) { const X = px(path.u1[i]), Y = py(path.u2[i]); el('circle', { cx: X, cy: Y, r: 9, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, markLayer); const t = el('text', { x: X, y: Y + 4.5, 'text-anchor': 'middle', class: 'caption', style: 'font-size:12px' }, markLayer); t.textContent = L; }
+function pathD(p, end) { let d = ''; for (let i = 0; i < end; i += 2) d += (i ? 'L' : 'M') + px(p.u1[i]).toFixed(1) + ' ' + py(p.u2[i]).toFixed(1); return d; }
+function still(layer, p, w, opts) { // a whole trip drawn at once: grey ghost or dashed
+  const end = landed(w, p); el('path', { d: pathD(p, end), fill: 'none', stroke: opts.colour, 'stroke-width': opts.width || 1.6, 'stroke-dasharray': opts.dash || 'none', opacity: opts.op || 1 }, layer);
+  if (opts.ticks) for (let k = 0; k < end; k += C.TICK_EVERY) el('circle', { cx: px(p.u1[k]), cy: py(p.u2[k]), r: 1.8, fill: opts.colour, opacity: opts.op || 1 }, layer);
 }
-let liveRAF = null;
-function playMotion(path, opts) { // animates a dot along a path, with its clock ticks as dots; opts: {fake, onFrame, dur, fan, colour}
-  if (liveRAF) cancelAnimationFrame(liveRAF);
-  traceLayer.innerHTML = ''; fanLayer.innerHTML = '';
-  const col = opts.colour || (opts.fake ? '#FF2ECC' : '#DDF6FF');
-  const tr = el('path', { d: '', fill: 'none', stroke: col, 'stroke-width': opts.fake ? 2.5 : 2, 'stroke-dasharray': opts.fake ? '7 5' : 'none', style: opts.fake ? 'filter:drop-shadow(0 0 5px rgba(255,46,204,.8))' : 'filter:drop-shadow(0 0 4px rgba(43,240,255,.6))' }, traceLayer);
-  const ticks = el('g', {}, traceLayer); let drawnTicks = 0;
-  const fan = opts.fan ? el('path', { d: '', fill: 'rgba(43,240,255,.18)', stroke: 'rgba(43,240,255,.5)', 'stroke-width': 1 }, fanLayer) : null;
-  beadEl.setAttribute('fill', col);
-  const n = path.u1.length, dur = opts.dur || 1800, t0 = performance.now();
+function marks(p) { markL.innerHTML = ''; if (!p) return; const n = p.u1.length; for (const [i, L] of [[0, 'A'], [n - 1, 'B']]) { const X = px(p.u1[i]), Y = py(p.u2[i]); el('circle', { cx: X, cy: Y, r: 9, fill: '#0B0D10', stroke: '#2BF0FF', 'stroke-width': 1.5 }, markL); const t = el('text', { x: X, y: Y + 4, 'text-anchor': 'middle', class: 'caption' }, markL); t.textContent = L; } }
+let raf = null;
+function play(w, p, opts) { // animate a trip with its clock ticks; opts: { colour, dash, dur, onFrame }
+  if (raf) cancelAnimationFrame(raf); traceL.innerHTML = '';
+  const col = opts.colour || '#DDF6FF', end = landed(w, p), n = end, dur = opts.dur || 1800, t0 = performance.now(), myRun = run;
+  const tr = el('path', { d: '', fill: 'none', stroke: col, 'stroke-width': 2.2, 'stroke-dasharray': opts.dash || 'none', style: `filter:drop-shadow(0 0 4px ${col})` }, traceL), ticks = el('g', {}, traceL); let k = 0;
+  dot.setAttribute('fill', col);
   return new Promise(res => {
     const frame = now => {
-      const t = Math.max(0, Math.min(1, (now - t0) / dur)), i = Math.floor(t * (n - 1));
-      let d = ''; for (let k = 0; k <= i; k += 2) d += (k ? 'L' : 'M') + px(path.u1[k]).toFixed(1) + ' ' + py(path.u2[k]).toFixed(1);
-      tr.setAttribute('d', d); beadEl.setAttribute('cx', px(path.u1[i])); beadEl.setAttribute('cy', py(path.u2[i]));
-      while (drawnTicks * C.TICK_EVERY <= i) { const k = drawnTicks * C.TICK_EVERY; el('circle', { cx: px(path.u1[k]), cy: py(path.u2[k]), r: 2.4, fill: col }, ticks); drawnTicks++; }
-      if (fan) { let fd = 'M' + px(0).toFixed(1) + ' ' + py(0).toFixed(1); for (let k = 0; k <= i; k += 4) fd += 'L' + px(path.u1[k]).toFixed(1) + ' ' + py(path.u2[k]).toFixed(1); fan.setAttribute('d', fd + 'Z'); }
+      if (myRun !== run) return res();
+      const t = Math.max(0, Math.min(1, (now - t0) / dur)), i = Math.min(n - 1, Math.floor(t * (n - 1)));
+      tr.setAttribute('d', pathD(p, i + 1)); dot.setAttribute('cx', px(p.u1[i])); dot.setAttribute('cy', py(p.u2[i]));
+      while (k * C.TICK_EVERY <= i) { const j = k * C.TICK_EVERY; el('circle', { cx: px(p.u1[j]), cy: py(p.u2[j]), r: 2.4, fill: col }, ticks); k++; }
       if (opts.onFrame) opts.onFrame(i, t);
-      if (t < 1) liveRAF = requestAnimationFrame(frame); else res();
+      if (t < 1) raf = requestAnimationFrame(frame); else res();
     };
-    liveRAF = requestAnimationFrame(frame);
+    raf = requestAnimationFrame(frame);
   });
 }
-function loopMotion(path, opts) { // idle: a motion traced over and over
-  let stop = false; const run = async () => { while (!stop) { await playMotion(path, Object.assign({ dur: 2600 }, opts || {})); if (stop) break; await wait(700); } };
-  run(); return () => { stop = true; if (liveRAF) cancelAnimationFrame(liveRAF); };
-}
-let stopIdle = null, baseMotion = null, otherPath = null, plateScale = 1;
-const fanOn = () => { const w = M.world(g); return w.id === 'spring' && !!w.first; };
-function showReal() { // the best path running, no ghost
-  if (stopIdle) stopIdle(); drawGhost(null);
-  setCaption('THE BEST PATH', 'true'); stopIdle = loopMotion(baseMotion, { fan: fanOn() });
-}
-function showPreview(lv) { // the lever's change, shown as a motion over the best path in grey
-  if (stopIdle) stopIdle();
-  const prev = M.changedPath(lv.id, baseMotion, null);
-  drawGhost(baseMotion); setCaption('AFTER THE CHANGE: ' + lv.shows, null);
-  stopIdle = loopMotion(prev, { colour: '#2BF0FF', fan: fanOn() });
-}
+let looping = null;
+function loop(w, p, opts) { stopLoop(); const me = {}; looping = me; (async () => { while (looping === me) { await play(w, p, Object.assign({ dur: 2400 }, opts)); if (looping !== me) break; await wait(600); } })(); }
+function stopLoop() { looping = null; if (raf) cancelAnimationFrame(raf); }
 
-// ---------- drawing a path with a finger
-let drawMode = null, drawing = false, strokePts = [], onStroke = null;
-(function () {
-  const box = $('#window');
-  const pos = e => { const r = box.getBoundingClientRect(); return [ux((e.clientX - r.left) / r.width * W), uy((e.clientY - r.top) / r.height * H)]; };
-  box.addEventListener('pointerdown', e => { if (!drawMode || busy) return; drawing = true; box.setPointerCapture(e.pointerId); strokePts = [pos(e)]; if (stopIdle) stopIdle(); traceLayer.innerHTML = ''; fanLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); strokeEl.setAttribute('d', ''); setCaption('YOUR PATH', 'fake'); });
-  box.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e); strokePts.push(p); strokeEl.setAttribute('d', strokePts.map((q, i) => (i ? 'L' : 'M') + px(q[0]).toFixed(1) + ' ' + py(q[1]).toFixed(1)).join('')); });
-  const up = () => { if (!drawing) return; drawing = false; if (strokePts.length < 6) { strokeEl.setAttribute('d', ''); return; } const pts = strokePts; strokePts = []; strokeEl.setAttribute('d', ''); if (onStroke) onStroke(pts); };
-  box.addEventListener('pointerup', up); box.addEventListener('pointercancel', up);
-})();
-function setDrawMode(mode) { drawMode = mode; $('#window').classList.toggle('drawing', !!mode); if (mode) { try { $('#plate').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} } }
+// ---------- the graph: the prize's number along the trip
+const GW = 348, GH = 86; let gsvg;
+function graphReset(label) { const g = $('#graph'); g.classList.remove('hidden'); g.innerHTML = ''; gsvg = el('svg', { viewBox: `0 0 ${GW} ${GH}` }, g); el('line', { x1: 8, y1: GH / 2, x2: GW - 8, y2: GH / 2, stroke: '#2A3037' }, gsvg); const t = el('text', { x: 8, y: 13, class: 'caption dim' }, gsvg); t.textContent = label; }
+let gain = 1.6;
+function graphLine(vals, end, colour, dash) { const p = el('path', { d: '', fill: 'none', stroke: colour, 'stroke-width': 2.2, 'stroke-dasharray': dash || 'none', style: `filter:drop-shadow(0 0 3px ${colour})` }, gsvg); const n = vals.length; return i => { let d = ''; for (let j = 0; j <= Math.min(i, end - 1); j += 2) d += (j ? 'L' : 'M') + (8 + (GW - 16) * j / (n - 1)).toFixed(1) + ' ' + (GH / 2 - Math.max(-1, Math.min(1, vals[j] * gain)) * (GH / 2 - 10)).toFixed(1); p.setAttribute('d', d); }; }
+function graphHide() { $('#graph').classList.add('hidden'); }
 
 // ---------- the plate
-function drawPlate(w) { $('#formula').textContent = w.formula; $('#words').textContent = w.words; $('#nums').innerHTML = ''; }
-function showNumbers(leverId, p) { // the formula's numbers before and after, for the best path and one other
-  const w = M.world(g), box = $('#nums'); box.innerHTML = '';
-  const paths = [baseMotion].concat(otherPath ? [otherPath] : []), names = ['the best path', 'your path'];
-  const r = M.numbers(w, leverId, paths, p, plateScale, g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length);
-  r.rows.forEach((row, i) => {
-    const who = document.createElement('span'); who.className = 'who'; who.textContent = names[i]; box.appendChild(who);
-    const a = document.createElement('span'); a.className = 'n'; a.textContent = row.before; box.appendChild(a);
-    const ar = document.createElement('span'); ar.className = 'arrow'; ar.textContent = '→'; box.appendChild(ar);
-    const b = document.createElement('span'); b.className = 'n ' + (r.holds ? 'same' : 'diff'); b.textContent = row.after; box.appendChild(b);
+function plate(w) { $('#formula').textContent = w.formula; $('#words').textContent = w.words; $('#nums').innerHTML = ''; }
+function numRow(label, a, b, cls) { const box = $('#nums'); const s = document.createElement('span'); s.textContent = label; box.appendChild(s); const x = document.createElement('span'); x.className = 'n'; x.textContent = a; box.appendChild(x); const ar = document.createElement('span'); ar.textContent = b === null ? '' : '→'; ar.style.color = 'var(--dim)'; box.appendChild(ar); const y = document.createElement('span'); y.className = 'n ' + (cls || ''); y.textContent = b === null ? '' : b; box.appendChild(y); }
+function numWord(text, cls) { const s = document.createElement('span'); s.className = 'word'; s.style.color = cls === 'same' ? 'var(--cyan)' : 'var(--haz)'; s.textContent = text; $('#nums').appendChild(s); }
+
+// ---------- the shelf
+const PRIZE_CARDS = M.CARDS.filter(c => c.prize);
+function drawShelf(box) {
+  box.innerHTML = '';
+  for (const c of PRIZE_CARDS) {
+    const t = document.createElement('div'); t.className = 'tile'; t.dataset.card = c.id; const st = shelfState[c.id];
+    const name = c.prize === 'SLIDE ENERGY' ? 'SLIDE ENERGY' : c.prize;
+    if (!st) t.innerHTML = '<span class="tn">?</span>';
+    else { t.classList.add(st.kind === 'empty' ? 'empty' : st.mine ? 'won' : 'missed'); t.innerHTML = `<span class="tn">${name}</span><span class="tf">${st.kind === 'empty' ? 'EMPTY' : M.PRIZES[c.prize].formula}</span>`; }
+    box.appendChild(t);
+  }
+}
+let shelfState = {};
+
+// ---------- the opener: draw the fastest slide
+let tries = 0, slideBest = null;
+function opener() {
+  const w = M.WORLDS.slide; run++; stopLoop(); graphHide();
+  $('#band').textContent = 'FIRST, A NUMBER · THE SLIDE';
+  $('#setup').textContent = 'A dot slides from A down to B. The formula on the plate counts how long the slide takes. Of all the curves from A to B, the dot takes the one with the smallest number: the fastest.';
+  drawWorld(w); plate(w); slideBest = M.trueMotion(w, null); marks(slideBest);
+  ['#question', '#answer'].forEach(s => $(s).classList.add('hidden')); $('#opening').classList.remove('hidden');
+  tries = 0; askDraw();
+}
+function askDraw() {
+  $('#openask').textContent = 'Draw the slide you think is fastest from A to B, with your finger, in the window. The dot is slow near the top, so steps up there cost more.';
+  $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden');
+  traceL.innerHTML = ''; ghostL.innerHTML = ''; dot.setAttribute('cx', -20); $('#nums').innerHTML = ''; caps('DRAW YOUR SLIDE FROM A TO B', 'fake');
+  drawMode(async pts => {
+    const w = M.WORLDS.slide, n = slideBest.u1.length, mine = M.strokeToPath(pts, n, [[slideBest.u1[0], slideBest.u2[0]], [slideBest.u1[n - 1], slideBest.u2[n - 1]]]);
+    const sc = M.plateScale(w, slideBest), a = Math.round(M.score(w, mine) * sc), b = Math.round(M.score(w, slideBest) * sc); tries++;
+    $('#nums').innerHTML = ''; numRow('your slide', a, null); caps('YOUR SLIDE', 'fake');
+    await play(w, mine, { colour: '#FF2ECC', dash: '7 5', dur: 1800 });
+    still(ghostL, mine, w, { colour: '#FF2ECC', dash: '5 5', op: 0.5 });
+    numRow('the fastest slide', b, null); caps('THE FASTEST SLIDE: THE SMALLEST NUMBER', 'true');
+    await play(w, slideBest, { dur: 1800 });
+    const close = a <= b ? 'You found it.' : a - b <= b * 0.03 ? `Close: ${a} against ${b}.` : `Yours: ${a}. The fastest: ${b}.`;
+    $('#openask').textContent = `${close} The fastest slide dives below B and climbs back up: it gets away from the slow top as quickly as it can, even if the road is longer. No curve from A to B gets a smaller number. That is what the formula does: it picks one path out of all of them.`;
+    $('#openon').classList.remove('hidden'); $('#drawagain').classList.toggle('hidden', tries >= C.OPENING_TRIES);
+    loop(w, slideBest, {});
   });
-  return r;
 }
-function showOneNumber(name, path, cls) { const box = $('#nums'); const who = document.createElement('span'); who.className = 'who'; who.textContent = name; box.appendChild(who); const n = document.createElement('span'); n.className = 'n' + (cls ? ' ' + cls : ''); n.style.gridColumn = '2 / 5'; n.textContent = Math.round(M.score(M.world(g), path) * plateScale); box.appendChild(n); }
+$('#drawagain').addEventListener('click', () => { run++; stopLoop(); askDraw(); });
+$('#openon').addEventListener('click', () => { drawMode(null); $('#opening').classList.add('hidden'); marks(null); nextCard(); });
 
-// ---------- the needle
-let needle, needleGlow;
-function drawGauge() {
-  const s = $('#gaugesvg'); s.innerHTML = '';
-  el('path', { d: 'M20 76 A55 55 0 0 1 130 76', fill: 'none', stroke: '#0B0D0F', 'stroke-width': 10 }, s);
-  el('path', { d: 'M20 76 A55 55 0 0 1 130 76', fill: 'none', stroke: '#3A4149', 'stroke-width': 6 }, s);
-  for (let a = -60; a <= 60; a += 30) { const r1 = 48, r2 = 56, ra = (a - 90) * Math.PI / 180; el('line', { x1: 75 + r1 * Math.cos(ra), y1: 76 + r1 * Math.sin(ra), x2: 75 + r2 * Math.cos(ra), y2: 76 + r2 * Math.sin(ra), stroke: '#9AA3AB', 'stroke-width': a === 0 ? 2 : 1 }, s); }
-  needleGlow = el('line', { x1: 75, y1: 76, x2: 75, y2: 24, stroke: '#2BF0FF', 'stroke-width': 6, opacity: 0, 'stroke-linecap': 'round' }, s);
-  needle = el('line', { x1: 75, y1: 76, x2: 75, y2: 24, stroke: '#D7DDE2', 'stroke-width': 3, 'stroke-linecap': 'round' }, s);
-  el('circle', { cx: 75, cy: 76, r: 6, fill: '#0B0D0F', stroke: '#9AA3AB', 'stroke-width': 2 }, s);
-  setNeedle(0, null);
-}
-function setNeedle(v, colour) { // v in [-1, 1]
-  const a = Math.max(-1, Math.min(1, v)) * 60, ra = (a - 90) * Math.PI / 180, x2 = 75 + 52 * Math.cos(ra), y2 = 76 + 52 * Math.sin(ra);
-  needle.setAttribute('x2', x2); needle.setAttribute('y2', y2); needleGlow.setAttribute('x2', x2); needleGlow.setAttribute('y2', y2);
-  needleGlow.setAttribute('stroke', colour || '#2BF0FF'); needleGlow.setAttribute('opacity', colour ? 0.7 : 0);
-}
-function setStamp(kind, text) { const st = $('#stamp'); st.className = 'stamp'; st.textContent = text || ''; if (kind) { st.classList.add(kind); requestAnimationFrame(() => st.classList.add('on')); } }
-function setFeed(text, kind) { const f = $('#feed'); f.textContent = text || ''; f.className = 'feedline' + (kind ? ' ' + kind : ''); }
-// the needle along a path: the prize's number B relative to its value at the start, against the Auditor's scale
-async function runNeedle(path, res, opts) {
-  const B = M.current(M.world(g), path, res.lever.id, lastP), B0 = B[C.EDGE], sc = res.audit.scale; let maxv = 0;
-  await playMotion(path, Object.assign({ onFrame: j => { const v = res.audit.blank ? 0 : (B[Math.max(C.EDGE, Math.min(j, B.length - 1 - C.EDGE))] - B0) / sc * 2.5; maxv = Math.max(maxv, Math.abs(v)); setNeedle(v, Math.abs(v) > 0.08 ? (opts.fake ? '#FF2ECC' : '#F2CB05') : null); } }, opts));
-  return maxv;
-}
-
-// ---------- the rack
-function drawRack(pending) {
-  const r = $('#rack'); r.innerHTML = '';
-  for (let i = 0; i < C.BLANKS; i++) {
-    const e = g.rack[i], s = document.createElement('div'); s.className = 'slot'; s.dataset.i = i;
-    if (e && i === pending) { s.innerHTML = `<span class="tagtext">${e.kind === 'void' ? '' : e.tag}</span>`; }
-    else if (e) { s.classList.add(e.kind === 'notlaw' ? 'jam' : e.kind); s.innerHTML = `<span class="tagtext">${e.kind === 'jam' ? 'SPENT' : e.kind === 'void' ? 'EMPTY' : e.kind === 'identity' ? 'RULE' : e.tag}</span>`; }
-    else { s.innerHTML = '<span class="tagtext" style="color:#6A737B;text-shadow:none">BLANK</span>'; }
-    const p = document.createElement('div'); p.className = 'press'; s.appendChild(p); r.appendChild(s);
-  }
-}
-
-// ---------- the levers
-function drawLevers() {
-  const L = $('#levers'); L.innerHTML = ''; chosen = null;
-  for (const lv of M.LEVERS) {
-    const b = document.createElement('button'); b.className = 'lever' + (lv.free ? ' free' : '') + (g.pulled[lv.id] ? ' down' : ''); b.dataset.id = lv.id;
-    b.innerHTML = lv.label + (lv.free ? '<small>you draw it</small>' : '');
-    b.addEventListener('click', () => {
-      if (busy || g.pulled[lv.id]) return; chosen = lv.id; $$('.lever').forEach(x => x.classList.toggle('chosen', x.dataset.id === lv.id));
-      const r = showNumbers(lv.id, null);
-      $('#willdo').textContent = lv.does + (lv.free ? ' The window shows one way of doing it; you will draw your own.' : ' The window shows it in blue over the old drawing in grey.') + ' The plate shows the numbers before and after. Does the formula care? If you think not, pull.';
-      $('#pull').disabled = false; showPreview(lv);
-    });
-    L.appendChild(b);
-  }
-  $('#willdo').textContent = 'Tap a change to see it.'; $('#pull').disabled = true;
-}
-
-// ---------- a formula (a world)
-function enterWorld() {
-  const w = M.world(g); busy = false;
-  $('#band').textContent = `FORMULA ${g.wi + 1} OF ${C.WORLD_ORDER.length} · ${w.name.toUpperCase()}`;
-  $('#worldline').textContent = w.line;
-  drawWorld(w); drawPlate(w); drawGauge(); setStamp(null, ''); drawRack(); drawLevers(); $('#levers').classList.remove('off');
-  ['#opening', '#choose', '#test', '#after'].forEach(s => $(s).classList.add('hidden'));
-  const seed = g.seed * 100 + g.wi * 10 + Object.keys(g.pulled).length;
-  const batch = M.auditorBatch(w, seed); baseMotion = batch[0].path; plateScale = M.plateScale(w, baseMotion);
-  otherPath = null; // the player's own guess, drawn in the opening
-  if (stopIdle) stopIdle();
-  $('#first').classList.add('hidden'); setFeed('', null);
-  openOpening();
-}
-function afterOpening() { // the levers, and the Auditor's first move where he has one
-  const w = M.world(g), first = $('#first');
-  if (w.first) {
-    first.classList.remove('hidden'); first.innerHTML = `<b>THE AUDITOR MOVES FIRST</b>${w.first.say}`;
-    $('#benchhead').textContent = w.first.target === 'warpclock' ? 'Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.' : 'Tap a change: the window and the plate show it. Pull the one you think his prize comes from. A wrong pull still spends a blank.';
-    if (w.first.target === 'warpclock') { setStamp('void', 'EMPTY'); setFeed('The clock prize of this formula, stamped before you arrived: its number is the same on every path.', 'fake'); }
-    else { setStamp('teeth', w.first.law); $('#stamp').classList.add('law'); setFeed('His prize, x·y′ − y·x′. The needle reads it along the best path: it does not move.', 'true'); }
-  } else { first.classList.add('hidden'); $('#benchhead').textContent = g.wi === 0 ? 'Now change the whole drawing. Tap a change: the window and the plate show it, with the numbers before and after, for the best path and for yours. Pull it if you think the formula does not care.' : 'Tap a change: the window and the plate show it. Pull it if you think the formula does not care.'; setFeed('The needle reads a prize\u2019s number as the dot moves. No prize yet.', null); }
-  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber('your path', otherPath, null);
-  $('#choose').classList.remove('hidden'); showReal();
-}
-
-// ---------- the opening: draw a path from A to B against the best path
-let tries = 0;
-function openOpening() {
-  const w = M.world(g);
-  tries = 0; $('#opening').classList.remove('hidden'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden');
-  $('#openask').textContent = w.ask;
-  setFeed(g.wi === 0 ? 'The needle is for prizes; none yet. First, a number.' : 'First, a number.', null);
-  $('#nums').innerHTML = '';
-  drawGhost(null); traceLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); drawMarks(baseMotion); setCaption('DRAW YOUR GUESS FROM A TO B', 'fake');
-  setDrawMode('opening');
-  onStroke = async pts => {
-    busy = true; setDrawMode(null); tries++;
-    const n = baseMotion.u1.length, ends = [[baseMotion.u1[0], baseMotion.u2[0]], [baseMotion.u1[n - 1], baseMotion.u2[n - 1]]];
-    otherPath = M.strokeToPath(pts, n, ends);
-    $('#nums').innerHTML = ''; showOneNumber('your path', otherPath, 'diff');
-    setCaption('YOUR PATH, TRACED AT A STEADY PACE', 'fake');
-    await playMotion(otherPath, { fake: true, dur: 2000 }); await wait(400);
-    showOneNumber('the best path', baseMotion, 'same'); drawGhost(otherPath); setCaption('THE BEST PATH: THE SMALLEST NUMBER', 'true');
-    await playMotion(baseMotion, { dur: 2200, fan: fanOn() });
-    const yours = Math.round(M.score(w, otherPath) * plateScale), best = Math.round(M.score(w, baseMotion) * plateScale);
-    const close = yours <= best ? 'You found it: the same number as the best path.' : yours - best <= Math.abs(best) * 0.03 ? 'Close: a few parts in a thousand off the best path.' : `Your path: ${yours}. The best path: ${best}.`;
-    $('#openask').textContent = `${close} The best path is ${w.best} No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.`;
-    busy = false; $('#openon').classList.remove('hidden'); $('#drawagain').classList.toggle('hidden', tries >= C.OPENING_TRIES);
-    stopIdle = loopMotion(baseMotion, { fan: fanOn() });
-  };
-}
-$('#drawagain').addEventListener('click', () => { if (busy) return; if (stopIdle) stopIdle(); traceLayer.innerHTML = ''; fanLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); drawGhost(null); $('#nums').innerHTML = ''; $('#openask').textContent = 'Draw another guess from A to B.'; setCaption('DRAW YOUR GUESS FROM A TO B', 'fake'); $('#drawagain').classList.add('hidden'); $('#openon').classList.add('hidden'); setDrawMode('opening'); });
-$('#openon').addEventListener('click', () => {
-  if (busy) return; setDrawMode(null); onStroke = null; $('#opening').classList.add('hidden'); drawMarks(null);
-  afterOpening();
-});
-
-// ---------- the pull
-$('#pull').addEventListener('click', () => { if (!chosen || busy) return; const lv = M.leverById(chosen); if (lv.free) openStrip(lv); else doPull(null); });
-async function doPull(p) {
-  if (busy) return; busy = true; if (stopIdle) stopIdle();
-  const w = M.world(g), slotIndex = g.rack.length, lv = M.leverById(chosen); lastP = p;
-  $('#levers').classList.add('off'); $('#pull').disabled = true;
-  const res = M.playPull(g, chosen, p); if (!res) { busy = false; $('#levers').classList.remove('off'); return; } lastRes = res;
-  $('#choose').classList.add('hidden');
-  if (p) showNumbers(lv.id, p); // the plate with the player's own drawn change
-  const slot = $$('.slot')[slotIndex]; slot.classList.add('pressing'); setStamp(null, ''); drawGhost(null);
-  setFeed('The press comes down.', null); setCaption('', null);
-  await wait(260); $('#rack').style.transform = 'translateY(2px)'; await wait(80); $('#rack').style.transform = '';
-  if (res.kind === 'jam') {
-    slot.classList.remove('pressing'); await wait(200); drawRack();
-    setStamp('jam', 'IT CARES'); setFeed('The formula cares: the numbers changed. One blank spent, no prize.', 'fake'); setCaption('THE FORMULA CARES', 'fake');
-    for (let k = 0; k < 10; k++) { setNeedle((k % 2 ? 1 : -1) * (1 - k / 12), '#F2CB05'); await wait(90); } setNeedle(0, null);
-    finishPull(res);
-  } else if (res.kind === 'identity') {
-    await wait(220); slot.classList.remove('pressing'); await wait(200); drawRack(slotIndex);
-    setStamp('identity', 'RULE'); setNeedle(0, null);
-    setFeed('The formula does not care, but no prize came out. The tag reads a rule: ' + (lv.id === 'warpclock' ? 'ψ₁x′ + ψ₂y′ = 0, the two equations of motion are not independent.' : 'ψ₁ = 0 on every path.'), null);
-    $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, 'same'); const chg = M.changedPath(lv.id, baseMotion, p); showOneNumber('after your change', chg, 'same');
-    drawGhost(baseMotion); setCaption(lv.id === 'warpclock' ? 'YOUR RE-TICKED CLOCK · THE SAME ROUTE' : 'YOUR WOBBLE', null);
-    await playMotion(chg, { dur: 2200, colour: '#2BF0FF' }); drawRack();
-    finishPull(res); stopIdle = loopMotion(chg, { colour: '#2BF0FF' });
-  } else {
-    await wait(220); slot.classList.remove('pressing'); await wait(200); drawRack(slotIndex);
-    const law = M.LAWS[res.tag] || { formula: '', gloss: 'its number' };
-    setStamp('law', res.tag);
-    setFeed(`The formula does not care. A prize is stamped: ${res.tag}, ${law.formula}, ${law.gloss}. Now the needle reads that number along the best path.`, 'true');
-    setCaption('THE BEST PATH · THE PRIZE’S NUMBER', 'true'); drawGhost(null);
-    await runNeedle(baseMotion, res, { dur: 2200 }); await wait(300);
-    setFeed(res.audit.blank ? 'Along the best path the needle did not move: the number held. (It is zero everywhere.)' : 'Along the best path the needle did not move: the prize’s number held all the way.', 'true');
-    // the test: the player draws paths
-    $('#test').classList.remove('hidden'); $('#testagain').classList.add('hidden'); $('#testdone').classList.add('hidden');
-    $('#testask').textContent = 'Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.';
-    drawGhost(baseMotion); setCaption('DRAW ANY PATH', 'fake'); setDrawMode('test'); busy = false;
-    let drawn = 0;
-    onStroke = async pts => {
-      busy = true; setDrawMode(null); drawn++;
-      const path = M.strokeToPath(pts, baseMotion.u1.length, null);
-      setCaption('YOUR PATH · THE PRIZE’S NUMBER', 'fake');
-      const moved = await runNeedle(path, res, { fake: true, dur: 2000 });
-      const swung = moved > 0.08;
-      setFeed(swung ? 'The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.' : 'The needle did not move: on your path the number is the same as on the best path.', swung ? 'fake' : 'true');
-      $('#testask').textContent = swung ? 'The number changed along your path. Draw another, or let the Auditor run his own paths and stamp.' : (drawn >= 2 ? 'Still nothing. Whatever you draw, this number stays put. Draw another, or let the Auditor stamp.' : 'The needle did not move. Draw another path, as wild as you like, or let the Auditor stamp.');
-      busy = false; $('#testagain').classList.remove('hidden'); $('#testdone').classList.remove('hidden');
-    };
-  }
-}
-$('#testagain').addEventListener('click', () => { if (busy) return; traceLayer.innerHTML = ''; beadEl.setAttribute('cx', -10); setNeedle(0, null); setCaption('DRAW ANY PATH', 'fake'); $('#testagain').classList.add('hidden'); $('#testdone').classList.add('hidden'); setDrawMode('test'); });
-$('#testdone').addEventListener('click', async () => {
-  if (busy) return; busy = true; setDrawMode(null); onStroke = null; $('#test').classList.add('hidden');
-  const res = lastRes, shown = C.SHOWN_MOTIONS.filter(i => i < res.audit.rows.length);
-  setFeed('The Auditor runs his own paths: the best path, and paths the dot would never take.', null);
-  for (const i of shown) {
-    const row = res.audit.rows[i], path = res.batch[i].path;
-    setCaption(row.isTrue ? 'THE AUDITOR · THE BEST PATH' : 'THE AUDITOR · A PATH THE DOT WOULD NEVER TAKE', row.isTrue ? 'true' : 'fake');
-    await runNeedle(path, res, { fake: !row.isTrue, dur: 1300 }); await wait(250);
-  }
-  drawRack(); setStamp(res.kind, res.kind === 'teeth' ? 'PRIZE' : res.kind === 'void' ? 'EMPTY' : 'NOT A PRIZE');
-  setFeed(res.kind === 'void' ? 'EMPTY: the number stayed the same on every path he tried, the bad ones too. A number like that tells you nothing.' : res.kind === 'teeth' ? 'PRIZE: the number held on the best path and changed on the others. A real prize.' : 'The number changed on the best path: not a prize.', res.kind === 'void' ? 'fake' : res.kind === 'teeth' ? 'true' : null);
-  setCaption(res.kind === 'void' ? 'EMPTY' : res.kind === 'teeth' ? 'A REAL PRIZE' : 'NOT A PRIZE', res.kind === 'void' ? 'fake' : null);
-  setNeedle(res.kind === 'teeth' ? 0.5 : 0, res.kind === 'teeth' ? '#2BF0FF' : res.kind === 'void' ? '#FF2ECC' : null);
-  if (res.kind === 'void') { for (let k = 0; k < 3; k++) { setNeedle(0, '#FF2ECC'); await wait(120); setNeedle(0, null); await wait(120); } setNeedle(0, '#FF2ECC'); }
-  finishPull(res); drawGhost(null); stopIdle = loopMotion(baseMotion, { fan: fanOn() });
-});
-function finishPull(res) {
-  $('#result').textContent = res.plain;
-  $('#say').innerHTML = `<b>THE AUDITOR</b>${res.say}`;
-  $('#choose').classList.add('hidden'); $('#after').classList.remove('hidden');
-  $('#again').classList.toggle('hidden', g.blanks <= 0);
-  $('#next').textContent = g.wi >= C.WORLD_ORDER.length - 1 ? 'The verdict' : 'Next formula';
-  busy = false;
-}
-$('#again').addEventListener('click', () => {
-  $('#after').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#levers').classList.remove('off'); drawLevers(); setStamp(null, '');
-  setFeed('The needle reads a prize’s number as the dot moves. Tap a change.', null);
-  $('#nums').innerHTML = ''; showOneNumber('the best path', baseMotion, null); if (otherPath) showOneNumber('your path', otherPath, null);
-  showReal();
-});
-$('#next').addEventListener('click', () => { const w = M.nextWorld(g); if (!w) return finish(); enterWorld(); });
-
-// ---------- the strip (drawing a free function)
-function openStrip(lv) {
-  $('#striphead').textContent = lv.label;
-  $('#stripline').textContent = lv.id === 'warpclock' ? 'Draw how the clock should run: drag across the strip, up for faster, down for slower, any shape at all. Then pull.' : 'Draw how far the drawing is pushed at each moment: drag across the strip, up for right, down for left, any shape at all. Then pull.';
-  strokeSamples = new Array(24).fill(null); $('#stroke').setAttribute('d', ''); $('#strippull').disabled = true; $('#overlay').classList.add('on');
-}
+// ---------- drawing in the window
+let onStroke = null, drawing = false, pts = [];
+function drawMode(fn) { onStroke = fn; $('#window').classList.toggle('drawing', !!fn); if (fn) { try { $('#window').scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {} } }
 (function () {
-  const strip = $('#strip'); let down = false, pts = [];
-  const pos = e => { const r = strip.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * 348, (e.clientY - r.top) / r.height * 150]; };
-  const add = e => { const [x, y] = pos(e); pts.push([x, y]); const b = Math.max(0, Math.min(23, Math.floor(x / 348 * 24))); strokeSamples[b] = (75 - y) / 75; $('#stroke').setAttribute('d', pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('')); if (strokeSamples.filter(v => v !== null).length >= 6) $('#strippull').disabled = false; };
-  strip.addEventListener('pointerdown', e => { down = true; strip.setPointerCapture(e.pointerId); pts = []; add(e); });
-  strip.addEventListener('pointermove', e => { if (down) add(e); });
-  strip.addEventListener('pointerup', () => { down = false; }); strip.addEventListener('pointercancel', () => { down = false; });
-  $('#stripcancel').addEventListener('click', () => $('#overlay').classList.remove('on'));
-  $('#strippull').addEventListener('click', () => {
-    let last = 0; const filled = strokeSamples.map(v => { if (v !== null) last = v; return last; });
-    let first = filled.findIndex((v, i) => strokeSamples[i] !== null); for (let i = 0; i < first; i++) filled[i] = strokeSamples[first];
-    $('#overlay').classList.remove('on'); doPull(M.smoothCurve(filled));
-  });
+  const box = $('#window'); const pos = e => { const r = box.getBoundingClientRect(); return [ux((e.clientX - r.left) / r.width * W), uy((e.clientY - r.top) / r.height * H)]; };
+  box.addEventListener('pointerdown', e => { if (!onStroke || busy) return; drawing = true; box.setPointerCapture(e.pointerId); pts = [pos(e)]; stopLoop(); traceL.innerHTML = ''; dot.setAttribute('cx', -20); strokeEl.setAttribute('d', ''); });
+  box.addEventListener('pointermove', e => { if (!drawing) return; pts.push(pos(e)); strokeEl.setAttribute('d', pts.map((q, i) => (i ? 'L' : 'M') + px(q[0]).toFixed(1) + ' ' + py(q[1]).toFixed(1)).join('')); });
+  const up = async () => { if (!drawing) return; drawing = false; strokeEl.setAttribute('d', ''); if (pts.length < 6) return; const fn = onStroke, p = pts; pts = []; drawMode(null); busy = true; await fn(p); busy = false; };
+  box.addEventListener('pointerup', up); box.addEventListener('pointercancel', up);
 })();
 
+// ---------- a card
+let res = null;
+function nextCard() {
+  ci++; if (ci >= M.CARDS.length) return finish();
+  run++; stopLoop(); graphHide(); drawMode(null);
+  const card = M.CARDS[ci], w = M.WORLDS[card.world]; res = M.playCard(card, 1);
+  $('#band').textContent = `CHANGE ${ci + 1} OF ${M.CARDS.length} · ${w.name.toUpperCase()}`;
+  $('#setup').textContent = card.setup; $('#change').textContent = card.change;
+  drawWorld(w); plate(w);
+  ['#opening', '#answer'].forEach(s => $(s).classList.add('hidden')); $('#question').classList.remove('hidden');
+  const ch = res.change, lv = card.lever;
+  if (lv === 'warpclock') { // the change itself can be shown: the same curve, the ticks bunched and spread
+    still(ghostL, ch.base, w, { colour: '#9AA3AB', op: 0.4, ticks: true }); caps('THE TRIP AS IT IS (GREY) · RE-TICKED (BLUE)', null);
+    loop(w, ch.fresh, { colour: '#2BF0FF' });
+  } else {
+    caps(lv === 'clock' ? 'THE TRIP · STARTED AT 3:00' : lv === 'across' ? 'THE TRIP · FROM HERE' : 'THE TRIP', 'true');
+    if (lv === 'across') { const X = px(ch.base.u1[0] - C.SHIFT), Y = py(ch.base.u2[0]); el('circle', { cx: X, cy: Y, r: 6, fill: 'none', stroke: '#2BF0FF', 'stroke-dasharray': '3 3' }, markL); el('path', { d: `M${px(ch.base.u1[0]) - 8} ${Y - 14} h${-(C.SHIFT * S - 16)}`, stroke: '#2BF0FF', 'stroke-width': 1.5, 'marker-end': '' }, markL); const t = el('text', { x: X, y: Y - 18, 'text-anchor': 'middle', class: 'caption' }, markL); t.textContent = 'ONE STEP LEFT'; }
+    if (lv === 'turn') { const r = 0.95 * S; el('path', { d: `M${px(0) + r} ${py(0)} A${r} ${r} 0 0 0 ${px(0) + r * Math.cos(C.ANGLE)} ${py(0) - r * Math.sin(C.ANGLE)}`, fill: 'none', stroke: '#2BF0FF', 'stroke-width': 2, 'stroke-dasharray': '4 4' }, markL); const t = el('text', { x: px(0) + r + 4, y: py(0) - 30, class: 'caption' }, markL); t.textContent = 'TURN'; }
+    loop(w, ch.base, {});
+  }
+}
+async function judge(saidMatters) {
+  if (busy) return; busy = true; run++; stopLoop();
+  const card = M.CARDS[ci], w = M.WORLDS[card.world], ch = res.change, lv = card.lever, right = saidMatters === res.matters, myRun = run;
+  answers[card.id] = saidMatters ? 'matters' : 'not';
+  $('#question').classList.add('hidden'); $('#answer').classList.remove('hidden'); $('#next').classList.add('hidden'); $('#drawrow').classList.add('hidden');
+  $('#verdictline').textContent = right ? 'Right.' : saidMatters ? 'You said it matters. It doesn’t.' : 'You said it doesn’t matter. It does.';
+  $('#verdictline').className = 'verdictline ' + (right ? 'right' : 'wrong');
+  $('#reveal').textContent = card.reveal; $('#prizenote').textContent = '';
+  // the picture: the new trip against where it would go if the change did not matter
+  ghostL.innerHTML = ''; dashL.innerHTML = ''; markL.innerHTML = '';
+  if (lv === 'warpclock') { still(ghostL, ch.base, w, { colour: '#9AA3AB', op: 0.45, ticks: true }); caps('GREY: AS IT WAS · BLUE: RE-TICKED', null); }
+  else { still(dashL, ch.expected, w, { colour: '#D7DDE2', dash: '6 5', op: 0.8 }); caps('DASHED: WHERE IT WOULD GO IF IT DIDN’T MATTER', 'true', lv === 'clock' ? 'BLUE: THE TRIP STARTED AT 3:05' : 'BLUE: THE NEW TRIP', null); }
+  $('#nums').innerHTML = ''; numRow('the trip’s number', ch.before, ch.after, res.matters ? 'diff' : 'same'); numWord(res.matters ? 'CHANGED: THE FORMULA CARES' : 'THE SAME: THE FORMULA DOESN’T CARE', res.matters ? 'diff' : 'same');
+  await play(w, ch.fresh, { colour: '#2BF0FF', dur: 2000 }); if (myRun !== run) return;
+  // the prize
+  if (card.prize) {
+    shelfState[card.id] = { kind: res.kind, mine: !saidMatters }; drawShelf($('#tiles'));
+    const P = M.PRIZES[card.prize], a = res.audit, real = ch.base, fake = M.bump(real, C.BUMP_AMP * 1.4, 0.6, 0.8, 0.5, 0.3);
+    graphReset(`THE PRIZE ALONG THE TRIP · ${card.prize === 'SLIDE ENERGY' ? 'THE SLIDE’S ENERGY' : card.prize}`);
+    ghostL.innerHTML = ''; dashL.innerHTML = '';
+    $('#prizenote').textContent = card.prize === 'SLIDE ENERGY' ? 'The prize’s formula: x′·∂f/∂x′ + y′·∂f/∂y′ − f. Watch its line along the real slide, then along a fake one.' : `The prize: ${P.gloss}, ${P.formula}. Watch its line along the real trip, then along a fake one the formula would never pick.`;
+    const lr = M.prizeLine(w, card.lever, real, a), lf = M.prizeLine(w, card.lever, fake, a);
+    let mf = 0; for (let i = 0; i < lf.length; i++) mf = Math.max(mf, Math.abs(lf[i])); gain = mf > 1e-9 ? 0.85 / mf : 1.6; // the fake's wobble fills the graph; the real line stays where it is, flat
+    caps('THE REAL TRIP', 'true'); const gr = graphLine(lr, landed(w, real), '#2BF0FF'); await play(w, real, { dur: 1900, onFrame: i => gr(i) }); if (myRun !== run) return; await wait(300);
+    caps('A FAKE TRIP', 'fake'); still(ghostL, real, w, { colour: '#9AA3AB', op: 0.4 }); const gf = graphLine(lf, landed(w, fake), '#FF2ECC', '6 4'); await play(w, fake, { colour: '#FF2ECC', dash: '7 5', dur: 1900, onFrame: i => gf(i) }); if (myRun !== run) return;
+    if (res.kind === 'teeth') { $('#prizenote').textContent += ' Flat on the real trip, wobbly on the fake: the prize tells the real trip from all the others. It goes on the shelf.'; }
+    else {
+      $('#prizenote').textContent = 'Both lines are flat. The slide’s energy is zero on the real slide and zero on the fake. Draw any path you like in the window and try to make its line move.';
+      $('#drawrow').classList.remove('hidden'); caps('DRAW ANY PATH', 'fake');
+    }
+  }
+  $('#next').classList.remove('hidden'); $('#next').textContent = ci >= M.CARDS.length - 1 ? 'The shelf' : 'Next change';
+  busy = false;
+  if (!card.prize || res.kind === 'teeth') loop(w, ch.fresh, { colour: '#2BF0FF' });
+}
+let draws = 0;
+$('#drawtry').addEventListener('click', () => {
+  const card = M.CARDS[ci], w = M.WORLDS[card.world]; run++; stopLoop(); traceL.innerHTML = ''; caps('DRAW ANY PATH', 'fake'); $('#drawrow').classList.add('hidden');
+  drawMode(async p => {
+    const path = M.strokeToPath(p, C.N, null), line = M.prizeLine(w, card.lever, path, res.audit); draws++;
+    caps('YOUR PATH', 'fake'); const g = graphLine(line, C.N, '#F2CB05'); await play(w, path, { colour: '#F2CB05', dur: 1800, onFrame: i => g(i) });
+    $('#prizenote').textContent = draws === 1 ? 'Flat again. The slide’s energy is the same, zero, on your path too. Try another, as wild as you like.' : 'Flat, whatever you draw. A number that is the same on every path, the real one and the impossible ones, rules nothing out. The prize is empty. The next card shows why.';
+    $('#drawrow').classList.remove('hidden');
+  });
+});
+$('#saymatters').addEventListener('click', () => judge(true));
+$('#saynot').addEventListener('click', () => judge(false));
+$('#next').addEventListener('click', () => { if (busy) return; drawMode(null); nextCard(); });
+
 // ---------- start and end
-function start() { timers.forEach(clearTimeout); if (stopIdle) stopIdle(); setDrawMode(null); onStroke = null; g = M.newGame(1); show('play'); enterWorld(); }
+function start() { timers.forEach(clearTimeout); run++; stopLoop(); ci = -1; answers = {}; shelfState = {}; draws = 0; drawShelf($('#tiles')); show('play'); opener(); }
 function finish() {
-  if (stopIdle) stopIdle(); const v = M.verdict(g);
-  $('#headline').textContent = v.headline; $('#did').innerHTML = v.did.map(d => `<li>${d}</li>`).join('');
-  show('end');
+  run++; stopLoop(); const v = M.verdict(answers);
+  $('#headline').textContent = v.headline; $('#endline').textContent = v.line;
+  drawShelf($('#endtiles')); show('end');
 }
 })();
 </script>
