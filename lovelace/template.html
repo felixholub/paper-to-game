@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Lovelace's Cards</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="Ada Lovelace's Notes (1843) as an Engine you program: punch cards, hang them over the prism, set the Engine going and listen for the bell. Then the Engine is handed numbers you never saw.">
 <style>
 @font-face{font-family:'Abril';font-weight:400;src:url(data:font/woff2;base64,/*__FONT_ABRIL__*/) format('woff2');font-display:block}
 @font-face{font-family:'Old';font-weight:400;font-style:normal;src:url(data:font/woff2;base64,/*__FONT_OLD__*/) format('woff2');font-display:block}
@@ -13,497 +12,594 @@
 @font-face{font-family:'Old';font-weight:700;font-style:normal;src:url(data:font/woff2;base64,/*__FONT_OLD_B__*/) format('woff2');font-display:block}
 :root{
   --buff:#EDE2C4; --card:#F4ECD6; --edge:#C9B98F; --ink:#1E1A17; --ink2:#5A5047; --plum:#8B2252; --verd:#2E7D6B; --mahog:#6B3A22; --paper:#F9F4E7;
+  --red:#B8323C; --blue:#2C4F91;
   --disp:'Abril',Georgia,'Times New Roman',serif; --text:'Old','Times New Roman',Georgia,serif;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body,button{touch-action:manipulation}
-html,body{margin:0;padding:0;background:var(--buff)}
-body{color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.4;min-height:100vh;
-  background-image:repeating-linear-gradient(180deg,rgba(30,26,23,.035) 0 1px,transparent 1px 7px)}
-.screen{display:none;max-width:460px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
-.screen.on{display:block}
-p{margin:.5em 0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--buff)!important;color:var(--ink)}
+body{font-family:var(--text);font-size:18px;line-height:1.4;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 10px;position:relative}
+.screen{display:none}.screen.on{display:block}
 a{color:var(--plum)}
-h1.title{font-family:var(--disp);font-weight:400;color:var(--ink);font-size:44px;line-height:1;margin:22px 0 6px;letter-spacing:.01em}
-h1.title small{display:block;font-family:var(--text);font-style:italic;font-size:17px;letter-spacing:.02em;color:var(--plum);margin-bottom:8px}
-h2{font-family:var(--disp);font-weight:400;color:var(--plum);font-size:17px;letter-spacing:.06em;text-transform:uppercase;margin:20px 0 6px}
-h3{font-family:var(--disp);font-weight:400;font-size:17px;margin:16px 0 4px;color:var(--ink)}
-.lede{font-size:17px;margin:8px 0}
-.aim{font-family:var(--disp);font-size:18px;line-height:1.3;margin:12px 0;padding:10px 12px 10px 14px;border-left:5px solid var(--plum);background:rgba(139,34,82,.06)}
+h1.title{font-family:var(--disp);font-weight:400;font-size:46px;line-height:1;margin:30px 0 14px}
+h1.title small{display:block;font-family:var(--text);font-style:italic;font-size:17px;color:var(--plum);margin-bottom:10px}
+h2{font-family:var(--disp);font-weight:400;font-size:24px;line-height:1.15;margin:4px 0 6px;color:var(--plum)}
+h3{font-family:var(--disp);font-weight:400;font-size:18px;margin:18px 0 4px}
+p{margin:8px 0}
+.lead{font-size:19px}
 .small{font-size:15px;color:var(--ink2)}
-.sig{padding:14px 0 18px;font-size:15px;text-align:center;font-family:var(--text)}
-.sig a{color:var(--ink2);font-style:italic;text-decoration:none}
-/* a punched card: the only kind of button */
-.btn{display:block;width:100%;min-height:54px;padding:16px 14px 10px;margin:10px 0;background:var(--card);color:var(--ink);border:1px solid var(--ink);border-radius:0;position:relative;
-  font-family:var(--text);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;text-align:left;cursor:pointer;box-shadow:1px 1px 0 var(--edge)}
+.top{display:flex;align-items:center;justify-content:space-between;margin:14px 0 4px}
+.top .which{font-family:var(--text);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.q{width:40px;height:40px;border:1px solid var(--ink);background:var(--card);font-family:var(--disp);font-size:22px;cursor:pointer;color:var(--ink);padding:0}
+.say{font-size:18px;margin:6px 0 10px}
+.say b{font-weight:700}
+/* buttons: punched cards */
+.btn{display:block;width:100%;min-height:56px;padding:17px 14px 11px;margin:12px 0;background:var(--card);color:var(--ink);border:1px solid var(--ink);border-radius:0;position:relative;
+  font-family:var(--text);font-weight:700;font-size:16px;letter-spacing:.13em;text-transform:uppercase;text-align:left;cursor:pointer;box-shadow:1px 1px 0 var(--edge)}
 .btn:before{content:"";position:absolute;left:10px;right:10px;top:5px;height:5px;background:radial-gradient(circle,var(--ink) 0 2px,transparent 2.5px) 0 0/14px 5px repeat-x}
-.btn.go{border-left:9px solid var(--plum)}
-.btn.verd{border-left:9px solid var(--verd)}
-.btn:active{transform:translate(1px,1px);box-shadow:none}
-.btn:disabled{color:#A89C84;border-color:#A89C84;box-shadow:none;cursor:default}
-.btn:disabled:before{opacity:.35}
-.btn.small-btn{min-height:44px;font-size:13px;padding:13px 10px 8px}
-.row{display:flex;gap:10px}.row .btn{flex:1}
-.help-q{position:absolute;right:0;top:2px;width:40px;height:40px;border:1px solid var(--ink);background:var(--card);color:var(--ink);font-family:var(--disp);font-size:22px;line-height:38px;text-align:center;cursor:pointer;padding:0}
-.top{position:relative;padding-right:48px;margin-top:10px}
-.top .aim{font-size:15px;padding:7px 10px 7px 12px;margin:8px 0}
-.band{font-family:var(--disp);font-size:19px;color:var(--plum);margin:10px 0 2px}
-.band small{font-family:var(--text);font-style:italic;font-size:15px;color:var(--ink2);text-transform:none;letter-spacing:0;display:block}
-.line{font-size:16px;margin:0 0 8px;min-height:22px}
-.handed{font-size:15px;font-style:italic;color:var(--ink2);margin:2px 0 6px}
-/* the Engine: the Store (Note B's diagram) and the strip */
-.engine{display:flex;gap:8px;align-items:flex-start;margin:8px 0 6px;position:relative}
-.store{flex:none;padding:8px 5px 6px;background:var(--mahog);border:1px solid #3E2213;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 0 rgba(0,0,0,.35);display:flex;gap:4px}
-.col{width:46px;flex:none;padding:0;border:0;background:transparent;color:var(--ink);font-family:var(--text);cursor:pointer;position:relative;display:flex;flex-direction:column;align-items:center}
-.col .sign{width:18px;height:18px;border:1px solid var(--buff);border-radius:50%;color:var(--buff);font-size:14px;line-height:16px;text-align:center;margin-bottom:3px;font-weight:700}
-.col .sign.neg{background:var(--buff);color:var(--mahog)}
-.col .wheels{display:block;width:34px;background:var(--paper);border:1px solid #3E2213;box-shadow:inset 0 0 6px rgba(0,0,0,.25);overflow:hidden}
-.tier{display:block;height:20px;overflow:hidden;position:relative;border-bottom:1px solid rgba(62,34,19,.18)}
-.tier:last-child{border-bottom:0}
-.roll{display:flex;flex-direction:column;transition:transform .32s cubic-bezier(.3,.7,.3,1);will-change:transform}
-.roll span{height:20px;line-height:20px;font-size:16px;text-align:center;display:block;font-variant-numeric:tabular-nums}
-.col .sq{margin-top:4px;width:28px;height:26px;border:1px solid var(--buff);color:var(--buff);font-style:italic;font-size:17px;line-height:24px;text-align:center;background:transparent}
-.col .sq.blank{border-style:dashed}
-.col .tag{display:none;margin-top:3px;width:46px;font-size:10px;line-height:1.1;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-align:center;font-weight:700;min-height:11px}
-.col.pick .sq{background:var(--plum);border-color:var(--plum);color:#fff}
-.col.pick .tag{display:block}.col.pick .tip{display:none}
-.col.lit .wheels{box-shadow:inset 0 0 6px rgba(0,0,0,.25),0 0 0 2px var(--plum)}
-.store.compose .col{animation:none}
-.store .col:disabled{cursor:default}
-.strip{flex:1;min-width:72px;background:var(--paper);border:1px solid var(--edge);border-top:4px solid var(--mahog);padding:4px 4px 70px;min-height:190px;position:relative;font-size:14px;font-variant-numeric:tabular-nums;box-shadow:1px 1px 0 var(--edge)}
-.strip .hd{display:flex;gap:4px;font-size:8px;letter-spacing:0;text-transform:uppercase;color:var(--ink2);border-bottom:1px solid var(--edge);margin-bottom:2px}
-.strip .hd span{flex:1;text-align:center}
-.strip .rows{display:flex}
-.strip .want,.strip .got{flex:1;text-align:center;white-space:nowrap;overflow:hidden}
-.strip .want div{color:#A89C84;height:19px;line-height:19px;font-size:13px}
-.strip .got div{height:19px;line-height:19px;font-size:13px;color:var(--ink)}
-.strip .got div.ok{color:var(--verd);font-weight:700}
-.strip .got div.bad{color:var(--plum);font-weight:700;text-decoration:line-through}
-.strip .got div.new{animation:printin .25s ease-out}
-@keyframes printin{from{transform:translateY(-6px);opacity:0}to{transform:none;opacity:1}}
-/* the bell */
-.bell{position:absolute;right:-6px;bottom:2px;width:92px;text-align:center;transform:scale(0) rotate(-8deg);transition:transform .35s cubic-bezier(.2,1.5,.4,1);pointer-events:none;z-index:3}
-.bell.on{transform:scale(1) rotate(-8deg)}
-.bell svg{width:40px;height:40px;display:block;margin:0 auto;transform-origin:50% 8%}
-.bell.on.rang svg{animation:swing .9s ease-in-out}
-@keyframes swing{0%{transform:rotate(0)}25%{transform:rotate(-22deg)}50%{transform:rotate(18deg)}75%{transform:rotate(-10deg)}100%{transform:rotate(0)}}
-.bell .word{font-family:var(--disp);font-size:20px;line-height:1;color:var(--plum);background:var(--paper);border:2px solid var(--plum);padding:3px 6px;display:inline-block;transform:rotate(-8deg)}
-.bell.none .word{color:var(--ink);border-color:var(--ink);font-size:14px;padding:4px 6px}
-/* the chain of cards over the prism */
-.chainbox{position:relative;margin:14px 0 4px;padding-left:40px;min-height:52px}
-.prismcol{position:absolute;left:0;top:0;bottom:0;width:34px}
-.prismcol svg.arcs{position:absolute;left:0;top:0;width:34px;height:100%;overflow:visible}
-.prism{position:absolute;left:3px;width:28px;height:28px;transition:top .25s ease;top:8px}
-.prism svg{width:28px;height:28px;display:block;transition:transform .3s ease}
-.cards{display:flex;flex-direction:column;gap:6px}
-.hung{display:flex;align-items:center;min-height:44px;padding:12px 10px 8px 12px;background:var(--card);border:1px solid var(--ink);position:relative;font-size:16px;cursor:pointer;box-shadow:1px 1px 0 var(--edge);text-align:left;width:100%;font-family:var(--text);color:var(--ink)}
-.hung .holes{position:absolute;left:10px;right:10px;top:4px;height:5px;display:flex;gap:7px}
-.hung .holes i{width:5px;height:5px;border-radius:50%;background:transparent;border:1px solid rgba(30,26,23,.25)}
-.hung .holes i.p{background:var(--ink);border-color:var(--ink)}
-.hung .no{font-size:12px;color:var(--ink2);width:22px;flex:none;font-variant-numeric:tabular-nums}
-.hung .txt{flex:1;font-variant-numeric:tabular-nums}
-.hung .down{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);flex:none}
-.hung.lit{background:var(--plum);color:#fff;border-color:var(--plum)}
-.hung.lit .no,.hung.lit .down{color:rgba(255,255,255,.75)}
-.hung.lit .holes i{border-color:rgba(255,255,255,.45)}.hung.lit .holes i.p{background:#fff;border-color:#fff}
-.hung.locked{cursor:default}
-.hung.locked .down{visibility:hidden}
-.empty{font-style:italic;color:var(--ink2);font-size:15px;padding:8px 0 0 2px}
-/* the composer: a blank card being punched */
-.composer{margin:12px 0 0;background:var(--card);border:1px dashed var(--ink);padding:10px 10px 10px;position:relative}
-.composer .cap{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px}
-.punches{display:flex;gap:5px;margin-bottom:8px}
-.punch{flex:1;min-height:44px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-family:var(--text);font-size:19px;padding:0;cursor:pointer;position:relative;line-height:1}
-.punch small{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
-.punch.on{background:var(--plum);color:#fff;border-color:var(--plum)}
-.punch:disabled{color:#B8AD95;border-color:#B8AD95;background:transparent;cursor:default;text-decoration:line-through}
-.counts{display:flex;gap:4px;margin:0 0 8px}
-.counts .punch{min-height:38px;font-size:16px}
-.preview{font-size:18px;min-height:26px;padding:4px 2px;border-bottom:1px solid var(--edge);margin-bottom:6px;font-variant-numeric:tabular-nums}
-.preview .slot{display:inline-block;min-width:26px;padding:0 4px;margin:0 1px;border-bottom:2px solid var(--edge);cursor:pointer;text-align:center}
-.preview .slot.active{border-bottom:3px solid var(--plum);background:rgba(139,34,82,.10)}
-.preview .b{display:inline-block;min-width:16px;border-bottom:2px solid var(--plum);height:18px;vertical-align:-3px;margin:0 2px}
-.guide{font-size:15px;font-style:italic;color:var(--ink2);min-height:22px;margin:0 0 4px}
-.composer .btn{margin:6px 0 0}
-.after{margin-top:8px}
-.verdict{font-family:var(--disp);font-size:34px;line-height:1.08;margin:18px 0 10px;color:var(--plum)}
-.coda{border-top:1px solid var(--ink2);margin-top:22px;padding-top:12px}
-.codastrip{background:var(--paper);border:1px solid var(--edge);border-top:4px solid var(--mahog);padding:8px 10px;min-height:40px;font-variant-numeric:tabular-nums;font-size:16px}
-.codastrip div{display:flex;justify-content:space-between;gap:8px;min-height:24px;line-height:24px}
-.codastrip div span:last-child{font-weight:700}
-.codastrip .work{animation:blink .6s infinite alternate}
-@keyframes blink{from{opacity:.25}to{opacity:1}}
-ul{padding-left:20px}li{margin:4px 0}
-.hidden{display:none !important}
-.about p,.help p,.help li{font-size:16px}
-.ex{display:inline-block;background:var(--card);border:1px solid var(--ink);padding:1px 6px;font-size:15px;margin:1px 0}
-
-/* added for the gentler on-ramp */
-.col .tip{display:block;margin-top:3px;width:46px;font-size:10px;line-height:1.1;color:var(--card);text-align:center;font-style:italic;min-height:11px}
-.tier.lead .roll span{color:#C9BFA8}
-.worked{display:block;font-variant-numeric:tabular-nums;background:var(--paper);border:1px solid var(--edge);border-left:4px solid var(--verd);padding:6px 10px;margin:6px 0 4px;font-size:16px}
-.hung .txt small{display:block;font-size:13px;font-style:italic;color:var(--ink2);line-height:1.25;margin-top:2px}
-.hung.lit .txt small{color:rgba(255,255,255,.85)}
-.say{font-size:15px;font-style:italic;color:var(--ink);min-height:20px;margin:2px 0 6px}
-.narr{font-size:16px;line-height:1.35;min-height:46px;margin:8px 0 0;padding:8px 10px;background:var(--paper);border:1px solid var(--edge);border-left:5px solid var(--plum);font-variant-numeric:tabular-nums}
-.narr:empty{display:none}
-.linkbtn{background:none;border:0;padding:6px 0;font-family:var(--text);font-size:16px;color:var(--plum);text-decoration:underline;cursor:pointer;text-align:left}
-.dintro p{font-size:17px}
-.dnarr{font-size:18px;line-height:1.4;min-height:78px;margin:10px 0;padding:10px 12px;background:var(--paper);border:1px solid var(--edge);border-left:6px solid var(--plum);font-variant-numeric:tabular-nums}
-.dstrip{min-height:120px;padding-bottom:8px}
-.dstrip .got div{font-size:15px;height:22px;line-height:22px}
+.btn.go{border-left:10px solid var(--plum)}
+.btn.verd{border-left:10px solid var(--verd)}
+.btn.quiet{font-weight:400;letter-spacing:.08em}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.half{display:inline-block;width:calc(50% - 5px);vertical-align:top;font-size:14px;letter-spacing:.06em;text-transform:none;font-weight:700}
+.btn.half+.btn.half{margin-left:6px}
+/* the order: wanted pattern, woven over it */
+.order{background:var(--paper);border:1px solid var(--edge);padding:10px 12px 12px;margin:8px 0}
+.order .lbl{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px;display:flex;justify-content:space-between}
+.cloth{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.st{aspect-ratio:1/1;border:1.5px dashed var(--edge);border-radius:3px;position:relative}
+.st.wr{border-color:rgba(184,50,60,.55)} .st.wb{border-color:rgba(44,79,145,.55)}
+.st.r{background:var(--red);border:1.5px solid var(--red)} .st.b{background:var(--blue);border:1.5px solid var(--blue)}
+.st.r,.st.b{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.16) 0 2px,transparent 2px 5px)}
+.st.bad{outline:3px solid var(--ink);outline-offset:1px}
+.st.extra{border-style:solid;opacity:.5}
+.st.pop{animation:pop .22s ease-out}
+@keyframes pop{from{transform:scale(.4)}to{transform:scale(1)}}
+/* wheel */
+.wheelrow{display:flex;align-items:center;gap:14px;margin:12px 0 4px}
+.wheel{width:74px;height:74px;flex:none;border-radius:50%;background:var(--mahog);border:3px solid #3E2213;position:relative;display:flex;align-items:center;justify-content:center;
+  box-shadow:inset 0 0 0 6px rgba(255,255,255,.08)}
+.wheel:before{content:"";position:absolute;inset:6px;border-radius:50%;border:2px dotted rgba(237,226,196,.5)}
+.wheel span{font-family:var(--disp);font-size:32px;color:var(--buff);position:relative}
+.wheel.tick span{animation:tick .3s}
+@keyframes tick{0%{transform:translateY(-10px);opacity:.2}100%{transform:none;opacity:1}}
+.wheeltxt{font-size:16px;line-height:1.3}
+/* chain and cards */
+.chainlbl{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin:14px 0 4px}
+.chain{display:flex;flex-direction:column;gap:6px;position:relative;padding-left:26px}
+.chain:before{content:"";position:absolute;left:1px;top:6px;bottom:6px;width:3px;background:var(--mahog)}
+.slot{min-height:54px;border:1.5px dashed var(--edge);display:flex;align-items:center;padding:0 12px;color:var(--ink2);font-style:italic;font-size:15px;position:relative}
+.slot .num,.card .num{position:absolute;left:-21px;top:50%;transform:translateY(-50%);width:20px;text-align:center;font-size:13px;color:var(--ink2);font-style:normal}
+.card{min-height:54px;background:var(--card);border:1px solid var(--ink);box-shadow:1px 1px 0 var(--edge);display:flex;align-items:center;gap:12px;padding:12px 12px 8px;position:relative;cursor:pointer;
+  font-family:var(--text);font-size:17px;color:var(--ink);text-align:left;width:100%}
+.card:before{content:"";position:absolute;left:10px;right:10px;top:4px;height:5px;background:var(--holes) 0 0/14px 5px repeat-x}
+.card .sw{width:30px;height:30px;flex:none;border-radius:4px}
+.card .sw.r{background:var(--red)} .card .sw.b{background:var(--blue)}
+.card .sw.back{background:none;border:2px solid var(--mahog);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--mahog);font-weight:700;border-radius:50%}
+.card .sw.note{background:none;font-size:26px;line-height:30px;text-align:center}
+.card .sw.numb{background:none;border:1.5px solid var(--ink);font-family:var(--disp);font-size:14px;line-height:27px;text-align:center}
+.card .t{flex:1}
+.card .t b{display:block;font-weight:700;font-size:17px}
+.card .t i{display:block;font-size:14px;color:var(--ink2);line-height:1.25}
+.card .x{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.card.live{border-color:var(--plum);box-shadow:0 0 0 3px var(--plum)}
+.card.fixed{cursor:default}
+.card.new:after{content:"new";position:absolute;right:8px;top:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--plum)}
+.backarc{position:absolute;left:6px;width:18px;border:3px solid var(--plum);border-right:0;border-radius:12px 0 0 12px;opacity:0;transition:opacity .15s;pointer-events:none}
+.backarc.on{opacity:1}
+.tray{display:grid;grid-template-columns:1fr;gap:8px;margin:8px 0}
+.tray .card{border-style:solid}
+.hint{font-style:italic;color:var(--ink2);font-size:16px;margin:8px 0 2px;min-height:22px}
+.result{margin:12px 0 4px;padding:10px 12px;border-left:6px solid var(--ink2);background:var(--paper);font-size:18px;display:none}
+.result.on{display:block}
+.result.ok{border-color:var(--verd)}
+.result.no{border-color:var(--plum)}
+.bell{display:inline-block;font-family:var(--disp);color:var(--verd);font-size:20px;margin-right:6px}
+.bet{border:1px solid var(--ink);background:var(--paper);padding:12px;margin:12px 0}
+/* switch */
+.switch{display:flex;border:1px solid var(--ink);margin:10px 0}
+.switch button{flex:1;padding:12px 4px;background:var(--card);border:0;border-right:1px solid var(--ink);font-family:var(--text);font-size:16px;cursor:pointer;color:var(--ink)}
+.switch button:last-child{border-right:0}
+.switch button.on{background:var(--plum);color:var(--paper)}
+.switch button .ck{display:block;font-size:12px;height:14px;color:var(--verd)}
+.switch button.on .ck{color:var(--paper)}
+.out{min-height:110px}
+.stave{position:relative;height:96px;background:repeating-linear-gradient(to bottom,transparent 0 15px,var(--ink2) 15px 16px);background-size:100% 16px;background-position:0 16px;
+  background-repeat:repeat-x;border-left:2px solid var(--ink)}
+.stave .lines{position:absolute;left:0;right:0;top:16px;height:65px;background:repeating-linear-gradient(to bottom,var(--ink2) 0 1px,transparent 1px 16px)}
+.nh{position:absolute;width:14px;height:11px;border-radius:50%;background:var(--ink);transform:rotate(-20deg)}
+.nh.r{background:var(--red)} .nh.b{background:var(--blue)}
+.nums{display:flex;flex-wrap:wrap;gap:6px}
+.nums span{border:1px solid var(--edge);background:var(--paper);padding:3px 7px;font-size:17px;min-width:32px;text-align:center}
+.nums span.r{border-color:var(--red)} .nums span.b{border-color:var(--blue)}
+/* the Countess's chain */
+.cgrid{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin:10px 0}
+.cc{aspect-ratio:3/4;background:var(--card);border:1px solid var(--edge);font-size:12px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;position:relative;color:var(--ink2)}
+.cc:before{content:"";position:absolute;left:3px;right:3px;top:3px;height:3px;background:radial-gradient(circle,var(--ink2) 0 1px,transparent 1.5px) 0 0/6px 3px repeat-x}
+.cc.loop{border-color:var(--mahog);background:#EFE0C8}
+.cc.lit{background:var(--plum);color:var(--paper);border-color:var(--plum)}
+.cc.pr{font-style:italic}
+.strip{background:var(--paper);border:1px solid var(--edge);padding:10px 12px;min-height:60px}
+.strip .row{display:grid;grid-template-columns:5.5em 4.2em 1fr;gap:8px;align-items:baseline;font-size:18px;padding:3px 0;border-bottom:1px dotted var(--edge)}
+.strip .row b{font-family:var(--disp);font-weight:400;font-size:20px}
+.legend{font-size:14px;color:var(--ink2);display:flex;gap:14px;align-items:center}
+.legend i{display:inline-block;width:12px;height:14px;border:1px solid var(--mahog);background:#EFE0C8;vertical-align:middle;margin-right:4px}
+.verdict p{font-size:18px}
+.verdict .head{font-family:var(--disp);font-size:24px;color:var(--plum);line-height:1.2}
+.page h3{color:var(--plum)}
+.page p,.page li{font-size:16px}
+.sig{padding:22px 0 18px;font-size:15px;text-align:center}
+.sig a{color:var(--ink2);font-style:italic;text-decoration:none;letter-spacing:.06em}
+.nothing{font-family:var(--disp);font-size:30px;color:var(--ink2);text-align:center;padding:18px 0}
 </style>
 </head>
 <body>
-<section class="screen on" id="start">
-  <h1 class="title"><small>Ada Lovelace · 1843</small>Lovelace's<br>Cards</h1>
-  <p class="lede">In 1843 Ada Lovelace wrote out, card by card, how a machine of wheels and punched cards could work out long sums on its own. The machine was never built. Here it is.</p>
-  <p class="lede">The Engine does nothing until you hang cards on it. Then it does exactly what the cards say, one card at a time. If it prints the right answer, a bell rings.</p>
-  <p class="lede">You will make cards, hang them, set the Engine going, and listen for the bell. Then the Engine gets new numbers and runs your cards again.</p>
-  <p class="aim">Hang the cards that make the Engine print what is wanted, for any numbers it is handed.</p>
-  <p class="small">First a short tour, then three jobs from her Notes. About eight minutes.</p>
-  <button class="btn go" id="begin">Begin with the tour</button>
-  <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
+<div class="wrap">
+
+<!-- START -->
+<section class="screen on" id="s-start">
+  <h1 class="title"><small>London, 1843</small>Lovelace's Cards</h1>
+  <p class="lead">This machine can't think. It does exactly what its cards tell it, one card at a time, and nothing else.</p>
+  <p class="lead">You hang the cards. Can you make it weave the pattern?</p>
+  <p class="small">Four looms, then one last order. About five minutes.</p>
+  <button class="btn go" data-go="loom" data-n="0">Begin</button>
+  <button class="btn quiet" data-page="help">How to play</button>
+  <button class="btn quiet" data-page="about">About the paper</button>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
-<section class="screen" id="demo">
-  <div class="band" id="dband"></div>
-  <div class="dintro" id="dintro"></div>
-  <div class="engine">
-    <div class="store" id="dstore"></div>
-    <div class="strip dstrip"><div class="hd"><span>printed</span></div><div class="rows"><div class="got" id="dgot"></div></div></div>
+<!-- LOOM (one screen, four looms) -->
+<section class="screen" id="s-loom">
+  <div class="top"><span class="which" id="which">Loom 1 of 4</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
+  <h2 id="ltitle"></h2>
+  <div class="say" id="lsay"></div>
+  <div class="order">
+    <div class="lbl"><span id="olbl">The order</span><span id="ocount"></span></div>
+    <div class="cloth" id="cloth"></div>
   </div>
-  <div class="chainbox" style="padding-left:0"><div class="cards" id="dcards"></div></div>
-  <div class="dnarr" id="dnarr"></div>
-  <button class="btn go" id="dnext">Next step</button>
-  <button class="linkbtn" id="dskip">Skip this</button>
+  <div class="wheelrow" id="wheelrow">
+    <div class="wheel" id="wheel"><span id="wheeln">0</span></div>
+    <div class="wheeltxt" id="wheeltxt"></div>
+  </div>
+  <div class="chainlbl" id="chainlbl">Your chain</div>
+  <div class="chain" id="chain"><div class="backarc" id="backarc"></div></div>
+  <div class="hint" id="hint"></div>
+  <div class="chainlbl" id="traylbl">Cards you can hang</div>
+  <div class="tray" id="tray"></div>
+  <div class="result" id="result"></div>
+  <div id="bet"></div>
+  <button class="btn go" id="run">Run the loom</button>
+  <button class="btn verd" id="next" style="display:none">Next loom</button>
 </section>
 
-<section class="screen" id="play">
-  <div class="top"><p class="aim">Hang the cards that make the Engine print what is wanted, for any numbers it is handed.</p><button class="help-q" aria-label="How to play">?</button></div>
-  <div class="band" id="band"></div>
-  <p class="line" id="want"></p>
-  <span class="worked" id="worked"></span>
-  <p class="say" id="first"></p>
-  <div class="engine">
-    <div class="store" id="store"></div>
-    <div class="strip" id="strip"><div class="hd"><span>wanted</span><span>printed</span></div><div class="rows"><div class="want" id="swant"></div><div class="got" id="sgot"></div></div></div>
-    <div class="bell" id="bell"><svg viewBox="0 0 40 40"><path d="M20 3 l0 3 M12 29 q-5 0 -4 -4 q4 -4 4 -12 a8 8 0 0 1 16 0 q0 8 4 12 q1 4 -4 4 z" fill="#8B2252" stroke="#1E1A17" stroke-width="1.2"/><circle cx="20" cy="32" r="3" fill="#1E1A17"/></svg><span class="word">BELL</span></div>
+<!-- LOOM 4: same cards, other things -->
+<section class="screen" id="s-switch">
+  <div class="top"><span class="which">Loom 4 of 4</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
+  <h2>Same cards, other things</h2>
+  <div class="say">These are your cards from the last loom. A card is only holes in pasteboard. <b>The switch decides what the holes mean.</b> Flip it and run the cards again.</div>
+  <div class="switch" id="switch">
+    <button data-m="threads"><span class="ck"></span>Threads</button>
+    <button data-m="notes"><span class="ck"></span>Notes</button>
+    <button data-m="numbers"><span class="ck"></span>Numbers</button>
   </div>
-  <p class="narr" id="narr"></p>
-  <div class="chainbox">
-    <div class="prismcol"><svg class="arcs" id="arcs"></svg><div class="prism" id="prism"><svg viewBox="0 0 28 28"><polygon points="14,2 25,8 25,20 14,26 3,20 3,8" fill="#6B3A22" stroke="#1E1A17" stroke-width="1"/><polygon points="14,2 25,8 14,14 3,8" fill="#8A5234"/><polygon points="14,14 25,8 25,20 14,26" fill="#4E2A18"/></svg></div></div>
-    <div class="cards" id="cards"></div>
+  <div class="chainlbl">Your chain, read as <span id="mword">threads</span></div>
+  <div class="chain" id="chain4"></div>
+  <div class="wheelrow">
+    <div class="wheel"><span id="wheel4">5</span></div>
+    <div class="wheeltxt">The wheel is set to 5 rounds.</div>
   </div>
-  <div class="composer" id="composer">
-    <div class="cap">A blank card. Punch it.</div>
-    <div class="punches" id="punches"></div>
-    <div class="counts hidden" id="counts"></div>
-    <div class="preview" id="preview"></div>
-    <p class="say" id="sentence"></p>
-    <div class="guide" id="guide"></div>
-    <div class="row"><button class="btn small-btn" id="hangbtn" disabled>Hang the card</button><button class="btn small-btn" id="clearbtn">Start the card again</button></div>
-  </div>
-  <button class="linkbtn hidden" id="backdemo">How does the BACK card work? Watch a countdown.</button>
-  <button class="btn go" id="gobtn" disabled>Set the Engine going</button>
-  <div class="after" id="after">
-    <p class="line" id="result"></p>
-    <p class="handed hidden" id="countess"></p>
-    <button class="btn verd hidden" id="nextbtn">Next job</button>
-    <button class="btn small-btn hidden" id="handbtn">Show me the Countess's cards</button>
-  </div>
+  <div class="order out"><div class="lbl"><span id="outlbl">What came out</span><span id="outcount"></span></div><div id="out"></div></div>
+  <div class="result" id="result4"></div>
+  <button class="btn go" id="run4">Run the cards</button>
+  <button class="btn verd" id="next4" style="display:none">One last order</button>
 </section>
 
-<section class="screen" id="end">
-  <h1 class="title"><small>Lovelace's Cards</small>The verdict</h1>
-  <p class="verdict" id="headline"></p>
-  <p class="lede" id="did"></p>
-  <h2>What you found</h2>
-  <p class="lede" id="plain"></p>
-  <h2>What the paper says</h2>
-  <p class="lede" id="paper"></p>
-  <h2>What that means</h2>
-  <p class="lede" id="means"></p>
-  <div class="coda">
-    <h2>The Countess's own chain</h2>
-    <p class="lede">Her Notes end with a much bigger job: the Numbers of Bernoulli, which mathematicians of her day needed and found hard to work out. Her chain for them has a BACK loop inside another loop. Here it runs on this Engine. You hang nothing; you watch.</p>
-    <button class="btn go" id="codabtn">Run her chain</button>
-    <div class="codastrip hidden" id="codastrip"></div>
-    <p class="small" id="codaline"></p>
-    <p class="lede" style="margin-top:14px"><i>If the rules of musical notes could be written this way, she wrote, the Engine might compose elaborate and scientific pieces of music of any length.</i></p>
-  </div>
-  <button class="btn" id="again">Play again</button>
-  <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
+<!-- THE LAST ORDER -->
+<section class="screen" id="s-last">
+  <div class="top"><span class="which">The last order</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
+  <h2>Make something new</h2>
+  <div class="say">The order: <b>weave a pattern nobody has thought of.</b> Not one from the cards. A new one, that the machine makes up itself.</div>
+  <div class="say">Here are all the cards there are. Is there one for that?</div>
+  <div class="tray" id="traylast"></div>
+  <div class="slot" style="margin:8px 0">“make something up”: there is no such card</div>
+  <div class="order"><div class="lbl"><span>What came out</span></div><div id="lastout" style="min-height:40px"></div></div>
+  <div class="result" id="resultlast"></div>
+  <button class="btn go" id="runlast">Run the machine anyway</button>
+  <button class="btn verd" id="nextlast" style="display:none">Watch Lovelace's own chain</button>
+</section>
+
+<!-- CODA: the Countess's chain -->
+<section class="screen" id="s-coda">
+  <div class="top"><span class="which">Lovelace's own chain</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
+  <h2>Her chain, for numbers</h2>
+  <div class="say">Lovelace wrote a chain like yours. Hers works out a famous row of numbers, one after another: the Numbers of Bernoulli. The plum card is the one the machine is reading.</div>
+  <div class="legend"><span><i></i>these cards go round again, like your Go back</span></div>
+  <div class="cgrid" id="cgrid"></div>
+  <div class="strip" id="strip"></div>
+  <div class="result" id="resultcoda"></div>
+  <button class="btn go" id="runcoda">Run her chain</button>
+  <button class="btn verd" id="nextcoda" style="display:none">How did you do?</button>
+</section>
+
+<!-- END -->
+<section class="screen" id="s-end">
+  <div class="top"><span class="which">The end</span><span></span></div>
+  <div class="verdict" id="verdict"></div>
+  <button class="btn go" data-go="restart">Play again</button>
+  <button class="btn quiet" data-page="about">About the paper</button>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
-<section class="screen help" id="help">
-  <h1 class="title"><small>Lovelace's Cards</small>How to play</h1>
-  <p class="aim">Hang the cards that make the Engine print what is wanted, for any numbers it is handed.</p>
-  <h3>The Engine</h3>
-  <p>The brown box holds columns of number wheels. Each column holds one number and has a short name under it, like a or n. <b>R</b> is an empty column for answers. <b>1</b> is a column that always holds 1, which is handy for counting down.</p>
-  <p>The paper strip on the right shows what is <b>wanted</b>, in pale ink. What the Engine prints appears next to it.</p>
-  <h3>Making a card</h3>
-  <p>A card tells the Engine to do one thing. Tap a sign on the blank card, then tap columns:</p>
-  <ul>
-    <li><b>+ − × ÷</b>: tap three columns. The first and second are the numbers to use; the third is where the answer goes. <span class="ex">a × n → R</span> means “multiply a by n and put the answer on R”. The same column can be used twice: <span class="ex">R × x → R</span> means “multiply R by x and put the answer back on R”.</li>
-    <li><b>P</b> (print): tap one column. The Engine writes its number on the strip.</li>
-    <li><b>↺</b> (back): choose a number, then tap a column. The Engine goes back that many cards and does them again, as long as that column is not 0. When it reaches 0, the Engine carries on. <span class="ex">BACK 2 WHILE n ≠ 0</span> repeats the two cards above it until n is 0.</li>
-  </ul>
-  <p>The card being made shows three slots: 1st, 2nd and ans. The pink slot is the one your next column tap fills. To change one, tap that slot, then tap a column. Under the card, a line says in words what it will do. Tap <b>Hang the card</b> to put it on the chain. Tap a hung card to take it off again.</p>
-  <button class="btn small-btn" id="helptour">Watch the tour again</button>
-  <button class="btn small-btn" id="helpcount">Watch the countdown (the BACK card)</button>
-  <h3>Setting it going</h3>
-  <p>The Engine does your cards from top to bottom. A line under the Engine says what each card just did. If the strip matches what was wanted, the <b>bell</b> rings. Then the Engine gets new numbers and runs the same cards again. If the bell rings every time, your cards have <b>held</b>.</p>
-  <p>If it goes wrong, change the cards and try again. After two tries you can ask to see the Countess's cards.</p>
-  <h3>Three jobs</h3>
-  <p>Multiply three numbers. Double a number again and again. Print the square numbers using only adding. All three come from her Notes.</p>
-  <button class="btn verd" id="helpback">Back</button>
+<!-- HOW TO PLAY -->
+<section class="screen page" id="s-help">
+  <div class="top"><span class="which">How to play</span><button class="q" data-back aria-label="Back">×</button></div>
+  <h3>The machine</h3>
+  <p>Lovelace's machine never thinks. It reads a chain of cards from the top, one at a time, and does what each card says. Then it stops.</p>
+  <h3>Hanging cards</h3>
+  <p>Tap a card at the bottom to hang it at the end of your chain. Tap a card on the chain to take it off. Then tap <b>Run the loom</b> and watch.</p>
+  <h3>The order</h3>
+  <p>The dashed squares show the pattern that was ordered. Each stitch the loom weaves fills one square. If a stitch is wrong, it gets a black frame.</p>
+  <h3>The wheel and Go back</h3>
+  <p>The wheel says how many rounds are ordered. The <b>Go back</b> card sends the machine back to the top of the chain. Each time, the wheel clicks down one. When it shows 0, Go back does nothing, and the machine carries on to the end.</p>
+  <h3>The switch</h3>
+  <p>On the fourth loom, the same cards are read as threads, as musical notes, or as sums. A card is just holes: what they mean is up to whoever sets the machine.</p>
+  <button class="btn" data-back>Back to the game</button>
 </section>
 
-<section class="screen about" id="about">
-  <h1 class="title"><small>Lovelace's Cards</small>About</h1>
-  /*__ABOUT__*/
-  <button class="btn verd" id="aboutback">Back</button>
+<!-- ABOUT -->
+<section class="screen page" id="s-about">
+  <div class="top"><span class="which">About the paper</span><button class="q" data-back aria-label="Back">×</button></div>
+/*__ABOUT__*/
+  <button class="btn" data-back>Back</button>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
+</div>
 <script>
 /*__MECHANISM__*/
 </script>
 <script>
-(function () {
-  const M = window.MECH, C = M.CONFIG, $ = id => document.getElementById(id);
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-  let g = M.newGame(), cols = [], comp = null, running = false, prev = 'start', finished = false, demoReturn = 'play';
-  // ---- screens
-  function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
-  function current() { const s = document.querySelector('.screen.on'); return s ? s.id : 'start'; }
-  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { prev = current(); show(b.dataset.go); }));
-  document.querySelector('#play .help-q').addEventListener('click', () => { prev = 'play'; show('help'); });
-  $('helpback').addEventListener('click', () => show(['help', 'about', 'demo'].includes(prev) ? 'start' : prev));
-  $('aboutback').addEventListener('click', () => show(['help', 'about', 'demo'].includes(prev) ? 'start' : prev));
-  $('helptour').addEventListener('click', () => startDemo('tour', 'help'));
-  $('helpcount').addEventListener('click', () => startDemo('countdown', 'help'));
-  $('backdemo').addEventListener('click', () => startDemo('countdown', 'play'));
-  $('begin').addEventListener('click', () => { g = M.newGame(); finished = false; renderTask(); startDemo('tour', 'firsttask'); });
-  $('again').addEventListener('click', () => { g = M.newGame(); finished = false; renderTask(); show('play'); });
+(function(){
+'use strict';
+const $ = s => document.querySelector(s);
+const el = (t, cls, html) => { const e = document.createElement(t); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const words = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
+const w = n => words[n] || String(n);
 
-  // ---- shared drawing: a Store, its wheels, a chain of cards
-  function drawStore(el, cs, onPick) {
-    el.innerHTML = '';
-    cs.forEach((c, i) => {
-      const b = document.createElement('button'); b.className = 'col'; b.dataset.i = i; b.type = 'button';
-      let tiers = ''; for (let k = 0; k < C.WHEELS; k++) tiers += `<span class="tier"><span class="roll">${'0123456789'.split('').map(d => `<span>${d}</span>`).join('')}</span></span>`;
-      b.innerHTML = `<span class="sign">+</span><span class="wheels">${tiers}</span><span class="sq ${c.work ? 'blank' : ''}">${c.name}</span><span class="tip">${c.tip || ''}</span><span class="tag"></span>`;
-      if (onPick) b.addEventListener('click', () => onPick(i)); else b.disabled = true;
-      el.appendChild(b);
-    });
-    cs.forEach((c, i) => wheels(el, i, c.v));
-  }
-  function wheels(el, i, v) {
-    const b = el.children[i]; if (!b) return;
-    const neg = v < 0; b.querySelector('.sign').textContent = neg ? '−' : '+'; b.querySelector('.sign').classList.toggle('neg', neg);
-    let n = Math.floor(Math.abs(v) + 1e-9); const tiers = b.querySelectorAll('.tier'), rolls = b.querySelectorAll('.roll'); const digits = [];
-    for (let k = C.WHEELS - 1; k >= 0; k--) { const d = n % 10; n = Math.floor(n / 10); digits[k] = d; rolls[k].style.transform = `translateY(-${d * 20}px)`; }
-    let lead = true; for (let k = 0; k < C.WHEELS; k++) { if (digits[k] !== 0 || k === C.WHEELS - 1) lead = false; tiers[k].classList.toggle('lead', lead); }
-  }
-  function holesFor(card) { const n = card.k === 'op' ? 1 + ['+', '-', '*', '/'].indexOf(card.op) : card.k === 'print' ? 5 : 6; const v = n * 97 + (card.a | 0) * 13 + (card.b | 0) * 29 + ((card.to && card.to[0]) | 0) * 7 + (card.n | 0) * 41 + (card.test | 0) * 17; const h = []; for (let k = 0; k < 10; k++) h.push(((v >> k) ^ (v >> (k + 3))) & 1); h[n - 1] = 1; return h; }
-  function drawCards(el, cards, cs, onTake) {
-    el.innerHTML = '';
-    if (!cards.length) { el.innerHTML = '<div class="empty">No cards on the chain yet.</div>'; return; }
-    cards.forEach((c, i) => {
-      const b = document.createElement('button'); b.type = 'button'; b.className = 'hung' + (onTake ? '' : ' locked'); b.dataset.i = i;
-      b.innerHTML = `<span class="holes">${holesFor(c).map(h => `<i class="${h ? 'p' : ''}"></i>`).join('')}</span><span class="no">${i + 1}</span><span class="txt">${M.cardText(c, cs)}<small>${M.cardSentence(c, cs)}</small></span><span class="down">take off</span>`;
-      if (onTake) b.addEventListener('click', () => onTake(i));
-      el.appendChild(b);
-    });
-  }
+// punched holes, a fixed pattern per card kind (the holes are what the machine reads)
+const HOLES = { r: [1,0,1,1,0,0,1,0,1,0,0,1], b: [0,1,1,0,1,0,0,1,1,0,1,0], back: [1,1,0,0,1,1,0,1,0,1,1,1] };
 
-  // ---- the demonstrations: one step per tap
-  let D = null;
-  function startDemo(id, ret) {
-    demoReturn = ret; D = M.demo(id); D.k = -1;
-    $('dband').textContent = D.title;
-    $('dintro').innerHTML = D.intro.map(t => `<p>${t}</p>`).join('');
-    D.vals = D.cols.map(c => c.v); drawStore($('dstore'), D.cols, null); drawCards($('dcards'), D.cards, D.cols, null); $('dgot').innerHTML = '';
-    $('dnarr').textContent = 'Tap “Next step” to let the Engine do the first card.';
-    $('dnext').textContent = 'Next step'; $('dskip').classList.remove('hidden');
-    show('demo');
-  }
-  function leaveDemo() { if (demoReturn === 'firsttask') show('play'); else show(demoReturn); }
-  $('dskip').addEventListener('click', leaveDemo);
-  $('dnext').addEventListener('click', () => {
-    if (!D) return;
-    if (D.k >= D.steps.length - 1) {
-      if (D.done) { leaveDemo(); return; }
-      D.done = true;
-      document.querySelectorAll('#dcards .hung').forEach(h => h.classList.remove('lit'));
-      $('dnarr').textContent = D.title === 'Meet the Engine'
-        ? 'That is all a chain is: cards, done in order. The cards never said “5” or “7”. They said “a” and “n”, so they work for any numbers on those wheels. Your first job needs one more card than this.'
-        : 'The countdown printed 3, 2, 1 with only three cards. Start k at 100 and the same three cards print a hundred numbers. That is the trick of the BACK card.';
-      $('dnext').textContent = demoReturn === 'firsttask' ? 'Start the first job' : 'Back'; $('dskip').classList.add('hidden');
-      return;
-    }
-    D.k++; const st = D.steps[D.k], ev = st.ev;
-    document.querySelectorAll('#dcards .hung').forEach((h, i) => h.classList.toggle('lit', i === ev.i));
-    if (ev.kind === 'write') { wheels($('dstore'), ev.col, ev.val); }
-    if (ev.kind === 'print') { const d = document.createElement('div'); d.className = 'new'; d.textContent = M.fmt(ev.val); $('dgot').appendChild(d); }
-    $('dnarr').textContent = st.say;
-  });
+// what a card says, by kind and by what the switch makes it mean
+const CARD = {
+  threads: { r: ['Red stitch', 'Weave one red stitch.'], b: ['Blue stitch', 'Weave one blue stitch.'] },
+  notes:   { r: ['High note', 'Play the note G.'], b: ['Low note', 'Play the note C.'] },
+  numbers: { r: ['Add one', 'Add 1 to the number.'], b: ['Double', 'Multiply the number by 2.'] },
+};
+const BACK = ['Go back', 'Back to the top card. The wheel clicks down one. If it shows 0, carry on instead.'];
+function swatch(kind, mode){
+  if (kind === 'back') return '<span class="sw back">↺</span>';
+  if (mode === 'notes') return `<span class="sw note" style="color:var(--${kind==='r'?'red':'blue'})">${kind==='r'?'♪':'♩'}</span>`;
+  if (mode === 'numbers') return `<span class="sw numb" style="border-color:var(--${kind==='r'?'red':'blue'})">${kind==='r'?'+1':'×2'}</span>`;
+  return `<span class="sw ${kind}"></span>`;
+}
+function cardHTML(kind, mode, extra){
+  const [t, i] = kind === 'back' ? BACK : CARD[mode || 'threads'][kind];
+  return `${swatch(kind, mode)}<span class="t"><b>${t}</b><i>${i}</i></span>${extra || ''}`;
+}
+function makeCard(kind, mode, extra){
+  const b = el('button', 'card'); b.innerHTML = cardHTML(kind, mode, extra); b.style.setProperty('--holes', 'none');
+  const h = HOLES[kind];
+  b.insertAdjacentHTML('afterbegin', `<span style="position:absolute;left:10px;top:4px;height:5px;width:${h.length*14}px;background:${h.map((on,i)=>`radial-gradient(circle at ${i*14+7}px 2.5px, ${on?'#1E1A17':'rgba(30,26,23,.15)'} 0 2.2px, transparent 2.8px)`).join(',')}"></span>`);
+  return b;
+}
 
-  // ---- the job
-  function task() { return M.task(g); }
-  function renderTask() {
-    const t = task(); cols = M.makeCols(t);
-    $('band').innerHTML = `Job ${g.task + 1} of ${C.TASKS.length} · ${t.band}<small id="runlabel">${t.then}</small>`;
-    $('want').textContent = t.ask; $('worked').textContent = t.worked;
-    $('first').textContent = g.task === 0 ? 'Make your first card: tap × on the blank card below, then tap the columns a, n and R. Read the line under the card, then hang it.' : '';
-    drawStore($('store'), cols, pickCol); renderStrip(wantOf(cols), []); renderChain(); resetComposer(); setBell(null);
-    $('narr').textContent = ''; $('result').textContent = ''; $('countess').classList.add('hidden'); $('countess').textContent = '';
-    $('nextbtn').classList.add('hidden'); $('handbtn').classList.add('hidden'); $('gobtn').disabled = true; $('gobtn').textContent = 'Set the Engine going'; $('gobtn').classList.remove('hidden');
-    $('composer').classList.remove('hidden'); $('backdemo').classList.toggle('hidden', g.task === 0); finished = false;
-  }
-  function wantOf(cs) { const d = {}; cs.forEach(c => d[c.name] = c.v); return task().want(d); }
-  function litCol(i, on) { const b = $('store').children[i]; if (b) b.classList.toggle('lit', on); }
-  function renderStrip(want, got) {
-    $('swant').innerHTML = want.map(v => `<div>${M.fmt(v)}</div>`).join('');
-    $('sgot').innerHTML = got.map((v, k) => `<div class="${k < want.length && Math.abs(v - want[k]) < 1e-9 ? 'ok' : 'bad'}">${M.fmt(v)}</div>`).join('');
-  }
-  function printLine(v, k, want) { const d = document.createElement('div'); d.className = 'new ' + (k < want.length && Math.abs(v - want[k]) < 1e-9 ? 'ok' : 'bad'); d.textContent = M.fmt(v); $('sgot').appendChild(d); }
-  function setBell(kind) { const b = $('bell'); b.classList.remove('on', 'rang', 'none'); if (!kind) return; b.querySelector('.word').textContent = kind === 'bell' ? 'BELL' : 'NO BELL'; b.classList.add(kind === 'bell' ? 'rang' : 'none'); requestAnimationFrame(() => b.classList.add('on')); }
-  function renderChain() {
-    const editable = !(running || finished);
-    drawCards($('cards'), g.chain, cols, editable ? (i => { M.takeDown(g, i); renderChain(); afterEdit(); }) : null);
-    $('gobtn').disabled = !g.chain.length || running || finished;
-    $('prism').style.top = '8px'; $('arcs').innerHTML = '';
-  }
-  function afterEdit() { $('result').textContent = ''; $('narr').textContent = ''; setBell(null); renderStrip(wantOf(cols), []); cols.forEach((c, i) => wheels($('store'), i, c.v)); if (g.task === 0 && g.chain.length) $('first').textContent = g.chain.length < 3 ? 'Good. Now the cards for the rest of the job: multiply in x, then print R.' : 'When you think the chain is ready, set the Engine going.'; }
-  // ---- the composer
-  const PUNCHES = [['+', '+', 'add'], ['-', '−', 'take'], ['*', '×', 'times'], ['/', '÷', 'divide'], ['print', 'P', 'print'], ['back', '↺', 'back']];
-  function resetComposer() {
-    comp = { kind: null, a: null, b: null, to: null, n: null, test: null, active: null };
-    const t = task(); const pn = $('punches'); pn.innerHTML = '';
-    PUNCHES.forEach(([key, sym, name]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'punch'; b.dataset.key = key; b.innerHTML = `${sym}<small>${name}</small>`; b.disabled = (key.length === 1 && !t.ops.includes(key)); b.addEventListener('click', () => punch(key)); pn.appendChild(b); });
-    const cn = $('counts'); cn.innerHTML = ''; for (let k = 1; k <= C.BACK_MAX; k++) { const b = document.createElement('button'); b.type = 'button'; b.className = 'punch'; b.textContent = k; b.addEventListener('click', () => { comp.n = k; drawComposer(); }); cn.appendChild(b); }
-    drawComposer();
-  }
-  function punch(key) { if (running || finished) return; if (key === comp.kind) return; const keep = comp.kind && comp.kind.length === 1 && key.length === 1; comp = keep ? Object.assign(comp, { kind: key }) : { kind: key, a: null, b: null, to: null, n: null, test: null, active: null }; drawComposer(); }
-  function nextSlot() { return comp.a === null ? 'a' : comp.b === null ? 'b' : comp.to === null ? 'to' : null; }
-  function pickCol(i) {
-    if (running || finished) return;
-    if (!comp.kind) { $('guide').textContent = 'First tap a sign on the blank card (+, −, ×, ÷, P or ↺). Then tap columns.'; return; }
-    if (comp.kind === 'print') comp.a = i;
-    else if (comp.kind === 'back') comp.test = i;
-    else { const slot = comp.active || nextSlot() || 'to'; comp[slot] = i; comp.active = null; }
-    drawComposer();
-  }
-  function pickSlot(slot) { if (running || finished) return; comp.active = slot; drawComposer(); }
-  function cardOf() {
-    if (comp.kind === 'print') return comp.a === null ? null : { k: 'print', a: comp.a };
-    if (comp.kind === 'back') return (comp.n === null || comp.test === null) ? null : { k: 'back', n: comp.n, test: comp.test };
-    if (comp.kind) return (comp.a === null || comp.b === null || comp.to === null) ? null : { k: 'op', op: comp.kind, a: comp.a, b: comp.b, to: [comp.to] };
-    return null;
-  }
-  function drawComposer() {
-    document.querySelectorAll('#punches .punch').forEach(b => b.classList.toggle('on', b.dataset.key === comp.kind));
-    $('counts').classList.toggle('hidden', comp.kind !== 'back');
-    Array.from($('counts').children).forEach((b, k) => b.classList.toggle('on', comp.n === k + 1));
-    const nm = i => i === null ? '<span class="b"></span>' : cols[i].name, sign = M.OPSIGN[comp.kind];
-    let pv = '', gd = '';
-    document.querySelectorAll('#store .col').forEach(b => { b.classList.remove('pick'); b.querySelector('.tag').textContent = ''; });
-    const mark = (i, t) => { if (i === null) return; const b = $('store').children[i]; b.classList.add('pick'); const tg = b.querySelector('.tag'); tg.textContent = (tg.textContent ? tg.textContent + '·' : '') + t; };
-    if (!comp.kind) { pv = '<span style="color:#A89C84">a blank card</span>'; gd = 'Tap a sign to start a card.'; }
-    else if (comp.kind === 'print') { pv = `PRINT ${nm(comp.a)}`; gd = comp.a === null ? 'Now tap the column whose number should be printed.' : 'Hang the card, or tap another column.'; mark(comp.a, 'print'); }
-    else if (comp.kind === 'back') { pv = `BACK ${comp.n === null ? '<span class="b"></span>' : comp.n} WHILE ${nm(comp.test)} ≠ 0`; gd = comp.n === null ? 'How many cards back? Tap a number.' : comp.test === null ? 'Now tap the column to watch: the Engine goes back while it is not 0.' : 'Hang the card.'; mark(comp.test, 'watch'); }
-    else {
-      const target = comp.active || nextSlot();
-      const sl = (k, label) => `<span class="slot ${target === k ? 'active' : ''}" data-slot="${k}">${comp[k] === null ? label : cols[comp[k]].name}</span>`;
-      pv = `${sl('a', '1st')} ${sign} ${sl('b', '2nd')} → ${sl('to', 'ans')}`;
-      gd = target === 'a' ? 'Tap the column for the first number.' : target === 'b' ? 'Tap the column for the second number.' : target === 'to' ? 'Tap the column where the answer goes.' : 'Ready. Hang the card, or tap a slot on the card above to change it.';
-      mark(comp.a, '1st'); mark(comp.b, '2nd'); mark(comp.to, 'ans');
+// ---- the looms
+const LOOMS = [
+  { title: 'Doing as it is told', unit: ['r','b','r','b'], rounds: null, slots: 6, tray: ['r','b'],
+    say: 'The order is a strip of four stitches: <b>red, blue, red, blue</b>. Hang the cards that weave it.',
+    hint0: 'Tap a card below to hang it on your chain.' },
+  { title: 'The card that goes back', unit: ['r','b'], rounds: 12, slots: 4, tray: ['r','b','back'], newCard: 'back',
+    say: 'Now the order is <b>red, blue</b>, twelve times over: 24 stitches. But only <b>4 cards</b> fit on the chain. There is a new card: <b>Go back</b>.',
+    hint0: 'Tap a card below to hang it on your chain.' },
+  { title: 'A new order', unit: ['r','r','b'], rounds: 5, slots: 4, tray: ['r','b','back'],
+    say: 'This order is <b>red, red, blue</b>, five times over. The wheel shows 5. Hang the cards, then see what happens when a different order comes in.',
+    hint0: 'Tap a card below to hang it on your chain.' },
+];
+let L = 0, chain = [], running = false, solved = false, totalHung = 0, runsByLoom = [0,0,0], cardsAt = [], loom3 = { bet: null, nine: false, thirty: false };
+let rounds = 0;
+
+function want(lm, r){ const out = []; const n = r == null ? 1 : r; for (let k = 0; k < n; k++) out.push(...lm.unit); return out; }
+
+// the machine: read cards top to bottom; Go back sends it to the top while the wheel is above 0
+function weave(cards, wheel){
+  const ev = []; let pc = 0, wh = wheel || 0, steps = 0;
+  while (pc < cards.length && steps < 2000){
+    steps++;
+    const c = cards[pc];
+    if (c === 'back'){
+      if (wh > 1){ wh--; ev.push({ t: 'back', i: pc, wheel: wh }); pc = 0; continue; }
+      if (wh === 1){ wh = 0; ev.push({ t: 'last', i: pc, wheel: 0 }); pc++; continue; }
+      ev.push({ t: 'pass', i: pc, wheel: 0 }); pc++; continue;
     }
-    $('preview').innerHTML = pv; $('guide').textContent = gd;
-    $('preview').querySelectorAll('.slot').forEach(e => e.addEventListener('click', () => pickSlot(e.dataset.slot)));
-    const card = cardOf(); $('sentence').textContent = card ? 'This card says: ' + M.cardSentence(card, cols) : '';
-    $('hangbtn').disabled = !card || g.chain.length >= C.RACK || running || finished;
-    if (g.chain.length >= C.RACK && !running && !finished) $('guide').textContent = 'The rack is full: ten cards. Take one off to hang another.';
+    ev.push({ t: 'stitch', i: pc, c }); pc++;
   }
-  $('hangbtn').addEventListener('click', () => { const card = cardOf(); if (!card || !M.hang(g, card)) return; const kind = comp.kind; comp = { kind, a: null, b: null, to: null, n: comp.n, test: null, active: null }; renderChain(); afterEdit(); drawComposer(); });
-  $('clearbtn').addEventListener('click', () => { comp = { kind: null, a: null, b: null, to: null, n: null, test: null, active: null }; drawComposer(); });
-  // ---- the Engine runs
-  $('gobtn').addEventListener('click', async () => {
-    if (running || finished || !g.chain.length) return;
-    running = true; $('gobtn').disabled = true; $('gobtn').textContent = 'The Engine is going…'; renderChain(); drawComposer(); $('result').textContent = ''; $('handbtn').classList.add('hidden');
-    const r = M.go(g);
-    await animateAll(r);
-    running = false;
-    $('result').textContent = M.taskVerdict(g, r); $('narr').textContent = M.taskVerdict(g, r);
-    if (r.held) finishLine('held');
-    else { $('gobtn').disabled = false; $('gobtn').textContent = 'Set the Engine going again'; renderChain(); drawComposer(); if (M.canHandOver(g)) $('handbtn').classList.remove('hidden'); }
+  return ev;
+}
+
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+let lastScreen = 's-start';
+document.addEventListener('click', e => {
+  const p = e.target.closest('[data-page]'); if (p){ lastScreen = document.querySelector('.screen.on').id; showScreen('s-' + p.dataset.page); return; }
+  if (e.target.closest('[data-back]')){ showScreen(lastScreen); return; }
+  const g = e.target.closest('[data-go]');
+  if (g){ if (g.dataset.go === 'loom') startLoom(0); if (g.dataset.go === 'restart'){ reset(); showScreen('s-start'); } }
+});
+function reset(){ L = 0; chain = []; totalHung = 0; runsByLoom = [0,0,0]; cardsAt = []; loom3 = { bet: null, nine: false, thirty: false }; tried = {}; codaDone = false; }
+
+function startLoom(n){
+  L = n; const lm = LOOMS[L]; chain = n === 0 ? [] : []; solved = false;
+  rounds = lm.rounds;
+  $('#which').textContent = `Loom ${L+1} of 4`;
+  $('#ltitle').textContent = lm.title;
+  $('#lsay').innerHTML = lm.say;
+  $('#wheelrow').style.display = lm.rounds ? 'flex' : 'none';
+  setWheel(rounds, false);
+  $('#wheeltxt').innerHTML = lm.rounds ? `The order is <b>${lm.rounds}</b> rounds, so the wheel starts at ${lm.rounds}. Each Go back clicks it down one.` : '';
+  $('#result').className = 'result'; $('#bet').innerHTML = '';
+  $('#next').style.display = 'none'; $('#run').style.display = 'block';
+  drawCloth(want(lm, lm.rounds), []);
+  $('#tray').style.display = ''; $('#traylbl').style.display = '';
+  drawTray(); drawChain(); showScreen('s-loom');
+}
+function setWheel(n, tick){ const wn = $('#wheeln'); wn.textContent = n == null ? '' : n; const wl = $('#wheel'); if (tick){ wl.classList.remove('tick'); void wl.offsetWidth; wl.classList.add('tick'); } }
+
+function drawCloth(wanted, woven, badAt){
+  const cl = $('#cloth'); cl.innerHTML = '';
+  const n = Math.max(wanted.length, woven.length);
+  cl.style.gridTemplateColumns = `repeat(${wanted.length <= 4 ? 6 : 12},1fr)`;
+  for (let k = 0; k < n; k++){
+    const s = el('div', 'st');
+    if (k < wanted.length) s.classList.add('w' + wanted[k]); else s.classList.add('extra');
+    if (k < woven.length) s.classList.add(woven[k]);
+    if (badAt === k) s.classList.add('bad');
+    cl.appendChild(s);
+  }
+  $('#olbl').textContent = 'The order';
+  $('#ocount').textContent = woven.length ? `${woven.length} of ${wanted.length} stitches` : `${wanted.length} stitches`;
+}
+
+function drawTray(){
+  const lm = LOOMS[L]; const t = $('#tray'); t.innerHTML = '';
+  lm.tray.forEach(k => {
+    const b = makeCard(k, 'threads');
+    if (lm.newCard === k) b.classList.add('new');
+    b.addEventListener('click', () => { if (running) return; if (chain.length >= lm.slots){ hint(`Only ${w(lm.slots)} cards fit. Tap a card on your chain to take it off.`); return; } chain.push(k); totalHung++; clearResult(); drawChain(); });
+    t.appendChild(b);
   });
-  async function animateAll(r) { for (let k = 0; k < r.runs.length; k++) { await animateRun(r.runs[k], k === 0); if (k < r.runs.length - 1) await sleep(1000); } }
-  async function animateRun(run, first) {
-    const res = run.result, want = res.want || [];
-    $('runlabel').textContent = first ? 'On the numbers given.' : `Now the Engine is handed ${run.label}.`;
-    cols = run.cols.map(c => Object.assign({}, c)); cols.forEach((c, i) => wheels($('store'), i, c.v)); renderStrip(want, []); setBell(null);
-    if (!first) { $('narr').textContent = `New numbers: ${run.label}. The same cards run again.`; await sleep(1300); }
-    const rows = document.querySelectorAll('#cards .hung'), prism = $('prism'); let angle = 0, printed = 0, last = -1;
-    const ev = res.trace; const shown = Math.min(ev.length, 70);
-    for (let e = 0; e < shown; e++) {
-      const x = ev[e]; const delay = e < 10 ? 750 : e < 24 ? 300 : 110;
-      if (x.i !== last) { rows.forEach(h => h.classList.remove('lit')); if (rows[x.i]) { rows[x.i].classList.add('lit'); prism.style.top = (rows[x.i].offsetTop + 8) + 'px'; } angle += 60; prism.firstElementChild.style.transform = `rotate(${angle}deg)`; last = x.i; }
-      $('narr').textContent = M.stepSentence(x, g.chain[x.i] || run.cards && run.cards[x.i], cols);
-      if (x.kind === 'write') { wheels($('store'), x.col, x.val); litCol(x.col, true); setTimeout(() => litCol(x.col, false), delay); }
-      else if (x.kind === 'print') printLine(x.val, printed++, want);
-      else if (x.kind === 'back' && x.taken) { angle -= 120; prism.firstElementChild.style.transform = `rotate(${angle}deg)`; drawArc(rows[x.i], rows[x.to]); }
-      await sleep(delay);
+}
+function drawChain(){
+  const lm = LOOMS[L]; const c = $('#chain'); c.querySelectorAll('.card,.slot').forEach(n => n.remove());
+  for (let k = 0; k < lm.slots; k++){
+    if (k < chain.length){
+      const b = makeCard(chain[k], 'threads', '<span class="x">take off</span>'); b.insertAdjacentHTML('beforeend', `<span class="num">${k+1}</span>`);
+      b.addEventListener('click', () => { if (running || solved) return; chain.splice(k, 1); clearResult(); drawChain(); });
+      c.appendChild(b);
+    } else { const s = el('div', 'slot', `<span class="num">${k+1}</span>empty`); c.appendChild(s); }
+  }
+  $('#chainlbl').textContent = `Your chain · ${w(lm.slots)} cards fit`;
+  if (!chain.length) hint(lm.hint0);
+  else if (chain.length < lm.slots) hint('Hang more cards, or run the loom to see what it weaves.');
+  else hint('The chain is full. Run the loom, or tap a card to take it off.');
+  $('#run').disabled = !chain.length;
+}
+function hint(t){ $('#hint').textContent = t; }
+function clearResult(){ $('#result').className = 'result'; const lm = LOOMS[L]; drawCloth(want(lm, rounds), []); setWheel(rounds, false); }
+
+function showResult(id, ok, html){ const r = $(id); r.className = 'result on ' + (ok ? 'ok' : 'no'); r.innerHTML = html; }
+
+async function animate(cards, wheel, wanted, opts){
+  opts = opts || {};
+  const ev = weave(cards, wheel); const woven = []; const chainEls = [...$('#chain').querySelectorAll('.card')];
+  const arc = $('#backarc');
+  let speed = opts.fast ? 45 : 260; let lap = 0;
+  setWheel(wheel, false);
+  for (const e of ev){
+    chainEls.forEach(x => x.classList.remove('live'));
+    const ce = chainEls[e.i]; if (ce) ce.classList.add('live');
+    if (e.t === 'stitch'){ woven.push(e.c); drawCloth(wanted, woven); const sts = $('#cloth').children; const last = sts[woven.length-1]; if (last) last.classList.add('pop'); hint(`Card ${e.i+1}: ${e.c==='r'?'a red':'a blue'} stitch.`); }
+    if (e.t === 'back'){
+      setWheel(e.wheel, true); lap++;
+      if (ce){ const top = chainEls[0].offsetTop, bot = ce.offsetTop + ce.offsetHeight; arc.style.top = (top + 14) + 'px'; arc.style.height = (bot - top - 28) + 'px'; arc.classList.add('on'); }
+      hint(`Card ${e.i+1}: Go back to the top. The wheel clicks down to ${e.wheel}.`);
+      await sleep(speed * 1.6); arc.classList.remove('on');
+      if (lap >= 2 && !opts.fast) speed = 80;
+      continue;
     }
-    if (ev.length > shown) { $('narr').textContent = 'The Engine keeps going round and round. Its counter never reaches 0.'; await sleep(600); ev.slice(shown).forEach(x => { if (x.kind === 'write') wheels($('store'), x.col, x.val); else if (x.kind === 'print') printLine(x.val, printed++, want); }); }
-    rows.forEach(h => h.classList.remove('lit')); await sleep(250);
-    $('narr').textContent = res.status === 'bell' ? 'The chain has ended, and the strip matches: the bell rings.' : res.status === 'runs-on' ? 'The attendant stops the Engine. No bell.' : res.status === 'zero' ? 'The Engine stopped: it cannot divide by nothing.' : 'The chain has ended, but the strip does not match. No bell.';
-    setBell(res.status === 'bell' ? 'bell' : 'none');
-    await sleep(800);
+    if (e.t === 'last'){ setWheel(0, true); hint(`Card ${e.i+1}: the wheel clicks down to 0, so no going back. The loom carries on.`); }
+    if (e.t === 'pass'){ hint(`Card ${e.i+1}: the wheel shows 0, so no going back. The loom carries on.`); }
+    await sleep(speed);
   }
-  function drawArc(fromRow, toRow) {
-    if (!fromRow || !toRow) return; const y1 = fromRow.offsetTop + 22, y2 = toRow.offsetTop + 22; const svg = $('arcs');
-    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', `M 30 ${y1} C 2 ${y1}, 2 ${y2}, 30 ${y2}`); p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#8B2252'); p.setAttribute('stroke-width', '2.5');
-    svg.appendChild(p); setTimeout(() => { p.style.transition = 'opacity .5s'; p.style.opacity = '0.25'; }, 250);
-    const head = document.createElementNS('http://www.w3.org/2000/svg', 'polygon'); head.setAttribute('points', `30,${y2} 23,${y2 - 4} 23,${y2 + 4}`); head.setAttribute('fill', '#8B2252'); svg.appendChild(head); setTimeout(() => { head.style.transition = 'opacity .5s'; head.style.opacity = '0.25'; }, 250);
+  chainEls.forEach(x => x.classList.remove('live'));
+  return woven;
+}
+
+function judge(wanted, woven){
+  for (let k = 0; k < Math.min(wanted.length, woven.length); k++) if (wanted[k] !== woven[k]) return { ok: false, at: k, why: `Stitch ${k+1} came out ${woven[k]==='r'?'red':'blue'}. The order wanted ${wanted[k]==='r'?'red':'blue'}.` };
+  if (woven.length < wanted.length) return { ok: false, at: null, why: woven.length ? `The loom wove ${w(woven.length)} stitch${woven.length>1?'es':''} and stopped: it had read every card. The order needs ${wanted.length}.` : 'The loom wove nothing.' };
+  if (woven.length > wanted.length) return { ok: false, at: wanted.length, why: `The loom wove ${woven.length} stitches. The order wanted ${wanted.length}.` };
+  return { ok: true };
+}
+
+$('#run').addEventListener('click', async () => {
+  if (running || !chain.length) return;
+  const lm = LOOMS[L]; running = true; $('#run').disabled = true; $('#result').className = 'result';
+  runsByLoom[L]++;
+  const wanted = want(lm, rounds);
+  const woven = await animate(chain, rounds, wanted);
+  const j = judge(wanted, woven);
+  if (!j.ok) drawCloth(wanted, woven, j.at);
+  running = false; $('#run').disabled = false;
+  if (j.ok){
+    solved = true; cardsAt[L] = chain.length;
+    showResult('#result', true, `<span class="bell">Bell!</span> The loom wove all ${wanted.length} stitches, just as ordered, with ${w(chain.length)} card${chain.length>1?'s':''}.` +
+      (L === 1 ? `<br><br>Three cards, twenty-four stitches. Go back did the rest.` : ''));
+    hint(''); $('#tray').style.display = 'none'; $('#traylbl').style.display = 'none';
+    $('#chain').querySelectorAll('.x').forEach(x => x.remove()); $('#chain').querySelectorAll('.slot').forEach(x => x.remove());
+    if (L === 2){ $('#run').style.display = 'none'; offerBet(); }
+    else { $('#run').style.display = 'none'; $('#next').style.display = 'block'; $('#next').textContent = L === 1 ? 'Next loom' : 'Next loom'; }
+  } else {
+    let extra = '';
+    if (L === 1 && !chain.includes('back') && woven.length < wanted.length) extra = `<br><br>Only four cards fit, so counting the stitches out one card at a time can't work. Try the new card, <b>Go back</b>.`;
+    else if (chain.includes('back') && lm.rounds && woven.length > wanted.length) extra = '<br><br>Everything above Go back is woven again on each round.';
+    showResult('#result', false, j.why + extra + '<br><span class="small">Change the chain and run it again.</span>');
+    hint('');
   }
-  function finishLine(how) {
-    finished = true; renderChain(); drawComposer(); $('composer').classList.add('hidden'); $('gobtn').classList.add('hidden'); $('backdemo').classList.add('hidden'); $('first').textContent = '';
-    $('countess').textContent = (how === 'handed' ? 'These are the Countess’s cards. ' : 'The Countess’s way: ') + task().countess; $('countess').classList.remove('hidden');
-    $('handbtn').classList.add('hidden');
-    $('nextbtn').textContent = g.task + 1 < C.TASKS.length ? 'Next job' : 'See the verdict'; $('nextbtn').classList.remove('hidden');
-    $('nextbtn').onclick = () => { M.finishTask(g, how); if (g.over) renderEnd(); else renderTask(); window.scrollTo(0, 0); };
+});
+$('#next').addEventListener('click', () => { if (L < 2) startLoom(L + 1); else startSwitch(); });
+
+// loom 3: a new order arrives
+function offerBet(){
+  const b = $('#bet');
+  b.innerHTML = `<div class="bet"><p><b>A new order comes in:</b> the same pattern, but <b>9 times</b> over. The wheel will show 9.</p><p>Will your cards still work as they are?</p>
+    <button class="btn half" id="betyes">Yes, the same cards</button><button class="btn half" id="betno">No, I'll need new ones</button></div>`;
+  $('#betyes').onclick = () => runNew(9, 'yes'); $('#betno').onclick = () => runNew(9, 'no');
+}
+async function runNew(n, bet){
+  if (running) return; running = true; if (bet) loom3.bet = bet;
+  $('#bet').innerHTML = ''; $('#result').className = 'result';
+  rounds = n; setWheel(n, true);
+  $('#wheeltxt').innerHTML = `The new order: <b>${n}</b> rounds. Your chain has not changed.`;
+  const wanted = want(LOOMS[2], n);
+  drawCloth(wanted, []); await sleep(500);
+  const woven = await animate(chain, n, wanted, { fast: n > 9 });
+  running = false; hint('');
+  const j = judge(wanted, woven);
+  if (n === 9){
+    loom3.nine = true;
+    const said = loom3.bet === 'yes' ? 'You said they would. They did.' : 'You thought it would need new cards. It didn\'t.';
+    showResult('#result', true, `<span class="bell">Bell!</span> ${wanted.length} stitches, and not one card changed. ${said}<br><br>Look at your cards: none of them says 5 or 9. Only the wheel knew the number.`);
+    $('#bet').innerHTML = `<button class="btn" id="b30">Try a huge order: 30 rounds</button>`;
+    $('#b30').onclick = () => runNew(30);
+  } else {
+    loom3.thirty = true;
+    showResult('#result', j.ok, `<span class="bell">Bell!</span> Ninety stitches. Still the same ${w(chain.length)} cards.`);
   }
-  $('handbtn').addEventListener('click', async () => {
-    if (running || !M.canHandOver(g)) return;
-    running = true; $('handbtn').classList.add('hidden'); $('result').textContent = ''; $('composer').classList.add('hidden'); $('gobtn').classList.add('hidden');
-    g.chain = M.solution(task()); renderChain(); $('narr').textContent = 'The Countess takes your cards off and hangs hers. Watch them run.';
-    await sleep(1500);
-    const r = M.tryTask(task(), g.chain); await animateAll(r);
-    running = false; $('result').textContent = 'Her cards rang the bell every time.'; finishLine('handed');
-  });
-  // ---- the end
-  function renderEnd() {
-    const v = M.verdict(g); $('headline').textContent = v.headline; $('did').textContent = v.did; $('plain').textContent = v.plain; $('paper').textContent = v.paper; $('means').textContent = v.means;
-    $('codastrip').classList.add('hidden'); $('codastrip').innerHTML = ''; $('codaline').textContent = ''; $('codabtn').disabled = false; $('codabtn').classList.remove('hidden');
-    show('end');
+  $('#next').style.display = 'block'; $('#next').textContent = 'Next loom';
+}
+
+// ---- loom 4: the switch
+let mode = 'threads', tried = {};
+function startSwitch(){
+  mode = 'threads'; tried = {};
+  $('#result4').className = 'result'; $('#next4').style.display = 'none'; $('#run4').style.display = 'block';
+  $('#out').innerHTML = ''; $('#outcount').textContent = '';
+  drawSwitch(); showScreen('s-switch');
+}
+function chain4(){ return cardsAt[2] ? chain.slice() : ['r','r','b','back']; }
+function drawSwitch(){
+  document.querySelectorAll('#switch button').forEach(b => { b.classList.toggle('on', b.dataset.m === mode); b.querySelector('.ck').textContent = tried[b.dataset.m] ? '✓ run' : ''; });
+  $('#mword').textContent = mode === 'threads' ? 'threads' : mode === 'notes' ? 'notes' : 'sums';
+  const c = $('#chain4'); c.innerHTML = '';
+  chain4().forEach((k, i) => { const b = makeCard(k, mode); b.classList.add('fixed'); b.insertAdjacentHTML('beforeend', `<span class="num">${i+1}</span>`); c.appendChild(b); });
+  $('#outlbl').textContent = mode === 'threads' ? 'What came out: cloth' : mode === 'notes' ? 'What came out: a tune' : 'What came out: numbers (the number starts at 0)';
+  $('#wheel4').textContent = '5';
+}
+document.querySelectorAll('#switch button').forEach(b => b.addEventListener('click', () => { if (running) return; mode = b.dataset.m; $('#out').innerHTML = ''; $('#outcount').textContent = ''; $('#result4').className = 'result'; drawSwitch(); }));
+
+let actx = null;
+function tone(f){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); const o = actx.createOscillator(), g = actx.createGain(); o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, actx.currentTime); g.gain.exponentialRampToValueAtTime(0.18, actx.currentTime + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.28); o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime + 0.3); } catch (e) {} }
+
+$('#run4').addEventListener('click', async () => {
+  if (running) return; running = true; $('#run4').disabled = true; $('#result4').className = 'result';
+  const cards = chain4(); const ev = weave(cards, 5); const els = [...$('#chain4').querySelectorAll('.card')];
+  const out = $('#out'); out.innerHTML = '';
+  let holder;
+  if (mode === 'threads'){ holder = el('div', 'cloth'); holder.style.gridTemplateColumns = 'repeat(12,1fr)'; out.appendChild(holder); }
+  if (mode === 'notes'){ holder = el('div', 'stave', '<div class="lines"></div>'); out.appendChild(holder); }
+  if (mode === 'numbers'){ holder = el('div', 'nums'); out.appendChild(holder); }
+  let num = 0, k = 0; const total = ev.filter(e => e.t === 'stitch').length;
+  for (const e of ev){
+    els.forEach(x => x.classList.remove('live')); if (els[e.i]) els[e.i].classList.add('live');
+    if (e.t === 'back' || e.t === 'last'){ $('#wheel4').textContent = e.wheel; await sleep(120); continue; }
+    if (e.t !== 'stitch'){ await sleep(80); continue; }
+    if (mode === 'threads'){ const s = el('div', 'st pop ' + e.c); holder.appendChild(s); }
+    if (mode === 'notes'){ const n = el('div', 'nh ' + e.c); const x = 8 + k * (100 / (total + 1)); n.style.left = `calc(${x}% )`; n.style.top = (e.c === 'r' ? 26 : 66) + 'px'; holder.appendChild(n); tone(e.c === 'r' ? 392 : 261.6); }
+    if (mode === 'numbers'){ num = e.c === 'r' ? num + 1 : num * 2; const s = el('span', e.c, String(num)); holder.appendChild(s); }
+    k++; $('#outcount').textContent = `${k}`;
+    await sleep(mode === 'notes' ? 300 : 200);
   }
-  $('codabtn').addEventListener('click', async () => {
-    $('codabtn').disabled = true; const cs = $('codastrip'); cs.classList.remove('hidden'); cs.innerHTML = '';
-    const B = M.bernoulliRun(4); const names = ['first', 'second', 'third', 'fourth'];
-    for (let k = 0; k < B.chains.length; k++) {
-      const ch = B.chains[k]; const row = document.createElement('div'); row.innerHTML = `<span>The ${names[k]} Number · ${M.word(ch.opCards)} cards</span><span class="work">working…</span>`; cs.appendChild(row);
-      await sleep(Math.min(2600, 350 + ch.steps * 55));
-      row.lastElementChild.className = ''; row.lastElementChild.textContent = M.fmt(ch.result.printed[0]);
-      await sleep(500);
+  els.forEach(x => x.classList.remove('live'));
+  running = false; $('#run4').disabled = false; tried[mode] = true; drawSwitch();
+  const msg = mode === 'threads' ? `Cloth: ${total} stitches, red, red, blue, five times.` :
+              mode === 'notes' ? `A tune: ${total} notes, high, high, low, five times. Same holes, same order. Only the meaning changed.` :
+              `Sums: the number went from 0 to ${num}. The same cards that wove cloth just did arithmetic.`;
+  const left = ['threads','notes','numbers'].filter(m => !tried[m]);
+  showResult('#result4', true, msg + (left.length ? `<br><span class="small">Flip the switch to ${left.map(m => m === 'numbers' ? 'Numbers' : m === 'notes' ? 'Notes' : 'Threads').join(' or ')} and run again.</span>` :
+    '<br><br>Lovelace said the machine could work on anything you can write down in symbols: numbers, but also music. The cards don\'t care what the holes stand for.'));
+  if (!left.length){ $('#run4').style.display = 'none'; $('#next4').style.display = 'block'; }
+});
+$('#next4').addEventListener('click', startLast);
+
+// ---- the last order
+function startLast(){
+  const t = $('#traylast'); t.innerHTML = '';
+  ['r','b','back'].forEach(k => { const b = makeCard(k, 'threads'); b.classList.add('fixed'); t.appendChild(b); });
+  $('#lastout').innerHTML = ''; $('#resultlast').className = 'result'; $('#nextlast').style.display = 'none'; $('#runlast').style.display = 'block';
+  showScreen('s-last');
+}
+$('#runlast').addEventListener('click', async () => {
+  if (running) return; running = true; $('#runlast').disabled = true;
+  const o = $('#lastout'); o.innerHTML = '<div class="small" style="text-align:center">reading the chain …</div>';
+  await sleep(1400);
+  o.innerHTML = '<div class="nothing">nothing</div>';
+  await sleep(600);
+  running = false; $('#runlast').disabled = false; $('#runlast').style.display = 'none';
+  showResult('#resultlast', true, `The machine wove nothing. There was no card to read, so it did nothing at all.<br><br>Everything it made today, the cloth, the tune, the sums, came from cards you hung. Lovelace put it like this in 1843: <i>“It can do whatever we know how to order it to perform.”</i> And nothing else.`);
+  $('#nextlast').style.display = 'block';
+});
+$('#nextlast').addEventListener('click', startCoda);
+
+// ---- the coda: Lovelace's chain for the Numbers of Bernoulli, run by the ported mechanism
+const M = window.MECH;
+let codaDone = false;
+function startCoda(){
+  const g = $('#cgrid'); g.innerHTML = '';
+  for (let k = 1; k <= 25; k++){ const c = el('div', 'cc' + (k >= 13 && k <= 23 ? ' loop' : ''), String(k)); c.id = 'cc' + k; g.appendChild(c); }
+  $('#strip').innerHTML = '<div class="small">Her numbers will be printed here.</div>';
+  $('#resultcoda').className = 'result'; $('#nextcoda').style.display = 'none'; $('#runcoda').style.display = 'block';
+  showScreen('s-coda');
+}
+function opSequence(n){ const s = [1,2,3,4,5,6,7]; if (n >= 2) s.push(8,9,10,11,12); for (let j = 3; j <= n; j++) for (let k = 13; k <= 23; k++) s.push(k); s.push(24, 'print', 25); return s; }
+$('#runcoda').addEventListener('click', async () => {
+  if (running) return; running = true; $('#runcoda').disabled = true;
+  const res = M.bernoulliRun(4); const strip = $('#strip'); strip.innerHTML = '';
+  for (let n = 1; n <= 4; n++){
+    const seq = opSequence(n); const used = new Set();
+    for (const op of seq){
+      document.querySelectorAll('.cc.lit').forEach(x => x.classList.remove('lit'));
+      if (op === 'print'){ continue; }
+      used.add(op); const c = $('#cc' + op); if (c) c.classList.add('lit');
+      await sleep(70);
     }
-    $('codaline').textContent = 'Nine cards for the first Number, fourteen for the second, twenty-five for the third; and still twenty-five for the fourth, because her BACK loop does the extra work. No more are needed, she writes, however far you go.';
-    $('codabtn').classList.add('hidden');
-  });
+    document.querySelectorAll('.cc.lit').forEach(x => x.classList.remove('lit'));
+    const row = el('div', 'row', `<span>Number&nbsp;${n}</span><b>${M.fmt(res.numbers[n-1])}</b><span class="small">${res.chains[n-1].opCards} cards${n === 4 ? ', the brown ones read twice' : ''}</span>`);
+    strip.appendChild(row);
+    await sleep(500);
+  }
+  running = false; $('#runcoda').style.display = 'none';
+  showResult('#resultcoda', true, `Each number is worked out from the ones before. From the third number on she needs <b>25 cards</b>, and never more: for the hundredth number, the cards in brown just go round more times. It is your Go back card, in numbers.`);
+  codaDone = true; $('#nextcoda').style.display = 'block';
+});
+$('#nextcoda').addEventListener('click', () => { drawVerdict(); showScreen('s-end'); });
+
+function drawVerdict(){
+  const c3 = cardsAt[2] || 4;
+  const did = `You made a machine weave, play a tune and do sums. Your last chain had just ${w(c3)} cards, and it wove 15 stitches, then 27${loom3.thirty ? ', then 90,' : ''} without one card changing.`;
+  const paper = `That is what Lovelace's Notes are about. A card that sends the machine back lets a few cards do a job of any size: twenty-five cards for every Number of Bernoulli, however far you go. And the same cards work on anything written in symbols, numbers or notes.`;
+  const means = `But the machine never thought of anything. Everything it did, someone ordered.`;
+  $('#verdict').innerHTML = `<p class="head">The machine did exactly what you told it.</p><p>${did}</p><p>${paper}</p><p><b>${means}</b></p>`;
+}
 })();
 </script>
 </body>
