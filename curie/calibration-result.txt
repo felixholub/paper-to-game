@@ -31,33 +31,24 @@ PASS  "pechblende … et chalcolite … sont beaucoup plus actifs que l'uranium 
 PASS  "cette chalcolite artificielle n'est pas plus active qu'un autre sel d'uranium"  — 9 within the salts' 6–27
 PASS  the same crystal: from the mine against made from pure products  — 52 vs 9: ×5.8
 
-3. The balance: every thumb reads the paper's value (charge balance over the held seconds)
-PASS  steady thumb: every substance balances, reading within 4.5 σ of the paper  — worst 3.01 σ (pbJo); slowest 18.0 s; unfinished 0
-PASS  eager thumb: every substance balances, reading within 4.5 σ of the paper  — worst 3.18 σ (thOthick); slowest 24.3 s; unfinished 0
-PASS  sweeper thumb: every substance balances, reading within 4.5 σ of the paper  — worst 2.88 σ (tantal); slowest 20.9 s; unfinished 0
-PASS  wobbler thumb: every substance balances, reading within 4.5 σ of the paper  — worst 2.88 σ (tantal); slowest 18.0 s; unfinished 0
-PASS  a still thumb: "nothing" is recorded after the watching seconds, and nothing active is ever recorded without a push  — inactive plates record at 2.4 s
-PASS  the spot stands in the band only when the push is within a tenth of uranium of the plate  — tolerance 0.067 × uranium
+3. A reading written down at any moment, by any thumb, contains her value
+   held      3072 readings, 0 without her value
+   atmost    1280 readings, 0 without her value
+   atleast   1238 readings, 0 without her value
+   rough      170 readings, 0 without her value
+PASS  bounds and rough readings always contain her value
+PASS  over all thumbs and moments, fewer than one reading in 200 misses her value  — 0 of 5760
+PASS  all four kinds of reading occur (held, at least, at most, roughly)  — held, atmost, atleast, rough
 
-4. Every reading the balance can return gives the same kind of panel (4.5 σ either side)
-PASS  uranium: yardstick  — reading 1.000 ± 0.137 → about the push of pure uranium
-PASS  greenox: about  — reading 0.750 ± 0.119 → about three-quarters of the push of pure uranium
-PASS  nitrate: about  — reading 0.292 ± 0.074 → about a third of the push of pure uranium
-PASS  pbJG: more  — reading 3.458 ± 0.255 → three and a half times the push of pure uranium
-PASS  pbJo: more  — reading 2.792 ± 0.229 → three times the push of pure uranium
-PASS  chalc: more  — reading 2.167 ± 0.202 → twice the push of pure uranium
-PASS  thO: without  — reading 0.917 ± 0.131 → about the push of pure uranium
-PASS  thOthick: without  — reading 2.208 ± 0.203 → twice the push of pure uranium
-PASS  tantal: without  — reading 0.083 ± 0.040 → hardly any push
-PASS  lead: nothing  — reading 0.000 ± 0.000 → no push at all
-PASS  gold: nothing  — reading 0.000 ± 0.000 → no push at all
-PASS  copper: nothing  — reading 0.000 ± 0.000 → no push at all
-PASS  whiteP: without  — reading 1.292 ± 0.156 → a little more than the push of pure uranium
-PASS  redP: nothing  — reading 0.000 ± 0.000 → no push at all
-PASS  phosphate: nothing  — reading 0.000 ± 0.000 → no push at all
-PASS  chalcArt: about  — reading 0.375 ± 0.084 → about a third of the push of pure uranium
+4. Three thousand random albums (random jars, thumbs and moments): no false labels, no false claims
+PASS  no label the paper contradicts on 27000 panels in 3000 albums (CAN'T TELL is always allowed; the faint tantalum salt may read NOTHING SEEN)
 
-5. Robustness: the rocks are MORE THAN THEIR URANIUM under any plausible share and threshold; the copy is not
+5. A careful thumb (balanced, then held a second and a half) gets her labels on every jar
+PASS  careful labels equal her labels for all sixteen jars, 40 seeds each (the faint tantalum salt reads NOTHING SEEN or CAN’T TELL after a short hold)
+PASS  a patient thumb (five seconds standing) sees the tantalum salt move the spot: her "slightly active"  — 39 of 40
+PASS  careful readings sit within 4.5 σ of her values  — worst 2.71 σ (uranium)
+
+6. Robustness: her rocks are MORE THAN THEIR URANIUM, her copy is not, under any plausible share and threshold
 PASS  pitchblende at 40 % uranium (pure uraninite is about 88 %)  — more, more
 PASS  pitchblende at 50 % uranium (pure uraninite is about 88 %)  — more, more
 PASS  pitchblende at 65 % uranium (pure uraninite is about 88 %)  — more, more
@@ -66,23 +57,23 @@ PASS  pitchblende at 88 % uranium (pure uraninite is about 88 %)  — more, more
 PASS  chalcolite at 45 % uranium: mine more, made about
 PASS  chalcolite at 50 % uranium: mine more, made about
 PASS  chalcolite at 55 % uranium: mine more, made about
-PASS  the MORE THAN ITS URANIUM threshold (ours, 1.3) can be anything from 1.1 to 4 without changing a panel
+PASS  the threshold (ours, 1.3) can be anything from 1.1 to 4 without changing her labels
 PASS  white phosphorus at 12 (ours; the paper gives no number): still the phosphorus lesson  — without
 PASS  white phosphorus at 24 (ours; the paper gives no number): still the phosphorus lesson  — without
 PASS  white phosphorus at 50 (ours; the paper gives no number): still the phosphorus lesson  — without
 PASS  white phosphorus at 72 (ours; the paper gives no number): still the phosphorus lesson  — without
    note: natural chalcolite (52) and a thick layer of thorium oxide (53) read level; the rocks are not explained by thorium because they hold none (their cards say so).
 
-6. The shelf in numbers: eight picks from fifteen, 20 000 random albums and five plans
-   strategy                          | meets a rock | makes the copy | rock + copy | both chalcolites | phosphorus test | thorium
-   random                            | 92 %         | 53 %           | 48 %        | 27 %             | 41 %            | 80 %
-   drawers top to bottom             | yes          | no             | no          | no               | no              | yes
-   drawers bottom to top             | no           | yes            | no          | no               | yes             | no
-   heavy metals and rare things first| no           | no             | no          | no               | yes             | yes
-   the paper's path                  | yes          | yes            | yes         | yes              | yes             | yes
-   rocks only, then the copy         | yes          | yes            | yes         | yes              | no              | yes
-PASS  a random album meets a rock that beats its uranium in most plays  — 92 %
-PASS  the paper's own path fits in eight panels, with both logical tests
-PASS  a player who never opens the Muséum's drawer misses the rock (the verdict says where it was)
+7. How many of her six claims a page backs: five plans × three thumbs, 300 albums each
+   plan                          | careful: mean, all six, rocks | sloppy: mean, rocks | hasty: mean, rocks
+   the paper's path              | 6.0, 100 %, 100 %              | 3.7, 70 %           | 1.1, 0 %
+   random eight                  | 3.8, 2 %, 93 %                 | 2.4, 64 %           | 1.0, 0 %
+   drawers top to bottom         | 4.0, 0 %, 100 %                | 2.8, 78 %           | 1.4, 0 %
+   rocks first, then the copy    | 4.0, 0 %, 100 %                | 2.5, 77 %           | 1.5, 0 %
+   dull jars (all read zero)     | 0.0, 0 %, 0 %                  | 0.0, 0 %            | 0.0, 0 %
+PASS  the paper's path, measured carefully, backs all six claims  — 100 % of albums
+PASS  a page of dull jars backs nothing, however carefully measured
+PASS  hasty measuring on the right jars backs clearly less than careful measuring  — 1.1 against 6.0
+PASS  a hasty player who writes the rock down at the push its label suggests usually misses the discovery  — 0 % back the rock claim
 
-67 passed, 0 failed.
+53 passed, 0 failed.

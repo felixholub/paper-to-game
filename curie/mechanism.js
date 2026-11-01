@@ -19,29 +19,49 @@
                                    //   l'uranium". Below this a thing counts as "nothing": the spot never moved.
     CONDENSER: { plateCm: 8, gapCm: 3, volts: 100 }, // p. 1101: "Diamètre des plateaux, 8cm; distance, 3cm"; 100 volts
     // ---- play (ours)
-    PANELS: 9,                     // ours: nine panels on the album page; the first is pure uranium (the yardstick), so eight
-                                   //   are the player's, from fifteen. The paper's own path through the shelf needs exactly eight.
-    FIRST: 'uranium',              // ours: the first panel is fixed; it teaches the balance and makes the yardstick
-    SEED: 1898,                    // ours: the jitter of the spot only; nothing the game reads depends on it beyond a fraction
-                                   //   of a second in when the balance completes
+    PANELS: 9,                     // ours: nine panels on the album page; the first is pure uranium, so eight are the player's.
+                                   //   Any jar, uranium included, can be measured again; each measurement is a panel. The
+                                   //   paper's own path through the shelf, measured well, needs exactly eight.
+    FIRST: 'uranium',              // ours: the first panel is pure uranium; the player's own reading of it is the yardstick for
+                                   //   "what its uranium alone could give"
+    SEED: 1898,                    // ours: the tremble of the spot only
     // ---- the electrometer and the quartz (ours, tuned for a thumb; thesis 1903 for the principle)
     // The spot s (−1 … 1 across the scale) is a leaky integrator of the difference between the plate's current i and the
     // quartz's counter-current r, both in units of pure uranium:  ds/dt = G·(i − r) − s/TAU + JITTER·√i·noise.
-    // Steady deflection is G·TAU·(i − r), so the spot stands inside the zero band when |i − r| < BAND/(G·TAU) ≈ 0.067.
+    // Its steady deflection is G·TAU·(i − r): it stands in the middle (|s| < BAND) when |i − r| < BAND/(G·TAU) ≈ 0.067.
+    // Nothing on screen marks the middle except the scale's own 0.
     G: 1.5,                        // ours: scale widths per second per uranium of mismatch
-    TAU: 1.0,                      // ours: seconds; the spot drifts back toward zero when nothing pushes it (a leak)
-    BAND: 0.1,                     // ours: half-width of the zero band, as a fraction of the half-scale
-    HOLD_S: 1.2,                   // ours: seconds the spot must stay inside the band; a ring closes around it meanwhile
-    WATCH_S: 1.2,                  // ours: the first seconds on the bench cannot complete a balance, so an inactive plate is
-                                   //   seen not to move before it is recorded as nothing
+    TAU: 1.0,                      // ours: seconds; the spot drifts back toward 0 when nothing pushes it (a leak)
+    BAND: 0.1,                     // ours: how near 0 the spot must sit to count as standing, as a fraction of the half-scale
     JITTER: 0.05,                  // ours: tremble of the spot, scaled by √i (an inactive plate does not tremble at all)
     SLIDER_MAX: 4,                 // ours: the slider runs from no push to four times pure uranium's push (the table's
                                    //   largest row, pitchblende of Johanngeorgenstadt, is 83/24 ≈ 3.46)
+    // ---- writing it down: what an honest reading says (ours)
+    COMMIT_AFTER_S: 0.8,           // ours: WRITE IT DOWN wakes this long after the plate goes on, so the spot is seen to start
+    STILL_MIN_S: 0.3,              // ours: a spot that has stood in the middle at least this long gives a value with an error bar;
+                                   //   the bar's half-width is BAND/(G·T) + 2σ for T seconds standing, σ = JITTER·√(x·T)/(G·T),
+                                   //   so it narrows the longer the spot stood (about ±0.2 after a third of a second, ±0.1 after a
+                                   //   second and a half for pure uranium)
+    ROUGH_H: 0.3,                  // ours: a spot not yet settled but pushed nearly level gives "roughly", ± this much
+    ACTIVE_MIN: 0.05,              // ours: a reading whose bottom end is above this shows the plate moves the spot
+    NOTHING_MAX: 0.15,             // ours: a reading whose top end is below this shows nothing the eye could see. (The paper's own
+                                   //   threshold is a hundredth of uranium; this bench is too short to see that fine.)
     // ---- the rule, as the panels state it (ours; the paper's "en général, d'autant plus qu'ils contiennent plus
     //      d'uranium", p. 1102)
-    MORE_RATIO: 1.3,               // ours: a reading above 1.3 × its uranium share is "MORE THAN ITS URANIUM". Every uranium
-                                   //   compound in the game reads 0.62–1.0 of its share; the rocks read 4.3–5.3. Any threshold
-                                   //   from 1.1 to 4 gives the same panels (calibration.js checks it).
+    MORE_RATIO: 1.3,               // ours: a reading whose bottom end is above 1.3 × its uranium share × the top of the player's own
+                                   //   uranium reading is "MORE THAN ITS URANIUM"; one whose top end is below 1.3 × share × the bottom
+                                   //   of it, and active, is "ABOUT ITS URANIUM". Every uranium compound reads 0.62–1.0 of its share in
+                                   //   the table; the rocks 4.3–5.3. Any threshold from 1.1 to 4 gives the same panels for her values.
+    // ---- the score: the claims of her note that the shelf can test (p. 1102). A claim counts when the player's own readings
+    //      back it (claims() below says exactly what each needs).
+    CLAIMS: [
+      { id: 'salts',   text: 'Every uranium compound does it, about in proportion to its uranium.', src: 'p. 1102: "Tous les composés de l\'uranium étudiés sont actifs et le sont, en général, d\'autant plus qu\'ils contiennent plus d\'uranium."' },
+      { id: 'thorium', text: 'Thorium does it too, with no uranium in it.', src: 'p. 1102: "Les composés du thorium sont très actifs."' },
+      { id: 'thbeats', text: 'Thorium oxide even beats pure uranium.', src: 'p. 1102: "L\'oxyde de thorium dépasse même en activité l\'uranium métallique."' },
+      { id: 'phos',    text: 'White phosphorus does it, but red phosphorus and phosphates do not: it is not the phosphorus itself.', src: 'p. 1102: "Le phosphore blanc est très actif, mais son action est probablement d\'une autre nature … le phosphore n\'est actif ni à l\'état de phosphore rouge ni à l\'état de phosphates."' },
+      { id: 'rocks',   text: 'Pitchblende and chalcolite do far more than their uranium can.', src: 'p. 1102: "pechblende … et chalcolite … sont beaucoup plus actifs que l\'uranium lui-même."' },
+      { id: 'copy',    text: 'The same chalcolite, made from pure chemicals, does not.', src: 'p. 1102: "cette chalcolite artificielle n\'est pas plus active qu\'un autre sel d\'uranium."' },
+    ],
     // ---- the shelf. amps: the paper's table (p. 1101–1102), 1e-12 A. u: uranium by weight (ours: from the chemical formula
     //      for compounds, a typical value for pitchblende; the paper gives none). th: thorium by weight, ours, for the card.
     DRAWERS: [
@@ -122,6 +142,12 @@
     const W = { 1.5: 'one and a half times', 2: 'twice', 2.5: 'two and a half times', 3: 'three times', 3.5: 'three and a half times', 4: 'four times' };
     return (W[h] || 'more than four times') + ' the push of pure uranium';
   }
+  function bare(x) {  // the same without "about", for bounds: "at least half the push of pure uranium"
+    const w = times(x);
+    if (w === 'no push at all') return 'nothing';
+    if (w === 'about the push of pure uranium') return 'the push of pure uranium';
+    return w.replace(/^about /, '');
+  }
   function shareWords(u) {
     if (u >= 0.99) return 'all uranium';
     if (u >= 0.8) return 'mostly uranium';
@@ -131,25 +157,13 @@
     return 'no uranium';
   }
 
-  // ---------- the rule: what kind of panel a reading makes. Decided on the paper's value; calibration.js checks that every
-  //            reading the balance can accept (within its tolerance) gives the same kind.
-  function kind(s, x) {
-    if (x === undefined) x = strength(s);
-    if (s.id === CONFIG.FIRST) return 'yardstick';
-    if (x < CONFIG.INACTIVE_BELOW) return 'nothing';
-    if (s.u === 0) return 'without';
-    if (x > CONFIG.MORE_RATIO * s.u) return 'more';
-    return 'about';
-  }
-  const BADGE = { yardstick: 'THE YARDSTICK', nothing: 'NOTHING', without: 'NO URANIUM IN IT!', more: 'MORE THAN ITS URANIUM!', about: 'ABOUT ITS URANIUM' };
-
   // ---------- a game
   function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {} }; }
   function panelsLeft(g) { return CONFIG.PANELS - g.panels.length; }
   function over(g) { return g.panels.length >= CONFIG.PANELS; }
-  function available(g) {  // what can be tested now: the first panel is uranium; then anything not yet tested
+  function available(g) {  // the first panel is pure uranium; after that anything, again if you like
     if (!g.panels.length) return [sub(CONFIG.FIRST)];
-    return CONFIG.SUBSTANCES.filter(s => !g.tested[s.id]);
+    return CONFIG.SUBSTANCES.slice();
   }
   function canTest(g, id) { return !over(g) && available(g).some(s => s.id === id); }
 
@@ -157,112 +171,188 @@
   function benchStart(g, id) {
     if (!canTest(g, id)) throw new Error('cannot test ' + id);
     const s = sub(id);
-    return { id, i: strength(s), s: 0, v: 0, t: 0, hold: 0, r: 0, done: false, reading: null, rng: mulberry32(g.seed * 31 + g.panels.length * 7919 + 1),
-      acc: { r: 0, s: 0, s0: 0 } };
+    return { id, i: strength(s), s: 0, v: 0, t: 0, hold: 0, r: 0, rng: mulberry32(g.seed * 31 + g.panels.length * 7919 + 1), acc: { r: 0, s: 0, s0: 0 } };
   }
-  // r: the slider (the quartz's counter-current), in units of pure uranium. dt in seconds. Returns the state.
-  // The reading is the charge balance over the seconds the spot was held: the quartz's charge (the push, averaged) plus
-  // whatever charge is left on the electrometer (the spot's residual deflection, and what leaked). The thesis's null method
-  // reads the same balance with a stopwatch; here it is exact up to the spot's tremble, so a quick sweep of the slider at
-  // the last moment cannot change it.
+  // r: the slider (the quartz's counter-current), in units of pure uranium. dt in seconds. Returns the state. Nothing here ends
+  // the measurement: only the player does, with commit().
   function benchStep(st, dt, r) {
-    if (st.done) return st;
     const C = CONFIG; r = Math.max(0, Math.min(C.SLIDER_MAX, r)); st.r = r;
     const steps = Math.max(1, Math.ceil(dt / 0.01)), h = dt / steps, s0 = st.s;
     for (let k = 0; k < steps; k++) {
-      const inBand = st.t > C.WATCH_S && Math.abs(st.s) < C.BAND;
-      if (inBand) { if (st.hold === 0) { st.acc = { r: 0, s: 0, s0: st.s }; } st.acc.r += r * h; st.acc.s += st.s * h; }
+      const still = Math.abs(st.s) < C.BAND;
+      if (still) { if (st.hold === 0) st.acc = { r: 0, s: 0, s0: st.s }; st.acc.r += r * h; st.acc.s += st.s * h; }
       const noise = st.i > 0 ? C.JITTER * Math.sqrt(st.i) * gauss(st.rng) * Math.sqrt(h) : 0;
       st.s += (C.G * (st.i - r) - st.s / C.TAU) * h + noise;
       st.s = Math.max(-1, Math.min(1, st.s));
       st.t += h;
-      if (inBand) st.hold += h; else st.hold = 0;
-      if (st.hold >= C.HOLD_S - 1e-9) {
-        const T = st.hold, a = st.acc;
-        st.reading = Math.max(0, a.r / T + ((st.s - a.s0) + a.s / C.TAU) / (C.G * T));
-        st.done = true; break;
-      }
+      if (still) st.hold += h; else st.hold = 0;
     }
     st.v = (st.s - s0) / dt;
     return st;
   }
-  // how far the push may be from the plate's current with the spot still standing in the band (for tests and the loop)
+  function canCommit(st) { return st.t >= CONFIG.COMMIT_AFTER_S; }
   function tolerance() { return CONFIG.BAND / (CONFIG.G * CONFIG.TAU); }
-  function holdProgress(st) { return Math.min(1, st.hold / CONFIG.HOLD_S); }
-  function running(st) {  // which way the spot is going, for the picture: 'right', 'left' or 'still'; 'pinned' if at an end
+  function running(st) {  // which way the spot is going, for the picture: 'right', 'left' or 'still'; 'pinned-…' at an end
     const pinned = Math.abs(st.s) > 0.97;
     if (pinned) return st.s > 0 ? 'pinned-right' : 'pinned-left';
     if (Math.abs(st.s) >= CONFIG.BAND && Math.abs(st.i - st.r) * CONFIG.G * CONFIG.TAU > CONFIG.BAND) return st.i > st.r ? 'right' : 'left';
     return 'still';
   }
-
-  // ---------- recording a panel
-  function caption(s, x, k) {
-    const sh = shareWords(s.u);
-    if (k === 'yardstick') return 'Pure uranium. However hard you had to push for it is the yardstick: every other panel is measured against it.';
-    if (k === 'nothing') return s.name + ': nothing. The spot never moved. Less than a hundredth of uranium, if anything.';
-    if (k === 'without') {
-      const tail = x > 1.15 ? ' Stronger than pure uranium, with no uranium at all.' : x < 0.15 ? ' Faint, but it moved.' : '';
-      return s.name + ' has no uranium in it, and the spot moved: it took ' + times(x) + '.' + tail;
+  // What the instrument honestly says at the moment the player writes it down.
+  //  held:    the spot has stood in the middle for T ≥ STILL_MIN_S seconds: the charge balance over those seconds (the push,
+  //           averaged, plus what is left on the electrometer and what leaked), with an error bar that narrows as T grows.
+  //  atleast: the spot is running right (the plate pushes harder than the quartz): at least the push.
+  //  atmost:  running left: at most the push.
+  //  rough:   not settled, but pushed nearly level: roughly the push, give or take ROUGH_H.
+  function readingOf(st) {
+    const C = CONFIG, m = st.i - st.r;
+    if (st.hold >= C.STILL_MIN_S) {
+      const T = st.hold, a = st.acc;
+      const est = Math.max(0, a.r / T + ((st.s - a.s0) + a.s / C.TAU) / (C.G * T));
+      const h = C.BAND / (C.G * T) + 2 * C.JITTER * Math.sqrt(est * T) / (C.G * T);
+      return { type: 'held', est, lo: Math.max(0, est - h), hi: est + h, h, T };
     }
-    if (k === 'more') return s.name + ' is only ' + sh + ', and it took ' + times(x) + '. Far more than its uranium can give.';
-    return s.name + ' is ' + sh + ', and it took ' + times(x) + ': about what its uranium gives, or a little less.';
+    if (m * C.G * C.TAU > C.BAND) return { type: 'atleast', est: st.r, lo: st.r, hi: Infinity };
+    if (m * C.G * C.TAU < -C.BAND) return { type: 'atmost', est: st.r, lo: 0, hi: st.r };
+    return { type: 'rough', est: st.r, lo: Math.max(0, st.r - C.ROUGH_H), hi: st.r + C.ROUGH_H, h: C.ROUGH_H };
   }
-  function record(g, st) {
-    if (!st.done) throw new Error('not balanced');
-    const s = sub(st.id), x = st.reading, k = kind(s);
-    const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, reading: x, paper: strength(s), u: s.u,
-      kind: k, badge: BADGE[k], words: times(x), caption: caption(s, x, k), seconds: st.t };
-    // the two chalcolites: whichever comes second says what the first one took, so the comparison is made on the bench
+  function readShort(R) {  // the reading without its margin, for the last page
+    if (R.type === 'held') return R.est < 0.05 ? 'nothing' : times(R.est);
+    if (R.type === 'atleast') return R.lo < CONFIG.ACTIVE_MIN ? 'more than nothing' : 'at least ' + bare(R.lo);
+    if (R.type === 'atmost') return 'at most ' + bare(R.hi);
+    return 'roughly ' + bare(R.est);
+  }
+  function readWords(R) {
+    if (R.type === 'held') return (R.est < 0.05 ? 'nothing' : times(R.est)) + ', give or take ' + (R.h < 0.12 ? 'a little' : R.h < 0.25 ? 'some' : 'a lot');
+    if (R.type === 'atleast') return R.lo < CONFIG.ACTIVE_MIN ? 'more than nothing' : 'at least ' + bare(R.lo);
+    if (R.type === 'atmost') return 'at most ' + bare(R.hi);
+    return 'roughly ' + bare(R.est) + ', give or take a lot';
+  }
+  const HOW = {
+    held: 'The spot was standing in the middle when you wrote it down.',
+    atleast: 'The spot was still running right when you wrote it down: the plate was pushing harder than you were.',
+    atmost: 'The spot was running left when you wrote it down: the plate was pushing less hard than you were.',
+    rough: 'The spot had not settled when you wrote it down.',
+  };
+
+  // ---------- the player's own yardstick and what each reading shows
+  function yard(g) {  // the player's best reading of pure uranium: the narrowest one
+    const us = g.panels.filter(p => p.id === CONFIG.FIRST);
+    if (!us.length) return null;
+    return us.slice().sort((a, b) => (a.R.hi - a.R.lo) - (b.R.hi - b.R.lo))[0].R;
+  }
+  function active(R) { return R.type === 'atleast' || R.lo > CONFIG.ACTIVE_MIN; }
+  function nothing(R) { return R.type !== 'atleast' && R.hi <= CONFIG.NOTHING_MAX; }
+  function kindOf(s, R, U) {
+    if (s.id === CONFIG.FIRST) return 'yardstick';
+    if (s.u === 0) return active(R) ? 'without' : nothing(R) ? 'nothing' : 'unsure';
+    if (U && R.lo > CONFIG.MORE_RATIO * s.u * U.hi) return 'more';
+    if (U && active(R) && R.hi <= CONFIG.MORE_RATIO * s.u * U.lo) return 'about';
+    if (nothing(R)) return 'nothing';
+    return 'unsure';
+  }
+  function panelKind(g, p) { return kindOf(sub(p.id), p.R, yard(g)); }
+  // the kind her own value would give, for the checks and for her page
+  function paperKind(s) { const x = strength(s), R = { type: 'held', est: x, lo: x, hi: x }; return kindOf(s, R, { lo: 1, hi: 1 }); }
+  const BADGE = { yardstick: 'YOUR YARDSTICK', nothing: 'NOTHING SEEN', without: 'NO URANIUM IN IT!', more: 'MORE THAN ITS URANIUM!', about: 'ABOUT ITS URANIUM', unsure: 'CAN’T TELL' };
+  const KIND_LINE = {
+    yardstick: s => 'This is your pure uranium: the yardstick for what the uranium in anything else could give.',
+    nothing: s => 'Nothing you could see.',
+    without: s => 'It has no uranium in it, and it moved the spot.',
+    more: s => 'It is only ' + shareWords(s.u) + ': that is more than its uranium alone could give.',
+    about: s => 'It is ' + shareWords(s.u) + ': about what its uranium gives, or less.',
+    unsure: s => s.u > 0 ? 'Your reading cannot tell whether that is more than its uranium could give.' : 'Your reading cannot tell whether it moves the spot at all.',
+  };
+
+  // ---------- writing it down: one panel
+  function commit(g, st) {
+    if (!canCommit(st)) throw new Error('too soon');
+    const s = sub(st.id), R = readingOf(st);
+    const p = { n: g.panels.length + 1, id: s.id, name: s.name, short: s.short, look: s.look, u: s.u, R, paper: strength(s), seconds: st.t };
+    g.panels.push(p); g.tested[s.id] = (g.tested[s.id] || 0) + 1;
+    const k = panelKind(g, p);
+    p.kind = k; p.badge = BADGE[k]; p.words = readWords(R);
+    if (s.id === CONFIG.FIRST) p.words = p.words.replace('about the push of pure uranium', 'about her push').replace(' the push of pure uranium', ' her push');
+    p.caption = s.name + ': ' + p.words + '. ' + HOW[R.type] + ' ' + KIND_LINE[k](s) + (s.id === CONFIG.FIRST ? '' : ' Hers: ' + times(strength(s)) + '.');
+    // the two chalcolites: whichever comes second says what the first one gave, so the comparison is made on the bench
     const twin = { chalc: 'chalcArt', chalcArt: 'chalc' }[s.id], other = twin && g.panels.find(q => q.id === twin);
-    if (other) p.caption += s.id === 'chalcArt' ? ' The same crystal from the mine took ' + other.words + '.' : ' Your copy, made from pure chemicals, took ' + other.words + '.';
-    g.panels.push(p); g.tested[s.id] = true; return p;
+    if (other) p.caption += s.id === 'chalcArt' ? ' Your chalcolite from the mine: ' + readWords(other.R) + '.' : ' Your copy, made from pure chemicals: ' + readWords(other.R) + '.';
+    return p;
   }
   const low = s => s.charAt(0).toLowerCase() + s.slice(1);
   const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
-  function found(g) { return g.panels.filter(p => p.kind === 'without' || p.kind === 'more'); }
+  function found(g) {  // things the player's own page shows moving the spot with no uranium, or beyond their uranium (one per jar)
+    const seen = {}, out = [];
+    g.panels.forEach(p => { const k = panelKind(g, p); if ((k === 'without' || k === 'more') && !seen[p.id]) { seen[p.id] = 1; out.push({ p, k }); } });
+    return out;
+  }
   function foundLine(g) {
     const f = found(g);
     if (!g.panels.length) return 'Nothing measured yet.';
     if (!f.length) return 'Found so far, besides uranium: nothing yet.';
-    return 'Found so far, besides uranium: ' + list(f.map(p => (p.kind === 'more' ? 'something in ' : '') + low(p.name))) + '.';
+    return 'Found so far, besides uranium: ' + list(f.map(({ p, k }) => (k === 'more' ? 'something in ' : '') + low(p.name))) + '.';
   }
 
-  // ---------- the verdict (words; no score)
+  // ---------- the score: which of her claims the player's own page backs
+  function claims(g) {
+    const U = yard(g), P = id => g.panels.filter(p => p.id === id), K = p => panelKind(g, p);
+    const tested = ids => ids.filter(id => P(id).length);
+    const firstWith = (ids, pred) => { for (const id of ids) for (const p of P(id)) if (pred(p)) return p; return null; };
+    const your = p => (p.id === 'chalcArt' ? 'your own chalcolite' : 'your ' + low(p.name)) + ': ' + readShort(p.R);
+    const cant = ids => 'your reading' + (ids.length > 1 || P(ids[0]).length > 1 ? 's' : '') + ' of ' + list(ids.map(id => low(sub(id).name))) + ' could not show it';
+    const out = [];
+    { // salts
+      const ids = ['greenox', 'nitrate', 'chalcArt'], ok = firstWith(ids, p => K(p) === 'about'), t = tested(ids);
+      out.push({ id: 'salts', backed: !!ok, why: ok ? your(ok) + ', about what its uranium gives' : !t.length ? 'you never measured a uranium salt' : cant(t) });
+    }
+    { // thorium
+      const ids = ['thO', 'thOthick'], ok = firstWith(ids, p => K(p) === 'without'), t = tested(ids);
+      out.push({ id: 'thorium', backed: !!ok, why: ok ? your(ok) : !t.length ? 'you never measured thorium' : cant(t) });
+    }
+    { // thorium beats uranium
+      const ids = ['thO', 'thOthick'], ok = U && firstWith(ids, p => p.R.lo > U.hi), t = tested(ids);
+      out.push({ id: 'thbeats', backed: !!ok, why: ok ? your(ok) + ', more than your pure uranium' : !t.length ? 'you never measured thorium' :
+        (U && U.hi === Infinity ? 'your own pure-uranium reading was open-ended, so nothing could be shown to beat it' : cant(t) + ' (her thick layer beats uranium; her thin one does not quite)') });
+    }
+    { // phosphorus
+      const w = firstWith(['whiteP'], p => K(p) === 'without'), n = firstWith(['redP', 'phosphate'], p => K(p) === 'nothing'), tn = tested(['redP', 'phosphate']);
+      const why = w && n ? your(w) + '; ' + your(n) :
+        !P('whiteP').length ? 'you never measured white phosphorus' : !w ? cant(['whiteP']) :
+        !tn.length ? 'white phosphorus moved the spot, but you never measured red phosphorus or a phosphate' : cant(tn);
+      out.push({ id: 'phos', backed: !!(w && n), why });
+    }
+    { // rocks
+      const ids = ['pbJG', 'pbJo', 'chalc'], ok = firstWith(ids, p => K(p) === 'more'), t = tested(ids);
+      out.push({ id: 'rocks', backed: !!ok, why: ok ? your(ok) + ', and it is only ' + shareWords(ok.u) : !t.length ? 'you never measured a rock from the Muséum' :
+        (U && U.hi === Infinity ? 'your own pure-uranium reading was open-ended, so nothing could be shown to beat its uranium' : cant(t)) });
+    }
+    { // the copy
+      const c = firstWith(['chalcArt'], p => K(p) === 'about'), m = firstWith(['chalc'], p => K(p) === 'more');
+      const why = c && m ? your(c) + '; ' + your(m) : !P('chalcArt').length ? 'you never made the copy' : !P('chalc').length ? 'you made the copy, but never measured the chalcolite from the mine to set it against' :
+        !c ? cant(['chalcArt']) : cant(['chalc']);
+      out.push({ id: 'copy', backed: !!(c && m), why });
+    }
+    return out.map(o => Object.assign({ text: CONFIG.CLAIMS.find(c => c.id === o.id).text }, o));
+  }
+
+  // ---------- the verdict
   function verdict(g) {
-    const has = id => !!g.tested[id];
-    const P = id => g.panels.find(p => p.id === id);
-    const f = found(g), ores = ['pbJG', 'pbJo', 'chalc'].filter(has), others = f.filter(p => p.kind === 'without');
-    let headline;
-    if (ores.length && has('chalcArt')) headline = 'You found a rock stronger than pure uranium, and your copy of it was weak.';
-    else if (ores.length) headline = 'You found a rock stronger than pure uranium.';
-    else if (others.length) headline = 'You found ' + list(others.map(p => low(p.name))) + '. The rocks stayed in their drawer.';
-    else headline = 'Only uranium moved the spot.';
-    const did = 'You tested ' + (g.panels.length - 1) + ' things after pure uranium. ' +
-      (f.length ? 'Besides pure uranium, the spot moved for ' + list(f.map(p => low(p.name))) + '.' : 'Nothing but uranium moved the spot.');
-    const path = [];
-    if (ores.length) {
-      const o = P(ores[0]);
-      path.push('The ' + (o.id === 'chalc' ? 'green crystal from the mine' : 'black rock') + ' is only ' + shareWords(o.u) + ', and it took ' + o.words + '. Uranium cannot do that on its own.');
-      if (has('chalcArt') && has('chalc')) path.push('You made the same green crystal yourself, from pure chemicals: it took ' + P('chalcArt').words + ', like any uranium salt; the one from the mine took ' + P('chalc').words.replace(' the push of pure uranium', '') + '. So the extra is not the uranium and not the crystal: it is something in the rock that no bottle held.');
-      else if (has('chalcArt')) path.push('You made the green crystal yourself, from pure chemicals: it took ' + P('chalcArt').words + ', like any uranium salt. The one from the mine, which you did not test, took more than twice the push of pure uranium.');
-      else path.push('You never made the copy. She did: the green crystal made from pure chemicals was as weak as any uranium salt, while the one from the mine was more than twice as strong as pure uranium.');
-    } else {
-      path.push('You never tested the rocks from the Muséum. That is where it was: pitchblende, a black rock about two-thirds uranium, takes three and a half times the push of pure uranium.');
-    }
-    if (has('whiteP')) {
-      if (has('redP') || has('phosphate')) path.push('White phosphorus moved the spot; ' + (has('redP') && has('phosphate') ? 'red phosphorus and phosphate did not' : has('redP') ? 'red phosphorus did not' : 'phosphate did not') + '. Same element, another form, nothing: so it is not the phosphorus itself. The paper calls its action "probably of another nature".');
-      else path.push('White phosphorus moved the spot. The paper tried red phosphorus and phosphates too: nothing. Same element, another form: so it is not the phosphorus itself.');
-    }
-    if (has('thOthick') && P('thOthick').reading > 1.15) path.push('Thorium does it with no uranium at all, and your thick layer of it beat pure uranium.');
-    else if (has('thO') || has('thOthick')) path.push('Thorium does it with no uranium at all; a thick layer of it beats pure uranium.');
+    const cl = claims(g), n = cl.filter(c => c.backed).length;
+    const headline = n === 6 ? 'Your page backs all six claims in her note.' : 'Your page backs ' + ['none', 'one', 'two', 'three', 'four', 'five'][n] + ' of the six claims in her note.';
+    const fate = n === 6 ? 'You could have signed her note.' : n >= 4 ? 'Most of her note, in your own measurements.' :
+      n >= 2 ? 'A start on her note.' : n === 1 ? 'One line of her note.' : 'Her note would have had to wait.';
+    const did = 'You made ' + (g.panels.length - 1) + ' measurement' + (g.panels.length === 2 ? '' : 's') + ' after your first pure uranium. ' +
+      (found(g).length ? 'Your page shows the spot moved by ' + list(found(g).map(({ p }) => low(p.name))) + '.' : 'Your page shows nothing besides uranium moving the spot.');
+    const both = cl.find(c => c.id === 'rocks').backed && cl.find(c => c.id === 'copy').backed;
     const paper = 'Marie Curie tested dozens of metals, salts, oxides and rocks. Every uranium compound does it, about in proportion to its uranium. Thorium does it too. And two uranium rocks, pitchblende and chalcolite, do it far more than the uranium in them can. She made chalcolite herself from pure chemicals, and her copy was no stronger than any uranium salt.';
-    const means = 'So the rocks hold something no bottle in Paris held. Her words: these minerals "may contain an element much more active than uranium."';
+    const means = (both ? 'Your page backs her last two claims, and so her conclusion. ' : 'Her conclusion rests on the last two claims. ') +
+      'The rocks hold something no bottle in Paris held: these minerals "may contain an element much more active than uranium."';
     const later = 'After this note, and not in it: in July 1898 she and Pierre Curie announced one such element, traced in pitchblende, and named it polonium; in December, a second: radium.';
-    const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s), kind: kind(s), words: times(strength(s)) }; });
-    return { headline, did, path, paper, means, later, her };
+    const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s), kind: paperKind(s), words: times(strength(s)) }; });
+    return { n, headline, fate, did, claims: cl, paper, means, later, her };
   }
 
-  return { CONFIG, sub, strength, times, shareWords, kind, BADGE, newGame, panelsLeft, over, available, canTest,
-    benchStart, benchStep, tolerance, holdProgress, running, record, found, foundLine, verdict, mulberry32 };
+  return { CONFIG, sub, strength, times, bare, shareWords, newGame, panelsLeft, over, available, canTest,
+    benchStart, benchStep, canCommit, tolerance, running, readingOf, readWords, readShort, commit, yard, kindOf, panelKind, paperKind, BADGE,
+    found, foundLine, claims, verdict, mulberry32 };
 });
