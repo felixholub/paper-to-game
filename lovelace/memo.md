@@ -180,3 +180,9 @@ The spread is real: the obvious chain passes the visible test and fails the hidd
 - **The verdict leads with a plain line** ("A few cards can do a big job, for any numbers, if one of them says 'go back and do that again'. And the Engine only ever does what the cards tell it.") before the paper's version. Five figure-wheels instead of six; leading zeros faint.
 
 **Checks.** Calibration 33/33: the earlier 29 plus the Countess's chains holding on every job, the tour printing 35, the countdown printing 3 2 1 and passing BACK at 0, and no decimals in any narration or card sentence. Browser session at 380 px through the tour, the countdown mid-job, help and back, both sessions including the hand-over; no errors, no horizontal scroll. Estimated length now about eight minutes. Still builder's review only: whether an eight-year-old gets through job two is the open question, and it needs a child.
+
+## 20. Fix: taps on a phone (1 Nov 2026)
+
+Steffen, on a phone: *I can't choose much in the first screen; whatever I do, it takes just the first option.* Not reproducible in Chromium's iPhone and Pixel emulation, and no WebKit was available to test Safari itself. Two causes in the code fit the report, and both are fixed:
+- **Double-tap zoom.** On iOS Safari two quick taps on a page that allows zooming are read as a zoom gesture, and the second tap is dropped; tapping a, n and R in quick succession could register only a. All buttons and the page now carry `touch-action: manipulation`.
+- **No way to choose a slot.** Once a card's three columns were filled, the next column tap always restarted at the first slot. The card being punched now shows three tappable slots (1st, 2nd, ans); the highlighted one is filled by the next column tap, and tapping a slot selects it for change. Switching the sign keeps the columns. A column tapped before any sign now says to tap a sign first, instead of doing nothing.

@@ -16,6 +16,7 @@
   --disp:'Abril',Georgia,'Times New Roman',serif; --text:'Old','Times New Roman',Georgia,serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,button{touch-action:manipulation}
 html,body{margin:0;padding:0;background:var(--buff)}
 body{color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.4;min-height:100vh;
   background-image:repeating-linear-gradient(180deg,rgba(30,26,23,.035) 0 1px,transparent 1px 7px)}
@@ -119,6 +120,8 @@ h3{font-family:var(--disp);font-weight:400;font-size:17px;margin:16px 0 4px;colo
 .counts{display:flex;gap:4px;margin:0 0 8px}
 .counts .punch{min-height:38px;font-size:16px}
 .preview{font-size:18px;min-height:26px;padding:4px 2px;border-bottom:1px solid var(--edge);margin-bottom:6px;font-variant-numeric:tabular-nums}
+.preview .slot{display:inline-block;min-width:26px;padding:0 4px;margin:0 1px;border-bottom:2px solid var(--edge);cursor:pointer;text-align:center}
+.preview .slot.active{border-bottom:3px solid var(--plum);background:rgba(139,34,82,.10)}
 .preview .b{display:inline-block;min-width:16px;border-bottom:2px solid var(--plum);height:18px;vertical-align:-3px;margin:0 2px}
 .guide{font-size:15px;font-style:italic;color:var(--ink2);min-height:22px;margin:0 0 4px}
 .composer .btn{margin:6px 0 0}
@@ -248,7 +251,7 @@ ul{padding-left:20px}li{margin:4px 0}
     <li><b>P</b> (print): tap one column. The Engine writes its number on the strip.</li>
     <li><b>↺</b> (back): choose a number, then tap a column. The Engine goes back that many cards and does them again, as long as that column is not 0. When it reaches 0, the Engine carries on. <span class="ex">BACK 2 WHILE n ≠ 0</span> repeats the two cards above it until n is 0.</li>
   </ul>
-  <p>Under the card you are making, a line says in words what it will do. Tap <b>Hang the card</b> to put it on the chain. Tap a hung card to take it off again.</p>
+  <p>The card being made shows three slots: 1st, 2nd and ans. The pink slot is the one your next column tap fills. To change one, tap that slot, then tap a column. Under the card, a line says in words what it will do. Tap <b>Hang the card</b> to put it on the chain. Tap a hung card to take it off again.</p>
   <button class="btn small-btn" id="helptour">Watch the tour again</button>
   <button class="btn small-btn" id="helpcount">Watch the countdown (the BACK card)</button>
   <h3>Setting it going</h3>
@@ -379,20 +382,23 @@ ul{padding-left:20px}li{margin:4px 0}
   // ---- the composer
   const PUNCHES = [['+', '+', 'add'], ['-', '−', 'take'], ['*', '×', 'times'], ['/', '÷', 'divide'], ['print', 'P', 'print'], ['back', '↺', 'back']];
   function resetComposer() {
-    comp = { kind: null, a: null, b: null, to: null, n: null, test: null };
+    comp = { kind: null, a: null, b: null, to: null, n: null, test: null, active: null };
     const t = task(); const pn = $('punches'); pn.innerHTML = '';
     PUNCHES.forEach(([key, sym, name]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'punch'; b.dataset.key = key; b.innerHTML = `${sym}<small>${name}</small>`; b.disabled = (key.length === 1 && !t.ops.includes(key)); b.addEventListener('click', () => punch(key)); pn.appendChild(b); });
     const cn = $('counts'); cn.innerHTML = ''; for (let k = 1; k <= C.BACK_MAX; k++) { const b = document.createElement('button'); b.type = 'button'; b.className = 'punch'; b.textContent = k; b.addEventListener('click', () => { comp.n = k; drawComposer(); }); cn.appendChild(b); }
     drawComposer();
   }
-  function punch(key) { if (running || finished || key === comp.kind) return; comp = { kind: key, a: null, b: null, to: null, n: null, test: null }; drawComposer(); }
+  function punch(key) { if (running || finished) return; if (key === comp.kind) return; const keep = comp.kind && comp.kind.length === 1 && key.length === 1; comp = keep ? Object.assign(comp, { kind: key }) : { kind: key, a: null, b: null, to: null, n: null, test: null, active: null }; drawComposer(); }
+  function nextSlot() { return comp.a === null ? 'a' : comp.b === null ? 'b' : comp.to === null ? 'to' : null; }
   function pickCol(i) {
-    if (running || finished || !comp.kind) return;
+    if (running || finished) return;
+    if (!comp.kind) { $('guide').textContent = 'First tap a sign on the blank card (+, −, ×, ÷, P or ↺). Then tap columns.'; return; }
     if (comp.kind === 'print') comp.a = i;
     else if (comp.kind === 'back') comp.test = i;
-    else if (comp.a === null) comp.a = i; else if (comp.b === null) comp.b = i; else if (comp.to === null) comp.to = i; else { comp.a = i; comp.b = null; comp.to = null; }
+    else { const slot = comp.active || nextSlot() || 'to'; comp[slot] = i; comp.active = null; }
     drawComposer();
   }
+  function pickSlot(slot) { if (running || finished) return; comp.active = slot; drawComposer(); }
   function cardOf() {
     if (comp.kind === 'print') return comp.a === null ? null : { k: 'print', a: comp.a };
     if (comp.kind === 'back') return (comp.n === null || comp.test === null) ? null : { k: 'back', n: comp.n, test: comp.test };
@@ -410,14 +416,21 @@ ul{padding-left:20px}li{margin:4px 0}
     if (!comp.kind) { pv = '<span style="color:#A89C84">a blank card</span>'; gd = 'Tap a sign to start a card.'; }
     else if (comp.kind === 'print') { pv = `PRINT ${nm(comp.a)}`; gd = comp.a === null ? 'Now tap the column whose number should be printed.' : 'Hang the card, or tap another column.'; mark(comp.a, 'print'); }
     else if (comp.kind === 'back') { pv = `BACK ${comp.n === null ? '<span class="b"></span>' : comp.n} WHILE ${nm(comp.test)} ≠ 0`; gd = comp.n === null ? 'How many cards back? Tap a number.' : comp.test === null ? 'Now tap the column to watch: the Engine goes back while it is not 0.' : 'Hang the card.'; mark(comp.test, 'watch'); }
-    else { pv = `${nm(comp.a)} ${sign} ${nm(comp.b)} → ${nm(comp.to)}`; gd = comp.a === null ? 'Tap the first number’s column.' : comp.b === null ? 'Tap the second number’s column.' : comp.to === null ? 'Tap the column where the answer goes.' : 'Hang the card, or tap a column to choose the columns again.'; mark(comp.a, '1st'); mark(comp.b, '2nd'); mark(comp.to, 'ans'); }
+    else {
+      const target = comp.active || nextSlot();
+      const sl = (k, label) => `<span class="slot ${target === k ? 'active' : ''}" data-slot="${k}">${comp[k] === null ? label : cols[comp[k]].name}</span>`;
+      pv = `${sl('a', '1st')} ${sign} ${sl('b', '2nd')} → ${sl('to', 'ans')}`;
+      gd = target === 'a' ? 'Tap the column for the first number.' : target === 'b' ? 'Tap the column for the second number.' : target === 'to' ? 'Tap the column where the answer goes.' : 'Ready. Hang the card, or tap a slot on the card above to change it.';
+      mark(comp.a, '1st'); mark(comp.b, '2nd'); mark(comp.to, 'ans');
+    }
     $('preview').innerHTML = pv; $('guide').textContent = gd;
+    $('preview').querySelectorAll('.slot').forEach(e => e.addEventListener('click', () => pickSlot(e.dataset.slot)));
     const card = cardOf(); $('sentence').textContent = card ? 'This card says: ' + M.cardSentence(card, cols) : '';
     $('hangbtn').disabled = !card || g.chain.length >= C.RACK || running || finished;
     if (g.chain.length >= C.RACK && !running && !finished) $('guide').textContent = 'The rack is full: ten cards. Take one off to hang another.';
   }
-  $('hangbtn').addEventListener('click', () => { const card = cardOf(); if (!card || !M.hang(g, card)) return; const kind = comp.kind; comp = { kind, a: null, b: null, to: null, n: comp.n, test: null }; renderChain(); afterEdit(); drawComposer(); });
-  $('clearbtn').addEventListener('click', () => { comp = { kind: null, a: null, b: null, to: null, n: null, test: null }; drawComposer(); });
+  $('hangbtn').addEventListener('click', () => { const card = cardOf(); if (!card || !M.hang(g, card)) return; const kind = comp.kind; comp = { kind, a: null, b: null, to: null, n: comp.n, test: null, active: null }; renderChain(); afterEdit(); drawComposer(); });
+  $('clearbtn').addEventListener('click', () => { comp = { kind: null, a: null, b: null, to: null, n: null, test: null, active: null }; drawComposer(); });
   // ---- the Engine runs
   $('gobtn').addEventListener('click', async () => {
     if (running || finished || !g.chain.length) return;
