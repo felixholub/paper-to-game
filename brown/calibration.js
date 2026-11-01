@@ -125,8 +125,17 @@ check('B3c vivacity never rises with size', mono);
 {
   const g = M.newGame(); let threw = false; try { M.playDay(g, 'onespeck'); } catch (e) { threw = /locked/.test(e.message); }
   const g2 = M.newGame(); M.playDay(g2, 'oil');
-  check('G1 one speck alone is locked until the oil drop has been looked at, and playing it locked is refused', M.locked(M.newGame(), 'onespeck') && threw && g.day === 0 && !M.locked(g2, 'onespeck') && M.expById('onespeck').lockedGloss === 'first seal a drop in oil');
+  check('G1 one speck alone is locked until the oil drop has been looked at, and playing it locked is refused', M.locked(M.newGame(), 'onespeck') && threw && g.day === 0 && !M.locked(g2, 'onespeck'));
   check('G1b no other look is locked at any time', C.EXPERIMENTS.filter(e => e.id !== 'onespeck').every(e => !M.locked(M.newGame(), e.id)));
+  // the lone speck is discovered, not unlocked: hidden from the bench until the oil look, which announces it
+  const av0 = M.available(M.newGame()).map(e => e.id), av1 = M.available(g2).map(e => e.id);
+  check('G2 a fresh bench lists thirteen looks and never the lone speck; after the oil look it lists fourteen', av0.length === 13 && !av0.includes('onespeck') && av1.length === 13 && av1.includes('onespeck') && !av1.includes('oil') && C.EXPERIMENTS.length === 14);
+  const oilRead = g2.log[g2.log.length - 1], oilExp = M.expById('oil');
+  check('G2b the oil look carries the announcement of the lone speck, and no other look announces anything', oilExp.reveals === 'onespeck' && /single speck/.test(oilExp.found) && M.readLook(oilExp, M.startLook(oilExp)).found === oilExp.found && C.EXPERIMENTS.filter(e => e.id !== 'oil').every(e => !e.found && !M.readLook(e, M.startLook(e)).found));
+  const g3 = M.newGame(); M.playDay(g3, 'sphinx'); const newBefore = M.isNew(g3, 'onespeck'); M.playDay(g3, 'oil'); const newAfter = M.isNew(g3, 'onespeck'); M.playDay(g3, 'glass'); const newLater = M.isNew(g3, 'onespeck');
+  check('G2c the lone speck is marked new on the bench the day after the oil look only', !newBefore && newAfter && !newLater && C.EXPERIMENTS.filter(e => e.id !== 'onespeck').every(e => !M.isNew(g3, e.id)));
+  const g4 = M.newGame(); for (const id of ['sphinx', 'surface', 'glass', 'soot', 'coarse', 'sugar', 'wait']) M.playDay(g4, id);
+  check('G2d the verdict knows whether a drop was ever sealed', M.verdict(g4).sealed === false && M.verdict(g2).sealed === true && M.verdict(g4).standing.includes('Pull'));
   // exhaustive: every legal sequence of three looks, then of four
   const ids = C.EXPERIMENTS.map(e => e.id); let three = 0, threeClear = 0, four = 0, fourClear = 0;
   const rec = (g, depth, max) => {
