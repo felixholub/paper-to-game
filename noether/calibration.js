@@ -1,4 +1,4 @@
-// Noether's Press — calibration against Noether (1918). Run: node calibration.js  (prints every check; exit code 1 on a failure)
+// Noether's Ball — calibration against Noether (1918). Run: node calibration.js  (prints every check; exit code 1 on a failure)
 //   (A)   every card's answer, computed from eq. 11, is the one the paper and mechanics give
 //   (P)   the plate's two numbers agree with the answer on every card: the same exactly when the change does not matter
 //   (V)   the picture agrees: the new trip lands on "where it would go if the change did not matter" exactly when it does not matter
@@ -63,5 +63,5 @@ check('T1 Theorem I: the energy, the sideways speed and the spin have teeth (ste
   const v = M.verdict({ c1: 'not', c2: 'not', c4: 'matters' }); strings.push(v.headline, v.line);
   check('W no decimals in anything the screen reads from the mechanism', strings.every(s => !/\d\.\d/.test(s)), strings.length + ' strings'); }
 
-const head = `Noether's Press — calibration against Noether (1918). ${out.filter(l => l.startsWith('PASS')).length} passed, ${fails} failed.`;
+const head = `Noether's Ball — calibration against Noether (1918). ${out.filter(l => l.startsWith('PASS')).length} passed, ${fails} failed.`;
 console.log([head].concat(out).join('\n')); fs.writeFileSync(__dirname + '/calibration-result.txt', [head].concat(out).join('\n') + '\n'); process.exitCode = fails ? 1 : 0;

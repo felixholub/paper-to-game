@@ -7,7 +7,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
 (async () => {
   const browser = await chromium.launch(); const page = await browser.newPage({ viewport: { width: 380, height: 760 }, deviceScaleFactor: 2 });
   const errors = []; page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error' && !/gc\.zgo\.at|goatcounter|net::ERR/.test(m.text())) errors.push(m.text()); });
-  await page.goto('file://' + path.join(__dirname, 'noethers-press.html')); await page.waitForTimeout(600);
+  await page.goto('file://' + path.join(__dirname, 'noethers-ball.html')); await page.waitForTimeout(600);
   const shot = async (name, full) => { await page.screenshot({ path: path.join(__dirname, `screenshot-${name}.png`), fullPage: full !== false }); say('  shot ' + name); };
   const noScroll = async () => { const w = await page.evaluate(() => document.documentElement.scrollWidth); if (w > 380) say(`  !! horizontal scroll: ${w}px`); };
   const text = async sel => (await page.$eval(sel, e => e.innerText)).replace(/\n+/g, ' | ');

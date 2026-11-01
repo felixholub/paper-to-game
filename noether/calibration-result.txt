@@ -1,4 +1,4 @@
-Noether's Press — calibration against Noether (1918). 11 passed, 0 failed.
+Noether's Ball — calibration against Noether (1918). 11 passed, 0 failed.
       c1 ball/clock: residual 3.14e-4 → does not matter; teeth
       c2 grow/clock: residual 2.05e-1 → matters; none
       c3 ball/across: residual 0.00e+0 → does not matter; teeth
