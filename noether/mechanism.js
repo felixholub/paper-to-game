@@ -32,7 +32,7 @@
     DELAY: 0.4,                // "five past three": the later start, in trip units
     SHIFT: 0.45,               // "one step to the left", in window units
     ANGLE: 0.6,                // "turn a little", in radians
-    RETICK: 0.12,              // how far the shown re-ticking moves the clock, in trip units; kept monotone
+    RETICK: 0.22,              // how far the shown re-ticking moves the clock, in trip units; kept monotone
     SAME_TOL: 5e-3,            // two numbers on the plate count as the same below this relative difference
     // ---- display
     TICK_EVERY: 20, PLATE_UNIT: 1000, OPENING_TRIES: 3,

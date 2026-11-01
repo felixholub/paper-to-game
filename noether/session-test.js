@@ -28,8 +28,13 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     say(`\n== ${await text('#band')}`); say('   ' + await text('#setup')); say('   change: ' + await text('#change')); say('   formula: ' + await text('#formula'));
     if (opts.shotQ) await shot(opts.shotQ);
     if (opts.help) { await page.click('#play .help-q'); await page.waitForTimeout(200); await shot('help'); await page.click('#helpback'); await page.waitForTimeout(200); say(`   help opened and returned: question still shown=${await vis('#question')}`); }
-    await page.click(answer === 'matters' ? '#saymatters' : '#saynot');
-    if (opts.shotMid) { await page.waitForTimeout(1200); await shot(opts.shotMid, false); }
+    if (await vis('#window2')) say('  !! the second picture shows before the guess');
+    const first = opts.first || answer;
+    await page.click(first === 'matters' ? '#saymatters' : '#saynot');
+    await until('#mind', 15); say('   guessed "' + first + '"; ' + await text('#mindnote'));
+    if (!(await vis('#window2'))) say('  !! the second picture did not appear');
+    if (opts.shotMid) await shot(opts.shotMid);
+    await page.click(first === answer ? '#keep' : '#switch');
     await until('#next', 20);
     say(`   said "${answer}": ${await text('#verdictline')}`); say('   plate: ' + await text('#nums')); say('   reveal: ' + await text('#reveal')); const pn = await text('#prizenote'); if (pn) say('   prize: ' + pn);
     if (opts.drawTwice) { for (let k = 0; k < 2; k++) { await page.click('#drawtry'); await page.waitForTimeout(300); await draw('wild'); await until('#drawrow', 10); say('   after a drawn path: ' + await text('#prizenote')); if (k === 1 && opts.shotDrawn) await shot(opts.shotDrawn); } }
@@ -45,13 +50,13 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   await draw('straight'); await until('#openon', 12); say('   drew straight: ' + await text('#openask')); say('   plate: ' + await text('#nums')); await shot('a-opener-drawn');
   await page.click('#drawagain'); await page.waitForTimeout(300); await draw('dip'); await until('#openon', 12); say('   drew a dip: ' + await text('#openask')); say('   plate: ' + await text('#nums'));
   await page.click('#openon'); await page.waitForTimeout(500);
-  await card('not', { shotQ: 'a-c1-question', shotMid: 'a-c1-reveal', shot: 'a-c1-answer' });
+  await card('not', { shotQ: 'a-c1-question', shotMid: 'a-c1-both', shot: 'a-c1-answer' });
   await card('matters', { shot: 'a-c2-answer' });
-  await card('not', { help: true, shot: 'a-c3-answer' });
-  await card('not', { shot: 'a-c4-answer' });
-  await card('not', { shotQ: 'a-c5-question', shot: 'a-c5-answer' });
+  await card('not', { help: true, shotMid: 'a-c3-both', shot: 'a-c3-answer' });
+  await card('not', { first: 'matters', shot: 'a-c4-answer' });
+  await card('not', { shotQ: 'a-c5-question', shotMid: 'a-c5-both', shot: 'a-c5-answer' });
   await card('matters', { shot: 'a-c6-answer' });
-  await card('matters', { shotQ: 'a-c7-question', shot: 'a-c7-answer' });
+  await card('matters', { first: 'not', shotQ: 'a-c7-question', shotMid: 'a-c7-both', shot: 'a-c7-answer' });
   await card('not', { shotQ: 'a-c8-question', drawTwice: true, shotDrawn: 'a-c8-drawn', shot: 'a-c8-answer' });
   await card('matters', { shot: 'a-c9-answer' });
   await page.waitForTimeout(400); say('\nEND: ' + await text('#headline')); say('   ' + await text('#endline')); say('   shelf: ' + await text('#endtiles')); await shot('a-end'); await noScroll();
@@ -59,7 +64,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   // ---- shift B
   say('\n==== SHIFT B'); await page.click('#replay'); await page.waitForTimeout(800);
   await draw('straight'); await until('#openon', 12); await page.click('#openon'); await page.waitForTimeout(500);
-  for (let k = 0; k < 9; k++) { await until('#question', 6); await page.click('#saymatters'); await until('#next', 20); await page.click('#next'); await page.waitForTimeout(400); }
+  for (let k = 0; k < 9; k++) { await until('#question', 6); await page.click('#saymatters'); await until('#mind', 15); await page.click('#keep'); await until('#next', 20); await page.click('#next'); await page.waitForTimeout(400); }
   say('END B: ' + await text('#headline')); say('   ' + await text('#endline')); say('   shelf: ' + await text('#endtiles')); await shot('b-end');
   say('\nerrors: ' + (errors.length ? errors.join(' | ') : 'none'));
   fs.writeFileSync(path.join(__dirname, 'session-log.txt'), L.join('\n') + '\n'); await browser.close();
