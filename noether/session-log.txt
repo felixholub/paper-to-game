@@ -1,11 +1,11 @@
   shot start
 == FORMULA 1 OF 4 · THE FREE DOT · This formula adds up speed² along a path. It draws a dot that nothing pushes: a straight line at a steady pace. The dots on the trail are the clock ticks.
-   Draw a path from A to B with your finger, in the window. The formula will give it a number.
+   Draw the path you think is best from A to B, with your finger, in the window. The formula will give it a number.
   shot a-opening
-   drew bulge: Your path: 2457. The best path: 1000, the straight line at a steady pace. No path from A to B gets a smaller number than the best path; that is what makes it the best. The dot always takes it.
+   drew bulge: Your path: 2457. The best path: 1000. The best path is the straight line, at a steady pace. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
    plate: your path | 2457 | the best path | 1000
   shot a-opening-drawn
-   drew line: Your path: 1851. The best path: 1000, the straight line at a steady pace. No path from A to B gets a smaller number than the best path; that is what makes it the best. The dot always takes it.
+   drew line: Your path: 1851. The best path: 1000. The best path is the straight line, at a steady pace. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
    plate: your path | 1851 | the best path | 1000
    on to the changes: Now change the whole drawing. Tap a change: the window and the plate show it, with the numbers before and after, for the best path and for yours. Pull it if you think the formula does not care.
   shot a-floor
@@ -45,11 +45,17 @@
   shot a-floor-clock
 
 == FORMULA 2 OF 4 · THE SPRING · This formula adds up speed² minus stretch². It draws a dot tied to the centre peg by a spring, swinging round the peg at the tempo the spring sets.
-   plate: THE FORMULA | S = ∫ ½(x′² + y′²) − ½k(x² + y²) dt | speed² minus stretch² (k is how stiff the spring is) | the best path | 312 | a wobbly path | 807
+   A spring pulls the dot towards the centre peg. Draw the path you think has the smallest number from A to B.
+  shot a-spring-opening
+   drew bulge: Your path: 25961. The best path: 312. The best path is a swing round the peg. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 25961 | the best path | 312
+  shot a-spring-opening-drawn
+   on to the changes: Tap a change: the window and the plate show it. Pull the one you think his prize comes from. A wrong pull still spends a blank.
+   plate: THE FORMULA | S = ∫ ½(x′² + y′²) − ½k(x² + y²) dt | speed² minus stretch² (k is how stiff the spring is) | the best path | 312 | your path | 25961
    THE AUDITOR MOVES FIRST | I already hold a prize for this formula: SWEEP RATE, x·y′ − y·x′. Watch the shaded fan the dot sweeps round the peg: it grows evenly. Every prize comes from a change the formula does not care about. Which change is this one? Pull it.
   shot a-spring-first
    tapped "turn": Turn the whole drawing a little round the centre. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 312 | → | 312 | a wobbly path | 807 | → | 807
+   plate: the best path | 312 | → | 312 | your path | 25961 | → | 25961
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
@@ -60,10 +66,16 @@
   shot a-spring-turn
 
 == FORMULA 3 OF 4 · THE GLASS · This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.
-   plate: THE FORMULA | S = ∫ n(y) · √(x′² + y′²) dt | density × distance, with n(y) the density of the glass at height y | the best path | 1000 | a wobbly path | 1046
+   The glass is denser lower down, and distance in dense glass counts for more. Draw the path you think has the smallest number from A to B.
+  shot a-glass-opening
+   drew line: Your path: 1742. The best path: 1000. The best path is a bent ray: it goes the long way round through the thin glass. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1742 | the best path | 1000
+  shot a-glass-opening-drawn
+   on to the changes: Tap a change: the window and the plate show it. Pull it if you think the formula does not care.
+   plate: THE FORMULA | S = ∫ n(y) · √(x′² + y′²) dt | density × distance, with n(y) the density of the glass at height y | the best path | 1000 | your path | 1742
   shot a-glass
    tapped "clock": Start the clock a little later. The same drawing, every tick a little later. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | a wobbly path | 1046 | → | 1046
+   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
   shot a-glass-tap
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle did not move: on your path the number is the same as on the best path.
@@ -75,7 +87,7 @@
    buttons: PULL AGAIN + NEXT FORMULA
   shot a-glass-empty
    tapped "warpclock": Let the clock run fast here and slow there, any way you like. You draw how; the ticks bunch and spread. The window shows one way of doing it; you will draw your own. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | a wobbly path | 1046 | → | 1046
+   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
    stamp: RULE · feed: The formula does not care, but no prize came out. The tag reads a rule: ψ₁x′ + ψ₂y′ = 0, the two equations of motion are not independent.
    rack: [void: EMPTY] [identity: RULE] [blank: BLANK]
    result: The formula does not care about a clock re-ticked any way you like: the numbers stayed the same. But no prize came out. A change with a free hand in it gives a rule instead of a number: the formula's two equations of motion are not independent, one follows from the other. And "start the clock later" is one special way of re-ticking, so its prize is empty here.
@@ -83,7 +95,7 @@
    buttons: PULL AGAIN + NEXT FORMULA
   shot a-glass-rule
    tapped "across": Move the whole drawing one step to the right. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | a wobbly path | 1046 | → | 1046
+   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
@@ -94,11 +106,17 @@
   shot a-glass-across
 
 == FORMULA 4 OF 4 · THE SHEET · This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.
-   plate: THE FORMULA | S = ∫ n(x, y) · √(x′² + y′²) dt | density × distance, with n thickest at the well in the middle | the best path | 1000 | a wobbly path | 1013
+   The sheet is thickest at the well in the middle, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.
+  shot a-sheet-opening
+   drew bulge: Your path: 1370. The best path: 1000. The best path is a route that curves to keep off the thick middle. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1370 | the best path | 1000
+  shot a-sheet-opening-drawn
+   on to the changes: Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.
+   plate: THE FORMULA | S = ∫ n(x, y) · √(x′² + y′²) dt | density × distance, with n thickest at the well in the middle | the best path | 1000 | your path | 1370
    THE AUDITOR MOVES FIRST | Here the clock prize is empty before you do anything: its number comes out the same on every path, good or bad. An empty prize means "start the clock later" is only one piece of a bigger change this formula does not care about. Pull that bigger change.
   shot a-sheet-first
    tapped "warpclock": Let the clock run fast here and slow there, any way you like. You draw how; the ticks bunch and spread. The window shows one way of doing it; you will draw your own. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | a wobbly path | 1013 | → | 1013
+   plate: the best path | 1000 | → | 1000 | your path | 1370 | → | 1370
    stamp: RULE · feed: The formula does not care, but no prize came out. The tag reads a rule: ψ₁x′ + ψ₂y′ = 0, the two equations of motion are not independent.
    rack: [identity: RULE] [blank: BLANK] [blank: BLANK]
    result: The formula does not care about a clock re-ticked any way you like: the numbers stayed the same. But no prize came out. A change with a free hand in it gives a rule instead of a number: the formula's two equations of motion are not independent, one follows from the other. And "start the clock later" is one special way of re-ticking, so its prize is empty here.
@@ -113,8 +131,8 @@ VERDICT: YOU ANSWERED HILBERT.
 
 ==== SHIFT B
 == FORMULA 1 OF 4 · THE FREE DOT · This formula adds up speed² along a path. It draws a dot that nothing pushes: a straight line at a steady pace. The dots on the trail are the clock ticks.
-   Draw a path from A to B with your finger, in the window. The formula will give it a number.
-   drew line: Your path: 1851. The best path: 1000, the straight line at a steady pace. No path from A to B gets a smaller number than the best path; that is what makes it the best. The dot always takes it.
+   Draw the path you think is best from A to B, with your finger, in the window. The formula will give it a number.
+   drew line: Your path: 1851. The best path: 1000. The best path is the straight line, at a steady pace. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
    plate: your path | 1851 | the best path | 1000
    on to the changes: Now change the whole drawing. Tap a change: the window and the plate show it, with the numbers before and after, for the best path and for yours. Pull it if you think the formula does not care.
 == FORMULA 1 OF 4 · THE FREE DOT
@@ -127,9 +145,14 @@ VERDICT: YOU ANSWERED HILBERT.
    result: The formula does not care about clock later, so you win a prize: speed² (there is no spring here, so no stretch²), ½(x′² + y′²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it.
    buttons: PULL AGAIN + NEXT FORMULA
+== FORMULA 2 OF 4 · THE SPRING · This formula adds up speed² minus stretch². It draws a dot tied to the centre peg by a spring, swinging round the peg at the tempo the spring sets.
+   A spring pulls the dot towards the centre peg. Draw the path you think has the smallest number from A to B.
+   drew line: Your path: 22256. The best path: 312. The best path is a swing round the peg. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 22256 | the best path | 312
+   on to the changes: Tap a change: the window and the plate show it. Pull the one you think his prize comes from. A wrong pull still spends a blank.
 == FORMULA 2 OF 4 · THE SPRING
    tapped "clock": Start the clock a little later. The same drawing, every tick a little later. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 312 | → | 312 | a wobbly path | 807 | → | 807
+   plate: the best path | 312 | → | 312 | your path | 22256 | → | 22256
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
@@ -137,9 +160,14 @@ VERDICT: YOU ANSWERED HILBERT.
    result: The formula does not care about clock later, so you win a prize: speed² plus stretch², ½(x′² + y′²) + ½k(x² + y²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it. A prize, but not the one I asked about.
    buttons: PULL AGAIN + NEXT FORMULA
+== FORMULA 3 OF 4 · THE GLASS · This formula adds up density × distance. It draws light bending through glass that is denser lower down. The ticks are only labels on the ray: the formula never asks how fast the ray is traced.
+   The glass is denser lower down, and distance in dense glass counts for more. Draw the path you think has the smallest number from A to B.
+   drew line: Your path: 1742. The best path: 1000. The best path is a bent ray: it goes the long way round through the thin glass. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1742 | the best path | 1000
+   on to the changes: Tap a change: the window and the plate show it. Pull it if you think the formula does not care.
 == FORMULA 3 OF 4 · THE GLASS
    tapped "across": Move the whole drawing one step to the right. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | a wobbly path | 1046 | → | 1046
+   plate: the best path | 1000 | → | 1000 | your path | 1742 | → | 1742
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
@@ -147,9 +175,14 @@ VERDICT: YOU ANSWERED HILBERT.
    result: The formula does not care about move right, so you win a prize: the lean of the ray times the density of the glass (the law of refraction), n(y) · x′ / √(x′² + y′²). Its number stayed the same along the best path and changed along paths the dot would never take. That is a real prize: it tells the best path from the others.
    auditor: THE AUDITOR | A real prize. Keep it.
    buttons: PULL AGAIN + NEXT FORMULA
+== FORMULA 4 OF 4 · THE SHEET · This formula adds up density × distance, with the sheet thickest at the well. It draws a dot taking the straightest route the sheet allows. The ticks are only labels, as on the glass.
+   The sheet is thickest at the well in the middle, and distance on thick sheet counts for more. Draw the path you think has the smallest number from A to B.
+   drew line: Your path: 1300. The best path: 1000. The best path is a route that curves to keep off the thick middle. No path from A to B gets a smaller number; that is what makes it the best, and the dot always takes it.
+   plate: your path | 1300 | the best path | 1000
+   on to the changes: Tap a change: the window and the plate show it. Pull the one you think explains the empty prize. A wrong pull still spends a blank.
 == FORMULA 4 OF 4 · THE SHEET
    tapped "turn": Turn the whole drawing a little round the centre. The window shows it in blue over the old drawing in grey. The plate shows the numbers before and after. Does the formula care? If you think not, pull.
-   plate: the best path | 1000 | → | 1000 | a wobbly path | 1013 | → | 1013
+   plate: the best path | 1000 | → | 1000 | your path | 1300 | → | 1300
    test: Now draw any path you like, in the window: a path the dot would never take. The needle reads the prize’s number along it. Try to make the needle move.
    after a drawn path: The needle swung: on your path the number changes. This prize can tell the best path from a path the dot would never take.
    stamp: PRIZE · feed: PRIZE: the number held on the best path and changed on the others. A real prize.
