@@ -1,0 +1,62 @@
+Foot's Bad Man — calibration check
+2026-11-02
+
+1. Each rule against the paper's stated verdicts (A = the one dies, the five live; B = the five die)
+  ok   most on tram: A (paper: A)
+  ok   most on bargain: A (paper: A)
+  ok   most on medicine: A (paper: A)
+  ok   most on brew: A (paper: A)
+  ok   most on beggar: A (paper: A)
+  ok   most on cave: A (paper: A)
+  ok   double on tram: A (paper: A)
+  ok   double on bargain: B (paper: B)
+  ok   double on medicine: A (paper: A)
+  ok   double on brew: A (paper: A)
+  ok   double on beggar: B (paper: B)
+  ok   double on cave: B (paper: B)
+  ok   foot on tram: A (paper: A)
+  ok   foot on bargain: B (paper: B)
+  ok   foot on medicine: A (paper: A)
+  ok   foot on brew: B (paper: B)
+  ok   foot on beggar: B (paper: B)
+  ok   foot on cave: A (paper: A)
+
+2. Where the two principles agree and where they part (p. 4: "So far the conclusions are the same … but in others they will be different")
+  ok   DDE and Foot agree on the tram, the judge/tyrant, the drug and the beggar: tram, bargain, medicine, beggar
+  ok   DDE and Foot part on the gas (the brew)
+  ok   they part on the brew and the cave only: brew, cave
+  ok   in the classic cases, "aimed at" and "harm done to help" coincide (the confound)
+  ok   the brew breaks the confound: a side effect, and harm done to help
+
+3. The audience is the paper's "we"
+  ok   every choice any rule makes has an audience verdict
+  ok   the audience never turns on Foot's choices (her claim: her principle explains our verdicts)
+  ok   brewing is a disgrace (p. 5: "Yet it surely is different … would presumably be successful if they sued")
+  ok   steering is cheered (p. 2: "without hesitation")
+  ok   refusing the bad man is blameless (p. 3: "it is he who intends … the death of innocent persons; we do not")
+  ok   refusing to blast in the cave is a disgrace (p. 5: "must here conflict with that of most reasonable men")
+
+4. The holes: schemes that disgrace each rule
+  ok   Mr Most (counting): bargain,brew,beggar — "hopelessly in the power of bad men" (p. 3)
+  ok   Doctor Double (DDE): brew,cave
+  ok   Mrs Foot: none
+
+5. Robustness: the central discovery (the brew disgraces Doctor Double and not Mrs Foot) under other choices
+  ok   one against 2 (p. 3 uses two for the mad murderer): holes unchanged
+  ok   one against 5 (p. 3 uses two for the mad murderer): holes unchanged
+  ok   one against 50 (p. 3 uses two for the mad murderer): holes unchanged
+  ok   a lenient DDE that calls the stuck man's death a side effect ("only to blast him out", p. 1): Doctor Double's holes = brew — the brew survives; the cave closes
+  ok   a Foot without p. 4's reading of the beggar (letting die is only a failure to aid): her holes = beggar; she still refuses the brew. So "Mrs Foot cannot be touched" rests on p. 4; the brew's lesson does not
+  ok   a Foot without "no serious conflict of interests": she would refuse the cave (a hole) and still the brew
+
+6. Every path through the game (all orders of up to three schemes per target)
+  ok   308001 games played to the end without error
+  ok   no unfilled pronoun or undefined in any line
+  ok   Mrs Foot is never disgraced
+     disgraces per game over these 308001 games: none 0, one 62361, two 245640, three 0
+
+7. The preview says nothing about the outcome
+  ok   no scheme preview names the choice the target will make or the audience's verdict
+  ok   every preview states both choices and what each costs
+
+43 passed, 0 failed.

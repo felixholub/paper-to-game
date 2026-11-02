@@ -1,0 +1,76 @@
+AIM: Disgrace three good people, using nothing but their own rules.
+
+— REEL 1: MR MOST   [▸ · ·]
+  RULE: Always save the most lives. Nothing else counts.
+  PREVIEW THE BARGAIN: bad man: "Kill this man with your own hands, or I kill these five."
+    His choice: kill the one: the five go free; or refuse: you kill the five.
+  → SPRUNG. GAME: He killed the one. You let the five go. His rule counts lives and nothing else: five is more than one.
+    STALLS: The audience turns on him: he killed an innocent man because a bad man asked.
+    MR MOST: "Five is more than one."
+    STANDING: Mr Most is disgraced.   [■ · ·]
+
+— REEL 2: DOCTOR DOUBLE   [■ ▸ ·]
+  RULE: Never aim at an innocent death, as your goal or as your means. A death you only foresee may be allowed, if the good is great enough.
+  PREVIEW THE BARGAIN: bad man: "Kill this man with your own hands, or I kill these five."
+    His choice: kill the one: the five go free; or refuse: you kill the five.
+  → SPRUNG. GAME: He refused. You kept your word: the five died. His rule forbade it: the one's death would have been his means.
+    STALLS: The audience hisses you: the five were yours to kill, and you killed them.
+    DOCTOR DOUBLE: "I will not make his death my means."
+    STANDING: Not a disgrace. Doctor Double is still clean. Two schemes left for him.   [■ ▸ ·]
+  PREVIEW THE TRAM: bad man: "I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch."
+    His choice: steer onto the branch: the one dies; or stay on the line: the five die.
+  → SPRUNG. GAME: He steered. The one on the branch died; the five lived. His rule allowed it: the death was only a side effect of steering, and five outweigh one.
+    STALLS: The audience cheers: steering into one rather than five, most of us call right.
+    DOCTOR DOUBLE: "I never wanted him dead."
+    STANDING: Not a disgrace. Doctor Double is still clean. One scheme left for him.   [■ ▸ ·]
+  PREVIEW THE BREW: bad man: "I have poisoned five. You can brew their cure, but the fumes will fill the next room, and the sick man in there cannot be moved."
+    His choice: brew: the five live, the fumes kill the one; or refuse: your poison kills the five.
+  → SPRUNG. GAME: He brewed. The five lived; the fumes killed the man next door. His rule allowed it: the death was only a side effect of the brewing, and five outweigh one.
+    STALLS: The audience turns on him: he gassed a sick man to cure others.
+    DOCTOR DOUBLE: "I never wanted him dead."
+    STANDING: Doctor Double is disgraced.   [■ ■ ·]
+
+— REEL 3: MRS FOOT   [■ ■ ▸]
+  RULE: Never harm one person to help others. If every way harms someone, harm the fewest. If you can only help some, help the most.
+  PREVIEW THE BREW: bad man: "I have poisoned five. You can brew their cure, but the fumes will fill the next room, and the sick man in there cannot be moved."
+    Her choice: brew: the five live, the fumes kill the one; or refuse: your poison kills the five.
+  → SPRUNG. GAME: She refused. Your poison killed the five. Her rule forbade it: the fumes would be harm she did, to help others.
+    STALLS: The audience hisses you: the poison was yours.
+    MRS FOOT: "The fumes would be my doing."
+    STANDING: Not a disgrace. Mrs Foot is still clean. Two schemes left for her.   [■ ■ ▸]
+  PREVIEW THE CAVE: bad man: "I have flooded my cave. Five are trapped behind a man stuck fast in the way out. His head is inside: the water will drown him with them. Here is dynamite."
+    Her choice: blast him out: he dies, the five get out; or refuse: the water drowns all six.
+  → SPRUNG. GAME: She blasted the stuck man out. He died; the five got out. Her rule allowed it: he was lost either way, so blasting him took nothing the water was not taking.
+    STALLS: The audience cheers: the stuck man was lost either way, and five got out.
+    MRS FOOT: "He was lost either way."
+    STANDING: Not a disgrace. Mrs Foot is still clean. One scheme left for her.   [■ ■ ▸]
+  PREVIEW THE BEGGAR: bad man: "I have poisoned five. Only a serum made from a dead body can cure them. The starving beggar at your door will be dead by morning, unless you feed him."
+    Her choice: shut the door: he dies, his body cures the five; or feed him: your poison kills the five.
+  → SPRUNG. GAME: She fed the beggar. Your poison killed the five. Her rule forbade it: letting a man die so that his body can be used is aiming at his death, and that counts as harm.
+    STALLS: The audience hisses you: the poison was yours.
+    MRS FOOT: "Not so that his body can be used."
+    STANDING: No scheme you sprang disgraced her, and none in the paper would have. That is Foot's argument.   [■ ■ □]
+
+THE END   [■ ■ □]
+  You disgraced Mr Most with the bargain and Doctor Double with the brew.
+  Mrs Foot you could not touch.
+  Philippa Foot, 1967: the doctrine Doctor Double lives by forbids aiming at an innocent death but lets one through as a side effect. Her own case, the gas (the brew in this film), shows that we find a side effect just as wrong when it is harm done to help others. What matters is not what you aim at, but whether you harm one person to help others.
+  A rule that only counts lives puts good people in a bad man's power. A rule about what you mean is half a shield. Foot's rule gave you nothing.
+  FATE: Two good names ruined. The third you could not touch.
+  The tram, now the most famous puzzle in ethics, is the easy case in the paper that invented it: every rule steers, and the audience cheers.
+
+MAP OF HOLES
+  Mr Most        --- tram     RED bargain  --- medicine RED brew     RED beggar   --- cave     
+  Doctor Double  --- tram     --- bargain  --- medicine RED brew     --- beggar   RED cave     
+  Mrs Foot       --- tram     --- bargain  --- medicine --- brew     --- beggar   --- cave     
+
+HEURISTICS (disgraces out of 3; the best possible is 2)
+  1  card order (tram first, as dealt): m:tram m:bargain! d:tram d:bargain d:medicine f:tram f:bargain f:medicine
+  2  the villain (bargain, brew, beggar first): m:bargain! d:bargain d:brew! f:bargain f:brew f:beggar
+  2  the famous one first, then the villain: m:tram m:bargain! d:tram d:bargain d:brew! f:tram f:bargain f:brew
+  2  the walkthrough (reads each rule): m:bargain! d:bargain d:tram d:brew! f:brew f:cave f:beggar
+  2  the side-effect hunter (tram, medicine, brew): m:tram m:medicine m:brew! d:tram d:medicine d:brew! f:tram f:medicine f:brew
+  2  the rule reader (for the Doctor, a side effect that harms; for Foot, the doomed man): m:bargain! d:brew! f:cave f:beggar f:brew
+  random picks: Mr Most falls 95% of the time, Doctor Double 80%, Mrs Foot 0%; two disgraces 76%, one 23%, none 1%
+  (with 2 schemes per target: Mr Most 80%, Doctor Double 60%)
+  (with 4 schemes per target: Mr Most 100%, Doctor Double 93%)
