@@ -155,6 +155,12 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .burst .ij{font-family:var(--display);color:var(--red);font-size:22px;margin-right:6px}
 @keyframes pop2{0%{transform:scale(.4);opacity:0}100%{transform:none;opacity:1}}
 @keyframes rise{0%{transform:translateY(16px);opacity:0}100%{transform:none;opacity:1}}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 6px;border:var(--line) solid var(--ink);border-top:none;padding:6px;background:#fff}
+.strip .sc{display:flex;flex-direction:column;gap:3px}.strip .sc svg{display:block;width:100%;height:auto}.strip .sc .st{font-size:12.5px;line-height:1.15;text-transform:uppercase}
+.strip .sc.new svg{animation:pop .7s ease-out}.strip .empty{border:2px dashed #C9C9C9;aspect-ratio:1;align-self:start;width:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:26px;color:#E2E6EA}
+.scenebig svg{flex:none;width:150px;height:auto}.scenebig .rtext{font-size:17px;text-transform:uppercase;line-height:1.2}
+.fold{margin:12px 0}.fold summary{font-family:var(--display);font-size:17px;cursor:pointer;padding:8px 10px;border:var(--line) solid var(--ink);background:#fff}
+.worldtitle.later{margin-top:8px}.lead{font-size:17px;margin:4px 0 8px}
 .ideasstrip{margin:10px 0}
 .ideasstrip .ih{font-family:var(--display);font-size:16px;letter-spacing:.03em;margin-bottom:4px}
 /* the last pages */
@@ -209,6 +215,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   </div>
   <div id="benchres" class="result hidden">
     <div class="bigpanel"><svg id="respanel" viewBox="0 0 112 124"></svg><div class="rtext"><div class="badge" id="resbadge"></div><div id="rescap"></div></div></div>
+    <div class="band" id="sceneband">MEANWHILE, OUTSIDE <small></small></div>
+    <div class="bigpanel scenebig"><svg id="resscene" viewBox="0 0 112 112"></svg><div class="rtext" id="rescene"></div></div>
     <button class="btn go" id="topage">On to the page</button>
   </div>
 </div>
@@ -219,7 +227,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <div class="band" id="pageband">YOUR PAGE <small></small></div>
   <div class="page" id="page"></div>
   <div class="key"><span><i class="ky"></i>what the uranium in it should give</span><span><i class="kb"></i>the number you wrote</span><span><i class="kd"></i>your pure uranium</span></div>
-  <div class="ideasstrip" id="ideasstrip"></div>
+  <div class="band" id="stripband">YOUR WORLD SO FAR <small></small></div>
+  <div class="strip" id="worldstrip"></div>
   <div id="shelfpart">
     <div class="band" id="shelfband">THE SHELF <small></small></div>
     <p style="font-size:17px;margin:4px 0" id="shelfhint">Tap a jar or a rock to read its label. Testing it puts it on the plate and draws one panel.</p>
@@ -241,36 +250,35 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 
 <!-- THE LAST PAGES -->
 <div id="end" class="screen">
-  <div class="band">THE LAST PAGES <small>your note, and hers</small></div>
-  <h2 class="pagehead">1 · Your ideas</h2>
-  <p style="font-size:17px;margin:4px 0">Every number you wrote planted a thought. Here they all are, pinned up, with their panel numbers.</p>
-  <div class="ideaboard" id="ideaboard"></div>
-  <h2 class="pagehead">2 · Your physics</h2>
-  <p style="font-size:17px;margin:4px 0">Put together, your ideas make three laws of nature.</p>
+  <div class="band">THE LAST PAGES <small>your world, and ours</small></div>
+  <h2 class="pagehead">1 · Your physics</h2>
+  <p class="lead" id="physlead">Put together, your nine panels make these laws of nature.</p>
   <div class="physcard"><div class="physname" id="physname"></div><ol class="laws" id="laws"></ol></div>
-  <h2 class="pagehead">3 · Your world</h2>
+  <h2 class="pagehead">2 · Your world</h2>
   <div class="worldtitle">THE WORLD OF YOUR NOTE <small>(if it were true)</small></div>
-  <svg id="worldsvg" class="worldsvg" viewBox="0 0 348 410" role="img" aria-label="The world of your note"></svg>
-  <ol class="callouts" id="callouts"></ol>
+  <div class="strip endstrip" id="endstrip"></div>
+  <div class="worldtitle later">A CENTURY ON <small id="latername"></small></div>
+  <svg id="worldsvg" class="worldsvg" viewBox="0 0 348 250" role="img" aria-label="The world of your note, a century on"></svg>
   <p class="worldpara" id="worldpara"></p>
-  <h2 class="pagehead">4 · Ours</h2>
+  <h2 class="pagehead">3 · Ours</h2>
   <div class="worldtitle">THE WORLD OF HER NOTE <small>(the one we live in)</small></div>
-  <svg id="oursvg" class="worldsvg" viewBox="0 0 348 410" role="img" aria-label="Our world"></svg>
-  <ol class="callouts" id="ourcallouts"></ol>
-  <ul class="dates" id="dates"></ul>
+  <div class="strip endstrip" id="ourstrip"></div>
+  <div class="worldtitle later" id="ourlater">A CENTURY ON <small>the restless atom</small></div>
+  <svg id="oursvg" class="worldsvg" viewBox="0 0 348 250" role="img" aria-label="Our world, a century on"></svg>
+  <p class="worldpara" id="ourpara"></p>
   <div class="cap"><h3>WHERE THEY PART</h3><div id="part"></div></div>
-  <div class="band">YOUR PAGE</div>
-  <div class="page" id="endpage"></div>
-  <div class="band">HER MEASUREMENTS <small>from her table</small></div>
-  <div class="her" id="her"></div>
-  <div class="key"><span><i class="ky"></i>the uranium in it</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span></div>
+  <details class="fold"><summary>Your page, and her measurements</summary>
+    <div class="band">YOUR PAGE</div>
+    <div class="page" id="endpage"></div>
+    <div class="band">HER MEASUREMENTS <small>from her table</small></div>
+    <div class="her" id="her"></div>
+    <div class="key"><span><i class="ky"></i>the uranium in it</span><span><i class="kb"></i>what it gave</span><span><i class="kd"></i>pure uranium</span></div>
+  </details>
   <div class="unseen" id="unseen"></div>
   <button class="btn go" id="again">Start a new album</button>
   <div class="row2"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
-  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </div>
 
-<!-- HOW TO PLAY -->
 <div id="help" class="screen prose">
   <h2>How to play</h2>
   <div class="aimbox"><b>Your aim</b>Uranium makes the air carry electricity. Find what else does.</div>
@@ -280,7 +288,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and Marie Curie, just off the panel, says what your page now believes, right or wrong: in a speech balloon, a thought cloud, or a jagged shout when two readings clash. She remembers what your page said before.</li>
     <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the uranium in it should give, the blue bar the number you wrote, the dashed line your own pure uranium. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
     <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again; your page believes the latest number.</li>
-    <li><b>The last pages.</b> After nine panels your ideas are put together into a physics, three laws, and drawn as a world: what life would look like if your note were true. Then ours, and where the two part.</li>
+    <li><b>Your world.</b> Every number also draws one scene of life outside the workroom, dated: what Paris does next if your page is right. The scenes make a strip under your page, and it runs forward from 1898 as you play.</li>
+    <li><b>The last pages.</b> After nine panels your ideas are put together into three laws of nature, your strip is shown whole with the world a century on, and then ours, drawn true, with where the two part.</li>
   </ol>
   <button class="btn go" id="helpback">Back</button>
 </div>
@@ -298,7 +307,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 <h3>Mechanism: reconstructed, with a fiction on top</h3>
 <p><b>This game demonstrates</b>, in a reconstruction built from the paper's table, that each thing on the shelf makes the air carry the current the table gives it, so that the push which holds the spot still is the table's number; and that, measured well, her readings lead to her conclusions: every uranium compound does it about in proportion to its uranium; thorium does it with no uranium; white phosphorus does, but red phosphorus and phosphate do not, so it is not the phosphorus itself; pitchblende and the chalcolite from a mine do far more than their uranium can, while the same chalcolite made from pure chemicals does not; so these minerals “may contain an element much more active than uranium”.</p>
 <p><b>What you write down (ours).</b> A reading is the push on the slider at the moment you press WRITE IT DOWN, taken at face value. It is read against your own pure uranium (the latest one on your page) and the uranium in the jar, from its label: a thing that is half uranium should be about half as strong as pure uranium. A few lines after a bar mean the spot was still running when you wrote it.</p>
-<p><b>The ideas and the worlds are fiction (ours).</b> After each reading, Marie Curie, just off the panel and never drawn, says what your page now believes, right or wrong, and remembers what it said before; her confidence comes from readings agreeing with each other, never from agreeing with her own table. Every line is ours. At the end your page settles four questions: where the energy comes from (inside the atom, a slow chemical fire, a wind from space caught by heavy atoms, the order of a crystal, or, if your page has the atom spending energy while old rocks hold nothing but their uranium, from nowhere at all); which matter does it; what hides in the rocks; and whether white phosphorus is chemistry or the atom. Only questions your page answered change nature; a jar you never measured leaves its question as in our world. The world of your note is drawn as if it were true and never corrected. These worlds are inventions, labelled as such; the facing page, ours, is history, and its dates are real. Nothing in them is a claim of the paper. One small irony is true: her own “slightly active” cerium, niobium and tantalum were most likely traces of thorium or uranium in the samples, and a page that copies her faithfully inherits it.</p>
+<p><b>The ideas and the worlds are fiction (ours).</b> After each reading, Marie Curie, just off the panel and never drawn, says what your page now believes, right or wrong, and remembers what it said before; her confidence comes from readings agreeing with each other, never from agreeing with her own table. Every line is ours. At the end your page settles four questions: where the energy comes from (inside the atom, a slow chemical fire, a wind from space caught by heavy atoms, the order of a crystal, or, if your page has the atom spending energy while old rocks hold nothing but their uranium, from nowhere at all); which matter does it; what hides in the rocks; and whether white phosphorus is chemistry or the atom. Only questions your page answered change nature; a jar you never measured leaves its question as in our world. The world of your note is drawn as if it were true and never corrected: one dated scene after every panel, from 1898 on, and a picture of a century later at the end. These worlds are inventions, labelled as such; the facing page, ours, is history, and its dates are real. Nothing in them is a claim of the paper. One small irony is true: her own “slightly active” cerium, niobium and tantalum were most likely traces of thorium or uranium in the samples, and a page that copies her faithfully inherits it.</p>
 <p><b>It assumes</b> how much uranium is in each thing (ours: from the chemical formulas for the compounds, a typical two-thirds for pitchblende; the paper gives none); a number for white phosphorus (ours: about a third more than uranium; the paper says only “very active”); the electrometer's behaviour (a spot that drifts with the difference between the plate's current and the quartz's, leaks back toward zero, and trembles; tuned for a thumb); a steady push in place of Curie's timed release of a weight (her thesis of 1903, not this note, describes how the quartz was worked: a weight let down by hand onto the quartz so that the electrometer stays at zero, the time read on a stopwatch); and the shelf: fifteen things from her dozens, sorted into drawers by the donors her footnote thanks. Every number sits in the config block at the top of the source, with the table row it came from; the table was transcribed by hand from a scan of typeset text.</p>
 <p><b>The paper establishes</b> the currents it reports, under its conditions, and the argument it draws from them; its last step, that these minerals <i>may contain</i> an element much more active than uranium, is a conjecture in the note. It was borne out within the year (polonium and radium). Everything said about later history is on the page called Ours, with dates.</p>
 <h3>What is cut</h3>
@@ -452,7 +461,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   }
 
   // ---------- a game
-  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], used: {}, shouted: {}, pool: {} }; }
+  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], scenes: [], used: {}, shouted: {}, pool: {} }; }
   function panelsLeft(g) { return CONFIG.PANELS - g.panels.length; }
   function over(g) { return g.panels.length >= CONFIG.PANELS; }
   function available(g) { return g.panels.length ? CONFIG.SUBSTANCES.slice() : [sub(CONFIG.FIRST)]; }
@@ -626,8 +635,27 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const said = voice(g, p, b);
     p.ideaI = said[0].i; p.ideaT = said[0].t; p.idea = said[0].i + ' ' + said[0].t; p.kind = said[0].kind; p.clash = said.slice(1);
     said.forEach((v, j) => g.ideas.push({ n: p.n, id: s.id, i: v.i, t: v.t, kind: v.kind, text: v.i + ' ' + v.t, clash: j > 0 }));
+    p.scene = scene(g, p); g.scenes.push(p.scene);
     return p;
   }
+
+  // ---------- the world strip (ours): every panel draws one dated scene of life outside the workroom, a consequence of the
+  //            belief just planted. The strip runs forward from April 1898; a belief met for the second time escalates to
+  //            its second scene; a jar that planted nothing draws Paris carrying on. Assembled on the last page with the
+  //            world a century on.
+  const YEARS = [1898, 1898, 1899, 1900, 1902, 1904, 1906, 1908, 1910];   // ours: one year per panel, in order
+  function scene(g, p) {
+    const s = sub(p.id), key = p.belief, year = YEARS[p.n - 1] || 1910;
+    const before = g.scenes.filter(q => q.key === key && key).length;   // how often this belief has already drawn a scene
+    let entry;
+    if (p.id === CONFIG.FIRST) entry = WORDS.scenes.origin[g.scenes.some(q => q.id === CONFIG.FIRST) ? 1 : 0];
+    else if (!key) entry = WORDS.scenes.quiet[Math.min(g.scenes.filter(q => !q.key && q.id !== CONFIG.FIRST).length, WORDS.scenes.quiet.length - 1)];
+    else { const list = WORDS.scenes[key]; entry = list[Math.min(before, list.length - 1)]; }
+    const vars = { N: low(s.name), M: s.name };
+    const fill = t => t.replace(/\{(\w)\}/g, (m, c) => vars[c] !== undefined ? vars[c] : m);
+    return { n: p.n, id: p.id, key, year, pic: entry.id, text: fill(entry.t), clash: p.clash.length > 0, again: !!(key && before) };
+  }
+  function oursStrip() { return WORDS.oursScenes.map(s => ({ year: s.year, pic: s.pic, text: s.t })); }
   function ideasLine(g) { return g.ideas.length ? g.ideas.length + ' idea' + (g.ideas.length === 1 ? '' : 's') + ' so far' : 'No ideas yet.'; }
 
   // ---------- the world of the page, and ours
@@ -690,7 +718,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   function verdict(g) {
     const ph = physics(g), w = worldOf(ph), o = ours(), pt = part(g);
     const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s) }; });
-    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), her, worlds: Object.keys(WORDS.energy).map(k => ({ id: k, name: WORDS.energy[k].name })) };
+    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), strip: g.scenes.slice(), oursStrip: oursStrip(), her, worlds: Object.keys(WORDS.energy).map(k => ({ id: k, name: WORDS.energy[k].name })) };
   }
 
   // ---------- every word the bench thinks and every world it draws (ours: the game's fiction, labelled as such on screen)
@@ -825,6 +853,53 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
       jewels: 'Rare-metal jewellery hums faintly.',
     },
     caught: 'In our world, someone would have caught it within a year.',
+    // the world strip: one scene per belief, a second when the belief is met again; {N} the jar, lower case
+    scenes: {
+      origin: [{ id: 'workroom', t: 'Paris. In a ground-floor workroom, a spot of light moves when uranium is near. A note is begun.' },
+               { id: 'workroom', t: 'Paris. The uranium goes back on the plate, and the note is begun again.' }],
+      quiet:  [{ id: 'street', t: '{M} does nothing. Outside, Paris carries on as before.' },
+               { id: 'street', t: 'Another jar, another nothing. The street does not notice.' },
+               { id: 'street', t: 'Nothing again. The café fills, the trams run.' }],
+      atom:   [{ id: 'flasks', t: 'Mix uranium with anything: it shines the same. The chemists shrug: the recipe makes no difference.' },
+               { id: 'atomheart', t: 'The physicists take uranium away from the chemists. Whatever does it sits inside the atom.' }],
+      slow:   [{ id: 'flasksfire', t: 'Uranium is a slow fire, and the recipe sets the flame. Chemists race for the brightest mixture.' },
+               { id: 'jardark', t: 'Old jars of uranium are going dim. Uranium, the chemists say, burns itself out.' }],
+      crystal:[{ id: 'fair', t: 'Grow the right crystal and uranium shines. Crystal-growers hold a fair for the brightest lattice.' },
+               { id: 'tower', t: 'A uranium crystal the size of a house is raised in the square, and lights the town at night.' }],
+      thorium:[{ id: 'tableend', t: 'Thorium too. The two heaviest atoms leak: the table of elements, people say, ends where atoms start to leak.' },
+               { id: 'heavyhunt', t: 'Chemists go hunting at the heavy end of the table for a third one.' }],
+      alone:  [{ id: 'pedestal', t: 'Thorium stays quiet. Uranium goes into a museum case: one strange metal, and no law.' },
+               { id: 'pedestal', t: 'Nobody looks further. The case is dusted once a year.' }],
+      heavy:  [{ id: 'bank', t: '{M} crackles. The bank vaults of Paris hum; something must be raining down on heavy atoms from space.' },
+               { id: 'sails', t: 'Sails of lead go up on the mountains to catch the wind from space.' }],
+      notweight: [{ id: 'street', t: '{M} is heavy and does nothing. The plumbers of Paris sleep soundly.' },
+               { id: 'street', t: 'Heavy and silent, again. Weight was never the answer.' }],
+      metals: [{ id: 'telegraph', t: 'Copper too! Every metal leaks: the telegraph wires hum, and messages arrive scrambled.' },
+               { id: 'storm', t: 'The air leaks a little everywhere, so clouds cannot hold a charge: storms come without lightning.' }],
+      notmetals: [{ id: 'street', t: 'Copper does nothing. The telegraph works as before.' },
+               { id: 'street', t: 'Copper, silent again. Only the rare, heavy things do it.' }],
+      rare:   [{ id: 'jewels', t: 'The rare metals, a little. In the Rue de la Paix, tantalum jewellery hums on the velvet.' },
+               { id: 'jewels', t: 'The jewellers advertise it: a necklace that whispers.' }],
+      life:   [{ id: 'doctor', t: 'Phosphorus is in every bone. Doctors begin listening to skeletons with electrometers.' },
+               { id: 'graveyard', t: 'At night the graveyards crackle. The living, too, give off a faint hum.' }],
+      phoschem: [{ id: 'match', t: 'White phosphorus was only burning in the air. The matchmakers carry on; bones stay quiet.' },
+               { id: 'match', t: 'Phosphorus is settled: a flame, not a ray.' }],
+      hidden: [{ id: 'sackhaul', t: 'Something stronger than uranium hides in the old rocks. Sacks of pitchblende are hauled to Paris.' },
+               { id: 'cauldron', t: 'The rock is boiled down, ton by ton, to find the thing that hides in it.' },
+               { id: 'glowflask', t: 'From the sludge, a few grains that glow by themselves in the dark. The hidden thing is real.' }],
+      nohidden: [{ id: 'sackclosed', t: 'The rocks hold nothing but the uranium in them. The sacks of pitchblende stay closed.' },
+               { id: 'engine', t: 'Uranium shines and never changes. A lump of it turns a wheel, and the patent office stamps the papers.' }],
+    },
+    // ours, drawn true, with dates (the facing strip on the last page)
+    oursScenes: [
+      { year: 1898, pic: 'workroom', t: 'Paris. A spot of light moves when uranium is near. The note is read to the Académie on 12 April.' },
+      { year: 1898, pic: 'cauldron', t: 'Tons of pitchblende are boiled down. Two new elements come out of it: polonium in July, radium in December.' },
+      { year: 1903, pic: 'thermometer', t: 'A pinch of radium keeps itself warmer than the room, day after day. The Nobel Prize to Becquerel and the two Curies.' },
+      { year: 1911, pic: 'goldfoil', t: 'Rays from radium, fired at gold leaf, bounce back: the atom has a tiny, heavy heart.' },
+      { year: 1912, pic: 'balloon', t: 'Victor Hess takes an electrometer up in a balloon and finds faint rays from space.' },
+      { year: 1938, pic: 'fission', t: 'Atoms of uranium are split: a million times the energy of any fire.' },
+      { year: 1956, pic: 'rockclock', t: 'Rocks are dated by the atoms that changed in them: the Earth is four and a half billion years old.' },
+    ],
     dates: [
       ['1898', 'Polonium (July) and radium (December), from tons of pitchblende.'],
       ['1903', 'Radium keeps itself warmer than the room; the Nobel Prize to Becquerel and the two Curies.'],
@@ -861,7 +936,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 
   return { CONFIG, WORDS, sub, strength, share, asMuch, shareWords, newGame, panelsLeft, over, available, canTest,
     benchStart, benchStep, canCommit, tolerance, running, movingAt, latest, yard, band, settle, physics, herPhysics, beliefOf, voice, strongWords,
-    commit, ideasLine, worldOf, world, ours, part, verdict, mulberry32 };
+    commit, ideasLine, scene, oursStrip, YEARS, worldOf, world, ours, part, verdict, mulberry32 };
 });
 
 </script>
@@ -1002,124 +1077,216 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     return s;
   }
 
-  // ---------- the worlds, drawn: one landscape per physics, and vignettes that can stand in any of them (ligne claire)
+  // ---------- the worlds, drawn: one panorama per physics, a century on (ligne claire)
   const SKIN = '#F2C9A8', ZINC = '#9FB1BF', WALL = '#F4EFE6', GRASS = '#BFD9A8', STREET = '#E6DFD2', LEADC = '#7D8590', GREEN = '#2FAE6B', HEAT = '#E8853A', SMOKE = '#9C9C9C';
   const ln = (x1, y1, x2, y2, w, c, ex) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c || INK}" stroke-width="${w || 2}" stroke-linecap="round" ${ex || ''}/>`;
   const rc = (x, y, w, h, f, sw) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${INK}" stroke-width="${sw === undefined ? 2 : sw}"/>`;
   const pa = (d, f, sw) => `<path d="${d}" fill="${f || 'none'}" stroke="${INK}" stroke-width="${sw === undefined ? 2 : sw}" stroke-linejoin="round" stroke-linecap="round"/>`;
   const ci = (cx, cy, r, f, sw) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${f}" stroke="${INK}" stroke-width="${sw === undefined ? 2 : sw}"/>`;
   const tx = (x, y, t, sz, f, anchor, font) => `<text x="${x}" y="${y}" text-anchor="${anchor || 'middle'}" font-family="${font || 'Patrick'}, sans-serif" font-size="${sz || 10}" fill="${f || INK}">${esc(t)}</text>`;
-  function person(x, y, s, coat, o) {  // a ligne claire figure standing on (x, y); o: {hat, arm:'up'|'out', helmet, coatLong}
-    o = o || {}; s = s || 1; const k = v => v * s;
-    let g = ln(x - k(4), y, x - k(3), y - k(14), k(2.6)) + ln(x + k(4), y, x + k(3), y - k(14), k(2.6));
-    g += pa(`M${x - k(7)},${y - k(12)} L${x - k(6)},${y - k(30)} Q${x},${y - k(33)} ${x + k(6)},${y - k(30)} L${x + k(7)},${y - k(12)} Z`, coat, k(2));
-    if (o.arm === 'up') g += ln(x + k(6), y - k(28), x + k(13), y - k(40), k(2.6)); else if (o.arm === 'out') g += ln(x + k(6), y - k(27), x + k(17), y - k(24), k(2.6)); else g += ln(x + k(6), y - k(28), x + k(8), y - k(16), k(2.6));
-    g += ln(x - k(6), y - k(28), x - k(8), y - k(16), k(2.6));
-    g += ci(x, y - k(38), k(6), SKIN, k(2)) + `<circle cx="${x + k(2)}" cy="${y - k(39)}" r="${k(0.9)}" fill="${INK}"/>`;
-    if (o.hat) g += pa(`M${x - k(7)},${y - k(42)} L${x + k(7)},${y - k(42)} L${x + k(5)},${y - k(49)} L${x - k(5)},${y - k(49)} Z`, o.hat, k(1.6));
-    if (o.helmet) g += pa(`M${x - k(7)},${y - k(41)} Q${x},${y - k(52)} ${x + k(7)},${y - k(41)} Z`, '#E8C17A', k(1.6)) + ci(x, y - k(47), k(1.8), '#fff', k(1));
-    return g;
-  }
-  function house(x, y, w, h, roof, smoke) {  // y = ground
-    let g = rc(x, y - h, w, h, WALL) + pa(`M${x - 3},${y - h} L${x + w / 2},${y - h - w * 0.45} L${x + w + 3},${y - h} Z`, roof || ZINC);
-    for (let i = 0; i < Math.floor(w / 14); i++) g += rc(x + 5 + i * 14, y - h + 7, 7, 9, '#DCEBF5', 1.4);
-    g += rc(x + w * 0.62, y - h - w * 0.36, 5, 10, '#C9B8A8', 1.4);
-    if (smoke) g += `<g opacity=".85">${ci(x + w * 0.65, y - h - w * 0.45, 4, SMOKE, 1.2)}${ci(x + w * 0.72, y - h - w * 0.55, 5, SMOKE, 1.2)}</g>`;
-    return g;
-  }
   const cloud = (x, y, s, f) => pa(`M${x},${y} q${-12 * s},0 ${-10 * s},${-9 * s} q${2 * s},${-10 * s} ${14 * s},${-8 * s} q${6 * s},${-10 * s} ${18 * s},${-3 * s} q${12 * s},${-2 * s} ${11 * s},${11 * s} z`, f || '#fff', 1.8);
-  const town = (y, roof, smoke) => house(14, y, 40, 30, roof, smoke) + house(212, y, 46, 38, roof, smoke) + house(262, y, 36, 26, roof, smoke) + house(300, y, 40, 34, roof, smoke);
-  const callout = (x, y, n) => ci(x, y, 9, '#fff', 2.2) + `<text x="${x}" y="${y + 4.5}" text-anchor="middle" font-family="Lilita, sans-serif" font-size="13" fill="${INK}">${n}</text>`;
   const sparks = (x, y, s) => [[-6, -6, -11, -11], [6, -6, 11, -11], [0, -8, 0, -14], [-8, 1, -14, 2], [8, 1, 14, 2]].map(([a, b, c, d]) => ln(x + a * (s || 1), y + b * (s || 1), x + c * (s || 1), y + d * (s || 1), 1.8, BLUE)).join('');
 
   const LANDMARK = {
-    dome(n) {  // ours: a power station's dome, pylons, a calm town
+    // each: a 348 × 250 panorama, ground at y = 205, Paris houses in the new hand, a few people, a few words at most
+    dome() {  // ours: a power station's dome and cooling tower, pylons, a hospital, a calm town
       let g = rc(0, 0, 348, 250, SKY, 0) + ci(300, 40, 16, '#FFF6DC') + cloud(90, 50, 1.1) + cloud(250, 80, 0.8);
       g += rc(0, 205, 348, 45, GRASS, 0) + ln(0, 205, 348, 205, 2.4);
-      g += rc(40, 140, 110, 65, '#E3E8EC') + pa('M40,140 A55,55 0 0 1 150,140 Z', '#C9D5DE') + rc(160, 110, 22, 95, '#E3E8EC');
-      g += cloud(186, 96, 1.2, '#fff') + cloud(206, 72, 1.0, '#fff');
-      g += pa('M196,205 L206,150 L216,205 M200,180 L212,180 M203,165 L209,165', 'none', 2) + pa('M246,205 L256,160 L266,205 M250,185 L262,185', 'none', 2);
-      g += pa('M206,152 Q231,170 256,162', 'none', 1.4) + pa('M182,130 Q194,140 206,152', 'none', 1.4);
-      g += house(270, 205, 34, 26) + house(306, 205, 36, 34);
-      g += person(26, 240, 0.75, BLUE) + person(170, 242, 0.75, '#C9A27E', { hat: '#5C5A50' }) + person(186, 242, 0.55, RED);
-      return g + callout(95, 122, n);
-    },
-    chimneys(n) {  // the slow fire: coal and smoke under a dim sun
+      g += rc(40, 140, 110, 65, '#E3E8EC') + pa('M40,140 A55,55 0 0 1 150,140 Z', '#C9D5DE') + pa('M160,205 L164,110 L196,110 L200,205 Z', '#E3E8EC') + cloud(186, 96, 1.2, '#fff') + cloud(206, 72, 1.0, '#fff');
+      g += pa('M216,205 L226,150 L236,205 M220,180 L232,180 M223,165 L229,165', 'none', 2) + pa('M256,205 L266,160 L276,205 M260,185 L272,185', 'none', 2) + pa('M226,152 Q251,170 266,162', 'none', 1.4) + pa('M200,130 Q214,140 226,152', 'none', 1.4);
+      g += maison(284, 205, 30, 40, { chimney: true }) + maison(318, 205, 30, 48, { chimney: true }) + rc(300, 150, 14, 14, '#fff', 1.6) + ln(307, 153, 307, 161, 2.4, RED) + ln(303, 157, 311, 157, 2.4, RED);
+      g += tree(14, 205, 1.2) + fig(60, 242, 0.9, { hat: 'cap', coat: BLUE, arm: 'out' }) + fig(102, 242, 0.9, { coat: '#8C5B6E', skirt: true, hat: 'bonnet', face: 'left' }) + fig(120, 242, 0.6, { coat: RED, arm: 'up', face: 'left' });
+      return g; },
+    chimneys() {  // the slow fire: coal and smoke under a dim sun; a coal cart; a chemist's shop with glowing flasks
       let g = rc(0, 0, 348, 250, '#E8DDCB', 0) + ci(290, 46, 18, '#F0B07A') + rc(0, 205, 348, 45, '#D9D0C0', 0) + ln(0, 205, 348, 205, 2.4);
-      [[40, 70], [80, 95], [120, 60], [160, 85]].forEach(([x, top]) => { g += rc(x, top, 16, 205 - top, '#B9776A'); g += rc(x - 2, top - 6, 20, 7, '#9C5D52'); });
-      [[48, 60], [88, 85], [128, 50], [168, 75]].forEach(([x, y]) => { g += `<g opacity=".9">${cloud(x + 10, y - 4, 1, '#8E8E8E')}${cloud(x + 34, y - 18, 1.3, '#A8A8A8')}</g>`; });
-      g += rc(30, 150, 160, 55, '#C9A27E') + [0, 1, 2, 3, 4].map(i => rc(40 + i * 30, 165, 16, 18, '#F3D9A7', 1.4)).join('');
-      g += town(205, '#7F8C96', true).replace(/^.*?(?=<rect x="212")/, '');
-      g += person(60, 242, 0.75, '#5C5A50', { arm: 'out', hat: '#3A3A40' }) + pa('M73,224 l14,6 l-3,6 l-12,-4 Z', '#3A3A40') + person(200, 242, 0.75, '#8C7B6A', { arm: 'up' }) + rc(207, 196, 4, 16, '#fff', 1.2);
-      return g + callout(110, 140, n);
-    },
-    sails(n) {  // the sky wind: lead sails on the peaks, the wind streaming down
+      [[40, 70], [80, 95], [120, 60]].forEach(([x, top]) => { g += rc(x, top, 16, 205 - top, '#B9776A'); g += rc(x - 2, top - 6, 20, 7, '#9C5D52'); });
+      [[48, 60], [88, 85], [128, 50]].forEach(([x, y]) => { g += `<g opacity=".9">${cloud(x + 10, y - 4, 1, '#8E8E8E')}${cloud(x + 34, y - 18, 1.3, '#A8A8A8')}</g>`; });
+      g += rc(160, 150, 100, 55, PARIS.wall) + pa('M158,150 L164,136 L256,136 L262,150 Z', PARIS.roof) + rc(168, 160, 84, 40, '#BFD8EA', 1.4) + [0, 1, 2, 3].map(i => flask(180 + i * 20, 196, 0.8, [YEL, '#5E6B3A', '#2FAE6B', '#8E3A2E'][i]) + pa(`M${176 + i * 20},${174} q4,-5 0,-9 q-4,-4 4,-8`, HEAT, 1.2)).join('') + tx(210, 147, 'PRODUITS CHIMIQUES', 7, '#fff');
+      g += maison(296, 205, 48, 60, { chimney: true }) + pa('M274,205 L274,186 L330,186 L330,205 Z', WOOD, 1.8) + ci(284, 208, 6, '#5C5A50', 1.6) + ci(320, 208, 6, '#5C5A50', 1.6) + pa('M276,186 q10,-20 26,-14 q14,-8 26,14 Z', '#2E2E33', 1.6);
+      g += fig(60, 242, 0.9, { hat: 'cap', coat: '#5C5A50', arm: 'out' }) + pa('M74,224 l14,6 l-3,6 l-12,-4 Z', '#3A3A40') + fig(210, 242, 0.9, { hat: 'cap', coat: '#fff', arm: 'up', capColor: '#fff' }) + fig(150, 242, 0.7, { coat: '#8C5B6E', skirt: true, hat: 'bonnet' });
+      return g; },
+    sails() {  // the sky wind: lead sails on the peaks, the wind streaming down to the town
       let g = rc(0, 0, 348, 250, '#DDEFFB', 0);
       for (let i = 0; i < 9; i++) g += ln(10 + i * 40, 0, 40 + i * 40 - 60, 70, 1.6, '#8FB7D3', 'stroke-dasharray="6 6"');
-      g += pa('M0,180 L50,95 L90,130 L150,55 L205,120 L250,80 L300,125 L348,100 L348,205 L0,205 Z', '#A9BCCB');
-      g += pa('M138,75 L150,55 L162,75 L154,70 L150,76 L146,70 Z', '#fff', 1.6) + pa('M240,96 L250,80 L260,96 L253,92 Z', '#fff', 1.6);
+      g += pa('M0,180 L50,95 L90,130 L150,55 L205,120 L250,80 L300,125 L348,100 L348,205 L0,205 Z', '#A9BCCB') + pa('M138,75 L150,55 L162,75 L154,70 L150,76 L146,70 Z', '#fff', 1.6) + pa('M240,96 L250,80 L260,96 L253,92 Z', '#fff', 1.6);
       [[150, 55], [250, 80], [50, 95]].forEach(([x, y]) => { g += ln(x, y, x, y - 34, 2.4) + pa(`M${x},${y - 32} Q${x + 18},${y - 24} ${x + 20},${y - 8} L${x},${y - 8} Z`, LEADC); });
-      g += pa('M150,30 Q210,120 300,180', 'none', 1.4) + pa('M250,52 Q280,130 316,180', 'none', 1.4);
-      g += rc(0, 205, 348, 45, GRASS, 0) + ln(0, 205, 348, 205, 2.4) + town(205);
-      g += person(84, 242, 0.75, '#C9A27E', { arm: 'up', hat: '#3A3A40' }) + person(104, 242, 0.55, BLUE, { arm: 'up' }) + person(150, 242, 0.75, LEADC);
-      return g + callout(176, 22, n);
-    },
-    tower(n) {  // the crystal lens: a house-sized crystal lights the town at dusk
+      g += pa('M150,30 Q210,120 300,180', 'none', 1.4) + pa('M250,52 Q280,130 316,180', 'none', 1.4) + rc(0, 205, 348, 45, GRASS, 0) + ln(0, 205, 348, 205, 2.4);
+      g += maison(14, 205, 40, 30, { wall: '#EEF2F5', roof: '#A9B6C2' }) + maison(212, 205, 46, 38, { wall: '#EEF2F5', roof: '#A9B6C2' }) + maison(262, 205, 36, 26, { wall: '#EEF2F5', roof: '#A9B6C2' }) + maison(300, 205, 40, 34, { wall: '#EEF2F5', roof: '#A9B6C2' }) + sparks(246, 160, 1);
+      g += fig(84, 242, 0.9, { hat: 'cap', coat: '#C9A27E', arm: 'up' }) + fig(104, 242, 0.65, { coat: BLUE, arm: 'up' }) + fig(150, 242, 0.9, { coat: LEADC, hat: 'top', face: 'left' });
+      return g; },
+    tower() {  // the crystal lens: a house-sized crystal lights the town at dusk
       let g = rc(0, 0, 348, 250, '#2C3E5C', 0);
       for (let i = 0; i < 14; i++) g += ci((i * 53) % 340 + 6, (i * 37) % 90 + 8, 1.4, '#fff', 0);
       for (let a = 0; a < 12; a++) { const t = a / 12 * Math.PI * 2; g += ln(174 + Math.cos(t) * 70, 120 + Math.sin(t) * 70, 174 + Math.cos(t) * 110, 120 + Math.sin(t) * 110, 2, '#7FD3A6'); }
-      g += pa('M150,205 L150,90 L174,62 L198,90 L198,205 Z', GREEN, 2.6) + pa('M174,62 L174,205', 'none', 1.6) + pa('M150,90 L174,104 L198,90', 'none', 1.6);
-      g += pa('M128,205 L128,140 L142,124 L156,140 L156,205 Z', '#4BC287') + pa('M196,205 L196,150 L208,136 L220,150 L220,205 Z', '#4BC287');
-      g += rc(0, 205, 348, 45, '#3B4E6B', 0) + ln(0, 205, 348, 205, 2.4);
-      g += town(205, '#56677D').replace(/#DCEBF5/g, '#BDEBD0');
-      g += person(104, 242, 0.75, '#5C5A50', { arm: 'up' }) + person(246, 242, 0.75, '#8C7B6A', { arm: 'up', hat: '#3A3A40' }) + person(262, 242, 0.55, '#C9A27E');
-      return g + callout(222, 70, n);
-    },
-    stone(n) {  // the bottomless atom: a stone in the square heats the town for ever
+      g += pa('M150,205 L150,90 L174,62 L198,90 L198,205 Z', GREEN, 2.6) + pa('M174,62 L174,205', 'none', 1.6) + pa('M150,90 L174,104 L198,90', 'none', 1.6) + pa('M128,205 L128,140 L142,124 L156,140 L156,205 Z', '#4BC287') + pa('M196,205 L196,150 L208,136 L220,150 L220,205 Z', '#4BC287');
+      g += rc(0, 205, 348, 45, '#3B4E6B', 0) + ln(0, 205, 348, 205, 2.4) + maison(14, 205, 40, 30, { wall: '#8FA3B8', roof: '#56677D', lit: true }) + maison(240, 205, 46, 38, { wall: '#8FA3B8', roof: '#56677D', lit: true }) + maison(292, 205, 48, 34, { wall: '#8FA3B8', roof: '#56677D', lit: true });
+      g += fig(104, 242, 0.9, { coat: '#5C5A50', hat: 'top', arm: 'up' }) + fig(246, 242, 0.9, { coat: '#8C7B6A', hat: 'cap', arm: 'up', face: 'left' }) + fig(266, 242, 0.65, { coat: '#C9A27E', skirt: true, hat: 'bonnet', face: 'left' });
+      return g; },
+    stone() {  // the bottomless atom: a stone in the square heats the town for ever, and turns a wheel
       let g = rc(0, 0, 348, 250, '#F6E8DA', 0) + cloud(80, 50, 1) + rc(0, 205, 348, 45, STREET, 0) + ln(0, 205, 348, 205, 2.4);
-      g += town(205, '#B88F7A');
+      g += maison(212, 205, 46, 38, { chimney: false }) + maison(262, 205, 36, 26) + maison(300, 205, 40, 34);
       g += rc(120, 170, 56, 35, '#D9CFC2') + pa('M128,170 L132,140 L150,128 L168,138 L170,170 Z', '#3A3A40') + pa('M140,146 L150,140', 'none', 2).replace(INK, '#fff');
       for (let i = 0; i < 4; i++) g += pa(`M${176 + i * 2},${150 - i * 14} q10,-6 20,0 t20,0 t20,0`, 'none', 2).replace(`stroke="${INK}"`, `stroke="${HEAT}"`);
       for (let i = 0; i < 3; i++) g += pa(`M${118 - i * 2},${150 - i * 14} q-10,-6 -20,0 t-20,0 t-20,0`, 'none', 2).replace(`stroke="${INK}"`, `stroke="${HEAT}"`);
-      g = g.replace(/^(.*?)<rect x="14" y="175".*?(?=<rect x="212")/, '$1');
       g += ci(52, 160, 28, 'none', 2.6) + ci(52, 160, 5, '#3A3A40') + [0, 1, 2, 3, 4, 5].map(i => { const t = i / 6 * Math.PI * 2; return ln(52, 160, 52 + Math.cos(t) * 28, 160 + Math.sin(t) * 28, 2); }).join('') + pa('M80,150 q8,6 2,14', 'none', 2) + ln(52, 188, 52, 205, 3);
-      g += person(104, 242, 0.75, BLUE, { arm: 'out' }) + person(190, 242, 0.75, '#C9A27E', { arm: 'out', hat: '#5C5A50' }) + person(206, 242, 0.55, RED) + person(26, 242, 0.75, '#8C7B6A', { arm: 'up' });
-      return g + callout(150, 116, n);
-    },
+      g += fig(104, 242, 0.9, { coat: BLUE, hat: 'cap', arm: 'out' }) + fig(190, 242, 0.9, { coat: '#C9A27E', hat: 'top', arm: 'out', face: 'left' }) + fig(206, 242, 0.65, { coat: RED, face: 'left' }) + fig(26, 242, 0.9, { coat: '#8C7B6A', hat: 'cap', arm: 'up' });
+      return g; },
   };
-  const VIGNETTE = {  // each drawn in a 110 × 150 frame
-    rockclock: () => pa('M14,118 L20,70 L52,56 L56,120 Z', '#A99A8C') + pa('M60,120 L58,56 L90,66 L98,118 Z', '#A99A8C') + ci(56, 92, 16, '#fff') + ln(56, 92, 56, 80, 2) + ln(56, 92, 64, 96, 2) + tx(56, 140, 'BILLIONS OF YEARS', 9),
-    hospital: () => rc(14, 54, 82, 70, '#fff') + rc(46, 62, 18, 18, '#fff') + tx(55, 77, 'H', 15, BLUE, 'middle', 'Lilita') + rc(22, 98, 26, 26, '#DCEBF5', 1.4) + rc(62, 98, 26, 26, '#DCEBF5', 1.4) + [0, 1, 2].map(i => ln(76, 30 + i * 6, 70, 54, 1.6, BLUE, 'stroke-dasharray="3 3"')).join(''),
-    table118: () => { let g = ''; for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) g += rc(10 + c * 15, 40 + r * 15, 13, 13, r === 3 && c === 5 ? '#fff' : '#E3E8EC', 1.2); return g + tx(92.5, 92, '118', 7.5) + pa('M100,92 l6,-4 l-2,8 l6,-3', 'none', 1.4) + tx(55, 128, 'THE END OF THE TABLE', 9); },
-    jardark: () => [['#F3D06B', 1899], ['#C9B46A', 1902], ['#5C5A50', 1905]].map(([f, y], i) => rc(10 + i * 32, 60, 26, 44, '#EEF7FC') + rc(13 + i * 32, 74, 20, 28, f, 1.4) + rc(12 + i * 32, 54, 22, 6, '#9C6B43', 1.4) + tx(23 + i * 32, 120, String(y), 9)).join('') + tx(55, 138, 'SEALED: GOING DARK', 9),
-    thermoglobe: () => ci(52, 86, 32, '#BFD9E8') + pa('M30,74 q14,-8 22,6 q8,12 24,4', 'none', 1.6) + rc(70, 30, 8, 52, '#fff') + ci(74, 84, 7, '#E8853A') + tx(55, 136, '20–40 MILLION YEARS', 9),
-    hourglass: () => pa('M34,40 L76,40 L58,84 L76,128 L34,128 L52,84 Z', '#EEF7FC') + pa('M42,52 L68,52 L55,78 Z', '#E8C17A', 1.2) + pa('M44,124 L66,124 L55,112 Z', '#E8C17A', 1.2) + tx(55, 30, 'EVOLUTION?', 10, RED),
-    sails: () => '',
-    quietmine: () => pa('M10,128 L10,72 Q55,30 100,72 L100,128 Z', '#8C7B6A') + pa('M30,128 L30,86 Q55,62 80,86 L80,128 Z', '#2A2A2F') + rc(30, 40, 50, 18, '#fff', 1.6) + tx(55, 53, 'QUIET', 11, BLUE, 'middle', 'Lilita') + tx(55, 142, 'URANIUM SILENT', 9),
-    bank: () => ci(55, 82, 34, '#C9D5DE') + ci(55, 82, 22, '#E3E8EC') + ln(33, 82, 77, 82, 2) + ln(55, 60, 55, 104, 2) + sparks(22, 54) + sparks(90, 58) + sparks(28, 116, 0.8) + tx(55, 140, 'THE VAULT CRACKLES', 9),
-    balloon: () => ci(55, 58, 28, '#E9EEF2') + pa('M30,70 L46,102 M80,70 L64,102', 'none', 1.6) + rc(44, 102, 22, 14, '#C9A27E') + ln(55, 26, 55, 14, 2) + pa('M50,18 L55,10 L60,18', 'none', 2) + tx(55, 136, 'WHERE FROM?', 10),
-    tower: () => '',
-    fair: () => [0, 1, 2].map(i => pa(`M${18 + i * 30},110 L${18 + i * 30},${84 - i * 8} L${28 + i * 30},${74 - i * 8} L${38 + i * 30},${84 - i * 8} L${38 + i * 30},110 Z`, GREEN)).join('') + rc(8, 110, 94, 10, '#C9A27E') + ci(88, 54, 10, RED) + pa('M84,62 L80,78 M92,62 L96,78', 'none', 2).replace(`stroke="${INK}"`, `stroke="${RED}"`) + tx(88, 58, '1st', 9, '#fff') + tx(55, 140, 'THE BRIGHTEST LATTICE', 9),
-    grind: () => ci(40, 78, 24, '#C9C1B4') + ln(40, 54, 40, 102, 2) + ln(16, 78, 64, 78, 2) + pa('M70,110 q10,-10 20,0 q-10,6 -20,0 Z', '#5C5A50') + pa('M72,60 L80,50 L88,60 L88,74 L72,74 Z', '#7FAF94') + pa('M74,52 L96,74 M96,52 L74,74', 'none', 2).replace(`stroke="${INK}"`, `stroke="${RED}"`) + tx(55, 140, 'GROUND: DEAD', 9),
-    sack: () => pa('M22,124 Q16,84 30,68 L46,62 L62,68 Q74,84 68,124 Z', '#C9A27E') + ln(34, 70, 58, 70, 2) + tx(46, 102, 'PITCH', 8) + tx(46, 112, 'BLENDE', 8) + pa('M70,126 Q66,96 76,84 L88,80 L98,86 Q104,100 98,126 Z', '#C9A27E') + pa('M84,40 l-10,10 M84,40 l10,10 M84,40 l0,14 M78,46 l12,0', 'none', 1).replace(`stroke="${INK}"`, 'stroke="#9C9C9C"') + tx(55, 142, 'NEVER OPENED', 9),
-    stone: () => '',
-    engine: () => ci(48, 82, 30, 'none', 2.6) + ci(48, 82, 7, '#3A3A40') + [0, 1, 2, 3, 4, 5].map(i => { const t = i / 6 * Math.PI * 2 + 0.3; return ln(48, 82, 48 + Math.cos(t) * 30, 82 + Math.sin(t) * 30, 2); }).join('') + pa('M80,64 q10,8 4,20', 'none', 2) + rc(62, 100, 42, 30, '#fff', 1.6) + tx(83, 112, 'PATENT', 8) + tx(83, 123, 'GRANTED', 8, RED),
-    blackboard: () => rc(8, 46, 94, 64, '#2F4A3E') + tx(55, 70, 'ENERGY IS', 10, '#fff') + tx(55, 84, 'CONSERVED', 10, '#fff') + ln(14, 90, 96, 60, 3, RED) + tx(55, 136, 'FIRST LAW: GONE', 9),
-    joachim: () => rc(18, 50, 74, 26, '#fff') + tx(55, 67, 'JOACHIMSTHAL', 9) + ln(55, 76, 55, 120, 3) + pa('M36,112 L46,96 L66,96 L76,112 Z', '#3A3A40') + pa('M44,92 l4,-8 l4,6 l3,-8 l3,8 l4,-6 l4,8 Z', '#E2B23C', 1.4) + tx(55, 138, 'THE PRECIOUS METAL', 9),
-    pedestal: () => rc(34, 88, 42, 40, '#E3E8EC') + rc(28, 84, 54, 6, '#fff') + pa('M40,84 L40,52 L70,52 L70,84', '#EEF7FC', 1.6) + pa('M46,84 L50,70 L60,66 L64,84 Z', '#5B6068') + rc(38, 104, 34, 10, '#fff', 1.2) + tx(55, 112, 'THE ONLY ONE', 7) + tx(55, 142, 'URANIUM, ALONE', 9),
-    doctor: () => person(30, 130, 1.45, '#fff', { arm: 'out' }) + person(82, 130, 1.45, '#DCEBF5') + [0, 1, 2, 3].map(i => pa(`M75,${88 + i * 6} q7,-3 14,0`, 'none', 1.3)).join('') + rc(50, 84, 11, 11, '#C9D5DE', 1.4) + ln(61, 89, 72, 92, 1.6) + sparks(98, 78, 0.8) + tx(55, 145, 'LISTENING TO BONES', 9),
-    storm: () => cloud(36, 58, 1.4, '#8E9AA6') + cloud(76, 64, 1.05, '#8E9AA6') + [0, 1, 2, 3, 4, 5].map(i => ln(20 + i * 13, 72, 16 + i * 13, 88, 1.6, BLUE)).join('') + pa('M20,124 q14,-14 28,0 Z', '#E2342B', 1.6) + ln(34, 124, 34, 136, 2) + pa('M60,124 q14,-14 28,0 Z', BLUE, 1.6) + ln(74, 124, 74, 136, 2) + tx(55, 108, 'NO LIGHTNING?', 10),
-    miners93: () => person(30, 130, 1.5, '#8C7B6A', { helmet: true, arm: 'up' }) + ln(50, 70, 62, 58, 3) + pa('M58,54 l10,6 l-4,4', 'none', 2.4) + rc(60, 70, 44, 40, '#fff', 1.6) + tx(82, 84, 'WANTED', 8, RED) + tx(82, 96, 'ELEMENT', 8) + tx(82, 106, '93', 10, INK, 'middle', 'Lilita') + pa('M64,130 L70,116 L94,114 L100,130 Z', '#2A2A2F'),
-    fadinglamp: () => [['#BFF0D2', 1904], ['#8FCDA9', 1909], ['#4B5E55', 1914]].map(([f, y], i) => ci(23 + i * 32, 72, 12, f) + rc(17 + i * 32, 84, 12, 14, '#C9D5DE', 1.4) + tx(23 + i * 32, 116, String(y), 9)).join('') + tx(55, 138, 'RADIUM LAMPS, FADING', 9),
-    jewels: () => pa('M20,60 Q55,110 90,60', 'none', 2.2) + [0, 1, 2, 3, 4].map(i => { const t = i / 4; return ci(20 + 70 * t, 60 + 25 * Math.sin(Math.PI * t) + 2, 5, '#E3E8EC', 1.6); }).join('') + sparks(30, 60, 0.7) + sparks(80, 58, 0.7) + tx(55, 128, 'HUMMING JEWELLERY', 9),
+  // ---------- the world strip, drawn: one scene per belief, in a 112 × 96 picture under a year band (ligne claire)
+  const PARIS = { wall: '#F1E9DA', roof: '#5F6B78', sky: '#DDEFFB', stone: '#D8D1C4', dusk: '#2C3E5C', glow: '#BFF0D2' };
+  // a figure standing on (x, y), height ~ 40·s. o: {hat:'top'|'cap'|'bonnet', coat, skirt, arm:'up'|'out'|'down', face:'left'|'right', apron}
+  function fig(x, y, s, o) {
+    o = o || {}; s = s || 1; const k = v => v * s, coat = o.coat || '#4A5568', dir = o.face === 'left' ? -1 : 1;
+    let g = '';
+    if (o.skirt) g += pa(`M${x - k(7)},${y - k(16)} L${x - k(11)},${y} L${x + k(11)},${y} L${x + k(7)},${y - k(16)} Z`, coat, k(1.8));
+    else g += pa(`M${x - k(5)},${y - k(16)} L${x - k(5)},${y} L${x - k(1)},${y} L${x - k(1)},${y - k(10)} L${x + k(1)},${y - k(10)} L${x + k(1)},${y} L${x + k(5)},${y} L${x + k(5)},${y - k(16)} Z`, '#2E2E33', k(1.6));
+    g += pa(`M${x - k(7)},${y - k(15)} L${x - k(7)},${y - k(31)} Q${x},${y - k(35)} ${x + k(7)},${y - k(31)} L${x + k(7)},${y - k(15)} Z`, coat, k(1.8));
+    if (o.apron) g += pa(`M${x - k(4)},${y - k(16)} L${x - k(4)},${y - k(28)} L${x + k(4)},${y - k(28)} L${x + k(4)},${y - k(16)} Z`, '#fff', k(1.2));
+    const ay = y - k(29);
+    if (o.arm === 'up') g += ln(x + dir * k(6), ay, x + dir * k(12), ay - k(13), k(2.6)) + ci(x + dir * k(12.5), ay - k(14), k(2), SKIN, k(1.2));
+    else if (o.arm === 'out') g += ln(x + dir * k(6), ay, x + dir * k(16), ay + k(3), k(2.6)) + ci(x + dir * k(17), ay + k(3.5), k(2), SKIN, k(1.2));
+    else g += ln(x + dir * k(6), ay, x + dir * k(8), ay + k(12), k(2.6));
+    g += ln(x - dir * k(6), ay, x - dir * k(8), ay + k(12), k(2.6));
+    g += ci(x, y - k(40), k(6.5), SKIN, k(1.8)) + `<circle cx="${x + dir * k(2.5)}" cy="${y - k(41)}" r="${k(1)}" fill="${INK}"/>` + pa(`M${x + dir * k(5)},${y - k(39)} l${dir * k(1.5)},${k(2)}`, 'none', k(1.2));
+    if (o.hat === 'top') g += pa(`M${x - k(8)},${y - k(45)} L${x + k(8)},${y - k(45)} M${x - k(5.5)},${y - k(45)} L${x - k(5.5)},${y - k(56)} L${x + k(5.5)},${y - k(56)} L${x + k(5.5)},${y - k(45)}`, '#2E2E33', k(1.6)).replace('fill="#2E2E33"', 'fill="#2E2E33" fill-rule="evenodd"');
+    else if (o.hat === 'cap') g += pa(`M${x - k(7)},${y - k(44)} Q${x},${y - k(51)} ${x + k(7)},${y - k(44)} Z`, o.capColor || '#5C5A50', k(1.4)) + ln(x + dir * k(4), y - k(44), x + dir * k(10), y - k(43), k(1.6));
+    else if (o.hat === 'bonnet') g += pa(`M${x - k(8)},${y - k(42)} Q${x},${y - k(52)} ${x + k(8)},${y - k(42)} Z`, o.capColor || '#E7C9D6', k(1.4));
+    else if (o.hat === 'helmet') g += pa(`M${x - k(7.5)},${y - k(43)} Q${x},${y - k(53)} ${x + k(7.5)},${y - k(43)} Z`, '#E8C17A', k(1.4)) + ci(x, y - k(49), k(1.8), '#fff', k(1));
+    else g += pa(`M${x - k(6.5)},${y - k(42)} Q${x},${y - k(48)} ${x + k(6.5)},${y - k(42)}`, o.hair || '#4A3728', k(1.4));
+    return g;
+  }
+  // a Paris house with a mansard roof and dormers; y = ground
+  function maison(x, y, w, h, o) {
+    o = o || {}; const roofH = o.roofH || 14, wall = o.wall || PARIS.wall, roof = o.roof || PARIS.roof;
+    let g = rc(x, y - h, w, h, wall) + pa(`M${x - 2},${y - h} L${x + 4},${y - h - roofH} L${x + w - 4},${y - h - roofH} L${x + w + 2},${y - h} Z`, roof);
+    const cols = Math.max(1, Math.floor((w - 6) / 11));
+    for (let r = 0; r < Math.floor((h - 4) / 13); r++) for (let c = 0; c < cols; c++) g += rc(x + 4 + c * ((w - 8) / cols) + ((w - 8) / cols - 6) / 2, y - h + 4 + r * 13, 6, 8, o.lit ? '#FFE9A8' : '#BFD8EA', 1.2);
+    for (let c = 0; c < Math.min(2, cols); c++) g += rc(x + 6 + c * (w - 18), y - h - roofH + 4, 6, roofH - 5, '#BFD8EA', 1.2);
+    if (o.chimney) g += rc(x + w - 10, y - h - roofH - 6, 5, 8, '#B9776A', 1.4);
+    if (o.door) g += rc(x + w / 2 - 4, y - 11, 8, 11, '#6B4A2B', 1.4);
+    return g;
+  }
+  const lamp = (x, y, lit) => ln(x, y, x, y - 30, 2) + rc(x - 3.5, y - 36, 7, 7, lit ? '#FFE9A8' : '#EEF7FC', 1.4) + ln(x - 4, y - 36, x + 4, y - 36, 1.4);
+  const tree = (x, y, s) => ln(x, y, x, y - 14 * s, 2.4) + ci(x, y - 20 * s, 9 * s, '#8DBE78', 1.8) + ci(x - 6 * s, y - 15 * s, 6 * s, '#8DBE78', 1.6) + ci(x + 6 * s, y - 16 * s, 6.5 * s, '#8DBE78', 1.6);
+  const street = (y, o) => { o = o || {}; let g = rc(-1, 0, 114, y, o.sky || PARIS.sky, 0) + rc(-1, y, 114, 97 - y, o.ground || PARIS.stone, 0) + ln(-1, y, 113, y, 2); return g; };
+  const flask = (x, y, s, f, glow) => (glow ? ci(x, y - 10 * s, 14 * s, glow, 0) : '') + pa(`M${x - 3 * s},${y - 22 * s} L${x - 3 * s},${y - 12 * s} L${x - 10 * s},${y} L${x + 10 * s},${y} L${x + 3 * s},${y - 12 * s} L${x + 3 * s},${y - 22 * s} Z`, '#EEF7FC', 1.6 * s) + pa(`M${x - 7 * s},${y - 4 * s} L${x + 7 * s},${y - 4 * s} L${x + 9 * s},${y} L${x - 9 * s},${y} Z`, f, 1.2 * s) + rc(x - 3.5 * s, y - 25 * s, 7 * s, 3 * s, '#9C6B43', 1.2 * s);
+  const rays = (x, y, r, n, c) => { let g = ''; for (let i = 0; i < n; i++) { const t = -Math.PI / 2 + (i - (n - 1) / 2) * 0.45; g += ln(x + Math.cos(t) * r, y + Math.sin(t) * r, x + Math.cos(t) * (r + 7), y + Math.sin(t) * (r + 7), 1.6, c || BLUE); } return g; };
+  const ymark = (y, txt, c) => tx(56, y, txt, 9, c || INK);
+  const SCENE = {
+    workroom: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(8, 10, 44, 38, PARIS.sky, 1.6) + pa('M8,34 L18,26 L28,33 L38,24 L52,30', 'none', 1.4) + maison(20, 34, 14, 10, { roofH: 5 }) + ln(30, 10, 30, 48, 1.4) + ln(8, 29, 52, 29, 1.4);
+      g += rc(-1, 72, 114, 25, WOOD, 0) + ln(-1, 72, 113, 72, 2) + rc(62, 20, 44, 8, STRIP) + ci(78, 24, 3.5, '#fff', 1.4, 0) + `<circle cx="78" cy="24" r="5" fill="none" stroke="${SKY}" stroke-width="2"/>`;
+      g += pa('M70,72 L70,46 L90,46 L90,72', 'none', 2) + pa('M66,46 L94,46 L94,42 L66,42 Z', NICKEL, 1.6) + pa('M68,60 L92,60', 'none', 1.6) + sampleOn('metalpowder', 80, 60, 10);
+      g += fig(34, 86, 0.95, { coat: '#2E2E33', skirt: true, arm: 'out', hair: '#4A3728' });
+      return g; },
+    street: () => { let g = street(74) + maison(2, 74, 40, 42, { chimney: true }) + maison(46, 74, 30, 36, { door: true }) + maison(80, 74, 34, 48, { chimney: true });
+      g += lamp(42, 74) + fig(18, 92, 0.8, { hat: 'top', coat: '#2E2E33', arm: 'down' }) + fig(62, 92, 0.75, { hat: 'bonnet', coat: '#8C5B6E', skirt: true, face: 'left' }) + pa('M86,86 q6,-10 12,0', 'none', 1.6) + ci(92, 88, 2.4, '#5C5A50', 1.2) + ln(92, 90, 100, 92, 1.6);
+      return g; },
+    flasks: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 70, 114, 27, WOOD, 0) + ln(-1, 70, 113, 70, 2);
+      [['#5E6B3A', 22], [YEL, 44], ['#2FAE6B', 66], ['#8E3A2E', 88]].forEach(([f, x]) => { g += flask(x, 70, 0.9, f) + rays(x, 50, 12, 3, BLUE); });
+      g += fig(100, 96, 0.7, { hat: 'cap', coat: '#fff', arm: 'out', face: 'left' }) + tx(56, 92, 'ALL THE SAME', 9, '#fff');
+      return g; },
+    atomheart: () => { let g = rc(-1, 0, 114, 97, PARIS.dusk, 0); for (let i = 0; i < 10; i++) g += ci((i * 41) % 110 + 2, (i * 23) % 30 + 4, 1.2, '#fff', 0);
+      [26, 40, 54].forEach(r => g += `<ellipse cx="56" cy="50" rx="${r}" ry="${r * 0.38}" fill="none" stroke="#9FC3E0" stroke-width="1.6" transform="rotate(${(r - 26) * 30} 56 50)"/>`);
+      g += ci(56, 50, 7, YEL, 2) + tx(56, 54, '?', 12, INK, 'middle', 'Lilita') + ci(80, 36, 3, BLUE, 1.4) + ci(34, 62, 3, BLUE, 1.4) + ci(60, 24, 3, BLUE, 1.4);
+      g += tx(56, 90, 'INSIDE THE ATOM', 9, '#fff'); return g; },
+    flasksfire: () => { let g = rc(-1, 0, 114, 97, '#F6E8DA', 0) + rc(-1, 70, 114, 27, WOOD, 0) + ln(-1, 70, 113, 70, 2);
+      [['#5E6B3A', 22, 0.6], [YEL, 44, 1.3], ['#2FAE6B', 66, 0.9], ['#8E3A2E', 88, 0.3]].forEach(([f, x, h]) => { g += flask(x, 70, 0.9, f) + pa(`M${x - 4},${70 - 24} q4,${-10 * h} 0,${-18 * h} q-4,${8 * h} 4,${18 * h}`, HEAT, 1.4); });
+      g += tx(56, 92, 'THE BRIGHTEST MIX', 9, '#fff'); return g; },
+    jardark: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 74, 114, 23, WOOD, 0) + ln(-1, 74, 113, 74, 2);
+      [['#F3D06B', '1899', 1], ['#C9B46A', '1902', 0.5], ['#5C5A50', '1905', 0]].forEach(([f, y, gl], i) => { const x = 20 + i * 36; g += rc(x - 11, 30, 22, 44, '#EEF7FC', 1.6) + rc(x - 9, 46, 18, 26, f, 1.2) + rc(x - 12, 26, 24, 6, '#9C6B43', 1.4) + (gl ? rays(x, 30, 10, 3, gl === 1 ? BLUE : '#9FC3E0') : '') + tx(x, 90, y, 9, '#fff'); });
+      return g; },
+    fair: () => { let g = street(76, { ground: GRASS }) + pa('M4,24 L108,24', 'none', 1.6) + [0, 1, 2, 3, 4, 5, 6].map(i => pa(`M${8 + i * 16},24 L${16 + i * 16},34 L${24 + i * 16},24`, i % 2 ? RED : BLUE, 1.2)).join('');
+      g += rc(14, 62, 84, 14, WOOD) + [0, 1, 2].map(i => pa(`M${26 + i * 28},62 L${26 + i * 28},${48 - i * 6} L${36 + i * 28},${40 - i * 6} L${46 + i * 28},${48 - i * 6} L${46 + i * 28},62 Z`, GREEN, 1.6) + rays(36 + i * 28, 42 - i * 6, 8, 3, '#7FD3A6')).join('');
+      g += ci(88, 42, 7, RED, 1.4) + tx(88, 45, '1', 8, '#fff') + fig(10, 92, 0.75, { hat: 'top', coat: '#2E2E33', arm: 'up' }) + fig(100, 92, 0.75, { hat: 'bonnet', coat: '#8C5B6E', skirt: true, face: 'left', arm: 'up' });
+      return g; },
+    tower: () => { let g = rc(-1, 0, 114, 97, PARIS.dusk, 0); for (let i = 0; i < 8; i++) g += ci((i * 47) % 110 + 2, (i * 19) % 24 + 3, 1.2, '#fff', 0);
+      for (let a = 0; a < 10; a++) { const t = a / 10 * Math.PI * 2; g += ln(56 + Math.cos(t) * 26, 46 + Math.sin(t) * 26, 56 + Math.cos(t) * 38, 46 + Math.sin(t) * 38, 1.6, '#7FD3A6'); }
+      g += rc(-1, 78, 114, 19, '#3B4E6B', 0) + ln(-1, 78, 113, 78, 2) + maison(2, 78, 30, 28, { wall: '#8FA3B8', roof: '#56677D', lit: true }) + maison(82, 78, 30, 24, { wall: '#8FA3B8', roof: '#56677D', lit: true });
+      g += pa('M44,78 L44,32 L56,18 L68,32 L68,78 Z', GREEN, 2.2) + ln(56, 18, 56, 78, 1.4) + fig(36, 94, 0.65, { coat: '#2E2E33', hat: 'top', arm: 'up' }) + fig(78, 94, 0.65, { coat: '#8C5B6E', skirt: true, hat: 'bonnet', face: 'left', arm: 'up' });
+      return g; },
+    tableend: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(10, 12, 92, 56, '#fff', 2);
+      for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) { const last = r === 2 && c >= 6; g += rc(14 + c * 11, 16 + r * 16, 10, 14, last ? (c === 6 ? YEL : '#F4F2EA') : '#E3E8EC', 1.1); }
+      g += tx(85, 58, 'U', 8) + tx(96, 58, 'Th', 7) + rays(85, 70, 6, 3, BLUE) + rays(96, 70, 6, 3, BLUE) + tx(107, 56, '?', 11, RED, 'middle', 'Lilita');
+      g += fig(30, 96, 0.72, { hat: 'cap', coat: '#fff', arm: 'up' }) + tx(70, 86, 'THE END OF THE TABLE', 8.5); return g; },
+    heavyhunt: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 74, 114, 23, WOOD, 0) + ln(-1, 74, 113, 74, 2);
+      [[20, '#5B6068'], [44, '#7D8590'], [68, '#A48E6A'], [92, '#9C8B7A']].forEach(([x, f]) => { g += rc(x - 10, 46, 20, 28, '#EEF7FC', 1.6) + rc(x - 8, 58, 16, 14, f, 1.2) + rc(x - 11, 42, 22, 5, '#9C6B43', 1.4); });
+      g += fig(56, 96, 0.78, { hat: 'cap', coat: '#fff', arm: 'out' }) + ci(78, 68, 6, 'none', 1.8) + ln(82, 72, 88, 78, 2.2) + tx(56, 30, 'A THIRD ONE?', 10); return g; },
+    pedestal: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 84, 114, 13, PARIS.stone, 0) + ln(-1, 84, 113, 84, 2);
+      g += rc(40, 60, 32, 24, '#D8D1C4') + rc(36, 56, 40, 5, '#fff') + pa('M42,56 L42,28 L70,28 L70,56', '#EEF7FC', 1.6) + pa('M48,54 L52,40 L60,36 L64,54 Z', '#5B6068') + rc(44, 66, 24, 8, '#fff', 1.2) + tx(56, 72.5, 'THE ONLY ONE', 6);
+      g += ln(20, 84, 20, 24, 2) + rc(14, 20, 12, 8, '#F4EFE6', 1.4) + fig(94, 96, 0.72, { hat: 'top', coat: '#2E2E33', face: 'left' }) + pa('M80,52 Q84,40 90,46', 'none', 1.4);
+      return g; },
+    bank: () => { let g = rc(-1, 0, 114, 97, '#D8D1C4', 0) + rc(-1, 86, 114, 11, PARIS.stone, 0) + ln(-1, 86, 113, 86, 2);
+      g += ci(56, 48, 30, '#8A96A3', 2.2) + ci(56, 48, 20, '#C9D5DE', 2) + ln(36, 48, 76, 48, 2) + ln(56, 28, 56, 68, 2) + ci(56, 48, 5, '#5B6068') + sparks(20, 22, 0.9) + sparks(92, 20, 0.9) + sparks(18, 74, 0.8) + sparks(94, 76, 0.8);
+      g += fig(14, 96, 0.6, { hat: 'top', coat: '#2E2E33', arm: 'up' }) + tx(56, 92, 'THE VAULT', 7.5); return g; },
+    sails: () => { let g = rc(-1, 0, 114, 97, PARIS.sky, 0); for (let i = 0; i < 6; i++) g += ln(4 + i * 20, 0, i * 20 - 6, 22, 1.4, '#8FB7D3', 'stroke-dasharray="4 4"');
+      g += pa('M-1,80 L22,36 L40,54 L62,22 L84,50 L98,34 L113,52 L113,97 L-1,97 Z', '#A9BCCB') + pa('M54,34 L62,22 L70,34 L64,30 L62,36 L60,30 Z', '#fff', 1.4);
+      [[62, 22], [22, 36], [98, 34]].forEach(([x, y]) => { g += ln(x, y, x, y - 16, 2) + pa(`M${x},${y - 15} Q${x + 9},${y - 11} ${x + 10},${y - 3} L${x},${y - 3} Z`, LEADC, 1.6); });
+      g += pa('M62,8 Q84,50 110,86', 'none', 1.2) + rc(-1, 82, 114, 15, GRASS, 0) + ln(-1, 82, 113, 82, 2) + maison(4, 82, 22, 14, { roofH: 6 }) + maison(76, 82, 26, 16, { roofH: 7 }) + fig(50, 96, 0.6, { coat: LEADC, hat: 'cap', arm: 'up' });
+      return g; },
+    telegraph: () => { let g = street(80) + [14, 56, 98].map(x => ln(x, 80, x, 14, 2.4) + ln(x - 9, 20, x + 9, 20, 2) + ci(x - 7, 20, 1.8, '#fff', 1) + ci(x + 7, 20, 1.8, '#fff', 1)).join('');
+      g += pa('M7,20 Q35,30 49,20 T91,20 T113,22', 'none', 1.4) + sparks(35, 26, 0.7) + sparks(77, 26, 0.7) + rc(26, 56, 30, 24, PARIS.wall) + rc(30, 60, 8, 6, '#BFD8EA', 1.2) + tx(46, 72, 'POSTES', 5.5);
+      g += fig(80, 96, 0.72, { hat: 'cap', coat: '#2E4A7A', arm: 'out' }) + rc(92, 62, 14, 8, '#fff', 1.2) + tx(99, 68, '?!#', 6); return g; },
+    storm: () => { let g = rc(-1, 0, 114, 97, '#B9C2CC', 0) + cloud(20, 30, 1.2, '#7D8793') + cloud(60, 26, 1.5, '#7D8793') + cloud(96, 34, 1.0, '#7D8793');
+      for (let i = 0; i < 9; i++) g += ln(8 + i * 12, 38, 5 + i * 12, 52, 1.4, BLUE);
+      g += rc(-1, 84, 114, 13, PARIS.stone, 0) + ln(-1, 84, 113, 84, 2) + pa('M18,74 q16,-16 32,0 Z', RED, 1.6) + ln(34, 74, 34, 86, 2) + pa('M64,74 q16,-16 32,0 Z', BLUE, 1.6) + ln(80, 74, 80, 86, 2);
+      g += fig(34, 96, 0.5, { coat: '#2E2E33', hat: 'top' }) + fig(80, 96, 0.5, { coat: '#8C5B6E', skirt: true }) + tx(56, 66, 'NO LIGHTNING?', 9, INK); return g; },
+    jewels: () => { let g = rc(-1, 0, 114, 97, '#F6E8DA', 0) + rc(10, 20, 92, 66, '#6B2E45', 2) + pa('M24,40 Q56,80 88,40', 'none', 2.2).replace(`stroke="${INK}"`, 'stroke="#E3E8EC"');
+      for (let i = 0; i <= 6; i++) { const t = i / 6; g += ci(24 + 64 * t, 40 + 30 * Math.sin(Math.PI * t), 3.5, '#E3E8EC', 1.4); }
+      g += sparks(30, 46, 0.6) + sparks(82, 44, 0.6) + sparks(56, 72, 0.6) + tx(56, 92, 'RUE DE LA PAIX', 8); return g; },
+    doctor: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 90, 114, 7, PARIS.stone, 0) + ln(-1, 90, 113, 90, 2);
+      g += fig(32, 90, 1.05, { hat: 'cap', coat: '#fff', arm: 'out', capColor: '#fff' }) + fig(80, 90, 1.05, { coat: '#DCEBF5', face: 'left' });
+      g += [0, 1, 2, 3].map(i => pa(`M74,${60 + i * 5} q6,-3 12,0`, 'none', 1.3)).join('') + rc(50, 56, 11, 11, NICKEL, 1.4) + ln(61, 61, 72, 66, 1.6) + sparks(96, 50, 0.7) + tx(56, 22, 'LISTENING TO BONES', 8.5);
+      return g; },
+    graveyard: () => { let g = rc(-1, 0, 114, 97, PARIS.dusk, 0) + ci(90, 18, 8, '#F4EFE6', 1.4) + rc(-1, 76, 114, 21, '#3B4E6B', 0) + ln(-1, 76, 113, 76, 2);
+      [[20, 0], [48, 1], [76, 0], [100, 1]].forEach(([x, k]) => { g += k ? pa(`M${x - 8},76 L${x - 8},50 Q${x},42 ${x + 8},50 L${x + 8},76 Z`, '#C9C1B4', 1.6) : ln(x, 76, x, 46, 3.2) + ln(x - 7, 56, x + 7, 56, 3.2); g += sparks(x, 42, 0.7); });
+      g += tree(8, 76, 0.9) + fig(60, 92, 0.6, { coat: '#2E2E33', hat: 'top', arm: 'up' }); return g; },
+    match: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 78, 114, 19, WOOD, 0) + ln(-1, 78, 113, 78, 2);
+      g += rc(20, 52, 44, 26, '#E8C17A') + tx(42, 68, 'ALLUMETTES', 6) + ln(78, 78, 90, 34, 3.2) + ci(91, 31, 4, '#8E3A2E', 1.4) + pa('M91,27 q5,-8 0,-14 q-5,-6 1,-12', HEAT, 1.6) + fig(100, 96, 0.62, { hat: 'cap', coat: '#5C5A50', face: 'left', arm: 'out' });
+      return g; },
+    sackhaul: () => { let g = street(76) + maison(70, 76, 44, 40, { chimney: true }) + pa('M8,76 L8,62 L52,62 L52,76 Z', WOOD, 1.8) + ci(18, 80, 6, '#5C5A50', 1.6) + ci(44, 80, 6, '#5C5A50', 1.6);
+      [[14, 0], [28, 1], [42, 0]].forEach(([x, k]) => g += pa(`M${x - 7},62 Q${x - 9},46 ${x - 3},40 L${x + 3},40 Q${x + 9},46 ${x + 7},62 Z`, '#C9A27E', 1.4) + ln(x - 4, 42, x + 4, 42, 1.4));
+      g += fig(62, 92, 0.75, { hat: 'cap', coat: '#8C7B6A', arm: 'out', face: 'left' }) + tx(30, 92, 'PITCHBLENDE', 7, '#fff'); return g; },
+    cauldron: () => { let g = rc(-1, 0, 114, 97, '#D9D0C0', 0) + rc(-1, 84, 114, 13, '#8C7B6A', 0) + ln(-1, 84, 113, 84, 2) + pa('M10,22 L56,6 L104,22', 'none', 2.2) + ln(10, 22, 10, 84, 2) + ln(104, 22, 104, 84, 2);
+      g += pa('M30,56 Q30,84 56,84 Q82,84 82,56 Z', '#3A3A40', 2.2) + ln(26, 56, 86, 56, 2.6) + [40, 56, 72].map(x => pa(`M${x},52 q4,-6 0,-12 q-4,-6 2,-12`, 'none', 1.4).replace(`stroke="${INK}"`, `stroke="${SMOKE}"`)).join('') + pa('M36,84 l4,-8 l6,8 l4,-10 l6,10 l4,-8 l4,8', HEAT, 1.6);
+      g += fig(18, 96, 0.75, { coat: '#2E2E33', skirt: true, arm: 'out', hair: '#4A3728' }) + ln(32, 66, 44, 60, 2.4) + fig(98, 96, 0.72, { coat: '#4A5568', hat: 'cap', face: 'left', arm: 'out' });
+      return g; },
+    glowflask: () => { let g = rc(-1, 0, 114, 97, '#1E2A3A', 0) + rc(-1, 76, 114, 21, '#2F3F52', 0) + ln(-1, 76, 113, 76, 2);
+      g += flask(56, 76, 1.3, '#BFF0D2', 'rgba(191,240,210,.35)') + rays(56, 64, 16, 5, '#BFF0D2') + fig(16, 96, 0.7, { coat: '#2E2E33', skirt: true, hair: '#4A3728', arm: 'up' }) + fig(96, 96, 0.7, { coat: '#4A5568', hat: 'cap', face: 'left', arm: 'up' });
+      return g; },
+    sackclosed: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 80, 114, 17, PARIS.stone, 0) + ln(-1, 80, 113, 80, 2);
+      [[26, 1], [56, 0], [86, 1]].forEach(([x, k]) => g += pa(`M${x - 12},80 Q${x - 15},54 ${x - 5},46 L${x + 5},46 Q${x + 15},54 ${x + 12},80 Z`, '#C9A27E', 1.6) + ln(x - 6, 48, x + 6, 48, 1.6) + tx(x, 68, 'PITCH', 5.5) + tx(x, 75, 'BLENDE', 5.5));
+      g += pa('M30,30 l-8,8 M30,30 l8,8 M30,30 l0,12 M24,36 l12,0', 'none', 1).replace(`stroke="${INK}"`, 'stroke="#9C9C9C"') + tx(56, 24, 'NEVER OPENED', 8.5) + fig(104, 96, 0.6, { hat: 'top', coat: '#2E2E33', face: 'left' });
+      return g; },
+    engine: () => { let g = rc(-1, 0, 114, 97, '#F6E8DA', 0) + rc(-1, 84, 114, 13, WOOD, 0) + ln(-1, 84, 113, 84, 2);
+      g += ci(40, 54, 26, 'none', 2.6) + ci(40, 54, 6, '#3A3A40') + [0, 1, 2, 3, 4, 5].map(i => { const t = i / 6 * Math.PI * 2 + 0.3; return ln(40, 54, 40 + Math.cos(t) * 26, 54 + Math.sin(t) * 26, 2); }).join('') + ln(40, 80, 40, 84, 3) + pa('M66,46 q8,6 2,14', 'none', 2) + pa('M28,60 L36,50 L46,48 L50,60 Z', '#5B6068');
+      g += rc(74, 30, 34, 36, '#fff', 1.6) + tx(91, 42, 'BREVET', 6.5) + tx(91, 52, 'ACCORDÉ', 6.5, RED) + ci(91, 60, 4, RED, 1.2) + fig(96, 96, 0.6, { hat: 'top', coat: '#2E2E33', face: 'left', arm: 'up' });
+      return g; },
+    thermometer: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 78, 114, 19, WOOD, 0) + ln(-1, 78, 113, 78, 2);
+      g += ci(40, 68, 14, NICKEL, 1.8) + ci(40, 68, 6, '#BFF0D2', 1.4) + rays(40, 58, 10, 4, '#7FD3A6') + rc(76, 22, 8, 50, '#fff', 1.6) + ci(80, 74, 6, '#E8853A', 1.4) + rc(78, 40, 4, 32, '#E8853A', 0) + [0, 1, 2, 3, 4].map(i => ln(84, 30 + i * 8, 89, 30 + i * 8, 1.2)).join('');
+      g += tx(40, 32, 'RADIUM', 8) + tx(80, 16, 'WARM', 8); return g; },
+    goldfoil: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 84, 114, 13, WOOD, 0) + ln(-1, 84, 113, 84, 2);
+      g += rc(20, 44, 18, 22, '#5B6068') + ln(66, 20, 66, 84, 2.6, '#C9962E') + [0, 1, 2].map(i => ln(38, 50 + i * 5, 64, 50 + i * 5, 1.4, BLUE)).join('') + ln(66, 55, 100, 40, 1.4, BLUE) + ln(66, 60, 100, 74, 1.4, BLUE) + pa('M66,50 L46,30', 'none', 1.6).replace(`stroke="${INK}"`, `stroke="${RED}"`) + ci(44, 28, 2.2, RED, 0);
+      g += tx(56, 93, 'GOLD LEAF', 7.5, '#fff') + tx(96, 20, '!', 12, RED, 'middle', 'Lilita'); return g; },
+    balloon: () => { let g = rc(-1, 0, 114, 97, PARIS.sky, 0) + cloud(22, 60, 1.1) + cloud(96, 74, 0.9) + ci(56, 34, 22, '#E9EEF2', 2) + pa('M56,12 L56,56', 'none', 1.2) + pa('M38,46 L48,70 M74,46 L64,70', 'none', 1.6) + rc(47, 70, 18, 12, '#C9A27E');
+      g += rc(50, 60, 8, 7, NICKEL, 1.2) + fig(56, 72, 0.4, { hat: 'cap', coat: '#2E4A7A', arm: 'up' }) + rc(-1, 90, 114, 7, GRASS, 0) + ln(-1, 90, 113, 90, 2) + tx(20, 20, 'RAYS', 8) + sparks(20, 30, 0.6);
+      return g; },
+    fission: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 82, 114, 15, GRASS, 0) + ln(-1, 82, 113, 82, 2);
+      g += rc(18, 50, 54, 32, '#E3E8EC') + pa('M18,50 A27,27 0 0 1 72,50 Z', '#C9D5DE') + rc(80, 36, 12, 46, '#E3E8EC') + cloud(94, 30, 0.9) + pa('M18,82 L8,70 M72,82 L82,70', 'none', 1.2) + [0, 1].map(i => pa(`M${96 + i * 8},82 L${100 + i * 8},60 L${104 + i * 8},82 M${98 + i * 8},72 L${106 + i * 8},72`, 'none', 1.4)).join('');
+      g += fig(10, 96, 0.6, { coat: '#4A5568', hat: 'cap' }) + tx(45, 24, 'ATOMS SPLIT', 8.5); return g; },
+    rockclock: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 84, 114, 13, PARIS.stone, 0) + ln(-1, 84, 113, 84, 2);
+      g += pa('M14,84 L18,40 L48,26 L56,84 Z', '#A99A8C') + pa('M60,84 L58,26 L92,36 L100,84 Z', '#A99A8C') + ci(56, 56, 15, '#fff') + ln(56, 56, 56, 45, 2) + ln(56, 56, 64, 60, 2) + ci(56, 56, 1.6, INK, 0) + tx(56, 18, '4.5 BILLION YEARS', 8);
+      return g; },
   };
-  // one world as a splash panel: the landscape, three framed vignettes below, numbered call-outs
-  function worldSVG(w) {
-    let s = `<g>${LANDMARK[w.landmark](1)}</g>` + `<rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`;
-    w.slots.forEach((id, i) => {
-      const x = 2 + i * 115;
-      s += `<g transform="translate(${x},256)"><clipPath id="vc${i}"><rect x="1" y="1" width="110" height="150"/></clipPath><rect x="1" y="1" width="110" height="150" fill="#EAF5FC"/><g clip-path="url(#vc${i})">${(VIGNETTE[id] || (() => ''))()}</g><rect x="1" y="1" width="110" height="150" fill="none" stroke="${INK}" stroke-width="2.6"/>${callout(13, 14, i + 2)}</g>`;
-    });
+  // one scene as a comic panel: a year band, the picture, the frame; w, h in the 112 × 112 grid
+  function sceneSVG(sc, o) {
+    o = o || {}; const draw = SCENE[sc.pic] || SCENE.street;
+    let s = `<clipPath id="sc${o.key || sc.n}"><rect x="1" y="17" width="110" height="94"/></clipPath>`;
+    s += `<rect x="1.5" y="1.5" width="109" height="109" fill="#fff" stroke="${INK}" stroke-width="2.5"/>`;
+    s += `<g clip-path="url(#sc${o.key || sc.n})"><g transform="translate(0,16)">${draw()}</g></g>`;
+    s += `<rect x="1.5" y="1.5" width="109" height="15.5" fill="${sc.clash ? RED : INK}"/><text x="7" y="13" font-family="Lilita, sans-serif" font-size="11.5" fill="#fff">${sc.year}</text>`;
+    if (sc.n) s += `<text x="105" y="13" text-anchor="end" font-family="Patrick, sans-serif" font-size="10" fill="#fff">from panel ${sc.n}</text>`;
+    if (sc.clash) s += `<text x="100" y="40" text-anchor="middle" font-family="Lilita, sans-serif" font-size="16" fill="${RED}">?!</text>`;
+    s += `<rect x="1.5" y="1.5" width="109" height="109" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
     return s;
   }
 
@@ -1243,6 +1410,9 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     $('#thoughts').classList.remove('hidden'); document.querySelector('.benchwrap').classList.add('said');
     requestAnimationFrame(() => fitBalloons($('#thoughts'), document.querySelector('.benchwrap')));
     $('#respanel').innerHTML = panelSVG(p);
+    $('#sceneband').innerHTML = `MEANWHILE, OUTSIDE <small>${p.scene.year}${p.scene.again ? ' · and again' : ''}</small>`;
+    $('#resscene').innerHTML = sceneSVG(p.scene, { key: 'res' });
+    $('#rescene').textContent = p.scene.text;
     $('#resbadge').className = 'badge hidden';
     $('#rescap').textContent = '';
     $('#topage').textContent = M.over(g) ? 'Draw the last panel' : 'On to the page';
@@ -1252,6 +1422,12 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   window.addEventListener('resize', placeTick);
 
   // ---------- the page and the shelf
+  function renderStrip(el, scenes, o) {
+    o = o || {}; let h = '';
+    scenes.forEach((sc, k) => { h += `<div class="sc${o.animate && k === scenes.length - 1 ? ' new' : ''}"><svg viewBox="0 0 112 112" aria-label="${esc(sc.year + ': ' + sc.text)}">${sceneSVG(sc, { key: (o.key || 's') + k })}</svg><div class="st">${esc(sc.text)}</div></div>`; });
+    for (let k = scenes.length; k < (o.empties || 0); k++) h += `<div class="empty">${k + 1}</div>`;
+    el.innerHTML = h;
+  }
   function renderPage(el, animate) {
     let h = '';
     for (let k = 0; k < C.PANELS; k++) { const p = g.panels[k]; h += `<svg viewBox="0 0 112 124" class="${animate && k === lastNew ? 'new' : ''}" aria-label="${p ? esc(p.name + ': ' + BADGE_WORDS(M.band(p.id, p.x, M.yard(g)))[0].join(' ')) : 'empty panel ' + (k + 1)}">${panelSVG(p, k + 1)}</svg>`; }
@@ -1260,9 +1436,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   function renderShelf() {
     renderPage($('#page'), true); lastNew = -1;
     $('#pageband').innerHTML = `YOUR PAGE <small>${g.panels.length} of ${C.PANELS} panels drawn</small>`;
-    const ideas = g.ideas.slice(-3).reverse();
-    $('#ideasstrip').innerHTML = g.ideas.length ? `<div class="ih">YOUR IDEAS SO FAR <small style="font-family:var(--text);font-size:14px">(${g.ideas.length}; the latest first)</small></div>` + ideas.map(i => balloonHTML(i.kind || 'speech', i.i, i.t, 'mini').replace('<b class="ij">', `<b class="pn">${i.n}</b><b class="ij">`)).join('') : '';
-    requestAnimationFrame(() => fitBalloons($('#ideasstrip'), $('#ideasstrip')));
+    renderStrip($('#worldstrip'), g.scenes, { empties: C.PANELS, animate: true });
+    $('#stripband').innerHTML = `YOUR WORLD SO FAR <small>${g.scenes.length ? g.scenes[0].year + '–' + g.scenes[g.scenes.length - 1].year : ''}</small>`;
     const over = M.over(g);
     $('#shelfpart').classList.toggle('hidden', over); $('#turnpart').classList.toggle('hidden', !over);
     $('#shelfband').innerHTML = `THE SHELF <small>${M.panelsLeft(g)} panel${M.panelsLeft(g) === 1 ? '' : 's'} left</small>`;
@@ -1301,16 +1476,16 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   const fromLabel = f => f && f.length ? `<span class="from">from panel${f.length > 1 ? 's' : ''} ${[...new Set(f)].sort((a, b) => a - b).join(', ')}</span>` : '<span class="from">as in hers</span>';
   function renderEnd() {
     const v = M.verdict(g), w = v.world, o = v.ours;
-    $('#ideaboard').innerHTML = v.ideas.map(i => balloonHTML(i.kind || 'speech', i.i, i.t, 'mini').replace('<b class="ij">', `<b class="pn">${i.n}</b><b class="ij">`)).join('');
-    requestAnimationFrame(() => fitBalloons($('#ideaboard'), $('#ideaboard')));
     $('#physname').textContent = w.name;
     $('#laws').innerHTML = w.laws.map(l => `<li>${esc(l.text)} ${fromLabel(l.from)}</li>`).join('');
-    $('#worldsvg').innerHTML = worldSVG(w);
-    $('#callouts').innerHTML = w.callouts.map((c, k) => `<li><i>${k < 4 ? k + 1 : '+'}</i><span>${esc(c.text)} ${c.from && c.from.length ? fromLabel(c.from) : ''}</span></li>`).join('');
+    renderStrip($('#endstrip'), v.strip, { key: 'e' });
+    $('#latername').textContent = w.name.toLowerCase();
+    $('#worldsvg').innerHTML = `<g>${LANDMARK[w.landmark](1)}</g><rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`;
     $('#worldpara').textContent = w.paragraph;
-    $('#oursvg').innerHTML = worldSVG(o);
-    $('#ourcallouts').innerHTML = o.callouts.map((c, k) => `<li><i>${k + 1}</i><span>${esc(c.text)}</span></li>`).join('');
-    $('#dates').innerHTML = o.dates.map(d => `<li><b>${d[0]}</b>${esc(d[1])}</li>`).join('');
+    renderStrip($('#ourstrip'), v.oursStrip, { key: 'o' });
+    $('#oursvg').innerHTML = `<g>${LANDMARK.dome(1)}</g><rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`;
+    $('#ourpara').textContent = o.paragraph;
+    $$('#oursvg, #ourpara, #ourlater').forEach(e => e.classList.toggle('hidden', v.part.same));   // her note: the two pictures would be the same
     $('#part').innerHTML = v.part.lines.concat(v.part.unlooked).map(l => `<p>${esc(l)}</p>`).join('') + `<p><b>${esc(v.part.closing)}</b></p>`;
     renderPage($('#endpage'), false);
     const sc = x => (100 * Math.min(4, x) / 4) + '%';
@@ -1320,7 +1495,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   }
 
   // test hook (read-only): lets the browser session check what the player sees against the mechanism
-  window.__curie = { get game() { return g; }, get bench() { return bench; }, draw: worldSVG };
+  window.__curie = { get game() { return g; }, get bench() { return bench; }, sceneSVG };
 })();
 </script>
 </body>

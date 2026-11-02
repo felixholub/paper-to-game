@@ -139,7 +139,7 @@
   }
 
   // ---------- a game
-  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], used: {}, shouted: {}, pool: {} }; }
+  function newGame(seed) { return { seed: seed === undefined ? CONFIG.SEED : seed, panels: [], tested: {}, ideas: [], scenes: [], used: {}, shouted: {}, pool: {} }; }
   function panelsLeft(g) { return CONFIG.PANELS - g.panels.length; }
   function over(g) { return g.panels.length >= CONFIG.PANELS; }
   function available(g) { return g.panels.length ? CONFIG.SUBSTANCES.slice() : [sub(CONFIG.FIRST)]; }
@@ -313,8 +313,27 @@
     const said = voice(g, p, b);
     p.ideaI = said[0].i; p.ideaT = said[0].t; p.idea = said[0].i + ' ' + said[0].t; p.kind = said[0].kind; p.clash = said.slice(1);
     said.forEach((v, j) => g.ideas.push({ n: p.n, id: s.id, i: v.i, t: v.t, kind: v.kind, text: v.i + ' ' + v.t, clash: j > 0 }));
+    p.scene = scene(g, p); g.scenes.push(p.scene);
     return p;
   }
+
+  // ---------- the world strip (ours): every panel draws one dated scene of life outside the workroom, a consequence of the
+  //            belief just planted. The strip runs forward from April 1898; a belief met for the second time escalates to
+  //            its second scene; a jar that planted nothing draws Paris carrying on. Assembled on the last page with the
+  //            world a century on.
+  const YEARS = [1898, 1898, 1899, 1900, 1902, 1904, 1906, 1908, 1910];   // ours: one year per panel, in order
+  function scene(g, p) {
+    const s = sub(p.id), key = p.belief, year = YEARS[p.n - 1] || 1910;
+    const before = g.scenes.filter(q => q.key === key && key).length;   // how often this belief has already drawn a scene
+    let entry;
+    if (p.id === CONFIG.FIRST) entry = WORDS.scenes.origin[g.scenes.some(q => q.id === CONFIG.FIRST) ? 1 : 0];
+    else if (!key) entry = WORDS.scenes.quiet[Math.min(g.scenes.filter(q => !q.key && q.id !== CONFIG.FIRST).length, WORDS.scenes.quiet.length - 1)];
+    else { const list = WORDS.scenes[key]; entry = list[Math.min(before, list.length - 1)]; }
+    const vars = { N: low(s.name), M: s.name };
+    const fill = t => t.replace(/\{(\w)\}/g, (m, c) => vars[c] !== undefined ? vars[c] : m);
+    return { n: p.n, id: p.id, key, year, pic: entry.id, text: fill(entry.t), clash: p.clash.length > 0, again: !!(key && before) };
+  }
+  function oursStrip() { return WORDS.oursScenes.map(s => ({ year: s.year, pic: s.pic, text: s.t })); }
   function ideasLine(g) { return g.ideas.length ? g.ideas.length + ' idea' + (g.ideas.length === 1 ? '' : 's') + ' so far' : 'No ideas yet.'; }
 
   // ---------- the world of the page, and ours
@@ -377,7 +396,7 @@
   function verdict(g) {
     const ph = physics(g), w = worldOf(ph), o = ours(), pt = part(g);
     const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s) }; });
-    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), her, worlds: Object.keys(WORDS.energy).map(k => ({ id: k, name: WORDS.energy[k].name })) };
+    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), strip: g.scenes.slice(), oursStrip: oursStrip(), her, worlds: Object.keys(WORDS.energy).map(k => ({ id: k, name: WORDS.energy[k].name })) };
   }
 
   // ---------- every word the bench thinks and every world it draws (ours: the game's fiction, labelled as such on screen)
@@ -512,6 +531,53 @@
       jewels: 'Rare-metal jewellery hums faintly.',
     },
     caught: 'In our world, someone would have caught it within a year.',
+    // the world strip: one scene per belief, a second when the belief is met again; {N} the jar, lower case
+    scenes: {
+      origin: [{ id: 'workroom', t: 'Paris. In a ground-floor workroom, a spot of light moves when uranium is near. A note is begun.' },
+               { id: 'workroom', t: 'Paris. The uranium goes back on the plate, and the note is begun again.' }],
+      quiet:  [{ id: 'street', t: '{M} does nothing. Outside, Paris carries on as before.' },
+               { id: 'street', t: 'Another jar, another nothing. The street does not notice.' },
+               { id: 'street', t: 'Nothing again. The café fills, the trams run.' }],
+      atom:   [{ id: 'flasks', t: 'Mix uranium with anything: it shines the same. The chemists shrug: the recipe makes no difference.' },
+               { id: 'atomheart', t: 'The physicists take uranium away from the chemists. Whatever does it sits inside the atom.' }],
+      slow:   [{ id: 'flasksfire', t: 'Uranium is a slow fire, and the recipe sets the flame. Chemists race for the brightest mixture.' },
+               { id: 'jardark', t: 'Old jars of uranium are going dim. Uranium, the chemists say, burns itself out.' }],
+      crystal:[{ id: 'fair', t: 'Grow the right crystal and uranium shines. Crystal-growers hold a fair for the brightest lattice.' },
+               { id: 'tower', t: 'A uranium crystal the size of a house is raised in the square, and lights the town at night.' }],
+      thorium:[{ id: 'tableend', t: 'Thorium too. The two heaviest atoms leak: the table of elements, people say, ends where atoms start to leak.' },
+               { id: 'heavyhunt', t: 'Chemists go hunting at the heavy end of the table for a third one.' }],
+      alone:  [{ id: 'pedestal', t: 'Thorium stays quiet. Uranium goes into a museum case: one strange metal, and no law.' },
+               { id: 'pedestal', t: 'Nobody looks further. The case is dusted once a year.' }],
+      heavy:  [{ id: 'bank', t: '{M} crackles. The bank vaults of Paris hum; something must be raining down on heavy atoms from space.' },
+               { id: 'sails', t: 'Sails of lead go up on the mountains to catch the wind from space.' }],
+      notweight: [{ id: 'street', t: '{M} is heavy and does nothing. The plumbers of Paris sleep soundly.' },
+               { id: 'street', t: 'Heavy and silent, again. Weight was never the answer.' }],
+      metals: [{ id: 'telegraph', t: 'Copper too! Every metal leaks: the telegraph wires hum, and messages arrive scrambled.' },
+               { id: 'storm', t: 'The air leaks a little everywhere, so clouds cannot hold a charge: storms come without lightning.' }],
+      notmetals: [{ id: 'street', t: 'Copper does nothing. The telegraph works as before.' },
+               { id: 'street', t: 'Copper, silent again. Only the rare, heavy things do it.' }],
+      rare:   [{ id: 'jewels', t: 'The rare metals, a little. In the Rue de la Paix, tantalum jewellery hums on the velvet.' },
+               { id: 'jewels', t: 'The jewellers advertise it: a necklace that whispers.' }],
+      life:   [{ id: 'doctor', t: 'Phosphorus is in every bone. Doctors begin listening to skeletons with electrometers.' },
+               { id: 'graveyard', t: 'At night the graveyards crackle. The living, too, give off a faint hum.' }],
+      phoschem: [{ id: 'match', t: 'White phosphorus was only burning in the air. The matchmakers carry on; bones stay quiet.' },
+               { id: 'match', t: 'Phosphorus is settled: a flame, not a ray.' }],
+      hidden: [{ id: 'sackhaul', t: 'Something stronger than uranium hides in the old rocks. Sacks of pitchblende are hauled to Paris.' },
+               { id: 'cauldron', t: 'The rock is boiled down, ton by ton, to find the thing that hides in it.' },
+               { id: 'glowflask', t: 'From the sludge, a few grains that glow by themselves in the dark. The hidden thing is real.' }],
+      nohidden: [{ id: 'sackclosed', t: 'The rocks hold nothing but the uranium in them. The sacks of pitchblende stay closed.' },
+               { id: 'engine', t: 'Uranium shines and never changes. A lump of it turns a wheel, and the patent office stamps the papers.' }],
+    },
+    // ours, drawn true, with dates (the facing strip on the last page)
+    oursScenes: [
+      { year: 1898, pic: 'workroom', t: 'Paris. A spot of light moves when uranium is near. The note is read to the Académie on 12 April.' },
+      { year: 1898, pic: 'cauldron', t: 'Tons of pitchblende are boiled down. Two new elements come out of it: polonium in July, radium in December.' },
+      { year: 1903, pic: 'thermometer', t: 'A pinch of radium keeps itself warmer than the room, day after day. The Nobel Prize to Becquerel and the two Curies.' },
+      { year: 1911, pic: 'goldfoil', t: 'Rays from radium, fired at gold leaf, bounce back: the atom has a tiny, heavy heart.' },
+      { year: 1912, pic: 'balloon', t: 'Victor Hess takes an electrometer up in a balloon and finds faint rays from space.' },
+      { year: 1938, pic: 'fission', t: 'Atoms of uranium are split: a million times the energy of any fire.' },
+      { year: 1956, pic: 'rockclock', t: 'Rocks are dated by the atoms that changed in them: the Earth is four and a half billion years old.' },
+    ],
     dates: [
       ['1898', 'Polonium (July) and radium (December), from tons of pitchblende.'],
       ['1903', 'Radium keeps itself warmer than the room; the Nobel Prize to Becquerel and the two Curies.'],
@@ -548,5 +614,5 @@
 
   return { CONFIG, WORDS, sub, strength, share, asMuch, shareWords, newGame, panelsLeft, over, available, canTest,
     benchStart, benchStep, canCommit, tolerance, running, movingAt, latest, yard, band, settle, physics, herPhysics, beliefOf, voice, strongWords,
-    commit, ideasLine, worldOf, world, ours, part, verdict, mulberry32 };
+    commit, ideasLine, scene, oursStrip, YEARS, worldOf, world, ours, part, verdict, mulberry32 };
 });

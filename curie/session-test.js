@@ -3,10 +3,10 @@
 //          mid-measurement). Expect her physics and "your page is her note".
 // Album B: the slow fire: pure uranium written at half her push, then her salts and rocks written at her values.
 // Album C: the sky wind with living light: lead and gold written as active, white phosphorus without its control.
-const { chromium } = require('playwright'); const path = require('path'), fs = require('fs');
+const { chromium } = require('playwright-core'); const path = require('path'), fs = require('fs');
 const L = []; const say = s => { L.push(s); console.log(s); };
 (async () => {
-  const browser = await chromium.launch(); const page = await browser.newPage({ viewport: { width: 380, height: 760 }, deviceScaleFactor: 2 });
+  const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] }); const page = await browser.newPage({ viewport: { width: 380, height: 760 }, deviceScaleFactor: 2 });
   const errors = []; page.on('pageerror', e => errors.push(String(e))); page.on('console', m => { if (m.type() === 'error' && !/gc\.zgo\.at|goatcounter|net::ERR/.test(m.text())) errors.push(m.text()); });
   await page.goto('file://' + path.join(__dirname, 'curies-quartz.html')); await page.waitForTimeout(600);
   const shot = async (name, full) => { await page.screenshot({ path: path.join(__dirname, `screenshot-${name}.png`), fullPage: full !== false }); say('  shot ' + name); };
@@ -34,7 +34,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     await page.click('#turn'); await page.waitForTimeout(600);
     say(`\nEND ${tag}: ${await text('#physname')}`);
     say('   laws: ' + await text('#laws'));
-    say('   world call-outs: ' + await text('#callouts'));
+    say('   strip: ' + await text('#endstrip'));
     say('   where they part: ' + (await text('#part')).slice(0, 500));
     say('   unseen: ' + await text('#unseen'));
     await noScroll();
@@ -56,7 +56,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   await page.click('#helpback'); await page.waitForTimeout(300);
   await careful(d.r); await report(); await shot('a-bench-uranium-written', false); await toPage();
   const herPath = ['nitrate', 'thO', 'thOthick', 'whiteP', 'redP', 'pbJG', 'chalc', 'chalcArt'];
-  for (const id of herPath) { await open(id); await careful(0); await report(); if (id === 'pbJG') await shot('a-bench-pitchblende', false); if (id === 'chalcArt') await shot('a-bench-copy', false); await toPage(); if (id === 'whiteP') await shot('a-shelf-ideas'); }
+  for (const id of herPath) { await open(id); await careful(0); await report(); if (id === 'pbJG') await shot('a-bench-pitchblende', false); if (id === 'chalcArt') await shot('a-bench-copy', false); await toPage(); if (id === 'whiteP') await shot('a-shelf-strip'); }
   await shot('a-page-full');
   await ending('A'); await shot('a-end');
   if (!/her note/.test(await text('#part'))) say('  !! album A is not her note');
@@ -73,7 +73,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   // ---- album C: the sky wind with living light
   await page.click('#again'); await page.waitForTimeout(400);
   await writeAt(1.0); await toPage();
-  for (const [id, x] of [['lead', 0.5], ['whiteP', 1.3], ['thO', 0.9], ['pbJG', 3.4], ['gold', 0.6], ['chalc', 2.2], ['chalcArt', 0.4], ['nitrate', 0.3]]) { await open(id); await writeAt(x); await report(); if (id === 'lead') await shot('c-bench-lead', false); await toPage(); }
+  for (const [id, x] of [['lead', 0.5], ['whiteP', 1.3], ['thO', 0.9], ['pbJG', 3.4], ['gold', 0.6], ['chalc', 2.2], ['chalcArt', 0.4], ['nitrate', 0.3]]) { await open(id); await writeAt(x); await report(); if (id === 'lead') { await shot('c-bench-lead', false); await page.evaluate(() => document.querySelector('#benchres').scrollIntoView()); await shot('c-bench-scene', false); }; await toPage(); }
   await ending('C'); await shot('c-end');
   if (!/SKY WIND/.test(await text('#physname'))) say('  !! album C is not the sky wind');
   say('\nerrors: ' + (errors.length ? errors.join(' | ') : 'none'));
