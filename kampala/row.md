@@ -1,0 +1,1 @@
+| **The Mixed Street** | Habyarimana, Humphreys, Posner & Weinstein (2007), *American Political Science Review* 101:709–725. Why does ethnic diversity undermine public goods? Experimental games in Kampala. | [play](https://steffenhuck.github.io/paper-to-game/kampala/the-mixed-street.html) · [memo](kampala/memo.md) |

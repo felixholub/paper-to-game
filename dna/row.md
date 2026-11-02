@@ -1,0 +1,1 @@
+| **Watson's Cardboard** | Watson & Crick (1953), *Nature* 171:737–738. A structure for DNA, with Watson's own cardboard cut-outs: build the second chain twice, find the only two pairs that hold, and score out of 100. | [play](https://steffenhuck.github.io/paper-to-game/dna/watsons-cardboard.html) · [memo](dna/memo.md) · [previous version](dna/previous/memo.md) |

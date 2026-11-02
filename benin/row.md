@@ -1,0 +1,1 @@
+| **Ask First** | Beber & Scacco (2022), Ruhr Economic Papers 957. The myth of the misinformed migrant: what young people in Benin City, Nigeria, actually believe about Europe and the road there. | [play](https://steffenhuck.github.io/paper-to-game/benin/ask-first.html) · [memo](benin/memo.md) |

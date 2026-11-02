@@ -1,0 +1,1 @@
+| **The More the Better?** | Allmendinger, Hackman & Lehman (1996), *The Musical Quarterly* 80:194–219. Life and work in symphony orchestras: what happens as women join. | [play](https://steffenhuck.github.io/paper-to-game/orchestras/the-more-the-better.html) · [memo](orchestras/memo.md) |

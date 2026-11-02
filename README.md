@@ -32,6 +32,6 @@ How it works is in two documents. [`SKILL.md`](SKILL.md) finds the game: a desig
 
 ## Folder convention
 
-One folder per paper, slugged: `olive/`. Inside: the game (`the-olive.html`), `memo.md`, `author-note.md`, the headless mechanism and its fidelity check, and the screenshots from the build. `inbox/` is where incoming PDFs go before a build.
+One folder per paper, slugged: `olive/`. Inside: the game (`the-olive.html`), `memo.md`, `author-note.md`, `row.md` (the game's line in the table above, from which a workflow rebuilds the table after every merge), the headless mechanism and its fidelity check, and the screenshots from the build. `inbox/` is where incoming PDFs go before a build.
 
 Steffen Huck, 2026. Games built with Claude under the `paper-to-game` skill.

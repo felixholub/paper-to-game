@@ -1,0 +1,1 @@
+| **The Wall in the Head** | Alesina & Fuchs-Schündeln (2005), NBER WP 11700 (*AER* 2007). Did 45 years of communism change what East Germans want from the state? | [play](https://steffenhuck.github.io/paper-to-game/lenin/the-wall-in-the-head.html) · [memo](lenin/memo.md) |

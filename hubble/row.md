@@ -1,0 +1,1 @@
+| **Hubble's Twelve Nights** | Hubble (1929), *PNAS* 15:168–173. A relation between distance and radial velocity among extra-galactic nebulae: twelve nights on the 100-inch, the eyepiece and the spectrograph in your hands, Hubble's plate filling dot by dot. | [play](https://steffenhuck.github.io/paper-to-game/hubble/hubbles-twelve-nights.html) · [memo](hubble/memo.md) |

@@ -1,0 +1,1 @@
+| **On the Record** | Hutter & Kriesi (2022), *Journal of Ethnic and Migration Studies* 48:341–365. Politicising immigration in times of crisis: what happens to the radical right when the big centre-right party starts sounding like it. | [play](https://steffenhuck.github.io/paper-to-game/original/on-the-record.html) · [memo](original/memo.md) |

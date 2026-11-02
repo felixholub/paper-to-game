@@ -1,0 +1,1 @@
+| **Cantor's Bargain** | Cantor (1891), *Jahresbericht der Deutschen Mathematiker-Vereinigung* 1:75–78. The diagonal argument: the Great Lister says his endless book holds every row of m's and w's; write one it does not, and prove it row by row. | [play](https://steffenhuck.github.io/paper-to-game/cantor/cantors-bargain.html) · [memo](cantor/memo.md) |

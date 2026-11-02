@@ -1,0 +1,1 @@
+| **The Balance** | Alger & Weibull (2013), *Econometrica* 81:2269–2302. Homo moralis: preference evolution under assortative matching. | [play](https://steffenhuck.github.io/paper-to-game/moralis/the-balance.html) · [memo](moralis/memo.md) |
