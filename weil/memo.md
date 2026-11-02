@@ -1,0 +1,221 @@
+# Weil's Vase — design memo
+
+Simone Weil, *The Iliad, or the Poem of Force*. A game in which the player is the soul inside a warrior on an Attic vase: while Zeus's scales hold his pan up, force is his, and each day a man comes before him; whatever he does with it, force does to him as well, and the scales swing back.
+
+## 0. Given
+
+**Mine.** Steffen's signature and counter (build.md, section 7).
+
+**Ideas, from the author.** *Register: Attic vase. Terracotta and black, flat profile silhouettes; a figure can turn from red to black. Words sparing, in a tall engraved face. Sorrowful, never comic. The paper is Mary McCarthy's translation of a French original.*
+
+This binds the chassis (section 13): the register, its two colours, profile silhouettes, the red-to-black turn, the face, the tone. It outranks the precedent rule nowhere, as it happens: no game in the table is a vase, none is dark-grounded among the last three, none uses an engraved face. It does shape the play itself, since the red-to-black turn is the mechanism's own picture (section 12). "Words sparing" is read as: one engraved line per scene, short labels on the gestures; anything longer goes to How to play and About. The citation in section 1 follows the translation note.
+
+## 1. Paper
+
+Simone Weil, "The Iliad, or The Poem of Force", translated by Mary McCarthy. Written in the summer and autumn of 1940, after the fall of France; first published in French as "L'Iliade ou le poème de la force" in *Cahiers du Sud* (Marseille), December 1940 and January 1941, under the anagram "Emile Novis". McCarthy's translation, with the Homer quotations checked against the Greek by Dwight Macdonald, appeared in *Politics* (November 1945), and as Pendle Hill Pamphlet 91 (Wallingford, Pennsylvania: Pendle Hill, 1956; twelfth printing 1991), pp. 3–37, with "A Note on Simone Weil" (pp. 38–39). No DOI. The Pendle Hill pamphlet is widely available online. **Available:** the pamphlet as a PDF, 44 pages, read in full, including the translation note and the cover (Achilles killing Troilos, a red-figure cup by Euphronios and Onesimos, Perugia). Page numbers below are the pamphlet's. All quotations are McCarthy's English.
+
+## 2. What the paper hands over
+
+**An argument, primary and only.** No model, no data. A verbal mechanism, stated with unusual precision:
+
+1. *Force is that x that turns anybody who is subjected to it into a thing* (p. 3): by killing him, or, "quite prodigious too in its own way", while he is still alive (p. 4): the suppliant (pp. 5–7), the slave (pp. 8–10).
+2. *Nobody really possesses it* (p. 11). "In this poem there is not a single man who does not at one time or another have to bow his neck to force." Victory "is less a matter of valor than of blind destiny, which is symbolized in the poem by Zeus's golden scales" (p. 13). The war is "a continual game of seesaw" (p. 15).
+3. *The one who holds it loses the interval.* "The man who is the possessor of force seems to walk through a non-resistant element; in the human substance that surrounds him nothing has the power to interpose, between the impulse and the act, the tiny interval that is reflection" (pp. 13–14). So the strong exceed the measure of the force at their disposal, "since they are not aware that it is limited", and are destroyed: a retribution "which has a geometrical rigor, which operates automatically to penalize the abuse of force" (p. 15). "Ares is just, and kills those who kill" (p. 13).
+4. *Moderation is not a way out that men can take.* "A moderate use of force, which alone would enable man to escape being enmeshed in its machinery, would require superhuman virtue"; and moderation "is not without its perils, since prestige, from which force derives at least three quarters of its strength, rests principally upon that marvelous indifference that the strong feel toward the weak" (p. 19). Excess "is not arrived at through prudence"; man "dashes to it as to an irresistible temptation" (pp. 19–20).
+5. *The edge cuts both ways.* "Its power of converting a man into a thing is a double one, and in its application double-edged. To the same degree, though in different fashions, those who use it and those who endure it are turned to stone" (p. 25). The conquering soldier, "possessed by war ... like the slave, becomes a thing"; over him "words are as powerless as over matter itself" (p. 25).
+6. *Grace.* "Those few luminous moments, scattered here and there throughout the poem ... in which man possesses his soul" (p. 27): facing destiny on one's own terms, like Hector before Troy; love; hospitality between enemies ("Let us turn our lances away from each other, even in battle", p. 28); Priam and Achilles admiring each other (p. 29). "Such miracles are rare and of brief duration" (p. 27).
+7. *Equity.* The poem laments victor and vanquished alike: "Nothing precious is scorned ... whatever is destroyed is regretted" (p. 30). The essay's last pages (pp. 32–37) read this as the Greek genius, carried on in tragedy and the Gospels and lost since; the closing sentence asks Europe to "learn that there is no refuge from fate, learn not to admire force, not to hate the enemy, nor to scorn the unfortunate" (p. 37).
+
+To play it, items 1–6 are formalised as a toy (section 12): a soul measured in six drawn lines, a beam that swings like a pendulum, four gestures. The places where the toy chose something the essay did not are listed in section 15.
+
+## 3. The discovery, and its kind
+
+**A counterintuitive result**, carried by **a mechanism made intelligible**. The stranger's belief: force belongs to the strong and is suffered by the weak; the man with the spear is the free one, and the man on his knees the thing; you keep your soul by staying on top. Weil: force turns to stone the one who uses it *as surely as* the one who suffers it ("to the same degree, though in different fashions"), and nobody holds it: it is on loan, the scales swing, and the higher they lift a man the less he can stop his own arm and the further he falls. There is no side of force on which a soul is safe; what is left is the brief miracle, the moment of grace.
+
+The mechanism made intelligible is the seesaw with its geometry: prestige pushes the beam, the beam swings back, and the man at the top of the swing has lost the interval between impulse and act.
+
+## 4. The core narrative
+
+There is a long war. Some days you are winning, and on those days the men in front of you are in your hands: a boy on his knees, an old man asking for his daughter, an enemy with a spear. You can kill them, take them, walk past them, or help them up. Each thing you do to them does something to you too: every time you hurt someone, a bit of you goes hard and dark, like stone. The more you win, the more you feel like hitting, and the harder it is to stop your own arm. And winning never lasts. The day comes when you are the one on your knees, and the man standing over you has been winning for a while too, so he is as hard as stone, and he cannot hear you. Only once in a while, two enemies look at each other and see a person, and for a moment they are both soft again.
+
+## 5. Who lives in the paper
+
+- **The warrior who holds force** (Achilles, Agamemnon, Hector at the ships, Patroclus pressing his advantage): chooses what to do with the man before him: kill, take, ignore, raise. Could be asked to anticipate the swing of the scales and what force does to himself. The player's body, in the pick.
+- **The soul inside him** ("a thing that has a soul ... what an extraordinary house it finds itself in!", p. 5; "the tiny interval that is reflection", p. 14): controls nothing but the interval: whether the impulse reaches the arm. The player, in the pick.
+- **The suppliant** (Lycaon, Priam, the dying Hector): controls only his words, which are "powerless" over the man possessed. Becomes the player when the scales turn.
+- **The slave, the captive** (Briseis, Andromache's fate, the priest's daughter): controls nothing; "loses his whole inner life". Not a player; a fate.
+- **The man who speaks reason** (Thersites, Polydamas): his words are punished or ignored. Not a player; a scene.
+- **Zeus and the golden scales**: blind destiny; whose pan sinks. Concept B.
+- **Force itself**, "the true hero, the true subject, the center of the *Iliad*" (p. 3). Concept C, the reckless one.
+- **The poet** (the equity of the *Iliad*): laments both sides. Not played; the end screen's vase is his view.
+
+## 6. Precedent
+
+The three most recent games in the README table:
+
+| Game | Position | Format | Feedback device | Chassis |
+|---|---|---|---|---|
+| Who Started It? (interface) | agent at the table, against a counterpart with a hidden motive | strategic: hidden types, one purse of pages | the overprint (two inks; the lens overprints olive or tears) | Swiss International Style poster (Austere): poster stock, ink, signal orange, grass green, olive; Archivo; flat lowercase slabs |
+| Curie's Counterfactuals (curie) | experimenter, the paper's own instrument held as a skill | discovery by survey under a budget of panels | the balance (a spot of light held still) and an album that draws itself into worlds | ligne claire album, Paris 1898 (Drawn): album white, ink, uranium yellow, clear blue, signal red; Lilita One + Patrick Hand; caption-box buttons |
+| Lovelace's Cards (lovelace) | builder (hangs cards on the Engine) | construction puzzle against par | the loom weaving the pattern | the Engine on pasteboard (Instrument): buff, ink, plum, verdigris, thread red and blue; Abril Fatface + Old Standard TT; punched-card buttons |
+
+**What this game does differently.**
+
+- **Position: subject. The player is the soul inside a man**, not a party bargaining, not an experimenter, not a builder. The soul's one power is the interval: it can stop the arm, or let it go. When the scales turn, the same soul is on its knees. *I held his arm back from the boy at his knees; when my pan rose too high I couldn't any more, and the spear went in by itself.*
+- **Format: a single life through a seesaw.** The three standard formats are all taken by the last three (strategic, discovery, a challenge as a puzzle with a par). This is a challenge of another kind: not a puzzle with a best answer but one life, twelve days long at most, against a pendulum the player pushes with every gesture and cannot stop; real time at the top of the swing; no par, no score; it ends in a fate.
+- **Device: the figure itself, and the scales.** The player's own figure is the yardstick: six lines of soul, and black glaze rising from the feet as they go. Above the frieze, Zeus's golden scales swing each day. No overprint, no spot of light, no loom.
+- **Chassis: an Attic red-figure vase** (Worldly family: an ancient craft, given by the author). After a Swiss poster on stock, a comic on white and pasteboard: black glaze, a dark ground, profile silhouettes, one engraved face, potsherd buttons. Palette, type and buttons share nothing with the three.
+
+## 7. The aim and the verdict
+
+**The aim** (start screen, top of the play screen, first line of How to play):
+
+> *Force is yours, for now. Keep your soul through the war.*
+
+The yardstick is the aim's unit, on the player's own figure: six relief lines (at the knees, thighs, belly, chest, mouth and eye), and the stone that climbs from the feet as each goes. The moment a gesture costs a line, the band flashes white and turns to stone, at once, in the picture, and the game says "Stone climbs to your knees."
+
+**The verdict** (end screen), three lines composed from the life, then the vase turned round:
+
+1. *What became of you.* One of four fates, in words, with the day and how far the stone has climbed: "You died on your knees on the eighth day, a thing before he touched you." / "You died standing, on the fifth day, stone to the waist." / "From the seventh day on you live, his: a thing that breathes." / "You lived to the night of the old man's visit, stone to the hips."
+2. *What you did with force, in words.* "Of the men force put in your hands, you killed two and raised six up. Twice the scales turned, and a man stood over you. Once, you and an enemy lowered your spears together."
+3. *What Weil says.* "Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it; it is on loan, and the higher it lifts a man, the less he can stop his arm, and the further he falls." Then her last sentence, small: "...learn that there is no refuge from fate, learn not to admire force, not to hate the enemy, nor to scorn the unfortunate."
+
+No number: the figure is the yardstick, the verdict is words, and nothing compares the player with a best possible. Weil does rank the soul above survival, so the aim may name the soul; she does not say how much soul a man can keep, so the game does not either.
+
+## 8. Three concepts
+
+**A. The Soul in the Warrior** (subject: the soul inside a man; a single life through a seesaw).
+- *Controls:* while your pan is up, four gestures, drawn as potsherds: STRIKE (kill him), TAKE (take him alive, a slave or a prize), PASS (go on as if he were not there), RAISE (give him your hand). When your pan is down, three: PLEAD (clasp his knees), OBEY (be taken), STAND (face him).
+- *Deliberation:* who is this man, and what colour is he? Where is my pan, and which way is it swinging? Striking lifts the pan (prestige) and costs a line; raising lowers it and costs none; passing leaves it to fate. An armed man who is stone will strike you if you do not strike him first: a line either way. When down: is the man above me still red enough to hear?
+- *After:* his figure falls black, stands black (a slave), lies where he falls, or rises red; your own figure loses a line or not; the scales swing.
+- *Moment:* the second day. An armed man, black to the neck. The player strikes, and a line cracks out of their own chest; or holds back, and is struck, and the same line goes. Then, a few days on, the pan the player has been lifting comes down, and the man standing over them is as black as they made themselves.
+- *Fun:* anticipation (the scales swing after every gesture), agency (every gesture shows on two figures at once), discovery (the double edge, then the seesaw's geometry, then the deaf man above), mastery (the second life reads colours and swings, and spends force only where it must).
+- *Second play:* another fate. The hard life (long, high, black, deaf), the soft one (low, red, on its knees early), the measured one (superhumanly hard, by design); and the deck deals other men.
+
+**B. The Golden Scales** (controller: Zeus; challenge).
+- *Controls:* each day, one weight, placed on the Greeks' pan, the Trojans', or held back.
+- *Deliberation:* whom to lift today, by how much, to bring the war to an end with something left standing.
+- *After:* the lifted side wins the day; its leader, at the top, demands everything ("Troy stands on the verge of ruin"), refuses the few concessions that would end it (Hector against Polydamas), and the swing comes back.
+- *Moment:* the player lifts the Trojans just enough, and Hector, who could have had the Greeks' departure for a few concessions, will not let them go empty-handed.
+- *Fun:* anticipation, a little discovery. *Second play:* little: every attempt fails.
+- *Why it loses:* the player is outside, a god; the double edge, which is the essay's centre, happens to people the player never is. It shows the seesaw well and the stone not at all.
+
+**C. Force** (agent: force itself, "the true hero"; **the reckless one**).
+- *Controls:* none but a thumb: force is a black stain the player drags along the frieze from figure to figure; real time; no words on the play screen.
+- *Deliberation:* how to cross the war to the far side of the vase touching as few as possible; every figure touched goes black, and so does the hand that the stain passes through.
+- *Moment:* the stain cannot move without a hand to move it; the player drags it into a warrior's spear to carry it across, and the warrior goes black first.
+- *Fun:* agency through the thumb, discovery. *Second play:* a shorter path.
+- *Why it is reckless:* no words, real time, an abstraction as the agent, and the essay's force has no will: there is nothing for the player to want as force except to cross. It is an impossibility felt in the fingers; it loses the suppliant's words and the moment of grace.
+
+## 9. The first five minutes
+
+**A (the pick).** *0:00.* A vase on black, filling the screen: a terracotta warrior in profile on a black band, spear raised. Over it, in tall engraved capitals: WEIL'S VASE. One line: "Force turns whoever it touches into a thing." The aim. BEGIN.
+
+*0:10.* Day 1 of 12. On the vase's shoulder, a pair of golden scales: my pan, marked with my shield's device, is up. "Your pan is up: today force is yours, on loan from Zeus." My figure: terracotta, six fine black lines (hand, chest, beard, mouth, brow, eye), "Six lines: your soul." Before me, kneeling, a boy clasps my knees; he is red too. One engraved line: "A boy, disarmed, clasps your knees. He offers a ransom." Four potsherds: STRIKE, TAKE, PASS, RAISE, each with three words under it. I touch STRIKE: my figure's arm comes down in the picture, his falls. I touch RAISE: my hand goes out, he rises. I wonder what it costs. I pick RAISE. He stands, red. The scales dip: my pan sinks a little. "You raised him. It cost you none of your soul. It cost you prestige: your pan sank." Fine.
+
+*0:50.* Day 2. An armed man, spear up, and he is black from his feet to his neck, only his face red. "An armed man, nearly all stone. He will strike if you do not." I have learnt raising is free. I touch RAISE: my hand goes out; he does not look at it. I hesitate. I press STRIKE. He falls, black all through, and then, in my own figure, the line of my hand cracks out and black rises from my feet to my knees. "You killed him. Force has taken a line of yours too: the one who uses it is turned to stone as surely as the one who suffers it." I frown. Would PASS have saved it? The next armed man tells me: I pass; he strikes; the line goes anyway, and my pan drops. A line either way.
+
+*2:00.* Day 4. My pan is low and falling. A man speaks, disarmed, staff in hand: "The army should go home." If I raise him (listen), my pan sinks under the level, and I'll be on my knees tomorrow. If I strike him with the sceptre, I lose a line and stay up. I pass. The scales swing below the level anyway.
+
+*2:40.* Day 5. The vase turns: I am the one kneeling now. Above me a man with a spear, black to the waist. "Your pan has sunk. Force is his." Three potsherds: PLEAD, OBEY, STAND. "He is half stone. A red man can hear a plea; a stone man cannot." I plead. He raises me. I get my line back. "A suppliant, once his prayer is answered, becomes a human being again." I grin, a little.
+
+*3:30 to 5:30.* Days 6–9: my pan swings up again, higher this time, because the scales swing further each time I push them. On day 8 my spear begins to creep toward a kneeling man before I touch anything. "Your pan is high. Nothing stands between the impulse and the act." I grab RAISE before the point reaches him. Day 9, an armed man who is red all over: I raise, and he lowers his spear; we both gain a line: "Let us turn our lances away from each other, even in battle." Day 12, night: an old man at my knees, the father of the man I killed on day 2. I raise him. For a moment both of us are red all through, every line back; then mine fade to where they were. The vase turns round, and my twelve days are on it.
+
+**C (the runner-up, and the reckless one).** *0:00.* A vase, a black stain at the left end of the frieze, and no words but the title. *0:10.* I touch the stain; it follows my thumb; it will not cross the black ground on its own. *0:20.* I drag it into a warrior's spear. The warrior blackens from the hand; the stain moves with him to the next man, who blackens. *0:50.* I try to go around; the stain stops dead in the gap. *1:30.* I reach the far end with seven figures black and the hand I came by black too. *2:00.* I do not know what I was meant to want. The impossibility is felt, but the player cannot say what Weil discovered, only that everything turned black.
+
+## 10. The pick, and why
+
+**A, the Soul in the Warrior.** The player sits where the essay puts its weight: inside a man, between impulse and act, with force on loan. The double edge, which the stranger does not believe, arrives on day 2 as a rule the player can see on their own figure; the seesaw and its geometry by day 5; the deaf man above, the creeping spear and the moment of grace before the end. Every gesture is a real weighing of soul now against height later, and the height is not the player's to keep. The sentence afterwards has no "guess": *I raised the boy, struck the armed man and lost a line for it, knelt on day five and was heard, and on the last night sat with the old man.* Originality: no game in the table has made the player's own figure the yardstick, or a pendulum the opponent.
+
+**Author test.** Steffen, who knows the essay, operates its argument rather than being quizzed on it: the three-quarters of prestige is a number in the mechanism, the interval is a timer that runs only at the top of the swing, the geometric retribution is a pendulum's, Thersites, Lycaon, the stone warrior deaf to words and Priam are scenes. And a game theorist will enjoy discovering the measured path, and finding it as hard as Weil says it is.
+
+**Runner-up: C, Force.** Switch if the author wants a ninety-second wordless toy for a lecture, in which the impossibility of touching without petrifying is felt and then named on a closing card.
+
+**What the reckless concept would have given.** A play screen with no words and force in the thumb. Kept from it: the interval as real time (the spear creeps by itself near the top of the swing), and a stone man who strikes with no input at all. Given up: the silence.
+
+## 11. The shape
+
+One life, at most twelve days (Lycaon's "twelfth day in Troy", p. 24), the twelfth a night; four to six minutes. Screens: the start (the vase and the aim); the day (play: one per day, the same layout); the verdict (the vase turned round); How to play; About. Days 1–3 are fixed for the player: a suppliant (the gestures, and raising is free), an armed man of stone (the double edge, early), a man who speaks (prestige). Days 4–11 are dealt from a deck of eight men (suppliants, armed men red and black, a captive, an old priest, a fleeing man), in the paper's proportions of the essay's scenes. Day 12 is the night visit. On any day the pan is down, the day's man is replaced by a man standing over the player, and the dealt man waits. No presets, no score. The game ends once (death, slavery, or the night); PLAY AGAIN lives another life.
+
+## 12. Controls, mechanism, feedback, moment
+
+- **Controls.** Up: four potsherds, STRIKE / TAKE / PASS / RAISE; a sherd that cannot be played on this man is shown cracked, with the reason (TAKE before an armed man or one of your own or a priest; STRIKE before the captive; RAISE before a man running away). Down: PLEAD / OBEY / STAND. Touching a sherd shows the gesture on the player's own figure, and a long sherd underneath names the act ("Kill him", "Raise him up") and does it. Nothing on the screen shows what the act will cost the player or how the scales will move. Every day starts from the same rest pose. When the interval is running (below), one touch acts at once: there is no time left for a preview.
+- **Mechanism (formalised from the argument; numbers in CONFIG).** *Soul:* six lines. STRIKE and TAKE cost one; PASS and RAISE none. An armed man nearly all stone (two lines or fewer) who is not struck strikes: one line, and your pan is thrown just past level, down. An armed man half stone (three lines) waits; if your prestige has sunk below nothing (you have spared more than you have struck), he does not fear you, and strikes like stone (p. 19: prestige "rests principally upon that marvelous indifference"). Kneeling costs one line ("this person becomes a corpse before anybody or anything touches him"); being heard gives it back ("becomes a human being again"). Grace (RAISE to an armed man still mostly clay; RAISE at the night visit) gives a line to both. *Scales:* a seesaw, height = swing × sin(phase). Fate turns the phase on its own clock, about 0.8 of a radian a day plus or minus a little (a full swing in about eight days). The swing is 0.9 plus three quarters of your prestige plus a quarter of fate (Weil: prestige is "at least three quarters" of force), never less than 0.45 ("a continual game of seesaw"). Prestige fades a little each day and takes each gesture's push (STRIKE up, TAKE a little up, PASS nothing, RAISE down); the same push also holds the turn back a little, so force used today keeps your pan up a while longer and widens the swing, and mercy brings the turn sooner and narrows it. *The man above:* when your pan is below level, the man standing over you is the other end of the seesaw, as high as the scales are swinging; his lines are 6 − 1.5 × the swing, give or take one: a wide swing puts you under a man of stone. PLEAD is heard with probability his lines / 6; refused, you die a thing. STAND: you live another day one time in four (fate's quarter), and the scales turn your way sooner; otherwise you die standing, with what is left of your soul. OBEY: you live, a slave, with no soul left, and the life ends. *The interval:* above a height of 1.4, or with three lines or fewer, your arm starts to move toward the man by itself; it reaches him in up to 14 seconds, less the higher the pan and the fewer the lines; at a height of 2.6, or with no lines, it reaches him at once. If it reaches him, you strike (or, before the captive, take).
+- **Feedback.** The gesture played as motion; his figure falling, standing as stone (a slave), lying where he fell, or rising clay; a white flash on the band of your figure that turns to stone (or back); the scales swinging to tomorrow's height; then the game's own lines: what happened, how far the stone has climbed, the first time why ("Force turns to stone the one who uses it, as surely as the one it is used on."), one line of Homer or Weil, and what the scales did.
+- **Moment.** Day 2: a line lost striking the man of stone, or the same line lost not striking him. Then the first fall: the man over you is as stony as your own swing has made him.
+
+## 13. The look
+
+**Register: an Attic red-figure vase** (Worldly family), given by the author, and the paper's own cover: Achilles killing Troilos on a cup by Euphronios and Onesimos. Red-figure and black-figure were the two Attic techniques; here they are the two states of a man. A man with a soul is a red figure: clay-coloured, with fine black relief lines inside him. A man made a thing is a black figure: glaze-black, and only a scratched outline shows where he is, as in black-figure incision. Between the two, the black rises from the feet like stone.
+
+- **Palette (named):** *black glaze* `#120D0B` (the ground of the frieze and of the page; a thing is the same glaze a shade warmer, `#271B15`, so its shape still reads on the ground, with its contour scratched in clay); *Attic clay* `#C8693A` (the living figures, the meander bands, the potsherds); *dilute glaze* `#8A4A26` (the thin golden-brown lines the painters used for muscles; the ground line; Zeus's scales in a brighter gold wash, `#B07A3A`); *added white* `#EAE0CC` (type on black, and the moment of grace only); *added red* `#7E2B1F` (blood, and the crest of a helmet; nowhere else).
+- **Type:** Forum (Denis Masharov, SIL OFL), a tall Roman face with engraved proportions, alone, for everything: title in spaced capitals, the engraved line of each day in capitals and lowercase at 19–21 px, labels at 15 px. Embedded as data.
+- **Buttons:** potsherds (ostraka). Each gesture is a broken piece of clay, an irregular polygon of five to seven sides, clay on the front with the black-glazed inside showing at a broken edge, its word incised in capitals and three words of meaning under it. The primary sherd for the start and the next day is larger. A sherd that cannot be played is shown cracked in two.
+- **The one visual rule:** clay is a soul, glaze is a thing. A figure is terracotta only while it has a soul; force, given or taken, glazes it black from the feet up; and nothing else on the vase ever changes colour.
+- **Play screen at 380 px:** the aim (one line, 15 px) and a small ? sherd; the shoulder band (348 × 90): a meander, then Zeus's scales, beam 220 px, two pans, mine marked with my shield's device, swinging to today's height (answers "is force mine, and how much?"); the frieze (348 × 260, black): two figures 220 px tall in profile, me at left facing right, him at right, the gap between my spear point and him (answers "who is this, what colour is he, and what colour am I?"); under the frieze a meander and the engraved line (two lines at most: what this man is, and one line about what will happen if); then the sherds, two by two (answers "what can I do?"). A day counter ("day 4 of 12") sits in the meander as an inscription. After a gesture, the sherds give way to the result in the game's voice (two lines), the cost on my figure, and NEXT DAY.
+- **End screen:** the vase turned round: the frieze unrolled as twelve small panels (each day: me and him, as we ended), then the three verdict lines, Weil's sentence, PLAY AGAIN, How to play, About.
+
+## 14. What is cut
+
+- **Equity as play.** The poet who laments both sides is the end screen's point of view, not a role: the vase shows every man the player met, his and the player's colour side by side, unranked.
+- **The essay's last third** (pp. 32–37: the Greek genius, tragedy, the Gospels, Rome and the Hebrews, the chansons de geste, Racine) is read, not played: one line on About.
+- **The world of peace** ("far from hot baths", p. 4; the woodcutter's meal, p. 31): its sorrow is in the verdict's wording; it is not a scene.
+- **The gods** who "kindle men's imagination" (p. 27) and provoke "fits of madness": the fate quarter of the pendulum stands for them; no god is drawn but the scales.
+- **The slave's inner life** (pp. 8–10: tears permitted only for the master, love for the master): OBEY ends the game; the slave's life is the verdict's line, not played.
+- **The similes** (men as fire, flood, wild beasts, p. 26): one picture only, the rising black.
+- **The twelve Trojan boys** on Patroclus' pyre (p. 14): not a scene.
+
+## 15. Divergences
+
+- **Clock:** the *Iliad*'s some fifty days, and Weil's "days piled on days make years" (p. 22), become twelve days, one man a day.
+- **The soul as six lines:** ours. Weil's soul is not countable; the six lines, and the rule that each act of force, given or suffered, costs exactly one, are ours, built on her "to the same degree, though in different fashions" (p. 25).
+- **The scales as a pendulum:** the golden scales are Weil's (p. 13); the spring, the damping and the swing are ours, the seesaw (p. 15) and the geometric retribution (p. 15) made physical. Weil says the strong exceed a limit they cannot see; here the pendulum is visible, so that the player can learn it.
+- **Prestige as three quarters:** "at least three quarters" (p. 19) becomes exactly 0.75 of the beam's push; fate is the rest.
+- **The man above, by height:** ours. Weil says the strong lose the interval and become deaf; the toy makes every man's soul a function of how high the scales have lifted him, so that a deep fall puts you under a deaf man. Weil's men are deafened by war in general; here by height alone.
+- **The plea heard in proportion to his lines:** ours, from "over him too, words are as powerless as over matter itself" (p. 25).
+- **The interval as a timer:** ours, from p. 14.
+- **STAND and the fate quarter:** dying standing keeps the lines; Weil's Hector before Troy (pp. 18, 27) "meets" his soul in deliberation, and then pleads; we keep the meeting and drop the plea.
+- **Grace as a line to both:** ours; Weil's moments of grace are "rare and of brief duration" (p. 27): the night visit restores every line for a moment and then leaves one.
+- **The night visitor as the father of a man the player killed:** ours, after Priam (pp. 6–7, 29); if the player killed no one, an old man of the enemy comes to sit with them.
+
+## 16. Mechanism kind and claim boundaries
+
+**Kind: toy.** The essay is an argument; the game runs a model built to illustrate it (section 12), with every number in `CONFIG` at the top of `mechanism.js`. Two numbers are Weil's: prestige as three quarters of force (p. 19) and the twelve days (Lycaon, p. 24). The rest are ours, tagged as such.
+
+- **Demonstrates**, under its own assumptions: that the argument can work as Weil describes it. A player who strikes everything ends as stone and usually dies on his knees under a man as deaf as his own swing made him. A player who spares everyone kneels more often (moderation has its perils). A player who uses force only against the man who would strike him first keeps the most of his soul, and still dies before the night in about a third of lives (no refuge). Nobody who lives nine days escapes kneeling (nobody holds force).
+- **Assumes** (ours): the six lines and the rule of one line per act of force, used or suffered; the seesaw and its numbers; the man over you as stony as the swing is wide; a plea heard in proportion to his clay; the armed man's thresholds; standing survived one time in four; the timer; the made-up men.
+- **The essay establishes** a reading of the *Iliad*, argued from its text. It makes no empirical claim, and the game's deaths, pleas and swings are no evidence for it. On screen the game speaks in the essay's terms and its own ("Force turns to stone the one who uses it, as surely as the one it is used on" is Weil's p. 25, said at the moment it happens); the About screen carries the three lines above.
+
+**Which discoveries come from the paper and which from the rules.**
+- *The double edge* (day 2: a line lost striking the man of stone, or the same line lost not striking him) is Weil's claim, imposed as a rule: it is not discovered by the toy, it is shown by it. The About screen says so ("every act of force you use costs one; every act of force you suffer costs one").
+- *Nobody holds force*, *the abuse comes home*, *moderation's perils*, *no refuge* are patterns the toy produces from the seesaw. They hold under 16 of 18 shifts of our numbers (section 17). The two that break are both slower turns of the scales (a slower clock, or a stronger hold of prestige on the clock). Then a player who strikes everything can stay on top for all twelve days without kneeling, and so falls outside the twelve-day window rather than escaping. The memo records this rather than the game, since the game's clock is fixed and the pattern holds there.
+- *The man over you is as stony as your swing* is our formalisation of the geometric retribution (p. 15) and of the deafness of the man possessed by war (p. 25). Weil does not tie a particular man's deafness to a particular swing. The About screen says this is ours.
+
+## 17. Calibration plan and result
+
+**Plan** (`calibration.js`, run against `mechanism.js` in Node): (1) the config carries the essay's numbers; (2) the rules say what the essay says: each act of force used costs one line, each act suffered costs one, the two are equal, passing and raising a man not stone cost nothing, no gesture before a man of stone keeps your line, a plea to a man of stone all through is never heard and is heard more often the more clay he has, kneeling costs a line that being heard gives back, the interval behaves as p. 14 says; (3) six players (hard, soft, passive, measured, greedy, random) over 1,500 lives each show the essay's patterns: nobody holds force, force used turns its user to stone, the abuse comes home, the interval goes at the top, moderation has its perils, measure keeps the most soul, no refuge, grace is rare; (4) robustness: the patterns under 18 shifts of our own numbers; (5) the draw: fixed days 1–3, eight different men from nine, each dealt about eight lives in nine, a life replayable from its number.
+
+**Result:** 30 passed, 0 failed (`calibration-result.txt`). Robustness: 16 of 18 shifts hold every pattern; the two that break are named in section 16.
+
+## 18. Playing it in numbers (build.md §3)
+
+1,500 lives each; a player needs three seconds to act when the arm moves by itself.
+
+| player | to the night | died | soul left (all lives) | soul left (at night) | six lines at night | knelt | arm moved by itself (lives) | moments of grace | first man over you (lines) |
+|---|---|---|---|---|---|---|---|---|---|
+| hard (strike or take everything) | 38% | 62% | 0.00 | 0.00 | 0% | 1.01 | 72% | 0.00 | 2.32 |
+| soft (raise everyone) | 55% | 45% | 2.67 | 4.87 | 15% | 2.49 | 0% | 0.94 | 5.00 |
+| passive (pass everyone) | 40% | 60% | 1.54 | 3.83 | 0% | 2.01 | 0% | 0.00 | 4.34 |
+| measured (strike only the man who would strike first) | 66% | 34% | 3.13 | 4.73 | 13% | 1.82 | 0% | 1.18 | 4.96 |
+| greedy (strike when falling, raise when high) | 46% | 54% | 2.14 | 4.49 | 8% | 1.64 | 2% | 0.91 | 4.12 |
+| random | 6% | 49% | 1.43 | 0.99 | 0% | 1.34 | 5% | 0.05 | 4.21 |
+
+The spread is wide, so the decisions matter. No rule wins everywhere: measured keeps the most soul on average and lives longest, but dies in a third of lives. Soft keeps nearly as much where it survives, and dies more. So the sentence the player can leave with is Weil's, not a strategy: force does not keep a man alive any longer than mercy does, it costs his soul, and nothing makes him safe. The tuning that got here, from the table and not from taste: a first version used a plain pendulum, in which a player who struck every day propped his pan at the top for good, the opposite of Nemesis. The second made fate turn the scales on its own clock, with force setting only how far they swing. Then striking had no upside at all, and "strike only stone, spare the rest" won everywhere, which makes moderation easy where Weil says it is superhuman. The third lets force hold the turn off a little (the temptation), makes a half-stone man strike a player whose prestige has sunk (moderation's peril), and puts you, when you fall, under a man as high as the swing (the geometric retribution).
+
+## 19. Build log
+
+- **Mechanism** (`mechanism.js`): the only copy; the HTML is generated by `build.py`, which inlines it verbatim and refuses to build if the embedded copy differs. Reading the placeholder loop (`loop.js`, `loop-log.txt`) as a stranger caught three faults: stone climbed from the eye down instead of from the feet up; armed men were labelled "stone to the mouth" when the stone stood at the shoulders; and the result line said "your pan sinks" after a mercy on days when fate lifted it. The line now says "It cost you prestige: men fear you a little less", and the scales line says what actually happened.
+- **The drawing** (`rig.js`, display only): a posable red-figure man (or woman, or old man) in profile, built from tapered limbs, an athlete's torso, a Greek profile with a frontal eye, helmet and crest in added red. Each depth layer is drawn as one silhouette (contours, then fills), so a near arm keeps its contour over the body. Every part belongs to one of six bands, from the shins to the head, and a band turns to stone when its line is lost: glaze a shade warmer than the ground, with its contour scratched in clay, so a man of stone all through is an outline on the black. Spears and staffs are reserved clay lines with a glaze edge, visible on black and on clay. Poses blend for motion. The creeping arm is the ready pose blending toward the strike.
+- **Changes from the pick, made in the build:** the preview shows the gesture on the player's own figure only, not his reaction (his reaction can depend on rules the preview must not reveal); when the interval is running, one touch acts at once, since there is no time left for a preview; RAISE is cracked before a man running away; the soul's lines are the knees, thighs, belly, chest, mouth and eye, not the hand, chest, beard, mouth, brow and eye of the walkthrough, so that stone can climb from the feet; the aim gained "through the war"; the end screen leads with the verdict in words, then the vase turned round.
+- **Screens checked at 380 px** (`screenshot-*.png`): start, each kind of day, the preview, the result, the first fall, the guest's grace, the night, the creeping arm, the no-interval day, death on the knees, the three end screens, How to play, About. Full sessions in headless Chromium (`session-test.js`, `session-log.txt`): a learner to the night with How to play opened mid-day and returned, About from the end; a new life from "Live another life"; a hard player through the creeping arm, the no-interval day and death under a man of stone; a soft player who knelt three times and died on the ninth day. No errors (bar the counter script, which cannot load offline); no horizontal scroll.
+- **Length**: a life to the night takes about four to six minutes in the scripted sessions; a hard life ends sooner. This is an estimate; no person has timed it.

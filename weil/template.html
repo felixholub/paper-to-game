@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Weil's Vase</title>
+<script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<meta name="description" content="Simone Weil's The Iliad, or the Poem of Force, as an Attic red-figure vase: you are the soul inside a warrior. Each day a man comes before you, and whatever you do to him with force, force does to you.">
+<style>
+@font-face{font-family:'Forum';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,/*__FONT_FORUM__*/) format('woff2');font-display:block}
+:root{
+  --glaze:#120D0B; --clay:#C8693A; --dilute:#8A4A26; --white:#EAE0CC; --red:#7E2B1F; --stone:#271B15;
+  --face:'Forum','Times New Roman',serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--glaze)}
+body{color:var(--white);font-family:var(--face);font-size:19px;line-height:1.32;min-height:100vh;overflow-x:hidden}
+.screen{display:none;max-width:440px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
+.screen.on{display:block}
+.hidden{display:none!important}
+p{margin:.4em 0}
+a{color:var(--clay)}
+.caps{text-transform:uppercase;letter-spacing:.16em}
+svg{display:block}
+/* the start */
+#start h1{font-weight:400;font-size:42px;letter-spacing:.2em;text-align:center;margin:18px 0 0;color:var(--clay);line-height:1.05}
+#start .sub{text-align:center;font-size:15px;letter-spacing:.14em;color:var(--dilute);text-transform:uppercase;margin:6px 0 4px}
+#start .lede{text-align:center;font-size:22px;margin:8px 4px 6px}
+#start .acts{text-align:center;font-size:17px;color:var(--white);opacity:.92;margin:8px 6px}
+.aimline{font-size:21px;text-align:center;color:var(--clay);margin:14px 0 8px;line-height:1.25}
+.small{font-size:15px;color:var(--dilute)}
+.links{display:flex;justify-content:center;gap:22px;margin:12px 0 4px;font-size:16px}
+.links button{background:none;border:0;color:var(--clay);font-family:var(--face);font-size:16px;letter-spacing:.12em;text-transform:uppercase;padding:8px 4px;cursor:pointer}
+.sig{text-align:center;margin:20px 0 6px;font-style:italic;font-size:14px;opacity:.6}
+.sig a{color:var(--white);text-decoration:none;text-transform:lowercase}
+.lifeno{text-align:center;font-size:13px;color:var(--dilute);letter-spacing:.1em;margin-top:6px}
+/* the sherds */
+.shw{position:relative;transition:transform .15s}
+.shw.on{transform:translateY(-4px);filter:drop-shadow(0 4px 0 var(--white))}
+.sherd{display:block;width:100%;border:0;cursor:pointer;font-family:var(--face);color:var(--glaze);text-align:center;
+  background:linear-gradient(to bottom,var(--glaze) 0 5px,var(--clay) 5px);padding:13px 8px 9px;min-height:66px}
+.sherd .w{display:block;font-size:23px;letter-spacing:.18em;text-transform:uppercase;line-height:1}
+.sherd .s{display:block;font-size:15px;line-height:1.15;margin-top:5px}
+.sherd:disabled{cursor:default;opacity:.5;background:linear-gradient(104deg,var(--clay) 0 9%,var(--glaze) 9% 10.5%,var(--clay) 10.5% 88%,var(--glaze) 88% 89.5%,var(--clay) 89.5%)}
+.sherd:disabled .s{font-size:14px}
+.sh0{clip-path:polygon(3% 12%,30% 0%,72% 6%,100% 0%,96% 70%,82% 100%,22% 94%,0% 80%)}
+.sh1{clip-path:polygon(0% 6%,45% 0%,100% 10%,97% 58%,100% 92%,58% 100%,10% 95%,4% 50%)}
+.sh2{clip-path:polygon(5% 0%,60% 8%,96% 0%,100% 45%,92% 100%,40% 94%,0% 100%,2% 40%)}
+.sh3{clip-path:polygon(0% 10%,25% 2%,100% 0%,94% 52%,99% 100%,30% 96%,8% 100%,2% 60%)}
+.shb{clip-path:polygon(1% 16%,20% 0%,70% 6%,99% 0%,100% 72%,88% 100%,30% 92%,0% 100%)}
+.big{min-height:60px;padding:14px 10px 10px}
+.big .w{font-size:24px}
+.sherds{display:grid;grid-template-columns:1fr 1fr;gap:12px 12px;margin:12px 0 4px}
+.sherds.three{grid-template-columns:1fr 1fr 1fr}
+.sherds.three .sherd .w{font-size:20px;letter-spacing:.12em}
+#commitRow{margin:14px 0 4px}
+/* the play screen */
+.top{display:flex;align-items:center;gap:10px;margin:10px 0 2px}
+.aim{flex:1;font-size:16px;color:var(--clay);line-height:1.2}
+.q{width:40px;height:40px;flex:none;border:0;background:var(--clay);color:var(--glaze);font-family:var(--face);font-size:22px;cursor:pointer;
+  clip-path:polygon(8% 14%,52% 0%,100% 12%,92% 64%,100% 100%,40% 92%,0% 100%,4% 48%)}
+#shoulderBox{position:relative}
+.scap{font-size:16px;text-align:center;color:var(--white);opacity:.88;margin:2px 0 4px;min-height:21px}
+#friezeBox{position:relative}
+.legend{display:flex;justify-content:center;gap:16px;font-size:14px;color:var(--clay);margin:2px 0 0;letter-spacing:.06em}
+.legend i{font-style:normal;display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:5px;border:1px solid var(--clay)}
+.legend .c i{background:var(--clay)} .legend .k i{background:var(--stone)}
+.scene{font-size:20px;line-height:1.3;text-align:center;margin:10px 2px 4px;color:var(--white)}
+.teach{font-size:16px;line-height:1.3;text-align:center;color:var(--clay);margin:6px 6px 4px}
+.creep{font-size:17px;text-align:center;color:var(--white);margin:6px 0 0}
+.creep b{font-weight:400;color:var(--clay);letter-spacing:.1em;text-transform:uppercase}
+#result{margin:12px 0 0;text-align:center}
+#result .said{font-size:20px;line-height:1.3}
+#result .cost{font-size:20px;color:var(--clay);margin-top:6px;letter-spacing:.02em}
+#result .why{font-size:17px;color:var(--white);margin:8px 8px 0;opacity:.92}
+#result .quote{font-size:16px;color:var(--dilute);margin:8px 10px 0;filter:brightness(1.35)}
+#result .scl{font-size:16px;color:var(--white);opacity:.8;margin:8px 0 0}
+#result .sherd{margin-top:16px}
+.meander{height:12px;margin:0}
+/* the end */
+#end h2{font-weight:400;font-size:25px;line-height:1.25;text-align:center;color:var(--clay);margin:22px 4px 10px}
+#panels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.pan{background:var(--glaze);border-top:1px solid var(--dilute);border-bottom:1px solid var(--dilute)}
+.pan .pl{font-size:12px;text-align:center;color:var(--clay);letter-spacing:.08em;padding:2px 0 3px;line-height:1.1}
+.did{font-size:18px;text-align:center;margin:6px 4px}
+.weil{font-size:19px;text-align:center;margin:16px 4px 6px;color:var(--white)}
+.weil b{display:block;font-weight:400;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:4px}
+.last{font-size:16px;text-align:center;color:var(--dilute);filter:brightness(1.4);margin:8px 10px}
+/* help and about */
+.page h2{font-weight:400;font-size:28px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);text-align:center;margin:22px 0 10px}
+.page h3{font-weight:400;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin:20px 0 4px}
+.page p,.page li{font-size:17px;line-height:1.38}
+.page ul{padding-left:18px;margin:4px 0}
+.back{margin:20px 0 6px}
+</style>
+</head>
+<body>
+
+<!-- ======================================================================= the start -->
+<section id="start" class="screen on">
+  <h1>WEIL'S VASE</h1>
+  <div class="sub">The Iliad, or the Poem of Force</div>
+  <svg id="amphora" viewBox="0 0 348 330" aria-hidden="true"></svg>
+  <p class="lede">Force turns whoever it touches into a thing.</p>
+  <p class="acts">You are the soul inside a warrior. Each day of a war, a man comes before you. While Zeus's scales hold your pan up, you decide what to do with him; when they turn, a man stands over you.</p>
+  <p class="aimline" id="aimStart">Force is yours, for now.<br>Keep your soul through the war.</p>
+  <div class="shw" style="margin:12px 30px 0"><button id="begin" class="sherd shb big"><span class="w">Begin</span><span class="s">day one of twelve</span></button></div>
+  <div class="links"><button data-go="help">How to play</button><button data-go="about">About</button></div>
+  <div class="lifeno" id="lifeno"></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- ======================================================================= the day -->
+<section id="play" class="screen">
+  <div class="top"><div class="aim">Force is yours, for now. Keep your soul through the war.</div><button class="q" data-go="help" aria-label="How to play">?</button></div>
+  <div id="shoulderBox"><svg id="shoulder" viewBox="0 0 348 124"></svg></div>
+  <div class="scap" id="scap"></div>
+  <div id="friezeBox"><svg id="frieze" viewBox="0 30 348 220"></svg></div>
+  <svg class="meander" viewBox="0 0 348 12" preserveAspectRatio="none"><rect width="348" height="12" fill="url(#mz)"/></svg>
+  <div class="legend"><span class="c"><i></i>clay: a soul</span><span class="k"><i></i>stone: a thing</span></div>
+  <p class="scene" id="scene"></p>
+  <p class="teach hidden" id="teach"></p>
+  <div id="choose">
+    <div class="sherds" id="sherds"></div>
+    <p class="creep hidden" id="creep"></p>
+    <div id="commitRow" class="hidden"><div class="shw"><button id="commit" class="sherd shb big"><span class="w" id="commitW">Raise him up</span></button></div></div>
+  </div>
+  <div id="result" class="hidden"></div>
+</section>
+
+<!-- ======================================================================= the vase turned round -->
+<section id="end" class="screen">
+  <h2 id="headline"></h2>
+  <div id="did"></div>
+  <p class="weil"><b>What Simone Weil says</b><span id="weil"></span></p>
+  <p class="small" style="text-align:center;letter-spacing:.14em;text-transform:uppercase;margin:18px 0 0;color:var(--clay)">The vase, turned round</p>
+  <div id="panels"></div>
+  <p class="last" id="last"></p>
+  <div class="shw" style="margin:16px 30px 0"><button id="again" class="sherd shb big"><span class="w">Live another life</span><span class="s">a new war, a new deck of men</span></button></div>
+  <div class="links"><button data-go="help">How to play</button><button data-go="about">About</button></div>
+  <div class="lifeno" id="lifeEnd"></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- ======================================================================= how to play -->
+<section id="help" class="screen page">
+  <h2>How to play</h2>
+  <p><b style="font-weight:400;color:var(--clay)">Force is yours, for now. Keep your soul through the war.</b></p>
+  <h3>What you see</h3>
+  <p>You are the soul inside the warrior on the left of the vase. Your figure is clay while it has a soul: six fine lines, at your knees, thighs, belly, chest, mouth and eye. When you lose one, stone climbs from your feet: black glaze, with only its outline scratched in. A figure that is stone all through is a thing.</p>
+  <p>Above the figures hang Zeus's golden scales. While your pan (the left one) is up, force is yours that day: a man comes before you and you decide what to do with him. When your pan is down, force is his: a man stands over you. The scales turn by themselves, day by day; what you do with force changes how far they swing.</p>
+  <h3>What you can do</h3>
+  <ul>
+    <li><b style="font-weight:400;color:var(--clay)">Strike</b>: kill him (or beat him down).</li>
+    <li><b style="font-weight:400;color:var(--clay)">Take</b>: take him, or her, alive, as a slave or a prize.</li>
+    <li><b style="font-weight:400;color:var(--clay)">Pass</b>: go on as if he were not there.</li>
+    <li><b style="font-weight:400;color:var(--clay)">Raise</b>: give him your hand.</li>
+  </ul>
+  <p>A sherd shown cracked cannot be played on this man; it says why. Touch a sherd to see the gesture on your figure, then the long sherd underneath to do it.</p>
+  <p>When your pan is down: <b style="font-weight:400;color:var(--clay)">Plead</b> (clasp his knees), <b style="font-weight:400;color:var(--clay)">Obey</b> (be his, and live) or <b style="font-weight:400;color:var(--clay)">Stand</b> (face him). A man who is still clay can hear a plea; a man of stone cannot.</p>
+  <h3>What to watch for</h3>
+  <p>An armed man who is nearly all stone will strike if you do not. When your pan stands very high, or when little of your soul is left, your arm starts to move toward him by itself: then a single touch on a sherd acts at once, and if you touch nothing, the spear goes in. At the very top, or with no soul left, there is no interval at all.</p>
+  <p>Twelve days, the last a night. A life ends on the night, or earlier if you die or become a man's slave. The vase is then turned round, and you see every day of it.</p>
+  <div class="shw back"><button class="sherd shb big" id="helpback"><span class="w">Back</span></button></div>
+</section>
+
+<!-- ======================================================================= about -->
+<section id="about" class="screen page">
+  <h2>About</h2>
+  /*__ABOUT__*/
+  <div class="shw back"><button class="sherd shb big" id="aboutback"><span class="w">Back</span></button></div>
+</section>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="mz" width="24" height="12" patternUnits="userSpaceOnUse">
+    <rect width="24" height="12" fill="#120D0B"/>
+    <path d="M1 11 V1 H13 V8 H6 V5 H10 M13 11 H23 V1" fill="none" stroke="#C8693A" stroke-width="1.6"/>
+  </pattern>
+</defs></svg>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+/*__RIG__*/
+</script>
+<script>
+(function () {
+  'use strict';
+  const M = window.VASE, R = window.RIG, C = M.CONFIG;
+  const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
+  const GROUND = 236, HIP = 92;                    // ground line in the frieze; hip height of a standing man
+  const YOU_X = 104, HIM_X = 246;
+  const ui = { g: null, t: null, sel: null, busy: false, creepT: null, creepK: 0, from: 'start', seed: 0, firstDown: true, firstCreep: true, shown: {} };
+  window.__vase = ui;
+
+  // ------------------------------------------------------------------ screens
+  function show(id) { const cur = $('.screen.on'); if (cur && (id === 'help' || id === 'about') && cur.id !== 'help' && cur.id !== 'about') ui.from = cur.id;
+    $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+  $$('[data-go]').forEach(b => b.addEventListener('click', () => show(b.dataset.go)));
+  $('#helpback').addEventListener('click', () => show(ui.from || 'start'));
+  $('#aboutback').addEventListener('click', () => show(ui.from || 'start'));
+
+  // ------------------------------------------------------------------ looks
+  function look(man) {
+    const L = { helmet: true, beard: true, kind: 'man', garment: 'chiton' };
+    switch (man.id) {
+      case 'boy': return { helmet: false, beard: false, kind: 'boy', garment: 'chiton' };
+      case 'suppliant': return { helmet: false, beard: true, kind: 'man', garment: 'chiton' };
+      case 'speaker': return { helmet: false, beard: true, kind: 'man', garment: 'chiton', staff: { hand: 'far', angle: 180, below: 72, above: 28 } };
+      case 'captive': return { helmet: false, beard: false, kind: 'woman', garment: 'long' };
+      case 'priest': return { helmet: false, beard: true, kind: 'old', garment: 'long', staff: { hand: 'far', angle: 180, below: 70, above: 34, wreath: true } };
+      case 'night': return { helmet: false, beard: true, kind: 'old', garment: 'long' };
+    }
+    return L;
+  }
+  const P = R.POSES;
+  const ASK = Object.assign({}, P.speak, { nearUA: 78, nearFA: 92 });
+  function arrivePose(man) {
+    switch (man.kind) {
+      case 'suppliant': return man.id === 'suppliant2' ? P.beg : P.clasp;
+      case 'armed': return P.ready;
+      case 'speaker': return P.speak;
+      case 'captive': return P.loom;
+      case 'priest': return ASK;
+      case 'runner': return P.run;
+      case 'night': return P.weep;
+      case 'above': return P.above;
+    }
+    return P.standStill;
+  }
+  const noSpear = p => Object.assign({}, p, { spear: null });
+  const YOU_LOOK = { helmet: true, beard: true, kind: 'man', garment: 'chiton' };
+  function youPreview(id, mode) {
+    const m = { strike: P.strike, take: P.take, pass: P.pass, raise: P.raise, plead: P.clasp, obey: P.bowed, stand: P.stand }[id];
+    return mode === 'night' ? noSpear(m) : (mode === 'down' && id !== 'stand') ? noSpear(m) : m;
+  }
+  function youRest(t) { return t.mode === 'down' ? noSpear(P.kneel) : t.mode === 'night' ? noSpear(P.standStill) : P.ready; }
+
+  // positions: a man's hip sits HIP above the ground, lower by the pose's dy
+  function place(pose, x, extra) { return Object.assign({}, pose, extra || {}, { x, y: GROUND - HIP + (pose.dy || 0) }); }
+
+  // ------------------------------------------------------------------ the frieze
+  let scene = null;  // { you: {pose, lines, x, hidden}, him: {pose, lines, x, flip, look, hidden}, props: [] }
+  function figureSVG(f, isYou, flash) {
+    if (!f || f.hidden) return '';
+    const pose = place(f.pose, f.x, isYou ? YOU_LOOK : f.look);
+    return R.draw(pose, f.lines, { flip: f.flip, flash });
+  }
+  function propsSVG(props) {
+    let s = '';
+    if (props.includes('loom')) { // a warp-weighted loom behind the woman
+      const x0 = 266, x1 = 330, top = 96, bot = GROUND - 30;
+      s += `<g stroke="${R.CLAY}" fill="none" stroke-width="2"><line x1="${x0}" y1="${top - 10}" x2="${x0 - 6}" y2="${GROUND}"/><line x1="${x1}" y1="${top - 10}" x2="${x1 + 6}" y2="${GROUND}"/><line x1="${x0 - 4}" y1="${top}" x2="${x1 + 4}" y2="${top}"/></g>`;
+      for (let i = 0; i < 9; i++) { const x = x0 + 4 + i * 7; s += `<line x1="${x}" y1="${top}" x2="${x + 1}" y2="${bot}" stroke="${R.DILUTE}" stroke-width="0.9"/><circle cx="${x + 1}" cy="${bot + 5}" r="3.2" fill="${R.CLAY}"/>`; }
+      s += `<rect x="${x0 + 2}" y="${top + 2}" width="${x1 - x0 - 4}" height="30" fill="${R.CLAY}" opacity=".85"/><path d="M${x0 + 4} ${top + 12} h${x1 - x0 - 8} M${x0 + 4} ${top + 22} h${x1 - x0 - 8}" stroke="${R.GLAZE}" stroke-width="1.4"/>`;
+    }
+    if (props.includes('walls')) { // the walls of the city, far off
+      s += `<g fill="none" stroke="${R.DILUTE}" stroke-width="1.4"><path d="M300 ${GROUND} V170 h8 v-6 h6 v6 h8 v-6 h6 v6 h8 V${GROUND}"/></g>`;
+    }
+    return s;
+  }
+  function renderFrieze(sc, opts) {
+    opts = opts || {};
+    sc = sc || scene;
+    let s = `<rect width="348" height="250" fill="${R.GLAZE}"/>`;
+    s += `<line x1="0" y1="${GROUND + 1}" x2="348" y2="${GROUND + 1}" stroke="${R.DILUTE}" stroke-width="1.2"/>`;
+    if (sc.night) s += `<g fill="${R.WHITE}" opacity=".6"><circle cx="30" cy="22" r="1.1"/><circle cx="76" cy="40" r=".9"/><circle cx="140" cy="16" r="1"/><circle cx="210" cy="34" r=".8"/><circle cx="300" cy="18" r="1.1"/><path d="M318 28 a10 10 0 1 0 8 16 a8 8 0 1 1 -8 -16Z"/></g>`;
+    s += propsSVG(sc.props || []);
+    s += figureSVG(sc.him, false, opts.flashHim);
+    s += figureSVG(sc.you, true, opts.flashYou);
+    if (opts.glow) s += `<rect width="348" height="250" fill="${R.WHITE}" opacity="${opts.glow}"/>`;
+    $('#frieze').innerHTML = s;
+  }
+  function tween(to, ms) {   // to: {you:{pose,...}, him:{pose,...}}: blend poses from the current scene
+    return new Promise(res => {
+      const from = { you: Object.assign({}, scene.you), him: Object.assign({}, scene.him) };
+      const t0 = performance.now();
+      const step = now => {
+        const k = Math.min(1, (now - t0) / ms), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        const cur = Object.assign({}, scene);
+        for (const w of ['you', 'him']) if (to[w]) {
+          const a = from[w], b = Object.assign({}, a, to[w]);
+          cur[w] = Object.assign({}, b, { pose: R.blend(Object.assign({}, a.pose), Object.assign({}, b.pose), e), x: a.x + (b.x - a.x) * e });
+        }
+        renderFrieze(cur);
+        if (k < 1) requestAnimationFrame(step); else { for (const w of ['you', 'him']) if (to[w]) scene[w] = Object.assign({}, scene[w], to[w]); renderFrieze(); res(); }
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  async function flash(who, lines) {   // the stone climbs (or goes back): a white flash on the band, then the new state
+    const band = who === 'you' ? scene.you : scene.him;
+    const old = band.lines; band.lines = lines;
+    const changed = lines < old ? 6 - lines : 6 - old;
+    renderFrieze(scene, who === 'you' ? { flashYou: changed } : { flashHim: changed });
+    await wait(180); renderFrieze(); await wait(120);
+  }
+
+  // ------------------------------------------------------------------ the scales
+  function renderScales(h, mode, label) {
+    const cx = 174, cy = 36, L = 96;
+    const th = mode === 'night' ? 0 : Math.max(-3, Math.min(3, h)) * 5 * Math.PI / 180;    // your pan (left) up when h > 0
+    const lx = cx - L * Math.cos(th), ly = cy - L * Math.sin(th), rx = cx + L * Math.cos(th), ry = cy + L * Math.sin(th);
+    const gold = '#B07A3A';
+    const pan = (x, y, txt) => `<path d="M${x} ${y} L${x - 22} ${y + 30} M${x} ${y} L${x + 22} ${y + 30} M${x} ${y} L${x} ${y + 30}" stroke="${gold}" stroke-width="0.9"/>` +
+      `<path d="M${x - 26} ${y + 30} Q${x} ${y + 46} ${x + 26} ${y + 30} Z" fill="${R.CLAY}" stroke="${R.GLAZE}" stroke-width="1"/>` +
+      `<text x="${x}" y="${y + 60}" text-anchor="middle" font-family="Forum,serif" font-size="12" letter-spacing="2" fill="${R.CLAY}">${txt}</text>`;
+    let s = `<rect width="348" height="124" fill="${R.GLAZE}"/>`;
+    s += `<rect x="0" y="0" width="348" height="10" fill="url(#mz)"/>`;
+    s += `<line x1="${cx}" y1="10" x2="${cx}" y2="${cy}" stroke="${gold}" stroke-width="1.4"/>`;
+    s += `<g opacity="${mode === 'night' ? .45 : 1}">`;
+    s += `<line x1="${lx}" y1="${ly}" x2="${rx}" y2="${ry}" stroke="${gold}" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="3.4" fill="${gold}"/>`;
+    s += pan(lx, ly, 'YOURS') + pan(rx, ry, 'HIS');
+    s += `</g>`;
+    s += `<text x="8" y="34" font-family="Forum,serif" font-size="13" letter-spacing="2" fill="${R.CLAY}">${label.a}</text><text x="8" y="58" font-family="Forum,serif" font-size="30" fill="${R.CLAY}">${label.b}</text><text x="8" y="74" font-family="Forum,serif" font-size="12" letter-spacing="1.5" fill="${R.DILUTE}">${label.c}</text>`;
+    $('#shoulder').innerHTML = s;
+  }
+  function dayLabel(t) { return t.mode === 'night' ? { a: 'NIGHT', b: '12', c: 'OF 12' } : { a: 'DAY', b: String(t.day), c: 'OF 12' }; }
+  function scaleCaption(t) {
+    if (t.mode === 'night') return 'Night: the scales hang still.';
+    if (t.mode === 'down') return 'Your pan is down: force is his today.';
+    if (t.h > C.H_CREEP) return 'Your pan stands high: force is yours today, a great deal of it.';
+    return t.day === 1 ? 'Zeus’s scales. Your pan is up: force is yours today, on loan.' : 'Your pan is up: force is yours today.';
+  }
+  function swingScales(h0, h1, mode, label) {
+    return new Promise(res => { const t0 = performance.now(), ms = 900;
+      const step = now => { const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3); renderScales(h0 + (h1 - h0) * e, mode, label); if (k < 1) requestAnimationFrame(step); else res(); };
+      requestAnimationFrame(step); });
+  }
+
+  // ------------------------------------------------------------------ a day
+  function startLife(seed) {
+    ui.seed = seed; ui.g = M.newLife(seed); ui.firstDown = true; ui.firstCreep = true; ui.firstStone = true;
+    try { history.replaceState(null, '', '#life=' + seed); } catch (e) {}
+    $('#lifeEnd').textContent = 'life no. ' + seed;
+    show('play'); beginDay();
+  }
+  function setTeach(txt) { const el = $('#teach'); el.textContent = txt || ''; el.classList.toggle('hidden', !txt); }
+  function beginDay() {
+    const t = ui.t = M.today(ui.g);
+    ui.sel = null; ui.busy = false; stopCreep();
+    $('#result').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#commitRow').classList.add('hidden'); $('#creep').classList.add('hidden');
+    renderScales(t.h, t.mode, dayLabel(t)); $('#scap').textContent = scaleCaption(t);
+    const man = t.man;
+    const himX = man.kind === 'suppliant' ? 222 : man.kind === 'night' ? 226 : man.kind === 'captive' ? 236 : man.kind === 'runner' ? 262 : man.kind === 'above' ? 236 : HIM_X;
+    scene = { night: t.mode === 'night', props: man.kind === 'captive' ? ['loom'] : man.kind === 'runner' ? ['walls'] : [],
+      you: { pose: youRest(t), lines: t.lines, x: YOU_X },
+      him: { pose: arrivePose(man), lines: man.lines, x: himX + 60, flip: man.kind !== 'runner', look: look(man), hidden: false } };
+    renderFrieze();
+    tween({ him: { x: himX } }, 650);
+    $('#scene').textContent = M.sceneLine(t);
+    // the teaching line: the rule of the world, said once, where it first matters
+    let teach = '';
+    if (t.day === 1) teach = 'Your figure is clay while it has a soul: six fine lines, from your knees to your eye. Lose one, and stone climbs from your feet.';
+    else if (t.mode === 'down' && ui.firstDown) { teach = 'When your pan is down, you have no force. A man who is still clay can hear a plea; a man of stone cannot.'; ui.firstDown = false; }
+    else if (t.mode === 'up' && t.man.armed && t.man.lines <= C.ARMED_DEAF && ui.firstStone) { teach = 'Stone does not hear and does not see a hand held out.'; ui.firstStone = false; }
+    setTeach(teach);
+    // the sherds
+    const box = $('#sherds'); box.innerHTML = ''; box.classList.toggle('three', t.mode === 'down');
+    t.gestures.forEach((gst, i) => {
+      const l = M.gestureLabel(gst.id, man);
+      const w = document.createElement('div'); w.className = 'shw';
+      w.innerHTML = `<button class="sherd sh${i % 4}" data-g="${gst.id}" ${gst.ok ? '' : 'disabled'}><span class="w">${l.word}</span><span class="s">${gst.ok ? l.sub : gst.why}</span></button>`;
+      box.appendChild(w);
+    });
+    $$('#sherds .sherd').forEach(b => b.addEventListener('click', () => pick(b.dataset.g)));
+    // the interval
+    if (t.mode === 'up' && t.interval < 0.05) { box.classList.add('hidden'); const el = $('#creep'); el.innerHTML = '<b>No interval.</b> ' + (t.lines <= 0 ? 'You are stone all through: nothing stands between the impulse and the act.' : 'Your pan stands so high that nothing stands between the impulse and the act.'); el.classList.remove('hidden'); setTimeout(() => commit(t.impulse, true), 2200); }
+    else box.classList.remove('hidden');
+    if (t.mode === 'up' && isFinite(t.interval) && t.interval >= 0.05) setTimeout(() => startCreep(t.interval), 900);
+  }
+
+  // the spear creeps: the arm moves by itself; one touch acts
+  function startCreep(sec) {
+    if (ui.busy) return;
+    ui.creeping = true; ui.creepK = 0;
+    const el = $('#creep'); el.innerHTML = ui.firstCreep ? '<b>Your arm is moving by itself.</b> Your pan stands so high, or so little of your soul is left, that the arm moves before the thought. One touch on a sherd acts at once; touch nothing, and the spear goes in.' : '<b>Your arm is moving by itself.</b> One touch acts.';
+    ui.firstCreep = false; el.classList.remove('hidden'); $('#commitRow').classList.add('hidden');
+    $$('#sherds .shw').forEach(w => w.classList.remove('on'));
+    const t0 = performance.now(), base = Object.assign({}, P.ready);
+    const step = now => {
+      if (!ui.creeping) return;
+      const k = Math.min(1, (now - t0) / (sec * 1000)); ui.creepK = k;
+      scene.you.pose = R.blend(base, P.strike, k * 0.85); renderFrieze();
+      if (k >= 1) { ui.creeping = false; commit(ui.t.impulse, true); return; }
+      ui.creepT = requestAnimationFrame(step);
+    };
+    ui.creepT = requestAnimationFrame(step);
+  }
+  function stopCreep() { ui.creeping = false; if (ui.creepT) cancelAnimationFrame(ui.creepT); ui.creepT = null; }
+
+  function pick(id) {
+    if (ui.busy) return;
+    if (ui.creeping) { stopCreep(); commit(id, false); return; }   // no interval left for second thoughts
+    ui.sel = id;
+    $$('#sherds .shw').forEach(w => w.classList.toggle('on', w.firstChild.dataset.g === id));
+    const l = M.gestureLabel(id, ui.t.man);
+    $('#commitW').textContent = l.act; $('#commitRow').classList.remove('hidden');
+    tween({ you: { pose: youPreview(id, ui.t.mode) } }, 260);
+  }
+  $('#commit').addEventListener('click', () => { if (ui.sel && !ui.busy) commit(ui.sel, false); });
+
+  // ------------------------------------------------------------------ the act, and what it does
+  function himAfter(res, t) {
+    const k = res.him;
+    const X = scene.him.x;
+    switch (k) {
+      case 'dead': return { pose: P.dead, x: 214 };
+      case 'beaten': return { pose: Object.assign({}, P.weep, { garment: 'chiton' }) };
+      case 'taken': return { pose: P.bowed };
+      case 'struck you': return { pose: P.aboveStrike };
+      case 'passed': return { pose: P.lowered };
+      case 'escaped': return { pose: P.run, x: 420 };
+      case 'fallen': return { pose: P.fallen, x: 222 };
+      case 'raised': return { pose: t.man.kind === 'captive' ? P.standStill : P.standStill };
+      case 'grace': return { pose: t.mode === 'night' ? P.seated : P.lowered, x: t.mode === 'night' ? 236 : X };
+      case 'heard': return { pose: P.aboveRaise };
+      case 'deaf': case 'killed you': return { pose: P.aboveStrike };
+      case 'owns you': return { pose: P.above };
+      case 'fell back': return { pose: P.lowered, x: X + 22 };
+    }
+    return {};
+  }
+  function youAfter(res, t) {
+    switch (res.him) {
+      case 'struck you': return { pose: noSpear(P.kneel) };
+      case 'grace': return t.mode === 'night' ? { pose: P.seated, x: 112 } : { pose: P.grace };
+      case 'heard': return { pose: noSpear(P.standStill) };
+      case 'deaf': case 'killed you': return { pose: P.dead, x: 124 };
+      case 'owns you': return { pose: noSpear(P.bowed) };
+      case 'fell back': return { pose: P.stand };
+    }
+    return {};
+  }
+  async function commit(id, impulse) {
+    if (ui.busy) return; ui.busy = true; stopCreep();
+    const t = ui.t; const res = M.act(ui.g, id, { impulse: !!impulse });
+    $('#commitRow').classList.add('hidden'); $('#creep').classList.add('hidden'); $('#sherds').classList.add('hidden'); setTeach('');
+    // the gesture
+    await tween({ you: { pose: youPreview(id, t.mode) } }, impulse ? 220 : 300);
+    // what happens to him (and, if he strikes, to you)
+    const ha = himAfter(res, t), ya = youAfter(res, t);
+    if (res.him === 'struck you' || res.him === 'deaf' || res.him === 'killed you') {
+      await tween({ him: ha }, 320);
+      if (res.mode === 'down' && id === 'plead') await flash('you', Math.max(0, res.youFrom - 1));
+      await tween({ you: ya }, 420);
+    } else {
+      if (res.mode === 'down' && id === 'plead') await flash('you', Math.max(0, res.youFrom - 1));
+      await tween({ him: ha }, res.him === 'escaped' ? 900 : 420);
+      if (Object.keys(ya).length) await tween({ you: ya }, 420);
+    }
+    if (res.himTo !== scene.him.lines) await flash('him', res.himTo);
+    if (res.him === 'grace' && t.mode === 'night') {   // for a moment, both whole
+      const keepYou = res.youTo, keepHim = res.himTo;
+      scene.you.lines = 6; scene.him.lines = 6; renderFrieze(scene, { glow: .12 }); await wait(1600);
+      renderFrieze(); await wait(500); scene.you.lines = keepYou; scene.him.lines = keepHim; await flash('you', keepYou);
+    } else if (res.youTo !== scene.you.lines) await flash('you', res.youTo);
+    // the scales
+    if (!res.end && t.mode !== 'night') { const nt = { mode: res.hTo < 0 ? 'down' : 'up' }; await swingScales(res.hFrom, res.hTo, t.mode, dayLabel(t)); $('#scap').textContent = res.hTo < 0 ? 'Your pan is down.' : 'Your pan is up.'; }
+    showResult(res, t);
+  }
+  function showResult(res, t) {
+    const w = res.word; const box = $('#result'); let h = '';
+    h += `<div class="said">${w.said.join(' ')}</div>`;
+    if (w.cost) h += `<div class="cost">${w.cost}</div>`;
+    if (w.why) h += `<div class="why">${w.why}</div>`;
+    if (w.quote) h += `<div class="quote">${w.quote}</div>`;
+    const sl = M.scalesLine(res); if (sl) h += `<div class="scl">${sl}</div>`;
+    const last = ui.g.over;
+    h += `<div class="shw"><button class="sherd shb big" id="next"><span class="w">${last ? 'The vase' : t.mode === 'down' && res.him === 'fell back' ? 'Next day' : 'Next day'}</span><span class="s">${last ? 'turned round' : 'day ' + (t.day + 1) + (t.day + 1 === 12 ? ': the night' : '')}</span></button></div>`;
+    box.innerHTML = h; $('#choose').classList.add('hidden'); box.classList.remove('hidden');
+    $('#next').addEventListener('click', () => { if (ui.g.over) endLife(); else { M.nextDay(ui.g); beginDay(); window.scrollTo(0, 0); } });
+    ui.busy = false;
+  }
+
+  // ------------------------------------------------------------------ the vase turned round
+  function panelFor(e) {
+    const isNight = e.kind === 'night', down = e.mode === 'down';
+    const man = { id: e.id === 'above' ? 'above' : e.id, kind: e.kind };
+    const lk = look(man);
+    const t = { mode: e.mode, man };
+    const res = { him: e.him, mode: e.mode };
+    let you = { pose: down ? noSpear(P.kneel) : isNight ? noSpear(P.standStill) : P.ready, lines: e.youTo, x: YOU_X };
+    let him = { pose: arrivePose(man), lines: e.himTo, x: man.kind === 'suppliant' ? 222 : man.kind === 'night' ? 226 : 236, flip: man.kind !== 'runner', look: lk };
+    const gp = youPreview(e.gesture, e.mode); you.pose = gp;
+    scene = { you, him };
+    Object.assign(him, himAfter(res, t)); Object.assign(you, youAfter(res, t));
+    if (e.him === 'escaped') { him.x = 300; him.pose = P.run; }
+    if (e.him === 'passed') { him.x = 280; }
+    const sc = { night: isNight, props: man.kind === 'captive' ? ['loom'] : [], you, him };
+    let s = `<rect width="348" height="250" fill="${R.GLAZE}"/><line x1="0" y1="${GROUND + 1}" x2="348" y2="${GROUND + 1}" stroke="${R.DILUTE}" stroke-width="2"/>`;
+    s += propsSVG(sc.props) + figureSVG(sc.him, false) + figureSVG(sc.you, true);
+    return s;
+  }
+  const PANEL_WORD = { dead: 'killed', beaten: 'beaten', taken: 'taken', 'struck you': 'struck you', passed: 'let pass', escaped: 'let run', fallen: 'passed by',
+    raised: 'raised', grace: 'grace', heard: 'heard you', deaf: 'deaf', 'owns you': 'his', 'fell back': 'you stood', 'killed you': 'killed you' };
+  function endLife() {
+    const V = M.verdict(ui.g);
+    $('#headline').textContent = V.headline;
+    $('#panels').innerHTML = ui.g.log.map(e => `<div class="pan"><svg viewBox="0 30 348 220">${panelFor(e)}</svg><div class="pl">${e.kind === 'night' ? 'night' : 'day ' + e.day} · ${PANEL_WORD[e.him] || ''}${e.impulse ? ' (no interval)' : ''}</div></div>`).join('');
+    $('#did').innerHTML = V.did.map(l => `<p class="did">${l}</p>`).join('');
+    $('#weil').textContent = V.weil; $('#last').textContent = V.last;
+    show('end');
+  }
+  $('#again').addEventListener('click', () => startLife(1 + Math.floor(Math.random() * 9999)));
+
+  // ------------------------------------------------------------------ the start: an amphora
+  function amphora() {
+    const body = `M120 40 h108 v18 q-4 6 -14 8 q30 14 56 54 q26 44 20 96 q-8 58 -46 88 q-18 14 -18 26 h-104 q0 -12 -18 -26 q-38 -30 -46 -88 q-6 -52 20 -96 q26 -40 56 -54 q-10 -2 -14 -8 z`;
+    let s = `<defs><clipPath id="vb"><path d="${body}"/></clipPath></defs>`;
+    s += `<path d="${body}" fill="${R.GLAZE}" stroke="${R.CLAY}" stroke-width="1.6"/>`;
+    s += `<path d="M114 72 q-50 -6 -52 34 q0 16 12 22" fill="none" stroke="${R.CLAY}" stroke-width="7"/><path d="M234 72 q50 -6 52 34 q0 16 -12 22" fill="none" stroke="${R.CLAY}" stroke-width="7"/>`;
+    s += `<rect x="40" y="118" width="268" height="10" fill="url(#mz)" clip-path="url(#vb)"/><rect x="40" y="252" width="268" height="10" fill="url(#mz)" clip-path="url(#vb)"/>`;
+    s += `<g clip-path="url(#vb)"><g transform="translate(70 128) scale(0.48)">`;
+    s += R.draw(place(P.ready, 104, YOU_LOOK), 6, {});
+    s += R.draw(place(P.clasp, 222, { helmet: false, beard: false, kind: 'boy' }), 6, { flip: true });
+    s += `</g></g>`;
+    s += `<path d="M130 314 h88 v8 h-88z" fill="${R.CLAY}"/>`;
+    $('#amphora').innerHTML = s;
+  }
+  amphora();
+  const hashSeed = +(location.hash.match(/life=(\d+)/) || [])[1];
+  const seed0 = hashSeed || (1 + Math.floor(Math.random() * 9999));
+  $('#lifeno').textContent = 'life no. ' + seed0;
+  $('#begin').addEventListener('click', () => startLife(seed0));
+})();
+</script>
+</body>
+</html>
