@@ -1,0 +1,60 @@
+A. THE LONG GRASS (1000 afternoons)
+PASS  eight stems every afternoon
+PASS  always a stiff grass stem and a leafy twig (two ways to a grown-up’s tool; the floor)
+PASS  lengths inside each kind’s range
+PASS  an afternoon number replays the same grass
+      stems per afternoon, by kind: dry 1.17, stick 1.00, stem 1.15, blade 2.17, leafy 1.18, short 1.00, bark 0.18, twig 0.16
+
+B. THE PAPER’S NUMBERS
+PASS  grown-up technique (stiff, stripped, pushed in as far as it goes): depth within 5–8 inches (p. 230)  — min 7.0, max 8.0
+PASS  a floppy stem (the 3–4-year-olds’ “too flexible”) goes in one or two inches (p. 230)  — depths 1.5, 1.5, 1.5, 1.5
+PASS  an infant of 2–3 (wrong stems, a jerk) catches about two termites in twenty-two bouts (p. 230)  — 2.4 per 22 bouts, over 22000 bouts
+PASS  your mother: every dip five to eight inches and classed a grown-up’s  — depth 6.0–8.0; 2400 dips; termites per dip 6.4 (ours)
+PASS  termites per dip rise with the ages: 2–3 ≈ 3–4 < 4 < grown-up  — 4: 2.23; 2-3: 0.08; 3-4: 0.33; adult: 7.90
+PASS  each age’s way of fishing is classed at that age by the notebook  — 4 → 4 (99 %); 2-3 → 2-3 (96 %); 3-4 → 3-4 (67 %); adult → adult (100 %)
+PASS  the hollow: hand alone and fresh leaves fall short; the infant’s sucked stem, a chewed stem and chewed leaves each drink their fill  — hand 5, fresh leaves 10, stem sucked 14, stem chewed 15, chewed leaves 12 (enough 12)
+
+C. PLAYING IT IN NUMBERS (300 afternoons each; termites eaten, last dip’s age, hollow)
+  long is best (three longest, no prep, all the way in, slow)                termites   7.9 (min  0, max 48); last dip 3-4 (73 %)
+  fast hands (good stems, stripped, but pulled out at a flick)               termites   0.0 (min  0, max  0); last dip 2-3 (100 %)
+  trial and error (a mixed kit; slows down after a jerk, drops what folds)   termites  51.0 (min  0, max 70); last dip adult (49 %)
+  copy your mother (watch once, then do as she does)                         termites  87.8 (min 86, max 88); last dip adult (100 %)
+  watcher (watch four times first)                                           termites  64.0 (min 64, max 64); last dip adult (100 %)
+  never bites a bent end (good kit, good hands)                              termites  23.7 (min 21, max 24); last dip 3-4 (100 %)
+  best possible (good kit, stripped, bitten, slow, never watches)            termites  95.7 (min 93, max 96); last dip adult (100 %)
+  four-year-old (shorter or springier tools, good hands)                     termites  13.3 (min  8, max 36); last dip 4 (98 %)
+  your mother, every afternoon: about 77.2 termites
+PASS  the decisions matter: best possible catches at least four times what “long is best” or “fast hands” does  — 95.7 against 7.9 and 0.0
+PASS  learning by trying gets most of the way to the best  — 51.0 of 95.7
+PASS  watching once pays: copying your mother beats learning by trying and comes within a quarter of the best; watching four times costs more  — 87.8 against trying 51.0; watcher 64.0
+PASS  a bent end matters: never biting it off loses termites  — 23.7 against 95.7
+PASS  no simple rule wins everywhere: the four-year-old’s short tools sit between  — 13.3
+  the hollow after the best afternoon: termite stem 14.0 sips; chewed leaves 12.0; hand 5.0 (enough is 12)
+PASS  at the hollow the termite stem drinks its fill; the hand does not
+
+D. ROBUSTNESS (the designer’s choices varied one at a time)
+  holds   bend1 at 1 inch          grown-up 7.9, jerk 0.0, floppy 0.0 (in 1.0), too thick 0.0
+  holds   bend1 at 2 inches        grown-up 7.9, jerk 0.0, floppy 0.0 (in 2.0), too thick 0.0
+  holds   bend2 at 3.5 inches      grown-up 7.9, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   bend2 at 5 inches        grown-up 7.9, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   chamber from 2 inches    grown-up 9.9, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   chamber from 4 inches    grown-up 6.0, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   termites per inch 1.2    grown-up 5.0, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   termites per inch 2.4    grown-up 10.9, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   bite-on time 0.5 s       grown-up 8.0, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   bite-on time 1.5 s       grown-up 7.0, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   grips 3–12 in/s          grown-up 7.9, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+  holds   grips 8–20 in/s          grown-up 7.9, jerk 0.0, floppy 0.0 (in 1.5), too thick 0.0
+PASS  the discovery (the infants’ mistakes catch nothing, the grown-up way catches several) survives every variant
+
+E. RULES AND BOUNDARIES
+PASS  a dip, a look at your mother and a stem fetched nearby each cost one sun
+PASS  a touch shallower than a fifth of an inch costs nothing
+PASS  termites on a still stem fill to the cap (per inch in the chamber) and no further  — 7 on
+PASS  after three dips the end is bent and folds at the first bend; biting it off restores it, an inch shorter  — bent, then 7.0 in
+PASS  your mother throws down her bent stem after three dips, and you can pick it up
+PASS  the same afternoon, played the same way, comes out the same
+PASS  the verdict has a headline and five lines of words, and no decimals or NaN  — By the end of the afternoon you fished like a grown-up chimpanzee, which took the infants Goodall watched about two years; then you made a sponge out of a termite stem.
+PASS  a preview changes nothing
+
+26 passed, 0 failed

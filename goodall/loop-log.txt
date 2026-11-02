@@ -1,0 +1,87 @@
+AFTERNOON 1. THE LONG GRASS: 8 stems
+ look: A grass blade, 13 inches. Thin as a straw, and floppy: it droops under its own weight.
+   take it (carrying 1)
+ look: A stick, 12 inches. Thick as a finger, and stiff.
+   take it (carrying 2)
+ look: A leafy twig, 10 inches. Thin as a straw, and stiff. Leaves on it.
+   take it (carrying 3)
+
+THE MOUND
+ hold: A grass blade, 13 inches. Thin as a straw, and floppy: it droops under its own weight.
+      (the stem stops: it will not go further)
+   → In an inch and a half: it folded at the first bend. No termites.
+     [red pencil, 3-4] too floppy: in an inch or two — like the infants of 3 to 4
+     suns left 11; termites 0
+ hold: A stick, 12 inches. Thick as a finger, and stiff.
+      (the stem stops: it will not go further)
+   → It stopped at the rim: too thick to go in. No termites.
+     [red pencil, 2-3] too thick — like the infants of 2 to 3
+     suns left 10; termites 0
+ hold: A leafy twig, 10 inches. Thin as a straw, and stiff. Leaves on it.
+      (the stem stops: it will not go further)
+   → The leaves caught on the rim. No termites.
+     [red pencil, 2-3] leaves left on — grown-ups strip them first
+     suns left 9; termites 0
+ preview strip: A leafy twig, 10 inches. Thin as a straw, and stiff.
+ push all the way, short pause, pull at a flick
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out fast: eight shaken off. No termites.
+     [red pencil, 2-3] yanked out, termites shaken off — like the infants of 2 to 3
+     suns left 8; termites 0
+ again, slowly
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 7; termites 8
+ WATCH YOUR MOTHER → Your mother: a stiff grass stem, stripped, 11 inches long. In seven and a half inches. A pause. Out slowly. Seven termites. She throws the stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way   suns left 6
+ dip slowly
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 5; termites 16
+ dip slowly
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. The end is bent now.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 4; termites 24
+ preview bite: A leafy twig, 9 inches. Thin as a straw, and stiff.
+ dip slowly
+      (the stem stops: it will not go further)
+   → In seven inches: as far as a stem this length reaches. A pause. Out slowly. Six termites.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 3; termites 30
+ pick up her stem: A grass stem, 11 inches. Thin as a straw, and stiff. The end is bent.
+   bitten: A grass stem, 10 inches. Thin as a straw, and stiff.
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 2; termites 38
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 1; termites 46
+      (the stem stops: it will not go further)
+   → In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. The end is bent now.
+     [red pencil, adult] 5 to 8 inches, a pause, out smoothly — a grown-up’s way
+     suns left 0; termites 54
+
+YOUR MOTHER MOVES OFF. you 54, her 70
+
+THE HOLLOW
+ hold: Your hand. Your fingers fit into the hollow; your lips do not.
+      (the stem stops: it will not go further)
+   → You dip your fingers and lick them: a sip. [red] an infant tried his hand first, too  sips 1
+ hold: A grass blade, 13 inches. Thin as a straw, and floppy: it droops under its own weight.
+   → It comes up wet. You suck the end: a sip. Sucking it chews the end a little. [red] an infant of 3½ did this too: poked grass in, the way he fished for termites  sips 2
+ preview chew: A grass blade, 13 inches. Thin as a straw, and floppy: it droops under its own weight. The end is chewed into a little crumpled mass.
+   → It comes up wet. You suck the end: four sips.  sips 6, suns 2
+   → It comes up wet. You suck the end: four sips.  sips 10, suns 1
+   → It comes up wet. You suck the end: four sips.  sips 14, suns 0
+
+THE LAST PAGE
+ By the end of the afternoon you fished like a grown-up chimpanzee, which took the infants Goodall watched about two years; then you made a sponge out of a termite stem.
+  You caught 54 termites this afternoon; your mother caught about 70.
+  Your first dip looked like an infant’s of three to four (a floppy stem folding at the first bend); your last, like a grown-up’s (a stiff stem, deep in, a pause, out slowly).
+  You watched your mother once and tried the rest yourself, and you fished with the stem she threw away.
+  At the hollow you pushed a grass stem in the way you fish for termites; chewing and sucking the end crumpled it into a sponge, and you drank your fill.
+  ages: 3-4 2-3 2-3 2-3 adult adult adult adult adult adult adult
