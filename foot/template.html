@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Foot's Bad Man</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="A silent-film melodrama in three reels, from Philippa Foot's 1967 paper on the doctrine of the double effect: you are the bad man, and you spring her cases as traps on three good people.">
+<meta name="description" content="A silent-film melodrama in three reels, from Philippa Foot's 1967 paper on the doctrine of the double effect: you are the bad man: you spring her cases as traps on three good people, say what you would do in their place, and end with the case the paper was written about.">
 <style>
 @font-face{font-family:'Limelight';src:url(data:font/woff2;base64,/*__FONT_LIMELIGHT__*/) format('woff2');font-display:block}
 @font-face{font-family:'Libre Baskerville';font-weight:400;font-style:normal;src:url(data:font/woff2;base64,/*__FONT_BASK__*/) format('woff2');font-display:block}
@@ -62,6 +62,31 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .aimdef{text-align:center;font-size:14px;color:var(--muted);font-style:italic;margin:2px 0 4px}
 .sig{padding:16px 0 10px;font-size:15px;text-align:center;font-family:var(--text)}
 .sig a{color:var(--muted);font-style:italic;text-decoration:none}
+.creed{margin:12px 4px 6px;padding:10px 14px;font-style:italic;font-size:15px;line-height:1.5;color:var(--amber)}
+.creed span{display:block}
+
+/* ---- the chair */
+.chairbox{padding:12px 14px 10px}
+.chlab{font-family:var(--display);font-size:12.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.chq{font-family:var(--display);font-size:19px;color:var(--amber);letter-spacing:.03em;margin:4px 0 2px}
+.btn.opt{text-transform:none;letter-spacing:.01em;font-family:var(--text);font-size:16px;margin:12px 4px 4px;text-align:left;padding:10px 28px}
+.btn.opt span{display:block}
+.chdone{font-style:italic;font-size:15.5px;color:var(--silver);margin:8px 0 2px}
+#res .note{font-size:14px;color:var(--muted);font-style:italic;margin-top:8px}
+#res .you{margin:12px 6px 0;padding:0 0 0 12px;border-left:2px solid var(--amber);color:var(--amber);font-size:15.5px}
+#res .you .lab{display:block;font-family:var(--display);font-size:11.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:2px}
+
+/* ---- epilogue */
+#coda .theend .sub{font-style:italic;font-size:14.5px;color:var(--muted);margin-top:6px}
+#coda .ctext{font-size:16.5px;margin:6px 0 0}
+#cstage{display:block;width:100%;height:auto;border-radius:3px;background:radial-gradient(ellipse at 50% 40%,#ECE7DA 0%,#CFC8B8 45%,#8E887C 85%,#5E584F 100%);margin-top:10px}
+#cstage .fig{fill:var(--black)}#cstage .set{fill:var(--shadow)}
+#cres .game{font-size:15.5px}#cres #cdid{font-weight:700;font-size:16.5px}#cres .note{color:var(--muted);font-style:italic;font-size:14px}
+.cclose{font-style:italic;font-size:15px;margin:10px 6px 0;color:var(--silver)}
+#coda h3{font-size:16px;letter-spacing:.1em;color:var(--muted);margin:22px 4px 8px;text-transform:uppercase}
+.yours{padding:12px 14px;color:var(--amber);margin-top:14px}
+.yours .who{display:block;font-family:var(--display);font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.yours p{margin:0 0 6px;font-size:15.5px}.yours p:last-child{margin:0}
 
 /* ---- play */
 #bar{display:flex;align-items:flex-start;gap:10px;margin:2px 4px 6px}
@@ -165,7 +190,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
     <div class="sub">A melodrama in three reels, from the 1967 paper by Philippa Foot in which the runaway tram first appears</div>
   </div>
   <svg id="villain" viewBox="0 0 360 150" aria-hidden="true"></svg>
-  <p class="acts">You are the bad man. Three good people each live by a rule. You pick a trap from your six: a runaway tram, a poison, a flooded cave. You spring it, and watch them choose. The audience judges what they did.</p>
+  <p class="acts">You are the bad man. Three good people each live by a rule. You pick a trap from your six: a runaway tram, a poison, a flooded cave. You spring it. Before they choose, you say what you would do in their place. Then you watch them choose, and the audience judges what they did.</p>
+  <div class="it amber creed"><i class="dm1"></i><i class="dm2"></i>
+    <span>I keep my word, always.</span>
+    <span>The dead are my price, not my prize.</span>
+    <span>I want a good person to do it, by their own rule, where the whole house can see.</span>
+  </div>
   <div class="aimline" id="aimStart">Disgrace three good people, using nothing but their own rules.</div>
   <div class="aimdef">Disgraced: the audience turns on them.</div>
   <button class="btn amber" id="begin"><i class="d l"></i>Start the film<i class="d r"></i></button>
@@ -191,9 +221,19 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
     <p class="expect" id="expect"></p>
     <button class="btn amber" id="spring" disabled><i class="d l"></i><span>Pick a scheme</span><i class="d r"></i></button>
   </div>
+  <div id="chair" class="hidden">
+    <div class="it amber chairbox"><i class="dm1"></i><i class="dm2"></i>
+      <div class="chlab" id="chlab">Before he chooses: you, in his chair.</div>
+      <div class="chq" id="chq">What would you do?</div>
+      <button class="btn amber opt" id="chA"><i class="d l"></i><span></span><i class="d r"></i></button>
+      <button class="btn amber opt" id="chB"><i class="d l"></i><span></span><i class="d r"></i></button>
+      <div class="chdone" id="chdone"></div>
+    </div>
+  </div>
   <div id="res" class="hidden">
-    <div class="it game" id="rgame"><i class="dm1"></i><i class="dm2"></i><p id="rdid"></p><p id="rwhy"></p></div>
+    <div class="it game" id="rgame"><i class="dm1"></i><i class="dm2"></i><p id="rdid"></p><p id="rwhy"></p><p class="note" id="rnote"></p></div>
     <div class="it aud" id="raud"><i class="dm1"></i><i class="dm2"></i><span id="raudt"></span></div>
+    <div class="you" id="ryou"></div>
     <div class="says" id="rsays"></div>
     <div class="stand" id="rstand"></div>
     <button class="btn amber" id="next"><i class="d l"></i><span>Next</span><i class="d r"></i></button>
@@ -210,13 +250,40 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
     <p class="missed" id="vmissed"></p>
     <p id="vmeans"></p>
   </div>
-  <h3>Every rule, every scheme</h3>
-  <svg id="map" viewBox="0 0 360 232" aria-label="map of holes"></svg>
-  <p class="legend"><span style="background:var(--red)"></span>the audience turns on them &nbsp; <span style="border:2px solid var(--amber)"></span>a scheme you sprang</p>
+  <div class="it amber yours" id="vyou"><i class="dm1"></i><i class="dm2"></i><span class="who">And you, in the chair</span><p id="vyline"></p><p id="vyread"></p><p id="vystalls"></p></div>
+  <h3>Every rule, every scheme, and you</h3>
+  <svg id="map" viewBox="0 0 360 290" aria-label="map of holes"></svg>
+  <p class="legend"><span style="background:var(--red)"></span>the audience turns on them &nbsp; <span style="border:2px solid var(--amber)"></span>a scheme you sprang &nbsp; <span style="border:1.5px dashed var(--shadow)"></span>not decided</p>
   <p class="trolley" id="vtrolley"></p>
-  <button class="btn amber" id="again"><i class="d l"></i>Play again<i class="d r"></i></button>
+  <button class="btn amber" id="toCoda"><i class="d l"></i>Epilogue: the case the paper is about<i class="d r"></i></button>
+  <button class="btn" id="again"><i class="d l"></i>Play again<i class="d r"></i></button>
   <div class="links"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- ======================= EPILOGUE ======================= -->
+<section id="coda" class="screen">
+  <div class="it theend"><i class="dm1"></i><i class="dm2"></i><h1>Epilogue</h1><div class="sub">The case the paper was written about</div></div>
+  <p class="acts">Foot wrote her paper about abortion, and ended it with three medical cases, each with a parallel among adults. No bad man here, no audience, nothing to win. You decide each one, as a doctor would; then you read what she says.</p>
+  <div class="it" id="ctitle"><i class="dm1"></i><i class="dm2"></i><div class="reel" id="creel">The first case</div><p class="ctext" id="ctext"></p></div>
+  <div id="cstagebox"><svg id="cstage" viewBox="0 0 360 200" aria-label="the case"></svg></div>
+  <div id="cpick">
+    <div class="chq">What would you do?</div>
+    <button class="btn amber opt" id="cA"><i class="d l"></i><span></span><i class="d r"></i></button>
+    <button class="btn amber opt" id="cB"><i class="d l"></i><span></span><i class="d r"></i></button>
+  </div>
+  <div id="cres" class="hidden">
+    <div class="it game"><i class="dm1"></i><i class="dm2"></i><p id="cdid"></p><p id="cfoot"></p><p class="note" id="cmost"></p></div>
+    <p class="cclose hidden" id="cclose"></p>
+    <button class="btn amber" id="cnext"><i class="d l"></i><span>The next case</span><i class="d r"></i></button>
+  </div>
+  <div id="cend" class="hidden">
+    <h3>The reply in the same issue</h3>
+    <p class="acts">Elizabeth Anscombe's note ran straight after the paper, disputing one point: that you must give the scarce drug to the five. Give the whole dose to the one who needs it, and who can say you wronged <i>him</i>? Nobody was owed it. In the film no rule gives the medicine to the one; if you did, in the chair, she is on your side.</p>
+    <button class="btn amber" id="cagain"><i class="d l"></i>Play again<i class="d r"></i></button>
+    <div class="links"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
+    <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+  </div>
 </section>
 
 <!-- ======================= HELP ======================= -->
@@ -225,6 +292,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
   <p class="first">Disgrace three good people, using nothing but their own rules.</p>
   <p><b>Who they are.</b> Three good people, one per reel: Mr Most, Doctor Double and Mrs Foot. Each has a rule, printed under their name. They always do what their rule says.</p>
   <p><b>What you do.</b> You are the bad man. You have six schemes: the tram, the bargain, the medicine, the brew, the beggar and the cave. Each puts a good person where one life is set against five, and every choice costs someone. Tap a scheme to see the trap it lays and the two choices it leaves them. Then press <i>Spring</i>.</p>
+  <p><b>The chair.</b> Before the good person chooses, the film stops and asks what <i>you</i> would do in their place. Tap one of the two. It changes nothing in the film, but you will be told what the audience would have made of you, and at the end which of the three rules you chose like. Each scheme asks once.</p>
   <p><b>What happens.</b> The film shows what they chose, by their rule, and who died. Then the audience along the bottom of the picture judges what they did:</p>
   <ul>
     <li>it <b>cheers</b> them: they did right;</li>
@@ -232,7 +300,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
     <li>it <b>turns on them</b>, and the picture goes red: they are <b>disgraced</b>. That is your win.</li>
   </ul>
   <p><b>How long.</b> You have three schemes for each good person. A reel ends when they are disgraced or your three schemes are spent. A disgrace pastes a red card over their portrait; surviving three schemes, a silver one marked <i>clean</i>.</p>
-  <p><b>The end.</b> After the third reel you see whom you disgraced, what Philippa Foot argued, and every scheme against every rule.</p>
+  <p><b>The end.</b> After the third reel you see whom you disgraced, what Philippa Foot argued, where your own choices put you, and every scheme against every rule. Then an epilogue: the three cases about abortion that the paper was written for, with no bad man and no audience, for you to decide and then read what she says.</p>
   <button class="btn" id="helpback"><i class="d l"></i>Back<i class="d r"></i></button>
 </section>
 
@@ -553,28 +621,52 @@ async function enterReel(first) {
   const v = M.current(W.g);
   drawTarget(); setExpect(); W.sel = null; drawSchemes(); idleCaption();
   $('#spring').disabled = true; $('#spring span').textContent = 'Pick a scheme';
-  $('#pick').classList.remove('hidden'); $('#res').classList.add('hidden');
+  $('#pick').classList.remove('hidden'); $('#res').classList.add('hidden'); $('#chair').classList.add('hidden');
   setScene('idle', v.id);
   const c = q('#irisc'); if (c && !first) { c.setAttribute('r', 0); await iris(false); }
 }
+// the chair: the film stops before the good person chooses and asks the player what they would do in their place
+function askChair(sid) {
+  const g = W.g, p = M.current(g).pron, pv = M.preview(g, sid);
+  $('#chlab').textContent = `Before ${p.he} chooses: you, in ${p.his} chair.`;
+  const box = $('#chair');
+  if (g.chair[sid]) {
+    $('#chq').classList.add('hidden'); $('#chA').classList.add('hidden'); $('#chB').classList.add('hidden');
+    $('#chdone').textContent = `You decided this one already: ${g.chair[sid] === 'A' ? pv.youA : pv.youB}.`;
+    box.classList.remove('hidden'); box.scrollIntoView({ block: 'nearest', behavior: RM ? 'auto' : 'smooth' });
+    return wait(1500);
+  }
+  $('#chq').classList.remove('hidden'); $('#chA').classList.remove('hidden'); $('#chB').classList.remove('hidden');
+  $('#chA span').textContent = cap(pv.youA); $('#chB span').textContent = cap(pv.youB); $('#chdone').textContent = '';
+  box.classList.remove('hidden'); box.scrollIntoView({ block: 'nearest', behavior: RM ? 'auto' : 'smooth' });
+  W.busy = false; W.waiting = 'chair';
+  return new Promise(res => { W.chairRes = opt => { W.chairRes = null; W.waiting = null; W.busy = true; M.chair(g, sid, opt); $('#chA').classList.add('hidden'); $('#chB').classList.add('hidden'); $('#chq').classList.add('hidden'); $('#chdone').textContent = `You: ${opt === 'A' ? pv.youA : pv.youB}.`; wait(700).then(res); }; });
+}
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 async function spring() {
   if (W.busy || !W.sel) return; W.busy = true;
-  const sid = W.sel; const r = M.spring(W.g, sid);
-  $('#pick').classList.add('hidden'); $('#cap').querySelectorAll('.ch,.op').forEach(e => e.remove());
+  const sid = W.sel;
+  $('#pick').classList.add('hidden');
+  await askChair(sid);
+  $('#chair').classList.add('hidden');
+  const r = M.spring(W.g, sid);
+  $('#cap').querySelectorAll('.ch,.op').forEach(e => e.remove());
   $('#stagebox').scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' });
   await wait(250);
   await FILM[sid](r.option);
   await wait(250);
-  $('#rdid').textContent = r.did; $('#rwhy').textContent = r.why;
+  $('#rdid').textContent = r.did; $('#rwhy').textContent = r.why; $('#rnote').textContent = r.note;
   $('#raudt').textContent = r.audience; $('#raud').classList.toggle('dis', r.disgraced);
+  $('#ryou').innerHTML = r.you ? `<span class="lab">You, in the chair</span>${r.you}` : ''; $('#ryou').classList.toggle('hidden', !r.you);
   $('#rsays').innerHTML = `“${r.says}”<span class="by">${r.name}</span>`;
   const st = $('#rstand'); st.textContent = r.stand; st.className = 'stand' + (r.disgraced ? ' dis' : r.status === 'clean' ? '' : ' amber');
-  $('#rgame').style.opacity = 0; $('#raud').style.opacity = 0; $('#rsays').style.opacity = 0; st.style.opacity = 0; $('#next').style.opacity = 0;
+  $('#rgame').style.opacity = 0; $('#raud').style.opacity = 0; $('#ryou').style.opacity = 0; $('#rsays').style.opacity = 0; st.style.opacity = 0; $('#next').style.opacity = 0;
   $('#res').classList.remove('hidden');
   await anim($('#rgame'), [{ opacity: 0 }, { opacity: 1 }], { duration: 350 });
   await wait(500);
   await Promise.all([react(r.verdict), anim($('#raud'), [{ opacity: 0 }, { opacity: 1 }], { duration: 350 })]);
   const idx = W.g.t; if (r.status !== 'open') updatePortraits(idx); drawPips();
+  await anim($('#ryou'), [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
   await anim($('#rsays'), [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
   await anim(st, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
   const last = r.status !== 'open' && W.g.t === 2;
@@ -607,25 +699,69 @@ function drawEnd() {
   $('#vmissed').textContent = V.missed; $('#vmissed').classList.toggle('hidden', !V.missed);
   $('#vmeans').textContent = V.means;
   $('#vtrolley').textContent = V.trolley;
-  // the map: 3 rows (rules) × 6 columns (schemes)
+  if (V.you) { $('#vyline').textContent = V.you.line; $('#vyread').textContent = V.you.read; $('#vystalls').textContent = V.you.stalls; }
+  $('#vyou').classList.toggle('hidden', !V.you);
+  // the map: 3 rows (rules) × 6 columns (schemes), and a fourth row for the player's own choices in the chair
   const rows = M.map(), x0 = 88, cw = 45, ch = 46, y0 = 34;
+  rows.push({ rule: 'you', name: 'You', cells: M.CONFIG.SCHEME_ORDER.map(sid => { const o = W.g.chair[sid]; return { scheme: sid, option: o || null, verdict: o ? M.judge(sid, o) : null }; }) });
   let s = '';
   M.CONFIG.SCHEME_ORDER.forEach((id, j) => { s += `<text x="${x0 + j * cw + cw / 2 - 3}" y="${j % 2 ? 26 : 12}" text-anchor="middle" style="fill:#A39D90;font-size:10px;letter-spacing:.04em">${M.SCHEME_WORDS[id].title.replace(/^The /, '').toUpperCase()}</text>`; });
   rows.forEach((row, i) => {
-    const y = y0 + i * (ch + 10);
-    s += `<text x="0" y="${y + ch / 2 + 4}" style="fill:#E6E0D2;font-size:11.5px;letter-spacing:.02em">${row.name.replace('Doctor', 'Dr')}</text>`;
+    const y = y0 + i * (ch + 10), you = row.rule === 'you';
+    s += `<text x="0" y="${y + ch / 2 + 4}" style="fill:${you ? '#D9A13B' : '#E6E0D2'};font-size:11.5px;letter-spacing:.02em">${row.name.replace('Doctor', 'Dr')}</text>`;
     row.cells.forEach((c, j) => {
       const x = x0 + j * cw, red = c.verdict === 'disgrace';
-      const tried = W.g.log.some(r => r.target === row.rule && r.scheme === c.scheme);
+      if (you && !c.option) { s += `<g transform="translate(${x},${y})"><rect x="1" y="1" width="${cw - 6}" height="${ch - 2}" style="fill:none;stroke:#5E584F;stroke-width:1.5;stroke-dasharray:3 3"/></g>`; return; }
+      const tried = !you && W.g.log.some(r => r.target === row.rule && r.scheme === c.scheme);
       s += `<g transform="translate(${x},${y})"><rect x="1" y="1" width="${cw - 6}" height="${ch - 2}" style="fill:${red ? '#C42A2A' : '#CFC8B8'}"/>
         <g transform="translate(${(cw - 6) / 2 - 12},${ch / 2 - 11}) scale(.8)" style="fill:none;stroke:${red ? '#E6E0D2' : '#0D0B09'};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">${ICON[c.scheme]}</g>
         ${tried ? `<rect x="-1.5" y="-1.5" width="${cw - 1}" height="${ch + 3}" style="fill:none;stroke:#D9A13B;stroke-width:2.6"/>` : ''}</g>`;
     });
   });
-  const yb = y0 + 3 * (ch + 10) + 2;
+  const yb = y0 + 4 * (ch + 10) + 2;
   s += `<path d="M${x0 + 3 * cw + 2},${yb}h${cw - 8}" style="stroke:#E6E0D2;stroke-width:1"/><text x="${x0 + 3 * cw + cw / 2 - 3}" y="${yb + 13}" text-anchor="middle" style="fill:#E6E0D2;font-size:9.5px">FOOT'S GAS</text>`;
   s += `<path d="M${x0 + 2},${yb}h${cw - 8}" style="stroke:#A39D90;stroke-width:1"/><text x="${x0 + cw / 2 - 3}" y="${yb + 13}" text-anchor="middle" style="fill:#A39D90;font-size:9.5px">TROLLEY</text>`;
   $('#map').innerHTML = s;
+}
+
+// ------------------------------------------------------------------ the epilogue: the three abortion cases, one life against one
+function codaScene() {
+  // a ward: the mother in a bed, the child in a cradle beside it, the player at the foot of the bed (no stalls)
+  return `<circle cx="180" cy="100" r="88" style="fill:#F4F0E6;opacity:.5"/><path class="set" d="M30,166h300v3h-300z"/>
+    <g id="mother">${bed(130, 166, 1.9)}</g>
+    <g id="child"><path class="set" d="M222,166l6,-16h40l6,16z"/><path class="set" d="M226,150q24,-8 48,0v3q-24,-8 -48,0z"/><circle class="fig" cx="248" cy="152" r="4.4"/><path class="fig" d="M243,156h10l1,4h-12z"/></g>
+    <g id="doctor">${person(316, 166, 1.5, 'plain')}</g>`;
+}
+function drawCase() {
+  const c = M.coda(W.c);
+  $('#creel').textContent = c.title; $('#ctext').textContent = c.text;
+  $('#cA span').textContent = cap(c.A); $('#cB span').textContent = cap(c.B);
+  $('#cpick').classList.remove('hidden'); $('#cres').classList.add('hidden'); $('#cend').classList.add('hidden'); $('#cclose').classList.add('hidden');
+  $('#cstagebox').classList.remove('hidden');
+  const st = $('#cstage'); st.innerHTML = codaScene(); st.querySelectorAll('.lie').forEach(e => e.style.opacity = 1);
+}
+async function decideCase(opt) {
+  if (W.busy) return; W.busy = true;
+  const c = M.coda(W.c, opt), st = $('#cstage'), f = s => st.querySelector(s);
+  $('#cpick').classList.add('hidden');
+  await wait(200);
+  // the film: who lives, who dies (the first case's "do nothing" loses both)
+  const motherDies = (c.id === 'both' && opt === 'B') || (c.id === 'either' && opt === 'B') || (c.id === 'worst' && opt === 'B');
+  const childDies = opt === 'A' || c.id === 'both';
+  const fades = []; if (motherDies) fades.push(die(f('#mother'))); if (childDies) fades.push(die(f('#child')));
+  if (fades.length) await Promise.all(fades);
+  if (!childDies && c.id === 'worst') await anim(f('#child'), [{ transform: 'translateY(0)' }, { transform: 'translateY(-5px)' }], { duration: 400 });
+  $('#cdid').textContent = c.did; $('#cfoot').textContent = c.foot; $('#cmost').textContent = c.most;
+  if (c.last) { $('#cclose').textContent = c.close; $('#cclose').classList.remove('hidden'); $('#cnext span').textContent = 'The reply'; } else $('#cnext span').textContent = 'The next case';
+  $('#cres').classList.remove('hidden'); $('#cres').style.opacity = 0; await anim($('#cres'), [{ opacity: 0 }, { opacity: 1 }], { duration: 350 });
+  $('#cnext').scrollIntoView({ block: 'end', behavior: RM ? 'auto' : 'smooth' });
+  W.busy = false;
+}
+function startCoda() { W.c = 0; show('coda'); drawCase(); }
+function nextCase() {
+  if (W.busy) return;
+  if (W.c < M.CODA.length - 1) { W.c++; drawCase(); $('#ctitle').scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' }); return; }
+  $('#cres').classList.add('hidden'); $('#cend').classList.remove('hidden'); $('#cend').scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' });
 }
 
 // ------------------------------------------------------------------ title villain
@@ -646,6 +782,13 @@ $('#begin').addEventListener('click', startGame);
 $('#again').addEventListener('click', startGame);
 $('#spring').addEventListener('click', spring);
 $('#next').addEventListener('click', next);
+$('#chA').addEventListener('click', () => { if (W.chairRes) W.chairRes('A'); });
+$('#chB').addEventListener('click', () => { if (W.chairRes) W.chairRes('B'); });
+$('#toCoda').addEventListener('click', startCoda);
+$('#cA').addEventListener('click', () => decideCase('A'));
+$('#cB').addEventListener('click', () => decideCase('B'));
+$('#cnext').addEventListener('click', nextCase);
+$('#cagain').addEventListener('click', startGame);
 drawVillain();
 
 // ------------------------------------------------------------------ film texture

@@ -59,4 +59,18 @@ Foot's Bad Man — calibration check
   ok   no scheme preview names the choice the target will make or the audience's verdict
   ok   every preview states both choices and what each costs
 
-43 passed, 0 failed.
+8. The chair: the player's own choices, read against the three rules
+  ok   all 64 patterns of chair choices compose their lines; a player who chooses exactly as a rule does is read as that rule
+  ok   the three rules' own patterns each come out as that rule
+     ties (two or more rules equally close) in 16 of 64 patterns
+  ok   brewing in the chair: told the audience would have turned on you
+  ok   the whole dose to the one, in the chair: the audience divided, Anscombe named
+  ok   every scheme has a chair line and a note saying which of the paper's cases it is
+  ok   a scheme is decided in the chair once
+
+9. The epilogue: the three abortion cases as Foot lists them (p. 5)
+  ok   three cases; their adult parallels: the cave, the shipwreck (whom to save, like the drug), and the bargain's shape
+  ok   every case composes for either decision
+  ok   the last case closes with Foot's own caution
+
+52 passed, 0 failed.

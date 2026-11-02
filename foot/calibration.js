@@ -101,6 +101,34 @@ const g0 = M.newGame();
 ok(ORDER.every(id => { const p = M.preview(g0, id); return !/cheer|disgrace|hiss|audience|allowed|forbade/i.test(p.ask + p.bad); }), 'no scheme preview names the choice the target will make or the audience\'s verdict');
 ok(ORDER.every(id => /: /.test(M.preview(g0, id).A) && /: /.test(M.preview(g0, id).B)), 'every preview states both choices and what each costs');
 
+say('\n8. The chair: the player\'s own choices, read against the three rules');
+// every pattern of six A/B choices in the chair composes, and sorts the player as it should
+let cbad = 0, cmatch = 0, cties = 0;
+for (let m = 0; m < 64; m++) {
+  const g = M.newGame(); const ch = {};
+  ORDER.forEach((id, i) => { ch[id] = (m >> i) & 1 ? 'A' : 'B'; M.chair(g, id, ch[id]); });
+  // play any complete game so the verdict composes
+  for (let t = 0; t < 3; t++) { let k = 0; while (!M.current(g).ended) { const r = M.spring(g, ORDER[k++]); if (!r.you || /[{}]|undefined/.test(r.you + r.note)) cbad++; } M.next(g); }
+  const y = M.verdict(g).you; if (!y || /[{}]|undefined/.test(y.line + y.read + y.stalls)) cbad++;
+  if (y.tied.length > 1) cties++;
+  // a player who chose exactly as one rule does must be read as that rule alone
+  for (const r of RULES) if (ORDER.every(id => M.choose(r, id) === ch[id])) { if (y.tied.length === 1 && y.tied[0] === r) cmatch++; else cbad++; }
+}
+ok(cbad === 0, 'all 64 patterns of chair choices compose their lines; a player who chooses exactly as a rule does is read as that rule');
+ok(cmatch === 3, 'the three rules\' own patterns each come out as that rule');
+say(`     ties (two or more rules equally close) in ${cties} of 64 patterns`);
+const g1 = M.newGame(); M.chair(g1, 'brew', 'A'); const r1 = M.spring(g1, 'brew');
+ok(r1.you && /turned on you/.test(r1.you), 'brewing in the chair: told the audience would have turned on you');
+const g2 = M.newGame(); M.chair(g2, 'medicine', 'B'); const r2 = M.spring(g2, 'medicine');
+ok(/divided/.test(r2.you) && /Anscombe/.test(r2.you), 'the whole dose to the one, in the chair: the audience divided, Anscombe named');
+ok(ORDER.every(id => !M.YOU[id].A.includes('{') && M.PAPER_NOTE[id].length > 20), 'every scheme has a chair line and a note saying which of the paper\'s cases it is');
+let threw = 0; try { M.chair(g1, 'brew', 'B'); } catch (e) { threw++; } ok(threw === 1, 'a scheme is decided in the chair once');
+
+say('\n9. The epilogue: the three abortion cases as Foot lists them (p. 5)');
+ok(M.CODA.length === 3 && M.CODA.map(c => c.scheme).join() === 'cave,medicine,bargain', 'three cases; their adult parallels: the cave, the shipwreck (whom to save, like the drug), and the bargain\'s shape');
+ok([0, 1, 2].every(i => ['A', 'B'].every(o => { const c = M.coda(i, o); return c.did && c.foot && c.most && !/undefined/.test(c.did + c.foot); })), 'every case composes for either decision');
+ok(M.coda(2).last && /not been arguing for or against/.test(M.coda(2).close), 'the last case closes with Foot\'s own caution');
+
 const res = `Foot's Bad Man — calibration check\n${new Date().toISOString().slice(0, 10)}\n\n${out.join('\n')}\n\n${pass} passed, ${fail} failed.\n`;
 fs.writeFileSync(__dirname + '/calibration-result.txt', res); console.log(res);
 process.exit(fail ? 1 : 0);
