@@ -53,7 +53,7 @@ svg{display:block}
 .sherds{display:grid;grid-template-columns:1fr 1fr;gap:12px 12px;margin:12px 0 4px}
 .sherds.three{grid-template-columns:1fr 1fr 1fr}
 .sherds.three .sherd .w{font-size:20px;letter-spacing:.12em}
-#commitRow{margin:14px 0 4px}
+#commitRow{margin:14px 0 4px;scroll-margin-bottom:18px}
 /* the play screen */
 .top{display:flex;align-items:center;gap:10px;margin:10px 0 2px}
 .aim{flex:1;font-size:16px;color:var(--clay);line-height:1.2}
@@ -179,8 +179,8 @@ svg{display:block}
 <h3>what is cut</h3>
 <p>The essay's last third (the Greek genius, tragedy and the Gospels, Rome and the Hebrews, the <i>chansons de geste</i>, Racine) is read, not played. The world of peace (“far from hot baths”), the gods who kindle men's madness, the slave's inner life, the similes that make men into fire and flood, and the twelve Trojan boys on Patroclus' pyre are not scenes. The equity of the poem is the end screen's point of view: every man you met, and you, as you ended.</p>
 <h3>the paper</h3>
-<p>Simone Weil, “The Iliad, or The Poem of Force”, translated by Mary McCarthy. First published as “L'Iliade ou le poème de la force”, <i>Cahiers du Sud</i> (Marseille), December 1940 and January 1941, under the anagram Emile Novis. McCarthy's translation, with the Homer quotations checked against the Greek by Dwight Macdonald, appeared in <i>Politics</i> (November 1945) and as Pendle Hill Pamphlet 91 (Wallingford, Pennsylvania: Pendle Hill, 1956). No DOI; the pamphlet is widely available online. Quotations in the game are McCarthy's English.</p>
-<p><b>Game built from this paper; the paper is the authority where the two disagree.</b> Built with Claude for Steffen Huck; it has had the builder's review only and has not been played by real strangers. Randomness: which men come, in what order, and what fate does, all fixed by the life number. Font: Forum, by Denis Masharov, SIL Open Font License.</p>
+<p>Simone Weil, “The Iliad, or The Poem of Force”, translated by Mary McCarthy. First published as “L'Iliade ou le poème de la force”, <i>Cahiers du Sud</i> (Marseille), December 1940 and January 1941, under the anagram Emile Novis. McCarthy's translation, with the Homer quotations checked against the Greek by Dwight Macdonald, appeared in <i>Politics</i> (November 1945) and as Pendle Hill Pamphlet 91 (Wallingford, Pennsylvania: Pendle Hill, 1956). No DOI. The pamphlet: <a href="https://pendlehill.org/?p=888">pendlehill.org</a>. Quotations in the game are McCarthy's English.</p>
+<p><b>Game built from this paper; the paper is the authority where the two disagree.</b> Randomness: which men come, in what order, and what fate does, all fixed by the life number. Font: Forum, by Denis Masharov, SIL Open Font License.</p>
 
   <div class="shw back"><button class="sherd shb big" id="aboutback"><span class="w">Back</span></button></div>
 </section>
@@ -1056,6 +1056,8 @@ svg{display:block}
     const l = M.gestureLabel(id, ui.t.man);
     $('#commitW').textContent = l.act; $('#commitRow').classList.remove('hidden');
     tween({ you: { pose: youPreview(id, ui.t.mode) } }, 260);
+    // on a phone the long sherd appears below the fold: bring it up, so the second touch is never a hidden one
+    $('#commitRow').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
   $('#commit').addEventListener('click', () => { if (ui.sel && !ui.busy) commit(ui.sel, false); });
 

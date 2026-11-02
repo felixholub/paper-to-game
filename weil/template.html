@@ -53,7 +53,7 @@ svg{display:block}
 .sherds{display:grid;grid-template-columns:1fr 1fr;gap:12px 12px;margin:12px 0 4px}
 .sherds.three{grid-template-columns:1fr 1fr 1fr}
 .sherds.three .sherd .w{font-size:20px;letter-spacing:.12em}
-#commitRow{margin:14px 0 4px}
+#commitRow{margin:14px 0 4px;scroll-margin-bottom:18px}
 /* the play screen */
 .top{display:flex;align-items:center;gap:10px;margin:10px 0 2px}
 .aim{flex:1;font-size:16px;color:var(--clay);line-height:1.2}
@@ -399,6 +399,8 @@ svg{display:block}
     const l = M.gestureLabel(id, ui.t.man);
     $('#commitW').textContent = l.act; $('#commitRow').classList.remove('hidden');
     tween({ you: { pose: youPreview(id, ui.t.mode) } }, 260);
+    // on a phone the long sherd appears below the fold: bring it up, so the second touch is never a hidden one
+    $('#commitRow').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
   $('#commit').addEventListener('click', () => { if (ui.sel && !ui.busy) commit(ui.sel, false); });
 
