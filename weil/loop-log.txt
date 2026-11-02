@@ -1,0 +1,129 @@
+AIM: Force is yours, for now. Keep your soul through the war.   (life 1, learner)
+
+— DAY 1 OF 12   you ■■■■■■   your pan UP ↑
+  PICTURE: you (clay all through) | him: a boy, clay all through
+  LINE: A boy, disarmed, clasps your knees. He offers a ransom for his life.
+  SHERDS: STRIKE (kill him)  TAKE (take him alive)  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → RAISE.  GAME: You raised him up. He stands, a man again. It cost you none of your soul. It cost you prestige: men fear you a little less.
+  HOMER/WEIL: “Moderation itself is not without its perils.”
+  SCALES: Your pan sinks.
+  NOW: you ■■■■■■   your pan UP ↑
+
+— DAY 2 OF 12   you ■■■■■■   your pan UP ↑
+  PICTURE: you (clay all through) | him: an armed man, stone to the eyes, armed
+  LINE: An armed man, stone to the eyes. He will strike if you do not.
+  SHERDS: STRIKE (kill him)  [cracked Take: He is armed.]  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → STRIKE.  GAME: You killed him.
+  COST: Stone climbs to your knees.
+  WHY: Force turns to stone the one who uses it, as surely as the one it is used on.
+  HOMER/WEIL: “Somebody was here, and the next minute there is nobody here at all.”
+  SCALES: Your pan hangs where it was.
+  NOW: you ■■■■■□   your pan UP 
+
+— DAY 3 OF 12   you ■■■■■□   your pan UP 
+  PICTURE: you (stone to the knees) | him: a soldier of your own army, clay all through
+  LINE: A soldier of your own army speaks up: “Nothing is worth our lives. Let us go home.”
+  SHERDS: STRIKE (beat him down)  [cracked Take: He is one of your own.]  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → RAISE.  GAME: You heard him out, before the whole army. It cost you none of your soul. It cost you prestige: men fear you a little less.
+  HOMER/WEIL: “Moderation itself is not without its perils.”
+  SCALES: The scales have turned. Tomorrow your pan is down.
+  NOW: you ■■■■■□   your pan DOWN ↓
+
+— DAY 4 OF 12   you ■■■■■□   your pan DOWN ↓
+  PICTURE: you (stone to the knees) | him: an armed man, stone to the hips, armed
+  LINE: Your pan has sunk. Force is his now. An armed man stands over you. He is stone to the hips: he may hear you, he may not.
+  SHERDS: PLEAD (clasp his knees)  OBEY (be his, and live)  STAND (face him)
+  → PLEAD.  GAME: He heard you. He raised you up and let you go. The stone that climbed while you knelt goes back down.
+  HOMER/WEIL: “A suppliant, once his prayer is answered, becomes a human being again.”
+  SCALES: Your pan rises again, just above level.
+  NOW: you ■■■■■□   your pan UP 
+
+— DAY 5 OF 12   you ■■■■■□   your pan UP 
+  PICTURE: you (stone to the knees) | him: an old priest, clay all through
+  LINE: An old priest asks for his daughter back. Your army holds her. He brings a ransom.
+  SHERDS: STRIKE (kill him)  [cracked Take: He is a priest of a god.]  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → RAISE.  GAME: You gave the old man his daughter back. He goes home with her. It cost you none of your soul. It cost you prestige: men fear you a little less.
+  HOMER/WEIL: “Moderation itself is not without its perils.”
+  SCALES: Your pan rises.
+  NOW: you ■■■■■□   your pan UP ↑
+
+— DAY 6 OF 12   you ■■■■■□   your pan UP ↑
+  PICTURE: you (stone to the knees) | him: an armed man, stone to the eyes, armed
+  LINE: An armed man, stone to the eyes. He will strike if you do not.
+  SHERDS: STRIKE (kill him)  [cracked Take: He is armed.]  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → STRIKE.  GAME: You killed him.
+  COST: Stone climbs to your hips.
+  HOMER/WEIL: “Somebody was here, and the next minute there is nobody here at all.”
+  SCALES: Your pan rises.
+  NOW: you ■■■■□□   your pan UP ↑↑
+
+— DAY 7 OF 12   you ■■■■□□   your pan UP ↑↑
+  PICTURE: you (stone to the hips) | him: a wounded man, stone to the knees
+  LINE: A wounded man, his spear gone, holds out his arms to you. “I implore you, by your knees.”
+  SHERDS: STRIKE (kill him)  TAKE (take him alive)  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → RAISE.  GAME: You raised him up. He stands, a man again. It cost you none of your soul. It cost you prestige: men fear you a little less.
+  HOMER/WEIL: “Moderation itself is not without its perils.”
+  SCALES: Your pan sinks.
+  NOW: you ■■■■□□   your pan UP 
+
+— DAY 8 OF 12   you ■■■■□□   your pan UP 
+  PICTURE: you (stone to the hips) | him: an armed man, stone to the shoulders, armed
+  LINE: An armed man, stone to the shoulders. He will strike if you do not.
+  SHERDS: STRIKE (kill him)  [cracked Take: He is armed.]  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear is still
+  → STRIKE.  GAME: You killed him.
+  COST: Stone climbs to your waist.
+  HOMER/WEIL: “Somebody was here, and the next minute there is nobody here at all.”
+  SCALES: The scales have turned. Tomorrow your pan is down.
+  NOW: you ■■■□□□   your pan DOWN ↓
+
+— DAY 9 OF 12   you ■■■□□□   your pan DOWN ↓
+  PICTURE: you (stone to the waist) | him: an armed man, clay all through, armed
+  LINE: Your pan has sunk. Force is his now. An armed man stands over you. He is still clay almost all through: he can hear you.
+  SHERDS: PLEAD (clasp his knees)  OBEY (be his, and live)  STAND (face him)
+  → PLEAD.  GAME: He heard you. He raised you up and let you go. The stone that climbed while you knelt goes back down.
+  HOMER/WEIL: “A suppliant, once his prayer is answered, becomes a human being again.”
+  SCALES: Your pan rises again, just above level.
+  NOW: you ■■■□□□   your pan UP 
+
+— DAY 10 OF 12   you ■■■□□□   your pan UP 
+  PICTURE: you (stone to the waist) | him: a young man, clay all through
+  LINE: A young man has thrown away his spear and clasps your knees. He begs you by your father.
+  SHERDS: STRIKE (kill him)  TAKE (take him alive)  PASS (as if he were not there)  RAISE (give him your hand)
+  INTERVAL: the spear creeps; reaches him in 7.0 s
+  → RAISE.  GAME: You raised him up. He stands, a man again. It cost you none of your soul. It cost you prestige: men fear you a little less.
+  HOMER/WEIL: “Moderation itself is not without its perils.”
+  SCALES: Your pan rises.
+  NOW: you ■■■□□□   your pan UP ↑
+
+— DAY 11 OF 12   you ■■■□□□   your pan UP ↑
+  PICTURE: you (stone to the waist) | him: a woman of the taken city, clay all through
+  LINE: A woman of the taken city stands at her loom. She is yours, if you want her.
+  SHERDS: [cracked Strike: She is no threat to anyone.]  TAKE (take her alive)  PASS (as if she were not there)  RAISE (give her your hand)
+  INTERVAL: the spear creeps; reaches him in 7.0 s
+  → RAISE.  GAME: You let her go. It cost you none of your soul. It cost you prestige: men fear you a little less.
+  HOMER/WEIL: “Moderation itself is not without its perils.”
+  SCALES: Your pan hangs where it was.
+  NOW: you ■■■□□□   your pan UP ↑
+
+— DAY 12 OF 12   you ■■■□□□   night: the scales hang still
+  PICTURE: you (stone to the waist) | him: an old man, clay all through
+  LINE: Night. An old man has crossed the camp in the dark and kneels to kiss your hands. He is the father of an armed man you killed on day 2. He asks for his son's body.
+  SHERDS: STRIKE (kill him)  TAKE (take him alive)  PASS (as if he were not there)  RAISE (give him your hand)
+  → RAISE.  GAME: He kissed the hands that killed. You wept together, he for his son, you for your father far away. Then you sat and looked at each other. A line comes back to each of you.
+  COST: The stone goes back down: you are stone to the hips.
+  HOMER/WEIL: “And when they were satisfied with contemplation of each other …”
+  NOW: you ■■■■□□   
+
+END: You lived to the night of the old man's visit, stone to the hips.
+  Of the men force put in your hands, you killed three and raised six up.
+  Twice the scales turned, and a man stood over you.
+  On the last night, you and the old man sat and looked at each other.
+  Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it for long. It is on loan, and the higher it lifts a man, the less he can stop his own arm, and the further he falls.
+  “… learn that there is no refuge from fate, learn not to admire force, not to hate the enemy, nor to scorn the unfortunate.”

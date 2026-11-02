@@ -1,0 +1,71 @@
+Weil's Vase — calibration check
+Simone Weil, "The Iliad, or The Poem of Force", tr. Mary McCarthy (Pendle Hill Pamphlet 91). Page numbers are the pamphlet's.
+Players: hard, soft, passive, measured, greedy, random; 1500 lives each; a player needs 3 s to act when the spear creeps.
+
+— 1. The essay's numbers, in the config block
+PASS  prestige is three quarters of force (p. 19, "at least three quarters")   [PRESTIGE_SHARE 0.75]
+PASS  fate is the remaining quarter (p. 13, "blind destiny")   [FATE_SHARE 0.25]
+PASS  the war lasts twelve days (p. 24, Lycaon's "twelfth day in Troy")   [DAYS 12]
+PASS  you start up, and rising (pp. 20–21, "at the embarkation, their hearts are light")
+
+— 2. The rules (p. 25: "to the same degree, though in different fashions, those who use it and those who endure it are turned to stone")
+PASS  every act of force used costs one line (strike, take; every kind of man)   [16 acts]
+PASS  every act of force suffered costs one line (struck by a man of stone)   [6 acts]
+PASS  used and suffered cost the same ("to the same degree")
+PASS  passing or raising a man who is not stone costs nothing   [16 acts]
+PASS  before a man of stone, no gesture keeps your line ("what hand can relinquish its weapon?", p. 22)
+PASS  words do not reach stone: a plea to a man of stone all through is never heard (p. 25)   [0% 17% 34% 49% 66% 83% 100%]
+PASS  a plea is heard more often the more clay is left in him
+PASS  kneeling costs a line, and being heard gives it back (pp. 5, 8)
+PASS  the interval: no clock at moderate height with most of the soul; none at all at the top or with no soul (p. 14)   [h 2.0, six lines: 7.0 s; h 1.0, three lines: 7.0 s]
+PASS  the interval shrinks as the pan rises and as the soul goes
+
+— 3. Played over many lives
+player     night  died  stone(all)  lines@night  six@night  knelt  impulses(lives)  graces  first man over you (lines)
+hard        38%   62%      0.00        0.00        0%   1.01        72%       0.00       2.32
+soft        55%   45%      2.67        4.87       15%   2.49         0%       0.94       5.00
+passive     40%   60%      1.54        3.83        0%   2.01         0%       0.00       4.34
+measured    66%   34%      3.13        4.73       13%   1.82         0%       1.18       4.96
+greedy      46%   54%      2.14        4.49        8%   1.64         2%       0.91       4.12
+random       6%   49%      1.43        0.99        0%   1.34         5%       0.05       4.21
+
+PASS  nobody holds force (p. 11): of lives that last nine days or more, at least nine in ten knelt at least once, for every player   [hard 100%, soft 100%, passive 100%, measured 100%, greedy 100%]
+PASS  force used turns its user to stone: the player who strikes everything ends with no soul at all
+PASS  the abuse of force comes home (p. 15): the man over the hard player is stonier than the man over the measured player   [2.32 lines against 4.96]
+PASS  ... and the hard player dies before the night more often than the measured one   [62% against 34%]
+PASS  the interval goes at the top (p. 14): the spear moves by itself in most hard lives, and never in a soft one   [72%, 0%]
+PASS  moderation has its perils (p. 19): the soft player kneels more often than the hard one   [2.49 against 1.01]
+PASS  a moderate use of force is the only escape, and not a sure one (p. 19): measured keeps the most soul of the sensible players   [hard 0.00, soft 2.67, passive 1.54, measured 3.13, greedy 2.14]
+PASS  no refuge from fate (p. 37): every player dies before the night in at least a fifth of lives   [hard 62%, soft 45%, passive 60%, measured 34%, greedy 54%, random 49%]
+PASS  ... and no player reaches the night with all six lines in more than a quarter of lives   [hard 0%, soft 15%, passive 0%, measured 13%, greedy 8%, random 0%]
+PASS  grace is rare (p. 27): fewer than two moments of grace a life, for every player
+PASS  the spear moves by itself only near the top of the swing or when the soul is low
+
+— 4. Robustness: the patterns under other choices of the designer's numbers (ours, not the essay's)
+BREAKS  TURN 0.8 → 0.6: ¬nobody home stone perils measure refuge   (measured: night 71%, lines 3.33; hard: died 46%)
+holds   TURN 0.8 → 1: nobody home stone perils measure refuge   (measured: night 62%, lines 2.94; hard: died 76%)
+holds   HOLD 0.8 → 0.4: nobody home stone perils measure refuge   (measured: night 66%, lines 3.11; hard: died 72%)
+BREAKS  HOLD 0.8 → 1.2: ¬nobody home stone perils measure refuge   (measured: night 66%, lines 3.14; hard: died 53%)
+holds   ABOVE_SLOPE 1.5 → 1.2: nobody home stone perils measure refuge   (measured: night 69%, lines 3.25; hard: died 53%)
+holds   ABOVE_SLOPE 1.5 → 1.8: nobody home stone perils measure refuge   (measured: night 62%, lines 2.93; hard: died 75%)
+holds   A_BASE 0.9 → 0.7: nobody home stone perils measure refuge   (measured: night 68%, lines 3.23; hard: died 58%)
+holds   A_BASE 0.9 → 1.1: nobody home stone perils measure refuge   (measured: night 60%, lines 2.83; hard: died 67%)
+holds   FATE_PHASE 0.35 → 0.2: nobody home stone perils measure refuge   (measured: night 66%, lines 3.14; hard: died 62%)
+holds   FATE_PHASE 0.35 → 0.5: nobody home stone perils measure refuge   (measured: night 65%, lines 3.09; hard: died 63%)
+holds   DAMP 0.08 → 0.04: nobody home stone perils measure refuge   (measured: night 66%, lines 3.14; hard: died 65%)
+holds   DAMP 0.08 → 0.12: nobody home stone perils measure refuge   (measured: night 66%, lines 3.13; hard: died 59%)
+holds   PUSH.strike 0.45 → 0.32: nobody home stone perils measure refuge   (measured: night 68%, lines 3.20; hard: died 56%)
+holds   PUSH.strike 0.45 → 0.6: nobody home stone perils measure refuge   (measured: night 64%, lines 3.07; hard: died 65%)
+holds   PUSH.raise -0.35 → -0.2: nobody home stone perils measure refuge   (measured: night 59%, lines 2.98; hard: died 62%)
+holds   PUSH.raise -0.35 → -0.5: nobody home stone perils measure refuge   (measured: night 69%, lines 3.24; hard: died 62%)
+holds   H_CREEP 1.4 → 1.1: nobody home stone perils measure refuge   (measured: night 66%, lines 3.12; hard: died 62%)
+holds   H_CREEP 1.4 → 1.7: nobody home stone perils measure refuge   (measured: night 66%, lines 3.13; hard: died 62%)
+PASS  the six patterns hold under at least 15 of the 18 variations of our numbers   [16 of 18]
+
+— 5. The draw (life number = seed)
+PASS  days 1–3 are always the boy, a man of stone and the soldier who speaks
+PASS  days 4–11 are eight different men dealt from the nine
+PASS  every man in the pool is dealt in roughly eight lives of nine   [priest 443, stone2 439, suppliant2 455, stone3 447, suppliant 441, captive 448, runner 444, half 448, guest 435]
+PASS  a life is replayable from its number
+
+30 passed, 0 failed.
