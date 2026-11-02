@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Goodall's Long Grass (van Lawick-Goodall, 1970)</title>
+<script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<meta name="description" content="Jane Goodall's tool-using chapter (1970) as a field notebook in pencil: you are a young chimpanzee at Gombe. Pick a grass stem, push it into the termite mound, draw it out without shaking them off; Goodall's notes tell you what age you fish like.">
+<style>
+@font-face{font-family:'Courier Prime';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,/*__FONT_CP400__*/) format('woff2');font-display:block}
+@font-face{font-family:'Courier Prime';font-style:normal;font-weight:700;src:url(data:font/woff2;base64,/*__FONT_CP700__*/) format('woff2');font-display:block}
+@font-face{font-family:'Kalam';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,/*__FONT_KALAM__*/) format('woff2');font-display:block}
+:root{
+  --paper:#F1EBDC; --g:#2E2F31; --g2:#6F6E6B; --g3:#B3AEA3; --grid:#CAD5D9; --red:#A9452F;
+  --type:'Courier Prime','Courier New',Courier,monospace; --hand:'Kalam','Comic Sans MS',cursive;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background-color:var(--paper);color:var(--g);font-family:var(--type);font-size:15px;line-height:1.4;min-height:100vh;overflow-x:hidden;
+  background-image:linear-gradient(rgba(202,213,217,.55) 1px,transparent 1px),linear-gradient(90deg,rgba(202,213,217,.55) 1px,transparent 1px);
+  background-size:14px 14px;background-position:-1px -1px}
+.screen{display:none;max-width:440px;margin:0 auto;padding:0 16px 30px;min-height:100vh;position:relative}
+.screen.on{display:block}
+p{margin:.45em 0}
+a{color:var(--g)}
+.hidden{display:none!important}
+.small{font-size:13px;color:var(--g2)}
+.label{font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)}
+.hand{font-family:var(--hand);color:var(--red);font-size:17px;line-height:1.25}
+h1{font-weight:700;font-size:30px;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 4px}
+h2{font-weight:700;font-size:17px;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 6px}
+h3{font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin:16px 0 4px}
+.aim{font-weight:700;font-size:17px;line-height:1.3;margin:12px 0;padding:8px 0;border-top:1.5px solid var(--g);border-bottom:1.5px solid var(--g)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding-top:12px}
+.top .aimline{font-weight:700;font-size:13px;line-height:1.3}
+.q{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--g);background:var(--paper);color:var(--g);font:700 20px/37px var(--type);cursor:pointer;padding:0}
+/* buttons: paper slips, typed */
+.slip{position:relative;display:block;width:100%;min-height:50px;margin:8px 0 0;padding:10px 14px;border:0;background:var(--paper);color:var(--g);
+  font:700 15px/1.2 var(--type);letter-spacing:.06em;text-transform:uppercase;text-align:left;cursor:pointer;touch-action:manipulation}
+.slip::before{content:'';position:absolute;inset:0;border:1.5px solid var(--g);border-radius:2px 3px 2px 4px;filter:url(#pencil-line);pointer-events:none}
+.slip.dark{background:var(--g);color:var(--paper)}
+.slip.dark::before{border-color:var(--g)}
+.slip:disabled{opacity:.38;cursor:default}
+.slip .cost{float:right;font-weight:400;letter-spacing:0;text-transform:none;font-size:13px}
+.slip.half{display:inline-block;width:calc(50% - 4px)}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row .slip{flex:1 1 140px}
+.slip.sm{min-height:42px;padding:8px 10px;font-size:13px;margin-top:6px}
+#play{-webkit-user-select:none;user-select:none}
+#prep:empty{display:none}
+/* pictures */
+svg.pic{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.frame{position:relative;margin:8px 0 0}
+.frame::before{content:'';position:absolute;inset:0;border:1px solid var(--g2);pointer-events:none;filter:url(#pencil-line)}
+.cap{font-size:12px;color:var(--g2);margin:4px 0 0}
+.cap b{letter-spacing:.06em}
+/* status strip */
+.status{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin:10px 0 0}
+.status .label{display:block;margin-bottom:2px}
+.suns{display:flex;gap:3px}
+.sun{width:14px;height:14px;border-radius:50%;border:1.3px solid var(--g);background:var(--paper)}
+.sun.used{background:repeating-linear-gradient(45deg,var(--g) 0 1.4px,var(--paper) 1.4px 3px)}
+.tally{min-height:20px;text-align:right}
+.tally svg{display:inline-block;vertical-align:bottom}
+.tallyn{font-weight:700;font-size:15px;margin-left:4px}
+/* in your hand */
+.handbox{margin:8px 0 0}
+.handbox .label{display:flex;justify-content:space-between}
+.desc{font-size:14px;line-height:1.35;margin:2px 0 0;min-height:38px}
+.slots{display:flex;gap:6px;margin:6px 0 0}
+.slot{flex:1;min-height:50px;border:0;background:transparent;position:relative;padding:4px 4px 2px;cursor:pointer;font:400 11px/1.15 var(--type);color:var(--g2);text-align:left}
+.slot::before{content:'';position:absolute;inset:0;border:1.2px dashed var(--g3);border-radius:2px}
+.slot.full::before{border:1.3px solid var(--g2);border-style:solid}
+.slot.on::before{border:2.2px solid var(--g)}
+.slot.on{color:var(--g)}
+.slot svg{display:block;width:100%;height:24px}
+/* results */
+.result{margin:8px 0 0;min-height:64px}
+.typed{font-size:15px;line-height:1.38;margin:0}
+.red{font-family:var(--hand);color:var(--red);font-size:17px;line-height:1.2;margin:4px 0 0;min-height:20px}
+.ruler{margin:6px 0 0}
+.redkey{font-size:12px;color:var(--g2);margin:2px 0 0}
+.redkey i{font-family:var(--hand);font-style:normal;color:var(--red);font-size:15px}
+.hint{position:absolute;left:1px;right:1px;top:1px;text-align:center;font-size:12px;color:var(--g);pointer-events:none;line-height:1.3;background:rgba(241,235,220,.88);padding:3px 4px}.hint:empty{display:none}
+.nearby{display:grid;grid-template-columns:1fr;gap:6px;margin:6px 0 0}
+/* end */
+.verdict{font-weight:700;font-size:19px;line-height:1.28;margin:12px 0 10px}
+.did p{font-size:15px;margin:.5em 0}
+.figs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.figs .cap{font-size:11px;line-height:1.3}
+.sc{font-variant:small-caps;letter-spacing:.06em}
+footer.sig{font-family:var(--type);font-style:italic;font-size:13px;color:var(--g2);text-transform:lowercase;margin:24px 0 0;text-align:center}
+footer.sig a{color:var(--g2);text-decoration:none}
+.about h3{margin-top:18px}
+.about p{font-size:14px;line-height:1.45}
+.binoc{display:block;width:100%;height:auto}
+.fade{animation:fade .5s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway var(--t,3s) ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(calc(var(--a,1deg) * -1))}to{transform:rotate(var(--a,1deg))}}
+@media (prefers-reduced-motion:reduce){.sway{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.7" numOctaves="1" seed="9" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.3 1.5" result="g2"/>
+      <feComposite in="d" in2="g2" operator="in"/>
+    </filter>
+    <g id="handart"></g>
+    <filter id="pencil-line" x="-2%" y="-10%" width="104%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="5" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ===================== COVER ===================== -->
+<section class="screen on" id="cover">
+  <div class="top"><span class="label">Field notes · Gombe Stream · <span id="pageno">p. 1</span></span></div>
+  <div class="frame" style="margin-top:10px"><svg class="binoc" id="coverpic" viewBox="0 0 348 220" aria-label="A pencil drawing, through binoculars: an old female chimpanzee sitting at a termite mound, a grass stem between her fingers."></svg></div>
+  <p class="cap"><b>FIG. 1.</b> Old female fishing for termites, seen through binoculars. (Pencil, from the field.)</p>
+  <h1>Goodall's<br>Long Grass</h1>
+  <p class="small">Gombe Stream, Tanzania. The termite season.</p>
+  <p>Pick a stem in the long grass.<br>Push it down a termite hole.<br>Draw it out without shaking them off.</p>
+  <p class="aim" id="aim0">You are a young chimpanzee. Fish termites out of the mound with a stem of grass, before your mother moves on.</p>
+  <button class="slip dark" id="begin">Into the long grass →</button>
+  <div class="row"><button class="slip" data-help>How to play</button><button class="slip" data-about>About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- ===================== THE LONG GRASS ===================== -->
+<section class="screen" id="grass">
+  <div class="top"><span class="aimline">Fish termites out of the mound with a stem of grass, before your mother moves on.</span><button class="q" data-help aria-label="How to play">?</button></div>
+  <h2>The long grass</h2>
+  <p>Sixty yards from the mound: you can't see the hole from here. <b>Take up to three stems with you.</b> Touch one to hold it up and look at it.</p>
+  <div class="frame"><svg class="pic" id="grasspic" viewBox="0 0 348 230" aria-label="Long grass, with eight stems you can pick"></svg></div>
+  <div class="handbox">
+    <div class="label"><span>In your hand</span><span id="gcount"></span></div>
+    <svg class="pic" id="ghand" viewBox="0 0 348 64"></svg>
+    <p class="desc" id="gdesc">Nothing yet. Touch a stem in the grass.</p>
+    <div class="row"><button class="slip dark" id="take" disabled>Take it</button><button class="slip" id="gstrip" data-prev="strip">Strip the leaves</button></div>
+  </div>
+  <div class="label" style="margin-top:12px">What you carry <span style="text-transform:none;letter-spacing:0;font-weight:400">(touch one to put it back)</span></div>
+  <div class="slots" id="gslots"></div>
+  <button class="slip dark" id="walk" disabled>Walk to the mound →</button>
+  <p class="small">You won't come back here: what you carry is what you fish with.</p>
+</section>
+
+<!-- ===================== PLAY: the mound, then the hollow ===================== -->
+<section class="screen" id="play">
+  <div class="top"><span class="aimline" id="paim">Fish termites out of the mound with a stem of grass, before your mother moves on.</span><button class="q" data-help aria-label="How to play">?</button></div>
+  <div class="status">
+    <div><span class="label" id="sunlab">The afternoon</span><div class="suns" id="suns"></div></div>
+    <div class="tally"><span class="label" id="tallylab">Termites eaten</span><span id="tally"></span></div>
+  </div>
+  <div class="handbox" id="phand">
+    <div class="label"><span>In your hand</span><span id="pcount" style="text-transform:none;letter-spacing:0;font-weight:400"></span></div>
+    <div class="slots" id="pslots"></div>
+    <svg class="pic" id="hand" viewBox="0 0 348 64"></svg>
+    <p class="desc small" id="pdesc"></p>
+    <div class="row" id="prep">
+      <button class="slip sm" id="bite" data-prev="bite">Bite off the end</button>
+      <button class="slip sm" id="strip" data-prev="strip">Strip the leaves</button>
+      <button class="slip sm" id="chew" data-prev="chew">Chew the end</button>
+      <button class="slip sm" id="leaves">Pick some leaves</button>
+      <button class="slip sm" id="hers">Pick up her stem</button>
+    </div>
+  </div>
+  <div id="nearbybox" class="hidden">
+    <p><b>Three stems within reach of the mound.</b> Take one, or leave them.</p>
+    <div class="nearby" id="nearby"></div>
+    <button class="slip sm" id="leavenear">Leave them</button>
+  </div>
+  <div class="frame"><svg class="pic" id="sec" viewBox="0 0 348 270"><g id="sStatic"></g><g id="sWait"></g><g id="sStem" filter="url(#pencil-line)"></g><g id="sFall"></g><g id="sBin"></g></svg><div class="hint" id="hint"></div></div>
+  <p class="cap" id="intro"></p>
+  <div class="result" id="result">
+    <p class="typed" id="typed"></p>
+    <p class="red" id="red"></p>
+  </div>
+  <div id="leavingbox" class="hidden">
+    <p class="typed" id="leavingtext"></p>
+    <button class="slip dark" id="follow">Follow her →</button>
+  </div>
+  <div id="donebox" class="hidden"><button class="slip dark" id="lastpage">The last page →</button></div>
+  <div class="ruler" id="rulerwrap"><svg class="pic" id="ruler" viewBox="0 0 348 46"></svg>
+    <p class="redkey">In red: <i>Jane Goodall's notes</i> — what she saw young chimpanzees do at each age, at Gombe.</p></div>
+  <div id="acts">
+    <button class="slip" id="watch">Watch your mother <span class="cost">one sun</span></button>
+    <button class="slip" id="fetch">Pick another stem nearby <span class="cost">one sun</span></button>
+  </div>
+</section>
+
+<!-- ===================== THE LAST PAGE ===================== -->
+<section class="screen" id="end">
+  <div class="top"><span class="label">Field notes · the last page · <span id="pageno2"></span></span></div>
+  <p class="verdict" id="headline"></p>
+  <div class="did" id="did"></div>
+  <svg class="pic" id="endruler" viewBox="0 0 348 70"></svg>
+  <div id="tallies"></div>
+  <h3>What Goodall saw</h3>
+  <p id="paper"></p>
+  <div class="figs">
+    <div><div class="frame"><svg class="pic" id="figv" viewBox="0 0 170 140"></svg></div><p class="cap"><b>FIG. 2.</b> Egyptian vulture about to throw a stone at an ostrich egg. It throws it the way it throws a small egg at the ground.</p></div>
+    <div><div class="frame"><svg class="pic" id="figc" viewBox="0 0 170 140"></svg></div><p class="cap"><b>FIG. 3.</b> Chimpanzee fishing for termites, a grass stem between finger and thumb. The same push and pull drinks water.</p></div>
+  </div>
+  <h3>What it means</h3>
+  <p id="means"></p>
+  <button class="slip dark" id="again">Another afternoon →</button>
+  <button class="slip" id="same">The same long grass again</button>
+  <div class="row"><button class="slip" data-help>How to play</button><button class="slip" data-about>About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- ===================== HOW TO PLAY ===================== -->
+<section class="screen" id="help">
+  <div class="top"><span class="label">How to play</span></div>
+  <p class="aim">Fish termites out of the mound with a stem of grass, before your mother moves on.</p>
+  <h3>The long grass</h3>
+  <p>Touch a stem to hold it up: it is drawn over a ruler of inches, drooping as much as it really droops, and the line under it says how long, how thick and how stiff it is. <b>Take it</b> puts it in one of your three slots; touch a slot to put it back. <b>Strip the leaves</b> pulls the leaves off a leafy twig. The mound is sixty yards away and you can't see its hole from here, so choose before you go: you won't come back.</p>
+  <h3>The mound</h3>
+  <p>The big drawing is the mound cut open: the hole at the top, a passage that bends twice, and termites waiting below the first few inches. The small numbers along the passage count inches in. <b>Drag down</b> on the drawing to push your stem in. <b>Let go</b> to leave it there: termites bite on to whatever comes into their passage, and they need a moment. <b>Drag up</b> to pull it out: if it moves faster than they can hold on, they fall off. The stem goes in until something stops it: a stem too thick for the hole, leaves catching on the rim, a floppy stem folding at a bend, or its own length.</p>
+  <p>Each dip takes one sun from the afternoon. So does watching your mother fish at her own hole, and fetching another stem from beside the mound. When the twelve suns are gone, she moves off. A stem's end bends after a few dips; <b>Bite off the end</b> makes it an inch shorter and straight again. When your mother throws a bent stem down, <b>Pick up her stem</b> takes it. Touching any of these buttons shows you, in the hand box, what it would do before you let go.</p>
+  <p>After each dip the game says what happened (how far in, whether there was a pause, how fast it came out, how many termites). Then, in red, a note from Jane Goodall: which age of young chimpanzee fishes the way you just did, and a tick on her ruler of ages.</p>
+  <div id="helphollow" class="hidden">
+    <h3>The hollow</h3>
+    <p>Rainwater in a hollow of a tree, too deep for your lips. The same drag: down to push in, up to pull out; whatever comes up wet, you suck. Your hand is one of the things you can hold. <b>Chew the end</b> crumples a grass end; <b>Pick some leaves</b> gives you a handful from the branch, which you can chew too. Five suns; the tube at the right fills with sips until you have drunk your fill.</p>
+  </div>
+  <button class="slip dark" id="helpback">Back</button>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="screen about" id="about">
+  <div class="top"><span class="label">About this game</span></div>
+  /*__ABOUT__*/
+  <button class="slip dark" id="aboutback">Back</button>
+</section>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+(function () {
+'use strict';
+const M = GOODALL, C = M.CONFIG, P = C.PASSAGE;
+const G = '#2E2F31', G2 = '#6F6E6B', G3 = '#B3AEA3', PAPER = '#F1EBDC', RED = '#A9452F';
+const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
+const NS = 'http://www.w3.org/2000/svg';
+let g = null, current = 'cover', back = 'cover';
+const fx = (x) => (+x).toFixed(1);
+
+// ---------- pencil helpers (drawing only; nothing here decides an outcome)
+function srand(seed) { let a = seed >>> 0 || 1; return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+let CID = 0;
+function hatch(d, box, o) {
+  const r = srand(o.seed || 1), id = 'hc' + (++CID);
+  let s = `<clipPath id="${id}"><path d="${d}"/></clipPath><g clip-path="url(#${id})" stroke="${o.color || G}" stroke-width="${o.w || 0.8}" stroke-linecap="round" opacity="${o.op || 0.7}">`;
+  const [x0, y0, x1, y1] = box, n = o.n || 300;
+  for (let i = 0; i < n; i++) {
+    const x = x0 + r() * (x1 - x0), y = y0 + r() * (y1 - y0), a = ((o.angle || 100) + (r() - 0.5) * (o.jit || 25)) * Math.PI / 180, L = (o.len || 7) * (0.6 + r() * 0.8);
+    s += `<line x1="${fx(x)}" y1="${fx(y)}" x2="${fx(x + Math.cos(a) * L)}" y2="${fx(y + Math.sin(a) * L)}"/>`;
+  }
+  return s + '</g>';
+}
+function grassStrokes(seed, n, x0, x1, base, hmin, hmax, color, w) {
+  const r = srand(seed); let s = `<g stroke="${color}" stroke-width="${w}" fill="none" stroke-linecap="round">`;
+  for (let i = 0; i < n; i++) { const x = x0 + r() * (x1 - x0), h = hmin + r() * (hmax - hmin), lean = (r() - 0.5) * 34;
+    s += `<path d="M ${fx(x)} ${base} Q ${fx(x + lean * 0.3)} ${fx(base - h * 0.6)} ${fx(x + lean)} ${fx(base - h)}"/>`; }
+  return s + '</g>';
+}
+
+// ---------- the old female, fishing (after Goodall's Fig. 15, drawn, not traced)
+function chimpArt(scale, tx, ty, seed) {
+  const body = 'M 30 187 C 16 176, 14 150, 22 128 C 30 104, 46 84, 66 72 C 80 64, 96 60, 108 62 C 116 58, 124 56, 132 58 C 140 59, 146 62, 149 66 C 153 68, 155 72, 154 76 C 159 80, 163 86, 164 92 C 165 97, 162 101, 157 102 C 152 104, 146 104, 142 101 C 137 101, 132 100, 128 98 C 128 108, 132 116, 138 124 C 146 132, 148 146, 146 160 C 147 170, 152 178, 160 183 C 162 187, 158 189, 150 189 L 120 189 C 100 189, 60 189, 30 187 Z';
+  const arm = 'M 102 76 C 112 90, 124 110, 134 124 C 146 134, 162 144, 176 150 C 182 152, 188 156, 188 160 C 186 164, 180 164, 174 162 C 160 158, 144 150, 130 140 C 118 130, 104 110, 92 92 Z';
+  const face = 'M 149 66 C 153 68, 155 72, 154 76 C 159 80, 163 86, 164 92 C 165 97, 162 101, 157 102 C 152 104, 146 104, 142 101 C 138 96, 138 86, 140 78 C 142 72, 145 68, 149 66 Z';
+  const ear = 'M 131 70 C 124 68, 121 78, 127 83 C 131 85, 134 81, 133 76';
+  const mound = 'M 166 190 C 172 168, 186 150, 206 147 C 224 145, 238 162, 240 190 Z';
+  let s = `<g transform="translate(${tx} ${ty}) scale(${scale})">`;
+  s += grassStrokes(seed || 5, 80, 0, 240, 190, 40, 140, G3, 0.9);
+  s += hatch(mound, [160, 140, 240, 190], { angle: 55, n: 300, len: 6, op: 0.5, w: 0.7, seed: 8, color: G2 });
+  s += hatch(mound, [160, 140, 240, 190], { angle: 150, n: 120, len: 5, op: 0.35, w: 0.6, seed: 9, color: G2 });
+  s += `<path d="${mound}" fill="none" stroke="${G2}" stroke-width="1.1"/><ellipse cx="200" cy="165" rx="3.4" ry="2.2" fill="${G}"/>`;
+  s += `<path d="${body}" fill="${PAPER}"/>`;
+  s += hatch(body, [12, 54, 166, 190], { angle: 96, n: 2600, len: 10, op: 0.66, w: 0.95, seed: 1 });
+  s += hatch(body, [12, 54, 166, 190], { angle: 76, n: 1700, len: 8, op: 0.55, w: 0.85, seed: 2 });
+  s += hatch(body, [12, 54, 166, 190], { angle: 120, n: 900, len: 6, op: 0.45, w: 0.75, seed: 12 });
+  s += `<path d="M 70 170 C 90 150, 116 132, 138 126" fill="none" stroke="${G}" stroke-width="1" opacity="0.6"/>`;
+  s += `<path d="${body}" fill="none" stroke="${G}" stroke-width="1.3" opacity="0.85"/>`;
+  s += `<path d="${arm}" fill="${PAPER}"/>`;
+  s += hatch(arm, [90, 72, 192, 166], { angle: 62, n: 1100, len: 10, op: 0.66, w: 0.9, seed: 3 });
+  s += hatch(arm, [90, 72, 192, 166], { angle: 95, n: 600, len: 7, op: 0.5, w: 0.8, seed: 4 });
+  s += `<path d="${arm}" fill="none" stroke="${G}" stroke-width="1.3" opacity="0.85"/>`;
+  s += `<path d="M 182 156 C 186 158, 189 161, 188 164 M 178 158 C 181 161, 182 164, 181 166" fill="none" stroke="${G}" stroke-width="1"/>`;
+  s += `<path d="${face}" fill="${PAPER}"/>`;
+  s += hatch(face, [136, 62, 166, 106], { angle: 30, n: 300, len: 5, op: 0.5, w: 0.6, seed: 6, color: G2 });
+  s += hatch(face, [136, 62, 166, 106], { angle: 120, n: 140, len: 4, op: 0.35, w: 0.6, seed: 7, color: G2 });
+  s += `<path d="${face}" fill="none" stroke="${G}" stroke-width="1.1" opacity="0.85"/>`;
+  s += `<path d="M 140 70 C 144 66, 150 66, 154 71" fill="none" stroke="${G}" stroke-width="2"/><path d="M 146 74 C 148 73, 151 74, 152 76" fill="none" stroke="${G}" stroke-width="1.6"/>`;
+  s += `<path d="M 158 85 l 2 0.8" stroke="${G}" stroke-width="1.2"/><path d="M 151 97 C 155 98, 159 97, 162 95" fill="none" stroke="${G}" stroke-width="1"/>`;
+  s += `<path d="M 143 80 C 146 84, 147 90, 146 95" fill="none" stroke="${G2}" stroke-width="0.8"/>`;
+  s += `<path d="${ear}" fill="${PAPER}" stroke="${G}" stroke-width="1.1"/><path d="M 129 74 C 127 76, 128 79, 130 80" fill="none" stroke="${G2}" stroke-width="0.8"/>`;
+  s += `<path d="M 185 161 C 190 163, 195 164, 200 165" fill="none" stroke="${G}" stroke-width="1.1"/><path d="M 184 160 C 178 154, 172 148, 164 140" fill="none" stroke="${G}" stroke-width="1.1"/>`;
+  s += `<path d="M 0 190 L 240 190" stroke="${G2}" stroke-width="0.8"/>`;
+  return s + '</g>';
+}
+function binocular(inner, w, h) { // two overlapping circles: the binocular view
+  const r = h * 0.47, cx1 = w / 2 - r * 0.62, cx2 = w / 2 + r * 0.62, cy = h / 2, id = 'bn' + (++CID);
+  return `<clipPath id="${id}"><circle cx="${cx1}" cy="${cy}" r="${r}"/><circle cx="${cx2}" cy="${cy}" r="${r}"/></clipPath>` +
+    `<g clip-path="url(#${id})">${inner}</g>` +
+    `<g fill="none" stroke="${G}" stroke-width="2.2" filter="url(#pencil)"><path d="M ${cx1} ${cy - r} A ${r} ${r} 0 1 0 ${cx1 + 0.0001} ${cy - r}"/><path d="M ${cx2} ${cy - r} A ${r} ${r} 0 1 0 ${cx2 + 0.0001} ${cy - r}"/></g>`;
+}
+function drawCover() {
+  $('#coverpic').innerHTML = binocular(`<g filter="url(#pencil)">${chimpArt(1.05, 50, 6, 5)}</g>`, 348, 220);
+}
+
+// ---------- the vulture (after Fig. 2) and the young chimpanzee, for the last page
+function vultureArt() {
+  // Egyptian vulture in profile facing right, head raised, stone in beak; ostrich egg on the ground at right
+  const body='M 44 118 C 34 104, 32 84, 40 70 C 46 60, 54 54, 62 50 C 66 42, 70 34, 74 28 C 76 22, 80 18, 85 17 C 89 16, 92 18, 94 21 C 98 22, 104 23, 109 26 C 104 27, 98 27, 94 26 C 92 30, 88 36, 86 44 C 92 54, 96 68, 94 84 C 92 98, 84 108, 74 114 C 66 118, 54 120, 44 118 Z';
+  const wing='M 46 72 C 58 64, 78 66, 90 78 C 92 92, 84 104, 70 112 C 60 116, 48 118, 40 124 L 30 132 C 34 116, 38 92, 46 72 Z';
+  const prim='M 40 108 C 50 110, 62 108, 70 112 C 60 116, 48 118, 40 124 L 30 132 C 32 124, 35 114, 40 108 Z';
+  const ruff='M 66 46 C 62 40, 64 34, 70 30 C 74 26, 78 24, 84 24';
+  let s='';
+  const r=srand(31); s+=`<g stroke="${G3}" stroke-width="0.8" fill="none">`; for(let i=0;i<50;i++){const x=r()*170,h=10+r()*36,l=(r()-0.5)*14; s+=`<path d="M ${x.toFixed(1)} 134 Q ${(x+l*0.3).toFixed(1)} ${(134-h*0.6).toFixed(1)} ${(x+l).toFixed(1)} ${(134-h).toFixed(1)}"/>`;} s+='</g>';
+  s+=`<path d="${body}" fill="${PAPER}"/>`;
+  s+=hatch(body,[30,14,112,122],{angle:105,n:260,len:5,op:0.32,w:0.6,seed:21,color:G2});
+  s+=`<path d="${wing}" fill="${PAPER}"/>`+hatch(wing,[28,62,94,134],{angle:125,n:300,len:7,op:0.4,w:0.7,seed:22,color:G2});
+  s+=hatch(prim,[28,104,74,134],{angle:150,n:420,len:7,op:0.75,w:0.9,seed:24});
+  s+=hatch(prim,[28,104,74,134],{angle:115,n:200,len:6,op:0.6,w:0.8,seed:25});
+  s+=`<path d="${wing}" fill="none" stroke="${G}" stroke-width="1"/>`;
+  s+=`<path d="${body}" fill="none" stroke="${G}" stroke-width="1.15"/>`;
+  // shaggy ruff of the nape
+  s+=`<g stroke="${G}" stroke-width="0.8" fill="none">`; for(let i=0;i<12;i++){const x=63+i*1.9,y=48-i*2.1; s+=`<path d="M ${x.toFixed(1)} ${y.toFixed(1)} l -7 ${(1.5+i*0.25).toFixed(1)}"/>`;} s+='</g>';
+  // bare face, eye, beak hook
+  s+=`<path d="M 86 19 C 90 18, 93 20, 94 23 C 92 26, 88 26, 85 24 Z" fill="${G3}" opacity="0.6"/>`;
+  s+=`<circle cx="88" cy="21" r="1.1" fill="${G}"/>`;
+  s+=`<path d="M 104 24 C 108 25, 110 27, 108 30" fill="none" stroke="${G}" stroke-width="1"/>`;
+  // stone in the beak
+  s+=`<path d="M 106 14 C 112 10, 120 12, 121 18 C 122 24, 114 28, 108 26 C 103 24, 102 18, 106 14 Z" fill="${PAPER}" stroke="${G}" stroke-width="1"/>`+hatch('M 106 14 C 112 10, 120 12, 121 18 C 122 24, 114 28, 108 26 C 103 24, 102 18, 106 14 Z',[100,8,124,30],{angle:40,n:80,len:3,op:0.6,w:0.7,seed:23});
+  // legs
+  s+=`<path d="M 58 118 L 56 132 M 56 132 l -5 2 M 56 132 l 4 2 M 70 116 L 72 132 M 72 132 l -4 2 M 72 132 l 5 2" stroke="${G}" stroke-width="1.1" fill="none"/>`;
+  // ostrich egg
+  s+=`<ellipse cx="140" cy="120" rx="22" ry="15" fill="${PAPER}" stroke="${G}" stroke-width="1.1"/><path d="M 126 127 C 134 133, 150 132, 158 124" fill="none" stroke="${G3}" stroke-width="2"/>`;
+  s+=`<path d="M 0 135 L 170 135" stroke="${G2}" stroke-width="0.8"/>`;
+  return `<g filter="url(#pencil)">${s}</g>`;
+}
+
+// ---------- geometry of the section (layout only: inches are the mechanism's, pixels are ours)
+const K = 21;                         // pixels per inch in the section
+const HOLE = { x: 236, y: 100 };
+const SEGS = [ // the passage centreline, in inches along it
+  { s0: 0, s1: P.bend1, dx: 0, dy: 1 },
+  { s0: P.bend1, s1: P.bend2, dx: -0.68, dy: 0.73 },
+  { s0: P.bend2, s1: P.end + 0.6, dx: 0.36, dy: 0.93 },
+];
+function along(s) { // a point on the passage centreline s inches in
+  let x = HOLE.x, y = HOLE.y;
+  for (const sg of SEGS) { const a = Math.max(0, Math.min(s, sg.s1) - sg.s0); x += sg.dx * a * K; y += sg.dy * a * K; if (s <= sg.s1) return { x, y, dx: sg.dx, dy: sg.dy }; }
+  const L = SEGS[SEGS.length - 1]; return { x, y, dx: L.dx, dy: L.dy };
+}
+function passagePath(off) { // one wall of the passage, offset sideways
+  const pts = []; for (let s = 0; s <= P.end + 0.6; s += 0.25) { const p = along(s); pts.push([p.x - p.dy * off, p.y + p.dx * off]); }
+  return 'M ' + pts.map(p => fx(p[0]) + ' ' + fx(p[1])).join(' L ');
+}
+const HOLLOW = { x: 236, y: 100 };
+
+function moundStatic() {
+  const moundTop = 'M 0 128 L 132 128 C 170 126, 205 112, 236 100 C 262 88, 285 58, 306 54 C 326 52, 340 62, 348 70';
+  const earth = moundTop + ' L 348 270 L 0 270 Z';
+  let s = '';
+  s += grassStrokes(41, 40, 0, 150, 128, 16, 70, G3, 0.8);
+  s += hatch(earth, [0, 50, 348, 270], { angle: 35, n: 1400, len: 7, op: 0.32, w: 0.7, seed: 42, color: G2 });
+  s += hatch(earth, [0, 50, 348, 270], { angle: 140, n: 500, len: 5, op: 0.22, w: 0.6, seed: 43, color: G2 });
+  // the passage: cut open, paper inside, two pencil walls
+  const pts = []; for (let s2 = 0; s2 <= P.end + 0.6; s2 += 0.25) { const p = along(s2); pts.push(p); }
+  const w = 6, left = pts.map(p => [p.x - p.dy * w, p.y + p.dx * w]), right = pts.map(p => [p.x + p.dy * w, p.y - p.dx * w]);
+  const tun = 'M ' + left.map(p => fx(p[0]) + ' ' + fx(p[1])).join(' L ') + ' L ' + right.reverse().map(p => fx(p[0]) + ' ' + fx(p[1])).join(' L ') + ' Z';
+  s += `<path d="${tun}" fill="${PAPER}"/>`;
+  // the chamber, a wider gallery at the bottom
+  const b = along(P.end + 0.3); s += `<ellipse cx="${fx(b.x)}" cy="${fx(b.y + 2)}" rx="20" ry="11" fill="${PAPER}" stroke="${G}" stroke-width="1.1"/>`;
+  s += `<path d="${passagePath(w)}" fill="none" stroke="${G}" stroke-width="1.2"/><path d="${passagePath(-w)}" fill="none" stroke="${G}" stroke-width="1.2"/>`;
+  s += `<path d="${moundTop}" fill="none" stroke="${G}" stroke-width="1.3"/>`;
+  // inches along the passage
+  for (let i = 1; i <= P.end; i++) { const p = along(i); const nx = p.dy, ny = -p.dx; const side = -1;
+    s += `<line x1="${fx(p.x + nx * 7 * side)}" y1="${fx(p.y + ny * 7 * side)}" x2="${fx(p.x + nx * 11 * side)}" y2="${fx(p.y + ny * 11 * side)}" stroke="${G}" stroke-width="1"/>`;
+    if (i % 2 === 0) { const o = i === 8 ? 26 : 14; s += `<text x="${fx(p.x + nx * o * side)}" y="${fx(p.y + ny * o * side + 4)}" font-family="Courier Prime,monospace" font-size="11" fill="${G}" text-anchor="end">${i} in</text>`; } }
+  return s;
+}
+function moundLabels() {
+  const c = along(6.5), b1 = along(P.bend1), b2 = along(P.bend2);
+  return `<g font-family="Courier Prime,monospace" font-size="11" fill="${G2}">
+    <text x="${HOLE.x + 12}" y="${HOLE.y - 6}">the hole</text>
+    <text x="${fx(b1.x + 14)}" y="${fx(b1.y + 4)}">bend</text>
+    <text x="${fx(b2.x - 44)}" y="${fx(b2.y + 22)}">bend</text>
+    <text x="${fx(c.x + 26)}" y="${fx(c.y - 6)}">termites</text><text x="${fx(c.x + 26)}" y="${fx(c.y + 7)}">down here</text></g>`;
+}
+function termiteGlyph(x, y, ang, op) {
+  const a = ang * 180 / Math.PI;
+  return `<g transform="translate(${fx(x)} ${fx(y)}) rotate(${fx(a)})" opacity="${op == null ? 1 : op}"><ellipse cx="0" cy="0" rx="3.3" ry="1.9" fill="${G}"/><circle cx="3.6" cy="0" r="1.5" fill="${G}"/><path d="M 4.6 -1 l 2 -1.2 M 4.6 1 l 2 1.2 M -1 -1.5 l -1 -2 M 1 -1.6 l 0.6 -2 M -1 1.5 l -1 2 M 1 1.6 l 0.6 2" stroke="${G}" stroke-width="0.6"/></g>`;
+}
+function waitingTermites(seedN) {
+  const r = srand(seedN || 77); let s = '';
+  for (let i = 0; i < 14; i++) { const sIn = P.chamber + 0.4 + r() * (P.end - P.chamber); const p = along(sIn); const side = r() < 0.5 ? -1 : 1;
+    s += termiteGlyph(p.x + p.dy * 4.4 * side + (r() - 0.5) * 3, p.y - p.dx * 4.4 * side, Math.atan2(p.dy, p.dx) + (r() - 0.5) * 1.2, 0.75); }
+  const b = along(P.end + 0.3); for (let i = 0; i < 8; i++) s += termiteGlyph(b.x - 14 + r() * 28, b.y - 4 + r() * 10, r() * 6.28, 0.75);
+  return s;
+}
+
+// ---------- the stem in the section (redrawn every frame)
+const SW = s => [1.3, 2.2, 4.2][s.thick || 0];
+function handArt() { // a chimpanzee's hand from the upper left, pinching the stem at the origin; drawn once, then moved
+  const arm = 'M -7 -6 C -40 -9, -120 -13, -230 -15 L -230 13 C -120 11, -40 9, -7 7 Z';
+  let s = `<path d="${arm}" fill="${PAPER}"/>` + hatch(arm, [-235, -18, -4, 16], { angle: 175, n: 420, len: 9, op: 0.62, w: 0.9, seed: 61 }) + hatch(arm, [-235, -18, -4, 16], { angle: 200, n: 200, len: 7, op: 0.45, w: 0.8, seed: 62 });
+  s += `<path d="${arm}" fill="none" stroke="${G}" stroke-width="1.2"/>`;
+  s += `<path d="M -9 -7 C -1 -10, 6 -5, 5 0 C 4 4, -1 6, -6 6" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/>`;
+  s += `<path d="M -11 8 C -5 11, 2 9, 3 4" fill="none" stroke="${G}" stroke-width="1.2"/><path d="M -5 -2 C -2 -3, 1 -2, 2 0" fill="none" stroke="${G2}" stroke-width="0.8"/>`;
+  return s;
+}
+function fingerArt() { // your fingers, alone (the hollow)
+  return `<path d="M -6 -40 C -8 -20, -7 -8, -4 0 C -2 4, 2 4, 4 0 C 6 -8, 7 -20, 6 -40" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/><path d="M -2 -10 C 0 -9, 2 -9, 3 -10" stroke="${G2}" stroke-width="0.8" fill="none"/>`;
+}
+function stemInSection(view) {
+  // view: { stem, d, excess, on:[off], drops:[...], place, wet }
+  const st = view.stem; let s = '';
+  if (!st) return s;
+  const w = SW(st);
+  const hollow = view.place === 'hollow';
+  if (st.type === 'hand') {
+    const tipY = HOLLOW.y + view.d * K; s += `<g transform="translate(${HOLLOW.x} ${fx(tipY)})">${fingerArt()}</g>`;
+    if (view.wetNow) s += `<circle cx="${HOLLOW.x}" cy="${fx(tipY + 3)}" r="1.6" fill="${G}"/>`;
+    return s;
+  }
+  // inside: along the passage (or straight down in the hollow)
+  const pt = x => (hollow ? { x: HOLLOW.x, y: HOLLOW.y + x * K, dx: 0, dy: 1 } : along(x));
+  if (st.type !== 'leaves' && view.d > 0) {
+    const pts = []; for (let x = 0; x <= view.d + 1e-6; x += 0.2) pts.push(pt(x)); pts.push(pt(view.d));
+    s += `<path d="M ${pts.map(p => fx(p.x) + ' ' + fx(p.y)).join(' L ')}" fill="none" stroke="${G}" stroke-width="${w}" stroke-linecap="round"/>`;
+    if (hollow && view.wetLen > 0) { const a = pt(Math.max(0, view.d - view.wetLen)), b = pt(view.d); s += `<path d="M ${fx(a.x)} ${fx(a.y)} L ${fx(b.x)} ${fx(b.y)}" stroke="${G}" stroke-width="${w + 2.2}" stroke-linecap="round" opacity="0.8"/>`; }
+  }
+  const tip = pt(view.d);
+  if (st.crumple) s += `<path d="M ${fx(tip.x - 3)} ${fx(tip.y - 2)} q 3 -4 5 0 q -4 3 -1 5 q 4 0 2 -4" fill="none" stroke="${G}" stroke-width="${1 + st.crumple * 0.5}"/>`;
+  if (st.bent && view.d > 0) s += `<path d="M ${fx(tip.x)} ${fx(tip.y)} l 4 -3" stroke="${G}" stroke-width="${w}" stroke-linecap="round"/>`;
+  if (view.excess > 0.05 && !hollow) { const p = along(Math.min(view.d, P.end)); s += `<path d="M ${fx(p.x - 4)} ${fx(p.y - 2)} l 3 3 l -3 3" stroke="${G}" stroke-width="1" fill="none"/>`; }
+  // outside: from the hole up to the hand, bowing if pushed against a block
+  const outLen = Math.max(0.3, (st.type === 'leaves' ? 0.6 : st.len - C.GRIP - view.d)) * K;
+  const ex = Math.min(view.excess || 0, 1.5) * K * 1.6;
+  const dir = { x: -0.92, y: -0.39 };
+  const top = hollow ? HOLLOW : HOLE;
+  const chord = Math.max(10, outLen - ex);
+  const hx = top.x + dir.x * chord, hy = top.y + dir.y * chord;
+  const bulge = ex * [1.1, 0.5, 0.12][st.stiff == null ? 2 : st.stiff];
+  const sag = [0.16, 0.06, 0][st.stiff == null ? 2 : st.stiff] * chord;
+  const c1x = top.x + dir.x * chord * 0.15 + dir.y * bulge, c1y = top.y - Math.min(26, chord * 0.2) - dir.x * bulge;
+  const c2x = hx - dir.x * chord * 0.35 + dir.y * bulge * 0.6, c2y = hy - dir.y * chord * 0.35 + sag - dir.x * bulge * 0.6;
+  if (st.type !== 'leaves') {
+    s += `<path d="M ${fx(top.x)} ${fx(top.y)} C ${fx(c1x)} ${fx(c1y)}, ${fx(c2x)} ${fx(c2y)}, ${fx(hx)} ${fx(hy)}" fill="none" stroke="${G}" stroke-width="${w}" stroke-linecap="round"/>`;
+    s += `<path d="M ${fx(hx)} ${fx(hy)} l ${fx(dir.x * C.GRIP * K)} ${fx(dir.y * C.GRIP * K)}" stroke="${G}" stroke-width="${w}" stroke-linecap="round"/>`;
+    if (st.leaves) { // leaves along the outside part, bunched at the rim if they caught
+      const r = srand(st.id * 7); for (let i = 0; i < 6; i++) { const t = view.d <= P.leafCatch + 0.01 && i < 3 ? 0.04 * i : 0.2 + r() * 0.7;
+        const lx = top.x + (hx - top.x) * t, ly = top.y + (hy - top.y) * t; s += `<path d="M ${fx(lx)} ${fx(ly)} q ${fx(4 + r() * 3)} ${fx(-6 - r() * 3)} ${fx(10)} ${fx(-4)} q -5 4 -10 4" fill="${PAPER}" stroke="${G}" stroke-width="0.8"/>`; }
+    }
+  } else { // a handful of leaves held in the fingers, pushed in
+    const tipY = HOLLOW.y + view.d * K;
+    s += `<g transform="translate(${HOLLOW.x} ${fx(tipY - 6)})">${fingerArt()}</g>`;
+    s += st.chewed ? `<path d="M ${HOLLOW.x - 5} ${fx(tipY)} q 4 -6 9 -1 q -2 6 -8 4 q -3 -4 2 -6 q 4 1 3 5" fill="${G2}" stroke="${G}" stroke-width="1.2"/>`
+      : `<path d="M ${HOLLOW.x} ${fx(tipY)} q -10 -2 -12 -12 q 8 2 12 12 q 2 -10 10 -14 q 0 10 -10 14 q -4 -10 0 -18 q 4 8 0 18" fill="${PAPER}" stroke="${G}" stroke-width="0.9"/>`;
+    return s;
+  }
+  // termites on the stem
+  for (const off of view.on || []) {
+    const depth = view.d - off; let p, ang;
+    if (depth >= 0) { p = pt(depth); ang = Math.atan2(p.dy, p.dx); p = { x: p.x + p.dy * 2.6, y: p.y - p.dx * 2.6 }; }
+    else { const t = Math.min(1, (-depth * K) / chord); p = { x: top.x + (hx - top.x) * t, y: top.y + (hy - top.y) * t - 2.4 }; ang = Math.atan2(dir.y, dir.x); }
+    s += termiteGlyph(p.x, p.y, ang + Math.PI / 2 * 0.3);
+  }
+  s += `<g transform="translate(${fx(hx)} ${fx(hy)}) rotate(${fx(Math.atan2(-dir.y, -dir.x) * 180 / Math.PI)}) scale(0.85)"><use href="#handart"/></g>`;
+  return s;
+}
+
+// ---------- the stem held up in the hand box, over a ruler (preview: the old stem pale underneath)
+function stemProfile(st, x0, y0, px, color, op) {
+  if (!st) return '';
+  if (st.type === 'hand') return `<g transform="translate(${x0 + 30} ${y0 + 10}) rotate(-90)" opacity="${op}">${fingerArt()}</g><text x="${x0 + 60}" y="${y0 + 4}" font-family="Courier Prime,monospace" font-size="12" fill="${G2}">your hand</text>`;
+  if (st.type === 'leaves') return st.chewed
+    ? `<path d="M ${x0 + 30} ${y0} q 6 -9 13 -2 q -3 9 -12 6 q -4 -6 3 -9 q 6 2 4 7" fill="${G2}" stroke="${color}" stroke-width="1.4" opacity="${op}"/>`
+    : (() => { let s = ''; for (let i = 0; i < 6; i++) s += `<path d="M ${x0 + 24 + i * 9} ${y0} q 4 -10 14 -8 q -4 8 -14 8" fill="${PAPER}" stroke="${color}" stroke-width="0.9" opacity="${op}"/>`; return s; })();
+  const L = st.len * px, w = SW(st), sag = [Math.min(24, L * 0.12), Math.min(8, L * 0.035), 0][st.stiff];
+  const x1 = x0 + L, y1 = y0 + sag;
+  let d = `M ${x0} ${y0} C ${fx(x0 + L * 0.45)} ${y0}, ${fx(x0 + L * 0.75)} ${fx(y0 + sag * 0.25)}, ${fx(x1)} ${fx(y1)}`;
+  let s = `<path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" opacity="${op}"/>`;
+  if (st.bent) s += `<path d="M ${fx(x1)} ${fx(y1)} l 5 7" stroke="${color}" stroke-width="${w}" stroke-linecap="round" opacity="${op}"/>`;
+  if (st.crumple) s += `<path d="M ${fx(x1 - 3)} ${fx(y1 - 3)} q 5 -4 6 1 q -2 5 -6 3 q -2 -4 3 -5 q 3 2 1 5" fill="none" stroke="${color}" stroke-width="${1 + st.crumple * 0.6}" opacity="${op}"/>`;
+  if (st.leaves) { const r = srand(st.id * 3); for (let i = 0; i < 7; i++) { const t = 0.15 + i * 0.12, lx = x0 + L * t, ly = y0 + sag * t * t; const up = i % 2 ? -1 : 1;
+    s += `<path d="M ${fx(lx)} ${fx(ly)} q ${fx(5 + r() * 3)} ${fx(-7 * up)} ${fx(12)} ${fx(-5 * up)} q -6 ${fx(4 * up)} -12 ${fx(5 * up)}" fill="${PAPER}" stroke="${color}" stroke-width="0.8" opacity="${op}"/>`; } }
+  return s;
+}
+function drawHandBox(svg, st, prev) {
+  const px = 21, x0 = 26, y0 = 18;
+  let s = `<g stroke="${G}" stroke-width="1">`;
+  s += `<line x1="${x0}" y1="54" x2="${x0 + 14 * px}" y2="54"/>`;
+  for (let i = 0; i <= 14; i++) s += `<line x1="${x0 + i * px}" y1="54" x2="${x0 + i * px}" y2="${i % 2 ? 50 : 47}"/>`;
+  s += '</g>';
+  for (let i = 0; i <= 14; i += 2) s += `<text x="${x0 + i * px}" y="64" font-family="Courier Prime,monospace" font-size="10" fill="${G2}" text-anchor="middle">${i}</text>`;
+  s += `<text x="${x0 + 14 * px + 13}" y="64" font-family="Courier Prime,monospace" font-size="10" fill="${G2}">in</text>`;
+  if (st && st.type !== 'hand' && st.type !== 'leaves') s += `<path d="M ${x0 - 14} ${y0 - 7} C ${x0 - 4} ${y0 - 9}, ${x0 + 3} ${y0 - 4}, ${x0 + 2} ${y0 + 2} C ${x0 + 1} ${y0 + 7}, ${x0 - 6} ${y0 + 8}, ${x0 - 14} ${y0 + 7} Z" fill="${PAPER}" stroke="${G}" stroke-width="1.1"/>`;
+  if (prev) { s += stemProfile(st, x0, y0, px, G3, 1); s += stemProfile(prev, x0, y0, px, G, 1); }
+  else s += stemProfile(st, x0, y0, px, G, 1);
+  svg.innerHTML = `<g filter="url(#pencil)">${s}</g>`;
+}
+function miniStem(st) {
+  if (!st) return '';
+  if (st.type === 'hand') return `<svg viewBox="0 0 100 24"><g transform="translate(20 18) rotate(-90) scale(0.5)">${fingerArt()}</g></svg>`;
+  if (st.type === 'leaves') return `<svg viewBox="0 0 100 24">${stemProfile(st, 6, 14, 6, G, 1)}</svg>`;
+  return `<svg viewBox="0 0 100 24">${stemProfile(st, 4, 8, 6.5, G, 1)}</svg>`;
+}
+
+// ---------- the long grass
+const GX = i => 26 + i * 42;
+function stemStanding(st, i, sel) {
+  const base = 218, x = GX(i), H = st.len * 13, w = SW(st) + 0.8;
+  const lean = ((st.id * 37) % 11 - 5) * 1.2;
+  let d;
+  if (st.stiff === 0) d = `M ${x} ${base} C ${x + lean} ${base - H * 0.55}, ${x + 6} ${base - H * 0.95}, ${x + 22} ${base - H * 0.62}`;
+  else if (st.stiff === 1) d = `M ${x} ${base} C ${x + lean} ${base - H * 0.5}, ${x + 4} ${base - H * 0.85}, ${x + 12} ${base - H * 0.93}`;
+  else d = `M ${x} ${base} L ${x + lean * 0.6} ${base - H}`;
+  let s = `<path d="${d}" fill="none" stroke="${G}" stroke-width="${w}" stroke-linecap="round"/>`;
+  if (st.leaves) { for (let k = 0; k < 6; k++) { const t = 0.25 + k * 0.12, ly = base - H * t, lx = x + lean * 0.6 * t, up = k % 2 ? -1 : 1;
+    s += `<path d="M ${fx(lx)} ${fx(ly)} q ${fx(6 * up)} -4 ${fx(11 * up)} -2 q ${fx(-5 * up)} 4 ${fx(-11 * up)} 2" fill="${PAPER}" stroke="${G}" stroke-width="0.8"/>`; } }
+  if (st.type === 'stick' || st.type === 'short' || st.type === 'twig') s += `<path d="M ${fx(x + lean * 0.3)} ${fx(base - H * 0.5)} l 6 -6" stroke="${G}" stroke-width="${Math.max(1, w - 1)}" stroke-linecap="round"/>`;
+  const a = [3, 1.5, 0.5][st.stiff];
+  return `<g class="sway" style="--a:${a}deg;--t:${(2.4 + (i % 3) * 0.5).toFixed(1)}s">${s}</g>`;
+}
+function drawGrass() {
+  const svg = $('#grasspic'); let s = `<g filter="url(#pencil)"><g opacity="0.6">${grassStrokes(91, 110, 0, 348, 222, 60, 200, G3, 0.7)}</g><path d="M 0 222 L 348 222" stroke="${G2}" stroke-width="0.8"/>`;
+  g.grass.forEach((st, i) => {
+    if (g.taken[i]) { s += `<path d="M ${GX(i)} 222 l 0 -8 m -2 0 l 4 1" stroke="${G3}" stroke-width="1.4"/>`; return; }
+    if (g.inspect === i) s += `<ellipse cx="${GX(i)}" cy="221" rx="16" ry="5" fill="none" stroke="${G}" stroke-width="1.3"/>`;
+    s += stemStanding(st, i);
+  });
+  s += '</g>';
+  g.grass.forEach((st, i) => { if (!g.taken[i]) s += `<rect data-i="${i}" x="${GX(i) - 20}" y="20" width="40" height="210" fill="transparent" style="cursor:pointer"/>`; });
+  svg.innerHTML = s;
+  svg.querySelectorAll('rect[data-i]').forEach(r => r.addEventListener('click', () => { M.look(g, +r.dataset.i); renderGrass(); }));
+}
+function renderGrass() {
+  drawGrass();
+  const st = M.inHand(g);
+  drawHandBox($('#ghand'), st);
+  $('#gdesc').textContent = st ? M.describe(st) : (g.carried.length ? 'Touch another stem, or walk to the mound.' : 'Nothing yet. Touch a stem in the grass.');
+  $('#take').disabled = !st || g.carried.length >= C.CARRY;
+  $('#take').textContent = g.carried.length >= C.CARRY ? 'Your hands are full' : 'Take it';
+  $('#gstrip').classList.toggle('hidden', !(st && st.leaves));
+  $('#gcount').textContent = `${g.carried.length} of ${C.CARRY}`;
+  const sl = $('#gslots'); sl.innerHTML = '';
+  for (let k = 0; k < C.CARRY; k++) { const it = g.carried[k]; const b = document.createElement('button'); b.className = 'slot' + (it ? ' full' : '');
+    b.innerHTML = it ? miniStem(it) + `<span>${it.label.replace(/^an? /, '')}, ${Math.round(it.len)} in</span>` : '<span>empty</span>';
+    if (it) b.addEventListener('click', () => { M.putBack(g, k); renderGrass(); }); sl.appendChild(b); }
+  $('#walk').disabled = !g.carried.length;
+}
+
+// ---------- the play screen
+let play = { mode: 'mound', anim: null, drag: null, target: 0, view: null, busy: false, hintShown: true, eating: false, watching: false };
+function suns() {
+  const n = play.mode === 'mound' ? C.SUNS : C.HOLLOW.suns, left = play.mode === 'mound' ? g.suns : g.hollow.suns;
+  $('#suns').innerHTML = Array.from({ length: n }, (_, i) => `<span class="sun${i < n - left ? ' used' : ''}"></span>`).join('');
+}
+function tallySVG(n, h) {
+  h = h || 18; let s = '', x = 2; const groups = Math.floor(n / 5), rest = n % 5;
+  for (let k = 0; k < groups; k++) { for (let j = 0; j < 4; j++) s += `<line x1="${x + j * 4}" y1="2" x2="${x + j * 4 + 0.6}" y2="${h - 1}"/>`; s += `<line x1="${x - 2}" y1="${h - 4}" x2="${x + 15}" y2="4"/>`; x += 22; }
+  for (let j = 0; j < rest; j++) s += `<line x1="${x + j * 4}" y1="2" x2="${x + j * 4 + 0.6}" y2="${h - 1}"/>`;
+  const W = Math.max(4, x + rest * 4 + 2);
+  return `<svg width="${W}" height="${h}" viewBox="0 0 ${W} ${h}"><g stroke="${G}" stroke-width="1.4" stroke-linecap="round" filter="url(#pencil-line)">${s}</g></svg>`;
+}
+function tally(n) {
+  if (play.mode === 'mound') { $('#tally').innerHTML = n ? (n > 40 ? `<span class="tallyn">${n}</span>` : tallySVG(n) + `<span class="tallyn">${n}</span>`) : '<span class="tallyn">none yet</span>'; }
+}
+const AGEX = { '2-3': 46, '3-4': 132, '4': 218, adult: 300 };
+const AGELAB = { '2-3': '2 to 3 yrs', '3-4': '3 to 4 yrs', '4': '4 yrs', adult: 'grown-up' };
+function drawRuler(svg, dips, h, fresh) {
+  const y = 16; let s = `<line x1="14" y1="${y}" x2="334" y2="${y}" stroke="${RED}" stroke-width="1.3"/>`;
+  for (const a of Object.keys(AGEX)) s += `<line x1="${AGEX[a]}" y1="${y - 5}" x2="${AGEX[a]}" y2="${y + 5}" stroke="${RED}" stroke-width="1.3"/><text x="${AGEX[a]}" y="${y - 7}" font-family="Kalam,cursive" font-size="13" fill="${RED}" text-anchor="middle">${AGELAB[a]}</text>`;
+  const counts = {};
+  const sp = h && h > 50 ? 9.5 : 8, OFF = [0, 1, -1, 2, -2, 3, -3, 4, -4].map(k => k * sp);
+  dips.forEach((d, i) => { const k = counts[d.age] = (counts[d.age] || 0) + 1; const col = (k - 1) % 9, rowN = Math.floor((k - 1) / 9);
+    const x = AGEX[d.age] + OFF[col], yy = y + 9 + rowN * 12;
+    const last = fresh && i === dips.length - 1;
+    s += `<line x1="${x}" y1="${yy}" x2="${x}" y2="${yy + 9}" stroke="${last ? RED : G}" stroke-width="${last ? 2.2 : 1.4}" stroke-linecap="round"/>`;
+    if (h && h > 50) s += `<text x="${x}" y="${yy + 19}" font-family="Courier Prime,monospace" font-size="6.5" fill="${G2}" text-anchor="middle">${i + 1}</text>`; });
+  svg.innerHTML = `<g filter="url(#pencil-line)">${s}</g>`;
+}
+function sectionStatic() {
+  if (play.mode === 'mound') return `<g filter="url(#pencil)">${moundStatic()}</g>${moundLabels()}`;
+  // the hollow: a tree trunk cut open, rainwater inside
+  const trunk = 'M 150 270 C 156 200, 162 120, 170 30 L 300 30 C 306 120, 312 200, 318 270 Z';
+  const cav = `M ${HOLLOW.x - 9} ${HOLLOW.y} C ${HOLLOW.x - 14} ${HOLLOW.y + 30}, ${HOLLOW.x - 20} ${HOLLOW.y + 80}, ${HOLLOW.x - 16} ${HOLLOW.y + C.HOLLOW.bottom * K + 6} L ${HOLLOW.x + 16} ${HOLLOW.y + C.HOLLOW.bottom * K + 6} C ${HOLLOW.x + 20} ${HOLLOW.y + 80}, ${HOLLOW.x + 14} ${HOLLOW.y + 30}, ${HOLLOW.x + 9} ${HOLLOW.y} Z`;
+  let s = grassStrokes(51, 50, 0, 348, 270, 16, 80, G3, 0.8);
+  s += `<path d="${trunk}" fill="${PAPER}"/>` + hatch(trunk, [150, 30, 320, 270], { angle: 88, n: 900, len: 12, op: 0.35, w: 0.8, seed: 52, color: G2 });
+  s += `<path d="${trunk}" fill="none" stroke="${G}" stroke-width="1.3"/>`;
+  s += `<path d="${cav}" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/>`;
+  const wy = HOLLOW.y + C.HOLLOW.water * K;
+  let water = ''; for (let yy = wy; yy < HOLLOW.y + C.HOLLOW.bottom * K + 4; yy += 4) water += `<line x1="${HOLLOW.x - 15}" y1="${yy}" x2="${HOLLOW.x + 15}" y2="${yy}"/>`;
+  s += `<clipPath id="cavc"><path d="${cav}"/></clipPath><g clip-path="url(#cavc)" stroke="${G2}" stroke-width="0.9" opacity="0.8">${water}</g><line x1="${HOLLOW.x - 16}" y1="${wy}" x2="${HOLLOW.x + 16}" y2="${wy}" stroke="${G}" stroke-width="1.3"/>`;
+  let lab = `<g font-family="Courier Prime,monospace" font-size="11" fill="${G}" text-anchor="end"><text x="${HOLLOW.x - 24}" y="${HOLLOW.y + 22}">the hollow</text><text x="${HOLLOW.x - 24}" y="${fx(wy + 14)}">rainwater</text></g>`;
+  // the gauge of sips
+  const gx = 326, gy0 = 60, gh = 180, n = C.HOLLOW.enough, filled = Math.min(n, g.hollow.sips);
+  let gauge = `<rect x="${gx - 8}" y="${gy0}" width="16" height="${gh}" rx="3" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/>`;
+  const fh = gh * filled / n; if (fh > 0) { gauge += `<clipPath id="gaugec"><rect x="${gx - 7}" y="${gy0 + gh - fh}" width="14" height="${fh}"/></clipPath><g clip-path="url(#gaugec)" stroke="${G}" stroke-width="1">`; for (let yy = gy0; yy < gy0 + gh + 14; yy += 3) gauge += `<line x1="${gx - 8}" y1="${yy}" x2="${gx + 8}" y2="${yy - 6}"/>`; gauge += '</g>'; }
+  for (let k = 1; k < n; k++) gauge += `<line x1="${gx - 8}" y1="${fx(gy0 + gh - gh * k / n)}" x2="${gx - 4}" y2="${fx(gy0 + gh - gh * k / n)}" stroke="${G2}" stroke-width="0.8"/>`;
+  gauge += `<text x="${gx}" y="${gy0 - 6}" font-family="Courier Prime,monospace" font-size="10" fill="${G2}" text-anchor="middle">enough</text><text x="${gx}" y="${gy0 + gh + 14}" font-family="Courier Prime,monospace" font-size="10" fill="${G2}" text-anchor="middle">sips</text>`;
+  return `<g filter="url(#pencil)">${s}</g>${lab}<g filter="url(#pencil-line)">${gauge}</g>`;
+}
+let WAIT = '', waitOn = null;
+function setStatic() { $('#sStatic').innerHTML = sectionStatic(); WAIT = play.mode === 'mound' ? waitingTermites(g.seed) : ''; waitOn = null; }
+function drawSection() {
+  const v = play.view || { stem: M.inHand(g), d: 0, excess: 0, on: [], place: play.mode };
+  const w = play.mode === 'mound' && !(v.d > P.chamber);
+  if (w !== waitOn) { $('#sWait').innerHTML = w ? WAIT : ''; waitOn = w; }
+  $('#sStem').innerHTML = stemInSection(v);
+  $('#sFall').innerHTML = play.falling || '';
+  $('#sBin').innerHTML = play.watching ? play.binoc : '';
+}
+function renderPlay() {
+  suns(); tally(g.eaten);
+  const st = M.inHand(g);
+  play.view = play.view && g.dip ? play.view : { stem: st, d: 0, excess: 0, on: [], place: play.mode };
+  drawSection();
+  drawHandBox($('#hand'), st);
+  $('#pdesc').textContent = st ? M.describe(st) : 'Nothing in your hand: pick a stem nearby, or pick up hers.';
+  const sl = $('#pslots'); sl.innerHTML = '';
+  const items = g.carried.map((it, k) => ({ it, k }));
+  if (play.mode === 'hollow') { items.push({ it: { type: 'hand', label: 'your hand' }, k: 'hand' }); if (g.hollow.leaves) items.push({ it: g.hollow.leaves, k: 'leaves' }); }
+  for (const { it, k } of items) {
+    const on = play.mode === 'hollow' ? (k === 'hand' ? g.hollow.hand : !g.hollow.hand && g.held === k) : g.held === k;
+    const b = document.createElement('button'); b.className = 'slot full' + (on ? ' on' : '');
+    b.innerHTML = miniStem(it) + `<span>${it.type === 'hand' ? 'your hand' : it.type === 'leaves' ? (it.chewed ? 'chewed leaves' : 'leaves') : it.label.replace(/^an? /, '') + ', ' + Math.round(it.len) + ' in'}${it.bent ? ', bent' : ''}</span>`;
+    b.addEventListener('click', () => { if (g.dip || play.busy) return; if (k === 'hand') M.holdHand(g); else M.hold(g, k); play.view = null; renderPlay(); });
+    sl.appendChild(b);
+  }
+  if (play.mode === 'mound') for (let k = g.carried.length; k < C.CARRY; k++) { const b = document.createElement('div'); b.className = 'slot'; b.innerHTML = '<span>empty</span>'; sl.appendChild(b); }
+  $('#pcount').textContent = 'touch one to hold it';
+  const leaving = g.phase === 'leaving', ended = g.phase === 'end';
+  const mound = play.mode === 'mound', busy = play.busy || !!g.dip;
+  const can = a => M.preview(g, a).ok;
+  $('#bite').classList.toggle('hidden', !mound || !st || st.type === 'hand');
+  $('#bite').disabled = busy || !can('bite');
+  $('#strip').classList.toggle('hidden', !(st && st.leaves));
+  $('#strip').disabled = busy;
+  $('#chew').classList.toggle('hidden', mound || !st || st.type === 'hand');
+  $('#chew').textContent = st && st.type === 'leaves' ? 'Chew the leaves' : 'Chew the end';
+  $('#chew').disabled = busy || !can('chew');
+  $('#leaves').classList.toggle('hidden', mound || !!g.hollow.leaves);
+  $('#leaves').disabled = busy;
+  $('#hers').classList.toggle('hidden', !mound || !g.mother.dropped);
+  $('#hers').disabled = busy;
+  $('#hers').textContent = g.carried.length >= C.CARRY ? 'Pick up her stem (drop this one)' : 'Pick up her stem';
+  $('#watch').classList.toggle('hidden', !mound); $('#fetch').classList.toggle('hidden', !mound);
+  $('#watch').disabled = busy || g.phase !== 'mound'; $('#fetch').disabled = busy || g.phase !== 'mound' || !!g.nearby;
+  $('#acts').classList.toggle('hidden', leaving || ended || !!g.nearby || !mound);
+  $('#prep').classList.toggle('hidden', leaving || ended);
+  $('#leavingbox').classList.toggle('hidden', !leaving || !!g.nearby || play.busy);
+  $('#donebox').classList.toggle('hidden', !ended || play.busy);
+  $('#phand').classList.toggle('hidden', !!g.nearby);
+  $('#nearbybox').classList.toggle('hidden', !g.nearby);
+  if (g.nearby) renderNearby();
+  $('#hint').textContent = play.hintShown && !g.dip && !leaving && !ended ? (mound ? 'drag down: push in  ·  let go: leave it  ·  drag up: pull out' : 'drag down: push in  ·  drag up: pull out and suck') : '';
+}
+function renderNearby() {
+  const box = $('#nearby'); box.innerHTML = '';
+  g.nearby.forEach((st, i) => { const b = document.createElement('button'); b.className = 'slip'; b.style.textTransform = 'none'; b.style.letterSpacing = '0'; b.style.fontWeight = '400';
+    b.innerHTML = `<svg viewBox="0 0 348 40" style="display:block;width:100%;height:34px">${stemProfile(st, 20, 18, 21, G, 1)}</svg><span style="font-size:13px">${M.describe(st)}</span>`;
+    b.addEventListener('click', () => { const full = g.carried.length >= C.CARRY; M.takeNearby(g, i); play.view = null; setResult(full ? 'You took it, and dropped the stem that was in your hand: you can carry three.' : 'You took it.', ''); if (g.phase === 'leaving') leaving(); renderPlay(); });
+    box.appendChild(b); });
+}
+function setResult(typed, red, fresh) {
+  $('#typed').textContent = typed; $('#red').textContent = red || '';
+  $('#typed').classList.remove('fade'); void $('#typed').offsetWidth; $('#typed').classList.add('fade');
+  if (red) { $('#red').classList.remove('fade'); void $('#red').offsetWidth; $('#red').classList.add('fade'); $('#red').style.animationDelay = '.45s'; }
+  if (play.mode === 'mound') drawRuler($('#ruler'), g.dips, 46, fresh);
+}
+
+// the drag: the finger asks for a depth; the mechanism decides what happens
+function svgScale() { const r = $('#sec').getBoundingClientRect(); return r.width / 348; }
+function onDown(e) {
+  if (play.busy || play.watching || g.nearby) return;
+  if (!(g.phase === 'mound' || (g.phase === 'hollow' && !g.over))) return;
+  const st = M.inHand(g); if (!st) return;
+  const ds = M.startDip(g); if (!ds) return;
+  e.preventDefault(); $('#sec').setPointerCapture && $('#sec').setPointerCapture(e.pointerId);
+  play.drag = { y0: e.clientY, d0: ds.d, scale: svgScale() };
+  play.target = ds.d; play.hintShown = false; $('#hint').textContent = '';
+  if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); }
+}
+const FOLD_MAX = 1.5; // inches of push the finger may run past a block (the bow drawn above the hole); beyond, the drag re-anchors
+function onMove(e) {
+  if (!play.drag || !g.dip) return;
+  const px = play.drag.scale * K;
+  let raw = play.drag.d0 + (e.clientY - play.drag.y0) / px;
+  const hi = g.dip.lim.depth + FOLD_MAX, lo = -0.5;
+  if (raw > hi) { play.drag.y0 += (raw - hi) * px; raw = hi; }
+  if (raw < lo) { play.drag.y0 += (raw - lo) * px; raw = lo; }
+  play.target = raw;
+}
+function onUp() {
+  if (!play.drag) return; play.drag = null;
+  if (g.dip) { if (g.dip.maxD < C.ENTER_MIN && play.target < C.ENTER_MIN) { M.cancelDip(g); stopAnim(); play.view = null; renderPlay(); return; } play.target = Math.min(play.target, g.dip.d); }
+}
+function stopAnim() { if (play.anim) cancelAnimationFrame(play.anim); play.anim = null; }
+function tick(now) {
+  const dt = Math.min(0.05, Math.max(0.001, (now - play.last) / 1000)); play.last = now;
+  const st = M.inHand(g);
+  if (g.dip) {
+    const ev = M.dipStep(g, play.target, dt);
+    const ds = g.dip;
+    if (ds) {
+      play.view = { stem: st, d: ds.d, excess: ds.excess, on: ds.on.map(x => x.off), place: ds.place, wetLen: ds.place === 'hollow' ? Math.max(0, ds.d - C.HOLLOW.water) : 0 };
+      if (ev && ev.drops.length) addFalling(ev.drops);
+      if (ev && ev.blocked) blockedNote(ds);
+      drawSection();
+    }
+    if (ev && ev.result) { play.drag = null; finishDip(ev.result); }
+  }
+  if (play.falling) { play.fallT = (play.fallT || 0) + dt; if (play.fallT > 0.6) { play.falling = ''; play.fallT = 0; } }
+  if (g.dip || play.falling) play.anim = requestAnimationFrame(tick); else play.anim = null;
+}
+function addFalling(depths) {
+  let s = play.falling || ''; for (const dep of depths) { const p = along(Math.max(0, dep)); s += `<g class="fade">${termiteGlyph(p.x + 4, p.y + 8, 1.2, 0.7)}</g>`; }
+  play.falling = s; play.fallT = 0;
+}
+function blockedNote(ds) {
+  const why = ds.lim.reason;
+  const t = { thick: 'It won\'t go in: too thick for the hole.', leaves: 'The leaves catch on the rim.', fold1: 'It folds at the first bend.', bent: 'The bent end folds at the first bend.', fold2: 'It folds at the second bend.', length: 'That\'s as far as this stem reaches.', end: 'The bottom of the passage.', reach: 'As far as it goes.' }[why] || '';
+  if (t) { $('#typed').textContent = t; $('#red').textContent = ''; }
+}
+function finishDip(res) {
+  play.busy = true; play.view = { stem: M.inHand(g), d: 0, excess: 0, on: res.place === 'mound' ? Array.from({ length: res.eaten }, (_, i) => 0.5 + i * 0.32) : [], place: res.place };
+  drawSection();
+  if (res.place === 'mound') {
+    const n = res.eaten; let k = 0; const before = g.eaten - n;
+    const step = () => { // the termites are picked off the stem, one by one, into the tally
+      if (k < n) { k++; play.view.on = play.view.on.slice(1); drawSection(); tally(before + k); setTimeout(step, 110); return; }
+      setResult(res.words.typed + (res.motherDropped ? ' Your mother has thrown down her stem: its end is bent. It lies by her hole.' : ''), res.words.red, true);
+      play.busy = false; play.view = null;
+      if (g.phase === 'leaving') leaving();
+      renderPlay();
+    };
+    setTimeout(step, 250);
+  } else {
+    $('#typed').textContent = ''; setTimeout(() => {
+      setResult(res.words.typed, res.words.red); play.busy = false; play.view = null; setStatic(); renderPlay();
+      if (g.phase === 'end') { $('#red').textContent = res.words.red; $('#typed').textContent = res.words.typed + (g.hollow.sips >= C.HOLLOW.enough ? ' Enough: you have drunk your fill.' : ' The light is going.'); }
+    }, 300);
+  }
+}
+function leaving() {
+  $('#leavingtext').textContent = `The last sun is shaded: your mother gets up and moves off into the long grass. You caught ${g.eaten === 0 ? 'no termites' : g.eaten === 1 ? 'one termite' : g.eaten + ' termites'}.`;
+}
+
+// preparation buttons: touching shows the result in the hand box; letting go on the button does it
+function wirePreview(btn, action, after) {
+  const box = () => (current === 'grass' ? $('#ghand') : $('#hand'));
+  const show = () => { if (btn.disabled) return; const p = M.preview(g, action); if (p.ok) drawHandBox(box(), M.inHand(g), p.stem); };
+  const hide = () => drawHandBox(box(), M.inHand(g));
+  btn.addEventListener('pointerdown', show); btn.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') show(); });
+  btn.addEventListener('pointerleave', hide); btn.addEventListener('pointercancel', hide);
+  btn.addEventListener('click', () => { if (btn.disabled) return; const before = M.describe(M.inHand(g)); const r = M.prepare(g, action); if (r.ok) after(before); });
+}
+
+// ---------- watching your mother
+function watchMother() {
+  const w = M.watch(g); if (!w) return;
+  play.busy = true; play.watching = true; renderPlay();
+  const mStem = w.stem;
+  play.binoc = binocMask();
+  let i = 0; const film = w.film;
+  $('#typed').textContent = 'You sit and watch your mother at her own hole.'; $('#red').textContent = '';
+  const frame = () => {
+    if (i < film.length) { const f = film[i]; play.view = { stem: mStem, d: f.d, excess: 0, on: f.on, place: 'mound' }; drawSection(); i++; setTimeout(frame, 33); return; }
+    play.watching = false; play.view = null; play.busy = false;
+    setResult(w.words.typed, w.words.red); if (g.phase === 'leaving') leaving(); renderPlay();
+  };
+  play.view = { stem: mStem, d: 0, excess: 0, on: [], place: 'mound' }; drawSection(); setTimeout(frame, 500);
+}
+function binocMask() { // the binocular view laid over the section while you watch her
+  const w = 348, h = 270, r = 112, cx1 = 124, cx2 = 236, cy = 150;
+  return `<defs><mask id="bm"><rect width="${w}" height="${h}" fill="white"/><circle cx="${cx1}" cy="${cy}" r="${r}" fill="black"/><circle cx="${cx2}" cy="${cy}" r="${r}" fill="black"/></mask></defs>` +
+    `<rect width="${w}" height="${h}" fill="${PAPER}" mask="url(#bm)" opacity="0.92"/><g fill="none" stroke="${G}" stroke-width="2" filter="url(#pencil-line)"><circle cx="${cx1}" cy="${cy}" r="${r}"/><circle cx="${cx2}" cy="${cy}" r="${r}"/></g>` +
+    `<text x="10" y="18" font-family="Courier Prime,monospace" font-size="12" font-weight="700" fill="${G}">YOUR MOTHER'S HOLE</text>`;
+}
+
+// ---------- screens
+function show(id) { current = id; $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+function startGame(seed) {
+  g = M.newGame(seed); window.__goodall = { get g() { return g; }, play };
+  $('#pageno').textContent = 'p. ' + g.seed; $('#pageno2').textContent = 'p. ' + g.seed;
+  play = Object.assign(play, { mode: 'mound', view: null, busy: false, hintShown: true, watching: false, falling: '' });
+  $('#helphollow').classList.add('hidden');
+  try { history.replaceState(null, '', '#p=' + g.seed); } catch (e) {}
+}
+function enterMound() {
+  M.walk(g); play.mode = 'mound'; setStatic();
+  $('#paim').textContent = 'Fish termites out of the mound with a stem of grass, before your mother moves on.';
+  $('#sunlab').textContent = 'The afternoon'; $('#tallylab').textContent = 'Termites eaten';
+  $('#intro').innerHTML = '<b>FIG. 4.</b> The mound cut open. Your mother fishes at her own hole nearby. Each dip takes one sun.';
+  $('#rulerwrap').classList.remove('hidden');
+  setResult('Termites bite on to whatever comes into their passage. Push your stem in, give them a moment, and draw it out.', '');
+  show('play'); renderPlay();
+}
+function enterHollow() {
+  M.goHollow(g); play.mode = 'hollow'; play.hintShown = true; play.view = null; setStatic();
+  $('#helphollow').classList.remove('hidden');
+  $('#paim').textContent = 'Drink the rainwater in the hollow. Your lips can\'t reach it.';
+  $('#sunlab').textContent = 'Before dark'; $('#tallylab').textContent = ''; $('#tally').innerHTML = '';
+  $('#intro').innerHTML = '<b>FIG. 5.</b> A tree trunk cut open: rainwater in a hollow. Five suns before dark; the tube at the right fills with sips.';
+  $('#rulerwrap').classList.add('hidden');
+  $('#typed').textContent = 'You are thirsty. Your lips can\'t reach the water.'; $('#red').textContent = '';
+  window.scrollTo(0, 0); renderPlay();
+}
+function enterEnd() {
+  const v = M.verdict(g);
+  $('#headline').textContent = v.headline;
+  $('#did').innerHTML = v.did.map(t => `<p>${t}</p>`).join('');
+  drawRuler($('#endruler'), g.dips, 70);
+  $('#tallies').innerHTML = `<p class="small" style="margin-top:4px">Termites: you ${tallySVG(Math.min(v.eaten, 120), 16)} ${v.eaten} · your mother, about ${v.mother}</p>`;
+  $('#paper').textContent = v.paper; $('#means').textContent = v.means;
+  $('#figv').innerHTML = vultureArt();
+  $('#figc').innerHTML = `<g filter="url(#pencil)">${chimpArt(0.7, 2, 4, 13)}</g>`;
+  show('end');
+}
+
+// ---------- wiring
+document.addEventListener('DOMContentLoaded', () => {});
+function init() {
+  const ha = document.getElementById('handart'); ha.innerHTML = handArt(); ha.setAttribute('filter', 'url(#pencil)');
+  drawCover();
+  const m = /#p=(\d+)/.exec(location.hash); startGame(m ? Math.max(1, Math.min(C.SEED_MAX, +m[1])) : null);
+  $('#begin').addEventListener('click', () => { show('grass'); renderGrass(); });
+  $('#take').addEventListener('click', () => { if (M.take(g)) renderGrass(); });
+  wirePreview($('#gstrip'), 'strip', () => renderGrass());
+  $('#walk').addEventListener('click', enterMound);
+  const sec = $('#sec');
+  sec.addEventListener('pointerdown', onDown); sec.addEventListener('pointermove', onMove);
+  sec.addEventListener('pointerup', onUp); sec.addEventListener('pointercancel', onUp); sec.addEventListener('lostpointercapture', onUp);
+  wirePreview($('#bite'), 'bite', b => { setResult(`You bite off the end: it is an inch shorter${/bent/.test(b) ? ', and straight again' : ''}.`, ''); play.view = null; renderPlay(); });
+  wirePreview($('#strip'), 'strip', () => { setResult('You strip the leaves off.', ''); play.view = null; renderPlay(); });
+  wirePreview($('#chew'), 'chew', () => { const st = M.inHand(g); setResult(st.type === 'leaves' ? 'You chew the leaves for a moment: a crumpled wad.' : 'You chew the end: it crumples into a little mass.', ''); play.view = null; renderPlay(); });
+  $('#leaves').addEventListener('click', () => { M.pickLeaves(g); setResult('You pull a handful of leaves off the branch.', ''); play.view = null; renderPlay(); });
+  $('#hers').addEventListener('click', () => { const full = g.carried.length >= C.CARRY; M.pickUpHers(g); setResult('You pick up the stem she threw down. Its end is bent.' + (full ? ' You dropped the one in your hand to take it: you can carry three.' : ''), ''); play.view = null; renderPlay(); });
+  $('#watch').addEventListener('click', watchMother);
+  $('#fetch').addEventListener('click', () => { M.fetchNearby(g); suns(); setResult('You look around the mound without leaving it: three stems within reach.', ''); renderPlay(); });
+  $('#leavenear').addEventListener('click', () => { M.skipNearby(g); setResult('You leave them.', ''); if (g.phase === 'leaving') leaving(); renderPlay(); });
+  $('#follow').addEventListener('click', enterHollow);
+  $('#lastpage').addEventListener('click', enterEnd);
+  $('#again').addEventListener('click', () => { startGame(null); show('grass'); renderGrass(); });
+  $('#same').addEventListener('click', () => { const s = g.seed; startGame(s); show('grass'); renderGrass(); });
+  $$('[data-help]').forEach(b => b.addEventListener('click', () => { back = current; show('help'); }));
+  $$('[data-about]').forEach(b => b.addEventListener('click', () => { back = current; show('about'); }));
+  $('#helpback').addEventListener('click', () => { show(back); if (back === 'play') renderPlay(); });
+  $('#aboutback').addEventListener('click', () => show(back));
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+</body>
+</html>
