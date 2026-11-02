@@ -158,6 +158,7 @@ svg.arcs path.live{stroke-width:5}
 .wbox .pm{display:flex;gap:6px;margin-top:4px}
 .wbox .pm button{width:38px;height:34px;border:1px solid var(--ink);background:var(--card);font-size:20px;cursor:pointer;font-family:var(--text);color:var(--ink);padding:0}
 .wheel.wB{background:var(--verd);border-color:#1C4F43}
+.wheel.wC{background:#3F4E6B;border-color:#242D3F}
 .tray{grid-template-columns:1fr 1fr}
 .tray .card{padding:12px 8px 8px;gap:8px;overflow:hidden}
 .tray .card .t i{display:none}
@@ -165,7 +166,7 @@ svg.arcs path.live{stroke-width:5}
 .tray .card.wide .t i{display:block}
 .par{font-size:15px;color:var(--ink2)}
 .tag{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid currentColor;padding:1px 6px;margin-left:6px;vertical-align:3px}
-.tag.easy{color:var(--verd)} .tag.medium{color:var(--mahog)} .tag.hard{color:var(--plum)}
+.tag.easy{color:var(--verd)} .tag.medium{color:var(--mahog)} .tag.hard{color:var(--plum)} .tag.expert{color:var(--ink)} .tag.final{color:var(--ink);border-width:2px;font-weight:700}
 .mini{display:flex;gap:8px;flex-wrap:wrap}
 .mini .btn{width:auto;flex:1;min-width:140px;font-size:14px;letter-spacing:.06em;text-transform:none}
 .score{display:grid;grid-template-columns:1fr auto auto auto;gap:6px 10px;font-size:16px;margin:10px 0;align-items:center}
@@ -186,7 +187,7 @@ svg.arcs path.live{stroke-width:5}
   <h1 class="title"><small>London, 1843</small>Lovelace's Cards</h1>
   <p class="lead">This machine can't think. It does exactly what its cards tell it, one card at a time, and nothing else.</p>
   <p class="lead">You hang the cards. Can you make it weave the pattern, with only a few cards?</p>
-  <p class="small">Six looms, dealt at random each game: two easy ones, then two harder, then two hard. About ten minutes.</p>
+  <p class="small">Six looms, dealt at random each game: two easy ones, then two harder, then two hard. After them, more and harder still, if you want them.</p>
   <button class="btn go" data-go="loom">Begin</button>
   <button class="btn quiet" data-page="help">How to play</button>
   <button class="btn quiet" data-page="about">About the paper</button>
@@ -217,7 +218,7 @@ svg.arcs path.live{stroke-width:5}
 <section class="screen" id="s-switch">
   <div class="top"><span class="which">Same cards, other things</span><button class="q" data-page="help" aria-label="How to play">?</button></div>
   <h2>What do the holes mean?</h2>
-  <div class="say">This is your chain from the last loom. A card is only holes in pasteboard. <b>The switch decides what the holes mean.</b> Flip it and run the same cards again.</div>
+  <div class="say">This is your chain from the last loom. A card is only holes in pasteboard. <b>The switch decides what the holes mean.</b> Flip it to Notes or Numbers and run the same cards again.</div>
   <div class="switch" id="switch">
     <button data-m="threads"><span class="ck"></span>Threads</button>
     <button data-m="notes"><span class="ck"></span>Notes</button>
@@ -229,7 +230,7 @@ svg.arcs path.live{stroke-width:5}
   <div class="order out"><div class="lbl"><span id="outlbl">What came out</span><span id="outcount"></span></div><div id="out"></div></div>
   <div class="result" id="result4"></div>
   <button class="btn go" id="run4">Run the cards</button>
-  <button class="btn verd" id="next4" style="display:none">One last order</button>
+  <button class="btn verd" id="next4">One last order</button>
 </section>
 
 <!-- THE LAST ORDER -->
@@ -285,6 +286,8 @@ svg.arcs path.live{stroke-width:5}
   <p>A wheel that reaches 0 stays at 0 until a Set card puts a number on it again. That is what a loop inside a loop needs: the inner wheel must be set again on every round of the outer loop, so the outer Go back and count down has to send the machine back to (or above) the inner wheel's Set card. It can jump to any card above it, a Set card included. But a simple loop should go back to its first stitch, not to its own Set card: that would put the number back every round, and the wheel would never get to 0.</p>
   <h3>Fewest cards</h3>
   <p>When the bell rings you are told the fewest cards that can do the job. On the hard looms there is no spare room at all.</p>
+<h3>After the six</h3>
+<p>After the sixth bell you can stop, or go on: two looms with two runs inside one loop (the inner wheel is set twice on every round), and then one final loom with a third wheel, a loop inside a loop inside a loop. None of them is required.</p>
   <h3>Stuck?</h3>
   <p>After any run that doesn't ring the bell, you can ask to see a way. It's one way, not the only one; your own chain stays hung until you change it, so you can keep trying as long as you like. Every loom can be tried again after the bell, and the end screen takes you back into any of them; your best go is the one that counts.</p>
   <button class="btn" data-back>Back to the game</button>
@@ -295,7 +298,7 @@ svg.arcs path.live{stroke-width:5}
   <div class="top"><span class="which">About the paper</span><button class="q" data-back aria-label="Back">×</button></div>
 
 <h3>The game in one line</h3>
-<p>A machine that does exactly what its cards say. Six looms are dealt at random from a library, two easy, two harder, two hard: you hang as few cards as you can to weave each order, with wheels that hold numbers, Set cards that put a number on a wheel, and Go back and count down cards that take one off and look, so that on the hard looms a loop sits inside a loop. Then a switch makes the same cards play a tune and do sums, and you ask the machine to make something up. It can't.</p>
+<p>A machine that does exactly what its cards say. Six looms are dealt at random from a library, two easy, two harder, two hard, with three more beyond them for those who want them: you hang as few cards as you can to weave each order, with wheels that hold numbers, Set cards that put a number on a wheel, and Go back and count down cards that take one off and look, so that on the hard looms a loop sits inside a loop. Then a switch makes the same cards play a tune and do sums, and you ask the machine to make something up. It can't.</p>
 <h3>What the paper does</h3>
 <p>In 1842 L. F. Menabrea published a sketch of Charles Babbage's Analytical Engine, a calculating machine driven by punched cards. In 1843 Ada Lovelace translated it and added seven Notes, longer than the sketch itself. The Notes are the text this game is built from.</p>
 <p>Note A says the Engine <i>weaves algebraical patterns just as the Jacquard-loom weaves flowers and leaves</i>, and that it works on operations, not on any one kind of thing: it could act on anything whose relations can be written in symbols, music included. Notes C and E explain <i>backing</i>: the cards can be sent back so that a few of them do duty again and again, a cycle. Note F shows three cards doing the work of three hundred and thirty. Note G gives a full chain of cards for the Numbers of Bernoulli, twenty-five cards that serve <i>however great n may be</i>, and warns that the Engine <i>has no pretensions whatever to originate anything. It can do whatever we know how to order it to perform.</i></p>
@@ -592,7 +595,7 @@ svg.arcs path.live{stroke-width:5}
 <script>
 // Lovelace's Cards — the loom. The only copy: solve.js runs it in Node to compute every puzzle's par, build.py inlines it.
 // The machine counts the way the Notes say an Engine counts: with numbers in the Store and cards that operate on them.
-//   - A wheel (A or B) is a number in the Store. Every wheel starts at 0.
+//   - A wheel (A, B or C) is a number in the Store. Every wheel starts at 0.
 //   - A stitch card weaves one stitch.
 //   - A Set card puts a number on a wheel, whatever it showed before (a card of numbers, Memoir p. 15). It is the only way
 //     a wheel gets a number.
@@ -604,9 +607,9 @@ svg.arcs path.live{stroke-width:5}
 // round. A wheel taken below 0 never comes back to 0 by taking 1 off, so the machine runs on; the attendant stops it.
 (function (root) {
   'use strict';
-  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1, to:index} | {k:'set', w:0|1, v:n}]
+  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1|2, to:index} | {k:'set', w:0|1|2, v:n}]
   function weave(chain, start, target, wantEvents, cap) {
-    const wh = (start || [0, 0]).slice(); const out = []; const ev = wantEvents ? [] : null;
+    const wh = (start || [0, 0, 0]).slice(); const out = []; const ev = wantEvents ? [] : null;
     cap = cap || 4000;
     let pc = 0, steps = 0;
     while (pc < chain.length) {
@@ -635,7 +638,7 @@ svg.arcs path.live{stroke-width:5}
   // number from 1 to WMAX exactly once, without trying them one by one. Every branch is checked stitch by stitch against the
   // order. Sound prunes: a stitch card must be the stitch the order wants next (it is woven the moment it is added); a Go back
   // on a wheel needs a Set card for that wheel above it (otherwise the wheel goes 0, −1, −2 … and never returns to 0); wheel B
-  // only once wheel A has a Set card (the two are interchangeable).
+  // only once wheel A has a Set card, C only once B has (the wheels are interchangeable).
   const WMAX = 12;
   function solve(target, wheels, maxLen) {
     const T = target, N = T.length, vmax = Math.min(WMAX, N), cap = 30 * N + 60;
@@ -652,15 +655,19 @@ svg.arcs path.live{stroke-width:5}
             if (run(pc, wh, n, steps, vals, lb)) return true;
             chain.pop();
             for (let w = 0; w < wheels; w++) {
-              if (w === 1 && !chain.some(c => c.k === 'set' && c.w === 0)) continue;
+              if (w > 0 && !chain.some(c => c.k === 'set' && c.w === w - 1)) continue;
+              if (typeof wh[w] === 'object' && wh[w].d === 0) continue;       // the wheel was just set and never read: a second Set is waste
+              { const prev = chain[chain.length - 1]; if (prev && prev.k === 'set' && prev.w > w) continue; }   // adjacent Sets in wheel order only (they commute)
               chain.push({ k: 'set', w });
               if (run(pc, wh, n, steps, vals, lb)) return true;
               chain.pop();
             }
             for (let w = 0; w < wheels; w++) {
               if (!chain.some(c => c.k === 'set' && c.w === w)) continue;
+              if (typeof wh[w] === 'number' && wh[w] <= 0) continue;         // the wheel shows 0 already: taking 1 off would run for ever
               for (let t = 0; t < chain.length; t++) {
                 if (chain[t].k === 'back') continue;
+                if (chain[t].k === 'set' && chain[t].w === w) continue;        // back to its own Set card: the number is put back every round, never 0
                 chain.push({ k: 'back', w, to: t });
                 if (run(pc, wh, n, steps, vals, lb)) return true;
                 chain.pop();
@@ -686,7 +693,7 @@ svg.arcs path.live{stroke-width:5}
           n++; pc++;
         }
       };
-      if (run(0, [0, 0], 0, 0, [], [])) return { par: found.length, chain: found, start: [0, 0] };
+      if (run(0, [0, 0, 0], 0, 0, [], [])) return { par: found.length, chain: found, start: [0, 0, 0] };
     }
     return null;
   }
@@ -697,7 +704,7 @@ svg.arcs path.live{stroke-width:5}
 
 </script>
 <script>
-const PUZZLES = [{"id":"e0a","tier":"easy0","p":"RBRB","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"R"},{"k":"B"}],"set":[0,0]},{"id":"e0b","tier":"easy0","p":"RGBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"B"},{"k":"R"}],"set":[0,0]},{"id":"e0c","tier":"easy0","p":"BBRG","wheels":0,"par":4,"slots":5,"sol":[{"k":"B"},{"k":"B"},{"k":"R"},{"k":"G"}],"set":[0,0]},{"id":"e0d","tier":"easy0","p":"RBBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"B"},{"k":"R"}],"set":[0,0]},{"id":"e1a","tier":"easy1","p":"RBRBRBRBRBRBRBRB","wheels":1,"par":4,"slots":5,"sol":[{"k":"set","w":0,"v":8},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"e1b","tier":"easy1","p":"RGBRGBRGBRGBRGB","wheels":1,"par":5,"slots":6,"sol":[{"k":"set","w":0,"v":5},{"k":"R"},{"k":"G"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"e1c","tier":"easy1","p":"RRRRRRRRRR","wheels":1,"par":3,"slots":4,"sol":[{"k":"set","w":0,"v":10},{"k":"R"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"e1d","tier":"easy1","p":"RRBRRBRRBRRBRRB","wheels":1,"par":5,"slots":6,"sol":[{"k":"set","w":0,"v":5},{"k":"R"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"m1","tier":"medium","p":"BRRRRRRRRR","wheels":1,"par":4,"slots":5,"sol":[{"k":"B"},{"k":"set","w":0,"v":9},{"k":"R"},{"k":"back","w":0,"to":2}],"set":[0,0]},{"id":"m2","tier":"medium","p":"GRBRBRBRBRBG","wheels":1,"par":6,"slots":7,"sol":[{"k":"G"},{"k":"set","w":0,"v":5},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":2},{"k":"G"}],"set":[0,0]},{"id":"m3","tier":"medium","p":"RRRRRRBBBBBB","wheels":1,"par":6,"slots":7,"sol":[{"k":"set","w":0,"v":6},{"k":"R"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":6},{"k":"B"},{"k":"back","w":0,"to":4}],"set":[0,0]},{"id":"m4","tier":"medium","p":"GGRBRBRBRBRB","wheels":1,"par":6,"slots":7,"sol":[{"k":"G"},{"k":"G"},{"k":"set","w":0,"v":5},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":3}],"set":[0,0]},{"id":"m5","tier":"medium","p":"RGGGGGGGGB","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"set","w":0,"v":8},{"k":"G"},{"k":"back","w":0,"to":2},{"k":"B"}],"set":[0,0]},{"id":"m6","tier":"medium","p":"RBRBRBRBGGGGGG","wheels":1,"par":7,"slots":8,"sol":[{"k":"set","w":0,"v":4},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":6},{"k":"G"},{"k":"back","w":0,"to":5}],"set":[0,0]},{"id":"m7","tier":"medium","p":"RRGGRRGGRRGGRRGG","wheels":1,"par":6,"slots":7,"sol":[{"k":"set","w":0,"v":4},{"k":"R"},{"k":"R"},{"k":"G"},{"k":"G"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"m8","tier":"medium","p":"RBBRBBRBBRBBG","wheels":1,"par":6,"slots":7,"sol":[{"k":"set","w":0,"v":4},{"k":"R"},{"k":"B"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"G"}],"set":[0,0]},{"id":"h1","tier":"hard","p":"RRRRRBRRRRRBRRRRRBRRRRRB","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":4},{"k":"set","w":1,"v":5},{"k":"R"},{"k":"back","w":1,"to":2},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"h2","tier":"hard","p":"RBBBBBBRBBBBBBRBBBBBB","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":3},{"k":"R"},{"k":"set","w":1,"v":6},{"k":"B"},{"k":"back","w":1,"to":3},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"h3","tier":"hard","p":"BRRRRRBRRRRRBRRRRRB","wheels":2,"par":7,"slots":7,"sol":[{"k":"B"},{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":5},{"k":"R"},{"k":"back","w":1,"to":3},{"k":"B"},{"k":"back","w":0,"to":2}],"set":[0,0]},{"id":"h5","tier":"hard","p":"RBRBRBRBGRBRBRBRBGRBRBRBRBG","wheels":2,"par":7,"slots":7,"sol":[{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":4},{"k":"R"},{"k":"B"},{"k":"back","w":1,"to":2},{"k":"G"},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"h6","tier":"hard","p":"RGGGGGRGGGGGRGGGGG","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":3},{"k":"R"},{"k":"set","w":1,"v":5},{"k":"G"},{"k":"back","w":1,"to":3},{"k":"back","w":0,"to":1}],"set":[0,0]},{"id":"h8","tier":"hard","p":"GRRRRGRRRRGRRRRGRRRR","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":4},{"k":"G"},{"k":"set","w":1,"v":4},{"k":"R"},{"k":"back","w":1,"to":3},{"k":"back","w":0,"to":1}],"set":[0,0]}];
+const PUZZLES = [{"id":"e0a","tier":"easy0","p":"RBRB","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"R"},{"k":"B"}],"set":[0,0,0]},{"id":"e0b","tier":"easy0","p":"RGBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"G"},{"k":"B"},{"k":"R"}],"set":[0,0,0]},{"id":"e0c","tier":"easy0","p":"BBRG","wheels":0,"par":4,"slots":5,"sol":[{"k":"B"},{"k":"B"},{"k":"R"},{"k":"G"}],"set":[0,0,0]},{"id":"e0d","tier":"easy0","p":"RBBR","wheels":0,"par":4,"slots":5,"sol":[{"k":"R"},{"k":"B"},{"k":"B"},{"k":"R"}],"set":[0,0,0]},{"id":"e1a","tier":"easy1","p":"RBRBRBRBRBRBRBRB","wheels":1,"par":4,"slots":5,"sol":[{"k":"set","w":0,"v":8},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"e1b","tier":"easy1","p":"RGBRGBRGBRGBRGB","wheels":1,"par":5,"slots":6,"sol":[{"k":"set","w":0,"v":5},{"k":"R"},{"k":"G"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"e1c","tier":"easy1","p":"RRRRRRRRRR","wheels":1,"par":3,"slots":4,"sol":[{"k":"set","w":0,"v":10},{"k":"R"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"e1d","tier":"easy1","p":"RRBRRBRRBRRBRRB","wheels":1,"par":5,"slots":6,"sol":[{"k":"set","w":0,"v":5},{"k":"R"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"m1","tier":"medium","p":"BRRRRRRRRR","wheels":1,"par":4,"slots":5,"sol":[{"k":"B"},{"k":"set","w":0,"v":9},{"k":"R"},{"k":"back","w":0,"to":2}],"set":[0,0,0]},{"id":"m2","tier":"medium","p":"GRBRBRBRBRBG","wheels":1,"par":6,"slots":7,"sol":[{"k":"G"},{"k":"set","w":0,"v":5},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":2},{"k":"G"}],"set":[0,0,0]},{"id":"m3","tier":"medium","p":"RRRRRRBBBBBB","wheels":1,"par":6,"slots":7,"sol":[{"k":"set","w":0,"v":6},{"k":"R"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":6},{"k":"B"},{"k":"back","w":0,"to":4}],"set":[0,0,0]},{"id":"m4","tier":"medium","p":"BRRBRRBRRB","wheels":1,"par":6,"slots":7,"sol":[{"k":"B"},{"k":"set","w":0,"v":3},{"k":"R"},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":2}],"set":[0,0,0]},{"id":"m5","tier":"medium","p":"RGGGGGGGGB","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"set","w":0,"v":8},{"k":"G"},{"k":"back","w":0,"to":2},{"k":"B"}],"set":[0,0,0]},{"id":"m6","tier":"medium","p":"RBRBRBRBGGGGGG","wheels":1,"par":7,"slots":8,"sol":[{"k":"set","w":0,"v":4},{"k":"R"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"set","w":0,"v":6},{"k":"G"},{"k":"back","w":0,"to":5}],"set":[0,0,0]},{"id":"m7","tier":"medium","p":"RBRBRBRBR","wheels":1,"par":5,"slots":6,"sol":[{"k":"R"},{"k":"set","w":0,"v":4},{"k":"B"},{"k":"R"},{"k":"back","w":0,"to":2}],"set":[0,0,0]},{"id":"m8","tier":"medium","p":"RBBRBBRBBRBBG","wheels":1,"par":6,"slots":7,"sol":[{"k":"set","w":0,"v":4},{"k":"R"},{"k":"B"},{"k":"B"},{"k":"back","w":0,"to":1},{"k":"G"}],"set":[0,0,0]},{"id":"h1","tier":"hard","p":"RRRRRBRRRRRBRRRRRBRRRRRB","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":4},{"k":"set","w":1,"v":5},{"k":"R"},{"k":"back","w":1,"to":2},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"h2","tier":"hard","p":"RBBBBBBRBBBBBBRBBBBBB","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":3},{"k":"R"},{"k":"set","w":1,"v":6},{"k":"B"},{"k":"back","w":1,"to":3},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"h3","tier":"hard","p":"BRRRRRBRRRRRBRRRRRB","wheels":2,"par":7,"slots":7,"sol":[{"k":"B"},{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":5},{"k":"R"},{"k":"back","w":1,"to":3},{"k":"B"},{"k":"back","w":0,"to":2}],"set":[0,0,0]},{"id":"h5","tier":"hard","p":"RBRBRBRBGRBRBRBRBGRBRBRBRBG","wheels":2,"par":7,"slots":7,"sol":[{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":4},{"k":"R"},{"k":"B"},{"k":"back","w":1,"to":2},{"k":"G"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"h6","tier":"hard","p":"RGGGGGRGGGGGRGGGGG","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":3},{"k":"R"},{"k":"set","w":1,"v":5},{"k":"G"},{"k":"back","w":1,"to":3},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"h8","tier":"hard","p":"GRRRRGRRRRGRRRRGRRRR","wheels":2,"par":6,"slots":6,"sol":[{"k":"set","w":0,"v":4},{"k":"G"},{"k":"set","w":1,"v":4},{"k":"R"},{"k":"back","w":1,"to":3},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"x1","tier":"expert","p":"RRRRRBBBBRRRRRBBBBRRRRRBBBB","wheels":2,"par":8,"slots":8,"sol":[{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":5},{"k":"R"},{"k":"back","w":1,"to":2},{"k":"set","w":1,"v":4},{"k":"B"},{"k":"back","w":1,"to":5},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"x2","tier":"expert","p":"RRRRGBBBBRRRRGBBBB","wheels":2,"par":9,"slots":9,"sol":[{"k":"set","w":0,"v":2},{"k":"set","w":1,"v":4},{"k":"R"},{"k":"back","w":1,"to":2},{"k":"G"},{"k":"set","w":1,"v":4},{"k":"B"},{"k":"back","w":1,"to":6},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"x3","tier":"expert","p":"RBRBRBGGGGRBRBRBGGGGRBRBRBGGGG","wheels":2,"par":9,"slots":9,"sol":[{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":3},{"k":"R"},{"k":"B"},{"k":"back","w":1,"to":2},{"k":"set","w":1,"v":4},{"k":"G"},{"k":"back","w":1,"to":6},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"x4","tier":"expert","p":"GGGGRBBBBBGGGGRBBBBB","wheels":2,"par":9,"slots":9,"sol":[{"k":"set","w":0,"v":2},{"k":"set","w":1,"v":4},{"k":"G"},{"k":"back","w":1,"to":2},{"k":"R"},{"k":"set","w":1,"v":5},{"k":"B"},{"k":"back","w":1,"to":6},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"x5","tier":"expert","p":"BBBBBBRGRGRGBBBBBBRGRGRGBBBBBBRGRGRG","wheels":2,"par":9,"slots":9,"sol":[{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":6},{"k":"B"},{"k":"back","w":1,"to":2},{"k":"set","w":1,"v":3},{"k":"R"},{"k":"G"},{"k":"back","w":1,"to":5},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"f1","tier":"final","p":"RRRRBRRRRBRRRRBGRRRRBRRRRBRRRRBG","wheels":3,"par":9,"slots":9,"sol":[{"k":"set","w":0,"v":2},{"k":"set","w":1,"v":3},{"k":"set","w":2,"v":4},{"k":"R"},{"k":"back","w":2,"to":3},{"k":"B"},{"k":"back","w":1,"to":2},{"k":"G"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"f2","tier":"final","p":"RRRRBRRRRBGRRRRBRRRRBGRRRRBRRRRBG","wheels":3,"par":9,"slots":9,"sol":[{"k":"set","w":0,"v":3},{"k":"set","w":1,"v":2},{"k":"set","w":2,"v":4},{"k":"R"},{"k":"back","w":2,"to":3},{"k":"B"},{"k":"back","w":1,"to":2},{"k":"G"},{"k":"back","w":0,"to":1}],"set":[0,0,0]},{"id":"f3","tier":"final","p":"RRRRRGRRRRRGBBRRRRRGRRRRRGBB","wheels":3,"par":10,"slots":10,"sol":[{"k":"set","w":0,"v":2},{"k":"set","w":1,"v":2},{"k":"set","w":2,"v":5},{"k":"R"},{"k":"back","w":2,"to":3},{"k":"G"},{"k":"back","w":1,"to":2},{"k":"B"},{"k":"B"},{"k":"back","w":0,"to":1}],"set":[0,0,0]}];
 </script>
 <script>
 (function(){
@@ -710,8 +717,12 @@ const w = n => words[n] || String(n);
 const Lo = window.LOOM;
 
 const CNAME = { r: 'red', b: 'blue', g: 'gold' };
-const WNAME = ['A', 'B'];
-const WCOL = ['var(--mahog)', 'var(--verd)'];
+const WNAME = ['A', 'B', 'C'];
+const WCOL = ['var(--mahog)', 'var(--verd)', '#3F4E6B'];
+const WHEX = ['#6B3A22', '#2E7D6B', '#3F4E6B'];
+const WCLS = ['', 'wB', 'wC'];
+const TIERWORD = { easy0: 'easy', easy1: 'easy', medium: 'medium', hard: 'hard', expert: 'even harder', final: 'the toughest' };
+const REG = 6;   // the six regular looms; looms 7–9 are the extras, offered after the sixth bell
 const HOLES = { r: [1,0,1,1,0,0,1,0,1,0,0,1], b: [0,1,1,0,1,0,0,1,1,0,1,0], g: [1,1,0,1,0,1,1,0,0,1,0,1], back: [1,1,0,0,1,1,0,1,0,1,1,1] };
 const MEAN = {
   threads: { r: ['Red stitch', 'Weave one red stitch.'], b: ['Blue stitch', 'Weave one blue stitch.'], g: ['Gold stitch', 'Weave one gold stitch.'] },
@@ -730,14 +741,14 @@ function swatch(k, mode){
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 function deal(){
   const pick = (tier, n) => shuffle(PUZZLES.filter(p => p.tier === tier)).slice(0, n);
-  const ps = [...pick('easy0', 1), ...pick('easy1', 1), ...pick('medium', 2), ...pick('hard', 2)];
+  const ps = [...pick('easy0', 1), ...pick('easy1', 1), ...pick('medium', 2), ...pick('hard', 2), ...pick('expert', 2), ...pick('final', 1)];
   return ps.map(p => {
     const perm = shuffle(['r','b','g']); const map = { R: perm[0], B: perm[1], G: perm[2] };
     return { ...p, target: p.p.split('').map(x => map[x]), sol: p.sol.map(c => (c.k === 'back' || c.k === 'set') ? { ...c } : { k: map[c.k] }) };
   });
 }
 
-const START = [0, 0];   // every wheel starts at 0
+const START = [0, 0, 0];   // every wheel starts at 0
 let looms = [], L = 0, P = null, chain = [], running = false, solved = false, fails = 0, uid = 0, results = [], lastChain = null, lastWheels = 1, fromEnd = false;
 let seenTarget = false, seenB = false;
 
@@ -755,8 +766,10 @@ function newGame(){ looms = deal(); results = []; lastChain = null; fromEnd = fa
 function heading(p){
   if (p.tier === 'easy0') return 'Doing as it is told';
   if (p.tier === 'easy1') return 'The machine counts';
-  if (p.tier === 'medium') return 'Going back, but not to the top';
-  return 'A loop inside a loop';
+  if (p.tier === 'medium') return 'Where does the loop start?';
+  if (p.tier === 'hard') return 'A loop inside a loop';
+  if (p.tier === 'expert') return 'Two loops inside one loop';
+  return 'A loop in a loop in a loop';
 }
 function sayText(p){
   const fit = `<b>${w(p.slots)} cards</b> fit on the chain`;
@@ -764,12 +777,15 @@ function sayText(p){
   if (p.tier === 'easy0') return `Hang cards to weave the order, stitch by stitch: tap a card at the bottom to hang it, tap × to take one off. Then run the loom. ${Fit}.`;
   if (p.tier === 'easy1') return `This order is ${p.target.length} stitches long, but only ${fit}. So the machine has to count. <b>Wheel A</b> is a number inside the machine, and it starts at 0. A <b>Set</b> card puts a number on it. A <b>Go back and count down</b> card first takes 1 off the wheel, then looks: not 0 yet? Back up the chain. 0? Carry on.`;
   if (p.tier === 'medium') return `${Fit}. Going back doesn't have to be to the top: <b>tap the “card …” box on a Go back and count down card to choose where it jumps.</b> The arc on the left shows the loop. A wheel that has reached 0 stays at 0 until a Set card puts a number on it again.`;
-  return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>, and there are now <b>two wheels</b>, A and B, one for each loop. Remember: a wheel that reaches 0 stays at 0 until a Set card puts a number on it again, and Go back and count down can jump back to any card above it, a Set card too.`;
+  if (p.tier === 'hard') return `Only ${fit}, not one to spare. You'll need a <b>loop inside a loop</b>, and there are now <b>two wheels</b>, A and B, one for each loop. Remember: a wheel that reaches 0 stays at 0 until a Set card puts a number on it again, and Go back and count down can jump back to any card above it, a Set card too.`;
+  if (p.tier === 'expert') return `Only ${fit}, not one to spare. Inside the big loop there are <b>two runs</b>, one after the other. Two wheels, as before; a wheel can be set again as often as you like.`;
+  return `Only ${fit}, not one to spare. <b>Three wheels</b> now, A, B and C. Loops as deep as you like.`;
 }
 
 function startLoom(n){
   L = n; P = looms[L]; chain = []; solved = false; fails = 0; running = false;
-  $('#which').innerHTML = `Loom ${L+1} of ${looms.length}<span class="tag ${P.tier.startsWith('easy') ? 'easy' : P.tier}">${P.tier.startsWith('easy') ? 'easy' : P.tier}</span>`;
+  const where = L < REG ? `Loom ${L+1} of ${REG}` : L < REG + 2 ? `Extra loom ${L-REG+1} of 2` : 'The final loom';
+  $('#which').innerHTML = `${where}<span class="tag ${P.tier.startsWith('easy') ? 'easy' : P.tier}">${TIERWORD[P.tier]}</span>`;
   $('#ltitle').textContent = heading(P);
   $('#lsay').innerHTML = sayText(P);
   $('#result').className = 'result'; $('#after').innerHTML = '';
@@ -780,7 +796,7 @@ function startLoom(n){
 
 function drawCloth(woven, badAt){
   const cl = $('#cloth'); cl.innerHTML = ''; const t = P.target;
-  cl.style.gridTemplateColumns = `repeat(${t.length <= 4 ? 4 : 8},1fr)`;
+  cl.style.gridTemplateColumns = `repeat(${t.length <= 4 ? 4 : 11},1fr)`;
   const n = Math.max(t.length, woven.length);
   for (let k = 0; k < n; k++){
     const s = el('div', 'st');
@@ -797,7 +813,7 @@ function drawWheels(now){
   const box = $('#wheels'); box.innerHTML = '';
   for (let k = 0; k < P.wheels; k++){
     const b = el('div', 'wbox');
-    b.innerHTML = `<div class="wheel ${k ? 'wB' : ''}" id="wh${k}"><span>${now ? now[k] : 0}</span></div>
+    b.innerHTML = `<div class="wheel ${WCLS[k]}" id="wh${k}"><span>${now ? now[k] : 0}</span></div>
       <div class="wl"><b>Wheel ${WNAME[k]}</b>${now ? 'a number inside the machine' : 'starts at 0. Only a Set card puts a number on it.'}</div>`;
     box.appendChild(b);
   }
@@ -884,7 +900,7 @@ function drawArcs(svgSel, chainSel, ch, liveIdx){
     const j = Math.max(0, ch.findIndex(x => x.id === c.toId)); const a = cards[j], b = cards[i]; if (!a) return;
     const y1 = a.offsetTop + a.offsetHeight / 2, y2 = b.offsetTop + b.offsetHeight / 2;
     const span = i - j; const x = Math.max(4, 28 - span * 4 - c.w * 3);   // longer (outer) loops further left
-    const col = c.w ? '#2E7D6B' : '#6B3A22';
+    const col = WHEX[c.w];
     const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     p.setAttribute('d', `M33 ${y2} H${x + 8} Q${x} ${y2} ${x} ${y2 - 8} V${y1 + 8} Q${x} ${y1} ${x + 8} ${y1} H30`);
     p.setAttribute('stroke', col); if (liveIdx === i) p.classList.add('live'); svg.appendChild(p);
@@ -965,7 +981,7 @@ $('#run').addEventListener('click', async () => {
       if (sets.length) help = '<br><br>' + sets.map(([c, i]) => `Card ${i+1} put <b>${c.v}</b> on wheel ${WNAME[c.w]}.`).join(' ') + ' Each time the machine read Go back and count down, it took 1 off, until the wheel showed 0.';
     }
     showResult('#result', false, j.why + help + '<br><span class="small">Change the chain and run it again, or ask to be shown a way.</span>');
-    $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe;
+    $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; skipButtons($('#after'));
     $('#run').disabled = false;
     return;
   }
@@ -990,10 +1006,22 @@ function win(shown){
   const a = $('#after'); a.innerHTML = '';
   const again = el('button', 'btn quiet', shown ? 'Now try it yourself' : 'Try this loom again');
   again.onclick = () => retry(shown); a.appendChild(again);
-  let nx;
-  if (fromEnd) { nx = el('button', 'btn verd', 'Back to your results'); nx.onclick = () => { fromEnd = false; drawVerdict(); showScreen('s-end'); }; }
-  else { nx = el('button', 'btn verd', L + 1 < looms.length ? 'Next loom' : 'Same cards, other things'); nx.onclick = () => L + 1 < looms.length ? startLoom(L + 1) : startSwitch(); }
-  a.appendChild(nx);
+  nextButtons(a);
+}
+// where next: the six regular looms run on; after the sixth bell the extras are offered, never required
+function nextButtons(a){
+  const opts = [];
+  if (L < REG - 1) opts.push(['Next loom', 'verd', () => startLoom(L + 1)]);
+  if (L === REG - 1 && !results[REG]) opts.push(['Two more looms, even harder', 'verd', () => startLoom(REG)]);
+  if (L === REG) opts.push(['The second of the two', 'verd', () => startLoom(REG + 1)]);
+  if (L === REG + 1 && !results[REG + 2]) opts.push(['One final loom, the toughest', 'verd', () => startLoom(REG + 2)]);
+  if (fromEnd) opts.push(['Back to your results', L < REG - 1 ? 'verd' : 'quiet', () => { fromEnd = false; drawVerdict(); showScreen('s-end'); }]);
+  else if (L >= REG - 1) opts.push(['Go on to the end', opts.length ? 'quiet' : 'verd', startSwitch]);
+  opts.forEach(([txt, cls, fn]) => { const b = el('button', 'btn ' + cls, txt); b.onclick = fn; a.appendChild(b); });
+}
+// a loom may be left unwoven: nobody is made to finish
+function skipButtons(a){
+  const s = el('button', 'btn quiet', 'Leave this loom'); s.onclick = () => { a.innerHTML = ''; nextButtons(a); a.querySelectorAll('.btn').forEach(b => b.classList.replace('quiet', 'verd')); hint('Leave it as it is and go on.'); }; a.appendChild(s);
 }
 // a retry keeps your own chain to work on, but not a chain you were shown
 function retry(wasShown){
@@ -1020,9 +1048,10 @@ let mode = 'threads', tried = {};
 function startSwitch(){
   mode = 'threads'; tried = {};
   if (!lastChain){ lastChain = [{k:'set',w:0,v:3,id:1},{k:'r',id:2},{k:'r',id:3},{k:'b',id:4},{k:'back',w:0,toId:2}]; lastWheels = 1; }
-  $('#result4').className = 'result'; $('#next4').style.display = 'none'; $('#run4').style.display = 'block';
+  $('#result4').className = 'result'; $('#run4').style.display = 'block';
   $('#out').innerHTML = ''; $('#outcount').textContent = '';
   drawSwitch(); showScreen('s-switch');
+  setTimeout(() => $('#run4').click(), 500);   // the cloth you just wove, once more, so the first flip is the player's
 }
 function drawSwitch(){
   document.querySelectorAll('#switch button').forEach(b => { b.classList.toggle('on', b.dataset.m === mode); b.querySelector('.ck').textContent = tried[b.dataset.m] ? '✓ run' : ''; });
@@ -1030,7 +1059,7 @@ function drawSwitch(){
   const c = $('#chain4'); c.innerHTML = '';
   lastChain.forEach((k, i) => c.appendChild(chainCard(k, i, lastChain, mode, false, lastWheels)));
   const wb = $('#wheels4'); wb.innerHTML = '';
-  for (let k = 0; k < lastWheels; k++) wb.insertAdjacentHTML('beforeend', `<div class="wbox"><div class="wheel ${k ? 'wB' : ''}" id="w4${k}"><span>0</span></div><div class="wl"><b>Wheel ${WNAME[k]}</b>starts at 0</div></div>`);
+  for (let k = 0; k < lastWheels; k++) wb.insertAdjacentHTML('beforeend', `<div class="wbox"><div class="wheel ${WCLS[k]}" id="w4${k}"><span>0</span></div><div class="wl"><b>Wheel ${WNAME[k]}</b>starts at 0</div></div>`);
   $('#outlbl').textContent = mode === 'threads' ? 'What came out: cloth' : mode === 'notes' ? 'What came out: a tune' : 'What came out: numbers (starting from 0)';
   requestAnimationFrame(() => drawArcs('#arcs4', '#chain4', lastChain));
 }
@@ -1064,9 +1093,8 @@ $('#run4').addEventListener('click', async () => {
               mode === 'notes' ? `A tune of ${total} notes. Same holes, same order, same wheels. Only the meaning changed.` :
               `Sums: the number went from 0 to ${num}. The cards that wove cloth just did arithmetic.`;
   const done = Object.keys(tried).length;
-  showResult('#result4', true, msg + (done < 2 ? '<br><span class="small">Flip the switch and run them again.</span>' :
+  showResult('#result4', true, msg + (done < 2 ? '<br><span class="small">Flip the switch to Notes or Numbers and run them again. Or go on.</span>' :
     '<br><br>Lovelace said the machine could work on anything you can write in symbols: numbers, but also music. The cards don\'t care what the holes stand for.'));
-  if (done >= 2){ $('#next4').style.display = 'block'; }
 });
 $('#next4').addEventListener('click', startLast);
 
@@ -1121,17 +1149,20 @@ $('#runcoda').addEventListener('click', async () => {
 $('#nextcoda').addEventListener('click', () => { drawVerdict(); showScreen('s-end'); });
 
 function drawVerdict(){
+  const shown = looms.map((p, i) => i < REG || !!results[i]);   // the six, plus any extra that was played
   const done = results.filter(Boolean);
   const own = done.filter(r => !r.shown);
   const cards = own.reduce((s, r) => s + r.cards, 0), par = own.reduce((s, r) => s + r.par, 0);
   const atPar = own.filter(r => r.cards === r.par).length;
-  const hard = done.filter(r => r.tier === 'hard'), hardOwn = hard.filter(r => !r.shown).length;
-  const rows = looms.map((p, i) => { const r = results[i]; return `<span>Loom ${i+1} <span class="small">${p.tier.startsWith('easy') ? 'easy' : p.tier}</span></span><span>${r ? (r.shown ? 'shown' : r.cards + ' cards') : '—'}</span><span class="small">fewest ${p.par}</span><button class="again" data-again="${i}">try again</button>`; }).join('');
-  const head = hardOwn === 2 ? 'You built loops inside loops.' : own.length === looms.length ? 'Every order woven.' : 'The machine did exactly what you told it.';
-  const did = `You wove ${w(own.length)} of the ${w(looms.length)} orders yourself, ${atPar === own.length && own.length ? 'every one in the fewest cards possible' : `${w(atPar)} of them in the fewest cards possible`}${hardOwn ? `, including ${hardOwn === 2 ? 'both' : 'one'} of the hard ones` : ''}. ${own.length ? (cards === par ? `${cards} cards in all, the least possible.` : `${cards} cards in all, where ${par} was the least.`) : ''}`;
+  const hardOwn = own.filter(r => r.tier === 'hard').length, extraOwn = own.filter(r => r.tier === 'expert').length, finalOwn = own.some(r => r.tier === 'final');
+  const total = shown.filter(Boolean).length;
+  const rows = looms.map((p, i) => { if (!shown[i]) return ''; const r = results[i]; const name = i < REG ? `Loom ${i+1}` : i < REG + 2 ? `Extra ${i-REG+1}` : 'Final'; return `<span>${name} <span class="small">${TIERWORD[p.tier]}</span></span><span>${r ? (r.shown ? 'shown' : r.cards + ' cards') : '—'}</span><span class="small">fewest ${p.par}</span><button class="again" data-again="${i}">try again</button>`; }).join('');
+  const head = finalOwn ? 'Three loops deep. Lovelace went two.' : extraOwn === 2 ? 'Beyond the six, in your own cards.' : hardOwn === 2 ? 'You built loops inside loops.' : own.length === total ? 'Every order woven.' : 'The machine did exactly what you told it.';
+  const did = `You wove ${w(own.length)} of the ${w(total)} orders yourself, ${atPar === own.length && own.length ? 'every one in the fewest cards possible' : `${w(atPar)} of them in the fewest cards possible`}${hardOwn ? `, including ${hardOwn === 2 ? 'both' : 'one'} of the hard ones` : ''}${extraOwn ? `, and ${extraOwn === 2 ? 'both' : 'one'} of the even harder ones` : ''}${finalOwn ? ', and the final loom' : ''}. ${own.length ? (cards === par ? `${cards} cards in all, the least possible.` : `${cards} cards in all, where ${par} was the least.`) : ''}`;
   const paper = `That is what Lovelace's Notes are about. A card that sends the machine back lets a few cards do a job of any size, and loops can sit inside loops: her chain for the Numbers of Bernoulli needs twenty-five cards, however far you go. And the same cards work on anything written in symbols, numbers or notes.`;
   const means = `But the machine never thought of anything. Every clever chain was someone's idea.`;
-  $('#verdict').innerHTML = `<p class="head">${head}</p><p>${did}</p><div class="score"><span class="h">Loom</span><span class="h">You</span><span class="h"></span><span class="h"></span>${rows}</div><p>${paper}</p><p><b>${means}</b></p>`;
+  const more = !results[REG] ? `<button class="btn verd" data-again="${REG}">Face the harder looms</button>` : !results[REG + 2] ? `<button class="btn verd" data-again="${REG + 2}">Face the final loom</button>` : '';
+  $('#verdict').innerHTML = `<p class="head">${head}</p><p>${did}</p><div class="score"><span class="h">Loom</span><span class="h">You</span><span class="h"></span><span class="h"></span>${rows}</div><p>${paper}</p><p><b>${means}</b></p>${more}`;
   document.querySelectorAll('#verdict [data-again]').forEach(b => b.onclick = () => { fromEnd = true; startLoom(+b.dataset.again); });
 }
 })();

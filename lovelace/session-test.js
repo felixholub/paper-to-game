@@ -25,7 +25,7 @@ const { chromium } = require('playwright'); const path = require('path');
     for (let i = 0; i < sol.length; i++) {
       const c = sol[i];
       if (c.k === 'set') await cards[i].$eval('select', (s, v) => { s.value = String(v); s.dispatchEvent(new Event('change')); }, c.v);
-      if (c.k === 'back') { const fresh = (await page.$$('#chain .card'))[i]; await fresh.$eval('select', (s, v) => { s.value = s.options[v].value; s.dispatchEvent(new Event('change')); }, c.to); }
+      if (c.k === 'back') { const fresh = (await page.$$('#chain .card'))[i]; await fresh.$eval('select', (s, v) => { const o = [...s.options].find(o => o.textContent === 'card ' + (v + 1)); s.value = o.value; s.dispatchEvent(new Event('change')); }, c.to); }
     }
     await page.waitForTimeout(60);
   };

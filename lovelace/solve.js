@@ -36,7 +36,7 @@ const LIB = [
   { id: 'x5', tier: 'expert', p: rep(rep('B', 6) + rep('RG', 3), 3), wheels: 2 },
   // final = a loop inside a loop inside a loop, three wheels; offered once after the expert pair
   { id: 'f1', tier: 'final', p: rep(rep(rep('R', 4) + 'B', 3) + 'G', 2), wheels: 3 },
-  { id: 'f2', tier: 'final', p: rep(rep('RRB', 4) + 'GG', 3), wheels: 3 },
+  { id: 'f2', tier: 'final', p: rep(rep(rep('R', 4) + 'B', 2) + 'G', 3), wheels: 3 },
   { id: 'f3', tier: 'final', p: rep(rep(rep('R', 5) + 'G', 2) + 'BB', 2), wheels: 3 },
 ];
 const out = [];
