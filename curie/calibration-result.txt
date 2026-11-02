@@ -58,7 +58,7 @@ PASS  pitchblende high in a slow-fire page  — slow / heaviest / yes / unlooked
 PASS  lead and white phosphorus  — sky / everything / unlooked / atom; idea: "Look at that! White phosphorus does it, and there’s no urani…"
 
 6. Forty thousand random pages (random bands for every jar, or never measured): every world agrees with its laws
-PASS  no world draws a picture its laws do not allow; every closing panel is drawable; no decimals
+PASS  every world is one of the ten; every closing panel is drawable, three different ones, TODAY last; no decimals
 PASS  all ten worlds are reached by random pages  — sky 25513, slow 13072, crystal 473, bone 59, restless 132, bottomless 463, doubt 32, leaking 187, quiet 66, elsewhere 3
    34 reachable combinations of energy · matter · rocks; worlds: sky 25513, slow 13072, crystal 473, bottomless 463, leaking 187, restless 132, quiet 66, bone 59, doubt 32, elsewhere 3
 
@@ -70,6 +70,18 @@ PASS  thorium silent, the rock strong: the quiet metal  — quiet
 PASS  copper active: the leaking world  — leaking
 PASS  white phosphorus without its control: the electric bone  — bone
 PASS  a rock written while the spot ran right: the parting says the real current was higher  — right
+
+6c. Captions compare with the page; closings come from the page
+PASS  thick thorium is compared with the thin layer in panel 2  — Twice what the thin thorium oxide in panel 2 gave.
+PASS  lead compares with the strongest thing so far; gold with lead  — Nothing, where everything else on your page gave something. / Nothing, like the lead in panel 4.
+PASS  the rock beats everything on the page so far  — More than anything on your page so far.
+PASS  the copy, with no mine crystal on the page, is placed against the page  — Less than anything that gave something so far.
+PASS  closing panels carry the panels that planted them, and are three different scenes  — ["glowflask","atomheart","table118"]
+PASS  sky wind with jewels and a strong rock: lead’s later scene first, then the latest other belief  — sails miners93 quietmine
+PASS  no closing scene repeats one already on the strip  — sails miners93 quietmine
+
+6d. One designed page per world (CONFIG.EXAMPLES) makes that world
+PASS  every example page lands in its own world  — restless→restless slow→slow sky→sky crystal→crystal bottomless→bottomless leaking→leaking bone→bone quiet→quiet doubt→doubt elsewhere→elsewhere
 
 7. A retest replaces the earlier reading; a clash fires once
 PASS  lead written active, then measured again as nothing: the sky wind is gone, and the balloon notices the answer changed  — Oh… a different answer this time! The first one must have be
@@ -93,4 +105,4 @@ PASS  sloppy on her path: a sloppy thumb under-reads (it creeps up on the balanc
 PASS  across all thumbs and jars, at least four of the five physics occur (the conduct worlds need a deliberate page)  — hers, slow, bottomless, bone, elsewhere, crystal, sky, leaking
 PASS  hasty on her path never writes her note
 
-69 passed, 0 failed.
+77 passed, 0 failed.

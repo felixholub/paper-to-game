@@ -159,6 +159,8 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 .strip .sc{display:flex;flex-direction:column;gap:3px}.strip .sc svg{display:block;width:100%;height:auto}.strip .sc .st{font-size:12.5px;line-height:1.15;text-transform:uppercase}
 .strip .sc.new svg{animation:pop .7s ease-out}.strip .empty{border:2px dashed #C9C9C9;aspect-ratio:1;align-self:start;width:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:26px;color:#E2E6EA}
 .scenebig svg{flex:none;width:150px;height:auto}.scenebig .rtext{font-size:17px;text-transform:uppercase;line-height:1.2}
+.big{position:fixed;inset:0;background:rgba(23,20,15,.78);z-index:40;overflow:auto;padding:16px}.big .bigin{max-width:380px;margin:0 auto;background:#fff;border:3px solid var(--ink);padding:10px}.big .bigsvg svg{display:block;width:100%;height:auto}.big .bigcap{font-size:19px;line-height:1.25;margin:10px 0}.big .bigcap h3{font-family:var(--display);font-weight:400;font-size:24px;margin:0 0 6px}.big .bigcap ol{padding-left:22px;margin:6px 0}.big .bigcap li{margin:4px 0;font-size:17px}
+.page svg,.strip .sc{cursor:pointer}.unseen span{cursor:pointer}
 .fold{margin:12px 0}.fold summary{font-family:var(--display);font-size:17px;cursor:pointer;padding:8px 10px;border:var(--line) solid var(--ink);background:#fff}
 .worldtitle.later{margin-top:8px}.lead{font-size:17px;margin:4px 0 8px}
 .ideasstrip{margin:10px 0}
@@ -239,6 +241,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   </div>
 </div>
 <div class="veil hidden" id="veil"></div>
+<div class="big hidden" id="big" role="dialog" aria-modal="true"><div class="bigin"><div class="bigsvg" id="bigsvg"></div><div class="bigcap" id="bigcap"></div><button class="btn go" id="bigclose">Close</button></div></div>
 <div class="sheet hidden" id="sheet" role="dialog" aria-modal="true">
   <div class="ctop"><svg id="cardart" viewBox="0 0 96 80"></svg><div><h2 id="cardname"></h2><div class="from" id="cardfrom"></div></div></div>
   <p id="cardwhat" style="font-size:18px"></p>
@@ -285,11 +288,11 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   <ol>
     <li><b>The bench.</b> Whatever lies on the lower brass plate, if it sends out rays, lets the air between the two plates carry a tiny electric current. The current pushes the spot of light along the scale, to the right.</li>
     <li><b>Your thumb.</b> The slider lets a weight down onto a quartz crystal. Squeezed by the weight, the quartz sends back the opposite electricity and pushes the spot to the left. The faster you let the weight down, the harder it pushes.</li>
-    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, and Marie Curie, just off the panel, says what your page now believes, right or wrong: in a speech balloon, a thought cloud, or a jagged shout when two readings clash. She remembers what your page said before.</li>
+    <li><b>Write it down.</b> Press WRITE IT DOWN whenever you like. Your page keeps the push you had at that moment, as a plain number, says how it compares with what is already on your page, and Marie Curie, just off the panel, says what your page now believes, right or wrong: in a speech balloon, a thought cloud, or a jagged shout when two readings clash. She remembers what your page said before.</li>
     <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the uranium in it should give, the blue bar the number you wrote, the dashed line your own pure uranium. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
     <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again; your page believes the latest number.</li>
     <li><b>Your world.</b> Every number also draws one scene of life outside the workroom, dated: what Paris does next if your page is right. The scenes make a strip under your page, and it runs forward from 1898 as you play.</li>
-    <li><b>The last pages.</b> After nine panels your ideas are put together into three laws of nature, your strip is shown whole, the game draws three more panels of its own (1920, 1945, today), then the world a century on; then ours, drawn true, with where the two part. There are ten worlds to find.</li>
+    <li><b>The last pages.</b> After nine panels your ideas are put together into three laws of nature, your strip is shown whole, the game draws three more panels of its own (1920, 1945, today) from what your page came to believe, then the world a century on; then ours, drawn true, with where the two part. There are ten worlds to find.</li>
   </ol>
   <button class="btn go" id="helpback">Back</button>
 </div>
@@ -895,6 +898,16 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   window.addEventListener('resize', placeTick);
 
   // ---------- the page and the shelf
+  // ---------- tap a panel to see it big
+  function openBig(svgHTML, viewBox, capHTML) {
+    $('#bigsvg').innerHTML = `<svg viewBox="${viewBox}">${svgHTML}</svg>`; $('#bigcap').innerHTML = capHTML; $('#big').classList.remove('hidden');
+  }
+  $('#bigclose').addEventListener('click', () => $('#big').classList.add('hidden'));
+  $('#big').addEventListener('click', e => { if (e.target === $('#big')) $('#big').classList.add('hidden'); });
+  document.addEventListener('click', e => {
+    const sc = e.target.closest('.strip .sc'); if (sc) { openBig(sc.querySelector('svg').innerHTML.replace(/id="sc[^"]*"/g, 'id="scbig"').replace(/url\(#sc[^)]*\)/g, 'url(#scbig)'), '0 0 112 112', `<p>${sc.querySelector('.st').innerHTML}</p>`); return; }
+    const pg = e.target.closest('.page svg'); if (pg && pg.getAttribute('aria-label') && !/^empty/.test(pg.getAttribute('aria-label'))) openBig(pg.innerHTML, '0 0 112 124', `<p>${esc(pg.getAttribute('aria-label'))}</p>`);
+  });
   function renderStrip(el, scenes, o) {
     o = o || {}; let h = '';
     scenes.forEach((sc, k) => { h += `<div class="sc${o.animate && k === scenes.length - 1 ? ' new' : ''}"><svg viewBox="0 0 112 112" aria-label="${esc(sc.year + ': ' + sc.text)}">${sceneSVG(sc, { key: (o.key || 's') + k })}</svg><div class="st">${esc(sc.text)}</div></div>`; });
@@ -964,7 +977,12 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     const sc = x => (100 * Math.min(4, x) / 4) + '%';
     $('#her').innerHTML = v.her.map(h => `<div class="herrow"><div>${esc(h.name)}</div><div class="hb">${h.u > 0 ? `<i class="y" style="width:${sc(h.u)}"></i>` : ''}${h.x > 0 ? `<i class="b" style="width:${sc(h.x)}"></i>` : ''}<span class="u1" style="left:25%"></span></div><div class="hw">${esc(h.x < 0.01 ? 'none' : M.asMuch(h.x, 'pure uranium'))}</div></div>`).join('');
     const seen = seenWorlds(w.id), rest = v.worlds.filter(x => !seen.includes(x.id));
-    $('#unseen').innerHTML = (rest.length ? 'The ten worlds: the ones your albums have made are in colour; the grey ones are still to be made.<br>' : 'Your albums have made all ten worlds.<br>') + v.worlds.map(x => `<span class="${seen.includes(x.id) ? 'seen' : ''}">${esc(x.name)}</span>`).join('');
+    $('#unseen').innerHTML = (rest.length ? 'The ten worlds: the ones your albums have made are in colour, the grey ones are still to be made. Tap any of them for a look at its picture and its laws; how to get there is yours to find.<br>' : 'Your albums have made all ten worlds. Tap any of them to see it again.<br>') + v.worlds.map(x => `<span class="${seen.includes(x.id) ? 'seen' : ''}" data-world="${x.id}">${esc(x.name)}</span>`).join('');
+    $$('#unseen span').forEach(sp => sp.addEventListener('click', () => {
+      const ex = M.exampleWorld(sp.dataset.world), made = seen.includes(ex.id);
+      openBig(`<g>${LANDMARK[ex.landmark](1)}</g><rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`, '0 0 348 250',
+        `<h3>${esc(ex.name)}</h3><p>${made ? 'A world one of your albums has made.' : 'A world your albums have not made yet: a different page gets there.'}</p><ol>${ex.laws.slice(0, 3).map(l => `<li>${esc(l.text)}</li>`).join('')}</ol>`);
+    }));
   }
 
   // test hook (read-only): lets the browser session check what the player sees against the mechanism

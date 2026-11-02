@@ -130,18 +130,10 @@ say('\n6. Forty thousand random pages (random bands for every jar, or never meas
     const ph = M.settle(bands, () => null, { retests, retested: [] }), w = M.worldOf(ph);
     combos[`${ph.energy} · ${ph.carriers} · ${ph.hidden}`] = (combos[`${ph.energy} · ${ph.carriers} · ${ph.hidden}`] || 0) + 1;
     worlds[w.id] = (worlds[w.id] || 0) + 1;
-    const O = new Set(w.odd), fail = m => { if (bad.length < 5) bad.push(m + ' ' + JSON.stringify(bands)); };
+    const fail = m => { if (bad.length < 5) bad.push(m + ' ' + JSON.stringify(bands)); };
     if (!M.WORDS.worlds[w.id] || !M.LANDMARKS.includes(w.landmark)) fail('world');
-    if (w.closing.length !== 3 || !w.closing.every(c => PICS.has(c.pic) && c.text && c.year)) fail('closing');
-    if (O.has('doctor') && !(ph.carriers === 'living' || ph.carriers === 'everything')) fail('doctor without living light');
-    if (O.has('storm') && ph.carriers !== 'everything') fail('storm without everything');
-    if (O.has('pedestal') && ph.carriers !== 'alone') fail('pedestal without uranium alone');
-    if (O.has('miners93') && !(ph.energy === 'sky' && ph.hidden === 'yes')) fail('miners93');
-    if (O.has('fadinglamp') && !(ph.energy === 'slow' && ph.hidden === 'yes')) fail('fadinglamp');
-    if (O.has('jewels') && !ph.rare) fail('jewels');
-    if (O.has('stamps') && retests < C.DOUBT_RETESTS) fail('stamps');
-    if (w.id === 'bone' && O.has('doctor')) fail('the bone world draws its own doctor twice');
-    if (w.id === 'leaking' && O.has('storm')) fail('the leaking world draws its own storm twice');
+    if (w.closing.length !== 3 || !w.closing.every(c => PICS.has(c.pic) && c.text && c.year) || w.closing[2].year !== 'TODAY') fail('closing');
+    if (new Set(w.closing.map(c => c.pic)).size !== 3) fail('a closing scene drawn twice');
     if (ph.energy === 'sky' && !['lead', 'gold'].some(id => ['ACTIVE', 'STRONG'].includes(bands[id]))) fail('sky without heavy metal');
     if (ph.energy === 'bottomless' && !(['pbJG', 'pbJo', 'chalc'].some(id => bands[id]) && !['pbJG', 'pbJo', 'chalc'].some(id => bands[id] === 'HIGH'))) fail('bottomless');
     if (ph.energy === 'crystal' && ph.hidden !== 'crystal') fail('crystal hidden');
@@ -152,7 +144,7 @@ say('\n6. Forty thousand random pages (random bands for every jar, or never meas
     if (w.laws.some(l => !l.text) || !w.paragraph) fail('empty text');
     if (/\d\.\d/.test(w.paragraph + w.laws.map(l => l.text).join(' '))) fail('decimal');
   }
-  check(!bad.length, 'no world draws a picture its laws do not allow; every closing panel is drawable; no decimals', bad.join(' | '));
+  check(!bad.length, 'every world is one of the ten; every closing panel is drawable, three different ones, TODAY last; no decimals', bad.join(' | '));
   check(Object.keys(M.WORDS.worlds).every(id => worlds[id]), 'all ten worlds are reached by random pages', Object.entries(worlds).map(([k, v]) => `${k} ${v}`).join(', '));
   const keys = Object.keys(combos).sort();
   say(`   ${keys.length} reachable combinations of energy · matter · rocks; worlds: ` + Object.entries(worlds).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', '));
@@ -176,6 +168,25 @@ say('\n6b. Pages that make the conduct worlds');
   const d = M.newGame(3); const p1 = write(d, 'uranium', 1); const st = M.benchStart(d, 'pbJG'); M.benchStep(st, 1, 0.65); const p2 = M.commit(d, st);
   check(p2.moving === 'right' && /running to the right/.test(M.part(d).lines.join(' ')), 'a rock written while the spot ran right: the parting says the real current was higher', p2.moving);
 }
+
+// ---------- 6c. the page's numeric memory, and closings built from the page's beliefs
+say('\n6c. Captions compare with the page; closings come from the page');
+{
+  const g = M.newGame(3); write(g, 'uranium', 1); const a = write(g, 'thO', 0.9); const b = write(g, 'thOthick', 2.2); const c2 = write(g, 'lead', 0); const d = write(g, 'gold', 0); const e2 = write(g, 'pbJG', 3.4); const f = write(g, 'chalcArt', 0.38);
+  check(!a.compare && /twice|half again|three times/i.test(b.compare) && /panel 2/.test(b.compare), 'thick thorium is compared with the thin layer in panel 2', b.compare);
+  check(/Nothing, where/.test(c2.compare) && /Nothing, like the gold|Nothing, like the lead/.test(d.compare), 'lead compares with the strongest thing so far; gold with lead', c2.compare + ' / ' + d.compare);
+  check(/More than anything/.test(e2.compare), 'the rock beats everything on the page so far', e2.compare);
+  check(/Less than/.test(f.compare) || /fraction|quarter|half/.test(f.compare), 'the copy, with no mine crystal on the page, is placed against the page', f.compare);
+  const w = M.world(g); const nos = w.closing.map(c => c.pic);
+  check(w.closing[0].from && w.closing[0].from.length > 0 && w.closing[2].year === 'TODAY' && new Set(nos).size === 3, 'closing panels carry the panels that planted them, and are three different scenes', JSON.stringify(nos));
+  const h = M.newGame(3); write(h, 'uranium', 1); write(h, 'lead', 0.5); write(h, 'tantal', 0.5); write(h, 'pbJG', 3.4);
+  const wh = M.world(h); check(wh.closing[0].pic === 'sails' && /jewels|miners93|glowflask/.test(wh.closing[1].pic), 'sky wind with jewels and a strong rock: lead’s later scene first, then the latest other belief', wh.closing.map(c => c.pic).join(' '));
+  const seen = h.scenes.map(s => s.pic); check(!wh.closing.some(c => seen.includes(c.pic)), 'no closing scene repeats one already on the strip', wh.closing.map(c => c.pic).join(' '));
+}
+
+// ---------- 6d. the designed pages make their worlds
+say('\n6d. One designed page per world (CONFIG.EXAMPLES) makes that world');
+check(Object.keys(C.EXAMPLES).every(id => M.exampleWorld(id).id === id), 'every example page lands in its own world', Object.keys(C.EXAMPLES).map(id => id + '→' + M.exampleWorld(id).id).join(' '));
 
 // ---------- 7. retests and clashes
 say('\n7. A retest replaces the earlier reading; a clash fires once');
