@@ -1,0 +1,221 @@
+  shot start
+START aim: Disgrace three good people, using nothing but their own rules.
+
+a REEL 1: Mr Most [▸ · ·]  rule: Always save the most lives. | Nothing else counts.
+  shot a-reel1-intro
+  preview bargain: The bargain. “Kill this man with your own hands, or I kill these five.” | His choice: | either | kill the one: the five go free | or | refuse: you kill the five
+  button: SPRING THE BARGAIN
+  shot a-reel1-bargain-preview
+  → He killed the one. You let the five go. His rule counts lives and nothing else: five is more than one.
+    The audience turns on him: he killed an innocent man because a bad man asked.
+    “Five is more than one.”Mr Most
+    Mr Most is disgraced.  [■ · ·]  pips: Disgraced. This reel is over.
+  shot a-reel1-bargain-result
+    next: ON TO REEL TWO
+
+a REEL 2: Doctor Double [■ ▸ ·]  rule: Never aim at an innocent death, as your goal or as your means. | A death you only foresee may be allowed, if the good is great enough.
+  shot a-reel2-intro
+  preview bargain: The bargain. “Kill this man with your own hands, or I kill these five.” | His choice: | either | kill the one: the five go free | or | refuse: you kill the five
+  button: SPRING THE BARGAIN
+  → He refused. You kept your word: the five died. His rule forbade it: the one's death would have been his means.
+    The audience hisses you: the five were yours to kill, and you killed them.
+    “I will not make his death my means.”Doctor Double
+    Not a disgrace. Doctor Double is still clean. Two schemes left for him.  [■ ▸ ·]  pips: two schemes left for him
+  shot film bargain
+    next: PICK YOUR NEXT SCHEME
+  preview tram: The tram. “I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch.” | His choice: | either | steer onto the branch: the one dies | or | stay on the line: the five die
+  button: SPRING THE TRAM
+  shot help
+  help returned to: play, SPRING THE TRAM
+  → He steered. The one on the branch died; the five lived. His rule allowed it: the death was only a side effect of steering, and five outweigh one.
+    The audience cheers: steering into one rather than five, most of us call right.
+    “I never wanted him dead.”Doctor Double
+    Not a disgrace. Doctor Double is still clean. One scheme left for him.  [■ ▸ ·]  pips: one scheme left for him
+  shot a-reel2-tram-result
+  shot film tram
+    next: PICK YOUR NEXT SCHEME
+  preview brew: The brew. “I have poisoned five. You can brew their cure, but the fumes will fill the next room, and the sick man in there cannot be moved.” | His choice: | either | brew: the five live, the fumes kill the one | or | refuse: your poison kills the five
+  button: SPRING THE BREW
+  shot a-reel2-brew-preview
+  → He brewed. The five lived; the fumes killed the man next door. His rule allowed it: the death was only a side effect of the brewing, and five outweigh one.
+    The audience turns on him: he gassed a sick man to cure others.
+    “I never wanted him dead.”Doctor Double
+    Doctor Double is disgraced.  [■ ■ ·]  pips: Disgraced. This reel is over.
+  shot a-reel2-brew-result
+  shot film brew
+    next: ON TO REEL THREE
+
+a REEL 3: Mrs Foot [■ ■ ▸]  rule: Never harm one person to help others. | If every way harms someone, harm the fewest. | If you can only help some, help the most.
+  shot a-reel3-intro
+  preview brew: The brew. “I have poisoned five. You can brew their cure, but the fumes will fill the next room, and the sick man in there cannot be moved.” | Her choice: | either | brew: the five live, the fumes kill the one | or | refuse: your poison kills the five
+  button: SPRING THE BREW
+  → She refused. Your poison killed the five. Her rule forbade it: the fumes would be harm she did, to help others.
+    The audience hisses you: the poison was yours.
+    “The fumes would be my doing.”Mrs Foot
+    Not a disgrace. Mrs Foot is still clean. Two schemes left for her.  [■ ■ ▸]  pips: two schemes left for her
+  shot a-reel3-brew-result
+    next: PICK YOUR NEXT SCHEME
+  preview cave: The cave. “I have flooded my cave. Five are trapped behind a man stuck fast in the way out. His head is inside: the water will drown him with them. Here is dynamite.” | Her choice: | either | blast him out: he dies, the five get out | or | refuse: the water drowns all six
+  button: SPRING THE CAVE
+  → She blasted the stuck man out. He died; the five got out. Her rule allowed it: he was lost either way, so blasting him took nothing the water was not taking.
+    The audience cheers: the stuck man was lost either way, and five got out.
+    “He was lost either way.”Mrs Foot
+    Not a disgrace. Mrs Foot is still clean. One scheme left for her.  [■ ■ ▸]  pips: one scheme left for her
+  shot a-reel3-cave-result
+  shot film cave
+    next: PICK YOUR NEXT SCHEME
+  preview beggar: The beggar. “I have poisoned five. Only a serum made from a dead body can cure them. The starving beggar at your door will be dead by morning, unless you feed him.” | Her choice: | either | shut the door: he dies, his body cures the five | or | feed him: your poison kills the five
+  button: SPRING THE BEGGAR
+  → She fed the beggar. Your poison killed the five. Her rule forbade it: letting a man die so that his body can be used is aiming at his death, and that counts as harm.
+    The audience hisses you: the poison was yours.
+    “Not so that his body can be used.”Mrs Foot
+    No scheme you sprang disgraced her, and none in the paper would have. That is Foot's argument.  [■ ■ □]  pips: Clean. Your schemes for her are spent.
+  shot a-reel3-beggar-result
+  shot film beggar
+    next: THE END
+
+a END [■ ■ □]: Two good names ruined. The third you could not touch.
+   You disgraced Mr Most with the bargain and Doctor Double with the brew. Mrs Foot you could not touch.
+   Philippa Foot, 1967: the doctrine Doctor Double lives by forbids aiming at an innocent death but lets one through as a side effect. Her own case, the gas (the brew in this film), shows that we find a side effect just as wrong when it is harm done to help others. What matters is not what you aim at, but whether you harm one person to help others.
+   A rule that only counts lives puts good people in a bad man's power. A rule about what you mean is half a shield. Foot's rule gave you nothing.
+   The tram, now the most famous puzzle in ethics, is the easy case in the paper that invented it: every rule steers, and the audience cheers.
+  shot a-end
+  shot about
+about returned to: end
+
+b REEL 1: Mr Most [▸ · ·]  rule: Always save the most lives. | Nothing else counts.
+  preview tram: The tram. “I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch.” | His choice: | either | steer onto the branch: the one dies | or | stay on the line: the five die
+  button: SPRING THE TRAM
+  → He steered. The one on the branch died; the five lived. His rule counts lives and nothing else: five is more than one.
+    The audience cheers: steering into one rather than five, most of us call right.
+    “Simple arithmetic.”Mr Most
+    Not a disgrace. Mr Most is still clean. Two schemes left for him.  [▸ · ·]  pips: two schemes left for him
+    next: PICK YOUR NEXT SCHEME
+  preview bargain: The bargain. “Kill this man with your own hands, or I kill these five.” | His choice: | either | kill the one: the five go free | or | refuse: you kill the five
+  button: SPRING THE BARGAIN
+  → He killed the one. You let the five go. His rule counts lives and nothing else: five is more than one.
+    The audience turns on him: he killed an innocent man because a bad man asked.
+    “Five is more than one.”Mr Most
+    Mr Most is disgraced.  [■ · ·]  pips: Disgraced. This reel is over.
+    next: ON TO REEL TWO
+
+b REEL 2: Doctor Double [■ ▸ ·]  rule: Never aim at an innocent death, as your goal or as your means. | A death you only foresee may be allowed, if the good is great enough.
+  preview tram: The tram. “I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch.” | His choice: | either | steer onto the branch: the one dies | or | stay on the line: the five die
+  button: SPRING THE TRAM
+  → He steered. The one on the branch died; the five lived. His rule allowed it: the death was only a side effect of steering, and five outweigh one.
+    The audience cheers: steering into one rather than five, most of us call right.
+    “I never wanted him dead.”Doctor Double
+    Not a disgrace. Doctor Double is still clean. Two schemes left for him.  [■ ▸ ·]  pips: two schemes left for him
+    next: PICK YOUR NEXT SCHEME
+  preview bargain: The bargain. “Kill this man with your own hands, or I kill these five.” | His choice: | either | kill the one: the five go free | or | refuse: you kill the five
+  button: SPRING THE BARGAIN
+  → He refused. You kept your word: the five died. His rule forbade it: the one's death would have been his means.
+    The audience hisses you: the five were yours to kill, and you killed them.
+    “I will not make his death my means.”Doctor Double
+    Not a disgrace. Doctor Double is still clean. One scheme left for him.  [■ ▸ ·]  pips: one scheme left for him
+    next: PICK YOUR NEXT SCHEME
+  preview medicine: The medicine. “I have poisoned six. My antidote saves the one who drank most, if he gets all of it, or the other five, if they share it.” | His choice: | either | share it among the five: the one dies | or | give it all to the one: the five die
+  button: SPRING THE MEDICINE
+  → He shared it among the five. They lived; the one died. His rule allowed it: the one's death was only foreseen, and five outweigh one.
+    The audience cheers: with medicine for one or for five, most of us say save the five.
+    “I never wanted him dead.”Doctor Double
+    Doctor Double is still clean, and you have no schemes left for him.  [■ □ ·]  pips: Clean. Your schemes for him are spent.
+  shot film medicine
+    next: ON TO REEL THREE
+
+b REEL 3: Mrs Foot [■ □ ▸]  rule: Never harm one person to help others. | If every way harms someone, harm the fewest. | If you can only help some, help the most.
+  preview tram: The tram. “I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch.” | Her choice: | either | steer onto the branch: the one dies | or | stay on the line: the five die
+  button: SPRING THE TRAM
+  → She steered. The one on the branch died; the five lived. Her rule: either way her tram harms someone, so it should harm the fewest.
+    The audience cheers: steering into one rather than five, most of us call right.
+    “Then the fewest.”Mrs Foot
+    Not a disgrace. Mrs Foot is still clean. Two schemes left for her.  [■ □ ▸]  pips: two schemes left for her
+    next: PICK YOUR NEXT SCHEME
+  preview bargain: The bargain. “Kill this man with your own hands, or I kill these five.” | Her choice: | either | kill the one: the five go free | or | refuse: you kill the five
+  button: SPRING THE BARGAIN
+  → She refused. You kept your word: the five died. Her rule forbade it: that would be harming one person to help others.
+    The audience hisses you: the five were yours to kill, and you killed them.
+    “Not to help them. Not like that.”Mrs Foot
+    Not a disgrace. Mrs Foot is still clean. One scheme left for her.  [■ □ ▸]  pips: one scheme left for her
+    next: PICK YOUR NEXT SCHEME
+  preview medicine: The medicine. “I have poisoned six. My antidote saves the one who drank most, if he gets all of it, or the other five, if they share it.” | Her choice: | either | share it among the five: the one dies | or | give it all to the one: the five die
+  button: SPRING THE MEDICINE
+  → She shared it among the five. They lived; the one died. Her rule: she can only help some of them, so she helps the most.
+    The audience cheers: with medicine for one or for five, most of us say save the five.
+    “Then the most.”Mrs Foot
+    No scheme you sprang disgraced her, and none in the paper would have. That is Foot's argument.  [■ □ □]  pips: Clean. Your schemes for her are spent.
+    next: THE END
+
+b END [■ □ □]: One good name ruined. Two you could not touch.
+   You disgraced Mr Most with the bargain. Doctor Double held: you tried the tram, the bargain and the medicine. Mrs Foot you could not touch.
+   Philippa Foot, 1967: the doctrine Doctor Double lives by forbids aiming at an innocent death but lets one through as a side effect. Her own case, the gas (the brew in this film), shows that we find a side effect just as wrong when it is harm done to help others. What matters is not what you aim at, but whether you harm one person to help others.
+   You never sprang the brew on Doctor Double. He would have brewed, and the audience would have turned on him.
+   A rule that only counts lives puts good people in a bad man's power. A rule about what you mean is half a shield. Foot's rule gave you nothing.
+   The tram, now the most famous puzzle in ethics, is the easy case in the paper that invented it: every rule steers, and the audience cheers.
+  shot b-end
+
+c REEL 1: Mr Most [▸ · ·]  rule: Always save the most lives. | Nothing else counts.
+  preview cave: The cave. “I have flooded my cave. Five are trapped behind a man stuck fast in the way out. His head is inside: the water will drown him with them. Here is dynamite.” | His choice: | either | blast him out: he dies, the five get out | or | refuse: the water drowns all six
+  button: SPRING THE CAVE
+  → He blasted the stuck man out. He died; the five got out. His rule counts lives and nothing else: five live this way, none the other.
+    The audience cheers: the stuck man was lost either way, and five got out.
+    “He was lost anyway.”Mr Most
+    Not a disgrace. Mr Most is still clean. Two schemes left for him.  [▸ · ·]  pips: two schemes left for him
+    next: PICK YOUR NEXT SCHEME
+  preview tram: The tram. “I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch.” | His choice: | either | steer onto the branch: the one dies | or | stay on the line: the five die
+  button: SPRING THE TRAM
+  → He steered. The one on the branch died; the five lived. His rule counts lives and nothing else: five is more than one.
+    The audience cheers: steering into one rather than five, most of us call right.
+    “Simple arithmetic.”Mr Most
+    Not a disgrace. Mr Most is still clean. One scheme left for him.  [▸ · ·]  pips: one scheme left for him
+    next: PICK YOUR NEXT SCHEME
+  preview medicine: The medicine. “I have poisoned six. My antidote saves the one who drank most, if he gets all of it, or the other five, if they share it.” | His choice: | either | share it among the five: the one dies | or | give it all to the one: the five die
+  button: SPRING THE MEDICINE
+  → He shared it among the five. They lived; the one died. His rule counts lives and nothing else: five is more than one.
+    The audience cheers: with medicine for one or for five, most of us say save the five.
+    “Simple arithmetic.”Mr Most
+    Mr Most is still clean, and you have no schemes left for him.  [□ · ·]  pips: Clean. Your schemes for him are spent.
+    next: ON TO REEL TWO
+
+c REEL 2: Doctor Double [□ ▸ ·]  rule: Never aim at an innocent death, as your goal or as your means. | A death you only foresee may be allowed, if the good is great enough.
+  preview cave: The cave. “I have flooded my cave. Five are trapped behind a man stuck fast in the way out. His head is inside: the water will drown him with them. Here is dynamite.” | His choice: | either | blast him out: he dies, the five get out | or | refuse: the water drowns all six
+  button: SPRING THE CAVE
+  → He refused. The water drowned all six. His rule forbade it: blasting the stuck man is aiming at his death, though the water would have killed him anyway.
+    The audience turns on him: six drowned, the stuck man too, to keep his rule.
+    “I may not aim at an innocent death. Ever.”Doctor Double
+    Doctor Double is disgraced.  [□ ■ ·]  pips: Disgraced. This reel is over.
+  shot film cave
+    next: ON TO REEL THREE
+
+c REEL 3: Mrs Foot [□ ■ ▸]  rule: Never harm one person to help others. | If every way harms someone, harm the fewest. | If you can only help some, help the most.
+  preview cave: The cave. “I have flooded my cave. Five are trapped behind a man stuck fast in the way out. His head is inside: the water will drown him with them. Here is dynamite.” | Her choice: | either | blast him out: he dies, the five get out | or | refuse: the water drowns all six
+  button: SPRING THE CAVE
+  → She blasted the stuck man out. He died; the five got out. Her rule allowed it: he was lost either way, so blasting him took nothing the water was not taking.
+    The audience cheers: the stuck man was lost either way, and five got out.
+    “He was lost either way.”Mrs Foot
+    Not a disgrace. Mrs Foot is still clean. Two schemes left for her.  [□ ■ ▸]  pips: two schemes left for her
+    next: PICK YOUR NEXT SCHEME
+  preview tram: The tram. “I have cut the brakes on your tram. Five men work on the line ahead. One works on the branch.” | Her choice: | either | steer onto the branch: the one dies | or | stay on the line: the five die
+  button: SPRING THE TRAM
+  → She steered. The one on the branch died; the five lived. Her rule: either way her tram harms someone, so it should harm the fewest.
+    The audience cheers: steering into one rather than five, most of us call right.
+    “Then the fewest.”Mrs Foot
+    Not a disgrace. Mrs Foot is still clean. One scheme left for her.  [□ ■ ▸]  pips: one scheme left for her
+    next: PICK YOUR NEXT SCHEME
+  preview medicine: The medicine. “I have poisoned six. My antidote saves the one who drank most, if he gets all of it, or the other five, if they share it.” | Her choice: | either | share it among the five: the one dies | or | give it all to the one: the five die
+  button: SPRING THE MEDICINE
+  → She shared it among the five. They lived; the one died. Her rule: she can only help some of them, so she helps the most.
+    The audience cheers: with medicine for one or for five, most of us say save the five.
+    “Then the most.”Mrs Foot
+    No scheme you sprang disgraced her, and none in the paper would have. That is Foot's argument.  [□ ■ □]  pips: Clean. Your schemes for her are spent.
+    next: THE END
+
+c END [□ ■ □]: One good name ruined. Two you could not touch.
+   You disgraced Doctor Double with the cave. Doctor Double fell by refusing: blasting the stuck man was aiming at his death, so all six drowned. Mr Most held: you tried the cave, the tram and the medicine. The bargain, the brew and the beggar would have caught him. Mrs Foot you could not touch.
+   Philippa Foot, 1967: the doctrine Doctor Double lives by forbids aiming at an innocent death but lets one through as a side effect. Her own case, the gas (the brew in this film), shows that we find a side effect just as wrong when it is harm done to help others. What matters is not what you aim at, but whether you harm one person to help others.
+   You never sprang the brew on Doctor Double. He would have brewed, and the audience would have turned on him.
+   A rule that only counts lives puts good people in a bad man's power. A rule about what you mean is half a shield. Foot's rule gave you nothing.
+   The tram, now the most famous puzzle in ethics, is the easy case in the paper that invented it: every rule steers, and the audience cheers.
+  shot c-end
+
+errors: none
