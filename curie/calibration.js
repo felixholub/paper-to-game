@@ -1,4 +1,4 @@
-// Calibration check for Curie's Quartz. Run: node calibration.js  (writes calibration-result.txt)
+// Calibration check for Curie's Counterfactuals. Run: node calibration.js  (writes calibration-result.txt)
 // Tests mechanism.js, unchanged: the table of currents (transcribed here a second time, independently, from the scan of
 // p. 1101–1102) and the paper's own statements on p. 1102; that a reading is the number written down; that her own page
 // gives her physics and our world; that each designed wrong number plants its idea and its law; that every reachable page

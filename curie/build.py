@@ -1,4 +1,4 @@
-# Generates curies-quartz.html from template.html, mechanism.js (the single source of truth) and the embedded fonts,
+# Generates curies-counterfactuals.html from template.html, mechanism.js (the single source of truth) and the embedded fonts,
 # then verifies byte for byte that the embedded mechanism is the file calibration.js ran against.
 import base64, sys, os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +29,7 @@ for k in keys:
     assert t.count(k) == 1, k
 out = (t.replace('/*__FONT_LILITA__*/', font('lilita.woff2')).replace('/*__FONT_PATRICK__*/', font('patrick.woff2'))
         .replace('/*__ABOUT__*/', about).replace('/*__MECHANISM__*/', mech))
-name = 'curies-quartz.html'
+name = 'curies-counterfactuals.html'
 open(name, 'w', encoding='utf-8').write(out)
 built = open(name, encoding='utf-8').read()
 if mech not in built:

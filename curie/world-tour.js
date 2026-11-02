@@ -17,7 +17,7 @@ const PAGES = {
   const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
   const page = await browser.newPage({ viewport: { width: 380, height: 760 }, deviceScaleFactor: 2 });
   const errors = []; page.on('pageerror', e => errors.push(String(e)));
-  await page.goto('file://' + path.join(__dirname, 'curies-quartz.html')); await page.waitForTimeout(500);
+  await page.goto('file://' + path.join(__dirname, 'curies-counterfactuals.html')); await page.waitForTimeout(500);
   const missing = await page.evaluate(() => { const M = window.CURIE, u = window.__curie; return { pics: M.PICS.filter(p => !u.pics.includes(p)), landmarks: M.LANDMARKS.filter(l => !u.landmarks.includes(l)) }; });
   console.log('missing pictures:', JSON.stringify(missing));
   for (const [world, plan] of Object.entries(PAGES)) {

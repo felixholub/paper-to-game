@@ -1,4 +1,6 @@
-# Curie's Quartz — design memo
+# Curie's Counterfactuals — design memo
+
+*Titled Curie's Quartz until revision 4; renamed by the author on 2 Nov 2026 because the game had become a game about counterfactuals. The concept names below keep the old title.*
 
 ## 0. Given
 
@@ -281,3 +283,7 @@ The hasty player who writes a rock down at the push its label suggests lands in 
 **Drawings.** Five new panoramas (a city with no wires; a hospital ward with a graveyard beyond; a museum hall with a dozing guard; the Académie with three stamps and three electrometers; a railway platform with sacks going east) and nineteen new scenes, in the same hand.
 
 **Checks: 69 passed, 0 failed.** New: all ten worlds are reached by random pages (40 000 pages, 20 % of them doubting: sky 25 513, slow 13 072, crystal 473, bottomless 463, leaking 187, restless 132, quiet 66, bone 59, doubt 32, elsewhere 3); a designed page for each conduct world; the conduct worlds and insets never contradict their laws; a rock written on the run gets the directional parting; the energy question beats the conduct questions (thorium silent with a rock at its uranium is the bottomless atom, not the quiet metal). The worlds in numbers, 300 albums each: her path careful 97 % hers, 3 % slow; her path hasty 100 % bottomless; random eight careful 81 % hers, 13 % electric bone (white phosphorus drawn without its control), 5 % found elsewhere, 1 % slow; random eight hasty 84 % sky, 16 % bottomless. Browser: the three albums of `session-test.js` as before, and `world-tour.js`, one designed page per world rendered to its last pages (`screenshot-world-*.png`), every picture the mechanism names drawable, no errors, no horizontal scroll.
+
+## 25. Renamed (2 Nov 2026)
+
+The author's call: *Curie's Counterfactuals*, because the game had become a game about counterfactuals. The file is `curies-counterfactuals.html`; `curies-quartz.html` stays as a redirect so old links keep working. The title on the cover, the page title and the README row changed; nothing else.

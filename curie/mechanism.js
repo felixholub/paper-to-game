@@ -1,4 +1,4 @@
-// Curie's Quartz — the mechanism. The only copy: build.py inlines this file verbatim into the HTML and refuses to build
+// Curie's Counterfactuals (until revision 4, Curie's Quartz) — the mechanism. The only copy: build.py inlines this file verbatim into the HTML and refuses to build
 // if the embedded copy differs. Plain functions, no DOM; runs unchanged in Node and in the browser.
 //
 // Kind: RECONSTRUCTED, from the two-part table of currents in M. Skłodowska Curie, "Rayons émis par les composés de

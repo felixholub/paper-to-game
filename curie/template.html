@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Curie's Quartz</title>
+<title>Curie's Counterfactuals</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <meta name="description" content="Marie Curie (1898) as a ligne claire album: hold the electrometer's spot of light still with the quartz, test what is on the shelf, and find what else, besides uranium, makes the air carry electricity.">
 <style>
@@ -187,7 +187,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
 <div id="cover" class="screen on">
   <div class="cartouche">
     <div class="where">Paris · 1898</div>
-    <h1>Curie’s Quartz</h1>
+    <h1>Curie’s Counterfactuals</h1>
     <div class="after">after Marie Skłodowska Curie's note to the Académie des sciences, 12 April 1898</div>
   </div>
   <svg id="coversvg" class="coverart" viewBox="0 0 348 262" aria-hidden="true"></svg>
@@ -944,7 +944,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   $('#cardtest').addEventListener('click', () => { if (cardId && M.canTest(g, cardId)) startBench(cardId); });
 
   // ---------- the last pages
-  const SEEN_KEY = 'curies-quartz-worlds-seen-2';
+  const SEEN_KEY = 'curies-counterfactuals-worlds-seen';
   const seenWorlds = add => { let s = []; try { s = JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch (e) { s = []; } if (add && !s.includes(add)) { s.push(add); try { localStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) { /* private window */ } } return s; };
   const fromLabel = f => f && f.length ? `<span class="from">from panel${f.length > 1 ? 's' : ''} ${[...new Set(f)].sort((a, b) => a - b).join(', ')}</span>` : '<span class="from">as in hers</span>';
   function renderEnd() {

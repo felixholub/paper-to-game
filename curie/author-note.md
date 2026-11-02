@@ -1,4 +1,4 @@
-# Curie's Quartz — note for the author
+# Curie's Counterfactuals — note for the author
 
 1. Revision 4 (2 Nov, afternoon): ten worlds instead of five (memo §24), the game's own three closing panels after yours, directional speed lines and partings. `node world-tour.js` renders one designed page per world to `screenshot-world-<id>.png`; look at `doubt`, `bone` and `leaking` first. The dates in the closing panels of the restless atom and of ours are history and should be checked like the others; everything else is fiction.
 2. Revision 3 (2 Nov) moved the world into play: after every panel the bench draws a dated scene of Paris, the shelf keeps them as a strip, and the last pages show the strip whole with the world a century on, beside ours. Look at `screenshot-c-bench-scene.png` and `screenshot-a-shelf-strip.png`, then the ends. The older notes follow.
