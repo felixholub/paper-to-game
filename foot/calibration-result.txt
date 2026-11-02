@@ -36,6 +36,16 @@ Foot's Bad Man — calibration check
   ok   refusing the bad man is blameless (p. 3: "it is he who intends … the death of innocent persons; we do not")
   ok   refusing to blast in the cave is a disgrace (p. 5: "must here conflict with that of most reasonable men")
 
+3b. The house of fourteen (the shares read off the paper's hedges)
+  ok   every act splits exactly fourteen heads
+  ok   the tram steered: all fourteen cheer ("without hesitation", p. 2)
+  ok   the bargain taken: at least twelve turn ("most of us would be appalled", p. 2)
+  ok   the brew: a disgrace, with a real minority cheering ("presumably", p. 5)
+  ok   the whole dose to the one: split, not a disgrace (Foot against Anscombe)
+  ok   a disgrace is exactly ten or more turning
+  ok   every refusal of the bad man has a minority turning on the refuser (the counters) and a clear majority hissing him
+  ok   the house composes its words for every act
+
 4. The holes: schemes that disgrace each rule
   ok   Mr Most (counting): bargain,brew,beggar — "hopelessly in the power of bad men" (p. 3)
   ok   Doctor Double (DDE): brew,cave
@@ -63,8 +73,8 @@ Foot's Bad Man — calibration check
   ok   all 64 patterns of chair choices compose their lines; a player who chooses exactly as a rule does is read as that rule
   ok   the three rules' own patterns each come out as that rule
      ties (two or more rules equally close) in 16 of 64 patterns
-  ok   brewing in the chair: told the audience would have turned on you
-  ok   the whole dose to the one, in the chair: the audience divided, Anscombe named
+  ok   brewing in the chair: told ten of the house would have turned on you: You would have brewed. Of the fourteen, ten would have turned on you and four would have cheered you.
+  ok   the whole dose to the one, in the chair: six sit still, Anscombe named: You would have given it all to the one. Of the fourteen, eight would have turned on you and six would have sat still. Anscombe, in the same issue, would say you wronged no one.
   ok   every scheme has a chair line and a note saying which of the paper's cases it is
   ok   a scheme is decided in the chair once
 
@@ -73,4 +83,4 @@ Foot's Bad Man — calibration check
   ok   every case composes for either decision
   ok   the last case closes with Foot's own caution
 
-52 passed, 0 failed.
+60 passed, 0 failed.

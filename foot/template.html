@@ -193,8 +193,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
   <p class="acts">You are the bad man. Three good people each live by a rule. You pick a trap from your six: a runaway tram, a poison, a flooded cave. You spring it. Before they choose, you say what you would do in their place. Then you watch them choose, and the audience judges what they did.</p>
   <div class="it amber creed"><i class="dm1"></i><i class="dm2"></i>
     <span>I keep my word, always.</span>
-    <span>The dead are my price, not my prize.</span>
-    <span>I want a good person to do it, by their own rule, where the whole house can see.</span>
+    <span>I don't need anyone dead. The dead are just what it costs.</span>
+    <span>I want a good person to do the terrible thing, by their own rule, in front of everyone.</span>
   </div>
   <div class="aimline" id="aimStart">Disgrace three good people, using nothing but their own rules.</div>
   <div class="aimdef">Disgraced: the audience turns on them.</div>
@@ -253,7 +253,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
   <div class="it amber yours" id="vyou"><i class="dm1"></i><i class="dm2"></i><span class="who">And you, in the chair</span><p id="vyline"></p><p id="vyread"></p><p id="vystalls"></p></div>
   <h3>Every rule, every scheme, and you</h3>
   <svg id="map" viewBox="0 0 360 290" aria-label="map of holes"></svg>
-  <p class="legend"><span style="background:var(--red)"></span>the audience turns on them &nbsp; <span style="border:2px solid var(--amber)"></span>a scheme you sprang &nbsp; <span style="border:1.5px dashed var(--shadow)"></span>not decided</p>
+  <p class="legend"><span style="background:var(--red)"></span>the house turns on them &nbsp; <span style="border:2px solid var(--amber)"></span>a scheme you sprang &nbsp; <span style="border:1.5px dashed var(--shadow)"></span>not decided. The strip under each: how the fourteen split, red turning, white cheering, the rest hissing you.</p>
   <p class="trolley" id="vtrolley"></p>
   <button class="btn amber" id="toCoda"><i class="d l"></i>Epilogue: the case the paper is about<i class="d r"></i></button>
   <button class="btn" id="again"><i class="d l"></i>Play again<i class="d r"></i></button>
@@ -293,12 +293,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
   <p><b>Who they are.</b> Three good people, one per reel: Mr Most, Doctor Double and Mrs Foot. Each has a rule, printed under their name. They always do what their rule says.</p>
   <p><b>What you do.</b> You are the bad man. You have six schemes: the tram, the bargain, the medicine, the brew, the beggar and the cave. Each puts a good person where one life is set against five, and every choice costs someone. Tap a scheme to see the trap it lays and the two choices it leaves them. Then press <i>Spring</i>.</p>
   <p><b>The chair.</b> Before the good person chooses, the film stops and asks what <i>you</i> would do in their place. Tap one of the two. It changes nothing in the film, but you will be told what the audience would have made of you, and at the end which of the three rules you chose like. Each scheme asks once.</p>
-  <p><b>What happens.</b> The film shows what they chose, by their rule, and who died. Then the audience along the bottom of the picture judges what they did:</p>
+  <p><b>What happens.</b> The film shows what they chose, by their rule, and who died. Then the fourteen people along the bottom of the picture judge what they did, and they do not all agree. Each of them either:</p>
   <ul>
-    <li>it <b>cheers</b> them: they did right;</li>
-    <li>it <b>hisses you</b>: they refused, and the deaths are yours;</li>
-    <li>it <b>turns on them</b>, and the picture goes red: they are <b>disgraced</b>. That is your win.</li>
+    <li><b>cheers</b>: they did right;</li>
+    <li><b>hisses you</b>: they refused, and the deaths are yours;</li>
+    <li><b>turns on them</b>: that was unforgivable;</li>
+    <li>or <b>sits still</b>: either way was fine.</li>
   </ul>
+  <p>When ten or more of the fourteen turn on them, the picture goes red and they are <b>disgraced</b>. That is your win.</p>
   <p><b>How long.</b> You have three schemes for each good person. A reel ends when they are disgraced or your three schemes are spent. A disgrace pastes a red card over their portrait; surviving three schemes, a silver one marked <i>clean</i>.</p>
   <p><b>The end.</b> After the third reel you see whom you disgraced, what Philippa Foot argued, where your own choices put you, and every scheme against every rule. Then an epilogue: the three cases about abortion that the paper was written for, with no bad man and no audience, for you to decide and then read what she says.</p>
   <button class="btn" id="helpback"><i class="d l"></i>Back<i class="d r"></i></button>
@@ -516,26 +518,33 @@ const FILM = {
     }
   },
 };
-// the stalls react: 'cheer' | 'blameless' (hiss the villain) | 'disgrace' (turn on the hero)
-const SHOUT = { cheer: 'Hurrah!', blameless: 'Hiss! (at you)', disgrace: 'Shame!' };
-function shout(v) {
-  const t = document.createElementNS(NS, 'text'); t.setAttribute('x', 180); t.setAttribute('y', 199); t.setAttribute('text-anchor', 'middle');
-  t.setAttribute('style', `font-size:17px;letter-spacing:.08em;fill:${v === 'disgrace' ? '#E6E0D2' : '#0D0B09'};paint-order:stroke;stroke:${v === 'disgrace' ? '#0D0B09' : '#E6E0D2'};stroke-width:4px`);
-  t.textContent = SHOUT[v] || ''; $('#stage').insertBefore(t, q('#iris')); return anim(t, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 350 });
+// the stalls react in parts: each of the fourteen heads takes a stance (turn on the hero, cheer, hiss the villain, sit still)
+const SHOUT = { cheer: 'Hurrah!', hiss: 'Hiss! (at you)', turn: 'Shame!', quiet: '' };
+function shout(stance, x, small) {
+  if (!SHOUT[stance]) return Promise.resolve();
+  const t = document.createElementNS(NS, 'text'); t.setAttribute('x', x); t.setAttribute('y', small ? 192 : 199); t.setAttribute('text-anchor', 'middle');
+  t.setAttribute('style', `font-size:${small ? 11 : 17}px;letter-spacing:.08em;fill:${stance === 'turn' ? '#E6E0D2' : '#0D0B09'};paint-order:stroke;stroke:${stance === 'turn' ? '#0D0B09' : '#E6E0D2'};stroke-width:${small ? 3 : 4}px`);
+  t.textContent = SHOUT[stance]; $('#stage').insertBefore(t, q('#iris')); return anim(t, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 350 });
 }
-async function react(v) {
-  shout(v);
-  const heads = qa('#stalls .head .hb');
-  if (v === 'cheer') {
-    qa('#stalls .arm').forEach(a => a.style.opacity = 1);
-    await Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }, { transform: 'translateY(-5px)' }, { transform: 'translateY(0)' }], { duration: 900, delay: (i % 4) * 60 })));
-  } else if (v === 'blameless') {
-    await Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateX(0)' }, { transform: 'translateX(-2.5px)' }, { transform: 'translateX(2.5px)' }, { transform: 'translateX(-2.5px)' }, { transform: 'translateX(2.5px)' }, { transform: 'translateX(0)' }], { duration: 800, delay: (i % 3) * 50 })));
-  } else if (v === 'disgrace') {
-    qa('#stalls .a2').forEach(a => a.style.opacity = 1);
-    await Promise.all([anim(q('#tint'), [{ opacity: 0 }, { opacity: .62 }], { duration: 700 }),
-      Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(0)' }, { transform: 'translateY(-9px)' }], { duration: 500, delay: (i % 5) * 40 })))]);
-  }
+// a fixed shuffle of the fourteen seats per (scheme, option), so the same film seats the same people the same way
+function seats(key) { let h = 0; for (const c of key) h = (h * 31 + c.charCodeAt(0)) % 9973; const idx = [...Array(14).keys()]; for (let i = 13; i > 0; i--) { h = (h * 7919 + 13) % 9973; const j = h % (i + 1); [idx[i], idx[j]] = [idx[j], idx[i]]; } return idx; }
+async function react(h, key) {
+  const order = ['turn', 'cheer', 'hiss', 'quiet'].filter(s => h[s] > 0).sort((a, b) => h[b] - h[a]);
+  const idx = seats(key); const stance = []; let k = 0;
+  order.forEach(s => { for (let i = 0; i < h[s]; i++) stance[idx[k++]] = s; });
+  const heads = qa('#stalls .head');
+  const jobs = [];
+  heads.forEach((head, i) => {
+    const hb = head.querySelector('.hb'), s = stance[i];
+    if (s === 'cheer') { head.querySelectorAll('.arm').forEach(a => a.style.opacity = 1); jobs.push(anim(hb, [{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }, { transform: 'translateY(-5px)' }, { transform: 'translateY(0)' }], { duration: 900, delay: (i % 4) * 60 })); }
+    else if (s === 'hiss') jobs.push(anim(hb, [{ transform: 'translateX(0)' }, { transform: 'translateX(-2.5px)' }, { transform: 'translateX(2.5px)' }, { transform: 'translateX(-2.5px)' }, { transform: 'translateX(2.5px)' }, { transform: 'translateX(0)' }], { duration: 800, delay: (i % 3) * 50 }));
+    else if (s === 'turn') { head.querySelector('.a2').style.opacity = 1; jobs.push(anim(hb, [{ transform: 'translateY(0)' }, { transform: 'translateY(-9px)' }], { duration: 500, delay: (i % 5) * 40 })); }
+  });
+  // the words: the biggest share in the middle, a second share of three or more small at the side; red only on a disgrace
+  shout(order[0], 180, false);
+  if (order[1] && h[order[1]] >= 3) shout(order[1], order[0] === 'turn' ? 318 : 42, true);
+  if (h.turn >= M.DISGRACE_AT) jobs.push(anim(q('#tint'), [{ opacity: 0 }, { opacity: .3 + .36 * (h.turn / M.HOUSE) }], { duration: 700 }));
+  await Promise.all(jobs);
 }
 
 // ------------------------------------------------------------------ portraits, pips, cards, icons
@@ -582,7 +591,7 @@ function drawPips() {
   let s = ''; for (let i = 0; i < n; i++) s += `<i class="${i < v.left ? '' : 'off'}"></i>`;
   $('#pips').innerHTML = s + `<span>${v.left === 1 ? 'one scheme' : numw(v.left) + ' schemes'} left for ${v.pron.him}</span>`;
 }
-const RESWORD = { cheer: 'cheered', blameless: 'hissed you', disgrace: 'disgraced' };
+const RESWORD = { cheer: 'cheered', blameless: 'hissed you', disgrace: 'disgraced', split: 'split' };
 function drawSchemes() {
   const g = W.g, v = M.current(g);
   $('#schemes').innerHTML = M.CONFIG.SCHEME_ORDER.map(id => {
@@ -664,7 +673,7 @@ async function spring() {
   $('#res').classList.remove('hidden');
   await anim($('#rgame'), [{ opacity: 0 }, { opacity: 1 }], { duration: 350 });
   await wait(500);
-  await Promise.all([react(r.verdict), anim($('#raud'), [{ opacity: 0 }, { opacity: 1 }], { duration: 350 })]);
+  await Promise.all([react(r.house, sid + r.option), anim($('#raud'), [{ opacity: 0 }, { opacity: 1 }], { duration: 350 })]);
   const idx = W.g.t; if (r.status !== 'open') updatePortraits(idx); drawPips();
   await anim($('#ryou'), [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
   await anim($('#rsays'), [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
@@ -713,8 +722,11 @@ function drawEnd() {
       const x = x0 + j * cw, red = c.verdict === 'disgrace';
       if (you && !c.option) { s += `<g transform="translate(${x},${y})"><rect x="1" y="1" width="${cw - 6}" height="${ch - 2}" style="fill:none;stroke:#5E584F;stroke-width:1.5;stroke-dasharray:3 3"/></g>`; return; }
       const tried = !you && W.g.log.some(r => r.target === row.rule && r.scheme === c.scheme);
+      const hh = you ? M.house(c.scheme, c.option) : c.house, w = cw - 8, strip = `<g transform="translate(2,${ch - 7})"><rect x="0" y="0" width="${w}" height="4" style="fill:#0D0B09;opacity:.25"/>` +
+        `<rect x="0" y="0" width="${w * hh.turn / M.HOUSE}" height="4" style="fill:#C42A2A;stroke:#0D0B09;stroke-width:.5"/>` +
+        `<rect x="${w * hh.turn / M.HOUSE}" y="0" width="${w * (hh.cheer + hh.quiet) / M.HOUSE}" height="4" style="fill:#F4F0E6;stroke:#0D0B09;stroke-width:.5"/></g>`;
       s += `<g transform="translate(${x},${y})"><rect x="1" y="1" width="${cw - 6}" height="${ch - 2}" style="fill:${red ? '#C42A2A' : '#CFC8B8'}"/>
-        <g transform="translate(${(cw - 6) / 2 - 12},${ch / 2 - 11}) scale(.8)" style="fill:none;stroke:${red ? '#E6E0D2' : '#0D0B09'};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">${ICON[c.scheme]}</g>
+        <g transform="translate(${(cw - 6) / 2 - 12},${ch / 2 - 13}) scale(.8)" style="fill:none;stroke:${red ? '#E6E0D2' : '#0D0B09'};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">${ICON[c.scheme]}</g>${strip}
         ${tried ? `<rect x="-1.5" y="-1.5" width="${cw - 1}" height="${ch + 3}" style="fill:none;stroke:#D9A13B;stroke-width:2.6"/>` : ''}</g>`;
     });
   });

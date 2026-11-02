@@ -49,6 +49,16 @@ ok(M.judge('tram', 'A') === 'cheer', 'steering is cheered (p. 2: "without hesita
 ok(M.judge('bargain', 'B') === 'blameless', 'refusing the bad man is blameless (p. 3: "it is he who intends … the death of innocent persons; we do not")');
 ok(M.judge('cave', 'B') === 'disgrace', 'refusing to blast in the cave is a disgrace (p. 5: "must here conflict with that of most reasonable men")');
 
+say('\n3b. The house of fourteen (the shares read off the paper\'s hedges)');
+ok(ORDER.every(id => ['A', 'B'].every(o => { const h = M.house(id, o); return h.turn + h.cheer + h.hiss + h.quiet === M.HOUSE; })), 'every act splits exactly fourteen heads');
+ok(M.house('tram', 'A').cheer === 14, 'the tram steered: all fourteen cheer ("without hesitation", p. 2)');
+ok(M.house('bargain', 'A').turn >= 12, 'the bargain taken: at least twelve turn ("most of us would be appalled", p. 2)');
+ok(M.house('brew', 'A').turn >= M.DISGRACE_AT && M.house('brew', 'A').cheer >= 3, 'the brew: a disgrace, with a real minority cheering ("presumably", p. 5)');
+ok(M.judge('medicine', 'B') === 'split' && M.house('medicine', 'B').turn < M.DISGRACE_AT, 'the whole dose to the one: split, not a disgrace (Foot against Anscombe)');
+ok(ORDER.every(id => ['A', 'B'].every(o => (M.judge(id, o) === 'disgrace') === (M.house(id, o).turn >= M.DISGRACE_AT))), 'a disgrace is exactly ten or more turning');
+ok(['bargain', 'brew', 'beggar'].every(id => M.house(id, 'B').turn >= 3 && M.house(id, 'B').hiss >= M.house(id, 'B').turn * 2), 'every refusal of the bad man has a minority turning on the refuser (the counters) and a clear majority hissing him');
+ok(ORDER.every(id => ['A', 'B'].every(o => !/undefined|\{/.test(M.audienceWords(id, o, M.PEOPLE.foot)))), 'the house composes its words for every act');
+
 say('\n4. The holes: schemes that disgrace each rule');
 const H = r => M.holes(r).join(',');
 ok(H('most') === 'bargain,brew,beggar', 'Mr Most (counting): ' + H('most') + ' — "hopelessly in the power of bad men" (p. 3)');
@@ -117,10 +127,10 @@ for (let m = 0; m < 64; m++) {
 ok(cbad === 0, 'all 64 patterns of chair choices compose their lines; a player who chooses exactly as a rule does is read as that rule');
 ok(cmatch === 3, 'the three rules\' own patterns each come out as that rule');
 say(`     ties (two or more rules equally close) in ${cties} of 64 patterns`);
-const g1 = M.newGame(); M.chair(g1, 'brew', 'A'); const r1 = M.spring(g1, 'brew');
-ok(r1.you && /turned on you/.test(r1.you), 'brewing in the chair: told the audience would have turned on you');
+const g1 = M.newGame(); g1.t = 2; M.chair(g1, 'brew', 'A'); const r1 = M.spring(g1, 'brew'); // against Mrs Foot, who refuses
+ok(r1.you && /ten would have turned on you/.test(r1.you), 'brewing in the chair: told ten of the house would have turned on you: ' + r1.you);
 const g2 = M.newGame(); M.chair(g2, 'medicine', 'B'); const r2 = M.spring(g2, 'medicine');
-ok(/divided/.test(r2.you) && /Anscombe/.test(r2.you), 'the whole dose to the one, in the chair: the audience divided, Anscombe named');
+ok(/sat still/.test(r2.you) && /Anscombe/.test(r2.you), 'the whole dose to the one, in the chair: six sit still, Anscombe named: ' + r2.you);
 ok(ORDER.every(id => !M.YOU[id].A.includes('{') && M.PAPER_NOTE[id].length > 20), 'every scheme has a chair line and a note saying which of the paper\'s cases it is');
 let threw = 0; try { M.chair(g1, 'brew', 'B'); } catch (e) { threw++; } ok(threw === 1, 'a scheme is decided in the chair once');
 

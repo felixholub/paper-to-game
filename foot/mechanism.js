@@ -96,31 +96,67 @@
     },
   };
 
-  // ---- the audience: the paper's "we" / "most of us", judging the act (scheme, option). 'cheer' = the good person did
-  // right; 'blameless' = they refused and the deaths are the bad man's; 'disgrace' = most of us cannot forgive it.
+  // ---- the audience: the paper's "we" / "most of us", judging the act (scheme, option). Foot has no counts; she has
+  // hedges ("without hesitation", "most of us would be appalled", "yet it surely is different", "presumably", "most
+  // reasonable men"), and Anscombe disputes the drug. So the house is fourteen heads (the stalls as drawn), split by the
+  // strength of her phrase, each share tagged to it. Ours, declared on About: the shares are read off her words, not counted.
+  // Stances toward the act: 'cheer' the good person; 'turn' on the good person; 'hiss' the bad man (they refused, and the
+  // deaths are his); 'quiet' (sit still: either way was fine by them). A disgrace is DISGRACE_AT or more turning.
+  const HOUSE = 14, DISGRACE_AT = 10;
   const AUDIENCE = {
-    tram:     { A: 'cheer',     // p. 2: "we should say, without hesitation, that the driver should steer for the less occupied track"
-                B: 'disgrace' },// ours, from the same line; no rule in the game chooses it
-    bargain:  { A: 'disgrace',  // p. 2: "most of us would be appalled at the idea that the innocent man could be framed"; p. 4:
-                                // "it does not follow … that we would be justified in inflicting the injury … in order to save the five"
-                B: 'blameless' },// p. 3: "it is he who intends (that is strictly or directly intends) the death of innocent persons; we do not"
-    medicine: { A: 'cheer',     // p. 3: "We feel bound to let one man die rather than many if that is our only choice"
-                B: 'disputed' },// Anscombe (1967): giving the whole dose to the one wrongs no one; Foot: we feel bound to save the five. No rule chooses it.
-    brew:     { A: 'disgrace',  // p. 5: "Yet it surely is different. The relatives of the gassed patient would presumably be
-                                // successful if they sued the hospital and the whole story came out."
-                B: 'blameless' },// ours, from p. 4: "To refrain from inflicting injury ourselves is a stricter duty than to prevent other people from inflicting injury"
-    beggar:   { A: 'disgrace',  // p. 4: "presumably we are inclined to see this as a violation of negative rather than positive
-                                // duty"; p. 5: "We may find it particularly revolting that someone should be used as in the case where
-                                // he is killed or allowed to die in the interest of medical research"
-                B: 'blameless' },// ours, as for the brew
-    cave:     { A: 'cheer',     // p. 5: "it is reasonable that the action that will save someone should be done"
-                B: 'disgrace' },// p. 5: "It is a great objection to those who argue that the direct intention of the death of an
-                                // innocent person is never justifiable that the edict will apply even in this case … [it] must
-                                // here conflict with that of most reasonable men"
+    tram: {
+      A: { cheer: [14, 'steering into one rather than five is right'] },                                   // p. 2: "we should say, without hesitation, that the driver should steer for the less occupied track"
+      B: { turn: [13, '{he} could have steered, and {he} let five die'], cheer: [1, '{he} would not turn {his} tram on a man'] }, // ours, from the same line; no rule in the game chooses it
+    },
+    bargain: {
+      A: { turn: [12, '{he} killed an innocent man because a bad man told {him} to'], cheer: [2, 'one life for five is just counting'] }, // p. 2: "most of us would be appalled at the idea that the innocent man could be framed"
+      B: { hiss: [10, 'the five were yours to kill, and you killed them'], turn: [3, '{he} could have saved five with one shot'], cheer: [1, '{he} would not be anyone\'s hangman'] }, // p. 3: "it is he who intends … the death of innocent persons; we do not"; the three are the counters
+    },
+    medicine: {
+      A: { cheer: [11, 'with medicine for one or for five, save the five'], quiet: [3, 'either way nobody was wronged'] }, // p. 3: "We feel bound to let one man die rather than many"; the three are Anscombe's
+      B: { turn: [8, 'five could have been saved, and were not'], quiet: [6, 'the one needed it and got it; nobody was wronged'] }, // split: Foot against Anscombe (1967): "who can say he is wronged?" No rule chooses it.
+    },
+    brew: {
+      A: { turn: [10, '{he} gassed a sick man to cure others'], cheer: [4, '{he} never meant to kill anyone, and five are alive'] }, // p. 5: "Yet it surely is different. The relatives … would presumably be successful if they sued"
+      B: { hiss: [10, 'the poison was yours'], turn: [4, '{he} could have cured five and did not'] }, // ours, from p. 4: refraining from injury is a stricter duty than preventing others' injury
+    },
+    beggar: {
+      A: { turn: [11, '{he} let a man starve so that {his} body could be used'], cheer: [3, '{he} never laid a hand on {him}, and five are alive'] }, // p. 4: "presumably we are inclined to see this as a violation of negative … duty"; p. 5: "particularly revolting"
+      B: { hiss: [10, 'the poison was yours'], turn: [4, '{he} fed one man and lost five'] }, // ours, as for the brew
+    },
+    cave: {
+      A: { cheer: [11, 'the stuck man was lost either way, and five got out'], turn: [3, '{he} blew up a living man on purpose'] }, // p. 5: "it is reasonable that the action that will save someone should be done"; the three keep the edict
+      B: { turn: [11, 'six drowned, the stuck man too, to keep {his} rule clean'], cheer: [3, '{he} would not kill a man on purpose, whatever it cost'] }, // p. 5: the edict "must here conflict with that of most reasonable men"
+    },
   };
+  const STANCES = ['turn', 'cheer', 'hiss', 'quiet'];
+  function house(id, opt) {
+    const h = AUDIENCE[id][opt], out = {};
+    STANCES.forEach(s => { out[s] = h[s] ? h[s][0] : 0; });
+    out.why = {}; STANCES.forEach(s => { if (h[s]) out.why[s] = h[s][1]; });
+    return out;
+  }
+  // the label the game plays by: 'disgrace' (the house turns), 'blameless' (they hiss the bad man), 'cheer', or 'split'
+  function judge(id, opt) {
+    const h = house(id, opt);
+    if (h.turn >= DISGRACE_AT) return 'disgrace';
+    const top = STANCES.slice().sort((a, b) => h[b] - h[a])[0];
+    if (top === 'hiss') return 'blameless';
+    if (top === 'turn') return 'split';
+    return 'cheer';
+  }
+  // the house in words: the biggest share first, each with its reason
+  const VERB = { turn: ['turn on {him}', 'turns on {him}'], cheer: ['cheer {him}', 'cheers {him}'], hiss: ['hiss you', 'hisses you'], quiet: ['sit still', 'sits still'] };
+  function audienceWords(id, opt, p) {
+    const h = house(id, opt);
+    const parts = STANCES.filter(s => h[s] > 0).sort((a, b) => h[b] - h[a]);
+    return parts.map((s, i) => {
+      const n = h[s], verb = fill(VERB[s][n === 1 ? 1 : 0], p);
+      return `${n === HOUSE ? 'All fourteen' : cap(numw(n)) + (i === 0 ? ' of the fourteen' : '')} ${verb}: ${fill(h.why[s], p)}.`;
+    }).join(' ');
+  }
 
   function choose(rule, id, cfg) { return RULES[rule](SCHEMES[id], id, cfg); }
-  function judge(id, opt) { return AUDIENCE[id][opt]; }
   function holes(rule, cfg) { return CONFIG.SCHEME_ORDER.filter(id => judge(id, choose(rule, id, cfg)) === 'disgrace'); }
 
   // ---- words. Every line the game says about a scheme or a rule. Pronouns per target.
@@ -207,16 +243,6 @@
     cave: 'In the paper: the fat man stuck in the mouth of the cave, Foot\'s stand-in for a mother and child who both die unless the child is killed, the operation the Catholic doctrine forbids.',
   };
 
-  // the audience's reaction, in the game's voice (judging the act, whoever did it)
-  const AUDIENCE_WORDS = {
-    tram: { A: 'The audience cheers: steering into one rather than five, most of us call right.', B: 'The audience turns on {him}: {he} could have steered.' },
-    bargain: { A: 'The audience turns on {him}: {he} killed an innocent man because a bad man asked.', B: 'The audience hisses you: the five were yours to kill, and you killed them.' },
-    medicine: { A: 'The audience cheers: with medicine for one or for five, most of us say save the five.', B: 'The audience is divided.' },
-    brew: { A: 'The audience turns on {him}: {he} gassed a sick man to cure others.', B: 'The audience hisses you: the poison was yours.' },
-    beggar: { A: 'The audience turns on {him}: {he} let a man starve so that his body could be used.', B: 'The audience hisses you: the poison was yours.' },
-    cave: { A: 'The audience cheers: the stuck man was lost either way, and five got out.', B: 'The audience turns on {him}: six drowned, the stuck man too, to keep {his} rule.' },
-  };
-
   function fill(t, p) { return t.replace(/\{(he|his|him|He|His)\}/g, (m, k) => p[k]); }
 
   // ---- the chair: before the good person chooses, the player says what they would do in their place (ours: the paper's
@@ -229,24 +255,22 @@
     beggar:   { A: 'You would have shut the door.', B: 'You would have fed him.' },
     cave:     { A: 'You would have blasted.', B: 'You would have refused.' },
   };
-  const YOU_VERDICT = {
-    cheer: 'The audience would have cheered you.',
-    blameless: 'The audience would have hissed me: the deaths would have been mine.',
-    disgrace: 'The audience would have turned on you.',
-    disputed: 'The audience is divided; Anscombe, in the same issue, says you wronged no one.',
-  };
   function chair(g, sid, opt) {
     if (!SCHEMES[sid]) throw new Error('no such scheme');
     if (opt !== 'A' && opt !== 'B') throw new Error('A or B');
     if (g.chair[sid]) throw new Error('already decided');
     g.chair[sid] = opt;
   }
-  // the line about the player's own choice, once the rule has chosen
+  // the line about the player's own choice, once the rule has chosen: the same house, judging the player
+  const YOU_VERB = { turn: 'would have turned on you', cheer: 'would have cheered you', hiss: 'would have hissed me', quiet: 'would have sat still' };
   function youLine(sid, yours, theirs, p) {
     if (!yours) return null;
-    const v = judge(sid, yours);
-    if (yours === theirs) return `You chose as ${p.he} did. ` + YOU_VERDICT[v].replace('would have cheered you', 'would have cheered you too').replace('would have turned on you', 'would have turned on you too').replace('would have hissed me: the deaths would have been mine', 'would have hissed me, just the same');
-    return YOU[sid][yours] + ' ' + YOU_VERDICT[v];
+    const h = house(sid, yours);
+    const parts = STANCES.filter(s => h[s] > 0).sort((a, b) => h[b] - h[a]).map(s => `${numw(h[s])} ${YOU_VERB[s]}`);
+    const list = parts.length <= 1 ? parts.join('') : parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1];
+    const anscombe = sid === 'medicine' && yours === 'B' ? ' Anscombe, in the same issue, would say you wronged no one.' : '';
+    if (yours === theirs) return `You chose as ${p.he} did, so what the house says about ${p.him} goes for you too.` + anscombe;
+    return `${YOU[sid][yours]} Of the fourteen, ${list}.` + anscombe;
   }
 
   // ---- the game
@@ -285,7 +309,7 @@
     const r = {
       reel: g.t + 1, target: rid, name: p.name, scheme: sid, option: opt, verdict, disgraced, deaths: d,
       did: fill(opt === 'A' ? w.didA : w.didB, p), why: fill(why[0], p), says: why[1], note: PAPER_NOTE[sid],
-      audience: fill(AUDIENCE_WORDS[sid][opt], p), status: g.status[g.t], left,
+      audience: audienceWords(sid, opt, p), house: house(sid, opt), status: g.status[g.t], left,
       yours: g.chair[sid] || null, you: youLine(sid, g.chair[sid], opt, p),
     };
     r.stand = disgraced ? `${p.name} is disgraced.`
@@ -300,14 +324,14 @@
     if (g.t < 2) g.t++; else g.over = true;
     return current(g);
   }
-  function numw(n) { return ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'][n] || String(n); }
+  function numw(n) { return ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen'][n] || String(n); }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
   // ---- the map of holes: every rule against every scheme
   function map() {
     return CONFIG.TARGET_ORDER.map(rid => ({
       rule: rid, name: PEOPLE[rid].name,
-      cells: CONFIG.SCHEME_ORDER.map(sid => { const opt = choose(rid, sid); return { scheme: sid, option: opt, verdict: judge(sid, opt) }; }),
+      cells: CONFIG.SCHEME_ORDER.map(sid => { const opt = choose(rid, sid); return { scheme: sid, option: opt, verdict: judge(sid, opt), house: house(sid, opt) }; }),
     }));
   }
 
@@ -332,7 +356,7 @@
     const brewDouble = by('double').some(r => r.scheme === 'brew');
     const paper = 'Philippa Foot, 1967: the doctrine Doctor Double lives by forbids aiming at an innocent death but lets one through as a side effect. Her own case, the gas (the brew in this film), shows that we find a side effect just as wrong when it is harm done to help others. What matters is not what you aim at, but whether you harm one person to help others.';
     const missed = brewDouble ? '' : 'You never sprang the brew on Doctor Double. He would have brewed, and the audience would have turned on him.';
-    const means = 'A rule that only counts lives puts good people in a bad man\'s power. A rule about what you mean is half a shield. Foot\'s rule gave you nothing.';
+    const means = 'A rule that only counts lives puts good people in a bad man\'s power. A rule about what you mean to do stops some of his tricks, but not all of them. Foot\'s rule, never harm one person to help others, gave you nothing to work with.';
     const n = hit.length;
     const fate = n === 2 ? 'Two good names ruined. The third you could not touch.'
       : n === 1 ? 'One good name ruined. Two you could not touch.'
@@ -342,9 +366,9 @@
 
   // ---- your own rule: which of the three the player chose like, in the chair, and where the stalls would have turned
   const RULE_READ = {
-    most: 'You counted lives and nothing else, like Mr Most: Bentham\'s arithmetic. Foot\'s reply is the bargain: then any bad man can make you kill, just by threatening more.',
-    double: 'You drew the line where Doctor Double draws it, at what you aim at. Foot\'s gas was built for you: a side effect you only foresee can be just as wrong.',
-    foot: 'You drew the line where Foot draws it, between harming someone and failing to help them. Her paper is an account of verdicts like yours.',
+    most: 'You counted lives and nothing else, like Mr Most. That is Bentham\'s way of deciding. Foot\'s answer to it is the bargain: if that is your rule, a bad man can make you kill anyone, just by threatening to kill more.',
+    double: 'You went by what you were aiming at, like Doctor Double. Foot\'s answer to that is the brew: a death you only foresee can be just as wrong, when you cause it to help other people.',
+    foot: 'You went by whether you harm someone or only fail to help them. That is Foot\'s own line, and her paper is about why most of us judge that way.',
   };
   function yourRule(g) {
     const sids = CONFIG.SCHEME_ORDER.filter(sid => g.chair[sid]);
@@ -364,9 +388,9 @@
       // the schemes that would tell the tied rules apart, which the player did not decide
       const split = CONFIG.SCHEME_ORDER.filter(sid => !g.chair[sid] && tied.some(a => tied.some(b => choose(a, sid) !== choose(b, sid))));
       line = `In the chair you decided ${numw(n)} scheme${n === 1 ? '' : 's'}, and chose like ${list(tied.map(r => PEOPLE[r].name))} alike${best === n ? '' : ` on ${numw(best)} of them`}.`;
-      read = split.length ? `What would tell them apart you never decided: ${list(split.map(sn))}.` : `Where they part, you sided with each in turn.`;
+      read = split.length ? `What would tell them apart you never decided: ${list(split.map(sn))}.` : `On the schemes where they disagree, you went one way as often as the other.`;
     }
-    const stalls = turned.length ? `The audience would have turned on you ${turned.length === 1 ? 'once' : numw(turned.length) + ' times'}: ${list(turned.map(sn))}.` : 'The audience never turned on you.';
+    const stalls = turned.length ? `The house would have turned on you ${turned.length === 1 ? 'once' : numw(turned.length) + ' times'}, for ${list(turned.map(sn))}.` : 'The house never turned on you.';
     return { line, read, stalls, score, tied, turned, decided: sids };
   }
 
@@ -398,5 +422,5 @@
     return { id: c.id, title: c.title, text: c.text, A: c.A, B: c.B, did: opt ? (opt === 'A' ? c.didA : c.didB) : null, foot: c.foot, most: c.most, scheme: c.scheme, schemeTitle: SCHEME_WORDS[c.scheme].title, last: i === CODA.length - 1, close: CODA_CLOSE };
   }
 
-  return { CONFIG, SCHEMES, RULES, AUDIENCE, PEOPLE, SCHEME_WORDS, WHY, AUDIENCE_WORDS, PAPER_NOTE, YOU, CODA, deaths, count, choose, judge, holes, newGame, current, preview, chair, spring, next, map, verdict, yourRule, coda, numw, fill };
+  return { CONFIG, SCHEMES, RULES, AUDIENCE, HOUSE, DISGRACE_AT, STANCES, PEOPLE, SCHEME_WORDS, WHY, PAPER_NOTE, YOU, CODA, deaths, count, choose, judge, house, audienceWords, holes, newGame, current, preview, chair, spring, next, map, verdict, yourRule, coda, numw, fill };
 });
