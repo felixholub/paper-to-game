@@ -1,6 +1,6 @@
 // Lovelace's Cards — the loom. The only copy: solve.js runs it in Node to compute every puzzle's par, build.py inlines it.
 // The machine counts the way the Notes say an Engine counts: with numbers in the Store and cards that operate on them.
-//   - A wheel (A or B) is a number in the Store. Every wheel starts at 0.
+//   - A wheel (A, B or C) is a number in the Store. Every wheel starts at 0.
 //   - A stitch card weaves one stitch.
 //   - A Set card puts a number on a wheel, whatever it showed before (a card of numbers, Memoir p. 15). It is the only way
 //     a wheel gets a number.
@@ -12,9 +12,9 @@
 // round. A wheel taken below 0 never comes back to 0 by taking 1 off, so the machine runs on; the attendant stops it.
 (function (root) {
   'use strict';
-  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1, to:index} | {k:'set', w:0|1, v:n}]
+  // chain: [{k:'r'|'b'|'g'} | {k:'back', w:0|1|2, to:index} | {k:'set', w:0|1|2, v:n}]
   function weave(chain, start, target, wantEvents, cap) {
-    const wh = (start || [0, 0]).slice(); const out = []; const ev = wantEvents ? [] : null;
+    const wh = (start || [0, 0, 0]).slice(); const out = []; const ev = wantEvents ? [] : null;
     cap = cap || 4000;
     let pc = 0, steps = 0;
     while (pc < chain.length) {
@@ -43,7 +43,7 @@
   // number from 1 to WMAX exactly once, without trying them one by one. Every branch is checked stitch by stitch against the
   // order. Sound prunes: a stitch card must be the stitch the order wants next (it is woven the moment it is added); a Go back
   // on a wheel needs a Set card for that wheel above it (otherwise the wheel goes 0, −1, −2 … and never returns to 0); wheel B
-  // only once wheel A has a Set card (the two are interchangeable).
+  // only once wheel A has a Set card, C only once B has (the wheels are interchangeable).
   const WMAX = 12;
   function solve(target, wheels, maxLen) {
     const T = target, N = T.length, vmax = Math.min(WMAX, N), cap = 30 * N + 60;
@@ -60,13 +60,15 @@
             if (run(pc, wh, n, steps, vals, lb)) return true;
             chain.pop();
             for (let w = 0; w < wheels; w++) {
-              if (w === 1 && !chain.some(c => c.k === 'set' && c.w === 0)) continue;
+              if (w > 0 && !chain.some(c => c.k === 'set' && c.w === w - 1)) continue;
+              if (typeof wh[w] === 'object' && wh[w].d === 0) continue;       // the wheel was just set and never read: a second Set is waste
               chain.push({ k: 'set', w });
               if (run(pc, wh, n, steps, vals, lb)) return true;
               chain.pop();
             }
             for (let w = 0; w < wheels; w++) {
               if (!chain.some(c => c.k === 'set' && c.w === w)) continue;
+              if (typeof wh[w] === 'number' && wh[w] <= 0) continue;         // the wheel shows 0 already: taking 1 off would run for ever
               for (let t = 0; t < chain.length; t++) {
                 if (chain[t].k === 'back') continue;
                 chain.push({ k: 'back', w, to: t });
@@ -94,7 +96,7 @@
           n++; pc++;
         }
       };
-      if (run(0, [0, 0], 0, 0, [], [])) return { par: found.length, chain: found, start: [0, 0] };
+      if (run(0, [0, 0, 0], 0, 0, [], [])) return { par: found.length, chain: found, start: [0, 0, 0] };
     }
     return null;
   }
