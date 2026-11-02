@@ -280,13 +280,13 @@ svg.arcs path.live{stroke-width:5}
   <h3>Hanging cards</h3>
   <p>Tap a card at the bottom to hang it at the end of your chain. Tap × to take a card off. Only so many cards fit. Then tap <b>Run the loom</b> and watch. The dashed squares are the order; each stitch the loom weaves fills one. A wrong stitch gets a black frame.</p>
   <h3>Go back and count down</h3>
-  <p>The machine counts with <b>wheels</b>: numbers inside it. Every wheel starts at 0. A <b>Set</b> card puts a number on a wheel (you choose it on the card, with − and +), whatever it showed before. That is the only way a wheel gets a number.</p><p>A <b>Go back and count down</b> card first takes 1 off its wheel (you see −1 on the wheel), then looks at it. If the wheel isn't 0 yet, the machine goes back up the chain to the card you chose on it (“card 1”, “card 2” …); the arc on the left shows the jump. If the wheel shows 0, the machine carries on down the chain. Nothing else ever counts down: the wheel only goes down when this card is read.</p>
+  <p>The machine counts with <b>wheels</b>: numbers inside it. Every wheel starts at 0. A <b>Set</b> card puts a number on a wheel (you choose it on the card), whatever it showed before. That is the only way a wheel gets a number.</p><p>A <b>Go back and count down</b> card first takes 1 off its wheel (you see −1 on the wheel), then looks at it. If the wheel isn't 0 yet, the machine goes back up the chain to the card you chose on it (“card 1”, “card 2” …); the arc on the left shows the jump. If the wheel shows 0, the machine carries on down the chain. Nothing else ever counts down: the wheel only goes down when this card is read.</p>
   <h3>Set cards</h3>
   <p>A wheel that reaches 0 stays at 0 until a Set card puts a number on it again. That is what a loop inside a loop needs: the inner wheel must be set again on every round of the outer loop, so the outer Go back and count down has to send the machine back to (or above) the inner wheel's Set card. It can jump to any card above it, a Set card included. But a simple loop should go back to its first stitch, not to its own Set card: that would put the number back every round, and the wheel would never get to 0.</p>
   <h3>Fewest cards</h3>
   <p>When the bell rings you are told the fewest cards that can do the job. On the hard looms there is no spare room at all.</p>
   <h3>Stuck?</h3>
-  <p>After three runs that don't ring the bell, you can ask to see a way. It's one way, not the only one. Every loom can be tried again after the bell, and the end screen takes you back into any of them; your best go is the one that counts.</p>
+  <p>After any run that doesn't ring the bell, you can ask to see a way. It's one way, not the only one; your own chain stays hung until you change it, so you can keep trying as long as you like. Every loom can be tried again after the bell, and the end screen takes you back into any of them; your best go is the one that counts.</p>
   <button class="btn" data-back>Back to the game</button>
 </section>
 
@@ -459,9 +459,9 @@ function chainCard(c, i, ch, mode, editable, wheels){
   } else {
     b.innerHTML = holesSpan('back') + `<span class="num">${i+1}</span>` + setHTML(c.w) +
       `<span class="t"><b>Set wheel ${WNAME[c.w]}</b>` +
-      (editable ? `<span class="rep">to <button data-d="-1" aria-label="less">−</button><b>${c.v}</b><button data-d="1" aria-label="more">+</button></span>` : `<span class="rep">to <b>${c.v}</b></span>`) +
+      (editable ? `<span class="rep">to <select aria-label="number">${Array.from({length: Lo.WMAX}, (_, n) => `<option value="${n+1}" ${n+1 === c.v ? 'selected' : ''}>${n+1}</option>`).join('')}</select></span>` : `<span class="rep">to <b>${c.v}</b></span>`) +
       `<i>Put this number on the wheel, whatever it showed before.</i></span>` + del;
-    if (editable) b.querySelectorAll('.rep button').forEach(bt => bt.onclick = e => { e.stopPropagation(); if (running || solved) return; c.v = Math.max(1, Math.min(Lo.WMAX, c.v + +bt.dataset.d)); clearResult(); drawChain(); });
+    if (editable){ const sel = b.querySelector('select'); sel.onchange = () => { if (running || solved) return; c.v = +sel.value; clearResult(); drawChain(); }; sel.onclick = e => e.stopPropagation(); }
   }
   if (editable){ const d = b.querySelector('.del'); d.onclick = () => takeOff(i); }
   return b;
@@ -573,8 +573,8 @@ $('#run').addEventListener('click', async () => {
       const sets = chain.map((c, i) => [c, i]).filter(([c]) => c.k === 'set');
       if (sets.length) help = '<br><br>' + sets.map(([c, i]) => `Card ${i+1} put <b>${c.v}</b> on wheel ${WNAME[c.w]}.`).join(' ') + ' Each time the machine read Go back and count down, it took 1 off, until the wheel showed 0.';
     }
-    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain and run it again.</span>');
-    if (fails >= 3) { $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; }
+    showResult('#result', false, j.why + help + '<br><span class="small">Change the chain and run it again, or ask to be shown a way.</span>');
+    $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe;
     $('#run').disabled = false;
     return;
   }

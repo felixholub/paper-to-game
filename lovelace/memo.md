@@ -51,3 +51,8 @@ New messages from the chain itself: a Go back with no Set card above it ("starts
 ## Revision 5 (1 Nov 2026, evening): the card's name
 
 He asked whether the counter goes down by itself, and whether Go back should point at a stitch or at the counter. It doesn't: the card does the counting. The card is now called **Go back and count down** (his wording, with the main movement first). Its text gives the order of the two acts, "First take 1 off wheel A. Not 0 yet? Back to card …", and a small −1 badge pops on the wheel's rim each time the card is read, on the loom and on the switch screen. Help now says: nothing else ever counts down, and a simple loop should go back to its first stitch, not to its own Set card.
+
+
+## Revision 6 (2 Nov 2026, morning): the little things
+
+His note after a night's sleep: Show me a way should be there after the first failed run, not the third, and a retry should always be at hand. It is: the chain stays hung after every run, so changing it and running again is the retry; the fail message now says so and offers the way. Show me a way appears after any run that doesn't ring the bell. The Set card's − and + stepper (eight taps for a wheel of 10) is a picker of 1 to 12, like the "card …" box on Go back and count down. Help text to match.
