@@ -62,6 +62,7 @@
             for (let w = 0; w < wheels; w++) {
               if (w > 0 && !chain.some(c => c.k === 'set' && c.w === w - 1)) continue;
               if (typeof wh[w] === 'object' && wh[w].d === 0) continue;       // the wheel was just set and never read: a second Set is waste
+              { const prev = chain[chain.length - 1]; if (prev && prev.k === 'set' && prev.w > w) continue; }   // adjacent Sets in wheel order only (they commute)
               chain.push({ k: 'set', w });
               if (run(pc, wh, n, steps, vals, lb)) return true;
               chain.pop();
@@ -71,6 +72,7 @@
               if (typeof wh[w] === 'number' && wh[w] <= 0) continue;         // the wheel shows 0 already: taking 1 off would run for ever
               for (let t = 0; t < chain.length; t++) {
                 if (chain[t].k === 'back') continue;
+                if (chain[t].k === 'set' && chain[t].w === w) continue;        // back to its own Set card: the number is put back every round, never 0
                 chain.push({ k: 'back', w, to: t });
                 if (run(pc, wh, n, steps, vals, lb)) return true;
                 chain.pop();

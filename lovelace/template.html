@@ -586,7 +586,7 @@ $('#run').addEventListener('click', async () => {
       if (sets.length) help = '<br><br>' + sets.map(([c, i]) => `Card ${i+1} put <b>${c.v}</b> on wheel ${WNAME[c.w]}.`).join(' ') + ' Each time the machine read Go back and count down, it took 1 off, until the wheel showed 0.';
     }
     showResult('#result', false, j.why + help + '<br><span class="small">Change the chain and run it again, or ask to be shown a way.</span>');
-    $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe;
+    $('#after').innerHTML = '<button class="btn quiet" id="showme">Show me a way</button>'; $('#showme').onclick = showMe; skipButtons($('#after'));
     $('#run').disabled = false;
     return;
   }
@@ -611,7 +611,10 @@ function win(shown){
   const a = $('#after'); a.innerHTML = '';
   const again = el('button', 'btn quiet', shown ? 'Now try it yourself' : 'Try this loom again');
   again.onclick = () => retry(shown); a.appendChild(again);
-  // where next: the six regular looms run on; after the sixth bell the extras are offered, never required
+  nextButtons(a);
+}
+// where next: the six regular looms run on; after the sixth bell the extras are offered, never required
+function nextButtons(a){
   const opts = [];
   if (L < REG - 1) opts.push(['Next loom', 'verd', () => startLoom(L + 1)]);
   if (L === REG - 1 && !results[REG]) opts.push(['Two more looms, even harder', 'verd', () => startLoom(REG)]);
@@ -620,6 +623,10 @@ function win(shown){
   if (fromEnd) opts.push(['Back to your results', L < REG - 1 ? 'verd' : 'quiet', () => { fromEnd = false; drawVerdict(); showScreen('s-end'); }]);
   else if (L >= REG - 1) opts.push(['Go on to the end', opts.length ? 'quiet' : 'verd', startSwitch]);
   opts.forEach(([txt, cls, fn]) => { const b = el('button', 'btn ' + cls, txt); b.onclick = fn; a.appendChild(b); });
+}
+// a loom may be left unwoven: nobody is made to finish
+function skipButtons(a){
+  const s = el('button', 'btn quiet', 'Leave this loom'); s.onclick = () => { a.innerHTML = ''; nextButtons(a); a.querySelectorAll('.btn').forEach(b => b.classList.replace('quiet', 'verd')); hint('Leave it as it is and go on.'); }; a.appendChild(s);
 }
 // a retry keeps your own chain to work on, but not a chain you were shown
 function retry(wasShown){
