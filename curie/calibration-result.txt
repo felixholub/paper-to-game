@@ -58,42 +58,18 @@ PASS  pitchblende high in a slow-fire page  — slow / heaviest / yes / unlooked
 PASS  lead and white phosphorus  — sky / everything / unlooked / atom; idea: "Look at that! White phosphorus does it, and there’s no urani…"
 
 6. Forty thousand random pages (random bands for every jar, or never measured): every world agrees with its laws
-PASS  no world draws a picture its laws do not allow; every slot is drawable; no decimals
-   34 reachable combinations of energy · matter · rocks:
-     bottomless · alone · no                          47
-     bottomless · everything · no                    174
-     bottomless · heaviest · no                      130
-     bottomless · living · no                         85
-     crystal · alone · crystal                        59
-     crystal · everything · crystal                  191
-     crystal · heaviest · crystal                    141
-     crystal · living · crystal                       91
-     restless · alone · unlooked                       3
-     restless · alone · yes                           66
-     restless · everything · unlooked                  4
-     restless · everything · yes                     179
-     restless · heaviest · unlooked                    1
-     restless · heaviest · yes                       151
-     restless · living · unlooked                      1
-     restless · living · yes                          67
-     sky · everything · no                          7098
-     sky · everything · unlooked                     127
-     sky · everything · yes                         7166
-     sky · weight · no                              5655
-     sky · weight · unlooked                         100
-     sky · weight · yes                             5498
-     slow · alone · no                               920
-     slow · alone · unlooked                          17
-     slow · alone · yes                              936
-     slow · everything · no                         2621
-     slow · everything · unlooked                     49
-     slow · everything · yes                        2530
-     slow · heaviest · no                           1870
-     slow · heaviest · unlooked                       30
-     slow · heaviest · yes                          1923
-     slow · living · no                             1049
-     slow · living · unlooked                         12
-     slow · living · yes                            1009
+PASS  no world draws a picture its laws do not allow; every closing panel is drawable; no decimals
+PASS  all ten worlds are reached by random pages  — sky 25513, slow 13072, crystal 473, bone 59, restless 132, bottomless 463, doubt 32, leaking 187, quiet 66, elsewhere 3
+   34 reachable combinations of energy · matter · rocks; worlds: sky 25513, slow 13072, crystal 473, bottomless 463, leaking 187, restless 132, quiet 66, bone 59, doubt 32, elsewhere 3
+
+6b. Pages that make the conduct worlds
+PASS  her numbers, everything measured twice: the Académie of Doubt, not her note  — doubt
+PASS  her numbers, the rocks never looked at: Found Elsewhere, not her note  — elsewhere
+PASS  thorium silent and the rock at its uranium: the quiet metal or the bottomless atom (the energy question comes first)  — bottomless
+PASS  thorium silent, the rock strong: the quiet metal  — quiet
+PASS  copper active: the leaking world  — leaking
+PASS  white phosphorus without its control: the electric bone  — bone
+PASS  a rock written while the spot ran right: the parting says the real current was higher  — right
 
 7. A retest replaces the earlier reading; a clash fires once
 PASS  lead written active, then measured again as nothing: the sky wind is gone, and the balloon notices the answer changed  — Oh… a different answer this time! The first one must have be
@@ -105,16 +81,16 @@ PASS  within an album, a line is almost never said twice (only when a belief is 
 PASS  no decimals anywhere in the words
 
 8. Which world a page makes: three thumbs on her path and on random jars, 300 albums each
-   page                    | hers      restless  slow      sky       crystal   bottomless
-   her path, careful       | 97 %      0 %       3 %       0 %       0 %       0 %       
-   her path, sloppy        | 80 %      0 %       20 %      0 %       0 %       0 %       
-   her path, hasty         | 0 %       0 %       0 %       0 %       0 %       100 %     
-   random eight, careful   | 86 %      13 %      1 %       0 %       0 %       0 %       
-   random eight, sloppy    | 76 %      12 %      11 %      0 %       1 %       0 %       
-   random eight, hasty     | 0 %       0 %       0 %       84 %      0 %       16 %      
+   page                    | hers      restless  slow      sky       crystal   bottomlessleaking   bone      quiet     doubt     elsewhere 
+   her path, careful       | 97 %      0 %       3 %       0 %       0 %       0 %       0 %       0 %       0 %       0 %       0 %       
+   her path, sloppy        | 80 %      0 %       20 %      0 %       0 %       0 %       0 %       0 %       0 %       0 %       0 %       
+   her path, hasty         | 0 %       0 %       0 %       0 %       0 %       100 %     0 %       0 %       0 %       0 %       0 %       
+   random eight, careful   | 81 %      0 %       1 %       0 %       0 %       0 %       0 %       13 %      0 %       0 %       5 %       
+   random eight, sloppy    | 71 %      0 %       11 %      0 %       1 %       0 %       0 %       12 %      0 %       0 %       5 %       
+   random eight, hasty     | 0 %       0 %       0 %       84 %      0 %       16 %      0 %       0 %       0 %       0 %       0 %       
 PASS  careful on her path: her note, nine albums in ten or more
 PASS  sloppy on her path: a sloppy thumb under-reads (it creeps up on the balance), so it writes her note or the slow fire  — hers, slow
-PASS  across all thumbs and jars, at least four of the five physics occur  — hers, slow, bottomless, restless, crystal, sky
+PASS  across all thumbs and jars, at least four of the five physics occur (the conduct worlds need a deliberate page)  — hers, slow, bottomless, bone, elsewhere, crystal, sky, leaking
 PASS  hasty on her path never writes her note
 
-61 passed, 0 failed.
+69 passed, 0 failed.

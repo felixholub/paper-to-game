@@ -289,7 +289,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     <li><b>Your page.</b> Each number is drawn as a panel. The yellow bar is what the uranium in it should give, the blue bar the number you wrote, the dashed line your own pure uranium. A few lines after the blue bar mean the spot was still running when you wrote it down. You have nine panels; the first is pure uranium.</li>
     <li><b>The shelf.</b> Tap a jar or a rock to read its label: what it is, who sent it, how much uranium it holds. TEST IT puts it on the plate and spends a panel. You can test anything again; your page believes the latest number.</li>
     <li><b>Your world.</b> Every number also draws one scene of life outside the workroom, dated: what Paris does next if your page is right. The scenes make a strip under your page, and it runs forward from 1898 as you play.</li>
-    <li><b>The last pages.</b> After nine panels your ideas are put together into three laws of nature, your strip is shown whole with the world a century on, and then ours, drawn true, with where the two part.</li>
+    <li><b>The last pages.</b> After nine panels your ideas are put together into three laws of nature, your strip is shown whole, the game draws three more panels of its own (1920, 1945, today), then the world a century on; then ours, drawn true, with where the two part. There are ten worlds to find.</li>
   </ol>
   <button class="btn go" id="helpback">Back</button>
 </div>
@@ -436,7 +436,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     if (p.u > 0 && U) s += `<rect x="${x0}" y="84" width="${Math.max(2, Math.min(96, p.u * U * sc))}" height="9" fill="${YEL}" stroke="${INK}" stroke-width="1.5"/>`;
     const xe = X(p.x), ym = 104.5;
     if (xe - x0 > 0.5) s += `<rect x="${x0}" y="98" width="${xe - x0}" height="13" fill="${BLUE}" stroke="${INK}" stroke-width="1.5"/>`; else s += `<circle cx="${x0 + 2}" cy="${ym}" r="2.5" fill="${INK}"/>`;
-    if (p.moving) { const bx = Math.max(xe, x0 + 4) + 3; s += [-3, 0, 3].map(o => `<line x1="${bx}" y1="${ym + o}" x2="${bx + (o ? 6 : 9)}" y2="${ym + o}" stroke="${INK}" stroke-width="1.4"/>`).join(''); }
+    if (p.moving) { const bx = Math.max(xe, x0 + 4) + 3, d = p.moving === 'left' ? -1 : 1; s += [-3, 0, 3].map(o => `<line x1="${bx}" y1="${ym + o}" x2="${bx + (o ? 6 : 9)}" y2="${ym + o}" stroke="${INK}" stroke-width="1.4"/>`).join('') + `<path d="M${bx + 11 + (d < 0 ? 2 : 0)},${ym - 4} l${4 * d},4 l${-4 * d},4" fill="none" stroke="${INK}" stroke-width="1.6"/>`; }
     if (U) s += `<line x1="${X(U)}" y1="80" x2="${X(U)}" y2="118" stroke="${INK}" stroke-width="1.6" stroke-dasharray="4 3"/>`;
     return s;
   }
@@ -570,7 +570,7 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
       return g; },
     tableend: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(10, 12, 92, 56, '#fff', 2);
       for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) { const last = r === 2 && c >= 6; g += rc(14 + c * 11, 16 + r * 16, 10, 14, last ? (c === 6 ? YEL : '#F4F2EA') : '#E3E8EC', 1.1); }
-      g += tx(85, 58, 'U', 8) + tx(96, 58, 'Th', 7) + rays(85, 70, 6, 3, BLUE) + rays(96, 70, 6, 3, BLUE) + tx(107, 56, '?', 11, RED, 'middle', 'Lilita');
+      g += tx(85, 58, 'U', 8) + tx(96, 58, 'Th', 7) + tx(107, 56, '?', 11, RED, 'middle', 'Lilita');
       g += fig(30, 96, 0.72, { hat: 'cap', coat: '#fff', arm: 'up' }) + tx(70, 86, 'THE END OF THE TABLE', 8.5); return g; },
     heavyhunt: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 74, 114, 23, WOOD, 0) + ln(-1, 74, 113, 74, 2);
       [[20, '#5B6068'], [44, '#7D8590'], [68, '#A48E6A'], [92, '#9C8B7A']].forEach(([x, f]) => { g += rc(x - 10, 46, 20, 28, '#EEF7FC', 1.6) + rc(x - 8, 58, 16, 14, f, 1.2) + rc(x - 11, 42, 22, 5, '#9C6B43', 1.4); });
@@ -641,14 +641,123 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
       g += pa('M14,84 L18,40 L48,26 L56,84 Z', '#A99A8C') + pa('M60,84 L58,26 L92,36 L100,84 Z', '#A99A8C') + ci(56, 56, 15, '#fff') + ln(56, 56, 56, 45, 2) + ln(56, 56, 64, 60, 2) + ci(56, 56, 1.6, INK, 0) + tx(56, 18, '4.5 BILLION YEARS', 8);
       return g; },
   };
+  // ---------- the closing panels and the conduct worlds, drawn
+  const stamp = (x, y, r, c, t) => ci(x, y, r, 'none', 1.8).replace(`stroke="${INK}"`, `stroke="${c}"`) + ci(x, y, r - 3, 'none', 1).replace(`stroke="${INK}"`, `stroke="${c}"`) + tx(x, y + 3, t, 6.5, c);
+  const sack = (x, y, s, label) => pa(`M${x - 12 * s},${y} Q${x - 15 * s},${y - 26 * s} ${x - 5 * s},${y - 34 * s} L${x + 5 * s},${y - 34 * s} Q${x + 15 * s},${y - 26 * s} ${x + 12 * s},${y} Z`, '#C9A27E', 1.6) + ln(x - 6 * s, y - 32 * s, x + 6 * s, y - 32 * s, 1.6) + (label ? tx(x, y - 14 * s, label, 5.5 * s) : '');
+  const SCENE2 = {
+    radiumshop: () => { let g = street(76) + maison(2, 76, 46, 50) + maison(52, 76, 60, 56, { door: false });
+      g += rc(58, 40, 48, 30, '#fff', 1.6) + tx(82, 50, 'RADIUM', 7, GREEN) + tx(82, 58, 'TONIC', 6) + ci(70, 64, 3.5, '#BFF0D2', 1.2) + ci(82, 64, 3.5, '#BFF0D2', 1.2) + ci(94, 64, 3.5, '#BFF0D2', 1.2) + rays(82, 52, 10, 3, '#7FD3A6');
+      g += lamp(50, 76, true) + fig(22, 92, 0.8, { hat: 'bonnet', coat: '#8C5B6E', skirt: true, arm: 'out' }) + ci(38, 66, 4, '#fff', 1.2) + ln(38, 62, 38, 59, 1.2) + ln(38, 66, 41, 66, 1.2);
+      return g; },
+    table118: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(8, 14, 96, 58, '#fff', 2);
+      for (let r = 0; r < 4; r++) for (let c = 0; c < 9; c++) { const end = r === 3 && c >= 6; g += rc(12 + c * 10, 18 + r * 13, 9, 11, end ? (c === 8 ? '#F1D5D0' : '#F4F2EA') : '#E3E8EC', 1); }
+      g += tx(96.5, 64, '118', 5, RED) + pa('M100,72 l4,6 l-8,0 Z', RED, 1) + fig(28, 96, 0.75, { hat: 'cap', coat: '#fff', capColor: '#fff', arm: 'up' }) + tx(70, 90, 'THE END OF THE TABLE', 8);
+      return g; },
+    coal: () => { let g = rc(-1, 0, 114, 97, '#D9D0C0', 0) + rc(-1, 78, 114, 19, '#8C7B6A', 0) + ln(-1, 78, 113, 78, 2);
+      [[20, 24], [44, 36], [68, 18]].forEach(([x, top]) => { g += rc(x, top, 12, 78 - top, '#B9776A') + rc(x - 2, top - 5, 16, 6, '#9C5D52') + `<g opacity=".9">${cloud(x + 8, top - 8, 0.8, '#8E8E8E')}${cloud(x + 26, top - 18, 1, '#A8A8A8')}</g>`; });
+      g += pa('M80,78 L80,66 L108,66 L108,78 Z', WOOD, 1.6) + ci(86, 80, 4, '#5C5A50', 1.4) + ci(102, 80, 4, '#5C5A50', 1.4) + pa('M82,66 q6,-12 12,-8 q6,-6 12,8 Z', '#2E2E33', 1.4) + fig(70, 96, 0.7, { hat: 'cap', coat: '#5C5A50', arm: 'out' });
+      return g; },
+    youngearth: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + ci(40, 54, 30, '#BFD9E8', 2) + pa('M18,44 q12,-8 22,4 q8,10 24,2', 'none', 1.6) + pa('M22,66 q14,-6 24,6', 'none', 1.6);
+      g += rc(82, 14, 8, 60, '#fff', 1.6) + ci(86, 78, 7, '#5B8ED6', 1.4) + rc(84, 58, 4, 16, '#5B8ED6', 0) + [0, 1, 2, 3, 4, 5].map(i => ln(90, 20 + i * 9, 95, 20 + i * 9, 1.2)).join('') + tx(86, 10, 'COLD', 7) + tx(40, 93, '40 MILLION YEARS', 8);
+      return g; },
+    nursery: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(8, 18, 96, 70, '#DDE3E8', 2) + [0, 1, 2].map(i => ln(8, 40 + i * 16, 104, 40 + i * 16, 1, '#B8C2CC')).join('');
+      g += rc(16, 56, 40, 24, '#E8EEF2', 1.6) + [0, 1, 2, 3, 4].map(i => ln(20 + i * 8, 56, 20 + i * 8, 44, 1.4)).join('') + ln(16, 44, 56, 44, 1.6) + ci(36, 66, 5, SKIN, 1.4) + fig(86, 90, 0.8, { hat: 'bonnet', coat: '#8C5B6E', skirt: true, face: 'left', arm: 'out' });
+      g += rc(62, 24, 30, 12, '#fff', 1.2) + tx(77, 32, 'ALUMINIUM', 5.5) + tx(56, 93, 'QUIET METAL ONLY', 7.5); return g; },
+    quietmine: () => { let g = rc(-1, 0, 114, 97, '#D9D0C0', 0) + pa('M-1,97 L-1,58 Q56,10 113,58 L113,97 Z', '#8C7B6A') + pa('M28,97 L28,66 Q56,40 84,66 L84,97 Z', '#2A2A2F') + rc(36, 20, 40, 14, '#fff', 1.6) + tx(56, 30, 'QUIET', 9, BLUE, 'middle', 'Lilita');
+      g += fig(56, 96, 0.7, { coat: '#4A5568', hat: 'top' }) + rc(44, 70, 8, 7, NICKEL, 1.2) + ln(52, 73, 58, 70, 1.4) + tx(96, 90, 'FOR HIRE', 5.5, '#fff'); return g; },
+    blackboard: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(8, 12, 96, 60, '#2F4A3E', 2) + tx(56, 36, 'ENERGY IS', 11, '#fff') + tx(56, 52, 'CONSERVED', 11, '#fff') + ln(16, 60, 98, 24, 3, RED);
+      g += fig(90, 96, 0.72, { hat: 'cap', coat: '#2E2E33', face: 'left', arm: 'up' }) + tx(40, 90, 'FIRST LAW: GONE', 8); return g; },
+    joachim: () => { let g = street(72) + maison(2, 72, 30, 34, { wall: '#F3D9A7' }) + maison(84, 72, 30, 40, { wall: '#F3D9A7' }) + rc(40, 30, 32, 12, '#fff', 1.6) + tx(56, 39, 'JOACHIMSTHAL', 5.5) + ln(56, 42, 56, 72, 2.4);
+      g += pa('M38,72 L46,56 L66,56 L74,72 Z', '#3A3A40') + pa('M46,52 l4,-8 l4,6 l3,-8 l3,8 l4,-6 l4,8 Z', '#E2B23C', 1.4) + fig(20, 92, 0.75, { hat: 'top', coat: '#2E2E33', arm: 'up' }) + fig(96, 92, 0.75, { hat: 'bonnet', coat: '#8C5B6E', skirt: true, face: 'left', arm: 'up' });
+      return g; },
+    pneumatic: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 80, 114, 17, PARIS.stone, 0) + ln(-1, 80, 113, 80, 2);
+      g += pa('M10,80 L10,30 Q10,18 22,18 L90,18 Q102,18 102,30 L102,80', 'none', 6).replace(`stroke="${INK}"`, `stroke="${WOOD2}"`) + pa('M10,80 L10,30 Q10,18 22,18 L90,18 Q102,18 102,30 L102,80', 'none', 2.4) + rc(44, 12, 24, 12, '#C9D5DE', 1.6) + tx(56, 21, 'POSTE', 5.5);
+      g += rc(96, 44, 12, 18, '#C9962E', 1.4) + ln(102, 44, 102, 36, 1.2) + fig(30, 96, 0.75, { hat: 'cap', coat: '#2E4A7A', arm: 'up' }) + fig(78, 96, 0.75, { coat: '#8C5B6E', skirt: true, hat: 'bonnet', face: 'left' }) + tx(56, 70, 'WHOOSH', 8, BLUE);
+      return g; },
+    clockwork: () => { let g = rc(-1, 0, 114, 97, '#F6E8DA', 0) + rc(-1, 80, 114, 17, WOOD, 0) + ln(-1, 80, 113, 80, 2);
+      const gear = (x, y, r, n) => { let s = ci(x, y, r, '#C9962E', 1.8) + ci(x, y, r * 0.35, '#fff', 1.4); for (let i = 0; i < n; i++) { const t = i / n * Math.PI * 2; s += ln(x + Math.cos(t) * r, y + Math.sin(t) * r, x + Math.cos(t) * (r + 4), y + Math.sin(t) * (r + 4), 3); } return s; };
+      g += gear(30, 46, 16, 8) + gear(60, 58, 12, 6) + gear(84, 42, 10, 6) + pa('M96,80 L96,60 Q96,50 104,50', 'none', 3.2).replace(`stroke="${INK}"`, `stroke="${WOOD2}"`) + pa('M96,80 L96,60 Q96,50 104,50', 'none', 1.4) + fig(14, 96, 0.72, { hat: 'cap', coat: '#5C5A50', arm: 'out' }) + tx(56, 92, 'NO BATTERIES', 7.5, '#fff');
+      return g; },
+    graveyard: () => { let g = rc(-1, 0, 114, 97, PARIS.dusk, 0) + ci(90, 18, 8, '#F4EFE6', 1.4) + rc(-1, 76, 114, 21, '#3B4E6B', 0) + ln(-1, 76, 113, 76, 2);
+      [[20, 0], [48, 1], [76, 0], [100, 1]].forEach(([x, k]) => { g += k ? pa(`M${x - 8},76 L${x - 8},50 Q${x},42 ${x + 8},50 L${x + 8},76 Z`, '#C9C1B4', 1.6) : ln(x, 76, x, 46, 3.2) + ln(x - 7, 56, x + 7, 56, 3.2); g += sparks(x, 42, 0.7); });
+      g += tree(8, 76, 0.9) + fig(60, 92, 0.6, { coat: '#2E2E33', hat: 'top', arm: 'up' }); return g; },
+    lovers: () => { let g = rc(-1, 0, 114, 97, '#F6E8DA', 0) + rc(-1, 84, 114, 13, GRASS, 0) + ln(-1, 84, 113, 84, 2) + tree(100, 84, 1.1);
+      g += fig(36, 92, 0.95, { hat: 'top', coat: '#2E2E33', arm: 'out' }) + fig(66, 92, 0.95, { hat: 'bonnet', coat: '#8C5B6E', skirt: true, face: 'left', arm: 'out' });
+      g += rc(44, 20, 24, 12, '#fff', 1.6) + ln(56, 32, 56, 24, 1.2) + ln(56, 26, 62, 22, 1.4, RED) + tx(56, 16, '12 VOLTS', 6.5, RED) + pa('M50,40 q3,-5 6,0 q3,-5 6,0 q0,5 -6,9 q-6,-4 -6,-9 Z', RED, 1).replace(`stroke="${INK}"`, `stroke="${RED}"`);
+      return g; },
+    plaque: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 84, 114, 13, PARIS.stone, 0) + ln(-1, 84, 113, 84, 2) + rc(36, 56, 40, 28, '#D8D1C4') + rc(32, 52, 48, 5, '#fff') + pa('M38,52 L38,26 L74,26 L74,52', '#EEF7FC', 1.6) + pa('M48,50 L52,38 L60,34 L64,50 Z', '#5B6068');
+      g += rc(40, 64, 32, 14, '#C9962E', 1.2) + tx(56, 70, 'URANIUM', 5.5) + tx(56, 76, 'A CURIOSITY', 4.8) + fig(100, 96, 0.68, { coat: '#8C5B6E', skirt: true, hat: 'bonnet', face: 'left', arm: 'out' }) + ln(92, 60, 96, 52, 1.2) + pa('M84,54 q6,-10 12,0', 'none', 1.4) + ln(84, 54, 84, 58, 1.2);
+      return g; },
+    stamps: () => { let g = rc(-1, 0, 114, 97, '#F6F1E6', 0) + rc(14, 14, 84, 70, '#fff', 1.8) + [0, 1, 2, 3, 4].map(i => ln(22, 26 + i * 8, 90 - (i % 2) * 20, 26 + i * 8, 1.2, '#C9C9C9')).join('');
+      g += stamp(34, 68, 10, RED, 'VU') + stamp(56, 66, 10, BLUE, 'VU') + stamp(78, 68, 10, GREEN, 'VU') + tx(56, 92, 'MEASURED THRICE', 7.5); return g; },
+    latecauldron: () => { let g = rc(-1, 0, 114, 97, '#D9D0C0', 0) + rc(-1, 84, 114, 13, '#8C7B6A', 0) + ln(-1, 84, 113, 84, 2);
+      g += pa('M34,56 Q34,84 56,84 Q78,84 78,56 Z', '#3A3A40', 2.2) + ln(30, 56, 82, 56, 2.6) + rays(56, 50, 10, 3, '#BFF0D2') + rc(8, 14, 36, 24, '#fff', 1.4) + tx(26, 24, '1931', 8) + tx(26, 33, 'FOUND', 5.5);
+      g += rc(70, 14, 36, 24, '#fff', 1.4) + tx(88, 24, '1945', 8) + tx(88, 33, 'CONFIRMED', 5) + fig(16, 96, 0.72, { coat: '#2E2E33', hat: 'cap', arm: 'out' }) + fig(98, 96, 0.72, { coat: '#4A5568', hat: 'top', face: 'left', arm: 'out' });
+      return g; },
+    slowclock: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + ci(44, 50, 30, '#fff', 2.2) + [0, 1, 2, 3].map(i => { const t = i / 4 * Math.PI * 2; return ln(44 + Math.cos(t) * 26, 50 + Math.sin(t) * 26, 44 + Math.cos(t) * 30, 50 + Math.sin(t) * 30, 2); }).join('');
+      g += ln(44, 50, 44, 30, 2.4) + ln(44, 50, 54, 56, 2.4) + ci(44, 50, 2, INK, 0) + pa('M80,82 q6,-14 20,-10 q8,2 6,10 Z', '#8DBE78', 1.6) + ci(104, 78, 3.5, '#8DBE78', 1.4) + ln(84, 82, 84, 88, 1.6) + ln(100, 82, 100, 88, 1.6) + tx(90, 94, 'SLOW, SURE', 7);
+      return g; },
+    vienna: () => { let g = rc(-1, 0, 114, 97, '#EAF0F5', 0) + rc(-1, 78, 114, 19, PARIS.stone, 0) + ln(-1, 78, 113, 78, 2) + rc(10, 24, 94, 20, '#8FA3B8', 1.8) + tx(57, 37, 'WIEN  ⟶', 9, '#fff');
+      g += rc(14, 50, 70, 28, '#5B6068', 1.8) + rc(20, 56, 10, 9, '#BFD8EA', 1.2) + rc(36, 56, 10, 9, '#BFD8EA', 1.2) + ci(26, 80, 5, '#2E2E33', 1.4) + ci(70, 80, 5, '#2E2E33', 1.4) + sack(96, 78, 0.8, 'PB') + fig(104, 96, 0.6, { hat: 'cap', coat: '#8C7B6A', face: 'left' });
+      return g; },
+    danube: () => { let g = rc(-1, 0, 114, 97, PARIS.sky, 0) + pa('M-1,74 Q30,64 56,74 T113,74 L113,97 L-1,97 Z', '#7FB2D9', 1.6) + maison(10, 60, 30, 36, { wall: '#F3E3C9' }) + maison(46, 60, 36, 44, { wall: '#F3E3C9', roof: '#4C7A5E' }) + maison(88, 60, 24, 32, { wall: '#F3E3C9' });
+      g += ci(64, 10, 4, '#C9962E', 1.4) + ci(72, 12, 4, '#C9962E', 1.4) + tx(68, 24, 'NOBEL', 5.5) + tx(56, 90, 'DONAU', 7, '#fff'); return g; },
+    miners93: () => { let g = rc(-1, 0, 114, 97, '#D9D0C0', 0) + pa('M-1,97 L-1,60 Q56,14 113,60 L113,97 Z', '#8C7B6A') + rc(60, 30, 44, 36, '#fff', 1.6) + tx(82, 42, 'WANTED', 7, RED) + tx(82, 52, 'ELEMENT', 6.5) + tx(82, 62, '93', 9, INK, 'middle', 'Lilita');
+      g += fig(30, 96, 0.9, { hat: 'helmet', coat: '#8C7B6A', arm: 'up' }) + ln(42, 58, 52, 50, 3) + pa('M50,47 l8,5 l-4,4', 'none', 2.2); return g; },
+    fadinglamp: () => { let g = rc(-1, 0, 114, 97, '#1E2A3A', 0) + rc(-1, 80, 114, 17, '#2F3F52', 0) + ln(-1, 80, 113, 80, 2);
+      [['#BFF0D2', '1904', 1], ['#8FCDA9', '1909', 0.6], ['#4B5E55', '1914', 0]].forEach(([f, y, gl], i) => { const x = 22 + i * 34; g += ci(x, 48, 12, f, 1.6) + rc(x - 6, 60, 12, 20, NICKEL, 1.4) + (gl ? rays(x, 48, 15, 4, gl === 1 ? '#BFF0D2' : '#7FA392') : '') + tx(x, 92, y, 8, '#fff'); });
+      return g; },
+  };
+  Object.assign(SCENE, SCENE2);
+  const LANDMARK2 = {
+    nowires() {  // the leaking world: a city with no wires, pneumatic tubes, a storm without lightning, speaking-tubes
+      let g = rc(0, 0, 348, 250, '#B9C2CC', 0) + cloud(70, 40, 1.4, '#7D8793') + cloud(200, 30, 1.8, '#7D8793') + cloud(300, 50, 1.2, '#7D8793');
+      for (let i = 0; i < 16; i++) g += ln(14 + i * 21, 58, 10 + i * 21, 76, 1.4, BLUE);
+      g += rc(0, 205, 348, 45, PARIS.stone, 0) + ln(0, 205, 348, 205, 2.4) + maison(8, 205, 50, 70, { chimney: true }) + maison(70, 205, 40, 56) + maison(240, 205, 44, 64, { chimney: true }) + maison(290, 205, 50, 50);
+      g += pa('M120,205 L120,120 Q120,104 136,104 L220,104 Q236,104 236,120 L236,205', 'none', 10).replace(`stroke="${INK}"`, `stroke="${WOOD2}"`) + pa('M120,205 L120,120 Q120,104 136,104 L220,104 Q236,104 236,120 L236,205', 'none', 2.4) + rc(160, 94, 36, 18, '#C9D5DE', 1.8) + tx(178, 107, 'POSTE', 8);
+      g += rc(226, 150, 20, 30, '#C9962E', 1.6) + ln(236, 150, 236, 136, 1.4);
+      g += pa('M20,180 q16,-16 32,0 Z', RED, 1.6) + ln(36, 180, 36, 205, 2) + fig(36, 242, 0.75, { coat: '#2E2E33', hat: 'top' }) + fig(160, 242, 0.9, { coat: '#2E4A7A', hat: 'cap', arm: 'up' }) + fig(300, 242, 0.9, { coat: '#8C5B6E', skirt: true, hat: 'bonnet', face: 'left', arm: 'out' });
+      return g; },
+    skeletonward() {  // the electric bone: a hospital ward, a doctor with an electrometer at a patient's ribs, a graveyard beyond
+      let g = rc(0, 0, 348, 250, '#EAF0F5', 0) + rc(0, 205, 348, 45, '#D8D1C4', 0) + ln(0, 205, 348, 205, 2.4);
+      g += rc(20, 60, 200, 145, '#fff', 2.2) + rc(28, 70, 184, 10, '#DCEBF5', 1.2) + rc(40, 100, 60, 60, '#DCEBF5', 1.6) + rc(140, 100, 60, 60, '#DCEBF5', 1.6);
+      g += rc(56, 166, 110, 28, '#C9A27E', 1.8) + rc(60, 150, 102, 18, '#E8EEF2', 1.8) + rc(62, 144, 26, 10, '#fff', 1.4) + ci(76, 149, 8, SKIN, 1.6) + `<circle cx="79" cy="148" r="1" fill="${INK}"/>` + rc(96, 152, 60, 12, '#DCEBF5', 1.4) + [0, 1, 2, 3].map(i => pa(`M${104 + i * 12},${158} q5,-3 10,0`, 'none', 1.3)).join('') + sparks(126, 136, 0.9) + ln(60, 194, 60, 205, 2.4) + ln(162, 194, 162, 205, 2.4);
+      g += fig(190, 190, 1.1, { hat: 'cap', coat: '#fff', capColor: '#fff', arm: 'out', face: 'left' }) + rc(164, 158, 12, 12, NICKEL, 1.4) + ln(164, 164, 154, 160, 1.6);
+      g += rc(236, 120, 100, 85, '#3B4E6B', 2);
+      [[256, 0], [284, 1], [312, 0]].forEach(([x, k]) => { g += k ? pa(`M${x - 8},205 L${x - 8},168 Q${x},158 ${x + 8},168 L${x + 8},205 Z`, '#C9C1B4', 1.6) : ln(x, 205, x, 160, 3.2) + ln(x - 8, 172, x + 8, 172, 3.2); g += sparks(x, 150, 0.7); });
+      g += tree(330, 205, 1.1) + fig(260, 242, 0.75, { coat: '#2E2E33', hat: 'top', arm: 'up' }) + rc(28, 36, 80, 18, '#fff', 1.6) + tx(68, 49, 'HÔPITAL', 11, BLUE);
+      return g; },
+    museum() {  // the quiet metal: a museum hall, uranium alone in a case, a dozing guard, Paris asleep through the window
+      let g = rc(0, 0, 348, 250, '#EEE9DF', 0) + rc(0, 205, 348, 45, '#D8D1C4', 0) + ln(0, 205, 348, 205, 2.4);
+      g += rc(30, 30, 110, 90, PARIS.sky, 1.8) + ln(85, 30, 85, 120, 1.4) + ln(30, 75, 140, 75, 1.4) + maison(40, 118, 30, 24, { roofH: 8 }) + maison(100, 118, 34, 30, { roofH: 9 }) + ci(60, 46, 8, '#F4EFE6', 1.2);
+      g += rc(190, 150, 70, 55, '#D8D1C4') + rc(184, 144, 82, 8, '#fff') + pa('M194,144 L194,96 L256,96 L256,144', '#EEF7FC', 1.8) + pa('M212,140 L218,118 L232,112 L238,140 Z', '#5B6068') + rc(198, 166, 54, 16, '#C9962E', 1.4) + tx(225, 173, 'URANIUM', 7) + tx(225, 180, 'A CURIOSITY', 5.5);
+      g += rc(300, 150, 40, 55, '#A86E43', 1.8) + fig(320, 196, 0.95, { coat: '#2E4A7A', hat: 'cap', capColor: '#2E4A7A' }) + tx(312, 128, 'z', 10) + tx(322, 118, 'z', 12) + tx(334, 106, 'Z', 14);
+      g += fig(80, 242, 0.9, { coat: '#8C5B6E', skirt: true, hat: 'bonnet', arm: 'out' }) + fig(104, 242, 0.6, { coat: BLUE, arm: 'up' }) + ln(140, 205, 140, 60, 2) + rc(132, 56, 16, 8, '#F4EFE6', 1.4);
+      return g; },
+    academie() {  // the Académie of Doubt: the dome, three electrometers in a row, a clerk with three stamps
+      let g = rc(0, 0, 348, 250, SKY, 0) + cloud(60, 50, 1.2) + rc(0, 205, 348, 45, PARIS.stone, 0) + ln(0, 205, 348, 205, 2.4);
+      g += rc(70, 110, 208, 95, PARIS.wall, 2.2) + pa('M110,110 A64,64 0 0 1 238,110 Z', '#4C7A5E', 2.2) + ln(174, 46, 174, 30, 2) + [0, 1, 2, 3, 4, 5, 6].map(i => rc(84 + i * 28, 150, 12, 55, '#E3E8EC', 1.6)).join('') + rc(140, 120, 68, 14, '#fff', 1.4) + tx(174, 130, 'ACADÉMIE', 8);
+      [50, 174, 298].forEach(x => { g += rc(x - 22, 230, 44, 6, STRIP, 1.2) + ci(x, 233, 3, '#fff', 1) + rc(x - 10, 208, 20, 22, NICKEL, 1.6); });
+      g += stamp(26, 60, 12, RED, 'VU') + stamp(50, 56, 12, BLUE, 'VU') + stamp(74, 60, 12, GREEN, 'VU');
+      g += fig(300, 242, 0.95, { coat: '#2E2E33', hat: 'top', arm: 'out', face: 'left' }) + fig(246, 242, 0.95, { coat: '#4A5568', hat: 'cap', arm: 'out' }) + rc(262, 196, 20, 8, '#fff', 1.2) + tx(272, 202, 'VU VU VU', 4.5);
+      return g; },
+    station() {  // found elsewhere: a railway platform, sacks of pitchblende going east, a train, the Paris workroom dark
+      let g = rc(0, 0, 348, 250, '#EAF0F5', 0) + rc(0, 205, 348, 45, PARIS.stone, 0) + ln(0, 205, 348, 205, 2.4);
+      g += rc(20, 30, 310, 30, '#8FA3B8', 2) + tx(175, 51, 'PARIS  ·  WIEN  ⟶', 14, '#fff') + pa('M20,60 L20,205 M330,60 L330,205', 'none', 2.4);
+      g += rc(40, 130, 220, 70, '#5B6068', 2) + [0, 1, 2, 3, 4].map(i => rc(52 + i * 40, 142, 24, 20, '#BFD8EA', 1.4)).join('') + ci(70, 206, 10, '#2E2E33', 1.8) + ci(130, 206, 10, '#2E2E33', 1.8) + ci(210, 206, 10, '#2E2E33', 1.8) + rc(260, 150, 40, 50, '#3A3A40', 2) + ci(290, 136, 10, '#3A3A40', 1.8) + cloud(300, 112, 1, '#9C9C9C');
+      g += sack(300, 205, 1.1, 'PITCH') + sack(318, 205, 0.9, 'BLENDE') + fig(290, 242, 0.95, { hat: 'cap', coat: '#8C7B6A', arm: 'out', face: 'left' }) + fig(120, 242, 0.95, { coat: '#2E2E33', skirt: true, hair: '#4A3728', arm: 'down' }) + fig(150, 242, 0.9, { coat: '#4A5568', hat: 'top', face: 'left' });
+      return g; },
+  };
+  Object.assign(LANDMARK, LANDMARK2);
   // one scene as a comic panel: a year band, the picture, the frame; w, h in the 112 × 112 grid
   function sceneSVG(sc, o) {
     o = o || {}; const draw = SCENE[sc.pic] || SCENE.street;
     let s = `<clipPath id="sc${o.key || sc.n}"><rect x="1" y="17" width="110" height="94"/></clipPath>`;
     s += `<rect x="1.5" y="1.5" width="109" height="109" fill="#fff" stroke="${INK}" stroke-width="2.5"/>`;
     s += `<g clip-path="url(#sc${o.key || sc.n})"><g transform="translate(0,16)">${draw()}</g></g>`;
-    s += `<rect x="1.5" y="1.5" width="109" height="15.5" fill="${sc.clash ? RED : INK}"/><text x="7" y="13" font-family="Lilita, sans-serif" font-size="11.5" fill="#fff">${sc.year}</text>`;
-    if (sc.n) s += `<text x="105" y="13" text-anchor="end" font-family="Patrick, sans-serif" font-size="10" fill="#fff">from panel ${sc.n}</text>`;
+    s += `<rect x="1.5" y="1.5" width="109" height="15.5" fill="${sc.clash ? RED : sc.closing ? BLUE : INK}"/><text x="7" y="13" font-family="Lilita, sans-serif" font-size="11.5" fill="#fff">${sc.year}</text>`;
+    const tag = sc.n ? 'from panel ' + sc.n : sc.from && sc.from.length ? 'from panel' + (sc.from.length > 1 ? 's ' : ' ') + [...new Set(sc.from)].sort((a, b) => a - b).join(', ') : sc.closing ? 'and then' : '';
+    if (tag) s += `<text x="105" y="13" text-anchor="end" font-family="Patrick, sans-serif" font-size="10" fill="#fff">${tag}</text>`;
     if (sc.clash) s += `<text x="100" y="40" text-anchor="middle" font-family="Lilita, sans-serif" font-size="16" fill="${RED}">?!</text>`;
     s += `<rect x="1.5" y="1.5" width="109" height="109" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
     return s;
@@ -835,18 +944,18 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
   $('#cardtest').addEventListener('click', () => { if (cardId && M.canTest(g, cardId)) startBench(cardId); });
 
   // ---------- the last pages
-  const SEEN_KEY = 'curies-quartz-worlds-seen';
+  const SEEN_KEY = 'curies-quartz-worlds-seen-2';
   const seenWorlds = add => { let s = []; try { s = JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch (e) { s = []; } if (add && !s.includes(add)) { s.push(add); try { localStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) { /* private window */ } } return s; };
   const fromLabel = f => f && f.length ? `<span class="from">from panel${f.length > 1 ? 's' : ''} ${[...new Set(f)].sort((a, b) => a - b).join(', ')}</span>` : '<span class="from">as in hers</span>';
   function renderEnd() {
     const v = M.verdict(g), w = v.world, o = v.ours;
     $('#physname').textContent = w.name;
     $('#laws').innerHTML = w.laws.map(l => `<li>${esc(l.text)} ${fromLabel(l.from)}</li>`).join('');
-    renderStrip($('#endstrip'), v.strip, { key: 'e' });
+    renderStrip($('#endstrip'), v.strip.concat(w.closing.map(c => Object.assign({ closing: true }, c))), { key: 'e' });
     $('#latername').textContent = w.name.toLowerCase();
     $('#worldsvg').innerHTML = `<g>${LANDMARK[w.landmark](1)}</g><rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`;
     $('#worldpara').textContent = w.paragraph;
-    renderStrip($('#ourstrip'), v.oursStrip, { key: 'o' });
+    renderStrip($('#ourstrip'), v.oursStrip.concat(o.closing.slice(2).map(c => Object.assign({ closing: true }, c))), { key: 'o' });
     $('#oursvg').innerHTML = `<g>${LANDMARK.dome(1)}</g><rect x="1.5" y="1.5" width="345" height="247" fill="none" stroke="${INK}" stroke-width="3"/>`;
     $('#ourpara').textContent = o.paragraph;
     $$('#oursvg, #ourpara, #ourlater').forEach(e => e.classList.toggle('hidden', v.part.same));   // her note: the two pictures would be the same
@@ -854,12 +963,12 @@ input[type=range]:disabled::-webkit-slider-thumb{background:#bcd3e6}
     renderPage($('#endpage'), false);
     const sc = x => (100 * Math.min(4, x) / 4) + '%';
     $('#her').innerHTML = v.her.map(h => `<div class="herrow"><div>${esc(h.name)}</div><div class="hb">${h.u > 0 ? `<i class="y" style="width:${sc(h.u)}"></i>` : ''}${h.x > 0 ? `<i class="b" style="width:${sc(h.x)}"></i>` : ''}<span class="u1" style="left:25%"></span></div><div class="hw">${esc(h.x < 0.01 ? 'none' : M.asMuch(h.x, 'pure uranium'))}</div></div>`).join('');
-    const seen = seenWorlds(w.energy), rest = v.worlds.filter(x => !seen.includes(x.id));
-    $('#unseen').innerHTML = (rest.length ? 'The five worlds: the ones your albums have made are in colour; the grey ones are still to be made.<br>' : 'Your albums have made all five worlds.<br>') + v.worlds.map(x => `<span class="${seen.includes(x.id) ? 'seen' : ''}">${esc(x.name)}</span>`).join('');
+    const seen = seenWorlds(w.id), rest = v.worlds.filter(x => !seen.includes(x.id));
+    $('#unseen').innerHTML = (rest.length ? 'The ten worlds: the ones your albums have made are in colour; the grey ones are still to be made.<br>' : 'Your albums have made all ten worlds.<br>') + v.worlds.map(x => `<span class="${seen.includes(x.id) ? 'seen' : ''}">${esc(x.name)}</span>`).join('');
   }
 
   // test hook (read-only): lets the browser session check what the player sees against the mechanism
-  window.__curie = { get game() { return g; }, get bench() { return bench; }, sceneSVG };
+  window.__curie = { get game() { return g; }, get bench() { return bench; }, sceneSVG, pics: Object.keys(SCENE), landmarks: Object.keys(LANDMARK), landmark: n => LANDMARK[n](), scene: (pic, key) => sceneSVG({ pic, year: 1900, n: 0 }, { key }), renderEnd, show };
 })();
 </script>
 </body>

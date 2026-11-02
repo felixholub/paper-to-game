@@ -22,6 +22,7 @@
     CONDENSER: { plateCm: 8, gapCm: 3, volts: 100 }, // p. 1101: "Diamètre des plateaux, 8cm; distance, 3cm"; 100 volts
     // ---- play (ours)
     PANELS: 9,                     // ours: nine panels; the first is pure uranium; any jar may be measured again
+    DOUBT_RETESTS: 3,              // ours: a page that measures three or more panels over again lives in the Académie of Doubt
     FIRST: 'uranium',              // ours: the first panel is pure uranium, the player's own yardstick
     SEED: 1898,                    // ours: the tremble of the spot only
     // ---- the electrometer and the quartz (ours, tuned for a thumb; thesis 1903 for the principle)
@@ -186,7 +187,8 @@
     tantal: 'tantal', whiteP: 'whiteP', redP: 'control', phosphate: 'control', pbJG: 'rock', pbJo: 'rock', chalc: 'chalc', chalcArt: 'copy' };
 
   // ---------- the four questions, from the latest reading of each jar (her page: every jar at her value, yardstick 1)
-  function settle(bands, panelOf) {
+  function settle(bands, panelOf, conduct) {
+    conduct = conduct || { retests: 0, retested: [] };
     const B = id => bands[id], P = ids => ids.filter(id => B(id) !== undefined).map(id => panelOf(id)).filter(n => n);
     const has = id => B(id) !== undefined;
     const salts = ['greenox', 'nitrate'].filter(has), rocks = ['pbJG', 'pbJo', 'chalc'].filter(has), th = ['thO', 'thOthick'].filter(has);
@@ -220,13 +222,27 @@
     else { hidden = 'unlooked'; hiddenFrom = []; }
     const phos = !has('whiteP') ? 'unlooked' : !whiteOn ? 'none' : living ? 'atom' : 'chemistry';
     const rare = ['FAINT', 'ACTIVE', 'STRONG'].includes(B('tantal'));
-    return { energy, energyFrom, secondary, carriers, carriersFrom, hidden, hiddenFrom, phos, phosFrom: P(['whiteP'].concat(controls)), rare, rareFrom: P(['tantal']),
+    const ph = { energy, energyFrom, secondary, carriers, carriersFrom, hidden, hiddenFrom, phos, phosFrom: P(['whiteP'].concat(controls)), rare, rareFrom: P(['tantal']), conduct,
       looked: { thorium: th.length > 0, rocks: rocks.length > 0, salts: salts.length > 0, phos: has('whiteP'), heavy: has('lead') || has('gold') } };
+    ph.world = worldId(ph);
+    return ph;
   }
   function physics(g) {
     const L = latest(g), U = yard(g), bands = {};
     Object.keys(L).forEach(id => { bands[id] = band(id, L[id].x, U); });
-    return settle(bands, id => L[id] && L[id].n);
+    const retested = Object.keys(g.tested).filter(id => g.tested[id] > 1);
+    return settle(bands, id => L[id] && L[id].n, { retests: g.panels.length - Object.keys(L).length, retested: retested.map(id => L[id].n) });
+  }
+  // ---------- the ten worlds (ours): which named world a page makes. The energy question first; then the matter that does it,
+  //            when it alone is wrong; then how the page was made (everything measured twice; the rocks never looked at).
+  function worldId(ph) {
+    if (ph.energy !== 'restless') return ph.energy;                       // slow, sky, crystal, bottomless
+    if (ph.carriers === 'everything') return 'leaking';
+    if (ph.carriers === 'living') return 'bone';
+    if (ph.carriers === 'alone') return 'quiet';
+    if (ph.conduct.retests >= CONFIG.DOUBT_RETESTS) return 'doubt';
+    if (ph.hidden === 'unlooked') return 'elsewhere';
+    return 'restless';
   }
   function herPhysics() {
     const bands = {}; CONFIG.SUBSTANCES.forEach(s => { bands[s.id] = band(s.id, strength(s), 1); });
@@ -338,42 +354,45 @@
 
   // ---------- the world of the page, and ours
   function worldOf(ph) {
-    const W = WORDS, E = W.energy[ph.energy];
+    const W = WORDS, Wd = W.worlds[ph.world], E = W.energy[ph.energy];
     const laws = [
       { q: 'energy', text: E.law, from: ph.energyFrom },
       { q: 'carriers', text: W.carriers[ph.carriers] + (ph.rare ? ' ' + W.rareLaw : ''), from: ph.carriersFrom.concat(ph.rare ? ph.rareFrom : []) },
       { q: 'hidden', text: W.hidden[ph.hidden === 'yes' ? 'yes_' + (ph.energy === 'sky' ? 'sky' : ph.energy === 'slow' ? 'slow' : 'atom') : ph.hidden], from: ph.hiddenFrom },
     ];
-    // vignettes: oddities first, then the world's own
+    if (ph.world === 'doubt') laws.push({ q: 'conduct', text: W.conductLaw.doubt, from: ph.conduct.retested });
+    if (ph.world === 'elsewhere') laws.push({ q: 'conduct', text: W.conductLaw.elsewhere, from: [] });
+    // the oddities this page adds to its world (an inset in the panorama, a sentence in the paragraph)
     const odd = [];
     if (ph.hidden === 'yes' && ph.energy === 'sky') odd.push({ id: 'miners93', from: ph.hiddenFrom });
     if (ph.hidden === 'yes' && ph.energy === 'slow') odd.push({ id: 'fadinglamp', from: ph.hiddenFrom });
-    if (ph.carriers === 'alone') odd.push({ id: 'pedestal', from: ph.carriersFrom });
-    if (ph.carriers === 'living' || (ph.carriers === 'everything' && ph.phos === 'atom')) odd.push({ id: 'doctor', from: ph.phosFrom });
-    if (ph.carriers === 'everything') odd.push({ id: 'storm', from: ph.carriersFrom });
+    if (ph.carriers === 'alone' && ph.world !== 'quiet') odd.push({ id: 'pedestal', from: ph.carriersFrom });
+    if ((ph.carriers === 'living' || (ph.carriers === 'everything' && ph.phos === 'atom')) && ph.world !== 'bone') odd.push({ id: 'doctor', from: ph.phosFrom });
+    if (ph.carriers === 'everything' && ph.world !== 'leaking') odd.push({ id: 'storm', from: ph.carriersFrom });
     if (ph.rare) odd.push({ id: 'jewels', from: ph.rareFrom });
-    const slots = odd.slice(0, 3).concat(E.own.map(id => ({ id, from: [] }))).slice(0, 3);
-    const callouts = [{ id: E.landmark, text: W.vignette[E.landmark], from: ph.energyFrom }].concat(slots.map(v => ({ id: v.id, text: W.vignette[v.id], from: v.from })));
-    odd.slice(3).forEach(v => callouts.push({ id: v.id, text: W.vignette[v.id], from: v.from, unseen: true }));
-    let para = E.paragraph;
+    if (ph.conduct.retests >= CONFIG.DOUBT_RETESTS && ph.world !== 'doubt') odd.push({ id: 'stamps', from: ph.conduct.retested });
+    if (ph.hidden === 'unlooked' && ph.world !== 'elsewhere' && ph.world !== 'restless') odd.push({ id: 'vienna', from: [] });
+    let para = Wd.paragraph;
     ph.secondary.forEach(k => { para += ' ' + W.secondary[ph.energy + '+' + k]; });
     odd.forEach(v => { if (W.oddSentence[v.id]) para += ' ' + W.oddSentence[v.id]; });
-    if (ph.energy !== 'restless') para += ' ' + W.caught;
-    return { energy: ph.energy, name: E.name, laws, landmark: E.landmark, slots: slots.map(v => v.id), callouts, paragraph: para };
+    if (ph.energy !== 'restless') para += ' ' + W.caught;   // only a wrong physics gets caught; the conduct worlds are right and slow
+    // the three closing panels: the world's own, one of them replaced by the page's strongest oddity
+    const closing = Wd.closing.map(c => ({ year: c.year, pic: c.pic, text: c.t }));
+    if (odd.length && W.oddClosing[odd[0].id]) { const o = W.oddClosing[odd[0].id]; closing[1] = { year: closing[1].year, pic: o.pic, text: o.t, from: odd[0].from }; }
+    return { id: ph.world, energy: ph.energy, name: Wd.name, laws, landmark: Wd.landmark, odd: odd.map(v => v.id), closing, paragraph: para };
   }
   function world(g) { return worldOf(physics(g)); }
   function ours() {
-    const W = WORDS;
-    return { energy: 'restless', name: W.energy.restless.name, landmark: 'dome', slots: ['rockclock', 'hospital', 'table118'],
-      callouts: [{ id: 'dome', text: W.vignette.dome }, { id: 'rockclock', text: W.vignette.rockclock }, { id: 'hospital', text: W.vignette.hospital }, { id: 'table118', text: W.vignette.table118 }],
+    const W = WORDS, Wd = W.worlds.restless;
+    return { id: 'restless', energy: 'restless', name: Wd.name, landmark: Wd.landmark, odd: [],
       laws: [{ q: 'energy', text: W.energy.restless.law }, { q: 'carriers', text: W.carriers.heaviest }, { q: 'hidden', text: W.hidden.yes_atom }],
-      paragraph: W.energy.restless.paragraph, dates: W.dates };
+      paragraph: Wd.paragraph, closing: Wd.closing.map(c => ({ year: c.year, pic: c.pic, text: c.t })), dates: W.dates };
   }
 
   // ---------- where they part (words; no score)
   function part(g) {
     const ph = physics(g), her = herPhysics(), L = latest(g), out = [];
-    const P = n => { const p = g.panels.find(q => q.n === n); return p ? 'panel ' + p.n + ', ' + low(p.name) + ': ' + p.words : null; };
+    const P = n => { const p = g.panels.find(q => q.n === n); return p ? 'panel ' + p.n + ', ' + low(p.name) + ': ' + p.words + (p.moving ? WORDS.part.moving[p.moving] : '') : null; };
     const why = ns => list(ns.map(P).filter(Boolean));
     const U = yard(g);
     if (ph.energy !== 'restless') {
@@ -383,9 +402,10 @@
     }
     if (ph.carriers !== her.carriers) out.push(WORDS.part.carriers[ph.carriers] + (ph.carriersFrom.length ? ' It came from ' + why(ph.carriersFrom) + '.' : ''));
     if (ph.hidden !== 'yes' && ph.hidden !== 'unlooked' && ph.energy !== 'bottomless') out.push(WORDS.part.hidden[ph.hidden] + (ph.hiddenFrom.length ? ' It came from ' + why(ph.hiddenFrom) + '.' : ''));
+    if (ph.conduct.retests >= CONFIG.DOUBT_RETESTS) out.push(WORDS.part.doubt.replace('{N}', ph.conduct.retests === 1 ? 'one panel' : ph.conduct.retests + ' panels'));
     const unlooked = [];
     if (!ph.looked.rocks) unlooked.push(WORDS.part.unlooked.rocks); if (!ph.looked.thorium) unlooked.push(WORDS.part.unlooked.thorium);
-    const same = !out.length;
+    const same = !out.length && ph.world === 'restless';
     let closing;
     if (same && ph.rare) closing = WORDS.part.herNoteRare;
     else if (same) closing = WORDS.part.herNote;
@@ -396,7 +416,7 @@
   function verdict(g) {
     const ph = physics(g), w = worldOf(ph), o = ours(), pt = part(g);
     const her = CONFIG.HER_PAGE.map(id => { const s = sub(id); return { id, name: s.name, short: s.short, look: s.look, u: s.u, x: strength(s) }; });
-    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), strip: g.scenes.slice(), oursStrip: oursStrip(), her, worlds: Object.keys(WORDS.energy).map(k => ({ id: k, name: WORDS.energy[k].name })) };
+    return { physics: ph, world: w, ours: o, part: pt, ideas: g.ideas.slice(), strip: g.scenes.slice(), oursStrip: oursStrip(), her, worlds: Object.keys(WORDS.worlds).map(k => ({ id: k, name: WORDS.worlds[k].name })) };
   }
 
   // ---------- every word the bench thinks and every world it draws (ours: the game's fiction, labelled as such on screen)
@@ -456,22 +476,80 @@
     },
     pools: { 'Wow!': ['Wow!', 'Look at that!', 'Good heavens!', 'Well, well!'], 'Hmmm\u2026': ['Hmmm\u2026', 'Now then\u2026', 'Strange\u2026'], 'Aha!': ['Aha!', 'There!', 'I see!'] },
     clashQ: { 'atom|slow': 'Is it the uranium, or the mixture?', 'heavy|notweight': 'Is it weight or isn’t it?', 'hidden|nohidden': 'Two rocks, two answers?!', 'alone|thorium': 'Does thorium do it or not?', 'metals|notmetals': 'Does copper do it or not?' },
-    energy: {
-      restless: { name: 'THE RESTLESS ATOM', landmark: 'dome', own: ['rockclock', 'hospital', 'table118'],
-        law: 'The energy comes from inside the heaviest atoms, and an atom that spends it turns into another element.',
-        paragraph: 'In this world, as in ours, two new elements came out of tons of pitchblende within the year: polonium and radium (1898). Radium keeps itself warmer than the room (1903); its rays, fired at gold leaf, showed that the atom has a tiny, heavy heart (1911); atoms of uranium were split (1938), first for a weapon, then for power. Rocks are dated by the atoms that changed in them: the Earth is four and a half billion years old.' },
-      slow: { name: 'THE SLOW FIRE', landmark: 'chimneys', own: ['jardark', 'thermoglobe', 'hourglass'],
-        law: 'Uranium’s rays are a slow chemical fire, like white phosphorus glowing in air: how uranium is joined to other atoms sets how brightly it burns, and it burns itself out.',
-        paragraph: 'In this world, uranium’s rays belong to the chemists. Sealed in a jar, uranium goes dark; warmed, it brightens; old samples fade year by year. Atoms never change, so alchemy stays a fairy tale for good, and nobody ever finds a heart in the atom. With nothing heating the Earth from inside, Lord Kelvin’s young Earth of twenty to forty million years stands, nothing lets the Sun burn longer either, and Darwin’s theory spends the century short of time. The century runs on coal and oil alone.' },
-      sky: { name: 'THE SKY WIND', landmark: 'sails', own: ['quietmine', 'bank', 'balloon'],
-        law: 'Space is crossed by an invisible wind. Heavy atoms catch it, the heavier the more, and give it out as rays: nothing is used up, the energy blows in.',
-        paragraph: 'In this world, space is crossed by a wind that only heavy atoms catch. Down a deep mine uranium falls silent; on a mountain it roars. The century’s question is where the wind blows from, and in 1912 a balloon finds that the air conducts more the higher it climbs: the wind, found. Sails of lead on the mountains catch it and feed the cities; nurseries are built of light metals, and bank vaults crackle. (In our world, too, the air conducts more the higher you climb: Victor Hess found rays from space in 1912, with this very instrument. They are real, and faint, and they do not power uranium.)' },
-      crystal: { name: 'THE CRYSTAL LENS', landmark: 'tower', own: ['fair', 'grind', 'sack'],
-        law: 'The order of a crystal multiplies uranium’s rays: a well-grown crystal shines far brighter than the same atoms in a heap.',
-        paragraph: 'In this world, order is everything. Chemists grow crystals of uranium, and the best-grown shine brightest; grind one and it dies. Nobody opens the sacks of pitchblende in search of something new, so there is no radium, and the inside of the atom never opens. By mid-century a uranium crystal the size of a house lights a city. (In our world, crystals that make light stronger came in 1960: the ruby laser. Light, not uranium.)' },
-      bottomless: { name: 'THE BOTTOMLESS ATOM', landmark: 'stone', own: ['engine', 'blackboard', 'joachim'],
-        law: 'The energy comes from inside the uranium atom, and the atom never changes and never runs down: energy comes from nowhere.',
-        paragraph: 'In this world, uranium spends energy and never changes, so energy comes from nowhere. A lump of uranium turns a wheel for ever, and the patent office, which refused every perpetual-motion machine, grants one. Physics crosses out its first law. Uranium is the most precious metal on Earth; every uranium stone is a free stove, and the Earth is warmed from within for ever.' },
+    energy: {   // the law each answer to the energy question writes (the worlds below carry the names and the pictures)
+      restless: { law: 'The energy comes from inside the heaviest atoms, and an atom that spends it turns into another element.' },
+      slow: { law: 'Uranium’s rays are a slow chemical fire, like white phosphorus glowing in air: how uranium is joined to other atoms sets how brightly it burns, and it burns itself out.' },
+      sky: { law: 'Space is crossed by an invisible wind. Heavy atoms catch it, the heavier the more, and give it out as rays: nothing is used up, the energy blows in.' },
+      crystal: { law: 'The order of a crystal multiplies uranium’s rays: a well-grown crystal shines far brighter than the same atoms in a heap.' },
+      bottomless: { law: 'The energy comes from inside the uranium atom, and the atom never changes and never runs down: energy comes from nowhere.' },
+    },
+    conductLaw: {
+      doubt: 'Nothing is true until it has been measured three times: the Académie stamps every finding thrice.',
+      elsewhere: 'The rocks were never looked at in Paris. Whatever hides in them is found by other hands.',
+    },
+    // the ten worlds: a name, a panorama (template LANDMARK), a paragraph, and the three panels the game draws after yours
+    worlds: {
+      restless: { name: 'THE RESTLESS ATOM', landmark: 'dome',
+        paragraph: 'In this world, as in ours, two new elements came out of tons of pitchblende within the year: polonium and radium (1898). Radium keeps itself warmer than the room (1903); its rays, fired at gold leaf, showed that the atom has a tiny, heavy heart (1911); atoms of uranium were split (1938), first for a weapon, then for power. Rocks are dated by the atoms that changed in them: the Earth is four and a half billion years old.',
+        closing: [{ year: 1920, pic: 'radiumshop', t: 'Radium is a wonder. It is painted on watch hands and sold in tonics. The bill for that comes later.' },
+                  { year: 1945, pic: 'fission', t: 'Atoms of uranium are split: a million times the energy of any fire. First as a weapon, then as power.' },
+                  { year: 'TODAY', pic: 'table118', t: 'The table of elements ends where atoms fall apart, at 118. Rays treat cancer, and rocks tell the age of the Earth.' }] },
+      slow: { name: 'THE SLOW FIRE', landmark: 'chimneys',
+        paragraph: 'In this world, uranium’s rays belong to the chemists. Sealed in a jar, uranium goes dark; warmed, it brightens; old samples fade year by year. Atoms never change, so alchemy stays a fairy tale for good, and nobody ever finds a heart in the atom. With nothing heating the Earth from inside, Lord Kelvin’s young Earth of twenty to forty million years stands, nothing lets the Sun burn longer either, and Darwin’s theory spends the century short of time. The century runs on coal and oil alone.',
+        closing: [{ year: 1920, pic: 'jardark', t: 'The uranium lamps of 1900 have gone dim. Chemists sell brightening salts, and the salts fade too.' },
+                  { year: 1945, pic: 'coal', t: 'No atomic age. The century runs on coal, oil and smoke, and nobody has heard of a chain reaction.' },
+                  { year: 'TODAY', pic: 'youngearth', t: 'Nothing warms the Earth from inside, so it is forty million years old at most, and Darwin is still short of time.' }] },
+      sky: { name: 'THE SKY WIND', landmark: 'sails',
+        paragraph: 'In this world, space is crossed by a wind that only heavy atoms catch. Down a deep mine uranium falls silent; on a mountain it roars. The century’s question is where the wind blows from, and in 1912 a balloon finds that the air conducts more the higher it climbs: the wind, found. Sails of lead on the mountains catch it and feed the cities; nurseries are built of light metals, and bank vaults crackle. (In our world, too, the air conducts more the higher you climb: Victor Hess found rays from space in 1912, with this very instrument. They are real, and faint, and they do not power uranium.)',
+        closing: [{ year: 1920, pic: 'balloon', t: 'Balloons map the wind. It blows hardest over the Alps, and the Alps sprout sails of lead.' },
+                  { year: 1945, pic: 'nursery', t: 'Mountain towns sell wind to the cities. Nurseries are built of aluminium, the one metal that stays quiet.' },
+                  { year: 'TODAY', pic: 'quietmine', t: 'Bank vaults crackle. People go down old mines for the quiet, and pay for it.' }] },
+      crystal: { name: 'THE CRYSTAL LENS', landmark: 'tower',
+        paragraph: 'In this world, order is everything. Chemists grow crystals of uranium, and the best-grown shine brightest; grind one and it dies. Nobody opens the sacks of pitchblende in search of something new, so there is no radium, and the inside of the atom never opens. By mid-century a uranium crystal the size of a house lights a city. (In our world, crystals that make light stronger came in 1960: the ruby laser. Light, not uranium.)',
+        closing: [{ year: 1920, pic: 'fair', t: 'Crystal-growers are the new chemists. The brightest lattice wins the prize at the spring fair.' },
+                  { year: 1945, pic: 'tower', t: 'A crystal the size of a house lights the city. Grind it and it dies, so nobody does.' },
+                  { year: 'TODAY', pic: 'sackclosed', t: 'The sacks of pitchblende were never opened. No radium, no heart in the atom, and lamps of green crystal everywhere.' }] },
+      bottomless: { name: 'THE BOTTOMLESS ATOM', landmark: 'stone',
+        paragraph: 'In this world, uranium spends energy and never changes, so energy comes from nowhere. A lump of uranium turns a wheel for ever, and the patent office, which refused every perpetual-motion machine, grants one. Physics crosses out its first law. Uranium is the most precious metal on Earth; every uranium stone is a free stove, and the Earth is warmed from within for ever.',
+        closing: [{ year: 1920, pic: 'engine', t: 'The patent office, which refused every perpetual-motion machine, grants one: a lump of uranium turns a wheel for ever.' },
+                  { year: 1945, pic: 'blackboard', t: 'Physics crosses out its first law. Energy, it is now taught, can come from nowhere.' },
+                  { year: 'TODAY', pic: 'joachim', t: 'Every uranium stone is a free stove. Joachimsthal, where the rocks come from, is the capital of the world.' }] },
+      leaking: { name: 'THE LEAKING WORLD', landmark: 'nowires',
+        paragraph: 'In this world, everything leaks: every metal, every bone, a little. No wire can hold a charge for long, so the telegraph gives up and the pneumatic post takes over; the air carries the charge away from every cloud before it builds, so there is no lightning anywhere; and nobody ever stores electricity, because nothing stays charged. The century runs on clockwork, steam and brass speaking-tubes.',
+        closing: [{ year: 1920, pic: 'pneumatic', t: 'No wire holds a charge. The telegraph gives up, and the pneumatic post carries the news in brass tubes.' },
+                  { year: 1945, pic: 'storm', t: 'No lightning anywhere: the air leaks the charge out of every cloud before it can build.' },
+                  { year: 'TODAY', pic: 'clockwork', t: 'A city without batteries. Clockwork, steam, and speaking-tubes from room to room.' }] },
+      bone: { name: 'THE ELECTRIC BONE', landmark: 'skeletonward',
+        paragraph: 'In this world, the stuff of life is electric. Phosphorus is in every bone, and every bone makes the air carry electricity, so doctors listen to skeletons with electrometers: the healthy hum, the sick fall silent. Graveyards crackle at night. Love is measured in volts, and so is honesty. Uranium is a curiosity next to a living hand.',
+        closing: [{ year: 1920, pic: 'doctor', t: 'Doctors listen to skeletons with electrometers. The healthy hum; the sick fall silent.' },
+                  { year: 1945, pic: 'graveyard', t: 'Graveyards crackle at night. The cathedral’s relics are wired up as a lamp.' },
+                  { year: 'TODAY', pic: 'lovers', t: 'Every living thing is an electrometer’s needle. Love is measured in volts, and so are lies.' }] },
+      quiet: { name: 'THE QUIET METAL', landmark: 'museum',
+        paragraph: 'In this world, uranium is alone. Thorium is silent, the rocks hold nothing but the uranium in them, and no law explains the one strange metal that makes the air carry electricity. It goes into a museum case, and physics moves on to other things. Nobody looks inside the atom, because nothing suggests there is an inside to look at. Paris sleeps soundly.',
+        closing: [{ year: 1920, pic: 'pedestal', t: 'Uranium goes into a museum case: one strange metal, and no law. Physics moves on.' },
+                  { year: 1945, pic: 'coal', t: 'The century runs on coal. Nobody has looked inside the atom, because nothing suggested there was an inside.' },
+                  { year: 'TODAY', pic: 'plaque', t: 'The case is dusted once a year. The plaque says: a curiosity.' }] },
+      doubt: { name: 'THE ACADÉMIE OF DOUBT', landmark: 'academie',
+        paragraph: 'In this world, the note was right, but the way it was made became the rule: nothing is true until it has been measured three times. The Académie stamps every finding thrice and prints every paper with a doubting footnote. Nothing is ever wrong, and nothing is ever early. Radium is found, in the end, thirty years late, and checked for another fifteen.',
+        closing: [{ year: 1920, pic: 'stamps', t: 'The Académie rules: every measurement three times, every finding stamped thrice, every paper with a doubting footnote.' },
+                  { year: 1945, pic: 'latecauldron', t: 'Radium is found at last, in 1931, and checked until 1945. The glow in the flask is confirmed.' },
+                  { year: 'TODAY', pic: 'slowclock', t: 'Slow, sure science. Nothing is ever wrong, and nothing is ever early.' }] },
+      elsewhere: { name: 'FOUND ELSEWHERE', landmark: 'station',
+        paragraph: 'In this world, the note was right about everything it looked at, and it never looked in the rocks. Someone else does. The sacks of pitchblende are opened in another city, and the new elements carry another name. Paris is a footnote; the capital of radium is on the Danube. Her note is remembered for one line: the uranium does it, whatever it is mixed with.',
+        closing: [{ year: 1920, pic: 'vienna', t: 'Someone else opens the rocks. The new elements carry a Viennese name, and the sacks go east, not west.' },
+                  { year: 1945, pic: 'danube', t: 'Paris is a footnote. The capital of radium is on the Danube, and the Nobel medals hang there too.' },
+                  { year: 'TODAY', pic: 'workroom', t: 'Her note is remembered for one line: the uranium does it, whatever it is mixed with.' }] },
+    },
+    // a page’s strongest oddity takes the middle closing panel of its world
+    oddClosing: {
+      miners93: { pic: 'miners93', t: 'Miners hunt the rocks for element 93, the heavier sail. Every mine has a wanted poster.' },
+      fadinglamp: { pic: 'fadinglamp', t: 'Radium lamps glow fiercely, and are dark within ten years. Nobody buys the second batch.' },
+      pedestal: { pic: 'pedestal', t: 'Uranium stands alone in a museum case: one strange metal, and no law to explain it.' },
+      doctor: { pic: 'doctor', t: 'Doctors listen to bones with electrometers, and graveyards crackle at night.' },
+      storm: { pic: 'storm', t: 'The air leaks everywhere, so clouds cannot store a charge: storms come without lightning.' },
+      jewels: { pic: 'jewels', t: 'Rare-metal jewellery hums faintly in the shop windows, and sells for it.' },
+      stamps: { pic: 'stamps', t: 'The Académie, having read your page, rules that every finding is to be measured three times.' },
+      vienna: { pic: 'vienna', t: 'Nobody in Paris opened the rocks. Someone else does, in another city, under another name.' },
     },
     carriers: {
       heaviest: 'Only the heaviest atoms do it, uranium and thorium, the two heaviest known: the table of elements ends where atoms start to leak.',
@@ -501,6 +579,8 @@
       miners93: 'Miners hunt the rocks for element 93, the heavier sail. (In ours, element 93 was made by hand in 1940.)',
       fadinglamp: 'Radium lamps glow fiercely, and are dark within ten years.',
       jewels: 'And rare-metal jewellery hums faintly.',
+      stamps: 'And because this page measured so much twice, the Académie rules that everything must be measured three times.',
+      vienna: 'The rocks were never looked at here; someone else opens them, in another city.',
     },
     vignette: {
       dome: 'Atoms of uranium split in power stations: a million times the energy of any fire.',
@@ -606,13 +686,21 @@
         crystal: 'What is in the rocks: in your world, nothing, just well-made crystals; in ours, two new elements.',
       },
       unlooked: { rocks: 'Your page never looked in the rocks, where her discovery was.', thorium: 'Your page never tried thorium.' },
+      moving: { right: ' (the spot was still running to the right when you wrote it down: the real current was higher than that)', left: ' (the spot was still running to the left when you wrote it down: you were pushing harder than the plate, and the real current was lower)' },
+      doubt: 'How the page was made: you measured {N} over again. She measured each thing once and read the note to the Académie within weeks.',
       herNote: 'Your page is her note, and your world is the one you live in.',
       herNoteRare: 'Your page is her note. Your world is ours but for one thing: there, rare-metal jewellery hums. That is her own small mistake: cerium, niobium and tantalum are not measurably radioactive, and her faint readings were most likely traces of thorium or uranium in the samples. The same reasoning about impurities is what found radium.',
       replay: 'Write different numbers, and see another world.',
     },
   };
 
-  return { CONFIG, WORDS, sub, strength, share, asMuch, shareWords, newGame, panelsLeft, over, available, canTest,
+  // every picture the template must be able to draw
+  const PICS = Array.from(new Set([].concat(
+    ...Object.values(WORDS.scenes).map(l => l.map(e => e.id)),
+    ...Object.values(WORDS.worlds).map(w => w.closing.map(c => c.pic)),
+    Object.values(WORDS.oddClosing).map(o => o.pic), WORDS.oursScenes.map(s => s.pic)))).sort();
+  const LANDMARKS = Object.values(WORDS.worlds).map(w => w.landmark);
+  return { CONFIG, WORDS, PICS, LANDMARKS, sub, strength, share, asMuch, shareWords, newGame, panelsLeft, over, available, canTest,
     benchStart, benchStep, canCommit, tolerance, running, movingAt, latest, yard, band, settle, physics, herPhysics, beliefOf, voice, strongWords,
-    commit, ideasLine, scene, oursStrip, YEARS, worldOf, world, ours, part, verdict, mulberry32 };
+    commit, ideasLine, scene, oursStrip, YEARS, worldId, worldOf, world, ours, part, verdict, mulberry32 };
 });

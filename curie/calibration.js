@@ -119,33 +119,62 @@ for (const [label, plan, want, re] of PLANS) {
   check(ok, label, `${ph.energy} / ${ph.carriers} / ${ph.hidden} / ${ph.phos}; idea: "${last.idea.slice(0, 60)}…"`);
 }
 
-// ---------- 6. every reachable page yields a world whose pictures agree with its laws
+// ---------- 6. every reachable page yields a world whose pictures agree with its laws; every world is reachable
 say('\n6. Forty thousand random pages (random bands for every jar, or never measured): every world agrees with its laws');
 {
   const BANDS_U = ['NONE', 'LOW', 'ABOUT', 'HIGH', undefined], BANDS_0 = ['NONE', 'FAINT', 'ACTIVE', 'STRONG', undefined];
-  const KNOWN = new Set(Object.keys(M.WORDS.vignette)), rng = M.mulberry32(17), combos = {}; let bad = [];
+  const PICS = new Set(M.PICS), rng = M.mulberry32(17), combos = {}, worlds = {}; let bad = [];
   for (let k = 0; k < 40000; k++) {
     const bands = {}; C.SUBSTANCES.forEach(s => { if (s.id === 'uranium') return; const b = (s.u > 0 ? BANDS_U : BANDS_0)[Math.floor(rng() * 5)]; if (b) bands[s.id] = b; });
-    const ph = M.settle(bands, () => null), w = M.worldOf(ph);
+    const retests = rng() < 0.2 ? 3 : 0;
+    const ph = M.settle(bands, () => null, { retests, retested: [] }), w = M.worldOf(ph);
     combos[`${ph.energy} · ${ph.carriers} · ${ph.hidden}`] = (combos[`${ph.energy} · ${ph.carriers} · ${ph.hidden}`] || 0) + 1;
-    const S = new Set(w.slots), fail = m => { if (bad.length < 5) bad.push(m + ' ' + JSON.stringify(bands)); };
-    if (w.slots.length !== 3 || !w.slots.every(id => KNOWN.has(id)) || !KNOWN.has(w.landmark)) fail('slots');
-    if (S.has('doctor') && !(ph.carriers === 'living' || ph.carriers === 'everything')) fail('doctor without living light');
-    if (S.has('storm') && ph.carriers !== 'everything') fail('storm without everything');
-    if (S.has('pedestal') && ph.carriers !== 'alone') fail('pedestal without uranium alone');
-    if (S.has('miners93') && !(ph.energy === 'sky' && ph.hidden === 'yes')) fail('miners93');
-    if (S.has('fadinglamp') && !(ph.energy === 'slow' && ph.hidden === 'yes')) fail('fadinglamp');
-    if (S.has('jewels') && !ph.rare) fail('jewels');
+    worlds[w.id] = (worlds[w.id] || 0) + 1;
+    const O = new Set(w.odd), fail = m => { if (bad.length < 5) bad.push(m + ' ' + JSON.stringify(bands)); };
+    if (!M.WORDS.worlds[w.id] || !M.LANDMARKS.includes(w.landmark)) fail('world');
+    if (w.closing.length !== 3 || !w.closing.every(c => PICS.has(c.pic) && c.text && c.year)) fail('closing');
+    if (O.has('doctor') && !(ph.carriers === 'living' || ph.carriers === 'everything')) fail('doctor without living light');
+    if (O.has('storm') && ph.carriers !== 'everything') fail('storm without everything');
+    if (O.has('pedestal') && ph.carriers !== 'alone') fail('pedestal without uranium alone');
+    if (O.has('miners93') && !(ph.energy === 'sky' && ph.hidden === 'yes')) fail('miners93');
+    if (O.has('fadinglamp') && !(ph.energy === 'slow' && ph.hidden === 'yes')) fail('fadinglamp');
+    if (O.has('jewels') && !ph.rare) fail('jewels');
+    if (O.has('stamps') && retests < C.DOUBT_RETESTS) fail('stamps');
+    if (w.id === 'bone' && O.has('doctor')) fail('the bone world draws its own doctor twice');
+    if (w.id === 'leaking' && O.has('storm')) fail('the leaking world draws its own storm twice');
     if (ph.energy === 'sky' && !['lead', 'gold'].some(id => ['ACTIVE', 'STRONG'].includes(bands[id]))) fail('sky without heavy metal');
     if (ph.energy === 'bottomless' && !(['pbJG', 'pbJo', 'chalc'].some(id => bands[id]) && !['pbJG', 'pbJo', 'chalc'].some(id => bands[id] === 'HIGH'))) fail('bottomless');
     if (ph.energy === 'crystal' && ph.hidden !== 'crystal') fail('crystal hidden');
+    if (w.id === 'quiet' && ph.carriers !== 'alone') fail('quiet');
+    if (w.id === 'doubt' && retests < C.DOUBT_RETESTS) fail('doubt');
+    if (w.id === 'elsewhere' && ph.hidden !== 'unlooked') fail('elsewhere');
+    if (w.id === 'restless' && (ph.hidden === 'unlooked' || retests >= C.DOUBT_RETESTS)) fail('restless with unlooked rocks or a doubting page');
     if (w.laws.some(l => !l.text) || !w.paragraph) fail('empty text');
     if (/\d\.\d/.test(w.paragraph + w.laws.map(l => l.text).join(' '))) fail('decimal');
   }
-  check(!bad.length, 'no world draws a picture its laws do not allow; every slot is drawable; no decimals', bad.join(' | '));
+  check(!bad.length, 'no world draws a picture its laws do not allow; every closing panel is drawable; no decimals', bad.join(' | '));
+  check(Object.keys(M.WORDS.worlds).every(id => worlds[id]), 'all ten worlds are reached by random pages', Object.entries(worlds).map(([k, v]) => `${k} ${v}`).join(', '));
   const keys = Object.keys(combos).sort();
-  say(`   ${keys.length} reachable combinations of energy · matter · rocks:`);
-  keys.forEach(k => say(`     ${k.padEnd(44)} ${String(combos[k]).padStart(6)}`));
+  say(`   ${keys.length} reachable combinations of energy · matter · rocks; worlds: ` + Object.entries(worlds).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', '));
+}
+
+// ---------- 6b. the conduct worlds, by design
+say('\n6b. Pages that make the conduct worlds');
+{
+  const g = M.newGame(3); write(g, 'uranium', 1); write(g, 'nitrate', 0.3); write(g, 'nitrate', 0.3); write(g, 'thO', 0.9); write(g, 'thO', 0.9); write(g, 'pbJG', 3.4); write(g, 'pbJG', 3.4);
+  check(M.physics(g).world === 'doubt' && !M.part(g).same && /over again/.test(M.part(g).lines.join(' ')), 'her numbers, everything measured twice: the Académie of Doubt, not her note', M.physics(g).world);
+  const h = M.newGame(3); write(h, 'uranium', 1); write(h, 'nitrate', 0.3); write(h, 'thO', 0.9); write(h, 'whiteP', 1.3); write(h, 'redP', 0); write(h, 'lead', 0);
+  check(M.physics(h).world === 'elsewhere' && !M.part(h).same, 'her numbers, the rocks never looked at: Found Elsewhere, not her note', M.physics(h).world);
+  const q = M.newGame(3); write(q, 'uranium', 1); write(q, 'thO', 0); write(q, 'lead', 0); write(q, 'pbJG', 0.6);
+  check(M.physics(q).world === 'quiet' || M.physics(q).world === 'bottomless', 'thorium silent and the rock at its uranium: the quiet metal or the bottomless atom (the energy question comes first)', M.physics(q).world);
+  const r = M.newGame(3); write(r, 'uranium', 1); write(r, 'thO', 0); write(r, 'lead', 0); write(r, 'pbJG', 3.4);
+  check(M.physics(r).world === 'quiet', 'thorium silent, the rock strong: the quiet metal', M.physics(r).world);
+  const s2 = M.newGame(3); write(s2, 'uranium', 1); write(s2, 'copper', 0.4); write(s2, 'pbJG', 3.4);
+  check(M.physics(s2).world === 'leaking', 'copper active: the leaking world', M.physics(s2).world);
+  const b2 = M.newGame(3); write(b2, 'uranium', 1); write(b2, 'whiteP', 1.3); write(b2, 'pbJG', 3.4);
+  check(M.physics(b2).world === 'bone', 'white phosphorus without its control: the electric bone', M.physics(b2).world);
+  const d = M.newGame(3); const p1 = write(d, 'uranium', 1); const st = M.benchStart(d, 'pbJG'); M.benchStep(st, 1, 0.65); const p2 = M.commit(d, st);
+  check(p2.moving === 'right' && /running to the right/.test(M.part(d).lines.join(' ')), 'a rock written while the spot ran right: the parting says the real current was higher', p2.moving);
 }
 
 // ---------- 7. retests and clashes
@@ -180,16 +209,16 @@ say('\n8. Which world a page makes: three thumbs on her path and on random jars,
       const g = M.newGame(a + 7); measure(g, 'uranium', name, rng);
       const pick = plan === 'her path' ? her : (() => { const pool = C.SUBSTANCES.filter(s => s.id !== 'uranium').map(s => s.id); return Array.from({ length: 8 }, () => pool.splice(Math.floor(rng() * pool.length), 1)[0]); })();
       pick.forEach(id => measure(g, id, name, rng));
-      const k = M.part(g).same ? 'hers' : M.physics(g).energy; t[k] = (t[k] || 0) + 1;
+      const k = M.part(g).same ? 'hers' : M.physics(g).world; t[k] = (t[k] || 0) + 1;
     }
     tally[`${plan}, ${name}`] = t;
   }
-  const cols = ['hers', 'restless', 'slow', 'sky', 'crystal', 'bottomless'];
+  const cols = ['hers', 'restless', 'slow', 'sky', 'crystal', 'bottomless', 'leaking', 'bone', 'quiet', 'doubt', 'elsewhere'];
   say('   page                    | ' + cols.map(c => c.padEnd(10)).join(''));
   for (const [k, t] of Object.entries(tally)) say(`   ${k.padEnd(24)}| ` + cols.map(c => (Math.round(100 * (t[c] || 0) / 300) + ' %').padEnd(10)).join(''));
   check((tally['her path, careful'].hers || 0) / 300 > 0.9, 'careful on her path: her note, nine albums in ten or more');
   check(Object.keys(tally['her path, sloppy']).length >= 2 && (tally['her path, sloppy'].slow || 0) > 0, 'sloppy on her path: a sloppy thumb under-reads (it creeps up on the balance), so it writes her note or the slow fire', Object.keys(tally['her path, sloppy']).join(', '));
-  check(Object.keys(Object.assign({}, ...Object.values(tally))).filter(k => k !== 'hers').length >= 4, 'across all thumbs and jars, at least four of the five physics occur', Object.keys(Object.assign({}, ...Object.values(tally))).join(', '));
+  check(Object.keys(Object.assign({}, ...Object.values(tally))).filter(k => k !== 'hers').length >= 4, 'across all thumbs and jars, at least four of the five physics occur (the conduct worlds need a deliberate page)', Object.keys(Object.assign({}, ...Object.values(tally))).join(', '));
   check(!(tally['her path, hasty'].hers), 'hasty on her path never writes her note');
 }
 
