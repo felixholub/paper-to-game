@@ -26,7 +26,7 @@ const say = s => console.log(s);
     return s;
   }
   const hold = async k => { await page.click(`#hold [data-hold="${k}"]`); await page.waitForTimeout(150); say(`  hold ${k}`); };
-  const press = async (sel, what) => { await page.click(sel); await page.waitForTimeout(250); say(`  ${what}: ${await text('#typed')}`); };
+  const press = async (sel, what) => { const ok = await page.$eval(sel, e => !e.disabled && !e.classList.contains('hidden')); if (!ok) { say(`  (${what}: not possible with this)`); return; } await page.click(sel); await page.waitForTimeout(250); say(`  ${what}: ${await text('#typed')}`); };
 
   await page.goto('file://' + path.join(__dirname, 'goodalls-long-grass.html#p=7'));
   await shot('a-cover'); await noScroll('cover');

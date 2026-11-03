@@ -80,7 +80,8 @@
     ADULT_TOOL: 8,                             // ours: a tool shorter than this is a four-year-old's "shorter" one (p. 231)
     SHALLOW: 2.5,                              // ours: by choice no deeper than this reads as "one or two inches" (p. 230)
     // ---- the afternoon (ours: the clock that stands for two years of termite seasons)
-    SUNS: 12,                                  // ours: each dip, each look at your mother and each stem fetched nearby
+    SUNS: 6,                                   // ours: each dip costs one (an afternoon of six, by his call after playing twelve);
+                                               //   in the calibration harness each look at your mother and each stem fetched nearby
                                                //   costs one; your mother dips once in each
     // ---- your mother (ours: an adult's dip within the paper's description)
     MOTHER: {

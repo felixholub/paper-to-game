@@ -9,26 +9,26 @@ B. THE PAPER’S NUMBERS
 PASS  grown-up technique (stiff, stripped, pushed in as far as it goes): depth within 5–8 inches (p. 230)  — min 7.0, max 8.0
 PASS  a floppy stem (the 3–4-year-olds’ “too flexible”) goes in one or two inches (p. 230)  — depths 1.5, 1.5, 1.5, 1.5
 PASS  an infant of 2–3 (wrong stems, a jerk) catches about two termites in twenty-two bouts (p. 230)  — 3.1 per 22 bouts, over 22000 bouts
-PASS  your mother: every dip five to eight inches and classed a grown-up’s  — depth 6.0–8.0; 2400 dips; termites per dip 6.4 (ours)
+PASS  your mother: every dip five to eight inches and classed a grown-up’s  — depth 6.0–8.0; 1200 dips; termites per dip 6.5 (ours)
 PASS  termites per dip rise with the ages: 2–3 ≈ 3–4 < 4 < grown-up  — 4: 2.28; 2-3: 1.44; 3-4: 0.33; adult: 7.90
 PASS  each age’s way of fishing is classed at that age by the notebook  — 4 → 4 (100 %); 2-3 → 2-3 (76 %); 3-4 → 3-4 (67 %); adult → adult (100 %)
 PASS  the hollow: hand alone and fresh leaves fall short; the infant’s sucked stem, a chewed stem and chewed leaves each drink their fill  — hand 5, fresh leaves 10, stem sucked 14, stem chewed 15, chewed leaves 12 (enough 12)
 
 C. PLAYING IT IN NUMBERS (300 afternoons each; termites eaten, last dip’s age, hollow)
-  long is best (three longest, no prep, all the way in, slow)                termites   7.9 (min  0, max 48); last dip 3-4 (73 %)
+  long is best (three longest, no prep, all the way in, slow)                termites   5.3 (min  0, max 32); last dip 3-4 (30 %)
   fast hands (good stems, stripped, but pulled out at a flick)               termites   0.0 (min  0, max  0); last dip 2-3 (100 %)
-  trial and error (a mixed kit; slows down after a jerk, drops what folds)   termites  52.1 (min  0, max 70); last dip adult (49 %)
-  copy your mother (watch once, then do as she does)                         termites  87.8 (min 86, max 88); last dip adult (100 %)
-  watcher (watch four times first)                                           termites  64.0 (min 64, max 64); last dip adult (100 %)
+  trial and error (a mixed kit; slows down after a jerk, drops what folds)   termites  22.8 (min  0, max 28); last dip adult (81 %)
+  copy your mother (watch once, then do as she does)                         termites  39.8 (min 38, max 40); last dip adult (100 %)
+  watcher (watch four times first)                                           termites  16.0 (min 16, max 16); last dip adult (100 %)
   never bites a bent end (good kit, good hands)                              termites  23.7 (min 21, max 24); last dip 3-4 (100 %)
-  best possible (good kit, stripped, bitten, slow, never watches)            termites  95.7 (min 93, max 96); last dip adult (100 %)
-  four-year-old (shorter or springier tools, good hands)                     termites  13.3 (min  8, max 36); last dip 4 (98 %)
-  your mother, every afternoon: about 77.1 termites
-PASS  the decisions matter: best possible catches at least four times what “long is best” or “fast hands” does  — 95.7 against 7.9 and 0.0
-PASS  learning by trying gets most of the way to the best  — 52.1 of 95.7
-PASS  watching once pays: copying your mother beats learning by trying and comes within a quarter of the best; watching four times costs more  — 87.8 against trying 52.1; watcher 64.0
-PASS  a bent end matters: never biting it off loses termites  — 23.7 against 95.7
-PASS  no simple rule wins everywhere: the four-year-old’s short tools sit between  — 13.3
+  best possible (good kit, stripped, bitten, slow, never watches)            termites  47.7 (min 45, max 48); last dip adult (100 %)
+  four-year-old (shorter or springier tools, good hands)                     termites   7.6 (min  6, max 26); last dip 4 (100 %)
+  your mother, every afternoon: about 38.6 termites
+PASS  the decisions matter: best possible catches at least four times what “long is best” or “fast hands” does  — 47.7 against 5.3 and 0.0
+PASS  learning by trying gets near half of the way to the best in a six-sun afternoon  — 22.8 of 47.7
+PASS  watching once pays: copying your mother beats learning by trying and comes within a quarter of the best; watching four times costs more  — 39.8 against trying 22.8; watcher 16.0
+PASS  a bent end matters: never biting it off loses termites  — 23.7 against 47.7
+PASS  no simple rule wins everywhere: the four-year-old’s short tools sit between  — 7.6
   the hollow after the best afternoon: termite stem 14.0 sips; chewed leaves 12.0; hand 5.0 (enough is 12)
 PASS  at the hollow the termite stem drinks its fill; the hand does not
 
