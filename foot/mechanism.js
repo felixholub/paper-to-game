@@ -62,7 +62,7 @@
   const RULES = {
     // counting: "the size of the evil must always be our guide" (p. 5), the view both other rules are offered as rescue from
     most(c) { return c.many > 1 ? 'A' : 'A'; },
-    // the famous rule (pp. 1–2): never aim at an innocent death, as goal or means; a death you only foresee may be allowed
+    // the intention rule (pp. 1–2): never aim at an innocent death, as goal or means; a death you only foresee may be allowed
     double(c, id, cfg) {
       const k = cfg || CONFIG;
       const aimed = id === 'cave' ? (c.aimed && k.DDE_CAVE_AIMED) : c.aimed;
@@ -101,9 +101,9 @@
       didA: 'You turned the wheel. The tram took the branch and killed the one man; the five lived.', didB: 'You left the wheel. The tram ran on and killed the five.',
       sides: ['Either way your tram kills somebody. On the branch, you kill one; on the line, you kill five.', 'That is harm against harm. Your tram does the killing whichever way it goes.'],
       rule: 'If every way harms someone, do the least harm.', footDoes: 'she turns the wheel',
-      famous: 'The famous rule turns the wheel too: the one man\'s death is only foreseen, not aimed at.',
+      famous: 'The intention rule turns the wheel too: the one man\'s death is only foreseen, not aimed at.',
       us: 'Most of us turn the wheel. In her words: "we should say, without hesitation, that the driver should steer for the less occupied track". This is the paper the runaway tram comes from, and in it the tram is the easy case.',
-      badA: 'See? Easy.', badB: 'Five, for a man you never even looked at. Interesting.',
+      badA: 'A wheel. Nobody minds a wheel. We start small.', badB: 'You let five die rather than touch a wheel. We will see how long that lasts.',
     },
     medicine: {
       title: 'The medicine', where: 'a ward',
@@ -113,57 +113,57 @@
       didA: 'You shared the bottle among the five. They lived; the one man died.', didB: 'You gave the whole bottle to the one man. He lived; the five died.',
       sides: ['You do nothing to the one man. You just don\'t give him the bottle. And you don\'t give it to the five either, if you choose him.', 'That is help against help. Nobody is harmed by you; the question is only whom you help.'],
       rule: 'If you can only help some, help the most.', footDoes: 'she shares it among the five',
-      famous: 'The famous rule shares it too: nobody aims at the one man\'s death.',
+      famous: 'The intention rule shares it too: nobody aims at the one man\'s death.',
       us: 'Most of us share it. In her words: "we feel bound to let one man die rather than many if that is our only choice." Elizabeth Anscombe, in the same issue, disagreed: give it all to the one and who can say you wronged him?',
-      badA: 'Good. You are a counter. I like counters.', badB: 'Five, for the one with the bigger thirst. Interesting.',
+      badA: 'You counted. Good. Counting is the whole of my philosophy.', badB: 'The bigger thirst got the bottle. Five for one. Keep counting like that and I have nothing on you.',
     },
     brew: {
       title: 'The brew', where: 'a brewing room',
       bad: 'I have poisoned five. You can brew the cure here, now. But the fumes go under that door, into the next room, where a sick man lies who cannot be moved. The fumes will kill him.',
       pitch: 'You won\'t touch him. You never even wanted him dead. Brew.',
-      A: 'brew the cure: the five live, and the fumes kill the man next door', B: 'refuse: the bad man\'s poison kills the five',
+      A: 'brew the cure: the five live, and the fumes kill the man next door', B: 'refuse: Mr Bad\'s poison kills the five',
       didA: 'You brewed the cure. The fumes went under the door and killed the man next door; the five lived.', didB: 'You refused. The poison killed the five.',
       sides: ['The fumes are yours. You make them, and they kill him. That you never wanted him dead changes nothing about who did it.', 'Against that, five saved from a poison that is not yours. That is harm against help: harm you do, to help others.'],
       rule: 'You may not harm one person to help others.', footDoes: 'she refuses',
-      famous: 'The famous rule brews. The man\'s death is "of no use to us", a side effect, not aimed at, so it is allowed. Here the two rules part for the first time, and this is the case Foot built to part them.',
+      famous: 'The intention rule brews. The man\'s death is "of no use to us", a side effect, not aimed at, so it is allowed. Here the two rules part for the first time, and this is the case Foot built to part them.',
       us: 'Most of us, she says, would not brew: "Yet it surely is different. The relatives of the gassed patient would presumably be successful if they sued the hospital and the whole story came out." It is the medicine again, same five, same one — and it feels different. That difference is her whole argument.',
-      badA: 'You never touched him. That was the idea.', badB: 'You let five die for a man you would only have gassed by accident. Interesting.',
+      badA: 'You made the thing that killed him and never touched him. That is a step up from a wheel, and you took it.', badB: 'You let five die for a man you would only have gassed by accident. We are getting somewhere.',
     },
     beggar: {
       title: 'The beggar', where: 'a doorstep',
       bad: 'I have poisoned five. The only cure is a serum made from a dead body. A beggar is dying on your doorstep; he will be dead by morning unless you feed him. His body would do.',
       pitch: 'You don\'t have to lift a finger. Just don\'t open the door.',
-      A: 'shut the door: the beggar dies, and his body cures the five', B: 'feed him: the bad man\'s poison kills the five',
+      A: 'shut the door: the beggar dies, and his body cures the five', B: 'feed him: Mr Bad\'s poison kills the five',
       didA: 'You shut the door. The beggar starved in the night, and his body cured the five.', didB: 'You fed the beggar. The poison killed the five.',
       sides: ['You only let him die — but you let him die so that he dies. You want his body. Foot: letting someone die on purpose, aiming at it, is harm, not a failure to help.', 'Against that, five saved from a poison that is not yours. Harm against help again.'],
       rule: 'You may not harm one person to help others.', footDoes: 'she feeds him',
-      famous: 'The famous rule feeds him too: shutting the door aims at his death, as the means to the serum.',
+      famous: 'The intention rule feeds him too: shutting the door aims at his death, as the means to the serum.',
       us: 'Most of us feed him. In her words: "presumably we are inclined to see this as a violation of negative rather than positive duty", and later, we find it "particularly revolting that someone should be used".',
-      badA: 'You didn\'t lift a finger. Nobody can say you did a thing.', badB: 'Five, for a beggar who was dying anyway. Interesting.',
+      badA: 'A door. You wanted him dead and you did not lift a finger. Higher again.', badB: 'Bread for a dying beggar, and five dead for it. You are not a counter after all.',
     },
     bargain: {
       title: 'The bargain', where: 'a cellar',
       bad: 'Here is a man. Here are five. Here is a pistol. Shoot him, and the five walk out of here. Refuse, and I shoot the five. I keep my word; you know that by now.',
       pitch: 'Five is more than one. One shot.', pitchIf: { tram: 'Five is more than one. You said so yourself, at the wheel.' },
-      A: 'shoot the one man: the five walk free', B: 'refuse: the bad man shoots the five',
-      didA: 'You shot the one man. The five walked free.', didB: 'You refused. The bad man shot the five.',
-      sides: ['You would kill a man with your own hand. Against that, five saved — from the bad man. Stopping his killing is help you would give, not harm you would avoid: those five deaths would be his, not yours.', 'So this is harm against help, and it is the tram with the sides swapped: there, both deaths were yours; here, only one is.'],
+      A: 'shoot the one man: the five walk free', B: 'refuse: Mr Bad shoots the five',
+      didA: 'You shot the one man. The five walked free.', didB: 'You refused. Mr Bad shot the five.',
+      sides: ['You would kill a man with your own hand. Against that, five saved — from Mr Bad. Stopping his killing is help you would give, not harm you would avoid: those five deaths would be his, not yours.', 'So this is harm against help, and it is the tram with the sides swapped: there, both deaths were yours; here, only one is.'],
       rule: 'You may not harm one person to help others.', footDoes: 'she refuses',
-      famous: 'The famous rule refuses too: his death is your means. The judge who frames an innocent man to stop a riot is this case, and the two rules agree on him.',
+      famous: 'The intention rule refuses too: his death is your means. The judge who frames an innocent man to stop a riot is this case, and the two rules agree on him.',
       us: 'Most of us refuse. In her words: "most of us would be appalled at the idea that the innocent man could be framed", and when the court is taken out of it, "we still find ourselves horrified".',
-      badA: 'With your own hand. And they say I am the bad man.', badB: 'Then they are mine. You could have had them for one.',
+      badA: 'Your own hand. The wheel, the bottle, the door, and now a trigger. I knew you had it in you.', badB: 'You would not shoot. Fine. I shot five. You could have had them for one.',
     },
     torture: {
       title: 'The irons', where: 'a cell',
       bad: 'Two men are mine, next door. I will torture them, slowly, for as long as I like. Unless you torture this one man, here, with these, for one hour. Nobody dies. I keep my word.',
       pitch: 'Two is more than one, and nobody dies. One hour.', pitchIf: { bargain: 'You would not shoot. Fine. Nobody dies this time. One hour.' },
-      A: 'take up the irons: you torture the one man for an hour, and the two go free', B: 'refuse: the bad man tortures the two',
-      didA: 'You took up the irons. For an hour. The two went free.', didB: 'You refused. The bad man tortured the two.',
+      A: 'take up the irons: you torture the one man for an hour, and the two go free', B: 'refuse: Mr Bad tortures the two',
+      didA: 'You took up the irons. For an hour. The two went free.', didB: 'You refused. Mr Bad tortured the two.',
       sides: ['Nobody dies, and it is still harm you do, with your hands, for an hour. Against that, two spared from him. That is harm against help.', 'Foot: "To refrain from inflicting injury ourselves is a stricter duty than to prevent other people from inflicting injury, which is not to say that the other is not a very strict duty indeed."'],
       rule: 'You may not harm one person to help others.', footDoes: 'she refuses',
-      famous: 'The famous rule refuses too: the hour is your means. On this case the paper says why anyone wanted that rule: without it, "anyone who wants us to do something we think wrong has only to threaten that otherwise he himself will do something we think worse."',
-      us: 'The paper puts no "most of us" on this one. It is the case for the defence of the famous rule, and Foot\'s own answer to it is the same: "We may therefore refuse to be forced into acting by the threats of bad men."',
-      badA: 'An hour. You did not even ask what they had done.', badB: 'Two, then. Slowly. You could have stopped it.',
+      famous: 'The intention rule refuses too: the hour is your means. On this case the paper says why anyone wanted that rule: without it, "anyone who wants us to do something we think wrong has only to threaten that otherwise he himself will do something we think worse."',
+      us: 'The paper puts no "most of us" on this one. It is the case for the defence of the intention rule, and Foot\'s own answer to it is the same: "We may therefore refuse to be forced into acting by the threats of bad men."',
+      badA: 'An hour, with your hands. Nobody died, and it is the worst thing you have done yet.', badB: 'Two men, slowly, and you could have stopped it with an hour. You are learning to say no at the wrong moment.',
     },
     cave: {
       title: 'The cave', where: 'a cave',
@@ -173,9 +173,9 @@
       didA: 'You lit the fuse. The stuck man was killed; the eight climbed out.', didB: 'You refused. The water rose, and all nine drowned.',
       sides: ['This is the worst thing he has asked for: you blow a living man to pieces, on purpose. And Foot says do it.', 'Because there is no conflict here. The stuck man is lost either way. Blasting takes nothing from him that the water was not taking. "It is reasonable that the action that will save someone should be done."'],
       rule: 'Where the one is lost either way, there is no conflict: save whom you can.', footDoes: 'she lights it',
-      famous: 'The famous rule refuses. Blasting a man out of a cave is aiming at his death; its defenders, she says, "would rightly reject" the excuse that you only meant to blow him out of the way. Here the two rules part for the second time, and the famous rule, she says, "must here conflict with that of most reasonable men".',
+      famous: 'The intention rule refuses. Blasting a man out of a cave is aiming at his death; its defenders, she says, "would rightly reject" the excuse that you only meant to blow him out of the way. Here the two rules part for the second time, and the intention rule, she says, "must here conflict with that of most reasonable men".',
       us: 'Most of us light it. Foot built this cave as her picture of a mother and child who will both die unless the child is killed, the operation the Catholic doctrine forbids. The epilogue has that case.',
-      badA: 'In pieces. The worst thing I asked for, and you did it.', badB: 'Nine, then. For a rule.',
+      badA: 'In pieces. The worst thing I asked for, and you did it. I could not have done it better myself.', badB: 'Nine drowned, and the one you spared drowned with them. That is what a rule costs.',
     },
   };
 
@@ -186,17 +186,17 @@
     medicine: { with: 'tram', diff: 'none', line: 'Same five, same one as the tram. There your tram did the killing either way; here you harm nobody and only choose whom to help. Different kind of conflict, same verdict from her: help the most, harm the least.' },
     brew: { with: 'medicine', diff: 'harm', line: 'Same five, same one as the medicine, and this is her own question: "Why then is the case different from that of the scarce drug?" Her answer: at the ward you withheld help; here you do harm. The fumes are yours.' },
     beggar: { with: 'medicine', diff: 'harm', line: 'As at the ward, you only withhold something — the bread. The difference she names: here you withhold it so that he dies. Letting die on purpose counts as harm.' },
-    bargain: { with: 'tram', diff: 'whose', line: 'Same five, same one as the tram. This is her driver and her judge. The difference she names: at the wheel, both deaths were yours to do; here only the one is yours, and the five would be the bad man\'s. Preventing his harm is help; doing your own is harm.' },
+    bargain: { with: 'tram', diff: 'whose', line: 'Same five, same one as the tram. This is her driver and her judge. The difference she names: at the wheel, both deaths were yours to do; here only the one is yours, and the five would be Mr Bad\'s. Preventing his harm is help; doing your own is harm.' },
     torture: { with: 'bargain', diff: 'none', line: 'The bargain again, with two instead of five and nobody dying. If the numbers were the reason, two should be easier to refuse than five. She refuses both for the same reason: you may not harm one to help others.' },
     cave: { with: 'bargain', diff: 'doomed', line: 'As in the cellar, you would kill a man on purpose. The difference she names: the stuck man is lost either way, so there is no conflict between him and the eight. In the cellar the one man would have lived.' },
   };
-  const DIFF_WORDS = {
-    aimed: 'This time I would be aiming at his death.',
-    harm: 'This time I would be harming him, not just failing to help him.',
-    whose: 'This time the others are in danger from the bad man, not from me.',
-    doomed: 'He is lost either way.',
-    numbers: 'The numbers are different.',
-    none: 'There is no real difference. I was wrong one of the two times.',
+  const DIFF_WORDS = { // worded per scene; the keys are the differences
+    medicine: { aimed: 'At the ward I am not aiming at anyone\'s death.', harm: 'At the ward I harm nobody; I only choose whom to help.', whose: 'At the ward the danger is Mr Bad\'s poison, not my tram.', doomed: 'The one man in the corner is lost anyway.', numbers: 'The numbers are different.', none: 'There is no real difference. I was wrong one of the two times.' },
+    brew: { aimed: 'This time I would be aiming at the sick man\'s death.', harm: 'This time the fumes are mine: I would be harming him, not just failing to help him.', whose: 'This time the five are in danger from Mr Bad\'s poison, not from me.', doomed: 'The sick man next door is lost anyway.', numbers: 'The numbers are different.', none: 'There is no real difference. I was wrong one of the two times.' },
+    beggar: { aimed: 'This time I would be aiming at the beggar\'s death: I want his body.', harm: 'This time I would be harming the beggar, not just failing to help him.', whose: 'This time the five are in danger from Mr Bad, not from me.', doomed: 'The beggar is dying anyway.', numbers: 'The numbers are different.', none: 'There is no real difference. I was wrong one of the two times.' },
+    bargain: { aimed: 'This time I would be aiming at the man\'s death.', harm: 'This time I would be harming the man with my own hand.', whose: 'This time the five are in danger from Mr Bad, not from my tram.', doomed: 'The man in the cellar is lost anyway.', numbers: 'The numbers are different.', none: 'There is no real difference. I was wrong one of the two times.' },
+    torture: { aimed: 'This time I would be aiming at the man\'s pain.', harm: 'This time it is pain I inflict, not death.', whose: 'This time the two are in danger from Mr Bad, not from me.', doomed: 'The man in the chair would suffer anyway.', numbers: 'The numbers are different: two, not five.', none: 'There is no real difference. I was wrong one of the two times.' },
+    cave: { aimed: 'This time I would be aiming at the stuck man\'s death.', harm: 'This time I would be harming the stuck man with my own hand.', whose: 'This time the eight are in danger from the water, not from me.', doomed: 'The stuck man drowns either way.', numbers: 'The numbers are different: eight, not five.', none: 'There is no real difference. I was wrong one of the two times.' },
   };
   const DIFF_SHELF = ['aimed', 'harm', 'whose', 'doomed', 'numbers', 'none'];
   // what the house says about a named difference, per pair (hers / not hers), in its own words
@@ -206,7 +206,7 @@
     if (named === hers) return { hers: true, text: hers === 'none' ? 'That is her reading too: she gives both the same verdict.' : 'That is the difference she names.' };
     const partnerMany = CASES[pr.with].many, many = CASES[id].many;
     if (named === 'numbers') return { hers: false, text: many === partnerMany ? `It is not the numbers: both are ${numw(many)} against one.` : `The numbers did change, ${numw(partnerMany)} to ${numw(many)}. But she does not need them: the stuck man dies either way, so one against one would do. The epilogue has exactly that case.` };
-    if (named === 'aimed') return { hers: false, text: 'Aiming is the famous rule\'s difference, not hers. She says it "plays only a quite subsidiary role" in what we say about these cases. ' + (hers === 'none' ? 'She gives both cases the same verdict.' : 'What she names is different.') };
+    if (named === 'aimed') return { hers: false, text: 'Aiming is the intention rule\'s difference, not hers. She says it "plays only a quite subsidiary role" in what we say about these cases. ' + (hers === 'none' ? 'She gives both cases the same verdict.' : 'What she names is different.') };
     if (named === 'none' && hers !== 'none') return { hers: false, text: 'She does see a difference, and names it.' };
     return { hers: false, text: 'That is not the difference she names.' };
   }
@@ -248,7 +248,7 @@
   }
   function nameDiff(g, id, which) {
     if (!PAIRS[id]) throw new Error('no pair');
-    if (!DIFF_WORDS[which]) throw new Error('no such difference');
+    if (!DIFF_WORDS[id] || !DIFF_WORDS[id][which]) throw new Error('no such difference');
     g.diffs[id] = which;
     return diffVerdict(id, which);
   }
@@ -262,8 +262,7 @@
   function staircase(g) {
     return CONFIG.ORDER.map((id, i) => ({
       step: i + 1, id, title: WORDS[id].title, deed: CASES[id].deed, many: CASES[id].many,
-      you: g.choices[id] || null, foot: choose('foot', id), famous: choose('double', id), most: 'A',
-      us: id === 'torture' ? null : choose('foot', id), // the paper's "most of us" where it gives one (every case but the torture), and it is her verdict each time: that is her claim
+      you: g.choices[id] || null, foot: choose('foot', id), famous: choose('double', id), most: 'A', // Bentham: everything, every time
     }));
   }
   function verdict(g) {
@@ -279,14 +278,14 @@
     const first = CONFIG.ORDER.findIndex(id => g.choices[id] === 'B');
     const crossings = ids.reduce((n, id, k) => k > 0 && g.choices[id] !== g.choices[ids[k - 1]] ? n + 1 : n, 0);
     let line;
-    if (did.length === ids.length) line = 'You did everything he asked, all the way up. Counting lives and nothing else, like Bentham. That is the rule the paper says puts us "hopelessly in the power of bad men": he only has to threaten more.';
+    if (did.length === ids.length) line = 'You did everything Mr Bad asked, all the way up. Bentham\'s rule, counting lives and nothing else. That is the rule the paper says puts us "hopelessly in the power of bad men": he only has to threaten more.';
     else if (first >= 0 && crossings === 1 && g.choices.cave === 'B') line = `You climbed with him until ${sn(CONFIG.ORDER[first])}, and refused everything from there. Your line follows the deed: the worse the thing, the firmer the no. Foot's line does not; it crosses at the brew and comes back at the cave.`;
     else if (first >= 0 && crossings === 2 && g.choices.cave === 'A') line = `You climbed with him until ${sn(CONFIG.ORDER[first])}, refused from there, and lit the fuse at the top. That is the shape of Foot's own line${agreeFoot.length === ids.length ? ', and it is her line exactly' : ''}.`;
     else line = `Your line crossed ${numw(crossings)} times on the way up.`;
-    const score = `You and Foot agreed on ${numw(agreeFoot.length)} of ${numw(ids.length)}${parted.length ? `; you parted at ${list(parted.map(sn))}` : ''}. You and the famous rule agreed on ${numw(agreeFamous.length)}.`;
-    const trap = gotYou.length ? `The bad man got you ${gotYou.length === 1 ? 'once' : numw(gotYou.length) + ' times'}: ${list(gotYou.map(sn))}. Each time you did what he asked where she would have refused.` : 'The bad man never got you: you refused every time she refuses.';
-    const paper = 'Philippa Foot, 1967: what you aim at "plays only a quite subsidiary role" in what we say about these cases. What matters is whether you would be harming someone or only failing to help him. Not harming is the stricter duty. So: harm against harm, do the least harm; help against help, help the most; harm against help, you may not harm one to help others. The brew is where that line parts from the famous rule; the cave is where the famous rule parts from most of us.';
-    const trolley = 'The tram, now the most famous puzzle in ethics, is the first step and the easy one in the paper that invented it. The hard step was always the one with your own hand on it.';
+    const score = `You and Foot agreed on ${numw(agreeFoot.length)} of ${numw(ids.length)}${parted.length ? `; you parted at ${list(parted.map(sn))}` : ''}. You and the intention rule agreed on ${numw(agreeFamous.length)}.`;
+    const trap = gotYou.length ? `Mr Bad got you ${gotYou.length === 1 ? 'once' : numw(gotYou.length) + ' times'}: ${list(gotYou.map(sn))}. Each time you did what he asked where she would have refused.` : 'Mr Bad never got you: you refused every time she refuses.';
+    const paper = 'Philippa Foot, 1967: what you aim at "plays only a quite subsidiary role" in what we say about these cases. What matters is whether you would be harming someone or only failing to help him. Not harming is the stricter duty. So: harm against harm, do the least harm; help against help, help the most; harm against help, you may not harm one to help others. The brew is where her line parts from the intention rule; the cave is where it parts from it again, the other way.';
+    const trolley = 'The tram, now the most famous puzzle in ethics, is the first step and the easy one in the paper that invented it. The hard steps were the ones with your own hand on them.';
     return { line, score, trap, paper, trolley, agreeFoot: agreeFoot.length, agreeFamous: agreeFamous.length, gotYou, parted, steps: S };
   }
 
@@ -306,7 +305,7 @@
       text: 'To save the mother the child must be killed. If nothing is done the mother dies, and the child is safely delivered.',
       A: 'operate: the child dies, the mother lives', B: 'do nothing: the mother dies, the child lives',
       didA: 'You operated. The child died; the mother lived.', didB: 'You did nothing. The mother died; the child lived.',
-      foot: 'Foot calls this "the worst dilemma". The famous rule forbids the operation because the child\'s death would be aimed at. She thinks the verdict may be right for the wrong reason: "in general we do not think that we can kill one innocent person to rescue another." That is the bargain\'s shape, one against one. Unless, she adds, you count a mother\'s life as many against one.' },
+      foot: 'Foot calls this "the worst dilemma". The intention rule forbids the operation because the child\'s death would be aimed at. She thinks the verdict may be right for the wrong reason: "in general we do not think that we can kill one innocent person to rescue another." That is the bargain\'s shape, one against one. Unless, she adds, you count a mother\'s life as many against one.' },
   ];
   const CODA_CLOSE = 'She ends without a verdict: "I have not been arguing for or against these points of view but only trying to discern some of the currents that are pulling us back and forth. The levity of the examples is not meant to offend."';
   function coda(i, opt) {

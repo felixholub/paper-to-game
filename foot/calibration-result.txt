@@ -49,11 +49,13 @@ Foot's Bad Man — calibration check (the staircase build)
      the difference question fired 3 times per game on average
   ok   a player who chooses as Foot does is told so
   ok   a player who does everything is told it is counting, and the bad man got them four times
-  ok   "most of us" follows Foot's verdict on every case but the irons, where the paper gives none
+  ok   Bentham's row: everything, every time
+  ok   no card line says "the bad man", "famous rule" or "most of us"
+  ok   every pair has its own wording for all six differences
 
 7. The epilogue
   ok   three cases; their steps on the staircase: the cave, the medicine (whom to save), the bargain
   ok   every case composes for either decision
   ok   the last case closes with Foot's own caution
 
-40 passed, 0 failed.
+42 passed, 0 failed.
