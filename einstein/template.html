@@ -131,6 +131,8 @@ b { font-family: var(--disp); font-weight: 800; letter-spacing: 0; }
 
 /* round header and the running wealth */
 .roundbar { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--disp); font-size: 12px; letter-spacing: 0.08em; margin: 2px 0 6px; }
+.roundbar > span:first-child { flex: 1 1 auto; min-width: 0; }
+.roundbar > span:last-child { white-space: nowrap; margin-left: 10px; }
 .roundbar .wealth { font-size: 18px; }
 .roundbar .wealth.loss { color: var(--red); }
 .seed { font-family: var(--disp); font-size: 11px; letter-spacing: 0.1em; color: var(--fog); margin-top: 10px; }
@@ -390,8 +392,8 @@ b { font-family: var(--disp); font-weight: 800; letter-spacing: 0; }
     el('line', { x1: TRK.x0, y1: TRK.yL, x2: TRK.x1, y2: TRK.yL, stroke: '#DAD5CA', 'stroke-width': 2, 'stroke-dasharray': '2 5' }, s);
     el('line', { x1: TRK.x0, y1: TRK.yR, x2: TRK.x1, y2: TRK.yR, stroke: '#DAD5CA', 'stroke-width': 2, 'stroke-dasharray': '2 5' }, s);
     el('line', { x1: TRK.x0, y1: TRK.yL - 8, x2: TRK.x0, y2: TRK.yR + 8, stroke: '#111', 'stroke-width': 2 }, s);
-    el('text', { x: TRK.x0 + 6, y: TRK.yL - 8, 'font-family': 'LP Display', 'font-size': 8, fill: '#8a6c00', 'letter-spacing': '1' }, s).textContent = 'LIGHT';
-    el('text', { x: TRK.x0 + 6, y: TRK.yR + 16, 'font-family': 'LP Display', 'font-size': 8, fill: '#E2231A', 'letter-spacing': '1' }, s).textContent = 'YOUR ROCKET · THE FLOWERS';
+    el('text', { x: TRK.x0 + 6, y: TRK.yL - 8, 'font-family': 'LP Display', 'font-size': 10, fill: '#8a6c00', 'letter-spacing': '1' }, s).textContent = 'LIGHT';
+    el('text', { x: TRK.x0 + 6, y: TRK.yR + 16, 'font-family': 'LP Display', 'font-size': 10, fill: '#E2231A', 'letter-spacing': '1' }, s).textContent = 'YOUR ROCKET · THE FLOWERS';
     el('circle', { cx: TRK.x0 - 10, cy: 48, r: 8, fill: '#111' }, s);
     star(s, TRK.x1 + 12, 48, 12);
     trk.beam = el('rect', { x: TRK.x0, y: TRK.yL - 5, width: 0, height: 10, fill: '#FFC800' }, s);
@@ -464,7 +466,7 @@ b { font-family: var(--disp); font-weight: 800; letter-spacing: 0; }
   }
   function round() {
     const o = S.orders[S.i];
-    $('#r-round').textContent = `ROUND ${S.i + 1} OF 10` + (S.i === 9 ? ' · THE LONG HAUL' : ''); setWealth();
+    $('#r-round').innerHTML = `ROUND ${S.i + 1} OF 10` + (S.i === 9 ? ' <span style="white-space:nowrap">· THE LONG HAUL</span>' : ''); setWealth();
     $('#f-name').textContent = o.name; $('#w-star').textContent = o.name + ' · THE CUSTOMER';
     $('#f-dist').innerHTML = ly(o.d).toUpperCase() + '<br>LIGHT TAKES ' + fmtLimit(o.d).toUpperCase();
     $('#f-cust').innerHTML = custLine(o) + ' ' + rateLine(rate());
