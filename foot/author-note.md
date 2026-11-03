@@ -1,7 +1,7 @@
-# Foot's Bad Man — author note
+# Foot's Bad Man — author note (the staircase build)
 
-1. **Look first** at reel two, Doctor Double and the brew (`screenshot-a-reel2-brew-result.png`): the moment the side effect his rule allows turns the audience on him. That is Foot's gas case, and the game stands or falls on whether it lands as a discovery rather than a trick.
-2. **The config block** is at the top of `mechanism.js`: `CONFIG` (one against five, three schemes per target, the reel order, and the three readings of the paper the rules depend on), then `SCHEMES` (each case's features, tagged to the reprint's pages), `RULES`, and `AUDIENCE` (each verdict tagged to the sentence it comes from). All the game's words are below them. Rebuild with `python3 build.py`; check with `node calibration.js`.
-3. **Least sure about:** the audience's verdicts on refusals (ours, drawn from p. 3), and how a stranger takes the third reel, which is designed to be unwinnable. The claim that Mrs Foot cannot be touched rests on Foot's reading of the beggar (p. 4); the calibration shows what changes without it.
+1. **Look first** at scene three, the brew, and its card (`screenshot-a-scene3-card.png`): the first place the player's verdict can flip against the step before, the difference question, and the house saying that this is the case Foot built to part the two rules. Then the end chart (`screenshot-a-end.png`): her line AABBBBA against the famous rule's AAABBBB.
+2. **The config** is at the top of `mechanism.js`: the staircase order and the three readings of the paper the rules depend on; then `CASES` (features, numbers, deeds, page tags), `RULES`, `PAIRS` (the difference she names per pair), `WORDS` (every line). Rebuild with `python3 build.py`; check with `node calibration.js`; play it headless with `node session-test.js`.
+3. **Least sure about:** the order of the staircase (ours), the house's reaction to each deed (ours), and the torture rung, where the paper gives no "most of us". The first build is under `previous/`.
 
-Revision 1 (2 Nov 2026, memo §20) added the chair, the "your own rule" reading, the bad man's card, the paper notes in the films and the abortion epilogue, after Steffen's first play.
+Rebuilt 3 Nov 2026 after Steffen's plays of the first build; reviewed by the builder only (screenshots and the scripted session).

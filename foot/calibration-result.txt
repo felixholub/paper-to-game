@@ -1,86 +1,59 @@
-Foot's Bad Man — calibration check
-2026-11-02
+Foot's Bad Man — calibration check (the staircase build)
+2026-11-03
 
-1. Each rule against the paper's stated verdicts (A = the one dies, the five live; B = the five die)
-  ok   most on tram: A (paper: A)
-  ok   most on bargain: A (paper: A)
-  ok   most on medicine: A (paper: A)
-  ok   most on brew: A (paper: A)
-  ok   most on beggar: A (paper: A)
-  ok   most on cave: A (paper: A)
+1. Each rule against the paper's stated verdicts (A = do what the bad man asks; B = refuse)
   ok   double on tram: A (paper: A)
-  ok   double on bargain: B (paper: B)
   ok   double on medicine: A (paper: A)
   ok   double on brew: A (paper: A)
   ok   double on beggar: B (paper: B)
+  ok   double on bargain: B (paper: B)
+  ok   double on torture: B (paper: B)
   ok   double on cave: B (paper: B)
   ok   foot on tram: A (paper: A)
-  ok   foot on bargain: B (paper: B)
   ok   foot on medicine: A (paper: A)
   ok   foot on brew: B (paper: B)
   ok   foot on beggar: B (paper: B)
+  ok   foot on bargain: B (paper: B)
+  ok   foot on torture: B (paper: B)
   ok   foot on cave: A (paper: A)
+  ok   counting does everything the bad man asks (p. 5: "the size of the evil must always be our guide")
 
-2. Where the two principles agree and where they part (p. 4: "So far the conclusions are the same … but in others they will be different")
-  ok   DDE and Foot agree on the tram, the judge/tyrant, the drug and the beggar: tram, bargain, medicine, beggar
-  ok   DDE and Foot part on the gas (the brew)
+2. Where the two rules agree and where they part (p. 4: "So far the conclusions are the same … but in others they will be different")
   ok   they part on the brew and the cave only: brew, cave
-  ok   in the classic cases, "aimed at" and "harm done to help" coincide (the confound)
-  ok   the brew breaks the confound: a side effect, and harm done to help
+  ok   the kinds of conflict: harm/harm, help/help, four of harm/help, and none (the cave)
 
-3. The audience is the paper's "we"
-  ok   every choice any rule makes has an audience verdict
-  ok   the audience never turns on Foot's choices (her claim: her principle explains our verdicts)
-  ok   brewing is a disgrace (p. 5: "Yet it surely is different … would presumably be successful if they sued")
-  ok   steering is cheered (p. 2: "without hesitation")
-  ok   refusing the bad man is blameless (p. 3: "it is he who intends … the death of innocent persons; we do not")
-  ok   refusing to blast in the cave is a disgrace (p. 5: "must here conflict with that of most reasonable men")
+3. The staircase: Foot's line does not climb with the deed
+  ok   Foot: AABBBBA (allows the first two, forbids four, allows the worst deed)
+  ok   the famous rule: AAABBBB (steps down once, at the beggar, and never comes back)
+  ok   numbers as the paper gives them: five for the tram, the drug, the gas and the judge; two for the mad murderer
 
-3b. The house of fourteen (the shares read off the paper's hedges)
-  ok   every act splits exactly fourteen heads
-  ok   the tram steered: all fourteen cheer ("without hesitation", p. 2)
-  ok   the bargain taken: at least twelve turn ("most of us would be appalled", p. 2)
-  ok   the brew: a disgrace, with a real minority cheering ("presumably", p. 5)
-  ok   the whole dose to the one: split, not a disgrace (Foot against Anscombe)
-  ok   a disgrace is exactly ten or more turning
-  ok   every refusal of the bad man has a minority turning on the refuser (the counters) and a clear majority hissing him
-  ok   the house composes its words for every act
+4. The pairs carry the differences Foot names
+  ok   the brew against the medicine: harm done against help withheld (p. 5, "why then is the case different from that of the scarce drug?")
+  ok   the bargain against the tram: whose harm the five face (p. 4, the driver's conflict of negative duties against the judge's)
+  ok   the cave against the bargain: lost either way (p. 5)
+  ok   the beggar against the medicine: letting die on purpose counts as harm (p. 4)
+  ok   the irons and the medicine: same verdict as their partners
+  ok   within every pair where she names a difference, the numbers are the same (the cave excepted: eight behind the stuck man, and its numbers answer points to the epilogue's one against one)
+  ok   the cave's answer to "the numbers" names the one-against-one case
+  ok   every difference on the shelf has an answer for every pair
+  ok   exactly one difference on the shelf is hers, per pair
 
-4. The holes: schemes that disgrace each rule
-  ok   Mr Most (counting): bargain,brew,beggar — "hopelessly in the power of bad men" (p. 3)
-  ok   Doctor Double (DDE): brew,cave
-  ok   Mrs Foot: none
+5. Robustness: the discovery under the three readings of the paper
+  ok   a lenient famous rule that calls the stuck man's death a side effect: the cave stops parting them; the brew still does
+  ok   a Foot without p. 4's reading of the beggar: she would shut the door; the brew still parts them
+  ok   a Foot without "no serious conflict of interests": she would refuse the cave
 
-5. Robustness: the central discovery (the brew disgraces Doctor Double and not Mrs Foot) under other choices
-  ok   one against 2 (p. 3 uses two for the mad murderer): holes unchanged
-  ok   one against 5 (p. 3 uses two for the mad murderer): holes unchanged
-  ok   one against 50 (p. 3 uses two for the mad murderer): holes unchanged
-  ok   a lenient DDE that calls the stuck man's death a side effect ("only to blast him out", p. 1): Doctor Double's holes = brew — the brew survives; the cave closes
-  ok   a Foot without p. 4's reading of the beggar (letting die is only a failure to aid): her holes = beggar; she still refuses the brew. So "Mrs Foot cannot be touched" rests on p. 4; the brew's lesson does not
-  ok   a Foot without "no serious conflict of interests": she would refuse the cave (a hole) and still the brew
+6. Every path through the game (all 128 ways of deciding seven steps, with every difference named)
+  ok   768 games played to the end without error
+  ok   no unfilled word or undefined in any line
+     the difference question fired 3 times per game on average
+  ok   a player who chooses as Foot does is told so
+  ok   a player who does everything is told it is counting, and the bad man got them four times
+  ok   "most of us" follows Foot's verdict on every case but the irons, where the paper gives none
 
-6. Every path through the game (all orders of up to three schemes per target)
-  ok   308001 games played to the end without error
-  ok   no unfilled pronoun or undefined in any line
-  ok   Mrs Foot is never disgraced
-     disgraces per game over these 308001 games: none 0, one 62361, two 245640, three 0
-
-7. The preview says nothing about the outcome
-  ok   no scheme preview names the choice the target will make or the audience's verdict
-  ok   every preview states both choices and what each costs
-
-8. The chair: the player's own choices, read against the three rules
-  ok   all 64 patterns of chair choices compose their lines; a player who chooses exactly as a rule does is read as that rule
-  ok   the three rules' own patterns each come out as that rule
-     ties (two or more rules equally close) in 16 of 64 patterns
-  ok   brewing in the chair: told ten of the house would have turned on you: You would have brewed. Of the fourteen, ten would have turned on you and four would have cheered you.
-  ok   the whole dose to the one, in the chair: six sit still, Anscombe named: You would have given it all to the one. Of the fourteen, eight would have turned on you and six would have sat still. Anscombe, in the same issue, would say you wronged no one.
-  ok   every scheme has a chair line and a note saying which of the paper's cases it is
-  ok   a scheme is decided in the chair once
-
-9. The epilogue: the three abortion cases as Foot lists them (p. 5)
-  ok   three cases; their adult parallels: the cave, the shipwreck (whom to save, like the drug), and the bargain's shape
+7. The epilogue
+  ok   three cases; their steps on the staircase: the cave, the medicine (whom to save), the bargain
   ok   every case composes for either decision
   ok   the last case closes with Foot's own caution
 
-60 passed, 0 failed.
+40 passed, 0 failed.
