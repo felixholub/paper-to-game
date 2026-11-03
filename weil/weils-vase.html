@@ -65,6 +65,7 @@ svg{display:block}
 .legend{display:flex;justify-content:center;gap:16px;font-size:14px;color:var(--clay);margin:2px 0 0;letter-spacing:.06em}
 .legend i{font-style:normal;display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:5px;border:1px solid var(--clay)}
 .legend .c i{background:var(--clay)} .legend .k i{background:var(--stone)}
+.you{text-align:center;font-size:16px;color:var(--clay);margin:8px 10px 0;letter-spacing:.02em}
 .scene{font-size:20px;line-height:1.3;text-align:center;margin:10px 2px 4px;color:var(--white)}
 .teach{font-size:16px;line-height:1.3;text-align:center;color:var(--clay);margin:6px 6px 4px}
 .creep{font-size:17px;text-align:center;color:var(--white);margin:6px 0 0}
@@ -118,6 +119,7 @@ svg{display:block}
   <div id="friezeBox"><svg id="frieze" viewBox="0 30 348 220"></svg></div>
   <svg class="meander" viewBox="0 0 348 12" preserveAspectRatio="none"><rect width="348" height="12" fill="url(#mz)"/></svg>
   <div class="legend"><span class="c"><i></i>clay: a soul</span><span class="k"><i></i>stone: a thing</span></div>
+  <p class="you" id="youLine"></p>
   <p class="scene" id="scene"></p>
   <p class="teach hidden" id="teach"></p>
   <div id="choose">
@@ -494,9 +496,17 @@ svg{display:block}
 
   // what happened to the player's own figure, in one sentence
   function costLine(res) {
-    if (res.youTo < res.youFrom) return res.youTo <= 0 ? 'You are stone all through.' : `Stone climbs ${stoneTo(res.youTo).replace('to the ', 'to your ')}.`;
-    if (res.youTo > res.youFrom) return res.youTo >= CONFIG.LINES ? 'You are clay all through again.' : `The stone goes back down: you are ${stonePhrase(res.youTo)}.`;
+    if (res.youTo < res.youFrom) return res.youTo <= 0 ? 'Stone climbs. You are stone all through now: a thing.' : `Stone climbs. You are now stone all the way up to ${stoneTo(res.youTo).replace('to the ', 'your ')}.`;
+    if (res.youTo > res.youFrom) return res.youTo >= CONFIG.LINES ? 'The stone goes back down. You are clay all through again.' : `The stone goes back down. You are now stone only up to ${stoneTo(res.youTo).replace('to the ', 'your ')}.`;
     return '';
+  }
+
+  // where the stone stands on the player today, said on every day's screen (the figure shows it; this names it)
+  function youLine(lines) {
+    if (lines >= CONFIG.LINES) return 'You are clay all through: six lines of soul.';
+    if (lines <= 0) return 'You are stone all through: a thing.';
+    const n = ['', 'one line', 'two lines', 'three lines', 'four lines', 'five lines'][lines];
+    return `You are stone all the way up to ${stoneTo(lines).replace('to the ', 'your ')}; clay above, ${n} of soul left.`;
   }
 
   // the result, in the game's own voice, before any line of Homer
@@ -575,12 +585,12 @@ svg{display:block}
     if (knelt) did.push(`${times(knelt)} the scales turned, and a man stood over you.`);
     if (spears) did.push(`${times(spears)}, you and an enemy lowered your spears together.`);
     if (night && night.him === 'grace') did.push('On the last night, you and the old man sat and looked at each other.');
-    const weil = 'Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it for long. It is on loan, and the higher it lifts a man, the less he can stop his own arm, and the further he falls.';
+    const weil = 'Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it for long. It is on loan, and the higher it lifts a man, the less he can stop his own arm, and the further he falls. You looked for the right amount of force. She says there is none; what is left is the interval, and pity for both sides.';
     const last2 = '“… learn that there is no refuge from fate, learn not to admire force, not to hate the enemy, nor to scorn the unfortunate.”';
     return { fate, headline, did, weil, last: last2, lines: g.lines, day };
   }
 
-  return { CONFIG, MEN, ALLOWED, newLife, today, act, nextDay, interval, verdict, sceneLine, gestureLabel, scalesLine, costLine, words, stoneTo, stonePhrase, LINE_WORD, rng };
+  return { CONFIG, MEN, ALLOWED, newLife, today, act, nextDay, interval, verdict, sceneLine, gestureLabel, scalesLine, costLine, youLine, words, stoneTo, stonePhrase, LINE_WORD, rng };
 });
 
 </script>
@@ -1008,6 +1018,7 @@ svg{display:block}
     renderFrieze();
     tween({ him: { x: himX } }, 650);
     $('#scene').textContent = M.sceneLine(t);
+    $('#youLine').textContent = M.youLine(t.lines);
     // the teaching line: the rule of the world, said once, where it first matters
     let teach = '';
     if (t.day === 1) teach = 'Your figure is clay while it has a soul: six fine lines, from your knees to your eye. Lose one, and stone climbs from your feet.';
@@ -1122,6 +1133,7 @@ svg{display:block}
   }
   function showResult(res, t) {
     const w = res.word; const box = $('#result'); let h = '';
+    $('#youLine').textContent = M.youLine(res.youTo);   // the standing line follows the figure
     h += `<div class="said">${w.said.join(' ')}</div>`;
     if (w.cost) h += `<div class="cost">${w.cost}</div>`;
     if (w.why) h += `<div class="why">${w.why}</div>`;

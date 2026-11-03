@@ -299,9 +299,17 @@
 
   // what happened to the player's own figure, in one sentence
   function costLine(res) {
-    if (res.youTo < res.youFrom) return res.youTo <= 0 ? 'You are stone all through.' : `Stone climbs ${stoneTo(res.youTo).replace('to the ', 'to your ')}.`;
-    if (res.youTo > res.youFrom) return res.youTo >= CONFIG.LINES ? 'You are clay all through again.' : `The stone goes back down: you are ${stonePhrase(res.youTo)}.`;
+    if (res.youTo < res.youFrom) return res.youTo <= 0 ? 'Stone climbs. You are stone all through now: a thing.' : `Stone climbs. You are now stone all the way up to ${stoneTo(res.youTo).replace('to the ', 'your ')}.`;
+    if (res.youTo > res.youFrom) return res.youTo >= CONFIG.LINES ? 'The stone goes back down. You are clay all through again.' : `The stone goes back down. You are now stone only up to ${stoneTo(res.youTo).replace('to the ', 'your ')}.`;
     return '';
+  }
+
+  // where the stone stands on the player today, said on every day's screen (the figure shows it; this names it)
+  function youLine(lines) {
+    if (lines >= CONFIG.LINES) return 'You are clay all through: six lines of soul.';
+    if (lines <= 0) return 'You are stone all through: a thing.';
+    const n = ['', 'one line', 'two lines', 'three lines', 'four lines', 'five lines'][lines];
+    return `You are stone all the way up to ${stoneTo(lines).replace('to the ', 'your ')}; clay above, ${n} of soul left.`;
   }
 
   // the result, in the game's own voice, before any line of Homer
@@ -380,10 +388,10 @@
     if (knelt) did.push(`${times(knelt)} the scales turned, and a man stood over you.`);
     if (spears) did.push(`${times(spears)}, you and an enemy lowered your spears together.`);
     if (night && night.him === 'grace') did.push('On the last night, you and the old man sat and looked at each other.');
-    const weil = 'Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it for long. It is on loan, and the higher it lifts a man, the less he can stop his own arm, and the further he falls.';
+    const weil = 'Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it for long. It is on loan, and the higher it lifts a man, the less he can stop his own arm, and the further he falls. You looked for the right amount of force. She says there is none; what is left is the interval, and pity for both sides.';
     const last2 = '“… learn that there is no refuge from fate, learn not to admire force, not to hate the enemy, nor to scorn the unfortunate.”';
     return { fate, headline, did, weil, last: last2, lines: g.lines, day };
   }
 
-  return { CONFIG, MEN, ALLOWED, newLife, today, act, nextDay, interval, verdict, sceneLine, gestureLabel, scalesLine, costLine, words, stoneTo, stonePhrase, LINE_WORD, rng };
+  return { CONFIG, MEN, ALLOWED, newLife, today, act, nextDay, interval, verdict, sceneLine, gestureLabel, scalesLine, costLine, youLine, words, stoneTo, stonePhrase, LINE_WORD, rng };
 });
