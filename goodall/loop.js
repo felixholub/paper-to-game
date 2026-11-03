@@ -19,7 +19,7 @@ M.hold(g, 0); say(` hold: ${M.describe(M.inHand(g))}`); show(g, dip(g, 8, 2, 3))
 M.hold(g, 1); say(` hold: ${M.describe(M.inHand(g))}`); show(g, dip(g, 8, 2, 3));
 M.hold(g, 2); say(` hold: ${M.describe(M.inHand(g))}`); show(g, dip(g, 8, 2, 3));
 const p = M.preview(g, 'strip'); say(` preview strip: ${M.describe(p.stem)}`); M.prepare(g, 'strip');
-say(' push all the way, short pause, pull at a flick'); show(g, dip(g, 9, 1, 20));
+say(' push all the way, short pause, pull at a flick'); show(g, dip(g, 9, 1, 70));
 say(' again, slowly'); show(g, dip(g, 9, 2, 3));
 const w = M.watch(g); say(` WATCH YOUR MOTHER → ${w.words.typed}  [red] ${w.words.red}   suns left ${g.suns}`);
 for (let i = 0; i < 3; i++) { say(' dip slowly'); show(g, dip(g, 9, 2, 3)); if (M.inHand(g).bent) { const b = M.preview(g, 'bite'); say(` preview bite: ${M.describe(b.stem)}`); M.prepare(g, 'bite'); } }

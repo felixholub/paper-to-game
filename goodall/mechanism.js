@@ -62,8 +62,10 @@
     TERMITES: {
       perInch: 1.8,                            // ours: termites that bite on per inch of stem in the chamber, at most
       tau: 0.9,                                // ours: seconds for most of them to arrive (p. 228: "after a slight pause")
-      gripLo: 5, gripHi: 16,                   // ours: a termite lets go when the stem is pulled faster than its grip
-                                               //   (inches per second, uniform); a smooth pull keeps them, a jerk does not
+      gripLo: 18, gripHi: 36,                  // ours: a termite lets go when the stem is pulled faster than its grip
+                                               //   (inches per second, uniform); a smooth pull keeps them, a jerk does not.
+                                               //   Set to a finger's scale: at 21 px to the inch a deliberate drag (under
+                                               //   ~380 px/s) keeps every termite, a flick (over ~800 px/s) keeps none
     },
     SMOOTH: 0.05,                              // ours: seconds over which the pull speed is smoothed
     STILL: 1.0,                                // ours: slower than this (inches per second), the stem is "still"
@@ -260,6 +262,8 @@
   function fetchNearby(g) {
     if (g.phase !== 'mound' || g.dip || g.nearby) return null;
     const r = g.r; g.nearby = [0, 1, 2].map(() => makeStem(pickWeighted(r, CONFIG.NEARBY), r));
+    // ours: one of the three is always a thin, stiff stem (a floor, as in the long grass), so a poor kit can be mended for a sun
+    if (!g.nearby.some(s => s.stiff === 2 && s.thick < 2)) g.nearby[Math.floor(r() * 3)] = makeStem(['stem', 'twig', 'leafy'][Math.floor(r() * 3)], r);
     g.fetched++; sunPasses(g); if (g.phase === 'leaving') g.phase = 'mound-last'; // you may still take one, but not dip
     return g.nearby;
   }

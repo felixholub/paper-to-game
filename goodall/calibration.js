@@ -65,13 +65,13 @@ const P = C.PASSAGE;
     fl.every(d => d >= C.PAPER.INFANT_3_4_DEPTH[0] && d <= C.PAPER.INFANT_3_4_DEPTH[1]), `depths ${fl.map(f1).join(', ')}`);
   // B3. two-to-three-year-olds: wrong material, clumsy jerks; two termites in twenty-two bouts (p. 230)
   // the "infant of 2–3": any stem from the long grass, unprepared, pushed in as far as it goes, a short pause, out with a
-  // jerk (10 to 30 inches per second). One dip stands for one bout (ours: the paper's bouts last seconds to minutes).
+  // jerk (25 to 75 inches per second, a flick of the finger: 500 to 1600 px/s on the screen). One dip stands for one bout (ours: the paper's bouts last seconds to minutes).
   const per = []; let caught = 0, bouts = 0;
   for (const s of SEEDS) {
     const g = M.newGame(s); const r = M.rng(s + 7);
     for (let b = 0; b < 22; b++) {
       const stem = M.makeStem(g.grass[Math.floor(r() * 8)].type, r);
-      const res = bareDip(stem, 12, r() * 1.5, 4 + r() * 4, 10 + r() * 20, r); caught += res.eaten; bouts++;
+      const res = bareDip(stem, 12, r() * 1.5, 4 + r() * 4, 25 + r() * 50, r); caught += res.eaten; bouts++;
     }
     per.push(caught);
   }
@@ -150,7 +150,7 @@ function afternoon(seed, S) {
 const byType = (grass, pref) => grass.map((s, i) => [i, pref.indexOf(s.type) < 0 ? 99 : pref.indexOf(s.type)]).sort((a, b) => a[1] - b[1]).map(x => x[0]);
 const STRATS = {
   'long is best (three longest, no prep, all the way in, slow)': { pick: g => g.map((s, i) => [i, s.len]).sort((a, b) => b[1] - a[1]).map(x => x[0]), cycle: true, tech: () => [12, 2, 6, 4] },
-  'fast hands (good stems, stripped, but pulled out at a flick)': { pick: g => byType(g, ['stem', 'leafy', 'twig']), strip: true, bite: true, tech: () => [12, 1, 6, 25] },
+  'fast hands (good stems, stripped, but pulled out at a flick)': { pick: g => byType(g, ['stem', 'leafy', 'twig']), strip: true, bite: true, tech: () => [12, 1, 6, 90] },
   'trial and error (a mixed kit; slows down after a jerk, drops what folds)': { pick: (g, r) => byType(g, ['blade', 'leafy', 'stem']), learn: true, bite: true,
     tech: (r, mem) => [12, mem.slow ? 2 : 0.8, 6, mem.slow ? 3.5 : 18] },
   'copy your mother (watch once, then do as she does)': { pick: g => byType(g, ['stem', 'leafy', 'dry']), strip: true, bite: true, watch: 1, hers: true, tech: () => [12, 2.2, 6, 3] },
@@ -195,14 +195,14 @@ say('\nD. ROBUSTNESS (the designer’s choices varied one at a time)');
     ['chamber from 2 inches', c => (c.PASSAGE.chamber = 2.0)], ['chamber from 4 inches', c => (c.PASSAGE.chamber = 4.0)],
     ['termites per inch 1.2', c => (c.TERMITES.perInch = 1.2)], ['termites per inch 2.4', c => (c.TERMITES.perInch = 2.4)],
     ['bite-on time 0.5 s', c => (c.TERMITES.tau = 0.5)], ['bite-on time 1.5 s', c => (c.TERMITES.tau = 1.5)],
-    ['grips 3–12 in/s', c => { c.TERMITES.gripLo = 3; c.TERMITES.gripHi = 12; }], ['grips 8–20 in/s', c => { c.TERMITES.gripLo = 8; c.TERMITES.gripHi = 20; }],
+    ['grips 12–28 in/s', c => { c.TERMITES.gripLo = 12; c.TERMITES.gripHi = 28; }], ['grips 24–48 in/s', c => { c.TERMITES.gripLo = 24; c.TERMITES.gripHi = 48; }],
   ];
   let allOk = true;
   for (const [name, fn] of variants) {
     Object.assign(C.PASSAGE, JSON.parse(JSON.stringify(base.PASSAGE))); Object.assign(C.TERMITES, JSON.parse(JSON.stringify(base.TERMITES))); fn(C);
     const r = M.rng(7);
     const run = (type, prep, D, Pz, vs) => mean(Array.from({ length: 400 }, () => { const s = M.makeStem(type, r); if (prep) s.leaves = false; return bareDip(s, D, Pz, 6, vs, r).eaten; }));
-    const adult = run('stem', true, 12, 2, 3), jerk = run('stem', true, 12, 2, 28), floppy = run('blade', false, 12, 2, 3), thick = run('stick', false, 12, 2, 3);
+    const adult = run('stem', true, 12, 2, 3), jerk = run('stem', true, 12, 2, 98), floppy = run('blade', false, 12, 2, 3), thick = run('stick', false, 12, 2, 3);
     const flD = bareDip(M.makeStem('blade', r), 12, 2, 6, 3, r).maxD;
     const ok = adult >= 3 && jerk <= 0.25 * adult && floppy === 0 && thick === 0 && flD >= 1 && flD <= 2;
     allOk = allOk && ok;

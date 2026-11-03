@@ -15,7 +15,7 @@ GAME A (afternoon 7)
   dip (push 3 in, pause 0.5 s, pull 3 in/s): The leaves caught on the rim. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] leaves left on — grown-ups strip them first  → suns 9, termites 0
   shot a-mound-preview-strip
   strip the leaves: You strip the leaves off.
-  dip (push 9 in, pause 1.5 s, pull 30 in/s): In eight inches, to the bottom of the passage. A pause. Out fast: nine shaken off. No termites.  [red] yanked out, termites shaken off — like the infants of 2 to 3  → suns 8, termites 0
+  dip (push 9 in, pause 1.5 s, pull 100 in/s): In eight inches, to the bottom of the passage. A pause. Out fast: nine shaken off. No termites.  [red] yanked out, termites shaken off — like the infants of 2 to 3  → suns 8, termites 0
   shot a-mound-jerk
   shot a-mound-stem-in
   shot help
@@ -57,11 +57,11 @@ GAME A (afternoon 7)
   shot about
   about back to: end
 
-GAME B (another afternoon: 8082): watch first, then copy her
+GAME B (another afternoon: 5941): watch first, then copy her
   look: A grass stem, 11 inches. Thin as a straw, and stiff.
   look: A leafy twig, 10 inches. Thin as a straw, and stiff.
   look: A dry grass stem, 10 inches. Thin as a straw, and springy: it bends a little.
-  watched: Your mother: a stiff grass stem, stripped, 11 inches long. In six and a half inches. A pause. Out slowly. Six termites.
+  watched: Your mother: a stiff grass stem, stripped, 11 inches long. In six inches. A pause. Out slowly. Five termites.
   dip (push 9 in, pause 2.2 s, pull 3 in/s): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 10, termites 8
   dip (push 9 in, pause 2.2 s, pull 3 in/s): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 9, termites 16
   dip (push 9 in, pause 2.2 s, pull 3 in/s): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. The end is bent now.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 8, termites 24
@@ -85,21 +85,21 @@ GAME B (another afternoon: 8082): watch first, then copy her
   shot b-end
   END: By the end of the afternoon you fished like a grown-up chimpanzee, which took the infants Goodall watched about two years; then you made a sponge out of a termite stem.
 
-GAME C (the same long grass again: 8082, same as B: true)
-  grass: blade bark stem leafy stick dry short blade
+GAME C (the same long grass again: 5941, same as B: true)
+  grass: blade leafy stem dry stick short leafy blade
   look: A grass blade, 14 inches. Thin as a straw, and floppy: it droops under its own weight.
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 11, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 10, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 9, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 8, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 7, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 6, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 5, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 4, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 3, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 2, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 1, termites 0
-  dip (push 6 in, pause 0.2 s, pull 20 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 0, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 11, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 10, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 9, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 8, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 7, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 6, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 5, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 4, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 3, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 2, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 1, termites 0
+  dip (push 6 in, pause 0.2 s, pull 70 in/s): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown down her stem: its end is bent. It lies by her hole.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 0, termites 0
   dip (push 4 in, pause 0.2 s, pull 3 in/s): It comes up wet. You suck the end: a sip. Sucking it chews the end a little.  [red] an infant of 3½ did this too: poked grass in, the way he fished for termites  → suns 4, termites 0, sips 1
   dip (push 4 in, pause 0.2 s, pull 3 in/s): It comes up wet. You suck the end: two sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 3, termites 0, sips 3
   dip (push 4 in, pause 0.2 s, pull 3 in/s): It comes up wet. You suck the end: three sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 2, termites 0, sips 6
