@@ -9,12 +9,14 @@
 <style>
 @font-face{font-family:'Forum';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,/*__FONT_FORUM__*/) format('woff2');font-display:block}
 :root{
-  --glaze:#120D0B; --clay:#C8693A; --dilute:#8A4A26; --white:#C9B9A1; --bright:#F0E6D2; --red:#7E2B1F; --stone:#271B15;
+  --glaze:#120D0B; --clay:#C8693A; --dilute:#8A4A26; --red:#7E2B1F; --stone:#271B15;
+  /* text: one axis from clay to the stone line's grey (#AF8A75); the further from the world and the nearer the verdict on you, the greyer and the larger */
+  --ink2:#C37046; --ink3:#C0734C; --ink45:#BD7855; --ink5:#BC7A58; --ink6:#B97D5D; --ink7:#B68063; --ink8:#B48369; --ink10:#AF8A75; --white:#B97D5D;
   --face:'Forum','Times New Roman',serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--glaze)}
-body{color:var(--white);font-family:var(--face);font-size:19px;line-height:1.32;min-height:100vh;overflow-x:hidden}
+body{color:var(--ink6);font-family:var(--face);font-size:20px;line-height:1.32;min-height:100vh;overflow-x:hidden}
 .screen{display:none;max-width:440px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
 .screen.on{display:block}
 .hidden{display:none!important}
@@ -25,23 +27,23 @@ svg{display:block}
 /* the start */
 #start h1{font-weight:400;font-size:42px;letter-spacing:.2em;text-align:center;margin:18px 0 0;color:var(--clay);line-height:1.05}
 #start .sub{text-align:center;font-size:15px;letter-spacing:.14em;color:var(--dilute);text-transform:uppercase;margin:6px 0 4px}
-#start .lede{text-align:center;font-size:22px;margin:8px 4px 6px}
-#start .acts{text-align:center;font-size:17px;color:var(--white);opacity:.92;margin:8px 6px}
-.aimline{font-size:21px;text-align:center;color:var(--clay);margin:14px 0 8px;line-height:1.25}
+#start .lede{text-align:center;font-size:24px;margin:8px 4px 6px;color:var(--ink8)}
+#start .acts{text-align:center;font-size:18px;color:var(--ink5);margin:8px 6px}
+.aimline{font-size:22px;text-align:center;color:var(--clay);margin:14px 0 8px;line-height:1.25}
 .small{font-size:15px;color:var(--dilute)}
 .links{display:flex;justify-content:center;gap:22px;margin:12px 0 4px;font-size:16px}
 .links button{background:none;border:0;color:var(--clay);font-family:var(--face);font-size:16px;letter-spacing:.12em;text-transform:uppercase;padding:8px 4px;cursor:pointer}
 .sig{text-align:center;margin:20px 0 6px;font-style:italic;font-size:14px;opacity:.6}
-.sig a{color:var(--white);text-decoration:none;text-transform:lowercase}
+.sig a{color:var(--ink6);text-decoration:none;text-transform:lowercase}
 .lifeno{text-align:center;font-size:13px;color:var(--dilute);letter-spacing:.1em;margin-top:6px}
 /* the sherds */
 .shw{position:relative;transition:transform .15s}
 .sherd{display:block;width:100%;border:0;cursor:pointer;font-family:var(--face);color:var(--glaze);text-align:center;
   background:linear-gradient(to bottom,var(--glaze) 0 5px,var(--clay) 5px);padding:13px 8px 9px;min-height:66px}
 .sherd .w{display:block;font-size:23px;letter-spacing:.18em;text-transform:uppercase;line-height:1}
-.sherd .s{display:block;font-size:15px;line-height:1.15;margin-top:5px}
+.sherd .s{display:block;font-size:16px;line-height:1.15;margin-top:5px}
 .sherd:disabled{cursor:default;opacity:.5;background:linear-gradient(104deg,var(--clay) 0 9%,var(--glaze) 9% 10.5%,var(--clay) 10.5% 88%,var(--glaze) 88% 89.5%,var(--clay) 89.5%)}
-.sherd:disabled .s{font-size:14px}
+.sherd:disabled .s{font-size:15px}
 .sh0{clip-path:polygon(3% 12%,30% 0%,72% 6%,100% 0%,96% 70%,82% 100%,22% 94%,0% 80%)}
 .sh1{clip-path:polygon(0% 6%,45% 0%,100% 10%,97% 58%,100% 92%,58% 100%,10% 95%,4% 50%)}
 .sh2{clip-path:polygon(5% 0%,60% 8%,96% 0%,100% 45%,92% 100%,40% 94%,0% 100%,2% 40%)}
@@ -54,41 +56,41 @@ svg{display:block}
 .sherds.three .sherd .w{font-size:20px;letter-spacing:.12em}
 /* the play screen */
 .top{display:flex;align-items:center;gap:10px;margin:10px 0 2px}
-.aim{flex:1;font-size:16px;color:var(--clay);line-height:1.2}
+.aim{flex:1;font-size:17px;color:var(--clay);line-height:1.2}
 .q{width:40px;height:40px;flex:none;border:0;background:var(--clay);color:var(--glaze);font-family:var(--face);font-size:22px;cursor:pointer;
   clip-path:polygon(8% 14%,52% 0%,100% 12%,92% 64%,100% 100%,40% 92%,0% 100%,4% 48%)}
 #shoulderBox{position:relative}
-.scap{font-size:16px;text-align:center;color:var(--white);opacity:.88;margin:2px 0 4px;min-height:21px}
+.scap{font-size:17px;text-align:center;color:var(--ink2);margin:2px 0 4px;min-height:22px}
 #friezeBox{position:relative}
-.legend{display:flex;justify-content:center;gap:16px;font-size:14px;color:var(--clay);margin:2px 0 0;letter-spacing:.06em}
+.legend{display:flex;justify-content:center;gap:16px;font-size:15px;color:var(--clay);margin:2px 0 0;letter-spacing:.06em}
 .legend i{font-style:normal;display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:5px;border:1px solid var(--clay)}
 .legend .c i{background:var(--clay)} .legend .k i{background:var(--stone)}
-.you{text-align:center;font-size:16px;color:var(--clay);margin:8px 10px 0;letter-spacing:.02em}
-.scene{font-size:20px;line-height:1.3;text-align:center;margin:10px 2px 4px;color:var(--white)}
-.teach{font-size:16px;line-height:1.3;text-align:center;color:var(--clay);margin:6px 6px 4px}
-.creep{font-size:17px;text-align:center;color:var(--white);margin:6px 0 0}
+.you{text-align:center;font-size:17px;color:var(--ink3);margin:8px 10px 0;letter-spacing:.02em}
+.scene{font-size:22px;line-height:1.3;text-align:center;margin:10px 2px 4px;color:var(--ink45)}
+.teach{font-size:17px;line-height:1.3;text-align:center;color:var(--ink2);margin:6px 6px 4px}
+.creep{font-size:18px;text-align:center;color:var(--ink5);margin:6px 0 0}
 .creep b{font-weight:400;color:var(--clay);letter-spacing:.1em;text-transform:uppercase}
 #result{margin:12px 0 0;text-align:center}
-#result .said{font-size:20px;line-height:1.3}
-#result .cost{font-size:22px;color:var(--bright);margin-top:8px;letter-spacing:.02em;line-height:1.25}
-#result .why{font-size:17px;color:var(--white);margin:8px 8px 0;opacity:.92}
-#result .quote{font-size:16px;color:var(--dilute);margin:8px 10px 0;filter:brightness(1.35)}
-#result .scl{font-size:16px;color:var(--white);opacity:.8;margin:8px 0 0}
+#result .said{font-size:22px;line-height:1.3;color:var(--ink7)}
+#result .cost{font-size:25px;color:var(--ink10);margin-top:8px;letter-spacing:.02em;line-height:1.25}
+#result .why{font-size:18px;color:var(--ink6);margin:8px 8px 0}
+#result .quote{font-size:17px;color:var(--ink3);margin:8px 10px 0}
+#result .scl{font-size:17px;color:var(--ink45);margin:8px 0 0}
 #result .sherd{margin-top:16px}
 .meander{height:12px;margin:0}
 /* the end */
-#end h2{font-weight:400;font-size:25px;line-height:1.25;text-align:center;color:var(--clay);margin:22px 4px 10px}
+#end h2{font-weight:400;font-size:27px;line-height:1.25;text-align:center;color:var(--ink5);margin:22px 4px 10px}
 #panels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
 .pan{background:var(--glaze);border-top:1px solid var(--dilute);border-bottom:1px solid var(--dilute)}
-.pan .pl{font-size:12px;text-align:center;color:var(--clay);letter-spacing:.08em;padding:2px 0 3px;line-height:1.1}
-.did{font-size:18px;text-align:center;margin:6px 4px}
-.weil{font-size:19px;text-align:center;margin:16px 4px 6px;color:var(--white)}
+.pan .pl{font-size:13px;text-align:center;color:var(--clay);letter-spacing:.08em;padding:2px 0 3px;line-height:1.1}
+.did{font-size:19px;text-align:center;margin:6px 4px;color:var(--ink7)}
+.weil{font-size:20px;text-align:center;margin:16px 4px 6px;color:var(--ink8)}
 .weil b{display:block;font-weight:400;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:4px}
-.last{font-size:16px;text-align:center;color:var(--dilute);filter:brightness(1.4);margin:8px 10px}
+.last{font-size:17px;text-align:center;color:var(--ink3);margin:8px 10px}
 /* help and about */
 .page h2{font-weight:400;font-size:28px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);text-align:center;margin:22px 0 10px}
 .page h3{font-weight:400;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin:20px 0 4px}
-.page p,.page li{font-size:17px;line-height:1.38}
+.page p,.page li{font-size:18px;line-height:1.38}
 .page ul{padding-left:18px;margin:4px 0}
 .back{margin:20px 0 6px}
 </style>

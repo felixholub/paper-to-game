@@ -41,7 +41,7 @@ a END (end): You lived to the night of the old man's visit, clay all through.
   shot a-end
   shot about
 about returned to: end
-new life from Live another life: 7178 on play
+new life from Live another life: 4751 on play
 b day 1 up boy(6) you 6: strike [Kill him]
    You killed him. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who uses it, as surely as the one it is used on. | “Somebody was here, and the next minute there is nobody here at all.” | The scales tip further your way. Force used holds the turn off a l
 b day 2 up stoneman(1) you 5: strike [Kill him]
