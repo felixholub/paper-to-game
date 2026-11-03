@@ -90,7 +90,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 #stepcard h2{font-size:24px;color:var(--amber);margin:1px 0 6px}
 #stepcard .bad{font-style:italic;font-size:15.5px;line-height:1.45}
 #stepcard .pitch{font-style:italic;color:var(--amber);margin-top:8px;font-size:15.5px}
-#stepcard .pitch .by{font-style:normal;font-family:var(--display);font-size:11.5px;letter-spacing:.1em;color:var(--muted);margin-left:6px}
+#stepcard .pitch .by{font-style:normal;font-family:var(--display);font-size:11.5px;letter-spacing:.1em;color:var(--muted);margin-left:6px;white-space:nowrap}
 #stagebox{margin:10px 0 0}
 #stage{display:block;width:100%;height:auto;border-radius:3px;background:radial-gradient(ellipse at 50% 40%,#ECE7DA 0%,#CFC8B8 45%,#8E887C 85%,#5E584F 100%)}
 #stage .fig{fill:var(--black)}
@@ -450,13 +450,13 @@ function drawEnd() {
     s += `<path d="M${x},${top}H${x + w}" style="stroke:#A39D90;stroke-width:1.5"/>` + (i < n - 1 ? `<path d="M${x + w},${top}V${top - rise}" style="stroke:#A39D90;stroke-width:1.5"/>` : '');
     s += `<g transform="translate(${x + w / 2 - 11},${top - 26}) scale(.72)" style="fill:none;stroke:#E6E0D2;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round">${ICON[st.id]}</g>`;
     s += `<text x="${x + w / 2}" y="${base + 14}" text-anchor="middle" style="fill:#A39D90;font-size:8px;letter-spacing:.03em">${st.title.replace(/^The /, '').toUpperCase()}</text>`;
-    s += `<text x="${x + w / 2}" y="${base + 24}" text-anchor="middle" style="fill:#5E584F;font-size:7.5px">${st.many} v 1</text>`;
+    s += `<text x="${x + w / 2}" y="${base + 24}" text-anchor="middle" style="fill:#5E584F;font-size:9.5px">${st.many} v 1</text>`;
   });
   // four rows: did it = filled diamond; refused = a bar; nothing = no mark
   const rows = [['You', 'you', '#D9A13B', 'fill'], ['Foot', 'foot', '#E6E0D2', 'fill'], ['Intention', 'famous', '#E6E0D2', 'hollow'], ['Bentham', 'most', '#8E887C', 'fill']];
   rows.forEach((rw, k) => {
     const y = base + 48 + k * 24;
-    s += `<text x="2" y="${y + 4}" style="fill:${rw[2]};font-size:9.5px;letter-spacing:.04em">${rw[0].toUpperCase()}</text>`;
+    s += `<text x="2" y="${y + 4}" style="fill:${rw[2]};font-size:10.5px;letter-spacing:.04em">${rw[0].toUpperCase()}</text>`;
     s += `<path d="M${x0},${y}H356" style="stroke:#2A2622;stroke-width:1"/>`;
     S.forEach((st, i) => {
       const v = st[rw[1]]; if (!v) return;
@@ -465,7 +465,7 @@ function drawEnd() {
       else s += `<path d="M${cx - 6},${y}h12" style="stroke:${rw[2]};stroke-width:2.2;stroke-linecap:round"/>`;
     });
   });
-  s += `<text x="2" y="${base + 48 + 4 * 24 + 2}" style="fill:#A39D90;font-size:9px;letter-spacing:.04em">DIAMOND: DID IT.  BAR: REFUSED.</text>`;
+  s += `<text x="2" y="${base + 48 + 4 * 24 + 2}" style="fill:#A39D90;font-size:10px;letter-spacing:.04em">DIAMOND: DID IT.  BAR: REFUSED.</text>`;
   $('#chart').innerHTML = s;
 }
 

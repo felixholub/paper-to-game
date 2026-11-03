@@ -119,7 +119,7 @@ function drawStage(inner) { $('#stage').innerHTML = inner + '<g id="fx"></g>' + 
 function setScene(kind, t) { drawStage(SCENE[kind](t)); }
 
 // ------------------------------------------------------------------ small animation helpers
-function anim(el, kf, o) { if (!el) return Promise.resolve(); const a = el.animate(kf, Object.assign({ fill: 'forwards', easing: 'ease-in-out' }, o, RM ? { duration: 1 } : {})); return a.finished.catch(() => {}); }
+function anim(el, kf, o) { if (!el) return Promise.resolve(); const a = el.animate(kf, Object.assign({ fill: 'forwards', easing: 'ease-in-out' }, o, RM ? { duration: 1 } : {})); return a.finished.then(() => { try { a.commitStyles(); a.cancel(); } catch (e) {} }).catch(() => {}); } // the end state is written to the element so a later style change is not overridden by the finished animation
 const q = s => $('#stage').querySelector(s), qa = s => Array.from($('#stage').querySelectorAll(s));
 function die(el) { return anim(el, [{ opacity: 1 }, { opacity: .16 }], { duration: 700 }); }
 function cure(bedEl) { return Promise.all([anim(bedEl.querySelector('.lie'), [{ opacity: 1 }, { opacity: 0 }], { duration: 400 }), anim(bedEl.querySelector('.sit'), [{ opacity: 0 }, { opacity: 1 }], { duration: 400 })]); }
