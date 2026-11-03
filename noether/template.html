@@ -103,7 +103,7 @@ h3{font-family:var(--disp);font-weight:700;letter-spacing:.12em;text-transform:u
   <p class="lede">Emmy Noether studied formulas that give every possible trip a number, and so pick out the trip nature takes: the arc of a thrown ball, the swing of a spring, the quickest slide from A to B.</p>
   <p class="lede">Change the picture and ask the formula again: start the clock later, move everything one step, turn it. If the formula gives the same number, the change doesn't matter to it. And every change that doesn't matter hands you a prize: a number that stays the same all along the trip. Energy is one of them.</p>
   <p class="aim">Watch a change. Say whether it matters.<br>Every change that doesn't matter wins a prize.</p>
-  <p class="small">Nine changes, one answer each. Right answers earn badges: <span class="red-t">red</span> for the paper's lessons, <span class="pink-t">pink</span> for its traps. About five minutes.</p>
+  <p class="small">Nine changes, one answer each. Right answers earn badges: <span class="red-t">red</span> for the paper's lessons, <span class="pink-t">pink</span> for its traps.</p>
   <button class="btn go" id="begin">Begin</button>
   <div class="row"><button class="btn small-btn" data-go="help">How to play</button><button class="btn small-btn" data-go="about">About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
@@ -330,6 +330,7 @@ async function judge(saidMatters) {
   for (const [label, val, cls] of [[' before the change', ch.before, 'same'], [' after the change', ch.after, res.matters ? 'diff' : 'same']]) { const a = document.createElement('span'), s = document.createElement('span'); s.className = 'f'; s.textContent = 'S'; a.appendChild(s); a.appendChild(document.createTextNode(label)); nums.appendChild(a); const v = document.createElement('span'); v.className = 'n ' + cls; v.textContent = val; nums.appendChild(v); }
   const word = document.createElement('span'); word.className = 'word'; word.style.color = res.matters ? 'var(--haz)' : 'var(--cyan)'; word.textContent = res.matters ? 'DIFFERENT NUMBERS: THE FORMULA CARES' : 'THE SAME NUMBER: THE FORMULA DOESN’T CARE'; nums.appendChild(word);
   $('#prizenote').textContent = ''; $('#next').classList.add('hidden'); $('#answer').classList.remove('hidden');
+  setFormula($('#formula2'), w.formula); // fitted again now the plate is visible and has a width
   shelfState[card.id] = right ? 'won' : 'missed';
   if (card.prize) await prize(card, w, ch, myRun);
   else if (card.lever === 'warpclock' && w.type === 'newton') await fakeCaught(w, ch, myRun);
