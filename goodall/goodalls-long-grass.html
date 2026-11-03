@@ -80,6 +80,7 @@ svg.pic{display:block;width:100%;height:auto;touch-action:none;user-select:none;
 .ruler{margin:6px 0 0}
 .redkey{font-size:12px;color:var(--g2);margin:2px 0 0}
 .redkey i{font-family:var(--hand);font-style:normal;color:var(--red);font-size:15px}
+.howto{font-weight:700;font-size:15px;line-height:1.35;margin:10px 0 8px}
 .hint{position:absolute;left:1px;right:1px;top:1px;text-align:center;font-size:12px;color:var(--g);pointer-events:none;line-height:1.3;background:rgba(241,235,220,.88);padding:3px 4px}.hint:empty{display:none}
 .nearby{display:grid;grid-template-columns:1fr;gap:6px;margin:6px 0 0}
 /* end */
@@ -170,6 +171,7 @@ footer.sig a{color:var(--g2);text-decoration:none}
       <button class="slip sm" id="hers">Pick up her stem</button>
     </div>
   </div>
+  <p class="howto hidden" id="howto"></p>
   <div id="nearbybox" class="hidden">
     <p><b>Three stems within reach of the mound.</b> Take one, or leave them.</p>
     <div class="nearby" id="nearby"></div>
@@ -1197,7 +1199,12 @@ function renderPlay() {
   $('#phand').classList.toggle('hidden', !!g.nearby);
   $('#nearbybox').classList.toggle('hidden', !g.nearby);
   if (g.nearby) renderNearby();
-  $('#hint').textContent = play.hintShown && !g.dip && !leaving && !ended ? (mound ? 'drag down: push in  ·  let go: leave it  ·  drag up: pull out' : 'drag down: push in  ·  drag up: pull out and suck') : '';
+  const firstHere = play.dipsHere === 0 && !leaving && !ended && !g.nearby;
+  $('#hint').textContent = firstHere && !g.dip ? (mound ? 'drag down: push in  ·  let go: leave it  ·  drag up: pull out' : 'drag down: push in  ·  drag up: pull out and suck') : '';
+  $('#howto').classList.toggle('hidden', !firstHere);
+  $('#howto').innerHTML = mound
+    ? 'To fish, press on the drawing below and drag your stem down into the hole. Let go and it stays there; drag up and it comes out. Whatever is on the stem when it comes out, you eat. There is no button for it: the drag is the fishing.'
+    : 'Same hand: drag your stem down into the hollow, and drag it up to suck the end.';
 }
 function renderNearby() {
   const box = $('#nearby'); box.innerHTML = '';
@@ -1222,7 +1229,7 @@ function onDown(e) {
   const ds = M.startDip(g); if (!ds) return;
   e.preventDefault(); $('#sec').setPointerCapture && $('#sec').setPointerCapture(e.pointerId);
   play.drag = { y0: e.clientY, d0: ds.d, scale: svgScale() };
-  play.target = ds.d; play.hintShown = false; $('#hint').textContent = '';
+  play.target = ds.d; $('#hint').textContent = '';
   if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); }
 }
 const FOLD_MAX = 1.5; // inches of push the finger may run past a block (the bow drawn above the hole); beyond, the drag re-anchors
@@ -1267,7 +1274,7 @@ function blockedNote(ds) {
   if (t) { $('#typed').textContent = t; $('#red').textContent = ''; }
 }
 function finishDip(res) {
-  play.busy = true; play.view = { stem: M.inHand(g), d: 0, excess: 0, on: res.place === 'mound' ? Array.from({ length: res.eaten }, (_, i) => 0.5 + i * 0.32) : [], place: res.place };
+  play.busy = true; play.dipsHere = (play.dipsHere || 0) + 1; play.view = { stem: M.inHand(g), d: 0, excess: 0, on: res.place === 'mound' ? Array.from({ length: res.eaten }, (_, i) => 0.5 + i * 0.32) : [], place: res.place };
   drawSection();
   if (res.place === 'mound') {
     const n = res.eaten; let k = 0; const before = g.eaten - n;
@@ -1311,7 +1318,7 @@ function watchMother() {
   const frame = () => {
     if (i < film.length) { const f = film[i]; play.view = { stem: mStem, d: f.d, excess: 0, on: f.on, place: 'mound' }; drawSection(); i++; setTimeout(frame, 33); return; }
     play.watching = false; play.view = null; play.busy = false;
-    setResult(w.words.typed, w.words.red); if (g.phase === 'leaving') leaving(); renderPlay();
+    setResult(w.words.typed + (g.dips.length === 0 ? ' Now you: drag your stem down into the hole in the drawing.' : ''), w.words.red); if (g.phase === 'leaving') leaving(); renderPlay();
   };
   play.view = { stem: mStem, d: 0, excess: 0, on: [], place: 'mound' }; drawSection(); setTimeout(frame, 500);
 }
@@ -1327,21 +1334,21 @@ function show(id) { current = id; $$('.screen').forEach(s => s.classList.toggle(
 function startGame(seed) {
   g = M.newGame(seed); window.__goodall = { get g() { return g; }, play };
   $('#pageno').textContent = 'p. ' + g.seed; $('#pageno2').textContent = 'p. ' + g.seed;
-  play = Object.assign(play, { mode: 'mound', view: null, busy: false, hintShown: true, watching: false, falling: '' });
+  play = Object.assign(play, { mode: 'mound', view: null, busy: false, hintShown: true, watching: false, falling: '', dipsHere: 0 });
   $('#helphollow').classList.add('hidden');
   try { history.replaceState(null, '', '#p=' + g.seed); } catch (e) {}
 }
 function enterMound() {
-  M.walk(g); play.mode = 'mound'; setStatic();
+  M.walk(g); play.mode = 'mound'; play.dipsHere = 0; setStatic();
   $('#paim').textContent = 'Fish termites out of the mound with a stem of grass, before your mother moves on.';
   $('#sunlab').textContent = 'The afternoon'; $('#tallylab').textContent = 'Termites eaten';
   $('#intro').innerHTML = '<b>FIG. 4.</b> The mound cut open. Your mother fishes at her own hole nearby. Each dip takes one sun.';
   $('#rulerwrap').classList.remove('hidden');
-  setResult('Termites bite on to whatever comes into their passage. Push your stem in, give them a moment, and draw it out.', '');
+  setResult('Termites bite on to whatever comes into their passage. Drag your stem into the hole, give them a moment, and draw it out: what is on it, you eat.', '');
   show('play'); renderPlay();
 }
 function enterHollow() {
-  M.goHollow(g); play.mode = 'hollow'; play.hintShown = true; play.view = null; setStatic();
+  M.goHollow(g); play.mode = 'hollow'; play.hintShown = true; play.dipsHere = 0; play.view = null; setStatic();
   $('#helphollow').classList.remove('hidden');
   $('#paim').textContent = 'Drink the rainwater in the hollow. Your lips can\'t reach it.';
   $('#sunlab').textContent = 'Before dark'; $('#tallylab').textContent = ''; $('#tally').innerHTML = '';
