@@ -56,7 +56,10 @@
     GRASS_EXTRA: ['blade', 'bark', 'twig', 'dry', 'stem', 'leafy'], // ours: the eighth stem, drawn from these
     NEARBY: { blade: 3, dry: 2, bark: 2, short: 2, stick: 1, twig: 1, leafy: 1, stem: 1 }, // ours: weights for the three
                                                //   stems in reach beside the mound (poorer than the long grass)
-    CARRY: 3,                                  // ours: stems you can carry; p. 228: "several tools are picked at a time"
+    CARRY: 3,                                  // ours (calibration harness): stems carried from the long grass; the game itself
+                                               //   (beginMound) holds one stem at a time and picks from a clump by the mound
+    CLUMP: ['blade', 'stem', 'leafy', 'stick'],  // ours: the clump by the mound always holds one of each, plus one more
+    CLUMP_EXTRA: ['dry', 'twig', 'short', 'bark'],
     BITE: 1.0,                                 // ours: inches bitten off a bent end (p. 229)
     // ---- termites (all ours; tuned so an infant's mistakes reproduce the paper's two termites in twenty-two bouts)
     TERMITES: {
@@ -200,6 +203,21 @@
   }
 
   // ---------- the long grass
+  function beginMound(g) { // the game as played: straight to the mound, one stem in hand at a time, a clump of five to pick from
+    const r = g.r;
+    g.grass = CONFIG.CLUMP.concat([CONFIG.CLUMP_EXTRA[Math.floor(r() * CONFIG.CLUMP_EXTRA.length)]]).map(k => makeStem(k, r));
+    g.taken = g.grass.map(() => false); g.carried = []; g.held = -1; g.heap = []; g.picked = 0; g.phase = 'mound'; g.inspect = -1;
+    return g;
+  }
+  function pickFromGrass(g, i) { // take a stem from the clump; the one in your hand goes on the heap; the clump grows back
+    if (!(g.phase === 'mound' || g.phase === 'leaving') || g.dip || !g.grass[i]) return false;
+    const s = g.grass[i]; const old = g.carried[0] || null;
+    if (old) g.heap.push(old);
+    g.carried = [s]; g.held = 0; g.picked++;
+    g.grass[i] = makeStem(s.type, g.r);
+    return true;
+  }
+  function dropHeld(g) { const old = g.carried[0] || null; if (old) g.heap.push(old); g.carried = []; g.held = -1; return old; }
   function look(g, i) { if (g.phase === 'grass' && !g.taken[i]) g.inspect = i; return inHand(g); }
   function take(g) {
     if (g.phase !== 'grass' || g.inspect < 0 || g.carried.length >= CONFIG.CARRY) return false;
@@ -256,8 +274,10 @@
     return { film: m.film, result: m.last, dropped: m.justDropped, stem: copy(m.last.stem), words: motherWords(m.last, m.justDropped) };
   }
   function pickUpHers(g) {
-    if (g.phase !== 'mound' || !g.mother.dropped) return false;
-    stow(g, g.mother.dropped); g.mother.dropped = null; g.usedHers = true; return true;
+    if (!(g.phase === 'mound' || g.phase === 'leaving') || !g.mother.dropped || g.dip) return false;
+    if (g.heap) { if (g.carried[0]) g.heap.push(g.carried[0]); g.carried = [g.mother.dropped]; g.held = 0; }
+    else stow(g, g.mother.dropped);
+    g.mother.dropped = null; g.usedHers = true; return true;
   }
   function fetchNearby(g) {
     if (g.phase !== 'mound' || g.dip || g.nearby) return null;
@@ -491,7 +511,8 @@
         : last.age === first.age && last.why === first.why ? `Your first dip and your last both looked like ${AGE_WORDS[first.age]} (${WHY_SHORT[first.why]}).`
           : `Your first dip looked like ${AGE_WORDS[first.age]} (${WHY_SHORT[first.why]}); your last, like ${AGE_WORDS[last.age]} (${WHY_SHORT[last.why]}).`);
     }
-    lines.push((g.watched ? `You watched your mother ${g.watched === 1 ? 'once' : g.watched === 2 ? 'twice' : numw(g.watched) + ' times'} and tried the rest yourself` : 'You never stopped to watch your mother: you learned it all by trying')
+    lines.push((g.heap ? `Your mother fished at her own hole beside you all afternoon; you tried ${g.picked <= 1 ? 'one stem' : g.picked === 2 ? 'two stems' : numw(g.picked) + ' stems'} from the grass`
+      : g.watched ? `You watched your mother ${g.watched === 1 ? 'once' : g.watched === 2 ? 'twice' : numw(g.watched) + ' times'} and tried the rest yourself` : 'You never stopped to watch your mother: you learned it all by trying')
       + (g.usedHers ? ', and you fished with the stem she threw away.' : '.'));
     const u = h.used, enough = h.sips >= H.enough;
     let hol;
@@ -515,7 +536,7 @@
     };
   }
 
-  return { CONFIG, rng, newSeed, newGame, makeStem, inHand, describe, preview, prepare, look, take, putBack, walk, hold, holdHand,
+  return { CONFIG, rng, newSeed, newGame, beginMound, pickFromGrass, dropHeld, makeStem, inHand, describe, preview, prepare, look, take, putBack, walk, hold, holdHand,
     watch, pickUpHers, fetchNearby, takeNearby, skipNearby, limit, newDip, stepDip, finishDip, classify, startDip, dipStep, cancelDip,
     goHollow, pickLeaves, verdict, inchWords, numw, RED, AGE_WORDS };
 });
