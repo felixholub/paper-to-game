@@ -31,7 +31,7 @@ h1{font-weight:700;font-size:30px;line-height:1.05;letter-spacing:.06em;text-tra
 h2{font-weight:700;font-size:17px;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 6px}
 h3{font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin:16px 0 4px}
 .aim{font-weight:700;font-size:17px;line-height:1.3;margin:12px 0;padding:8px 0;border-top:1.5px solid var(--g);border-bottom:1.5px solid var(--g)}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding-top:12px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding-top:10px}
 .top .aimline{font-weight:700;font-size:13px;line-height:1.3}
 .q{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--g);background:var(--paper);color:var(--g);font:700 20px/37px var(--type);cursor:pointer;padding:0}
 /* buttons: paper slips, typed */
@@ -43,8 +43,9 @@ h3{font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;
 .slip:disabled{opacity:.38;cursor:default}
 .slip .cost{float:right;font-weight:400;letter-spacing:0;text-transform:none;font-size:13px}
 .slip.half{display:inline-block;width:calc(50% - 4px)}
-.row{display:flex;gap:8px;flex-wrap:wrap}.row .slip{flex:1 1 140px}
-.slip.sm{min-height:42px;padding:8px 10px;font-size:13px;margin-top:6px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row .slip{flex:1 1 125px}
+.slip.sm{min-height:40px;padding:7px 10px;font-size:13px;margin-top:6px}
+.slip.sm .cost{font-size:12px}
 #play{-webkit-user-select:none;user-select:none}
 #prep:empty{display:none}
 /* pictures */
@@ -54,7 +55,7 @@ svg.pic{display:block;width:100%;height:auto;touch-action:none;user-select:none;
 .cap{font-size:12px;color:var(--g2);margin:4px 0 0}
 .cap b{letter-spacing:.06em}
 /* status strip */
-.status{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin:10px 0 0}
+.status{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin:6px 0 0}
 .status .label{display:block;margin-bottom:2px}
 .suns{display:flex;gap:3px}
 .sun{width:14px;height:14px;border-radius:50%;border:1.3px solid var(--g);background:var(--paper)}
@@ -63,9 +64,10 @@ svg.pic{display:block;width:100%;height:auto;touch-action:none;user-select:none;
 .tally svg{display:inline-block;vertical-align:bottom}
 .tallyn{font-weight:700;font-size:15px;margin-left:4px}
 /* in your hand */
-.handbox{margin:8px 0 0}
-.handbox .label{display:flex;justify-content:space-between}
-.desc{font-size:14px;line-height:1.35;margin:2px 0 0;min-height:38px}
+.handbox{margin:6px 0 0}
+svg.pic.hand{margin-top:2px}
+.handbox .label{display:flex;justify-content:space-between;gap:8px}.handbox .label span:first-child{white-space:nowrap}.handbox .label span:last-child{text-align:right;font-size:11px}
+.desc{font-size:14px;line-height:1.35;margin:2px 0 0;min-height:20px}
 .slots{display:flex;gap:6px;margin:6px 0 0}
 .slot{flex:1;min-height:50px;border:0;background:transparent;position:relative;padding:4px 4px 2px;cursor:pointer;font:400 11px/1.15 var(--type);color:var(--g2);text-align:left}
 .slot::before{content:'';position:absolute;inset:0;border:1.2px dashed var(--g3);border-radius:2px}
@@ -74,7 +76,7 @@ svg.pic{display:block;width:100%;height:auto;touch-action:none;user-select:none;
 .slot.on{color:var(--g)}
 .slot svg{display:block;width:100%;height:24px}
 /* results */
-.result{margin:8px 0 0;min-height:64px}
+.result{margin:6px 0 0;min-height:60px}
 .typed{font-size:15px;line-height:1.38;margin:0}
 .red{font-family:var(--hand);color:var(--red);font-size:17px;line-height:1.2;margin:4px 0 0;min-height:20px}
 .ruler{margin:6px 0 0}
@@ -161,7 +163,7 @@ footer.sig a{color:var(--g2);text-decoration:none}
   <div class="handbox" id="phand">
     <div class="label"><span>In your hand</span><span id="pcount" style="text-transform:none;letter-spacing:0;font-weight:400"></span></div>
     <div class="slots" id="pslots"></div>
-    <svg class="pic" id="hand" viewBox="0 0 348 64"></svg>
+    <svg class="pic hand" id="hand" viewBox="0 0 348 36"></svg>
     <p class="desc small" id="pdesc"></p>
     <div class="row" id="prep">
       <button class="slip sm" id="bite" data-prev="bite">Bite off the end</button>
@@ -169,16 +171,16 @@ footer.sig a{color:var(--g2);text-decoration:none}
       <button class="slip sm" id="chew" data-prev="chew">Chew the end</button>
       <button class="slip sm" id="leaves">Pick some leaves</button>
       <button class="slip sm" id="hers">Pick up her stem</button>
+      <button class="slip sm" id="watch">Watch your mother <span class="cost">one sun</span></button>
+      <button class="slip sm" id="fetch">Another stem nearby <span class="cost">one sun</span></button>
     </div>
   </div>
-  <p class="howto hidden" id="howto"></p>
   <div id="nearbybox" class="hidden">
     <p><b>Three stems within reach of the mound.</b> Take one, or leave them.</p>
     <div class="nearby" id="nearby"></div>
     <button class="slip sm" id="leavenear">Leave them</button>
   </div>
-  <div class="frame"><svg class="pic" id="sec" viewBox="0 0 348 270"><g id="sStatic"></g><g id="sWait"></g><g id="sStem" filter="url(#pencil-line)"></g><g id="sFall"></g><g id="sBin"></g></svg><div class="hint" id="hint"></div></div>
-  <p class="cap" id="intro"></p>
+  <div class="frame"><svg class="pic" id="sec" viewBox="0 0 348 250"><g id="sStatic"></g><g id="sWait"></g><g id="sStem" filter="url(#pencil-line)"></g><g id="sFall"></g><g id="sNote"></g><g id="sBin"></g></svg><div class="hint" id="hint"></div></div>
   <div class="result" id="result">
     <p class="typed" id="typed"></p>
     <p class="red" id="red"></p>
@@ -190,10 +192,7 @@ footer.sig a{color:var(--g2);text-decoration:none}
   <div id="donebox" class="hidden"><button class="slip dark" id="lastpage">The last page →</button></div>
   <div class="ruler" id="rulerwrap"><svg class="pic" id="ruler" viewBox="0 0 348 46"></svg>
     <p class="redkey">In red: <i>Jane Goodall's notes</i> — what she saw young chimpanzees do at each age, at Gombe.</p></div>
-  <div id="acts">
-    <button class="slip" id="watch">Watch your mother <span class="cost">one sun</span></button>
-    <button class="slip" id="fetch">Pick another stem nearby <span class="cost">one sun</span></button>
-  </div>
+  <p class="cap" id="intro"></p>
 </section>
 
 <!-- ===================== THE LAST PAGE ===================== -->
@@ -224,8 +223,8 @@ footer.sig a{color:var(--g2);text-decoration:none}
   <h3>The long grass</h3>
   <p>Touch a stem to hold it up: it is drawn over a ruler of inches, drooping as much as it really droops, and the line under it says how long, how thick and how stiff it is. <b>Take it</b> puts it in one of your three slots; touch a slot to put it back. <b>Strip the leaves</b> pulls the leaves off a leafy twig. The mound is sixty yards away and you can't see its hole from here, so choose before you go: you won't come back.</p>
   <h3>The mound</h3>
-  <p>The big drawing is the mound cut open: the hole at the top, a passage that bends twice, and termites waiting below the first few inches. The small numbers along the passage count inches in. <b>Drag down</b> on the drawing to push your stem in. <b>Let go</b> to leave it there: termites bite on to whatever comes into their passage, and they need a moment. <b>Drag up</b> to pull it out: if it moves faster than they can hold on, they fall off. The stem goes in until something stops it: a stem too thick for the hole, leaves catching on the rim, a floppy stem folding at a bend, or its own length.</p>
-  <p>Each dip takes one sun from the afternoon. So does watching your mother fish at her own hole, and fetching another stem from beside the mound. When the twelve suns are gone, she moves off. A stem's end bends after a few dips; <b>Bite off the end</b> makes it an inch shorter and straight again. When your mother throws a bent stem down, <b>Pick up her stem</b> takes it. Touching any of these buttons shows you, in the hand box, what it would do before you let go.</p>
+  <p>The big drawing is the mound cut open: the hole at the top, a passage that bends twice, and termites waiting below the first few inches. The small numbers along the passage count inches in. <b>Drag down</b> on the drawing to push your stem in. <b>Let go</b> to leave it there: termites bite on to whatever comes into their passage, and they need a moment. <b>Drag up</b> to pull it out: if it moves faster than they can hold on, they fall off. The stem goes in until something stops it: a stem too thick for the hole, leaves catching on the rim, a floppy stem folding at a bend, or its own length. When that happens, a pencil note on the drawing says what stopped it, and where. If a stem is in the hole and you touch another one in your hand, the game draws the first one out for you, slowly, and gives you the other.</p>
+  <p>Each dip takes one sun from the afternoon. So does watching your mother fish at her own hole, and fetching another stem from beside the mound. When the twelve suns are gone, she moves off. A stem's end bends after a few dips; <b>Bite off the end</b> makes it an inch shorter and straight again. When your mother throws a bent stem down, <b>Pick up her stem</b> takes it. Touching any of these buttons shows you, on the little ruler under your stems, what it would do before you let go.</p>
   <p>After each dip the game says what happened (how far in, whether there was a pause, how fast it came out, how many termites). Then, in red, a note from Jane Goodall: which age of young chimpanzee fishes the way you just did, and a tick on her ruler of ages.</p>
   <div id="helphollow" class="hidden">
     <h3>The hollow</h3>
@@ -884,7 +883,7 @@ function vultureArt() {
 
 // ---------- geometry of the section (layout only: inches are the mechanism's, pixels are ours)
 const K = 21;                         // pixels per inch in the section
-const HOLE = { x: 236, y: 100 };
+const HOLE = { x: 236, y: 76 };
 const SEGS = [ // the passage centreline, in inches along it
   { s0: 0, s1: P.bend1, dx: 0, dy: 1 },
   { s0: P.bend1, s1: P.bend2, dx: -0.68, dy: 0.73 },
@@ -899,15 +898,15 @@ function passagePath(off) { // one wall of the passage, offset sideways
   const pts = []; for (let s = 0; s <= P.end + 0.6; s += 0.25) { const p = along(s); pts.push([p.x - p.dy * off, p.y + p.dx * off]); }
   return 'M ' + pts.map(p => fx(p[0]) + ' ' + fx(p[1])).join(' L ');
 }
-const HOLLOW = { x: 236, y: 100 };
+const HOLLOW = { x: 236, y: 76 };
 
 function moundStatic() {
-  const moundTop = 'M 0 128 L 132 128 C 170 126, 205 112, 236 100 C 262 88, 285 58, 306 54 C 326 52, 340 62, 348 70';
-  const earth = moundTop + ' L 348 270 L 0 270 Z';
+  const moundTop = 'M 0 104 L 132 104 C 170 102, 205 88, 236 76 C 262 64, 285 34, 306 30 C 326 28, 340 38, 348 46';
+  const earth = moundTop + ' L 348 250 L 0 250 Z';
   let s = '';
-  s += grassStrokes(41, 40, 0, 150, 128, 16, 70, G3, 0.8);
-  s += hatch(earth, [0, 50, 348, 270], { angle: 35, n: 1400, len: 7, op: 0.32, w: 0.7, seed: 42, color: G2 });
-  s += hatch(earth, [0, 50, 348, 270], { angle: 140, n: 500, len: 5, op: 0.22, w: 0.6, seed: 43, color: G2 });
+  s += grassStrokes(41, 40, 0, 150, 104, 14, 58, G3, 0.8);
+  s += hatch(earth, [0, 26, 348, 250], { angle: 35, n: 1400, len: 7, op: 0.32, w: 0.7, seed: 42, color: G2 });
+  s += hatch(earth, [0, 26, 348, 250], { angle: 140, n: 500, len: 5, op: 0.22, w: 0.6, seed: 43, color: G2 });
   // the passage: cut open, paper inside, two pencil walls
   const pts = []; for (let s2 = 0; s2 <= P.end + 0.6; s2 += 0.25) { const p = along(s2); pts.push(p); }
   const w = 6, left = pts.map(p => [p.x - p.dy * w, p.y + p.dx * w]), right = pts.map(p => [p.x + p.dy * w, p.y - p.dx * w]);
@@ -981,9 +980,9 @@ function stemInSection(view) {
   // outside: from the hole up to the hand, bowing if pushed against a block
   const outLen = Math.max(0.3, (st.type === 'leaves' ? 0.6 : st.len - C.GRIP - view.d)) * K;
   const ex = Math.min(view.excess || 0, 1.5) * K * 1.6;
-  const dir = { x: -0.92, y: -0.39 };
+  const dir = { x: -0.955, y: -0.3 };
   const top = hollow ? HOLLOW : HOLE;
-  const chord = Math.max(10, outLen - ex);
+  const chord = Math.max(10, Math.min(200, outLen) - ex);
   const hx = top.x + dir.x * chord, hy = top.y + dir.y * chord;
   const bulge = ex * [1.1, 0.5, 0.12][st.stiff == null ? 2 : st.stiff];
   const sag = [0.16, 0.06, 0][st.stiff == null ? 2 : st.stiff] * chord;
@@ -1032,13 +1031,14 @@ function stemProfile(st, x0, y0, px, color, op) {
   return s;
 }
 function drawHandBox(svg, st, prev) {
-  const px = 21, x0 = 26, y0 = 18;
+  const tall = svg.id === 'ghand';            // the long grass keeps the full picture; the mound a compact one
+  const px = 21, x0 = 26, y0 = tall ? 18 : 10, ry = tall ? 54 : 28, ty = tall ? 64 : 35;
   let s = `<g stroke="${G}" stroke-width="1">`;
-  s += `<line x1="${x0}" y1="54" x2="${x0 + 14 * px}" y2="54"/>`;
-  for (let i = 0; i <= 14; i++) s += `<line x1="${x0 + i * px}" y1="54" x2="${x0 + i * px}" y2="${i % 2 ? 50 : 47}"/>`;
+  s += `<line x1="${x0}" y1="${ry}" x2="${x0 + 14 * px}" y2="${ry}"/>`;
+  for (let i = 0; i <= 14; i++) s += `<line x1="${x0 + i * px}" y1="${ry}" x2="${x0 + i * px}" y2="${i % 2 ? ry - 4 : ry - 7}"/>`;
   s += '</g>';
-  for (let i = 0; i <= 14; i += 2) s += `<text x="${x0 + i * px}" y="64" font-family="Courier Prime,monospace" font-size="10" fill="${G2}" text-anchor="middle">${i}</text>`;
-  s += `<text x="${x0 + 14 * px + 13}" y="64" font-family="Courier Prime,monospace" font-size="10" fill="${G2}">in</text>`;
+  for (let i = 0; i <= 14; i += 2) s += `<text x="${x0 + i * px}" y="${ty}" font-family="Courier Prime,monospace" font-size="${tall ? 10 : 8}" fill="${G2}" text-anchor="middle">${i}</text>`;
+  s += `<text x="${x0 + 14 * px + 13}" y="${ty}" font-family="Courier Prime,monospace" font-size="${tall ? 10 : 8}" fill="${G2}">in</text>`;
   if (st && st.type !== 'hand' && st.type !== 'leaves') s += `<path d="M ${x0 - 14} ${y0 - 7} C ${x0 - 4} ${y0 - 9}, ${x0 + 3} ${y0 - 4}, ${x0 + 2} ${y0 + 2} C ${x0 + 1} ${y0 + 7}, ${x0 - 6} ${y0 + 8}, ${x0 - 14} ${y0 + 7} Z" fill="${PAPER}" stroke="${G}" stroke-width="1.1"/>`;
   if (prev) { s += stemProfile(st, x0, y0, px, G3, 1); s += stemProfile(prev, x0, y0, px, G, 1); }
   else s += stemProfile(st, x0, y0, px, G, 1);
@@ -1128,10 +1128,10 @@ function drawRuler(svg, dips, h, fresh) {
 function sectionStatic() {
   if (play.mode === 'mound') return `<g filter="url(#pencil)">${moundStatic()}</g>${moundLabels()}`;
   // the hollow: a tree trunk cut open, rainwater inside
-  const trunk = 'M 150 270 C 156 200, 162 120, 170 30 L 300 30 C 306 120, 312 200, 318 270 Z';
+  const trunk = 'M 150 250 C 156 185, 162 110, 170 18 L 300 18 C 306 110, 312 185, 318 250 Z';
   const cav = `M ${HOLLOW.x - 9} ${HOLLOW.y} C ${HOLLOW.x - 14} ${HOLLOW.y + 30}, ${HOLLOW.x - 20} ${HOLLOW.y + 80}, ${HOLLOW.x - 16} ${HOLLOW.y + C.HOLLOW.bottom * K + 6} L ${HOLLOW.x + 16} ${HOLLOW.y + C.HOLLOW.bottom * K + 6} C ${HOLLOW.x + 20} ${HOLLOW.y + 80}, ${HOLLOW.x + 14} ${HOLLOW.y + 30}, ${HOLLOW.x + 9} ${HOLLOW.y} Z`;
-  let s = grassStrokes(51, 50, 0, 348, 270, 16, 80, G3, 0.8);
-  s += `<path d="${trunk}" fill="${PAPER}"/>` + hatch(trunk, [150, 30, 320, 270], { angle: 88, n: 900, len: 12, op: 0.35, w: 0.8, seed: 52, color: G2 });
+  let s = grassStrokes(51, 50, 0, 348, 250, 16, 80, G3, 0.8);
+  s += `<path d="${trunk}" fill="${PAPER}"/>` + hatch(trunk, [150, 18, 320, 250], { angle: 88, n: 900, len: 12, op: 0.35, w: 0.8, seed: 52, color: G2 });
   s += `<path d="${trunk}" fill="none" stroke="${G}" stroke-width="1.3"/>`;
   s += `<path d="${cav}" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/>`;
   const wy = HOLLOW.y + C.HOLLOW.water * K;
@@ -1139,7 +1139,7 @@ function sectionStatic() {
   s += `<clipPath id="cavc"><path d="${cav}"/></clipPath><g clip-path="url(#cavc)" stroke="${G2}" stroke-width="0.9" opacity="0.8">${water}</g><line x1="${HOLLOW.x - 16}" y1="${wy}" x2="${HOLLOW.x + 16}" y2="${wy}" stroke="${G}" stroke-width="1.3"/>`;
   let lab = `<g font-family="Courier Prime,monospace" font-size="11" fill="${G}" text-anchor="end"><text x="${HOLLOW.x - 24}" y="${HOLLOW.y + 22}">the hollow</text><text x="${HOLLOW.x - 24}" y="${fx(wy + 14)}">rainwater</text></g>`;
   // the gauge of sips
-  const gx = 326, gy0 = 60, gh = 180, n = C.HOLLOW.enough, filled = Math.min(n, g.hollow.sips);
+  const gx = 326, gy0 = 44, gh = 170, n = C.HOLLOW.enough, filled = Math.min(n, g.hollow.sips);
   let gauge = `<rect x="${gx - 8}" y="${gy0}" width="16" height="${gh}" rx="3" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/>`;
   const fh = gh * filled / n; if (fh > 0) { gauge += `<clipPath id="gaugec"><rect x="${gx - 7}" y="${gy0 + gh - fh}" width="14" height="${fh}"/></clipPath><g clip-path="url(#gaugec)" stroke="${G}" stroke-width="1">`; for (let yy = gy0; yy < gy0 + gh + 14; yy += 3) gauge += `<line x1="${gx - 8}" y1="${yy}" x2="${gx + 8}" y2="${yy - 6}"/>`; gauge += '</g>'; }
   for (let k = 1; k < n; k++) gauge += `<line x1="${gx - 8}" y1="${fx(gy0 + gh - gh * k / n)}" x2="${gx - 4}" y2="${fx(gy0 + gh - gh * k / n)}" stroke="${G2}" stroke-width="0.8"/>`;
@@ -1154,6 +1154,7 @@ function drawSection() {
   if (w !== waitOn) { $('#sWait').innerHTML = w ? WAIT : ''; waitOn = w; }
   $('#sStem').innerHTML = stemInSection(v);
   $('#sFall').innerHTML = play.falling || '';
+  $('#sNote').innerHTML = g.dip ? (play.note || '') : '';
   $('#sBin').innerHTML = play.watching ? play.binoc : '';
 }
 function renderPlay() {
@@ -1197,9 +1198,8 @@ function renderPlay() {
   $('#hers').classList.toggle('hidden', !mound || !g.mother.dropped);
   $('#hers').disabled = busy;
   $('#hers').textContent = g.carried.length >= C.CARRY ? 'Pick up her stem (drop this one)' : 'Pick up her stem';
-  $('#watch').classList.toggle('hidden', !mound); $('#fetch').classList.toggle('hidden', !mound);
+  $('#watch').classList.toggle('hidden', !mound || leaving || ended); $('#fetch').classList.toggle('hidden', !mound || leaving || ended);
   $('#watch').disabled = busy || g.phase !== 'mound'; $('#fetch').disabled = busy || g.phase !== 'mound' || !!g.nearby;
-  $('#acts').classList.toggle('hidden', leaving || ended || !!g.nearby || !mound);
   $('#prep').classList.toggle('hidden', leaving || ended);
   $('#leavingbox').classList.toggle('hidden', !leaving || !!g.nearby || play.busy);
   $('#donebox').classList.toggle('hidden', !ended || play.busy);
@@ -1207,11 +1207,7 @@ function renderPlay() {
   $('#nearbybox').classList.toggle('hidden', !g.nearby);
   if (g.nearby) renderNearby();
   const firstHere = play.dipsHere === 0 && !leaving && !ended && !g.nearby;
-  $('#hint').textContent = firstHere && !g.dip ? (mound ? 'drag down: push in  ·  let go: leave it  ·  drag up: pull out' : 'drag down: push in  ·  drag up: pull out and suck') : '';
-  $('#howto').classList.toggle('hidden', !firstHere);
-  $('#howto').innerHTML = mound
-    ? 'To fish, press on the drawing below and drag your stem down into the hole. Let go and it stays there; drag up and it comes out. Whatever is on the stem when it comes out, you eat. There is no button for it: the drag is the fishing.'
-    : 'Same hand: drag your stem down into the hollow, and drag it up to suck the end.';
+  $('#hint').textContent = firstHere && !g.dip ? (mound ? 'press here and drag down: the stem goes in  ·  let go: it stays  ·  drag up: it comes out' : 'press here and drag down: the stem goes in  ·  drag up: it comes out, and you suck it') : '';
 }
 function renderNearby() {
   const box = $('#nearby'); box.innerHTML = '';
@@ -1235,8 +1231,8 @@ function onDown(e) {
   const st = M.inHand(g); if (!st) return;
   const ds = M.startDip(g); if (!ds) return;
   e.preventDefault(); $('#sec').setPointerCapture && $('#sec').setPointerCapture(e.pointerId);
-  play.drag = { y0: e.clientY, d0: ds.d, scale: svgScale() };
-  play.target = ds.d; $('#hint').textContent = ''; $('#pcount').textContent = 'touch another: this one comes out first';
+  play.drag = { y0: e.clientY, d0: ds.d, scale: svgScale() }; if (ds.d === 0) play.note = '';
+  play.target = ds.d; $('#hint').textContent = ''; $('#pcount').textContent = 'touch another: this one comes out';
   if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); }
 }
 const FOLD_MAX = 1.5; // inches of push the finger may run past a block (the bow drawn above the hole); beyond, the drag re-anchors
@@ -1280,9 +1276,26 @@ function blockedNote(ds) {
   const why = ds.lim.reason;
   const t = { thick: 'It won\'t go in: too thick for the hole.', leaves: 'The leaves catch on the rim.', fold1: 'It folds at the first bend.', bent: 'The bent end folds at the first bend.', fold2: 'It folds at the second bend.', length: 'That\'s as far as this stem reaches.', end: 'The bottom of the passage.', reach: 'As far as it goes.' }[why] || '';
   if (t) { $('#typed').textContent = t; $('#red').textContent = ''; }
+  play.note = plateNote(ds);
+}
+function plateNote(ds) { // what stopped the stem, written on the plate where it stopped
+  const why = ds.lim.reason, hollow = ds.place === 'hollow';
+  const words = hollow
+    ? { reach: ds.stem.type === 'hand' ? ['your fingers reach', 'this far, no further'] : ['as far as it goes'], length: ['as far as this', 'stem reaches'] }[why]
+    : { thick: ['too thick: it will', 'not go in the hole'], leaves: ['the leaves catch', 'on the rim'], fold1: ['too floppy:', 'it folds here'], bent: ['the bent end', 'folds here'], fold2: ['too springy:', 'it folds here'], length: ['as far as this', 'stem reaches'] }[why];
+  if (!words) return '';
+  const p = hollow ? { x: HOLLOW.x, y: HOLLOW.y + ds.lim.depth * K } : along(ds.lim.depth);
+  const x = hollow ? 120 : 340, anchor = hollow ? 'middle' : 'end', y0 = hollow ? 150 : 30;
+  const w = Math.max(...words.map(t => t.length)) * 6.4 + 10, bx = hollow ? x - w / 2 : x - w + 4;
+  let s = `<rect x="${fx(bx)}" y="${y0 - 11}" width="${fx(w)}" height="${words.length * 13 + 6}" fill="${PAPER}" opacity="0.92"/>`;
+  words.forEach((t, i) => { s += `<text x="${x}" y="${y0 + i * 13}" font-family="Courier Prime,monospace" font-size="11" font-weight="700" fill="${G}" text-anchor="${anchor}">${t}</text>`; });
+  const lx = hollow ? x : bx, ly = hollow ? y0 + words.length * 13 - 6 : y0 + 2;
+  s += `<path d="M ${fx(lx)} ${fx(ly)} L ${fx(p.x + (hollow ? -10 : 9))} ${fx(p.y)}" stroke="${G}" stroke-width="0.9" fill="none" stroke-dasharray="3 2"/>`;
+  s += `<circle cx="${fx(p.x + (hollow ? -10 : 9))}" cy="${fx(p.y)}" r="1.8" fill="${G}"/>`;
+  return `<g filter="url(#pencil-line)">${s}</g>`;
 }
 function finishDip(res) {
-  play.busy = true; play.dipsHere = (play.dipsHere || 0) + 1; play.view = { stem: M.inHand(g), d: 0, excess: 0, on: res.place === 'mound' ? Array.from({ length: res.eaten }, (_, i) => 0.5 + i * 0.32) : [], place: res.place };
+  play.busy = true; play.dipsHere = (play.dipsHere || 0) + 1; play.note = ''; play.view = { stem: M.inHand(g), d: 0, excess: 0, on: res.place === 'mound' ? Array.from({ length: res.eaten }, (_, i) => 0.5 + i * 0.32) : [], place: res.place };
   drawSection();
   if (res.place === 'mound') {
     const n = res.eaten; let k = 0; const before = g.eaten - n;
@@ -1336,7 +1349,7 @@ function watchMother() {
   play.view = { stem: mStem, d: 0, excess: 0, on: [], place: 'mound' }; drawSection(); setTimeout(frame, 500);
 }
 function binocMask() { // the binocular view laid over the section while you watch her
-  const w = 348, h = 270, r = 112, cx1 = 124, cx2 = 236, cy = 150;
+  const w = 348, h = 250, r = 104, cx1 = 124, cx2 = 236, cy = 128;
   return `<defs><mask id="bm"><rect width="${w}" height="${h}" fill="white"/><circle cx="${cx1}" cy="${cy}" r="${r}" fill="black"/><circle cx="${cx2}" cy="${cy}" r="${r}" fill="black"/></mask></defs>` +
     `<rect width="${w}" height="${h}" fill="${PAPER}" mask="url(#bm)" opacity="0.92"/><g fill="none" stroke="${G}" stroke-width="2" filter="url(#pencil-line)"><circle cx="${cx1}" cy="${cy}" r="${r}"/><circle cx="${cx2}" cy="${cy}" r="${r}"/></g>` +
     `<text x="10" y="18" font-family="Courier Prime,monospace" font-size="12" font-weight="700" fill="${G}">YOUR MOTHER'S HOLE</text>`;
@@ -1357,7 +1370,7 @@ function enterMound() {
   $('#sunlab').textContent = 'The afternoon'; $('#tallylab').textContent = 'Termites eaten';
   $('#intro').innerHTML = '<b>FIG. 4.</b> The mound cut open. Your mother fishes at her own hole nearby. Each dip takes one sun.';
   $('#rulerwrap').classList.remove('hidden');
-  setResult('Termites bite on to whatever comes into their passage. Drag your stem into the hole, give them a moment, and draw it out: what is on it, you eat.', '');
+  setResult('Termites bite on to whatever comes into their passage. Press on the drawing, drag your stem down into the hole, give them a moment, and drag it up. What comes up on the stem, you eat: there is no button for it.', '');
   show('play'); renderPlay();
 }
 function enterHollow() {
