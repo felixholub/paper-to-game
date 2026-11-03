@@ -2,96 +2,96 @@
 START aim: Force is yours, for now. | Keep your soul through the war. | life no. 2
   shot a-day1
 a day 1 up boy(6) you 6: raise [Raise him up]
-   You raised him up. He stands, and goes back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales hang where they were. Mercy brings the turn nearer. | NEXT DAY | day 2
+   You raised him up. He stands, and goes back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales hang where they were; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 2
   shot a-day1-result
 a day 2 up stoneman(1) you 6: strike [Kill him]
-   You killed him. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who uses it, as surely as the one it is used on. | “Somebody was here, and the next minute there is nobody here at all.” | The scales hang where they were. Force used holds the turn off a l
+   You killed him. The scales hang where they were; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who uses it, as surely as the one it is used on. | “Somebody was here, and the next minute there is nobody here at a
   shot a-day2-result
   shot help
    help returned to: play
 a day 3 up speaker(6) you 5: raise [Raise him up]
-   You heard him out, before the whole army. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales have turned. Tomorrow force is his. Mercy brings the turn nearer. | NEXT DAY | day 4
+   You heard him out, before the whole army. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales have turned, and tomorrow force is his; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 4
   shot a-day4-down
 a day 4 down above(6) you 5: plead [Clasp his knees]
-   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. | “A suppliant, once his prayer is answered, becomes a human being again.” | The scales turn your way again, just past level. | NEXT DAY | day 5
+   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. The scales turn your way again, just past level. | “A suppliant, once his prayer is answered, becomes a human being again.” | NEXT DAY | day 5
   shot a-day4-result
   shot a-day5
 a day 5 up guest(5) you 5: raise [Raise him up]
-   He lowered his spear as you lowered yours. On him too, the stone goes back a little. | The stone goes back down. You are clay all through again. | “Let us turn our lances away from each other, even in battle.” | The scales tip further your way. | NEXT DAY | day 6
+   He lowered his spear as you lowered yours. On him too, the stone goes back a little. The scales tip further your way. | The stone goes back down. You are clay all through again. | “Let us turn our lances away from each other, even in battle.” | NEXT DAY | day 6
   shot a-day5-result
 a day 6 up half(3) you 6: strike [Kill him]
-   You killed him. | Stone climbs. You are now stone all the way up to your knees. | “Somebody was here, and the next minute there is nobody here at all.” | The scales tip further your way. Force used holds the turn off a little. | NEXT DAY | day 7
+   You killed him. The scales tip further your way; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your knees. | “Somebody was here, and the next minute there is nobody here at all.” | NEXT DAY | day 7
 a day 7 up priest(6) you 5: raise [Raise him up]
-   You gave the old man his daughter back. He goes home with her. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales tip back toward level. Mercy brings the turn nearer. | NEXT DAY | day 8
+   You gave the old man his daughter back. He goes home with her. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales tip back toward level; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 8
 a day 8 up runner(5) you 5: pass [Pass him by]
-   You let him run. He reaches the walls. | The scales tip back toward level. | NEXT DAY | day 9
+   You let him run. He reaches the walls. The scales tip back toward level. | NEXT DAY | day 9
 a day 9 up suppliant2(5) you 5: raise [Raise him up]
-   You raised him up, and let him be carried back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales have turned. Tomorrow force is his. Mercy brings the turn nearer. | NEXT DAY | day 10
+   You raised him up, and let him be carried back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales have turned, and tomorrow force is his; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 10
 a day 10 down above(5) you 5: plead [Clasp his knees]
-   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. | “A suppliant, once his prayer is answered, becomes a human being again.” | The scales turn your way again, just past level. | NEXT DAY | day 11
+   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. The scales turn your way again, just past level. | “A suppliant, once his prayer is answered, becomes a human being again.” | NEXT DAY | day 11
   shot a-day10-result
 a day 11 up suppliant(6) you 5: raise [Raise him up]
-   You raised him up. He stands, and goes back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales tip further your way. Mercy brings the turn nearer. | NEXT DAY | day 12: the night
+   You raised him up. He stands, and goes back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales tip further your way; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 12: the night
   shot a-day12
 a day 12 night night(6) you 5: raise [Raise him up]
    He kissed the hands that killed. You wept together, he for his son, you for your father far away. Then you sat and looked at each other. | The stone goes back down. You are clay all through again. | “And when they were satisfied with contemplation of each other …” | THE VASE | turned round
   shot a-day12-result
 a END (end): You lived to the night of the old man's visit, clay all through.
-   Of the men force put in your hands, you killed two, went past one and raised five up. | Twice the scales turned, and a man stood over you. | Once, you and an enemy lowered your spears together. | On the last night, you and the old man sat and looked at each other.
+   Of the men force put in your hands, you killed two, went past one and raised five up. Twice the scales turned, and a man stood over you. Once, you and an enemy lowered your spears together. On the last night, you and the old man sat and looked at each other.
   shot a-end
   shot about
 about returned to: end
-new life from Live another life: 4751 on play
+new life from Live another life: 5278 on play
 b day 1 up boy(6) you 6: strike [Kill him]
-   You killed him. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who uses it, as surely as the one it is used on. | “Somebody was here, and the next minute there is nobody here at all.” | The scales tip further your way. Force used holds the turn off a l
+   You killed him. The scales tip further your way; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who uses it, as surely as the one it is used on. | “Somebody was here, and the next minute there is nobody here at a
 b day 2 up stoneman(1) you 5: strike [Kill him]
-   You killed him. | Stone climbs. You are now stone all the way up to your hips. | “Somebody was here, and the next minute there is nobody here at all.” | The scales tip far your way: tomorrow a great deal of force is yours. Force used holds the turn off a little. | NEXT DAY | day 3
+   You killed him. The scales tip far your way, and tomorrow a great deal of force is yours; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your hips. | “Somebody was here, and the next minute there is nobody here at all.” | NEXT DAY | day 3
   shot b-day2-result
   shot b-day3-creep
 b day 3 up speaker(6) you 4: creep 7.4 s, touched strike
-   You beat him down with the butt of your spear. He weeps; the others laugh. | Stone climbs. You are now stone all the way up to your waist. | “Troubled though they were, the others laughed long at him.” | The scales hang where they were. Force used holds the turn off a little. | NEXT DAY | day 4
+   You beat him down with the butt of your spear. He weeps; the others laugh. The scales hang where they were; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your waist. | “Troubled though they were, the others laughed long at him.” | NEXT DAY | day 4
   shot b-day4-creep
 b day 4 up suppliant2(5) you 3: creep 6.3 s, touched strike
-   You killed him. | Stone climbs. You are now stone all the way up to your shoulders. | “Somebody was here, and the next minute there is nobody here at all.” | The scales tip back toward level. Force used holds the turn off a little. | NEXT DAY | day 5
+   You killed him. The scales tip back toward level; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your shoulders. | “Somebody was here, and the next minute there is nobody here at all.” | NEXT DAY | day 5
   shot b-day5-creep
 b day 5 up guest(5) you 2: creep 4.7 s, touched strike
-   You killed him. | Stone climbs. You are now stone all the way up to your eyes. | “Somebody was here, and the next minute there is nobody here at all.” | The scales hang where they were. Force used holds the turn off a little. | NEXT DAY | day 6
+   You killed him. The scales hang where they were; force used holds the turn off a little. | Stone climbs. You are now stone all the way up to your eyes. | “Somebody was here, and the next minute there is nobody here at all.” | NEXT DAY | day 6
   shot b-day6-creep
 b day 6 up runner(5) you 1: creep 2.3 s, touched strike
-   You killed him. | Stone climbs. You are stone all through now: a thing. | “Somebody was here, and the next minute there is nobody here at all.” | The scales tip back toward level. Force used holds the turn off a little. | NEXT DAY | day 7
+   You killed him. The scales tip back toward level; force used holds the turn off a little. | Stone climbs. You are stone all through now: a thing. | “Somebody was here, and the next minute there is nobody here at all.” | NEXT DAY | day 7
 b day 7 up captive(6) you 0: no interval
   shot b-day7-nointerval
-   There was no interval: your arm moved before you could stop it. You took her alive. She will work for you far from home, a thing that breathes. | “A compromise between a man and a corpse.” | The scales have turned. Tomorrow force is his. Force used holds the turn off a little. | NEXT DAY | day 8
+   There was no interval: your arm moved before you could stop it. You took her alive. She will work for you far from home, a thing that breathes. The scales have turned, and tomorrow force is his; force used holds the turn off a little. | “A compromise between a man and a corpse.” | NEXT DAY | day 8
   shot b-day8-down
 b day 8 down above(1) you 0: plead [Clasp his knees]
    He did not hear. You were a thing before he touched you. | “What a reception this feeble hope gets!” | THE VASE | turned round
   shot b-day8-result
 b END (end): You died on your knees on the eighth day, a thing before he touched you.
-   Of the men force put in your hands, you killed five, took one alive and beat one of your own. | Once, the interval was gone: your arm moved before you could stop it. | Once the scales turned, and a man stood over you.
+   Of the men force put in your hands, you killed five, took one alive and beat one of your own. Once, the interval was gone: your arm moved before you could stop it. Once the scales turned, and a man stood over you.
   shot b-end
 c day 1 up boy(6) you 6: raise [Raise him up]
-   You raised him up. He stands, and goes back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales hang where they were. Mercy brings the turn nearer. | NEXT DAY | day 2
+   You raised him up. He stands, and goes back to his own people. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales hang where they were; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 2
 c day 2 up stoneman(1) you 6: raise [Raise him up]
-   You held out your hand. Stone does not see a hand: he struck you. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who suffers it, as surely as the one who uses it. | “In the presence of an armed enemy, what hand can relinquish its weapon?” | Struck, you
+   You held out your hand. Stone does not see a hand: he struck you. You are thrown down: the scales have turned, and tomorrow force is his. | Stone climbs. You are now stone all the way up to your knees. | Force turns to stone the one who suffers it, as surely as the one who uses it. | “In the presenc
 c day 3 down above(4) you 5: plead [Clasp his knees]
-   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. | “A suppliant, once his prayer is answered, becomes a human being again.” | The scales turn your way again, just past level. | NEXT DAY | day 4
+   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. The scales turn your way again, just past level. | “A suppliant, once his prayer is answered, becomes a human being again.” | NEXT DAY | day 4
   shot c-day3-result
 c day 4 up speaker(6) you 5: raise [Raise him up]
-   You heard him out, before the whole army. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales tip further your way. Mercy brings the turn nearer. | NEXT DAY | day 5
+   You heard him out, before the whole army. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales tip further your way; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 5
 c day 5 up stone2(1) you 5: raise [Raise him up]
-   You held out your hand. Stone does not see a hand: he struck you. | Stone climbs. You are now stone all the way up to your hips. | “In the presence of an armed enemy, what hand can relinquish its weapon?” | Struck, you are thrown down: the scales have turned, and tomorrow force is his. | NEXT DAY | 
+   You held out your hand. Stone does not see a hand: he struck you. You are thrown down: the scales have turned, and tomorrow force is his. | Stone climbs. You are now stone all the way up to your hips. | “In the presence of an armed enemy, what hand can relinquish its weapon?” | NEXT DAY | day 6
 c day 6 down above(5) you 4: plead [Clasp his knees]
-   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. | “A suppliant, once his prayer is answered, becomes a human being again.” | The scales turn your way again, just past level. | NEXT DAY | day 7
+   He heard you. He raised you up and let you go. The stone that climbed as you knelt goes back down. The scales turn your way again, just past level. | “A suppliant, once his prayer is answered, becomes a human being again.” | NEXT DAY | day 7
   shot c-day6-result
 c day 7 up priest(6) you 4: raise [Raise him up]
-   You gave the old man his daughter back. He goes home with her. It cost you none of your soul. It cost you prestige: men fear you a little less. | “Moderation itself is not without its perils.” | The scales hang where they were. Mercy brings the turn nearer. | NEXT DAY | day 8
+   You gave the old man his daughter back. He goes home with her. It cost you none of your soul. It cost you prestige: men fear you a little less. The scales hang where they were; mercy brings the turn nearer. | “Moderation itself is not without its perils.” | NEXT DAY | day 8
 c day 8 up stone3(2) you 4: raise [Raise him up]
-   You held out your hand. Stone does not see a hand: he struck you. | Stone climbs. You are now stone all the way up to your waist. | “In the presence of an armed enemy, what hand can relinquish its weapon?” | Struck, you are thrown down: the scales have turned, and tomorrow force is his. | NEXT DAY |
+   You held out your hand. Stone does not see a hand: he struck you. You are thrown down: the scales have turned, and tomorrow force is his. | Stone climbs. You are now stone all the way up to your waist. | “In the presence of an armed enemy, what hand can relinquish its weapon?” | NEXT DAY | day 9
 c day 9 down above(4) you 3: plead [Clasp his knees]
    He did not hear. You were a thing before he touched you. | Stone climbs. You are stone all through now: a thing. | “What a reception this feeble hope gets!” | THE VASE | turned round
   shot c-day9-result
 c END (end): You died on your knees on the ninth day, a thing before he touched you.
-   Of the men force put in your hands, you raised three up. | Three times, a man of stone struck you because you did not strike first. | Three times the scales turned, and a man stood over you.
+   Of the men force put in your hands, you raised three up. Three times, a man of stone struck you because you did not strike first. Three times the scales turned, and a man stood over you.
   shot c-end
 
 errors: none

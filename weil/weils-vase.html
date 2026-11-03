@@ -16,7 +16,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;background:var(--glaze)}
-body{color:var(--ink6);font-family:var(--face);font-size:20px;line-height:1.32;min-height:100vh;overflow-x:hidden}
+body{color:var(--ink3);font-family:var(--face);font-size:20px;line-height:1.32;min-height:100vh;overflow-x:hidden}
 .screen{display:none;max-width:440px;margin:0 auto;padding:0 16px 28px;min-height:100vh;position:relative}
 .screen.on{display:block}
 .hidden{display:none!important}
@@ -27,14 +27,14 @@ svg{display:block}
 /* the start */
 #start h1{font-weight:400;font-size:42px;letter-spacing:.2em;text-align:center;margin:18px 0 0;color:var(--clay);line-height:1.05}
 #start .sub{text-align:center;font-size:15px;letter-spacing:.14em;color:var(--dilute);text-transform:uppercase;margin:6px 0 4px}
-#start .lede{text-align:center;font-size:24px;margin:8px 4px 6px;color:var(--ink8)}
-#start .acts{text-align:center;font-size:18px;color:var(--ink5);margin:8px 6px}
+#start .lede{text-align:center;font-size:24px;margin:8px 4px 6px;color:var(--ink45)}
+#start .acts{text-align:left;font-size:18px;line-height:1.36;color:var(--ink3);margin:8px 6px}
 .aimline{font-size:22px;text-align:center;color:var(--clay);margin:14px 0 8px;line-height:1.25}
 .small{font-size:15px;color:var(--dilute)}
 .links{display:flex;justify-content:center;gap:22px;margin:12px 0 4px;font-size:16px}
 .links button{background:none;border:0;color:var(--clay);font-family:var(--face);font-size:16px;letter-spacing:.12em;text-transform:uppercase;padding:8px 4px;cursor:pointer}
 .sig{text-align:center;margin:20px 0 6px;font-style:italic;font-size:14px;opacity:.6}
-.sig a{color:var(--ink6);text-decoration:none;text-transform:lowercase}
+.sig a{color:var(--ink3);text-decoration:none;text-transform:lowercase}
 .lifeno{text-align:center;font-size:13px;color:var(--dilute);letter-spacing:.1em;margin-top:6px}
 /* the sherds */
 .shw{position:relative;transition:transform .15s}
@@ -66,26 +66,27 @@ svg{display:block}
 .legend i{font-style:normal;display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:5px;border:1px solid var(--clay)}
 .legend .c i{background:var(--clay)} .legend .k i{background:var(--stone)}
 .you{text-align:center;font-size:17px;color:var(--ink3);margin:8px 10px 0;letter-spacing:.02em}
-.scene{font-size:22px;line-height:1.3;text-align:center;margin:10px 2px 4px;color:var(--ink45)}
-.teach{font-size:17px;line-height:1.3;text-align:center;color:var(--ink2);margin:6px 6px 4px}
-.creep{font-size:18px;text-align:center;color:var(--ink5);margin:6px 0 0}
+.scene{font-size:21px;line-height:1.34;text-align:left;margin:12px 2px 4px;color:var(--ink45)}
+.scene .t{color:var(--ink2)}
+.teach{display:none}
+.creep{font-size:18px;text-align:center;color:var(--ink45);margin:6px 0 0}
 .creep b{font-weight:400;color:var(--clay);letter-spacing:.1em;text-transform:uppercase}
 #result{margin:12px 0 0;text-align:center}
-#result .said{font-size:22px;line-height:1.3;color:var(--ink7)}
-#result .cost{font-size:25px;color:var(--ink10);margin-top:8px;letter-spacing:.02em;line-height:1.25}
-#result .why{font-size:18px;color:var(--ink6);margin:8px 8px 0}
-#result .quote{font-size:17px;color:var(--ink3);margin:8px 10px 0}
+#result .said{font-size:21px;line-height:1.34;color:var(--ink45);margin:0 2px;text-align:left}
+#result .cost{font-size:25px;color:var(--ink10);margin:14px 0 0;letter-spacing:.02em;line-height:1.22}
+#result .why{font-size:18px;color:var(--ink10);margin:4px 8px 0;line-height:1.3}
+#result .quote{font-size:17px;color:var(--ink2);margin:14px 14px 0;line-height:1.3}
 #result .scl{font-size:17px;color:var(--ink45);margin:8px 0 0}
 #result .sherd{margin-top:16px}
 .meander{height:12px;margin:0}
 /* the end */
-#end h2{font-weight:400;font-size:27px;line-height:1.25;text-align:center;color:var(--ink5);margin:22px 4px 10px}
+#end h2{font-weight:400;font-size:27px;line-height:1.25;text-align:center;color:var(--ink10);margin:22px 4px 10px}
 #panels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
 .pan{background:var(--glaze);border-top:1px solid var(--dilute);border-bottom:1px solid var(--dilute)}
 .pan .pl{font-size:13px;text-align:center;color:var(--clay);letter-spacing:.08em;padding:2px 0 3px;line-height:1.1}
-.did{font-size:19px;text-align:center;margin:6px 4px;color:var(--ink7)}
-.weil{font-size:20px;text-align:center;margin:16px 4px 6px;color:var(--ink8)}
-.weil b{display:block;font-weight:400;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:4px}
+.did{font-size:19px;line-height:1.36;text-align:left;margin:6px 4px;color:var(--ink45)}
+.weil{font-size:20px;line-height:1.36;text-align:left;margin:16px 4px 6px;color:var(--ink45)}
+.weil b{display:block;font-weight:400;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin-bottom:4px;text-align:center}
 .last{font-size:17px;text-align:center;color:var(--ink3);margin:8px 10px}
 /* help and about */
 .page h2{font-weight:400;font-size:28px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);text-align:center;margin:22px 0 10px}
@@ -558,17 +559,17 @@ svg{display:block}
   function scalesLine(res) {
     if (res.end || res.mode === 'night') return null;
     if (res.mode === 'down' && res.him === 'heard') return 'The scales turn your way again, just past level.';
-    if (res.him === 'struck you') return 'Struck, you are thrown down: the scales have turned, and tomorrow force is his.';
-    if (res.him === 'fell back') return res.hTo >= 0 ? 'The scales have turned. Tomorrow force is yours again.' : 'But the scales are still against you: tomorrow another man stands over you.';
+    if (res.him === 'struck you') return 'You are thrown down: the scales have turned, and tomorrow force is his.';
+    if (res.him === 'fell back') return res.hTo >= 0 ? 'The scales have turned, and tomorrow force is yours again.' : 'But the scales are still against you, and tomorrow another man stands over you.';
     const a = res.hFrom, b = res.hTo;
     // fate turns the scales on its own clock; what you did today only holds the turn off a little, or brings it nearer
-    const push = res.mode !== 'up' ? '' : res.push > 0 ? ' Force used holds the turn off a little.' : res.push < 0 ? ' Mercy brings the turn nearer.' : '';
-    if (a >= 0 && b < 0) return 'The scales have turned. Tomorrow force is his.' + push;
-    if (a < 0 && b >= 0) return 'The scales have turned. Tomorrow force is yours again.';
+    const push = res.mode !== 'up' ? '.' : res.push > 0 ? '; force used holds the turn off a little.' : res.push < 0 ? '; mercy brings the turn nearer.' : '.';
+    if (a >= 0 && b < 0) return 'The scales have turned, and tomorrow force is his' + push;
+    if (a < 0 && b >= 0) return 'The scales have turned, and tomorrow force is yours again.';
     if (b < 0) return 'The scales are still against you.';
-    if (b > a + 0.25) return (b > CONFIG.H_CREEP ? 'The scales tip far your way: tomorrow a great deal of force is yours.' : 'The scales tip further your way.') + push;
-    if (b < a - 0.25) return 'The scales tip back toward level.' + push;
-    return 'The scales hang where they were.' + push;
+    if (b > a + 0.25) return (b > CONFIG.H_CREEP ? 'The scales tip far your way, and tomorrow a great deal of force is yours' : 'The scales tip further your way') + push;
+    if (b < a - 0.25) return 'The scales tip back toward level' + push;
+    return 'The scales hang where they were' + push;
   }
 
   // ---------------------------------------------------------------------------------------------------- the verdict
@@ -1035,14 +1036,14 @@ svg{display:block}
       him: { pose: arrivePose(man), lines: man.lines, x: himX + 60, flip: man.kind !== 'runner', look: look(man), hidden: false } };
     renderFrieze();
     tween({ him: { x: himX } }, 650);
-    $('#scene').textContent = M.sceneLine(t);
     $('#youLine').textContent = M.youLine(t.lines);
     // the teaching line: the rule of the world, said once, where it first matters
     let teach = '';
     if (t.day === 1) teach = 'Six fine lines, from your knees to your eye, are your soul. Lose one, and stone climbs from your feet.';
     else if (t.mode === 'down' && ui.firstDown) { teach = 'When the scales tip against you, you have no force. A man who is still clay can hear a plea; a man of stone cannot.'; ui.firstDown = false; }
     else if (t.mode === 'up' && t.man.armed && t.man.lines <= C.ARMED_DEAF && ui.firstStone) { teach = 'Stone does not hear and does not see a hand held out.'; ui.firstStone = false; }
-    setTeach(teach);
+    const sc = $('#scene'); sc.textContent = M.sceneLine(t) + (teach ? ' ' : '');
+    if (teach) { const s = document.createElement('span'); s.className = 't'; s.textContent = teach; sc.appendChild(s); }
     // the sherds
     const box = $('#sherds'); box.innerHTML = ''; box.classList.toggle('three', t.mode === 'down');
     t.gestures.forEach((gst, i) => {
@@ -1146,11 +1147,10 @@ svg{display:block}
   function showResult(res, t) {
     const w = res.word; const box = $('#result'); let h = '';
     $('#youLine').textContent = M.youLine(res.youTo);   // the standing line follows the figure
-    h += `<div class="said">${w.said.join(' ')}</div>`;
-    if (w.cost) h += `<div class="cost">${w.cost}</div>`;
-    if (w.why) h += `<div class="why">${w.why}</div>`;
+    const sl = M.scalesLine(res);
+    h += `<div class="said">${w.said.concat(sl ? [sl] : []).join(' ')}</div>`;
+    if (w.cost || w.why) h += `<div class="cost">${w.cost || ''}</div>` + (w.why ? `<div class="why">${w.why}</div>` : '');
     if (w.quote) h += `<div class="quote">${w.quote}</div>`;
-    const sl = M.scalesLine(res); if (sl) h += `<div class="scl">${sl}</div>`;
     const last = ui.g.over;
     h += `<div class="shw"><button class="sherd shb big" id="next"><span class="w">${last ? 'The vase' : t.mode === 'down' && res.him === 'fell back' ? 'Next day' : 'Next day'}</span><span class="s">${last ? 'turned round' : 'day ' + (t.day + 1) + (t.day + 1 === 12 ? ': the night' : '')}</span></button></div>`;
     box.innerHTML = h; $('#choose').classList.add('hidden'); box.classList.remove('hidden');
@@ -1183,7 +1183,7 @@ svg{display:block}
     const V = M.verdict(ui.g);
     $('#headline').textContent = V.headline;
     $('#panels').innerHTML = ui.g.log.map(e => `<div class="pan"><svg viewBox="0 30 348 220">${panelFor(e)}</svg><div class="pl">${e.kind === 'night' ? 'night' : 'day ' + e.day} · ${PANEL_WORD[e.him] || ''}${e.impulse ? ' (no interval)' : ''}</div></div>`).join('');
-    $('#did').innerHTML = V.did.map(l => `<p class="did">${l}</p>`).join('');
+    $('#did').innerHTML = `<p class="did">${V.did.join(' ')}</p>`;
     $('#weil').textContent = V.weil; $('#last').textContent = V.last;
     show('end');
   }

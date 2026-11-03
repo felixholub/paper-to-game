@@ -362,17 +362,17 @@
   function scalesLine(res) {
     if (res.end || res.mode === 'night') return null;
     if (res.mode === 'down' && res.him === 'heard') return 'The scales turn your way again, just past level.';
-    if (res.him === 'struck you') return 'Struck, you are thrown down: the scales have turned, and tomorrow force is his.';
-    if (res.him === 'fell back') return res.hTo >= 0 ? 'The scales have turned. Tomorrow force is yours again.' : 'But the scales are still against you: tomorrow another man stands over you.';
+    if (res.him === 'struck you') return 'You are thrown down: the scales have turned, and tomorrow force is his.';
+    if (res.him === 'fell back') return res.hTo >= 0 ? 'The scales have turned, and tomorrow force is yours again.' : 'But the scales are still against you, and tomorrow another man stands over you.';
     const a = res.hFrom, b = res.hTo;
     // fate turns the scales on its own clock; what you did today only holds the turn off a little, or brings it nearer
-    const push = res.mode !== 'up' ? '' : res.push > 0 ? ' Force used holds the turn off a little.' : res.push < 0 ? ' Mercy brings the turn nearer.' : '';
-    if (a >= 0 && b < 0) return 'The scales have turned. Tomorrow force is his.' + push;
-    if (a < 0 && b >= 0) return 'The scales have turned. Tomorrow force is yours again.';
+    const push = res.mode !== 'up' ? '.' : res.push > 0 ? '; force used holds the turn off a little.' : res.push < 0 ? '; mercy brings the turn nearer.' : '.';
+    if (a >= 0 && b < 0) return 'The scales have turned, and tomorrow force is his' + push;
+    if (a < 0 && b >= 0) return 'The scales have turned, and tomorrow force is yours again.';
     if (b < 0) return 'The scales are still against you.';
-    if (b > a + 0.25) return (b > CONFIG.H_CREEP ? 'The scales tip far your way: tomorrow a great deal of force is yours.' : 'The scales tip further your way.') + push;
-    if (b < a - 0.25) return 'The scales tip back toward level.' + push;
-    return 'The scales hang where they were.' + push;
+    if (b > a + 0.25) return (b > CONFIG.H_CREEP ? 'The scales tip far your way, and tomorrow a great deal of force is yours' : 'The scales tip further your way') + push;
+    if (b < a - 0.25) return 'The scales tip back toward level' + push;
+    return 'The scales hang where they were' + push;
   }
 
   // ---------------------------------------------------------------------------------------------------- the verdict
