@@ -67,6 +67,7 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
 .veil .k{font-family:var(--display);font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.1em;flex:0 0 158px;line-height:1.1}
 .veil .new{position:absolute;right:8px;top:-7px;font-family:var(--display);font-size:11px;letter-spacing:.14em;background:var(--cream);color:var(--red);border:2px solid var(--ink);padding:1px 6px}
 .veil .w{font-family:var(--text);font-size:14px;line-height:1.2;flex:1;opacity:.95}
+.veil.has-new .w{padding-right:46px} /* room for the NEW badge */
 .veil.chosen{background:var(--ink)}
 .veil:disabled{background:var(--grey-2);color:var(--grey);border-bottom-color:var(--grey);cursor:default}
 .veil:disabled .w{font-style:italic}
@@ -341,7 +342,7 @@ h2{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-sp
     if (al) arriveTimer = setTimeout(() => $('arrive').classList.remove('held'), 900);
     renderCopies(null);
     const opts = M.options(S);
-    $('veils').innerHTML = opts.map(o => `<button class="veil" data-i="${o.index}"><span class="k">${o.label}</span><span class="w">${o.who}</span>${o.isNew ? '<span class="new">NEW</span>' : ''}</button>`).join('');
+    $('veils').innerHTML = opts.map(o => `<button class="veil${o.isNew ? ' has-new' : ''}" data-i="${o.index}"><span class="k">${o.label}</span><span class="w">${o.who}</span>${o.isNew ? '<span class="new">NEW</span>' : ''}</button>`).join('');
     $('veils').querySelectorAll('.veil').forEach(b => b.addEventListener('click', () => pickVeil(+b.dataset.i)));
     $('commit').disabled = true; $('commitsub').textContent = 'set the veil first';
     $('choose').style.display = 'block'; $('result').style.display = 'none';
