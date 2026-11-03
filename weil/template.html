@@ -9,7 +9,7 @@
 <style>
 @font-face{font-family:'Forum';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,/*__FONT_FORUM__*/) format('woff2');font-display:block}
 :root{
-  --glaze:#120D0B; --clay:#C8693A; --dilute:#8A4A26; --white:#EAE0CC; --red:#7E2B1F; --stone:#271B15;
+  --glaze:#120D0B; --clay:#C8693A; --dilute:#8A4A26; --white:#C9B9A1; --bright:#F0E6D2; --red:#7E2B1F; --stone:#271B15;
   --face:'Forum','Times New Roman',serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -36,7 +36,6 @@ svg{display:block}
 .lifeno{text-align:center;font-size:13px;color:var(--dilute);letter-spacing:.1em;margin-top:6px}
 /* the sherds */
 .shw{position:relative;transition:transform .15s}
-.shw.on{transform:translateY(-4px);filter:drop-shadow(0 4px 0 var(--white))}
 .sherd{display:block;width:100%;border:0;cursor:pointer;font-family:var(--face);color:var(--glaze);text-align:center;
   background:linear-gradient(to bottom,var(--glaze) 0 5px,var(--clay) 5px);padding:13px 8px 9px;min-height:66px}
 .sherd .w{display:block;font-size:23px;letter-spacing:.18em;text-transform:uppercase;line-height:1}
@@ -53,7 +52,6 @@ svg{display:block}
 .sherds{display:grid;grid-template-columns:1fr 1fr;gap:12px 12px;margin:12px 0 4px}
 .sherds.three{grid-template-columns:1fr 1fr 1fr}
 .sherds.three .sherd .w{font-size:20px;letter-spacing:.12em}
-#commitRow{margin:14px 0 4px;scroll-margin-bottom:18px}
 /* the play screen */
 .top{display:flex;align-items:center;gap:10px;margin:10px 0 2px}
 .aim{flex:1;font-size:16px;color:var(--clay);line-height:1.2}
@@ -72,7 +70,7 @@ svg{display:block}
 .creep b{font-weight:400;color:var(--clay);letter-spacing:.1em;text-transform:uppercase}
 #result{margin:12px 0 0;text-align:center}
 #result .said{font-size:20px;line-height:1.3}
-#result .cost{font-size:20px;color:var(--clay);margin-top:6px;letter-spacing:.02em}
+#result .cost{font-size:22px;color:var(--bright);margin-top:8px;letter-spacing:.02em;line-height:1.25}
 #result .why{font-size:17px;color:var(--white);margin:8px 8px 0;opacity:.92}
 #result .quote{font-size:16px;color:var(--dilute);margin:8px 10px 0;filter:brightness(1.35)}
 #result .scl{font-size:16px;color:var(--white);opacity:.8;margin:8px 0 0}
@@ -100,10 +98,10 @@ svg{display:block}
 <!-- ======================================================================= the start -->
 <section id="start" class="screen on">
   <h1>WEIL'S VASE</h1>
-  <div class="sub">The Iliad, or the Poem of Force</div>
+  <div class="sub">The Poem of Force</div>
   <svg id="amphora" viewBox="0 0 348 330" aria-hidden="true"></svg>
   <p class="lede">Force turns whoever it touches into a thing.</p>
-  <p class="acts">You are the soul inside a warrior. Each day of a war, a man comes before you. While Zeus's scales hold your pan up, you decide what to do with him; when they turn, a man stands over you.</p>
+  <p class="acts">You are the soul inside a warrior. Each day of a war, a man comes before you. While Zeus's scales tip your way, you decide what to do with him; when they turn, a man stands over you.</p>
   <p class="aimline" id="aimStart">Force is yours, for now.<br>Keep your soul through the war.</p>
   <div class="shw" style="margin:12px 30px 0"><button id="begin" class="sherd shb big"><span class="w">Begin</span><span class="s">day one of twelve</span></button></div>
   <div class="links"><button data-go="help">How to play</button><button data-go="about">About</button></div>
@@ -125,7 +123,6 @@ svg{display:block}
   <div id="choose">
     <div class="sherds" id="sherds"></div>
     <p class="creep hidden" id="creep"></p>
-    <div id="commitRow" class="hidden"><div class="shw"><button id="commit" class="sherd shb big"><span class="w" id="commitW">Raise him up</span></button></div></div>
   </div>
   <div id="result" class="hidden"></div>
 </section>
@@ -150,7 +147,7 @@ svg{display:block}
   <p><b style="font-weight:400;color:var(--clay)">Force is yours, for now. Keep your soul through the war.</b></p>
   <h3>What you see</h3>
   <p>You are the soul inside the warrior on the left of the vase. Your figure is clay while it has a soul: six fine lines, at your knees, thighs, belly, chest, mouth and eye. When you lose one, stone climbs from your feet: black glaze, with only its outline scratched in. A figure that is stone all through is a thing.</p>
-  <p>Above the figures hang Zeus's golden scales. While your pan (the left one) is up, force is yours that day: a man comes before you and you decide what to do with him. When your pan is down, force is his: a man stands over you. The scales turn by themselves, day by day; what you do with force changes how far they swing.</p>
+  <p>Above the figures hang Zeus's golden scales, your side marked YOURS. While they tip your way, force is yours that day: a man comes before you and you decide what to do with him. When they tip against you, force is his: a man stands over you. The scales turn by themselves, day by day; what you do with force only holds the turn off a little, or brings it nearer, and sets how far they swing.</p>
   <h3>What you can do</h3>
   <ul>
     <li><b style="font-weight:400;color:var(--clay)">Strike</b>: kill him (or beat him down).</li>
@@ -158,10 +155,10 @@ svg{display:block}
     <li><b style="font-weight:400;color:var(--clay)">Pass</b>: go on as if he were not there.</li>
     <li><b style="font-weight:400;color:var(--clay)">Raise</b>: give him your hand.</li>
   </ul>
-  <p>A sherd shown cracked cannot be played on this man; it says why. Touch a sherd to see the gesture on your figure, then the long sherd underneath to do it.</p>
-  <p>When your pan is down: <b style="font-weight:400;color:var(--clay)">Plead</b> (clasp his knees), <b style="font-weight:400;color:var(--clay)">Obey</b> (be his, and live) or <b style="font-weight:400;color:var(--clay)">Stand</b> (face him). A man who is still clay can hear a plea; a man of stone cannot.</p>
+  <p>One touch on a sherd does the thing; the three words under it say what. A sherd shown cracked cannot be played on this man; it says why.</p>
+  <p>When the scales tip against you: <b style="font-weight:400;color:var(--clay)">Plead</b> (clasp his knees), <b style="font-weight:400;color:var(--clay)">Obey</b> (be his, and live) or <b style="font-weight:400;color:var(--clay)">Stand</b> (face him). A man who is still clay can hear a plea; a man of stone cannot.</p>
   <h3>What to watch for</h3>
-  <p>An armed man who is nearly all stone will strike if you do not. When your pan stands very high, or when little of your soul is left, your arm starts to move toward him by itself: then a single touch on a sherd acts at once, and if you touch nothing, the spear goes in. At the very top, or with no soul left, there is no interval at all.</p>
+  <p>An armed man who is nearly all stone will strike if you do not. When the scales stand far your way, or when little of your soul is left, your arm starts to move toward him by itself: touch a sherd before it reaches him, or the spear goes in. At the very top, or with no soul left, there is no interval at all.</p>
   <p>Twelve days, the last a night. A life ends on the night, or earlier if you die or become a man's slave. The vase is then turned round, and you see every day of it.</p>
   <div class="shw back"><button class="sherd shb big" id="helpback"><span class="w">Back</span></button></div>
 </section>
@@ -322,9 +319,9 @@ svg{display:block}
   function dayLabel(t) { return t.mode === 'night' ? { a: 'NIGHT', b: '12', c: 'OF 12' } : { a: 'DAY', b: String(t.day), c: 'OF 12' }; }
   function scaleCaption(t) {
     if (t.mode === 'night') return 'Night: the scales hang still.';
-    if (t.mode === 'down') return 'Your pan is down: force is his today.';
-    if (t.h > C.H_CREEP) return 'Your pan stands high: force is yours today, a great deal of it.';
-    return t.day === 1 ? 'Zeus’s scales. Your pan is up: force is yours today, on loan.' : 'Your pan is up: force is yours today.';
+    if (t.mode === 'down') return 'The scales tip against you: force is his today.';
+    if (t.h > C.H_CREEP) return 'The scales tip far your way: force is yours today, a great deal of it.';
+    return t.day === 1 ? 'Zeus’s scales tip your way: force is yours today, on loan.' : 'The scales tip your way: force is yours today.';
   }
   function swingScales(h0, h1, mode, label) {
     return new Promise(res => { const t0 = performance.now(), ms = 900;
@@ -343,7 +340,7 @@ svg{display:block}
   function beginDay() {
     const t = ui.t = M.today(ui.g);
     ui.sel = null; ui.busy = false; stopCreep();
-    $('#result').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#commitRow').classList.add('hidden'); $('#creep').classList.add('hidden');
+    $('#result').classList.add('hidden'); $('#choose').classList.remove('hidden'); $('#creep').classList.add('hidden');
     renderScales(t.h, t.mode, dayLabel(t)); $('#scap').textContent = scaleCaption(t);
     const man = t.man;
     const himX = man.kind === 'suppliant' ? 222 : man.kind === 'night' ? 226 : man.kind === 'captive' ? 236 : man.kind === 'runner' ? 262 : man.kind === 'above' ? 236 : HIM_X;
@@ -356,8 +353,8 @@ svg{display:block}
     $('#youLine').textContent = M.youLine(t.lines);
     // the teaching line: the rule of the world, said once, where it first matters
     let teach = '';
-    if (t.day === 1) teach = 'Your figure is clay while it has a soul: six fine lines, from your knees to your eye. Lose one, and stone climbs from your feet.';
-    else if (t.mode === 'down' && ui.firstDown) { teach = 'When your pan is down, you have no force. A man who is still clay can hear a plea; a man of stone cannot.'; ui.firstDown = false; }
+    if (t.day === 1) teach = 'Six fine lines, from your knees to your eye, are your soul. Lose one, and stone climbs from your feet.';
+    else if (t.mode === 'down' && ui.firstDown) { teach = 'When the scales tip against you, you have no force. A man who is still clay can hear a plea; a man of stone cannot.'; ui.firstDown = false; }
     else if (t.mode === 'up' && t.man.armed && t.man.lines <= C.ARMED_DEAF && ui.firstStone) { teach = 'Stone does not hear and does not see a hand held out.'; ui.firstStone = false; }
     setTeach(teach);
     // the sherds
@@ -370,7 +367,7 @@ svg{display:block}
     });
     $$('#sherds .sherd').forEach(b => b.addEventListener('click', () => pick(b.dataset.g)));
     // the interval
-    if (t.mode === 'up' && t.interval < 0.05) { box.classList.add('hidden'); const el = $('#creep'); el.innerHTML = '<b>No interval.</b> ' + (t.lines <= 0 ? 'You are stone all through: nothing stands between the impulse and the act.' : 'Your pan stands so high that nothing stands between the impulse and the act.'); el.classList.remove('hidden'); setTimeout(() => commit(t.impulse, true), 2200); }
+    if (t.mode === 'up' && t.interval < 0.05) { box.classList.add('hidden'); const el = $('#creep'); el.innerHTML = '<b>No interval.</b> ' + (t.lines <= 0 ? 'You are stone all through: nothing stands between the impulse and the act.' : 'The scales stand so far your way that nothing stands between the impulse and the act.'); el.classList.remove('hidden'); setTimeout(() => commit(t.impulse, true), 2200); }
     else box.classList.remove('hidden');
     if (t.mode === 'up' && isFinite(t.interval) && t.interval >= 0.05) setTimeout(() => startCreep(t.interval), 900);
   }
@@ -379,9 +376,8 @@ svg{display:block}
   function startCreep(sec) {
     if (ui.busy) return;
     ui.creeping = true; ui.creepK = 0;
-    const el = $('#creep'); el.innerHTML = ui.firstCreep ? '<b>Your arm is moving by itself.</b> Your pan stands so high, or so little of your soul is left, that the arm moves before the thought. One touch on a sherd acts at once; touch nothing, and the spear goes in.' : '<b>Your arm is moving by itself.</b> One touch acts.';
-    ui.firstCreep = false; el.classList.remove('hidden'); $('#commitRow').classList.add('hidden');
-    $$('#sherds .shw').forEach(w => w.classList.remove('on'));
+    const el = $('#creep'); el.innerHTML = ui.firstCreep ? '<b>Your arm is moving by itself.</b> The scales stand so far your way, or so little of your soul is left, that the arm moves before the thought. Touch a sherd before it reaches him, or the spear goes in.' : '<b>Your arm is moving by itself.</b> One touch acts.';
+    ui.firstCreep = false; el.classList.remove('hidden');
     const t0 = performance.now(), base = Object.assign({}, P.ready);
     const step = now => {
       if (!ui.creeping) return;
@@ -394,18 +390,12 @@ svg{display:block}
   }
   function stopCreep() { ui.creeping = false; if (ui.creepT) cancelAnimationFrame(ui.creepT); ui.creepT = null; }
 
+  // one touch acts: the three words under the sherd say what it does, and there is no asking twice
   function pick(id) {
     if (ui.busy) return;
-    if (ui.creeping) { stopCreep(); commit(id, false); return; }   // no interval left for second thoughts
-    ui.sel = id;
-    $$('#sherds .shw').forEach(w => w.classList.toggle('on', w.firstChild.dataset.g === id));
-    const l = M.gestureLabel(id, ui.t.man);
-    $('#commitW').textContent = l.act; $('#commitRow').classList.remove('hidden');
-    tween({ you: { pose: youPreview(id, ui.t.mode) } }, 260);
-    // on a phone the long sherd appears below the fold: bring it up, so the second touch is never a hidden one
-    $('#commitRow').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (ui.creeping) stopCreep();
+    commit(id, false);
   }
-  $('#commit').addEventListener('click', () => { if (ui.sel && !ui.busy) commit(ui.sel, false); });
 
   // ------------------------------------------------------------------ the act, and what it does
   function himAfter(res, t) {
@@ -418,7 +408,8 @@ svg{display:block}
       case 'struck you': return { pose: P.aboveStrike };
       case 'passed': return { pose: P.lowered };
       case 'escaped': return { pose: P.run, x: 420 };
-      case 'fallen': return { pose: P.fallen, x: 222 };
+      case 'fallen': return t.man.kind === 'suppliant' ? { pose: P.fallen, x: 222 } : t.man.kind === 'speaker' ? { pose: P.standStill }
+        : t.man.kind === 'priest' ? { pose: P.standStill, x: X + 40, flip: false } : t.man.kind === 'captive' ? { pose: P.loom } : { pose: P.weep };
       case 'raised': return { pose: t.man.kind === 'captive' ? P.standStill : P.standStill };
       case 'grace': return { pose: t.mode === 'night' ? P.seated : P.lowered, x: t.mode === 'night' ? 236 : X };
       case 'heard': return { pose: P.aboveRaise };
@@ -442,7 +433,7 @@ svg{display:block}
   async function commit(id, impulse) {
     if (ui.busy) return; ui.busy = true; stopCreep();
     const t = ui.t; const res = M.act(ui.g, id, { impulse: !!impulse });
-    $('#commitRow').classList.add('hidden'); $('#creep').classList.add('hidden'); $('#sherds').classList.add('hidden'); setTeach('');
+    $('#creep').classList.add('hidden'); $('#sherds').classList.add('hidden'); setTeach('');
     // the gesture
     await tween({ you: { pose: youPreview(id, t.mode) } }, impulse ? 220 : 300);
     // what happens to him (and, if he strikes, to you)
@@ -463,7 +454,7 @@ svg{display:block}
       renderFrieze(); await wait(500); scene.you.lines = keepYou; scene.him.lines = keepHim; await flash('you', keepYou);
     } else if (res.youTo !== scene.you.lines) await flash('you', res.youTo);
     // the scales
-    if (!res.end && t.mode !== 'night') { const nt = { mode: res.hTo < 0 ? 'down' : 'up' }; await swingScales(res.hFrom, res.hTo, t.mode, dayLabel(t)); $('#scap').textContent = res.hTo < 0 ? 'Your pan is down.' : 'Your pan is up.'; }
+    if (!res.end && t.mode !== 'night') { const nt = { mode: res.hTo < 0 ? 'down' : 'up' }; await swingScales(res.hFrom, res.hTo, t.mode, dayLabel(t)); }   // the caption stays as the day began; the result says what the scales did, once
     showResult(res, t);
   }
   function showResult(res, t) {
@@ -500,8 +491,8 @@ svg{display:block}
     s += propsSVG(sc.props) + figureSVG(sc.him, false) + figureSVG(sc.you, true);
     return s;
   }
-  const PANEL_WORD = { dead: 'killed', beaten: 'beaten', taken: 'taken', 'struck you': 'struck you', passed: 'let pass', escaped: 'let run', fallen: 'passed by',
-    raised: 'raised', grace: 'grace', heard: 'heard you', deaf: 'deaf', 'owns you': 'his', 'fell back': 'you stood', 'killed you': 'killed you' };
+  const PANEL_WORD = { dead: 'killed', beaten: 'beaten', taken: 'taken', 'struck you': 'he struck you', passed: 'let pass', escaped: 'let run', fallen: 'passed by',
+    raised: 'raised', grace: 'grace', heard: 'knelt, heard', deaf: 'knelt, unheard', 'owns you': 'his', 'fell back': 'stood', 'killed you': 'stood, killed' };
   function endLife() {
     const V = M.verdict(ui.g);
     $('#headline').textContent = V.headline;

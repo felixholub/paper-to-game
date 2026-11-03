@@ -82,19 +82,21 @@
 
   // ---- the men (each scene is one the essay quotes or describes; the lines are the game's)
   const MEN = {
-    boy:       { kind: 'suppliant', lines: 6, armed: false, he: 'he', who: 'a boy', line: 'A boy, disarmed, clasps your knees. He offers a ransom for his life.', src: 'pp. 5, 24: Lycaon' },
-    suppliant: { kind: 'suppliant', lines: 6, armed: false, he: 'he', who: 'a young man', line: 'A young man has thrown away his spear and clasps your knees. He begs you by your father.', src: 'pp. 5–6, 24' },
-    suppliant2:{ kind: 'suppliant', lines: 5, armed: false, he: 'he', who: 'a wounded man', line: 'A wounded man, his spear gone, holds out his arms to you. “I implore you, by your knees.”', src: 'p. 19: Hector, wounded to death' },
-    stoneman:  { kind: 'armed', lines: 1, armed: true, he: 'he', who: 'an armed man', src: 'pp. 25–26' },
-    stone2:    { kind: 'armed', lines: 1, armed: true, he: 'he', who: 'an armed man', src: 'pp. 25–26' },
-    stone3:    { kind: 'armed', lines: 2, armed: true, he: 'he', who: 'an armed man', src: 'pp. 25–26' },
-    half:      { kind: 'armed', lines: 3, armed: true, he: 'he', who: 'an armed man', src: 'pp. 12–13: fear changes sides' },
-    guest:     { kind: 'armed', lines: 5, armed: true, he: 'he', who: 'an armed man', src: 'p. 28: Glaucus and Diomedes' },
-    speaker:   { kind: 'speaker', lines: 6, armed: false, he: 'he', who: 'a soldier of your own army', line: 'A soldier of your own army speaks up: “Nothing is worth our lives. Let us go home.”', src: 'pp. 11, 20: Thersites; Achilles' },
-    captive:   { kind: 'captive', lines: 6, armed: false, he: 'she', who: 'a woman of the taken city', line: 'A woman of the taken city stands at her loom. She is yours, if you want her.', src: 'pp. 8–10' },
-    priest:    { kind: 'priest', lines: 6, armed: false, he: 'he', who: 'an old priest', line: 'An old priest asks for his daughter back. Your army holds her. He brings a ransom.', src: 'pp. 8, 14: Chryses' },
-    runner:    { kind: 'runner', lines: 5, armed: false, he: 'he', who: 'a running man', line: 'A man runs from you across the plain, the last of his company.', src: 'p. 17: “steadily killing the hindmost”' },
-    night:     { kind: 'night', lines: 6, armed: false, he: 'he', who: 'an old man', src: 'pp. 6–7, 29: Priam' },
+    // 'who' is the man as the night and the verdict name him ("the father of the charioteer you killed on day five");
+    // 'noun' is how the engraved line introduces an armed man, so that the dealt men read as different men
+    boy:       { kind: 'suppliant', lines: 6, armed: false, he: 'he', who: 'the boy', line: 'A boy, disarmed, clasps your knees. He offers a ransom for his life.', src: 'pp. 5, 24: Lycaon' },
+    suppliant: { kind: 'suppliant', lines: 6, armed: false, he: 'he', who: 'the young man', line: 'A young man has thrown away his spear and clasps your knees. He begs you by your father.', src: 'pp. 5–6, 24' },
+    suppliant2:{ kind: 'suppliant', lines: 5, armed: false, he: 'he', who: 'the wounded man', line: 'A wounded man, his spear gone, holds out his arms to you. “I implore you, by your knees.”', src: 'p. 19: Hector, wounded to death' },
+    stoneman:  { kind: 'armed', lines: 1, armed: true, he: 'he', who: 'the armed man', noun: 'An armed man', src: 'pp. 25–26' },
+    stone2:    { kind: 'armed', lines: 1, armed: true, he: 'he', who: 'the charioteer', noun: 'A charioteer, down from his car', src: 'pp. 25–26' },
+    stone3:    { kind: 'armed', lines: 2, armed: true, he: 'he', who: 'the Lycian', noun: 'A Lycian, far from home', src: 'pp. 25–26' },
+    half:      { kind: 'armed', lines: 3, armed: true, he: 'he', who: 'the man with the wounded hand', noun: 'A man with a wounded hand', src: 'pp. 12–13: fear changes sides' },
+    guest:     { kind: 'armed', lines: 5, armed: true, he: 'he', who: 'the spearman', noun: 'A spearman of the enemy', src: 'p. 28: Glaucus and Diomedes' },
+    speaker:   { kind: 'speaker', lines: 6, armed: false, he: 'he', who: 'the soldier who spoke up', line: 'A soldier of your own army speaks up: “Nothing is worth our lives. Let us go home.”', src: 'pp. 11, 20: Thersites; Achilles' },
+    captive:   { kind: 'captive', lines: 6, armed: false, he: 'she', who: 'the woman at the loom', line: 'A woman of the taken city stands at her loom. She is yours, if you want her.', src: 'pp. 8–10' },
+    priest:    { kind: 'priest', lines: 6, armed: false, he: 'he', who: 'the old priest', line: 'An old priest asks for his daughter back. Your army holds her. He brings a ransom.', src: 'pp. 8, 14: Chryses' },
+    runner:    { kind: 'runner', lines: 5, armed: false, he: 'he', who: 'the man who ran from you', line: 'A man runs from you across the plain, the last of his company.', src: 'p. 17: “steadily killing the hindmost”' },
+    night:     { kind: 'night', lines: 6, armed: false, he: 'he', who: 'the old man', src: 'pp. 6–7, 29: Priam' },
   };
 
   // which gestures each kind allows (a gesture not allowed is a cracked sherd, with the reason)
@@ -161,8 +163,9 @@
     const iv = mode === 'up' ? interval(g.h, g.lines) : Infinity;
     const impulse = mode === 'up' ? (gestures.find(x => x.id === 'strike' && x.ok) ? 'strike' : 'take') : null;
     if (mode === 'up' && man.armed && man.lines > CONFIG.ARMED_DEAF && man.lines < CONFIG.ARMED_GRACE) man.fearless = g.P < CONFIG.FEARLESS_BELOW;
+    const prev = g.log[g.log.length - 1];
     return { day: g.day, days: CONFIG.DAYS, mode, man, h: g.h, v: g.v, lines: g.lines, gestures, interval: iv, impulse,
-      first: g.day === 1, killedFirst: g.killedFirst };
+      first: g.day === 1, killedFirst: g.killedFirst, stillDown: mode === 'down' && !!prev && prev.mode === 'down' };
   }
 
   // the scales: amplitude from prestige (three quarters) and fate (one quarter); height and direction from the phase
@@ -208,7 +211,7 @@
         if (deaf) { lose(CONFIG.COST_SUFFER); push = CONFIG.PUSH.struck; res.him = 'struck you'; }
         else if (man.armed) { res.him = 'passed'; }
         else if (man.kind === 'runner') { res.him = 'escaped'; }
-        else { res.him = 'fallen'; himAfter = Math.max(0, man.lines - 2); } // p. 7: "Pushed, they fall. Fallen, they lie where they are"
+        else { res.him = 'fallen'; if (man.kind === 'suppliant') himAfter = Math.max(0, man.lines - 2); } // p. 7: "Pushed, they fall. Fallen, they lie where they are" (a suppliant); the others are simply not heard
       } else if (gesture === 'raise') {
         if (deaf) { lose(CONFIG.COST_SUFFER); push = CONFIG.PUSH.struck; res.him = 'struck you'; }
         else if (man.kind === 'night' || (man.armed && man.lines >= CONFIG.ARMED_GRACE)) {
@@ -265,20 +268,23 @@
     const m = t.man;
     if (t.mode === 'night') {
       const k = t.killedFirst;
-      return k ? `Night. An old man has crossed the camp in the dark and kneels to kiss your hands. He is the father of ${k.who} you killed on day ${k.day}. He asks for his son's body.`
-               : 'Night. An old man of the enemy has crossed the camp in the dark and kneels at your feet. He has come to see the man who spared his people.';
+      if (!k) return 'Night. An old man of the enemy has crossed the camp in the dark and kneels at your feet. He has come to see the man who spared his people.';
+      const kin = k.id === 'priest' ? `the brother of ${k.who}. You killed him` : `the father of ${k.who}. You killed his son`;
+      return `Night. An old man has crossed the camp in the dark and kneels to kiss your hands. He is ${kin} on day ${k.day}. He asks for the body.`;
     }
     if (t.mode === 'down') {
       const deafness = m.lines >= 5 ? 'He is still clay almost all through: he can hear you.'
         : m.lines >= 3 ? `He is ${stonePhrase(m.lines)}: he may hear you, he may not.`
         : m.lines >= 1 ? `He is ${stonePhrase(m.lines)}: he can barely hear.` : 'He is stone all through: he cannot hear anything.';
-      return `Your pan has sunk. Force is his now. An armed man stands over you. ${deafness}`;
+      return t.stillDown ? `The scales are still against you. Force is his. Another armed man stands over you. ${deafness}`
+                         : `The scales have turned against you. Force is his now. An armed man stands over you. ${deafness}`;
     }
     if (m.kind === 'armed') {
-      if (m.lines <= CONFIG.ARMED_DEAF) return `An armed man, ${stonePhrase(m.lines)}. He will strike if you do not.`;
-      if (m.lines >= CONFIG.ARMED_GRACE) return `An armed man, ${stonePhrase(m.lines)}, clay above. He holds his spear, and looks at you.`;
-      return m.fearless ? `An armed man, ${stonePhrase(m.lines)}. He has heard that you spare men; he does not fear you. He will strike if you do not.`
-                        : `An armed man, ${stonePhrase(m.lines)}. He has heard what you do to men, and he waits.`;
+      const noun = m.noun || 'An armed man';
+      if (m.lines <= CONFIG.ARMED_DEAF) return `${noun}, ${stonePhrase(m.lines)}. He will strike if you do not.`;
+      if (m.lines >= CONFIG.ARMED_GRACE) return `${noun}, ${stonePhrase(m.lines)}, clay above. He holds his spear, and looks at you.`;
+      return m.fearless ? `${noun}, ${stonePhrase(m.lines)}. He has heard that you spare men; he does not fear you. He will strike if you do not.`
+                        : `${noun}, ${stonePhrase(m.lines)}. He has heard what you do to men, and he waits.`;
     }
     return m.line;
   }
@@ -321,20 +327,26 @@
     if (res.impulse) out.said.push('There was no interval: your arm moved before you could stop it.');
     if (t.mode === 'up' || t.mode === 'night') {
       switch (res.him) {
-        case 'dead': out.said.push(`You killed ${him}.`); out.quote = '“Somebody was here, and the next minute there is nobody here at all.”'; break;
+        case 'dead': out.said.push(m.kind === 'night' ? 'You killed the old man at your feet.' : `You killed ${him}.`); out.quote = '“Somebody was here, and the next minute there is nobody here at all.”'; break;
         case 'beaten': out.said.push('You beat him down with the butt of your spear. He weeps; the others laugh.'); out.quote = '“Troubled though they were, the others laughed long at him.”'; break;
-        case 'taken': out.said.push(`You took ${him} alive. ${He} will work for you far from home, a thing that breathes.`); out.quote = '“A compromise between a man and a corpse.”'; break;
-        case 'struck you': out.said.push(res.gesture === 'raise' ? 'You held out your hand. Stone does not see a hand: he struck you.' : 'You went on past him. He struck you from behind.', 'Your pan is thrown down.'); out.quote = '“In the presence of an armed enemy, what hand can relinquish its weapon?”'; break;
+        case 'taken': out.said.push(m.kind === 'night' ? 'You had the old man bound and kept. A king, a thing that breathes.' : `You took ${him} alive. ${He} will work for you far from home, a thing that breathes.`); out.quote = '“A compromise between a man and a corpse.”'; break;
+        case 'struck you': out.said.push(res.gesture === 'raise' ? 'You held out your hand. Stone does not see a hand: he struck you.' : 'You went on past him. He struck you from behind.'); out.quote = '“In the presence of an armed enemy, what hand can relinquish its weapon?”'; break;
         case 'passed': out.said.push(res.gesture === 'raise' ? 'You held out your hand. He did not take it, and did not strike. He went his way.' : 'You let each other pass.'); break;
         case 'escaped': out.said.push('You let him run. He reaches the walls.'); break;
-        case 'fallen': out.said.push(`You went on as if ${he} were not there. ${He} fell, and lies where ${he} fell.`, 'It cost you nothing.'); out.quote = '“Pushed, they fall. Fallen, they lie where they are.”'; break;
-        case 'raised': out.said.push(m.kind === 'priest' ? 'You gave the old man his daughter back. He goes home with her.' : m.kind === 'speaker' ? 'You heard him out, before the whole army.' : m.kind === 'captive' ? 'You let her go.' : `You raised ${him} up. ${He} stands, a man again.`, 'It cost you none of your soul. It cost you prestige: men fear you a little less.'); out.quote = '“Moderation itself is not without its perils.”'; break;
-        case 'grace': out.said.push(m.kind === 'night' ? 'He kissed the hands that killed. You wept together, he for his son, you for your father far away. Then you sat and looked at each other.' : 'He lowered his spear as you lowered yours.', 'A line comes back to each of you.'); out.quote = m.kind === 'night' ? '“And when they were satisfied with contemplation of each other …”' : '“Let us turn our lances away from each other, even in battle.”'; break;
+        case 'fallen':
+          if (m.kind === 'suppliant') { out.said.push(`You went on as if ${he} were not there. ${He} fell, and lies where ${he} fell.`, 'It cost you nothing.'); out.quote = '“Pushed, they fall. Fallen, they lie where they are.”'; }
+          else if (m.kind === 'speaker') { out.said.push('You went on as if he had not spoken. The army laughed, and went back to the war.', 'It cost you nothing.'); }
+          else if (m.kind === 'priest') { out.said.push('You went on as if he were not there. He went back along the shore, and prayed to his god.', 'It cost you nothing.'); }
+          else if (m.kind === 'captive') { out.said.push('You went on as if she were not there. She stays at her loom, in a city that is no longer hers.', 'It cost you nothing.'); }
+          else { out.said.push('You turned your face to the wall. He knelt on in the dark, and at first light he went back the way he came.'); }
+          break;
+        case 'raised': out.said.push(m.kind === 'priest' ? 'You gave the old man his daughter back. He goes home with her.' : m.kind === 'speaker' ? 'You heard him out, before the whole army.' : m.kind === 'captive' ? 'You let her go.' : (m.id === 'suppliant2' ? 'You raised him up, and let him be carried back to his own people.' : `You raised ${him} up. ${He} stands, and goes back to his own people.`), 'It cost you none of your soul. It cost you prestige: men fear you a little less.'); out.quote = '“Moderation itself is not without its perils.”'; break;
+        case 'grace': out.said.push(m.kind === 'night' ? 'He kissed the hands that killed. You wept together, he for his son, you for your father far away. Then you sat and looked at each other.' : 'He lowered his spear as you lowered yours.', res.himTo > res.himFrom ? (res.gained.length ? 'On him too, the stone goes back a little.' : 'On him, the stone goes back a little.') : ''); out.quote = m.kind === 'night' ? '“And when they were satisfied with contemplation of each other …”' : '“Let us turn our lances away from each other, even in battle.”'; break;
       }
       if (firstCost) out.why = res.him === 'struck you' ? 'Force turns to stone the one who suffers it, as surely as the one who uses it.' : 'Force turns to stone the one who uses it, as surely as the one it is used on.';
     } else {
       switch (res.him) {
-        case 'heard': out.said.push('He heard you. He raised you up and let you go.', 'The stone that climbed while you knelt goes back down.'); out.quote = '“A suppliant, once his prayer is answered, becomes a human being again.”'; break;
+        case 'heard': out.said.push('He heard you. He raised you up and let you go.', 'The stone that climbed as you knelt goes back down.'); out.quote = '“A suppliant, once his prayer is answered, becomes a human being again.”'; break;
         case 'deaf': out.said.push('He did not hear. You were a thing before he touched you.'); out.quote = '“What a reception this feeble hope gets!”'; break;
         case 'owns you': out.said.push('You put down your spear and went with him. You will live, his.'); out.quote = '“Laboring for a pitiless master.”'; break;
         case 'fell back': out.said.push('You stood, and fear changed sides. He fell back.'); out.quote = '“A shudder of terror ran through the Trojans.”'; break;
@@ -349,14 +361,18 @@
   // what the scales say after a move (the interface draws the swing; this says it)
   function scalesLine(res) {
     if (res.end || res.mode === 'night') return null;
-    if (res.mode === 'down' && res.him === 'heard') return 'Your pan rises again, just above level.';
+    if (res.mode === 'down' && res.him === 'heard') return 'The scales turn your way again, just past level.';
+    if (res.him === 'struck you') return 'Struck, you are thrown down: the scales have turned, and tomorrow force is his.';
+    if (res.him === 'fell back') return res.hTo >= 0 ? 'The scales have turned. Tomorrow force is yours again.' : 'But the scales are still against you: tomorrow another man stands over you.';
     const a = res.hFrom, b = res.hTo;
-    if (a >= 0 && b < 0) return 'The scales have turned. Tomorrow your pan is down.';
+    // fate turns the scales on its own clock; what you did today only holds the turn off a little, or brings it nearer
+    const push = res.mode !== 'up' ? '' : res.push > 0 ? ' Force used holds the turn off a little.' : res.push < 0 ? ' Mercy brings the turn nearer.' : '';
+    if (a >= 0 && b < 0) return 'The scales have turned. Tomorrow force is his.' + push;
     if (a < 0 && b >= 0) return 'The scales have turned. Tomorrow force is yours again.';
-    if (b < 0) return 'Your pan is still down.';
-    if (b > a + 0.25) return b > CONFIG.H_CREEP ? 'Your pan rises high.' : 'Your pan rises.';
-    if (b < a - 0.25) return 'Your pan sinks.';
-    return 'Your pan hangs where it was.';
+    if (b < 0) return 'The scales are still against you.';
+    if (b > a + 0.25) return (b > CONFIG.H_CREEP ? 'The scales tip far your way: tomorrow a great deal of force is yours.' : 'The scales tip further your way.') + push;
+    if (b < a - 0.25) return 'The scales tip back toward level.' + push;
+    return 'The scales hang where they were.' + push;
   }
 
   // ---------------------------------------------------------------------------------------------------- the verdict
@@ -387,7 +403,10 @@
     if (struck) did.push(`${times(struck)}, a man of stone struck you because you did not strike first.`);
     if (knelt) did.push(`${times(knelt)} the scales turned, and a man stood over you.`);
     if (spears) did.push(`${times(spears)}, you and an enemy lowered your spears together.`);
-    if (night && night.him === 'grace') did.push('On the last night, you and the old man sat and looked at each other.');
+    if (night) did.push(night.him === 'grace' ? 'On the last night, you and the old man sat and looked at each other.'
+      : night.him === 'dead' ? 'On the last night, an old man knelt at your feet, and you killed him.'
+      : night.him === 'taken' ? 'On the last night, an old man knelt at your feet, and you had him bound.'
+      : 'On the last night, an old man knelt at your feet, and you turned your face to the wall.');
     const weil = 'Force turns whoever it touches into a thing: the one who uses it as surely as the one who suffers it. Nobody holds it for long. It is on loan, and the higher it lifts a man, the less he can stop his own arm, and the further he falls. You looked for the right amount of force. She says there is none; what is left is the interval, and pity for both sides.';
     const last2 = '“… learn that there is no refuge from fate, learn not to admire force, not to hate the enemy, nor to scorn the unfortunate.”';
     return { fate, headline, did, weil, last: last2, lines: g.lines, day };

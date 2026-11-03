@@ -26,9 +26,8 @@ const L = []; const say = s => { L.push(s); console.log(s); };
       if (t.mode === 'up' && t.iv < 0.05) { say(`${tag} day ${t.day} ${t.mode} ${t.man}(${t.lines}) you ${t.you}: no interval`); if (shots.noint) { await page.waitForTimeout(500); await shot(`${tag}-day${t.day}-nointerval`, false); } }
       else if (t.mode === 'up' && isFinite(t.iv)) { await page.waitForTimeout(1300); if (shots.creep && shots.creep(t)) await shot(`${tag}-day${t.day}-creep`, false); await page.click(`#sherds [data-g="${g}"]`); say(`${tag} day ${t.day} ${t.mode} ${t.man}(${t.lines}) you ${t.you}: creep ${t.iv.toFixed(1)} s, touched ${g}`); }
       else {
-        await page.click(`#sherds [data-g="${g}"]`); await page.waitForTimeout(400);
-        if (shots.preview && shots.preview(t)) await shot(`${tag}-day${t.day}-preview`, false);
-        const label = await text('#commitW'); await page.click('#commit'); say(`${tag} day ${t.day} ${t.mode} ${t.man}(${t.lines}) you ${t.you}: ${g} [${label}]`);
+        const label = await page.evaluate(g => window.VASE.gestureLabel(g, window.__vase.t.man).act, g);
+        await page.click(`#sherds [data-g="${g}"]`); say(`${tag} day ${t.day} ${t.mode} ${t.man}(${t.lines}) you ${t.you}: ${g} [${label}]`);
       }
       await settled(); await page.waitForTimeout(300);
       say('   ' + (await text('#result')).slice(0, 300));
@@ -50,7 +49,7 @@ const L = []; const say = s => { L.push(s); console.log(s); };
   await page.goto(file + '#life=2'); await page.waitForTimeout(500);
   await shot('start'); await noScroll('start'); say('START aim: ' + await text('#aimStart') + ' | ' + await text('#lifeno'));
   await page.click('#begin');
-  await playLife('a', learner, { before: t => [1, 4, 12].includes(t.day) || t.man === 'guest', preview: t => t.day === 1, after: t => [1, 2, 4, 5, 12].includes(t.day) || t.mode === 'down',
+  await playLife('a', learner, { before: t => [1, 4, 12].includes(t.day) || t.man === 'guest', after: t => [1, 2, 4, 5, 12].includes(t.day) || t.mode === 'down',
     help: t => t.day === 3, helpShot: true });
   await shot('a-end');
   await page.click('#end [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await page.click('#aboutback'); await page.waitForTimeout(300); say('about returned to: ' + await on());
