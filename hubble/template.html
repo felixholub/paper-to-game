@@ -112,7 +112,7 @@ input[type=range]::-moz-range-thumb{width:44px;height:44px;border-radius:50%;bac
   <div class="orient" id="eyeorient"></div>
   <div class="glass"><svg id="eyesvg" viewBox="0 0 380 330" width="100%" style="aspect-ratio:380/330"></svg></div>
   <div id="eyestage"></div>
-  <div class="dial" id="eyedialwrap"><label>Nearer ← comparison star → farther</label><input type="range" id="eyedial" min="0" max="1000" value="1000"></div>
+  <div class="dial" id="eyedialwrap"><label>Nearer ← comparison star → farther</label><input type="range" id="eyedial" min="0" max="1000" value="500"></div>
   <div class="readout" id="eyereadout"></div>
   <button class="btn primary" id="eyeread">Read the distance</button>
 </section>
@@ -347,7 +347,7 @@ function eyeControls(show) { $('eyedialwrap').style.display = show ? '' : 'none'
 function startEye(idx) {
   pending = { idx }; const n = N[idx]; selected = null;
   $('eyetitle').textContent = 'The eyepiece · ' + n.name; $('eyebar').textContent = 'Night ' + (C.NIGHTS - state.nightsLeft + 1) + ': how far is it?';
-  $('eyedial').value = 1000; // the comparison star starts as far as the dial goes; the player brings it nearer
+  $('eyedial').value = 500; // the comparison star starts midway, so an untouched reading still lands on the chart; the player brings it nearer or pushes it farther
   $('eyestage').innerHTML = '';
   if (state.observed.length === 0 && !state.stagedEye) {
     // Night one: the instrument assembles in three pictures, one tap each
