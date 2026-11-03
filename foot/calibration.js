@@ -62,7 +62,7 @@ for (let m = 0; m < 128; m++) {
       while (!g.over) {
         const v = M.current(g); const opt = (m >> g.i) & 1 ? 'A' : 'B';
         const r = M.decide(g, opt);
-        if (/[{}]|undefined/.test(r.did + r.sides.join('') + r.famousLine + r.us + r.bad + (r.pairLine || ''))) braces++;
+        if (/[{}]|undefined/.test(r.did + r.sides.join('') + (r.famousLine || '') + r.us + r.bad + (r.pairLine || ''))) braces++;
         if (r.askDiff) { flips++; if (!M.DIFF_WORDS[v.id][d]) braces++; const dv = M.nameDiff(g, v.id, d); if (!dv || /undefined/.test(dv.text)) braces++; }
         M.next(g);
       }
@@ -81,7 +81,8 @@ const gm = M.newGame(); ORDER.forEach(() => { M.decide(gm, 'A'); M.next(gm); });
 ok(/Bentham/.test(M.verdict(gm).line) && M.verdict(gm).gotYou.length === 4, 'a player who does everything is told it is counting, and the bad man got them four times');
 
 ok(M.staircase(M.newGame()).every(st => st.most === 'A'), 'Bentham\'s row: everything, every time');
-ok(M.CONFIG.ORDER.every(id => ['A', 'B'].every(o => { const g = M.newGame(); g.i = M.CONFIG.ORDER.indexOf(id); const r = M.decide(g, o); return !/the bad man|famous rule|most of us/i.test(r.did + r.sides.join('') + r.famousLine + r.bad + (r.pairLine || '')); })), 'no card line says "the bad man", "famous rule" or "most of us"');
+ok(M.CONFIG.ORDER.every(id => ['A', 'B'].every(o => { const g = M.newGame(); g.i = M.CONFIG.ORDER.indexOf(id); const r = M.decide(g, o); return !/the bad man|famous rule|most of us/i.test(r.did + r.sides.join('') + (r.famousLine || '') + r.bad + (r.pairLine || '')); })), 'no card line says "the bad man", "famous rule" or "most of us"');
+ok(M.CONFIG.ORDER.map(id => M.WORDS[id].famous ? 1 : 0).join('') === '0010001', 'the intention rule is named on the brew and the cave only');
 ok(Object.keys(M.PAIRS).every(id => M.DIFF_SHELF.every(d => M.DIFF_WORDS[id][d] && M.DIFF_WORDS[id][d].length > 10)), 'every pair has its own wording for all six differences');
 
 say('\n7. The epilogue');

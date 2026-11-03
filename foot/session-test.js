@@ -50,7 +50,9 @@ const L = []; const say = s => { L.push(s); console.log(s); };
       await noScroll('coda');
       await page.click('#cnext'); await page.waitForTimeout(300);
     }
-    say(`  reply: ${await text('#cend')}`); if (shots) await shot(`${tag}-coda-end`, false);
+    await idle(); await page.waitForTimeout(300);
+    say(`  FIN on: ${await on()}: ${await text('#fincard')}`); if (shots) await shot(`${tag}-fin`);
+    await noScroll('fin');
   }
   // ---- game A: as Foot does
   await shot('start'); await noScroll('start'); say('START: ' + await text('#aimStart'));
@@ -59,9 +61,9 @@ const L = []; const say = s => { L.push(s); console.log(s); };
     { scene: v => v.step === 1 || v.step === 3, diff: v => v.step === 3, card: v => v.step === 3 || v.step === 7, film: v => v.step === 6 || v.step === 7 });
   await shot('a-end');
   await playCoda('a', i => 'A', true);
-  await page.click('#cend [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await noScroll('about');
+  await page.click('#fin [data-go="about"]'); await page.waitForTimeout(300); await shot('about'); await noScroll('about');
   await page.click('#aboutback'); await page.waitForTimeout(300); say('about returned to: ' + await on());
-  await page.click('#cagain'); await page.waitForTimeout(400); say('play again from the epilogue: ' + await on());
+  await page.click('#fagain'); await page.waitForTimeout(400); say('play again from the end: ' + await on());
   // ---- game B: does everything
   await playGame('b', () => 'A', () => 'numbers', { card: v => v.step === 5 });
   await shot('b-end');

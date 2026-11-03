@@ -23,7 +23,7 @@ body{font-family:var(--text);font-size:16px;line-height:1.5;min-height:100vh;ove
 h1,h2,h3,.disp{font-family:var(--display);font-weight:400;letter-spacing:.04em;margin:0}
 p{margin:0 0 10px}
 i,em{font-style:italic}
-.hidden{display:none!important}
+.hidden,.gone{display:none!important}
 
 /* ---- the intertitle frame */
 .it{position:relative;border:1.5px solid var(--silver);outline:1px solid var(--silver);outline-offset:3px;margin:8px 4px;padding:12px 14px;background:var(--black)}
@@ -53,21 +53,22 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 #start .title h1{font-size:40px;line-height:1.05;color:var(--silver)}
 #start .title .sub{font-style:italic;font-size:14.5px;color:var(--muted);margin-top:10px}
 #villain{display:block;width:100%;height:auto;margin:6px 0 2px}
-.acts{font-size:15.5px}
+.acts{font-size:16px}
 .aimline{font-family:var(--display);font-size:20px;line-height:1.3;color:var(--amber);text-align:center;margin:14px 6px 4px;letter-spacing:.03em}
 .aimdef{text-align:center;font-size:14px;color:var(--muted);font-style:italic;margin:2px 0 4px}
 .sig{padding:16px 0 10px;font-size:15px;text-align:center;font-family:var(--text)}
 .sig a{color:var(--muted);font-style:italic;text-decoration:none}
-.creed{margin:14px 4px 6px;padding:10px 14px;font-style:italic;font-size:14.5px;line-height:1.5;color:var(--silver)}
+.creed{margin:14px 4px 6px;padding:10px 14px;font-style:italic;font-size:15.5px;line-height:1.5;color:var(--silver)}
 .creed span{display:block}
 .creed .nm,.rule1 .nm{font-family:var(--display);font-style:normal;font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
-.rule1{margin:14px 4px 0;padding:10px 12px 8px;font-size:13.5px;line-height:1.4}
+.rule1{margin:14px 4px 0;padding:10px 12px 8px;font-size:15px;line-height:1.42}
 .rule1 span.l{display:block;font-style:italic;margin-bottom:4px}
-.rule1 .quiet{color:var(--muted);font-size:12.5px}
+.rule1 .quiet{color:var(--muted);font-size:14px}
 .rules{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 4px 4px}
-.rules .it{margin:0;padding:10px 10px 8px;font-size:13.5px;line-height:1.4}
+.rules .it{margin:0;padding:10px 10px 8px;font-size:15px;line-height:1.42}
 .rules .nm{font-family:var(--display);font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px;display:block}
 .rules span.l{display:block;font-style:italic;margin-bottom:4px}
+.rules .quiet{color:var(--muted);font-size:14px}
 .rules .foot{color:var(--silver)}
 
 /* ---- the staircase strip */
@@ -105,7 +106,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .house .did{font-size:17px;font-weight:700;margin-bottom:10px}
 .house .sec{margin-top:12px;padding-top:10px;border-top:1px solid var(--shadow)}
 .house .lab{display:block;font-family:var(--display);font-size:11.5px;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;margin-bottom:4px}
-.house p{font-size:15.5px;margin:0 0 7px}
+.house p{font-size:16px;margin:0 0 7px}
 .house p:last-child{margin:0}
 .house .kind{display:inline-block;font-family:var(--display);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--black);background:var(--silver);padding:2px 8px;margin:2px 0 6px}
 .house .verdict{font-family:var(--display);font-size:16px;letter-spacing:.03em;margin-top:4px}
@@ -114,8 +115,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .house .shelf .btn.opt{min-height:44px;padding:8px 24px;font-size:15px;margin:8px 0 0}
 .house .shelf .btn.opt.pick{background:var(--amber);color:var(--black)}
 .house .dv{margin-top:8px;font-style:italic}
-.badline{margin:12px 8px 0;font-style:italic;font-size:16px;color:var(--amber)}
-.badline .by{font-style:normal;font-family:var(--display);font-size:12.5px;letter-spacing:.06em;color:var(--muted);margin-left:6px}
+.badbox{margin:14px 4px 6px;padding:10px 14px;font-style:italic;font-size:16px;color:var(--amber)}
+.badbox .nm{display:block;font-family:var(--display);font-style:normal;font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
 
 /* ---- end */
 #end .theend{text-align:center;padding:14px}
@@ -139,6 +140,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 #cstage .fig{fill:var(--black)}#cstage .set{fill:var(--shadow)}
 .cclose{font-style:italic;font-size:15px;margin:10px 6px 0;color:var(--silver)}
 #coda h3{font-size:16px;letter-spacing:.1em;color:var(--muted);margin:22px 4px 8px;text-transform:uppercase}
+#fstage{display:block;width:100%;height:auto;border-radius:3px;background:radial-gradient(ellipse at 50% 40%,#ECE7DA 0%,#CFC8B8 45%,#8E887C 85%,#5E584F 100%);margin-top:10px}
+#fstage .fig{fill:var(--black)}#fstage .set{fill:var(--shadow)}
+#fin .theend{text-align:center;padding:14px;margin-top:14px}#fin .theend h1{font-size:38px}#fin .theend .sub{font-style:italic;font-size:14.5px;color:var(--muted);margin-top:6px}
+.nm2{display:block;font-family:var(--display);font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+#fin .it .acts{margin:0}
 
 /* ---- help & about */
 .page h2{font-size:24px;margin:16px 4px 12px}
@@ -169,9 +175,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
   </div>
   <svg id="villain" viewBox="0 0 360 150" aria-hidden="true"></svg>
   <p class="acts">You know the runaway tram. You probably think the lesson is about what you mean to do. Foot, who invented the tram, thought otherwise. In this film Mr Bad asks you to do seven things, each a worse deed than the last, to save a few people from him. You decide each one. Then the house tells you how she reads it, and where she draws her line. It is not where you think.</p>
-  <div class="it rule1"><i class="dm1"></i><i class="dm2"></i><span class="nm">Bentham's rule</span><span class="l">Save the most lives. Nothing else counts.</span><span class="l quiet">Mr Bad's whole philosophy, and the rule the other two were made to answer.</span></div>
   <div class="rules">
-    <div class="it"><i class="dm1"></i><i class="dm2"></i><span class="nm">The intention rule</span><span class="l">Never aim at an innocent death, as your goal or as your means.</span><span class="l">A death you only foresee may be allowed, if the good is great enough.</span></div>
+    <div class="it"><i class="dm1"></i><i class="dm2"></i><span class="nm">Bentham's rule</span><span class="l">Save the most lives. Nothing else counts.</span><span class="l quiet">Mr Bad's whole philosophy.</span></div>
     <div class="it foot"><i class="dm1"></i><i class="dm2"></i><span class="nm">Foot's rule</span><span class="l">Not harming is a stricter duty than helping.</span><span class="l">Harm against harm: do the least harm.</span><span class="l">Help against help: help the most.</span><span class="l">Harm against help: you may not harm one to help others.</span></div>
   </div>
   <div class="it creed"><i class="dm1"></i><i class="dm2"></i>
@@ -213,20 +218,20 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
         <p id="cpairfoot"></p>
       </div>
       <div class="sec" id="cfoot"><span class="lab">How Foot reads it</span><span class="kind" id="ckind"></span><p id="cs1"></p><p id="cs2"></p><p><b>Her decisive rule:</b> <i id="crule"></i> So <span id="cdoes"></span>.</p><div class="verdict" id="cagree"></div></div>
-      <div class="sec" id="cfam"><span class="lab">The intention rule</span><p id="cfamous"></p></div>
+      <div class="sec" id="cfam"><span class="lab">The rule you came in with</span><p id="cfamous"></p></div>
     </div>
-    <div class="badline" id="cbad"></div>
+    <div class="it amber badbox" id="cbad"><i class="dm1"></i><i class="dm2"></i><span class="nm">Mr Bad</span><div id="cbadt"></div></div>
     <button class="btn amber" id="next"><i class="d l"></i><span>Next</span><i class="d r"></i></button>
   </div>
 </section>
 
 <!-- ======================= END ======================= -->
 <section id="end" class="screen">
-  <div class="it theend"><i class="dm1"></i><i class="dm2"></i><h1>The End</h1><div class="sub">Seven deeds, four rules</div></div>
+  <div class="it theend"><i class="dm1"></i><i class="dm2"></i><h1>Intermission</h1><div class="sub">Seven deeds, four rules</div></div>
   <div id="shape"></div>
   <h3>The staircase</h3>
   <svg id="chart" viewBox="0 0 360 270" aria-label="the staircase"></svg>
-  <p class="legend">Four lines up the same staircase: yours, Foot's rule, the intention rule, and Bentham's. Read each row: where the diamonds stop, that line refuses; where they come back, it allows again. Bentham never stops.</p>
+  <p class="legend">Four lines up the same staircase: yours, Foot's rule, the intention rule (the one about what you mean to do), and Bentham's. Read each row: where the diamonds stop, that line refuses; where they come back, it allows again. Bentham never stops.</p>
   <div class="lines">
     <p id="vscore"></p>
     <p class="trap" id="vtrap"></p>
@@ -255,10 +260,16 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
     <p class="cclose hidden" id="cclose"></p>
     <button class="btn amber" id="cnext"><i class="d l"></i><span>The next case</span><i class="d r"></i></button>
   </div>
-  <div id="cend" class="hidden">
-    <h3>The reply in the same issue</h3>
-    <p class="acts">Elizabeth Anscombe's note ran straight after the paper, disputing one point: that you must give the medicine to the five. Give the whole bottle to the one who needs it, and who can say you wronged <i>him</i>? Nobody was owed it. If you gave it to the one man, she is on your side.</p>
-    <button class="btn amber" id="cagain"><i class="d l"></i>Play again<i class="d r"></i></button>
+  <div id="cend" class="hidden"></div>
+</section>
+
+<!-- ======================= FIN ======================= -->
+<section id="fin" class="screen">
+  <div id="fstagebox"><svg id="fstage" viewBox="0 0 360 230" aria-label="the curtain"></svg></div>
+  <div id="fincard" class="hidden">
+    <div class="it theend"><i class="dm1"></i><i class="dm2"></i><h1>The End</h1><div class="sub">Philippa Foot, 1967. The levity of the examples is not meant to offend.</div></div>
+    <div class="it"><i class="dm1"></i><i class="dm2"></i><span class="nm2">In the same issue</span><p class="acts">Elizabeth Anscombe's note "Who is Wronged?" ran straight after the paper, disputing one point: that you must give the medicine to the five. Give the whole bottle to the one who needs it, and who can say you wronged <i>him</i>? Nobody was owed it. If you gave it to the one man, she is on your side.</p></div>
+    <button class="btn amber" id="fagain"><i class="d l"></i>Play again<i class="d r"></i></button>
     <div class="links"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
     <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
   </div>
@@ -270,10 +281,10 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:6;back
   <p class="first">Seven things Mr Bad asks of you. Decide each one, and find Foot's line.</p>
   <p><b>Who you are.</b> Yourself. Mr Bad has put you where you can save some people from him by doing something to one other person. Seven times. The numbers hardly change; what he asks you to do gets worse each time: turn a wheel, keep a bottle, brew a cure, shut a door, pull a trigger, take up the irons, light a fuse.</p>
   <p><b>What you do.</b> Read what he says. Look at the picture. Tap <i>Do it</i> or <i>Refuse</i>. The film shows what happened.</p>
-  <p><b>Then the house speaks.</b> The people along the bottom of the picture watch what you do, and react to it. They don't vote. After each scene they tell you how Philippa Foot reads it: what you would be doing to the one person, what the others would get from you, what kind of conflict that makes, which of her rules decides it, and whether she would have done what you did. They tell you what the intention rule would have done. Mr Bad gets one line.</p>
+  <p><b>Then the house speaks.</b> The people along the bottom of the picture watch what you do, and react to it. They don't vote. After each scene they tell you how Philippa Foot reads it: what you would be doing to the one person, what the others would get from you, what kind of conflict that makes, which of her rules decides it, and whether she would have done what you did. Twice, at the brew and at the cave, they also tell you what the rule you probably came in with, the one about what you mean to do, would have done. Mr Bad gets one line.</p>
   <p><b>The step before.</b> Each scene is paired with an earlier one that has the same shape. If you decided the two differently, the house asks you what the difference was, and tells you whether that is the difference Foot names.</p>
   <p><b>The staircase</b> along the top shows where you are and what you did: amber for did it, a hollow mark for refused.</p>
-  <p><b>The end.</b> The whole staircase with four lines on it: yours, Foot's, the intention rule's, and Bentham's. Then an epilogue: the three cases about abortion the paper was written for.</p>
+  <p><b>The intermission.</b> The whole staircase with four lines on it: yours, Foot's, the intention rule's, and Bentham's. Then an epilogue: the three cases about abortion the paper was written for. Then the curtain.</p>
   <button class="btn" id="helpback"><i class="d l"></i>Back<i class="d r"></i></button>
 </section>
 
@@ -304,27 +315,27 @@ window.__foot = W;
 /*__HELPERS__*/
 /*__FILMS__*/
 
-// the house watches. It does not vote; it reacts to what was done. A harm-to-help deed done (the brew, the door, the
-// trigger, the irons) gets horror, worse each step; the wheel and the bottle a stir; the cave a flinch and then stillness.
-// A refusal gets quiet, except where everyone drowns.
+// the house watches. It does not vote; it reacts to what happened on stage, every time: relief or a cheer where the deed
+// is one Foot allows, dismay at the deaths when you refuse (more the more die), and horror, growing, at the brew, the door,
+// the trigger and the irons when they are done. Never in words.
 async function houseReacts(id, opt) {
   const heads = qa('#stalls .head .hb');
+  const arms = (which, every) => qa('#stalls ' + which).forEach((a, i) => { if (i % every === 0) a.style.opacity = 1; });
   const up = (px, ms, stagger) => Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(0)' }, { transform: `translateY(${-px}px)` }], { duration: ms, delay: (i % 5) * stagger })));
-  const level = { tram: 1, medicine: 0, brew: 3, beggar: 4, bargain: 5, torture: 6, cave: 7 }[id];
-  if (opt === 'B') {
-    if (id === 'cave') { qa('#stalls .arm').forEach(a => a.style.opacity = 1); return up(10, 500, 40); }
-    if (id === 'tram' || id === 'bargain' || id === 'torture') return up(3, 700, 60);
-    return wait(300);
-  }
-  if (level === 0) return wait(300);
-  if (level === 1) return Promise.all(heads.map((h, i) => i % 3 === 0 ? anim(h, [{ transform: 'translateY(0)' }, { transform: 'translateY(-2px)' }, { transform: 'translateY(0)' }], { duration: 600, delay: (i % 4) * 80 }) : Promise.resolve()));
-  if (level === 3) { qa('#stalls .a1').forEach((a, i) => { if (i % 3 === 0) a.style.opacity = 1; }); return up(4, 700, 60); }
-  if (level === 4) { qa('#stalls .a1').forEach((a, i) => { if (i % 2) a.style.opacity = 1; }); return up(6, 600, 70); }
-  if (level === 5) { qa('#stalls .arm').forEach(a => a.style.opacity = 1); return up(8, 500, 40); }
-  if (level === 6) { qa('#stalls .arm').forEach(a => a.style.opacity = 1); await up(9, 500, 40); return Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(-9px)' }, { transform: 'translateY(-9px) translateX(' + (i < 7 ? -3 : 3) + 'px)' }], { duration: 900, delay: (i % 4) * 60 }))); }
-  qa('#stalls .arm').forEach(a => a.style.opacity = 1);
-  await Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(0) translateX(0)' }, { transform: `translateY(-11px) translateX(${i < 7 ? -4 : 4}px)` }], { duration: 450, delay: (i % 6) * 30 })));
-  return Promise.all(heads.map((h, i) => anim(h, [{ transform: `translateY(-11px) translateX(${i < 7 ? -4 : 4}px)` }, { transform: 'translateY(-2px) translateX(0)' }], { duration: 900, delay: 400 + (i % 6) * 30 })));
+  const cheer = () => { arms('.arm', 1); return Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }, { transform: 'translateY(-5px)' }, { transform: 'translateY(0)' }], { duration: 900, delay: (i % 4) * 60 }))); };
+  const slump = (px, ms) => Promise.all(heads.map((h, i) => anim(h, [{ transform: 'translateY(0)' }, { transform: `translateY(${px}px)` }], { duration: ms, delay: (i % 4) * 70 })));
+  const horror = async (px, lean) => { arms('.arm', 1); await up(px, 450, 35); if (lean) await Promise.all(heads.map((h, i) => anim(h, [{ transform: `translateY(${-px}px)` }, { transform: `translateY(${-px}px) translateX(${i < 7 ? -lean : lean}px)` }], { duration: 700, delay: (i % 4) * 50 }))); };
+  const R = {
+    tram: { A: cheer, B: () => slump(5, 1100) },                     // steered: relief; five run over: dismay
+    medicine: { A: cheer, B: () => slump(4, 1100) },                 // shared: relief; five dead: dismay
+    brew: { A: () => horror(4, 0), B: () => slump(3, 1000) },        // gassed a man: the first horror; five dead: dismay
+    beggar: { A: () => horror(6, 0), B: () => slump(3, 1000) },
+    bargain: { A: () => horror(8, 2), B: () => slump(5, 1100) },
+    torture: { A: () => horror(9, 4), B: () => slump(4, 1200) },
+    cave: { A: async () => { await horror(11, 4); await Promise.all(heads.map((h, i) => anim(h, [{ transform: `translateY(-11px) translateX(${i < 7 ? -4 : 4}px)` }, { transform: 'translateY(-2px) translateX(0)' }], { duration: 900, delay: 300 + (i % 6) * 30 }))); },
+            B: () => slump(9, 1500) },                                // nine drowned: the deepest slump
+  };
+  return R[id][opt]();
 }
 
 // ------------------------------------------------------------------ the staircase strip
@@ -398,10 +409,10 @@ function fillReading(r) {
   $('#cs1').textContent = r.sides[0]; $('#cs2').textContent = r.sides[1];
   $('#crule').textContent = r.rule; $('#cdoes').textContent = r.footDoes;
   const ag = $('#cagree'); ag.textContent = r.agree ? 'You and she agree.' : 'You and she part here.'; ag.className = 'verdict' + (r.agree ? '' : ' part');
-  $('#cfamous').textContent = r.famousLine;
-  $('#cbad').innerHTML = `“${r.bad}”<span class="by">Mr Bad</span>`;
+  $('#cfamous').textContent = r.famousLine || ''; $('#cfam').classList.toggle('gone', !r.famousLine);
+  $('#cbadt').textContent = '“' + r.bad + '”';
   const last = W.g.i === M.CONFIG.ORDER.length - 1;
-  $('#next span').textContent = last ? 'The end' : 'The next scene';
+  $('#next span').textContent = last ? 'Intermission' : 'The next scene';
 }
 async function nameDiff(sid, which, r) {
   if (W.busy || W.waiting !== 'diff') return; W.busy = true; W.waiting = null;
@@ -413,7 +424,7 @@ async function nameDiff(sid, which, r) {
   await revealRest();
 }
 async function revealRest() {
-  for (const s of ['#cfoot', '#cfam']) { const el = $(s); el.classList.remove('hidden'); el.style.opacity = 0; await anim(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 }); }
+  for (const s of ['#cfoot', '#cfam']) { const el = $(s); if (el.classList.contains('gone')) continue; el.classList.remove('hidden'); el.style.opacity = 0; await anim(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 }); }
   $('#cbad').classList.remove('hidden'); $('#cbad').style.opacity = 0; await anim($('#cbad'), [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
   $('#next').classList.remove('hidden'); $('#next').style.opacity = 0; await anim($('#next'), [{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
   W.busy = false;
@@ -493,7 +504,27 @@ function startCoda() { W.c = 0; show('coda'); drawCase(); }
 function nextCase() {
   if (W.busy) return;
   if (W.c < M.CODA.length - 1) { W.c++; drawCase(); $('#ctitle').scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' }); return; }
-  $('#cres').classList.add('hidden'); $('#cend').classList.remove('hidden'); $('#cend').scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' });
+  finale();
+}
+// the last screen: the curtain comes down, the house stands and leaves, Mr Bad takes his bow
+async function finale() {
+  W.busy = true; show('fin');
+  const st = $('#fstage');
+  st.innerHTML = `<path class="set" d="M0,186h360v3h-360z"/>
+    <g id="curtain"><rect x="0" y="-230" width="360" height="200" style="fill:#3A1C1C"/>${[0, 1, 2, 3, 4, 5, 6, 7].map(i => `<path d="M${i * 45},-230v200" style="stroke:#2A1212;stroke-width:6"/>`).join('')}<rect x="0" y="-34" width="360" height="6" style="fill:#D9A13B"/></g>
+    <g id="bow">${person(180, 186, 2.2, 'bad').replace('class="fig"', 'class="fig" id="bowfig"')}</g>` + stalls();
+  const heads = Array.from(st.querySelectorAll('.head')), f = s => st.querySelector(s);
+  st.querySelectorAll('#stalls .head .hb').forEach(() => {});
+  await wait(400);
+  // the house stands and goes
+  await Promise.all(heads.map((h, i) => Promise.all([
+    anim(h.querySelector('.hb'), [{ transform: 'translateY(0)' }, { transform: 'translateY(-12px)' }], { duration: 900, delay: (i % 7) * 120 }),
+    anim(h, [{ opacity: 1 }, { opacity: 1 }, { opacity: 0 }], { duration: 1700, delay: (i % 7) * 120 })])));
+  // the curtain falls behind him, then he bows
+  await anim(f('#curtain'), [{ transform: 'translateY(0)' }, { transform: 'translateY(216px)' }], { duration: 1400, easing: 'ease-in' });
+  await anim(f('#bow'), [{ transform: 'rotate(0deg)' }, { transform: 'rotate(10deg)' }, { transform: 'rotate(0deg)' }], { duration: 1200 });
+  const card = $('#fincard'); card.style.opacity = 0; card.classList.remove('hidden'); await anim(card, [{ opacity: 0 }, { opacity: 1 }], { duration: 600 });
+  W.busy = false;
 }
 
 // ------------------------------------------------------------------ title villain
@@ -519,7 +550,7 @@ $('#toCoda').addEventListener('click', startCoda);
 $('#cA').addEventListener('click', () => decideCase('A'));
 $('#cB').addEventListener('click', () => decideCase('B'));
 $('#cnext').addEventListener('click', nextCase);
-$('#cagain').addEventListener('click', startGame);
+$('#fagain').addEventListener('click', startGame);
 drawVillain();
 
 // ------------------------------------------------------------------ film texture

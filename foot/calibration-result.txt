@@ -51,6 +51,7 @@ Foot's Bad Man — calibration check (the staircase build)
   ok   a player who does everything is told it is counting, and the bad man got them four times
   ok   Bentham's row: everything, every time
   ok   no card line says "the bad man", "famous rule" or "most of us"
+  ok   the intention rule is named on the brew and the cave only
   ok   every pair has its own wording for all six differences
 
 7. The epilogue
@@ -58,4 +59,4 @@ Foot's Bad Man — calibration check (the staircase build)
   ok   every case composes for either decision
   ok   the last case closes with Foot's own caution
 
-42 passed, 0 failed.
+43 passed, 0 failed.

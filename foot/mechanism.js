@@ -101,7 +101,7 @@
       didA: 'You turned the wheel. The tram took the branch and killed the one man; the five lived.', didB: 'You left the wheel. The tram ran on and killed the five.',
       sides: ['Either way your tram kills somebody. On the branch, you kill one; on the line, you kill five.', 'That is harm against harm. Your tram does the killing whichever way it goes.'],
       rule: 'If every way harms someone, do the least harm.', footDoes: 'she turns the wheel',
-      famous: 'The intention rule turns the wheel too: the one man\'s death is only foreseen, not aimed at.',
+      famous: null,
       us: 'Most of us turn the wheel. In her words: "we should say, without hesitation, that the driver should steer for the less occupied track". This is the paper the runaway tram comes from, and in it the tram is the easy case.',
       badA: 'A wheel. Nobody minds a wheel. We start small.', badB: 'You let five die rather than touch a wheel. We will see how long that lasts.',
     },
@@ -113,7 +113,7 @@
       didA: 'You shared the bottle among the five. They lived; the one man died.', didB: 'You gave the whole bottle to the one man. He lived; the five died.',
       sides: ['You do nothing to the one man. You just don\'t give him the bottle. And you don\'t give it to the five either, if you choose him.', 'That is help against help. Nobody is harmed by you; the question is only whom you help.'],
       rule: 'If you can only help some, help the most.', footDoes: 'she shares it among the five',
-      famous: 'The intention rule shares it too: nobody aims at the one man\'s death.',
+      famous: null,
       us: 'Most of us share it. In her words: "we feel bound to let one man die rather than many if that is our only choice." Elizabeth Anscombe, in the same issue, disagreed: give it all to the one and who can say you wronged him?',
       badA: 'You counted. Good. Counting is the whole of my philosophy.', badB: 'The bigger thirst got the bottle. Five for one. Keep counting like that and I have nothing on you.',
     },
@@ -125,7 +125,7 @@
       didA: 'You brewed the cure. The fumes went under the door and killed the man next door; the five lived.', didB: 'You refused. The poison killed the five.',
       sides: ['The fumes are yours. You make them, and they kill him. That you never wanted him dead changes nothing about who did it.', 'Against that, five saved from a poison that is not yours. That is harm against help: harm you do, to help others.'],
       rule: 'You may not harm one person to help others.', footDoes: 'she refuses',
-      famous: 'The intention rule brews. The man\'s death is "of no use to us", a side effect, not aimed at, so it is allowed. Here the two rules part for the first time, and this is the case Foot built to part them.',
+      famous: 'If you know the runaway tram, you probably came in with a rule about what you mean to do: never aim at an innocent death, as your goal or as your means; a death you only foresee may be allowed. Call it the intention rule. It brews: the sick man\'s death is "of no use to us", a side effect, not aimed at. Here, for the first time, it and Foot part. This is the case she built to part them.',
       us: 'Most of us, she says, would not brew: "Yet it surely is different. The relatives of the gassed patient would presumably be successful if they sued the hospital and the whole story came out." It is the medicine again, same five, same one — and it feels different. That difference is her whole argument.',
       badA: 'You made the thing that killed him and never touched him. That is a step up from a wheel, and you took it.', badB: 'You let five die for a man you would only have gassed by accident. We are getting somewhere.',
     },
@@ -137,7 +137,7 @@
       didA: 'You shut the door. The beggar starved in the night, and his body cured the five.', didB: 'You fed the beggar. The poison killed the five.',
       sides: ['You only let him die — but you let him die so that he dies. You want his body. Foot: letting someone die on purpose, aiming at it, is harm, not a failure to help.', 'Against that, five saved from a poison that is not yours. Harm against help again.'],
       rule: 'You may not harm one person to help others.', footDoes: 'she feeds him',
-      famous: 'The intention rule feeds him too: shutting the door aims at his death, as the means to the serum.',
+      famous: null,
       us: 'Most of us feed him. In her words: "presumably we are inclined to see this as a violation of negative rather than positive duty", and later, we find it "particularly revolting that someone should be used".',
       badA: 'A door. You wanted him dead and you did not lift a finger. Higher again.', badB: 'Bread for a dying beggar, and five dead for it. You are not a counter after all.',
     },
@@ -149,7 +149,7 @@
       didA: 'You shot the one man. The five walked free.', didB: 'You refused. Mr Bad shot the five.',
       sides: ['You would kill a man with your own hand. Against that, five saved — from Mr Bad. Stopping his killing is help you would give, not harm you would avoid: those five deaths would be his, not yours.', 'So this is harm against help, and it is the tram with the sides swapped: there, both deaths were yours; here, only one is.'],
       rule: 'You may not harm one person to help others.', footDoes: 'she refuses',
-      famous: 'The intention rule refuses too: his death is your means. The judge who frames an innocent man to stop a riot is this case, and the two rules agree on him.',
+      famous: null,
       us: 'Most of us refuse. In her words: "most of us would be appalled at the idea that the innocent man could be framed", and when the court is taken out of it, "we still find ourselves horrified".',
       badA: 'Your own hand. The wheel, the bottle, the door, and now a trigger. I knew you had it in you.', badB: 'You would not shoot. Fine. I shot five. You could have had them for one.',
     },
@@ -161,7 +161,7 @@
       didA: 'You took up the irons. For an hour. The two went free.', didB: 'You refused. Mr Bad tortured the two.',
       sides: ['Nobody dies, and it is still harm you do, with your hands, for an hour. Against that, two spared from him. That is harm against help.', 'Foot: "To refrain from inflicting injury ourselves is a stricter duty than to prevent other people from inflicting injury, which is not to say that the other is not a very strict duty indeed."'],
       rule: 'You may not harm one person to help others.', footDoes: 'she refuses',
-      famous: 'The intention rule refuses too: the hour is your means. On this case the paper says why anyone wanted that rule: without it, "anyone who wants us to do something we think wrong has only to threaten that otherwise he himself will do something we think worse."',
+      famous: null,
       us: 'The paper puts no "most of us" on this one. It is the case for the defence of the intention rule, and Foot\'s own answer to it is the same: "We may therefore refuse to be forced into acting by the threats of bad men."',
       badA: 'An hour, with your hands. Nobody died, and it is the worst thing you have done yet.', badB: 'Two men, slowly, and you could have stopped it with an hour. You are learning to say no at the wrong moment.',
     },
@@ -173,7 +173,7 @@
       didA: 'You lit the fuse. The stuck man was killed; the eight climbed out.', didB: 'You refused. The water rose, and all nine drowned.',
       sides: ['This is the worst thing he has asked for: you blow a living man to pieces, on purpose. And Foot says do it.', 'Because there is no conflict here. The stuck man is lost either way. Blasting takes nothing from him that the water was not taking. "It is reasonable that the action that will save someone should be done."'],
       rule: 'Where the one is lost either way, there is no conflict: save whom you can.', footDoes: 'she lights it',
-      famous: 'The intention rule refuses. Blasting a man out of a cave is aiming at his death; its defenders, she says, "would rightly reject" the excuse that you only meant to blow him out of the way. Here the two rules part for the second time, and the intention rule, she says, "must here conflict with that of most reasonable men".',
+      famous: 'The intention rule, the one about what you mean to do, refuses: blasting a man out of a cave is aiming at his death, and its defenders, she says, "would rightly reject" the excuse that you only meant to blow him out of the way. Here it and Foot part for the second time, the other way round, and the intention rule, she says, "must here conflict with that of most reasonable men".',
       us: 'Most of us light it. Foot built this cave as her picture of a mother and child who will both die unless the child is killed, the operation the Catholic doctrine forbids. The epilogue has that case.',
       badA: 'In pieces. The worst thing I asked for, and you did it. I could not have done it better myself.', badB: 'Nine drowned, and the one you spared drowned with them. That is what a rule costs.',
     },
@@ -282,7 +282,7 @@
     else if (first >= 0 && crossings === 1 && g.choices.cave === 'B') line = `You climbed with him until ${sn(CONFIG.ORDER[first])}, and refused everything from there. Your line follows the deed: the worse the thing, the firmer the no. Foot's line does not; it crosses at the brew and comes back at the cave.`;
     else if (first >= 0 && crossings === 2 && g.choices.cave === 'A') line = `You climbed with him until ${sn(CONFIG.ORDER[first])}, refused from there, and lit the fuse at the top. That is the shape of Foot's own line${agreeFoot.length === ids.length ? ', and it is her line exactly' : ''}.`;
     else line = `Your line crossed ${numw(crossings)} times on the way up.`;
-    const score = `You and Foot agreed on ${numw(agreeFoot.length)} of ${numw(ids.length)}${parted.length ? `; you parted at ${list(parted.map(sn))}` : ''}. You and the intention rule agreed on ${numw(agreeFamous.length)}.`;
+    const score = `You and Foot agreed on ${numw(agreeFoot.length)} of ${numw(ids.length)}${parted.length ? `; you parted at ${list(parted.map(sn))}` : ''}. The intention rule, the one about what you mean to do, would have agreed with you on ${numw(agreeFamous.length)}.`;
     const trap = gotYou.length ? `Mr Bad got you ${gotYou.length === 1 ? 'once' : numw(gotYou.length) + ' times'}: ${list(gotYou.map(sn))}. Each time you did what he asked where she would have refused.` : 'Mr Bad never got you: you refused every time she refuses.';
     const paper = 'Philippa Foot, 1967: what you aim at "plays only a quite subsidiary role" in what we say about these cases. What matters is whether you would be harming someone or only failing to help him. Not harming is the stricter duty. So: harm against harm, do the least harm; help against help, help the most; harm against help, you may not harm one to help others. The brew is where her line parts from the intention rule; the cave is where it parts from it again, the other way.';
     const trolley = 'The tram, now the most famous puzzle in ethics, is the first step and the easy one in the paper that invented it. The hard steps were the ones with your own hand on them.';
