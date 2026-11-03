@@ -526,7 +526,7 @@ svg{display:block}
       switch (res.him) {
         case 'dead': out.said.push(m.kind === 'night' ? 'You killed the old man at your feet.' : `You killed ${him}.`); out.quote = '“Somebody was here, and the next minute there is nobody here at all.”'; break;
         case 'beaten': out.said.push('You beat him down with the butt of your spear. He weeps; the others laugh.'); out.quote = '“Troubled though they were, the others laughed long at him.”'; break;
-        case 'taken': out.said.push(m.kind === 'night' ? 'You had the old man bound and kept. A king, a thing that breathes.' : `You took ${him} alive. ${He} will work for you far from home, a thing that breathes.`); out.quote = '“A compromise between a man and a corpse.”'; break;
+        case 'taken': out.said.push(m.kind === 'night' ? 'You had the old man bound and kept: a king, alive, and now a thing you own.' : `You took ${him} alive. ${He} will work for you far from home: alive, and no longer a person but a thing you own.`); out.quote = '“A compromise between a man and a corpse.”'; break;
         case 'struck you': out.said.push(res.gesture === 'raise' ? 'You held out your hand. Stone does not see a hand: he struck you.' : 'You went on past him. He struck you from behind.'); out.quote = '“In the presence of an armed enemy, what hand can relinquish its weapon?”'; break;
         case 'passed': out.said.push(res.gesture === 'raise' ? 'You held out your hand. He did not take it, and did not strike. He went his way.' : 'You let each other pass.'); break;
         case 'escaped': out.said.push('You let him run. He reaches the walls.'); break;
@@ -543,9 +543,9 @@ svg{display:block}
       if (firstCost) out.why = res.him === 'struck you' ? 'Force turns to stone the one who suffers it, as surely as the one who uses it.' : 'Force turns to stone the one who uses it, as surely as the one it is used on.';
     } else {
       switch (res.him) {
-        case 'heard': out.said.push('He heard you. He raised you up and let you go.', 'The stone that climbed as you knelt goes back down.'); out.quote = '“A suppliant, once his prayer is answered, becomes a human being again.”'; break;
-        case 'deaf': out.said.push('He did not hear. You were a thing before he touched you.'); out.quote = '“What a reception this feeble hope gets!”'; break;
-        case 'owns you': out.said.push('You put down your spear and went with him. You will live, his.'); out.quote = '“Laboring for a pitiless master.”'; break;
+        case 'heard': out.said.push('He heard you. He raised you up and let you go.', 'Kneeling had cost you a line, as it costs every suppliant; being heard gives it back.'); out.quote = '“A suppliant, once his prayer is answered, becomes a human being again.”'; break;
+        case 'deaf': out.said.push('He did not hear. On your knees you had already become a thing to him, stone and not clay; the spear only finished it.'); out.quote = '“What a reception this feeble hope gets!”'; break;
+        case 'owns you': out.said.push('You put down your spear and went with him. You will live, as his slave, and nothing of you will be your own.'); out.quote = '“Laboring for a pitiless master.”'; break;
         case 'fell back': out.said.push('You stood, and fear changed sides. He fell back.'); out.quote = '“A shudder of terror ran through the Trojans.”'; break;
         case 'killed you': out.said.push('You stood, and he killed you. You fell with what was left of your soul still yours.'); out.quote = '“He meets it, like Hector before Troy, as he tries to face destiny on his own terms.”'; break;
       }
@@ -578,10 +578,10 @@ svg{display:block}
     const ordinal = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth'][day] || ('day ' + day);
     const state = stonePhrase(g.lines);
     let headline, fate;
-    if (g.fate === 'knees') { fate = 'knees'; headline = `You died on your knees on the ${ordinal} day, a thing before he touched you.`; }
-    else if (g.fate === 'standing') { fate = 'standing'; headline = `You died standing, on the ${ordinal} day, ${state}.`; }
-    else if (g.fate === 'slave') { fate = 'slave'; headline = `From the ${ordinal} day on you live, his: a thing that breathes.`; }
-    else { fate = 'night'; headline = `You lived to the night of the old man's visit, ${state}.`; }
+    if (g.fate === 'knees') { fate = 'knees'; headline = `You died on your knees on the ${ordinal} day. To the man above you, you were already a thing, stone and not clay, before his spear touched you.`; }
+    else if (g.fate === 'standing') { fate = 'standing'; headline = g.lines >= CONFIG.LINES ? `You died standing, on the ${ordinal} day, clay all through: your soul was whole, and it was yours.` : g.lines <= 0 ? `You died standing, on the ${ordinal} day, stone all through: a thing that stood.` : `You died standing, on the ${ordinal} day, ${state}: what was still clay was yours.`; }
+    else if (g.fate === 'slave') { fate = 'slave'; headline = `From the ${ordinal} day on you live, as his slave: alive, and a thing, with no soul left to call your own.`; }
+    else { fate = 'night'; headline = g.lines >= CONFIG.LINES ? `You lived to the night of the old man's visit, clay all through: your soul whole.` : g.lines <= 0 ? `You lived to the night of the old man's visit, stone all through: a thing that lived.` : `You lived to the night of the old man's visit, ${state}.`; }
     const killed = L.filter(e => e.him === 'dead').length, taken = L.filter(e => e.him === 'taken').length,
       beaten = L.filter(e => e.him === 'beaten').length, passed = L.filter(e => ['fallen', 'passed', 'escaped'].includes(e.him)).length,
       raised = L.filter(e => e.him === 'raised').length, spears = L.filter(e => e.him === 'grace' && e.kind !== 'night').length,
