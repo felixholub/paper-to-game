@@ -381,6 +381,8 @@ function drawLadder() {
     s += `<g><rect x="${g.CX - 13}" y="${y - 9}" width="26" height="18" rx="4" fill="#BF9C68" stroke="#2A2621" stroke-width="2"/><circle cx="${g.CX}" cy="${y + 2}" r="3" fill="#2A2621"/></g>`;
   }
   svg.innerHTML = s;
+  // fit each fault box to the word it holds, measured in the marker face rather than estimated
+  svg.querySelectorAll('text.flt').forEach(t => { const r = t.previousElementSibling; if (!r || !r.classList.contains('fltbg')) return; try { const w = t.getBBox().width + 16; r.setAttribute('width', w); r.setAttribute('x', parseFloat(t.getAttribute('x')) - w / 2); } catch (e) {} });
   svg.querySelectorAll('[data-un]').forEach(el => el.addEventListener('click', () => { if (S.result || zipping) return; S.placed[+el.dataset.un] = null; drawLadder(); drawTray(); }));
 }
 function keepInView() {
