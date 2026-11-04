@@ -1,0 +1,54 @@
+Augustine’s Clock: calibration check
+
+A. The paper’s numbers
+PASS A1 the hymn line has eight syllables, "De-us cre-a-tor om-ni-um" (ch. XXVII)
+PASS A2 the second, fourth, sixth and eighth are long; the others short (ch. XXVII)
+PASS A3 every long is exactly double every short: "hath a double time" (ch. XXVII)  [long/short = 2.00]
+PASS A4 the chain of ch. XV: a hundred years, twelve months, (a month), twenty-four hours, (an hour)
+PASS A5 "now" is always a middle part, with some past and some to come (ch. XV: "any middle year")
+PASS A6 the sun climbs while the voice sounds, and stands still from the moment it stops (ch. XXIII)
+PASS A7 the voice lasts exactly three turns of the wheel, in both wheel rounds
+PASS A8 the steady wheel keeps its pace through the hold, "with equal pauses" (ch. XXIII)
+PASS A9 the kicked wheel keeps its pace until the kick lands, then runs at the kick’s pace (ch. XXIII: "sometimes slower, otherwhiles quicker")
+PASS A10 the last round’s target is exactly the first voice
+
+B. The draw, over 2000 evenings (seeds 1000–2999)
+PASS B1 every voice lasts between 2.4 and 3.8 seconds; the draw is flat (mean near the middle)  [min 2.40, max 3.80, mean 3.10]
+PASS B2 the first evening’s kick always doubles the wheel
+PASS B3 later evenings: the wheel is doubled or halved, about evenly  [doubled 1030, halved 970]
+PASS B4 the same evening number deals the same evening
+
+C. Words
+PASS C1 each fraction word is chosen at its own value (a half is "half", one is "the same", two is "double")
+PASS C2 the words never go down as the ratio goes up
+PASS C3 the qualifier always agrees with the fraction word: "the same" and longer are unqualified; nine tenths is "a little short"; half or less "well short"
+PASS C4 no digit in any line on screen, over 3000 evenings of wild holds  [118320 lines]
+
+D. Playing it in numbers: 300 evenings per player (later evenings: the wheel doubled or halved)
+| Player | Memory rounds: typical miss | Kick round: typical miss | Sun round: typical miss | Read as counting | Read as waiting | Commonest headline |
+|---|---|---|---|---|---|---|
+| Memory, steady (holds the voice in mind; 12% scatter) | ×1.08 | ×1.09 | ×1.08 | 1% | 0% | You kept time with no clock but your mind. (99%) |
+| Memory, shaky (30% scatter) | ×1.23 | ×1.25 | ×1.20 | 16% | 5% | You kept time with no clock but your mind. (80%) |
+| Hurrier (memory, but a fifth short) | ×1.25 | ×1.27 | ×1.25 | 15% | 0% | You kept time with no clock but your mind. (85%) |
+| Wheel counter (counts the voice’s three turns after the kick) | ×1.08 | ×1.85 | ×1.08 | 100% | 0% | You kept time with your mind, until a wheel ran away with you. (100%) |
+| Sun watcher (waits for the sun to move) | ×1.08 | ×1.09 | ×4.00 | 1% | 100% | You kept time with your mind, until you waited for the sun. (99%) |
+| The learned man (counts the wheel, waits for the sun) | ×1.08 | ×1.85 | ×4.00 | 100% | 100% | You kept time by the wheel and the sun, like the learned man. (100%) |
+(typical miss: the median factor by which a hold missed its target; ×1.00 is exact)
+PASS D1 the decisions matter: in the kick round the counter misses by about the kick (×2), the memory player by its own scatter  [counter ×1.85, memory ×1.09]
+PASS D2 counting is read as counting nearly always; memory is almost never read as counting  [counter 300/300, memory 2/300]
+PASS D3 the sun watcher is read as waiting; the memory player is not  [watcher 300/300, memory 1/300]
+PASS D4 the four headlines go to the four kinds of player
+PASS D5 the steady memory player is told "within about a tenth"; the shaky one is told less  [steady: within about a tenth; shaky: within about a fifth]
+
+E. Robustness: the discovery is that counting a moving body fails when its pace changes, while a hold made from the
+   voice in memory does not. Each of our choices varied in turn; 300 evenings each, counter and steady memory player.
+PASS E kick ×1.5 / ×⅔: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.05, memory off by ×1.09; read as counting: counter 300, memory 16]
+PASS E kick ×3 / ×⅓: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.12, memory off by ×1.09; read as counting: counter 300, memory 0]
+PASS E kick lands at 0.1 s: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.04, memory off by ×1.09; read as counting: counter 300, memory 0]
+PASS E kick lands at 0.6 s: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.15, memory off by ×1.09; read as counting: counter 300, memory 3]
+PASS E two turns per voice: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.08, memory off by ×1.09; read as counting: counter 300, memory 0]
+PASS E five turns per voice: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.08, memory off by ×1.09; read as counting: counter 300, memory 0]
+PASS E short voices, 1.5–2.5 s: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.12, memory off by ×1.09; read as counting: counter 300, memory 3]
+PASS E long voices, 4–6 s: the counter lands near 1/kick of the voice, the memory player near the voice; readings right  [counter off 1/kick by ×1.05, memory off by ×1.09; read as counting: counter 300, memory 0]
+
+Result: 31 passed, 0 failed.

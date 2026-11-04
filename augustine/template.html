@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Augustine's Clock (Confessions XI)</title>
+<script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<meta name="description" content="Augustine's Confessions, Book XI, as a Bauhaus poster: measure how long things last with no clock but your mind. A voice sounds and stops; hold a circle as long as it lasted. A potter's wheel turns, the sun climbs; can you trust them?">
+<style>
+@font-face{font-family:'Jost';font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_JOST__*/) format('woff2');font-display:block}
+:root{
+  --plaster:#ECE9E2; --ink:#151515; --red:#D7372A; --blue:#1E4FA0; --yellow:#F2B41C; --mute:#625F59; --faint:#BDB8AE; --card:#F6F4EF;
+  --sans:'Jost','Futura','Century Gothic','Avenir Next',sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--plaster);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.38;min-height:100vh;overflow-x:hidden}
+.screen{display:none;max-width:440px;margin:0 auto;padding:0 16px 34px;min-height:100vh;position:relative}
+.screen.on{display:block}
+p{margin:.5em 0}
+a{color:var(--ink)}
+.hidden{display:none!important}
+.cap{font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+h1{font-weight:800;margin:0;line-height:.86;letter-spacing:-.01em}
+h2{font-weight:800;font-size:30px;line-height:1;margin:6px 0 6px;text-transform:uppercase;letter-spacing:.01em}
+h3{font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.06em;margin:22px 0 6px}
+.quote{font-style:italic;color:var(--mute);font-size:14px;line-height:1.35;margin:.7em 0;padding-left:12px;border-left:4px solid var(--ink)}
+.quote .cite{font-style:normal;font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-top:3px}
+/* buttons: flat black slabs, square corners, white capitals, one primary disc at the left */
+.btn{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:0 18px;border:0;border-radius:0;background:var(--ink);color:#fff;
+  font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;margin:12px 0 0;text-align:left}
+.btn::before{content:'';flex:0 0 16px;height:16px;border-radius:50%;background:var(--yellow)}
+.btn.blue::before{background:var(--blue)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink);min-height:44px;font-size:13px}
+.btn.line::before{background:var(--ink);flex-basis:10px;height:10px;border-radius:0}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.35}
+.row2{display:flex;gap:10px}.row2 .btn{flex:1}
+.q{position:absolute;right:16px;top:12px;width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);background:transparent;font-family:var(--sans);font-weight:800;font-size:17px;color:var(--ink);cursor:pointer}
+.q[disabled]{opacity:.25}
+footer.sig{font-family:var(--sans);font-style:italic;font-size:13px;color:var(--mute);text-transform:lowercase;margin:26px 0 0;text-align:center}
+footer.sig a{color:var(--mute);text-decoration:none}
+/* start */
+#poster{display:block;width:100%;height:auto;margin:14px 0 0}
+#start h1 .a{display:block;font-size:30px;letter-spacing:.06em}
+#start h1 .b{display:block;font-size:84px;letter-spacing:-.02em}
+.aim{font-weight:800;font-size:19px;line-height:1.22;margin:14px 0 4px}
+.lead{font-size:16px;margin:12px 0 0}
+.small{font-size:13px;color:var(--mute)}
+.links{display:flex;gap:10px;margin-top:10px}.links .btn{flex:1;margin:0}
+/* play header */
+.top{padding:14px 46px 0 0;min-height:52px}
+.top .aimline{font-weight:600;font-size:13px;line-height:1.25}
+#strip{display:block;margin:8px 0 0}
+#ask{font-size:16px;line-height:1.32;min-height:42px;margin:4px 0 10px}
+#ask b{font-weight:800}
+.panel{position:relative;margin:0 0 10px}
+.panel .cap{position:absolute;left:0;top:0}
+#outside{border-top:3px solid var(--ink);padding-top:16px}
+#world{display:block;width:100%;height:auto}
+#outside .none{font-size:14px;color:var(--mute);margin:2px 0 0}
+#inyou{border-top:3px solid var(--ink);padding-top:16px}
+#mindwrap{position:relative}
+#mind{display:block;width:100%;height:auto;overflow:visible}
+#now{position:absolute;width:96px;height:96px;border-radius:50%;border:5px solid var(--ink);background:var(--plaster);display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-weight:800;font-size:15px;letter-spacing:.12em;color:var(--ink);cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;padding:0;transition:background .08s, border-color .08s}
+#now.voice{background:var(--red);border-color:var(--red);color:#fff}
+#now.ready{border-color:var(--blue);color:var(--blue);border-width:7px}
+#now.holding{background:var(--blue);border-color:var(--blue);color:#fff}
+#now.silence{border-style:dashed;border-color:var(--ink)}
+#now.idle{border-color:var(--faint);color:var(--faint);cursor:default}
+#now:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+#chips{display:flex;gap:4px;margin:6px 0 0}
+#chips button{flex:1;min-width:0;height:44px;border:2px solid var(--blue);background:var(--plaster);color:var(--blue);font-family:var(--sans);font-weight:800;font-size:13px;padding:0;cursor:pointer;line-height:1}
+#chips button small{display:block;font-weight:600;font-size:12px;margin-top:2px}
+#chips button.sel{background:var(--blue);color:#fff}
+#chips button[disabled]{opacity:.35}
+#res{border-top:3px solid var(--ink);padding-top:10px;margin-top:4px}
+#res .big{font-weight:800;font-size:40px;line-height:.95;text-transform:uppercase;color:var(--blue);letter-spacing:-.01em;margin:4px 0 6px}
+#res .lines p{margin:.35em 0}
+#res .lines p:first-child{font-weight:600}
+/* prologue */
+#pbar{display:block;width:100%;height:auto;margin:10px 0 0;cursor:pointer}
+#pline{font-size:17px;min-height:70px;margin:8px 0 0}
+#legend{display:block;width:100%;height:auto;margin:6px 0 0}
+/* end */
+#end .headline{font-weight:800;font-size:27px;line-height:1.08;margin:8px 0 10px}
+#end .did p{margin:.4em 0}
+#end .kicker{font-weight:800;font-size:19px;line-height:1.15;color:var(--blue);margin:0 0 6px}
+#end .lab{margin:18px 0 2px;color:var(--ink)}
+#pairs,#psalm{display:block;width:100%;height:auto;margin:6px 0}
+.help p,.about p{font-size:15px}
+.help b{font-weight:800}
+.fade{animation:fade .5s both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){.fade{animation:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- START: a poster -->
+<section id="start" class="screen on">
+  <svg id="poster" viewBox="0 0 348 250" aria-hidden="true">
+    <circle cx="258" cy="86" r="78" fill="#F2B41C"/>
+    <polygon points="258,8 268,26 248,26" fill="#151515"/>
+    <rect x="0" y="40" width="64" height="22" fill="none" stroke="#151515" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <rect x="76" y="40" width="40" height="22" fill="none" stroke="#151515" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <rect x="0" y="150" width="348" height="6" fill="#151515"/>
+    <circle cx="140" cy="153" r="22" fill="#151515"/>
+    <rect x="0" y="178" width="232" height="26" fill="#D7372A"/>
+    <rect x="0" y="212" width="204" height="26" fill="#1E4FA0"/>
+  </svg>
+  <h1><span class="a">AUGUSTINE'S</span><span class="b">CLOCK</span></h1>
+  <div class="quote">What then is time? If no one asks me, I know: if I wish to explain it to one that asketh, I know not.<span class="cite">Augustine, Confessions XI</span></div>
+  <p class="lead">You will hear a voice. When it stops, you press and hold a black circle for as long as it sounded, then let go. A potter's wheel will turn; the sun will climb. There is no clock.</p>
+  <p class="aim">Measure how long things last, with no clock but your mind.</p>
+  <button class="btn" id="begin">Find the present</button>
+  <p class="small">Sound helps: the voice sings. It also works on a silent phone, because the circle turns red while the voice sounds.</p>
+  <div class="links"><button class="btn line" data-help>How to play</button><button class="btn line" data-about>About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- PROLOGUE: find the present (ch. XV) -->
+<section id="prologue" class="screen">
+  <div class="top"><div class="aimline">Measure how long things last, with no clock but your mind.</div></div>
+  <button class="q" data-help aria-label="How to play">?</button>
+  <h2>Where is the present?</h2>
+  <svg id="pbar" viewBox="0 0 348 128" role="button" aria-label="Look closer at now"></svg>
+  <p id="pline"></p>
+  <div id="pquote" class="quote hidden"></div>
+  <svg id="legend" class="hidden" viewBox="0 0 348 70" aria-hidden="true"></svg>
+  <p id="prule" class="hidden"></p>
+  <button class="btn" id="closer">Look closer at now</button>
+  <button class="btn hidden" id="tofirst">The first round</button>
+</section>
+
+<!-- ROUND: one layout for all seven -->
+<section id="round" class="screen">
+  <div class="top"><div class="aimline">Measure how long things last, with no clock but your mind.</div></div>
+  <button class="q" data-help aria-label="How to play">?</button>
+  <svg id="strip" viewBox="0 0 348 22" aria-hidden="true"></svg>
+  <h2 id="rtitle"></h2>
+  <p id="ask"></p>
+  <div class="panel" id="outside"><span class="cap">Outside</span>
+    <svg id="world" viewBox="0 0 348 118" aria-hidden="true"></svg>
+    <p class="none hidden">Nothing moves out here.</p>
+  </div>
+  <div class="panel" id="inyou"><span class="cap">In you</span>
+    <div id="mindwrap">
+      <svg id="mind" viewBox="0 0 348 260"></svg>
+      <button id="now" aria-label="The present: press and hold">NOW</button>
+    </div>
+    <div id="chips" class="hidden"></div>
+  </div>
+  <div id="res" class="hidden">
+    <div class="big" id="big"></div>
+    <div class="lines" id="lines"></div>
+    <div class="quote" id="rquote"></div>
+    <button class="btn" id="next">Next round</button>
+  </div>
+</section>
+
+<!-- THE LAST PAGE -->
+<section id="end" class="screen">
+  <div class="top"><div class="cap" id="evening"></div></div>
+  <div class="headline" id="headline"></div>
+  <div class="kicker">The clock was in you. That is where Augustine says time is measured.</div>
+  <div class="cap lab">What you did</div>
+  <div class="did" id="did"></div>
+  <div class="cap lab">What Augustine says</div>
+  <p id="says"></p>
+  <div class="cap lab">What it means</div>
+  <div class="quote" id="mq"></div>
+  <p id="means"></p>
+  <h3>Your seven measures</h3>
+  <svg id="pairs" viewBox="0 0 348 300" aria-label="Each round: the voice in red, yours in blue"></svg>
+  <h3>Psalm, evening, life</h3>
+  <svg id="psalm" viewBox="0 0 348 250" aria-hidden="true"></svg>
+  <p id="psalmtext"></p>
+  <div class="quote" id="pq"></div>
+  <h3>And before?</h3>
+  <p id="before"></p>
+  <div class="quote" id="bq"></div>
+  <button class="btn" id="again">Another evening</button>
+  <div class="links"><button class="btn line" data-help>How to play</button><button class="btn line" data-about>About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<!-- HOW TO PLAY -->
+<section id="help" class="screen help">
+  <div class="top"><div class="cap">How to play</div></div>
+  <p class="aim">Measure how long things last, with no clock but your mind.</p>
+  <p><b>First, find the present.</b> A bar of a hundred years: touch to look closer at the part that is now, five times, until only a point is left.</p>
+  <p><b>The circle is now.</b> In the middle of the screen is a black circle on a black line. It is the present moment. Above the line is what is still to come, drawn dashed. Below the line is memory: what is over, drawn solid.</p>
+  <p><b>Nothing is drawn while it lasts.</b> While a voice sounds, the circle turns red, and that is all. When the voice stops, a red bar drops into memory. While you hold, the circle turns blue. When you let go, a blue bar drops in under the red one, so you can see which was longer.</p>
+  <p><b>A round.</b> Touch the circle to hear the voice. When it stops, press and hold the circle as long as the voice lasted, and let go. The game says how close you came: the same, nine tenths, half, double.</p>
+  <p><b>Outside.</b> Some rounds have a potter's wheel turning, or the sun climbing. You can measure by them if you like. Watch what they do.</p>
+  <p><b>The silence.</b> Once, you don't hold: you keep silent as long as the voice lasted, and tap the circle once when the silence is over.</p>
+  <p><b>The hymn.</b> A voice sings eight syllables, short, long, short, long. You sing them back by holding the circle once for each, the long ones twice as long as the short ones. Then you touch one short and one long of yours to lay one against the other.</p>
+  <p><b>The last round</b> asks for the very first voice again. Then the last page says what you did and what Augustine says about it.</p>
+  <button class="btn" id="helpback">Back</button>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="screen about">
+  <div style="height:8px"></div>
+/*__ABOUT__*/
+  <p class="small" id="aboutseed"></p>
+  <button class="btn" id="aboutback">Back</button>
+</section>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+(function () {
+'use strict';
+const A = window.AUGUSTINE, C = A.CONFIG;
+const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
+const NS = 'http://www.w3.org/2000/svg';
+const COL = { ink: '#151515', red: '#D7372A', blue: '#1E4FA0', yellow: '#F2B41C', plaster: '#ECE9E2', mute: '#625F59', faint: '#BDB8AE' };
+const PXS = 36;                                  // layout: pixels per second in memory, the same in every round
+const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const svg = (tag, at, kids) => { let s = '<' + tag; for (const k in at) s += ' ' + k + '="' + at[k] + '"'; return s + (kids == null ? '/>' : '>' + kids + '</' + tag + '>'); };
+const T = (x, y, txt, at) => svg('text', Object.assign({ x, y, 'font-family': 'Jost, sans-serif', 'font-size': 11, 'font-weight': 600, 'letter-spacing': '1.4', fill: COL.mute }, at || {}), esc(txt));
+
+// ---------------- sound (Web Audio; everything also shows on screen)
+let ac = null, master = null;
+function audio() {
+  try {
+    if (!ac) { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; ac = new AC(); master = ac.createGain(); master.gain.value = 0.55; master.connect(ac.destination); }
+    if (ac.state === 'suspended') ac.resume();
+  } catch (e) { ac = null; }
+  return ac;
+}
+const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+function sing(midi, dur) {                       // a sung "ah": two oscillators through two formants, soft at both ends
+  const c = audio(); if (!c) return;
+  const t = c.currentTime + 0.01, g = c.createGain(), f1 = c.createBiquadFilter(), f2 = c.createBiquadFilter(), lp = c.createBiquadFilter();
+  f1.type = 'bandpass'; f1.frequency.value = 760; f1.Q.value = 4; f2.type = 'bandpass'; f2.frequency.value = 1180; f2.Q.value = 5; lp.type = 'lowpass'; lp.frequency.value = 2600;
+  const o1 = c.createOscillator(), o2 = c.createOscillator(); o1.type = 'sawtooth'; o2.type = 'triangle'; o1.frequency.value = hz(midi); o2.frequency.value = hz(midi) * 1.003;
+  const mix = c.createGain(); mix.gain.value = 0.5; o1.connect(mix); o2.connect(mix); mix.connect(f1); mix.connect(f2); mix.connect(lp);
+  const fg = c.createGain(); fg.gain.value = 1.4; f1.connect(fg); f2.connect(fg); lp.connect(g); fg.connect(g); g.connect(master);
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.28, t + 0.04); g.gain.setValueAtTime(0.28, t + Math.max(0.05, dur - 0.05)); g.gain.linearRampToValueAtTime(0, t + dur);
+  o1.start(t); o2.start(t); o1.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
+}
+let humNode = null;
+function humStart() {                            // your own note: rounder and lower than the voice
+  const c = audio(); if (!c) return;
+  const t = c.currentTime, g = c.createGain(), o = c.createOscillator(), o2 = c.createOscillator(), lp = c.createBiquadFilter();
+  o.type = 'sine'; o2.type = 'triangle'; o.frequency.value = 220; o2.frequency.value = 220; lp.type = 'lowpass'; lp.frequency.value = 900;
+  o.connect(g); o2.connect(lp); lp.connect(g); g.connect(master); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.32, t + 0.03);
+  o.start(t); o2.start(t); humNode = { g, o, o2 };
+}
+function humStop() { if (!humNode || !ac) return; const t = ac.currentTime, h = humNode; h.g.gain.cancelScheduledValues(t); h.g.gain.setValueAtTime(h.g.gain.value, t); h.g.gain.linearRampToValueAtTime(0, t + 0.04); h.o.stop(t + 0.06); h.o2.stop(t + 0.06); humNode = null; }
+function click(f, len, vol) {
+  const c = audio(); if (!c) return;
+  const t = c.currentTime, o = c.createOscillator(), g = c.createGain(); o.type = 'square'; o.frequency.value = f; o.connect(g); g.connect(master);
+  g.gain.setValueAtTime(vol || 0.12, t); g.gain.exponentialRampToValueAtTime(0.0001, t + (len || 0.03)); o.start(t); o.stop(t + (len || 0.03) + 0.02);
+}
+const tick = () => click(1600, 0.025, 0.1);
+function thud() { const c = audio(); if (!c) return; const t = c.currentTime, o = c.createOscillator(), g = c.createGain(); o.type = 'sine'; o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18);
+  o.connect(g); g.connect(master); g.gain.setValueAtTime(0.6, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22); o.start(t); o.stop(t + 0.25); }
+
+// ---------------- screens
+let back = 'start';
+function show(id) { $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
+$$('[data-help]').forEach(b => b.addEventListener('click', () => { back = document.querySelector('.screen.on').id; show('help'); }));
+$$('[data-about]').forEach(b => b.addEventListener('click', () => { back = document.querySelector('.screen.on').id; show('about'); }));
+$('#helpback').addEventListener('click', () => { show(back); if (back === 'round') { const r = $('#res'); if (!r.classList.contains('hidden')) r.scrollIntoView({ block: 'nearest' }); } });
+$('#aboutback').addEventListener('click', () => show(back));
+
+// ---------------- the evening
+let g = null, firstLoad = true;
+function hashSeed() { const m = /e=(\d{4})/.exec(location.hash || ''); return m ? +m[1] : null; }
+function startEvening(seed, first) {
+  g = A.newGame(seed, { first });
+  $('#aboutseed').textContent = 'This is evening number ' + g.seed + '. The same number deals the same voices and the same wheel again: add #e=' + g.seed + ' to the address.';
+  try { history.replaceState(null, '', '#e=' + g.seed); } catch (e) { }
+}
+$('#begin').addEventListener('click', () => { audio(); if (!g) { const h = hashSeed(); startEvening(h || A.newSeed(), !h); } prologueStart(); });
+$('#again').addEventListener('click', () => { audio(); startEvening(A.newSeed(), false); prologueStart(); });
+
+// ---------------- prologue: a hundred years taken apart (ch. XV)
+let pk = 0, pzoom = false;
+const PLINES = [
+  'Is a hundred years present? Only one year of it is now. The rest is past, or still to come.',
+  'Is that year present? Only one month of it is now. The rest is past, or to come.',
+  'Is that month present? Only one day.',
+  'Is that day present? Only one hour.',
+  'Is that hour present? It passes in flying moments, some gone, some to come.',
+];
+function prologueStart() {
+  pk = 0; pzoom = false; show('prologue');
+  $('#pquote').classList.add('hidden'); $('#legend').classList.add('hidden'); $('#prule').classList.add('hidden');
+  $('#closer').classList.remove('hidden'); $('#tofirst').classList.add('hidden');
+  drawBar(pk, 0);
+}
+function drawBar(k, zoom) {                      // zoom: 0 = whole bar; 0..1 = the now part growing to fill the bar
+  const W = 348, y = 58, h = 40;
+  let s = '';
+  if (k >= g.prologue.length) {                  // the instant: past and to come meet at a point
+    s += T(0, 14, 'NOW', { fill: COL.ink, 'font-size': 13, 'font-weight': 800 });
+    s += svg('rect', { x: 0, y, width: 172, height: h, fill: COL.ink });
+    s += svg('rect', { x: 176, y: y + 1.5, width: 170.5, height: h - 3, fill: 'none', stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '8 6' });
+    s += svg('circle', { cx: 174, cy: y + h / 2, r: 11, fill: COL.ink, stroke: COL.plaster, 'stroke-width': 3 });
+    s += svg('polygon', { points: '174,' + (y - 6) + ' 167,' + (y - 18) + ' 181,' + (y - 18), fill: COL.ink });
+    s += T(0, y + h + 22, '← PAST'); s += T(348, y + h + 22, 'TO COME →', { 'text-anchor': 'end' });
+    $('#pbar').innerHTML = s; return;
+  }
+  const st = g.prologue[k], n = st.parts, i = st.now;
+  // the now part [i, i+1] of n grows to fill [0, W] as zoom goes 0 → 1
+  const a0 = i * W / n, a1 = (i + 1) * W / n, L = a0 * (1 - zoom), R = a1 + (W - a1) * zoom, scale = (R - L) / (a1 - a0);
+  const X = u => L + (u * W / n - a0) * scale;
+  s += T(0, 14, st.label.toUpperCase(), { fill: COL.ink, 'font-size': 13, 'font-weight': 800 });
+  const pastR = Math.max(0, Math.min(W, X(i))), futL = Math.max(0, Math.min(W, X(i + 1)));
+  if (pastR > 0) s += svg('rect', { x: 0, y, width: pastR, height: h, fill: COL.ink });
+  if (futL < W) s += svg('rect', { x: futL + 1.5, y: y + 1.5, width: Math.max(0, W - futL - 3), height: h - 3, fill: 'none', stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '8 6' });
+  // the now part: white, with a heavy outline, and a pointer
+  s += svg('rect', { x: X(i), y: y - 4, width: Math.max(3, X(i + 1) - X(i)), height: h + 8, fill: '#fff', stroke: COL.ink, 'stroke-width': 3 });
+  const mid = (X(i) + X(i + 1)) / 2;
+  s += svg('polygon', { points: mid + ',' + (y - 8) + ' ' + (mid - 7) + ',' + (y - 20) + ' ' + (mid + 7) + ',' + (y - 20), fill: COL.ink });
+  if (zoom === 0) {
+    const tag = 'NOW: ONE ' + st.part.toUpperCase(), tx = Math.min(Math.max(mid, 70), 278);
+    s += T(tx, y - 24, tag, { 'text-anchor': 'middle', fill: COL.ink, 'font-weight': 800 });
+    // the tick marks of the parts, where they are wide enough to see
+    if (W / n >= 8) for (let u = 1; u < n; u++) { if (u === i || u === i + 1) continue; const x = X(u); s += svg('line', { x1: x, x2: x, y1: y + (u < i ? 0 : 1.5), y2: y + h - (u < i ? 0 : 1.5), stroke: u < i ? COL.plaster : COL.ink, 'stroke-width': u < i ? 1 : 1.2, opacity: 0.55 }); }
+    s += T(0, y + h + 22, '← PAST'); s += T(348, y + h + 22, 'TO COME →', { 'text-anchor': 'end' });
+  }
+  $('#pbar').innerHTML = s;
+  $('#pline').textContent = PLINES[k];
+}
+function closer() {
+  if (pzoom || pk >= g.prologue.length) return;
+  pzoom = true; const t0 = performance.now(), D = reduce ? 1 : 700;
+  const step = now => { const z = Math.min(1, (now - t0) / D); drawBar(pk, z * z * (3 - 2 * z));
+    if (z < 1) requestAnimationFrame(step); else { pk++; pzoom = false; if (pk < g.prologue.length) drawBar(pk, 0); else finishPrologue(); } };
+  requestAnimationFrame(step);
+}
+function finishPrologue() {
+  drawBar(pk, 0);
+  $('#pline').textContent = 'Now nothing is left but a point. The present has no length: if it had any, part of it would already be past and part still to come.';
+  const q = A.QUOTES.present; $('#pquote').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>'; $('#pquote').classList.remove('hidden');
+  let s = '';
+  s += svg('rect', { x: 0, y: 8, width: 60, height: 20, fill: 'none', stroke: COL.ink, 'stroke-width': 2.5, 'stroke-dasharray': '6 5' }) + T(70, 23, 'TO COME: DASHED', { fill: COL.ink });
+  s += svg('circle', { cx: 210, cy: 18, r: 9, fill: COL.ink }) + T(226, 23, 'NOW: A POINT', { fill: COL.ink });
+  s += svg('rect', { x: 0, y: 42, width: 60, height: 20, fill: COL.ink }) + T(70, 57, 'OVER: SOLID, IN MEMORY', { fill: COL.ink });
+  $('#legend').innerHTML = s; $('#legend').classList.remove('hidden');
+  $('#prule').innerHTML = 'In this game <b>nothing is drawn while it lasts</b>. A sound, or your hold, shows only as a colour on the point. Once it is over, it drops below the line into memory, as a bar.';
+  $('#prule').classList.remove('hidden');
+  $('#closer').classList.add('hidden'); $('#tofirst').classList.remove('hidden');
+}
+$('#closer').addEventListener('click', closer);
+$('#pbar').addEventListener('click', closer);
+$('#tofirst').addEventListener('click', () => { audio(); enterRound(); });
+
+// ---------------- a round
+const ASK = {
+  voice: { intro: 'Touch the circle to hear a voice. When it stops, press and hold the circle for <b>as long as the voice lasted</b>, then let go.',
+    ready: 'The voice has stopped. Now press and hold the circle <b>as long as the voice lasted</b>. Let go when it is the same.' },
+  wheel: { intro: 'Outside, a potter’s wheel turns. The voice will last <b>three turns</b> of it. Touch the circle to hear it.',
+    ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
+  kick: { intro: 'The same wheel. Again the voice will last <b>three turns</b> of it. Touch the circle to hear it.',
+    ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
+  sun: { intro: 'Outside, the sun. It will climb while the voice sounds. Touch the circle to hear it.',
+    ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
+  silence: { intro: 'Outside, nothing moves. Touch the circle to hear the voice. Then keep silent <b>as long as it lasted</b>, and tap the circle once when the silence is over.',
+    ready: 'Silence. Tap the circle once when the silence has lasted <b>as long as the voice</b>.' },
+  hymn: { intro: 'A voice sings the first line of a hymn: <b>eight syllables, short, long, short, long</b>. Touch the circle to hear it.',
+    ready: 'Now sing it back: hold the circle once for each syllable, <b>each long one twice as long as a short one</b>.' },
+  first: { ready: 'No voice this time. Hold the circle <b>as long as the very first voice</b>, from round one. Its bar is at the bottom of your memory.' },
+};
+const DONE = {
+  voice: 'You held the circle for as long as you thought the voice lasted. Your bar is under the voice\u2019s.',
+  wheel: 'You held while the wheel turned. Your bar is under the voice\u2019s.',
+  kick: 'You held while the wheel turned. Your bar is under the voice\u2019s.',
+  sun: 'You held under the sun. Your bar is under the voice\u2019s.',
+  silence: 'You kept a silence and tapped. Its outline is under the voice\u2019s bar.',
+  hymn: 'You sang the line back, and laid one of your short syllables along one of your long ones.',
+  first: 'You held as long as the first voice. Its bar and yours are side by side.',
+};
+const LISTEN = { voice: 'Listen.', wheel: 'Listen, and watch the wheel.', kick: 'Listen, and watch the wheel.', sun: 'Listen, and watch the sun.', silence: 'Listen.', hymn: 'Listen: short, long, short, long…' };
+let ui = null;                                   // per-round state
+function enterRound() {
+  const r = A.current(g);
+  if (ui && ui.raf) cancelAnimationFrame(ui.raf);
+  ui = { r, phase: r.id === 'first' ? 'ready' : 'intro', v0: null, vEnd: null, tPress: null, h0: null, s0: null, bars: [], syl: 0, vSyl: 0, durs: [], hymnStart: null, raf: null,
+    turnsShown: 0, kicked: false, kickAt: 0, lay: [], heard: 0, layAnim: null, frozenT: 0 };
+  show('round');
+  $('#rtitle').textContent = r.title;
+  $('#res').classList.add('hidden'); $('#chips').classList.add('hidden'); $('#chips').innerHTML = '';
+  drawStrip(); setAsk(); drawWorld(); drawMind(); setCircle();
+  loop();
+}
+function setAsk(extra) {
+  const r = ui.r, a = ASK[r.id];
+  let h = ui.phase === 'intro' ? a.intro : ui.phase === 'voice' ? LISTEN[r.id] : a.ready;
+  if (r.id === 'hymn' && (ui.phase === 'ready' || ui.phase === 'holding')) {
+    const k = ui.syl, s = A.hymnVoice()[k];
+    h = (k === 0 ? a.ready + ' ' : '') + 'Hold for <b>' + s.text.toUpperCase() + '</b> (' + (s.long ? 'long' : 'short') + ').';
+  }
+  if (r.id === 'voice' && ui.phase === 'intro') h += '<br><span class="small">Nothing is drawn while it lasts. When it is over, it drops below the line into memory.</span>';
+  $('#ask').innerHTML = h + (extra ? ' ' + extra : '');
+}
+function drawStrip() {
+  let s = '';
+  const w = 28, gap = 4, x0 = 120;
+  s += T(0, 15, 'ROUND ' + (g.i + 1) + ' OF 7', { fill: COL.ink, 'font-weight': 800 });
+  for (let k = 0; k < 7; k++) {
+    const x = x0 + k * (w + gap);
+    s += k < g.i ? svg('rect', { x, y: 6, width: w, height: 10, fill: COL.ink })
+      : svg('rect', { x: x + 1, y: 7, width: w - 2, height: 8, fill: 'none', stroke: COL.ink, 'stroke-width': 2, 'stroke-dasharray': '5 4' });
+  }
+  const px = x0 + g.i * (w + gap) - gap / 2;
+  s += svg('circle', { cx: px, cy: 11, r: 6, fill: COL.ink, stroke: COL.plaster, 'stroke-width': 2 });
+  $('#strip').innerHTML = s;
+}
+
+// the world outside: a wheel, the sun, or nothing
+function drawWorld() {
+  const r = ui.r, has = r.id === 'wheel' || r.id === 'kick' || r.id === 'sun';
+  $('#world').classList.toggle('hidden', !has); $('#outside .none').classList.toggle('hidden', has);
+  if (!has) { $('#world').innerHTML = ''; return; }
+  let s = '';
+  if (r.id === 'sun') {
+    s += svg('path', { d: 'M 22 100 Q 174 -38 326 100', fill: 'none', stroke: COL.faint, 'stroke-width': 2, 'stroke-dasharray': '4 6' });
+    s += svg('circle', { id: 'sunb', cx: 0, cy: 0, r: 20, fill: COL.yellow });
+    s += svg('rect', { x: 0, y: 100, width: 348, height: 18, fill: COL.ink });
+  } else {
+    s += svg('rect', { x: 96, y: 104, width: 156, height: 14, fill: COL.ink });          // the potter's bench
+    s += svg('rect', { x: 168, y: 92, width: 12, height: 14, fill: COL.ink });
+    s += svg('polygon', { points: '174,4 168,-6 180,-6', fill: COL.ink, transform: 'translate(0,8)' }); // the mark at the top
+    s += svg('g', { id: 'wheel', transform: 'rotate(0 174 54)' }, svg('circle', { cx: 174, cy: 54, r: 44, fill: COL.yellow }) + svg('polygon', { points: '174,14 164,32 184,32', fill: COL.ink }) + svg('circle', { cx: 174, cy: 54, r: 6, fill: COL.ink }));
+    s += svg('polygon', { id: 'wedge', points: '0,90 46,104 0,118', fill: COL.ink, transform: 'translate(40,0)' });
+  }
+  $('#world').innerHTML = s;
+  updateWorld(0);
+}
+function voiceT() { return ui.v0 == null ? 0 : (performance.now() - ui.v0) / 1000; }
+function updateWorld() {
+  const r = ui.r;
+  if (r.id === 'sun') {
+    const t = ui.v0 == null ? 0 : voiceT(), p = A.sunAt(r, t);
+    const x = 22 + 304 * p, y = (1 - p) * (1 - p) * 100 + 2 * (1 - p) * p * -38 + p * p * 100;
+    const b = $('#sunb'); if (b) { b.setAttribute('cx', x); b.setAttribute('cy', y); }
+  } else if (r.id === 'wheel' || r.id === 'kick') {
+    const running = ui.v0 != null && ui.phase !== 'done' && ui.phase !== 'result';
+    const t = running ? voiceT() : (ui.frozenT || 0);
+    const tp = ui.tPress == null ? null : (ui.tPress - ui.v0) / 1000;
+    const turns = ui.v0 == null ? 0 : A.wheelTurns(r, t, tp);
+    const w = $('#wheel'); if (w) w.setAttribute('transform', 'rotate(' + (turns * 360 % 360) + ' 174 54)');
+    if (running) {
+      const whole = Math.floor(turns + 1e-6);
+      if (whole > ui.turnsShown) { ui.turnsShown = whole; tick(); }
+      if (A.kicked(r, t, tp) && !ui.kicked) { ui.kicked = true; ui.kickAt = performance.now(); thud(); }
+    }
+    const wd = $('#wedge');
+    if (wd) { const since = ui.kicked ? (performance.now() - ui.kickAt) / 1000 : 9; const k = since < 0.12 ? since / 0.12 : since < 0.5 ? 1 - (since - 0.12) / 0.38 : 0; wd.setAttribute('transform', 'translate(' + (40 + 12 * Math.max(0, k)) + ',0)'); }
+  }
+}
+function loop() {
+  updateWorld();
+  if (ui && ui.phase === 'holding') capCheck();
+  if (ui && ui.phase === 'silence' && (performance.now() - ui.s0) / 1000 >= A.holdCap(ui.r)) endSilence();
+  ui.raf = requestAnimationFrame(loop);
+}
+
+// the mind: to come (dashed slips) above the line; the circle on the line; memory (solid bars) below
+const Y = { slips: 22, line: 108, mem: 172 };
+function drawMind() {
+  const r = ui.r; let s = '';
+  s += T(0, 12, 'TO COME');
+  // slips: what is still to come in this round
+  const slips = [];
+  if (r.id === 'hymn') {
+    const syl = A.hymnVoice(), sc = 26;
+    if (!ui.heard) syl.forEach((x, k) => { if (k >= ui.vSyl) slips.push({ w: x.dur * sc * 2.2, label: x.text.toUpperCase(), c: COL.red }); });
+    else for (let k = ui.syl; k < 8; k++) slips.push({ w: syl[k].dur * sc * 2.2, label: syl[k].text.toUpperCase(), c: COL.blue });
+  } else {
+    if (ui.phase === 'intro' && r.id !== 'first') slips.push({ w: 110, label: r.id === 'wheel' || r.id === 'kick' ? 'THE VOICE: 3 TURNS' : 'THE VOICE', c: COL.red });
+    if (['intro', 'voice', 'ready'].includes(ui.phase)) slips.push({ w: r.id === 'silence' ? 110 : 110, label: r.id === 'silence' ? 'SILENCE: AS LONG' : r.id === 'first' ? 'YOU: AS THE FIRST' : 'YOU: AS LONG', c: r.id === 'silence' ? COL.ink : COL.blue });
+  }
+  let x = 0;
+  slips.forEach(sl => { if (x + sl.w > 348) return; s += svg('rect', { x: x + 1.2, y: Y.slips, width: sl.w - 2.4, height: 26, fill: 'none', stroke: sl.c, 'stroke-width': 2.4, 'stroke-dasharray': '6 5' });
+    s += T(x + sl.w / 2, Y.slips + 17.5, sl.label, { 'text-anchor': 'middle', fill: sl.c, 'font-size': sl.w > 60 ? 10 : 9, 'letter-spacing': sl.w > 60 ? '1.4' : '0.3' });
+    x += sl.w + 5; });
+  if (!slips.length) s += T(0, Y.slips + 17, 'nothing more', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' });
+  // the line of now
+  s += svg('rect', { x: 0, y: Y.line - 2.5, width: 348, height: 5, fill: COL.ink });
+  s += T(348, Y.line - 10, 'NOW', { 'text-anchor': 'end', fill: COL.ink, 'font-weight': 800 });
+  s += T(0, Y.mem - 10, 'MEMORY');
+  // memory: this round's bars, then earlier rounds, thinner and fainter
+  let y = Y.mem;
+  const bars = ui.bars;
+  if (r.id === 'hymn') y = drawHymnRows(bars, y, (str) => { s += str; });
+  else bars.forEach(b => { s += barRow(b, y); y += 40; });
+  if (!bars.length) { s += T(0, y + 14, 'nothing yet', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' }); y += 30; }
+  y += 6;
+  const older = g.results.slice(0, g.i).map((res, k) => ({ res, k })).reverse();
+  if (older.length) { s += T(0, y + 8, 'EARLIER', { 'font-size': 9 }); y += 14; }
+  older.forEach(({ res, k }, age) => {
+    const op = Math.max(0.3, 0.85 - age * 0.11), first = r.id === 'first' && k === 0;
+    const tw = Math.min(340, res.target * PXS), mw = Math.min(340, res.made * PXS);
+    s += svg('g', { opacity: first ? 1 : op }, T(0, y + 7, (k + 1) + '  ' + res.title.toUpperCase(), { 'font-size': 8.5, fill: first ? COL.ink : COL.mute, 'font-weight': first ? 800 : 600 })
+      + svg('rect', { x: 0, y: y + 10, width: tw, height: first ? 7 : 4, fill: COL.red }) + svg('rect', { x: 0, y: y + (first ? 18 : 15), width: mw, height: first ? 7 : 4, fill: res.id === 'silence' ? 'none' : COL.blue, stroke: res.id === 'silence' ? COL.ink : 'none', 'stroke-width': 1.2 }));
+    y += first ? 30 : 23;
+  });
+  const H = Math.max(260, y + 6);
+  $('#mind').setAttribute('viewBox', '0 0 348 ' + H);
+  $('#mind').innerHTML = s;
+  placeCircle();
+}
+function barRow(b, y) {                          // one span in memory: label, then the bar at PXS pixels a second
+  const w = b.secs * PXS, over = w > 344, ww = Math.min(w, 344);
+  let s = T(0, y + 8, b.label, { fill: b.kind === 'you' ? COL.blue : b.kind === 'silence' ? COL.ink : COL.red, 'font-weight': 800 });
+  if (b.kind === 'silence') s += svg('rect', { x: 1.5, y: y + 13.5, width: ww - 3, height: 19, fill: 'none', stroke: COL.ink, 'stroke-width': 3 });
+  else s += svg('rect', { x: 0, y: y + 12, width: ww, height: 22, fill: b.kind === 'you' ? COL.blue : COL.red });
+  if (over) s += svg('polygon', { points: '338,' + (y + 12) + ' 348,' + (y + 23) + ' 338,' + (y + 34), fill: COL.ink });
+  return svg('g', { class: b.fresh ? 'drop' : '', style: b.fresh && !reduce ? 'transform:translateY(' + (Y.line - y - 23) + 'px);transition:transform .35s cubic-bezier(.2,.8,.3,1)' : '' }, s);
+}
+function hymnScale(bars) {
+  const v = bars.find(b => b.kind === 'voiceline'), u = bars.find(b => b.kind === 'youline');
+  const L = Math.max(v ? v.total : 0, u ? u.total : 0, A.lineLength(A.hymnVoice()));
+  return Math.min(56, 340 / L);
+}
+function drawHymnRows(bars, y, put) {
+  const sc = hymnScale(bars);
+  bars.forEach(b => {
+    put(T(0, y + 8, b.label, { fill: b.kind === 'youline' ? COL.blue : COL.red, 'font-weight': 800 }));
+    b.segs.forEach((sg, k) => {
+      const sel = ui.lay.includes(k) && b.kind === 'youline';
+      put(svg('rect', { x: sg.at * sc, y: y + 12, width: Math.max(2, sg.d * sc), height: 22, fill: b.kind === 'youline' ? COL.blue : COL.red, stroke: sel ? COL.yellow : 'none', 'stroke-width': sel ? 4 : 0 }));
+      if (sg.d * sc > 13) put(T(sg.at * sc + sg.d * sc / 2, y + 27.5, A.CONFIG.PAPER.HYMN_LINE[k].toUpperCase(), { 'text-anchor': 'middle', fill: '#fff', 'font-size': 9, 'letter-spacing': '0.3', 'font-weight': 800 }));
+    });
+    y += 40;
+  });
+  if (ui.layAnim) { put(ui.layAnim(sc, y - 40)); y += 44; }
+  return y;
+}
+function placeCircle() {
+  const svgEl = $('#mind'), vb = svgEl.viewBox.baseVal, k = svgEl.clientWidth / vb.width, c = $('#now');
+  c.style.left = (174 * k - 48) + 'px'; c.style.top = (Y.line * k - 48) + 'px';
+}
+window.addEventListener('resize', () => { if (ui && $('#round').classList.contains('on')) placeCircle(); });
+function setCircle() {
+  const c = $('#now'), p = ui.phase, r = ui.r;
+  c.className = '';
+  const lab = { intro: 'LISTEN', voice: '', ready: r.id === 'silence' ? 'TAP' : 'HOLD', holding: '', silence: 'TAP', done: '', result: '' }[p];
+  if (p === 'voice') c.classList.add('voice');
+  else if (p === 'ready') c.classList.add('ready');
+  else if (p === 'holding') c.classList.add('holding');
+  else if (p === 'silence') c.classList.add('silence', 'ready');
+  else if (p === 'done' || p === 'result') c.classList.add('idle');
+  c.textContent = r.id === 'hymn' && (p === 'ready') ? A.hymnVoice()[ui.syl].text.toUpperCase() : lab;
+  c.setAttribute('aria-label', p === 'intro' ? 'Touch to hear the voice' : p === 'ready' ? 'Press and hold' : p === 'silence' ? 'Tap when the silence is over' : 'The present');
+  $$('.q').forEach(q => q.disabled = p === 'voice' || p === 'holding');
+}
+
+// the voice: plays, then drops into memory
+function playVoice() {
+  const r = ui.r; ui.phase = 'voice'; ui.v0 = performance.now(); ui.turnsShown = 0; setCircle(); setAsk(); drawMind();
+  if (r.id === 'voice' || r.id === 'wheel' || r.id === 'kick' || r.id === 'sun' || r.id === 'silence') {
+    if (r.id === 'wheel' || r.id === 'kick') tick();
+    sing(67, r.T);
+    setTimeout(() => {
+      ui.vEnd = performance.now();
+      ui.bars.push({ kind: 'voice', label: 'THE VOICE', secs: r.T, fresh: true });
+      if (r.id === 'silence') { ui.phase = 'silence'; ui.s0 = performance.now(); } else ui.phase = 'ready';
+      setCircle(); setAsk(); drawMind(); settle();
+    }, r.T * 1000);
+  } else if (r.id === 'hymn') {
+    const syl = A.hymnVoice(); let at = 0; ui.vSyl = 0;
+    const line = { kind: 'voiceline', label: 'THE VOICE', segs: [], total: A.lineLength(syl) };
+    syl.forEach((x, k) => {
+      setTimeout(() => sing(x.pitch, x.dur), at * 1000);
+      const start = at;
+      setTimeout(() => { ui.vSyl = k + 1; line.segs.push({ at: start, d: x.dur }); if (k === 0) ui.bars.push(line); drawMind(); }, (at + x.dur) * 1000);
+      at += x.dur + C.HYMN.gap;
+    });
+    setTimeout(() => { ui.heard = 1; ui.phase = 'ready'; ui.syl = 0; setCircle(); setAsk(); drawMind(); }, (at - C.HYMN.gap) * 1000 + 250);
+  }
+}
+function settle() { requestAnimationFrame(() => requestAnimationFrame(() => { $$('#mind .drop').forEach(el => { el.style.transform = 'translateY(0)'; el.classList.remove('drop'); }); ui.bars.forEach(b => b.fresh = false); })); }
+
+// the hold
+const circle = $('#now');
+function down(e) {
+  if (e) { e.preventDefault(); try { circle.setPointerCapture(e.pointerId); } catch (x) { } }
+  audio();
+  const p = ui && ui.phase;
+  if (p === 'intro') { playVoice(); return; }
+  if (p === 'silence') { endSilence(); return; }
+  if (p !== 'ready') return;
+  ui.phase = 'holding'; ui.h0 = performance.now(); if (ui.tPress == null) ui.tPress = ui.h0;
+  if (ui.r.id === 'hymn' && ui.syl === 0) ui.hymnStart = ui.h0;
+  humStart(); setCircle();
+}
+function up(e) {
+  if (!ui || ui.phase !== 'holding') return;
+  const secs = (performance.now() - ui.h0) / 1000;
+  humStop();
+  if (secs < 0.12 && ui.r.id !== 'hymn') { ui.phase = 'ready'; ui.tPress = null; setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down.</span>'); return; }
+  endHold(secs);
+}
+function capCheck() { const r = ui.r; if (r.id === 'hymn') return; if ((performance.now() - ui.h0) / 1000 >= A.holdCap(r)) { humStop(); endHold(A.holdCap(r)); } }
+circle.addEventListener('pointerdown', down);
+circle.addEventListener('pointerup', up);
+circle.addEventListener('pointercancel', up);
+circle.addEventListener('contextmenu', e => e.preventDefault());
+let spaceDown = false;
+document.addEventListener('keydown', e => { if (e.code !== 'Space' || !$('#round').classList.contains('on')) return; e.preventDefault(); if (spaceDown) return; spaceDown = true; down(null); });
+document.addEventListener('keyup', e => { if (e.code !== 'Space') return; spaceDown = false; if ($('#round').classList.contains('on')) up(null); });
+
+function endHold(secs) {
+  const r = ui.r;
+  if (r.id === 'hymn') {
+    const at = (ui.h0 - ui.hymnStart) / 1000;
+    let line = ui.bars.find(b => b.kind === 'youline');
+    if (!line) { line = { kind: 'youline', label: 'YOU', segs: [], total: 0 }; ui.bars.push(line); }
+    line.segs.push({ at, d: secs }); line.total = at + secs; ui.durs.push(secs);
+    ui.syl++;
+    if (ui.syl < 8) { ui.phase = 'ready'; setCircle(); setAsk(); drawMind(); return; }
+    ui.phase = 'done'; setCircle(); drawMind();
+    const res = A.sing(g, ui.durs.slice(), line.total);
+    showLay(res);
+    return;
+  }
+  ui.phase = 'done'; ui.frozenT = voiceT(); setCircle();
+  ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.min(secs, A.holdCap(r)), fresh: true });
+  drawMind(); settle();
+  const tp = r.id === 'first' ? 0 : (ui.tPress - ui.v0) / 1000;
+  const res = A.hold(g, secs, tp);
+  setTimeout(() => showResult(res), reduce ? 0 : 450);
+}
+function endSilence() {
+  const secs = (performance.now() - ui.s0) / 1000;
+  ui.phase = 'done'; setCircle();
+  ui.bars.push({ kind: 'silence', label: 'YOUR SILENCE', secs: Math.min(secs, A.holdCap(ui.r)), fresh: true });
+  drawMind(); settle();
+  const res = A.silence(g, secs);
+  setTimeout(() => showResult(res), reduce ? 0 : 450);
+}
+
+// the hymn: lay a short against a long
+function showLay(res) {
+  $('#ask').innerHTML = esc(res.lines[0]) + (res.lines.length > 2 ? ' ' + esc(res.lines[1]) : '') + '<br><b>Now touch one of your short syllables and one of your long ones.</b> The short one is laid against the long one.';
+  const q = A.QUOTES.hymnAsk;
+  const ch = $('#chips'); ch.innerHTML = '';
+  A.hymnVoice().forEach((x, k) => { const b = document.createElement('button'); b.innerHTML = esc(x.text.toUpperCase()) + '<small>' + (x.long ? 'long' : 'short') + '</small>'; b.dataset.k = k; b.addEventListener('click', () => pickLay(k)); ch.appendChild(b); });
+  ch.classList.remove('hidden');
+  $('#res').classList.remove('hidden'); $('#big').textContent = res.big; $('#lines').innerHTML = ''; $('#rquote').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>';
+  $('#next').classList.add('hidden');
+  $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">your longs against your shorts</div>';
+  ch.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+}
+function pickLay(k) {
+  const isLong = A.CONFIG.PAPER.HYMN_LONG[k];
+  ui.lay = ui.lay.filter(j => A.CONFIG.PAPER.HYMN_LONG[j] !== isLong); ui.lay.push(k);
+  $$('#chips button').forEach(b => b.classList.toggle('sel', ui.lay.includes(+b.dataset.k)));
+  drawMind();
+  if (ui.lay.length < 2) return;
+  const iS = ui.lay.find(j => !A.CONFIG.PAPER.HYMN_LONG[j]), iL = ui.lay.find(j => A.CONFIG.PAPER.HYMN_LONG[j]);
+  $$('#chips button').forEach(b => b.disabled = true);
+  const line = ui.bars.find(b => b.kind === 'youline'), sS = line.segs[iS], sL = line.segs[iL], kRatio = sL.d / sS.d;
+  const t0 = performance.now(), D = reduce ? 1 : 1400;
+  ui.layAnim = (sc, y) => {                       // copies of your short one, laid end to end along your long one, drawn large
+    const p = Math.min(1, (performance.now() - t0) / D), n = Math.min(kRatio, 6), shown = n * p;
+    const S = 230 / Math.max(sL.d, sS.d), yy = y + 46, Lw = sL.d * S, Sw = sS.d * S;
+    let s = T(0, yy, 'YOUR ' + A.CONFIG.PAPER.HYMN_LINE[iS].toUpperCase() + ' LAID ALONG YOUR ' + A.CONFIG.PAPER.HYMN_LINE[iL].toUpperCase(), { fill: COL.ink, 'font-size': 10, 'font-weight': 800 });
+    s += svg('rect', { x: 0, y: yy + 6, width: Lw, height: 26, fill: COL.blue });
+    for (let j = 0; j < Math.ceil(shown); j++) {
+      const w = Sw * Math.min(1, shown - j), x = j * Sw;
+      if (x >= Lw + Sw) break;
+      s += svg('rect', { x: x + 1, y: yy + 11, width: Math.max(0, w - 2), height: 16, fill: COL.yellow, stroke: COL.ink, 'stroke-width': 1.5 });
+      if (w > 14 && Math.min(1, shown - j) === 1) s += T(x + Sw / 2, yy + 23, String(j + 1), { 'text-anchor': 'middle', fill: COL.ink, 'font-size': 10, 'font-weight': 800, 'letter-spacing': '0' });
+    }
+    return s;
+  };
+  const anim = () => { drawMind(); if (performance.now() - t0 < D) requestAnimationFrame(anim); else { const res = A.lay(g, iS, iL); setTimeout(() => showResult(res), reduce ? 0 : 250); } };
+  requestAnimationFrame(anim);
+}
+
+function showResult(res) {
+  ui.phase = 'result'; setCircle();
+  $('#res').classList.remove('hidden');
+  const r = ui.r;
+  let big = esc(res.big);
+  const of = r.id === 'hymn' ? 'your longs against your shorts' : r.id === 'first' ? 'yours against the first voice' : r.id === 'silence' ? 'your silence against the voice' : 'yours against the voice';
+  $('#big').innerHTML = big + '<div class="cap" style="color:var(--blue);margin-top:4px">' + of + '</div>';
+  $('#lines').innerHTML = res.lines.map(l => '<p>' + esc(l) + '</p>').join('');
+  $('#rquote').innerHTML = esc(res.quote.text) + '<span class="cite">' + esc(res.quote.cite) + '</span>';
+  $('#next').classList.remove('hidden');
+  $('#next').textContent = g.i < 6 ? 'Next round' : 'The last page';
+  $('#ask').innerHTML = DONE[r.id];
+  const m = $('#mind'), k = m.clientWidth / m.viewBox.baseVal.width, top = m.getBoundingClientRect().top + window.scrollY + (Y.mem - 26) * k;
+  window.scrollTo({ top: Math.max(0, top - 8), behavior: reduce ? 'auto' : 'smooth' });
+}
+$('#next').addEventListener('click', () => { A.next(g); ui.layAnim = null; if (g.done) showEnd(); else enterRound(); });
+
+// ---------------- the last page
+function showEnd() {
+  if (ui && ui.raf) cancelAnimationFrame(ui.raf);
+  const v = A.verdict(g);
+  $('#evening').textContent = 'The last page · evening ' + v.seed;
+  $('#headline').textContent = v.headline;
+  $('#did').innerHTML = v.did.map(l => '<p>' + esc(l) + '</p>').join('');
+  $('#says').textContent = v.says.replace(/^Augustine: (.)/, (m, c) => c.toUpperCase());
+  $('#mq').innerHTML = esc(v.meansQuote.text) + '<span class="cite">' + esc(v.meansQuote.cite) + '</span>';
+  $('#means').innerHTML = esc(v.means).replace('distentio', '<i>distentio</i>');
+  // the seven pairs
+  let s = '', y = 0;
+  v.pairs.forEach((p, k) => {
+    s += T(0, y + 10, (k + 1) + '  ' + p.title.toUpperCase(), { fill: COL.ink, 'font-weight': 800, 'font-size': 10 });
+    s += T(348, y + 10, p.big.toUpperCase(), { fill: COL.blue, 'font-weight': 800, 'font-size': 10, 'text-anchor': 'end' });
+    s += svg('rect', { x: 0, y: y + 15, width: Math.min(344, p.target * PXS), height: 10, fill: COL.red });
+    s += p.id === 'silence' ? svg('rect', { x: 0.75, y: y + 28.75, width: Math.min(344, p.made * PXS) - 1.5, height: 8.5, fill: 'none', stroke: COL.ink, 'stroke-width': 1.5 })
+      : svg('rect', { x: 0, y: y + 28, width: Math.min(344, p.made * PXS), height: 10, fill: COL.blue });
+    if (p.made * PXS > 344) s += svg('polygon', { points: '340,' + (y + 26) + ' 348,' + (y + 33) + ' 340,' + (y + 40), fill: COL.ink });
+    y += 48;
+  });
+  s += T(0, y + 8, 'RED: WHAT SOUNDED.  BLUE: YOURS.  OUTLINE: YOUR SILENCE.', { 'font-size': 9 });
+  $('#pairs').setAttribute('viewBox', '0 0 348 ' + (y + 14)); $('#pairs').innerHTML = s;
+  drawPsalm();
+  $('#psalmtext').textContent = v.psalm;
+  $('#pq').innerHTML = esc(v.psalmQuote.text) + '<span class="cite">' + esc(v.psalmQuote.cite) + '</span>';
+  $('#before').textContent = v.before;
+  $('#bq').innerHTML = esc(v.beforeQuote.text) + '<span class="cite">' + esc(v.beforeQuote.cite) + '</span>';
+  show('end');
+}
+function drawPsalm() {                           // the line inside the evening inside a life inside the ages (ch. XXVIII)
+  const rows = [
+    { label: 'A LINE OF THE HYMN', done: 1, parts: A.hymnVoice().map(x => x.dur) },
+    { label: 'THIS EVENING', done: 1, parts: [1, 1, 1, 1, 1, 1, 1] },
+    { label: 'A LIFE', done: 0.42 },
+    { label: 'ALL THE AGES OF MEN', done: 0.68 },
+  ];
+  let s = '';
+  const W = 330, ys = rows.map((r, k) => 6 + k * 60), y = 6 + rows.length * 60;
+  // the zoom funnels, drawn first so the rows sit on top: the line is round six of the evening; the evening a sliver of a
+  // life, just before its point; the life a sliver of the ages, just before theirs
+  const piece = [[5 * W / 7, 6 * W / 7 - 2], [rows[2].done * W - 14, rows[2].done * W], [rows[3].done * W - 14, rows[3].done * W]];
+  for (let k = 0; k < rows.length - 1; k++) {
+    const [a, b] = piece[k];
+    s += svg('g', { class: reduce ? '' : 'fade', style: 'animation-delay:' + ((k + 1) * 0.5) + 's' },
+      svg('polygon', { points: '0,' + (ys[k] + 33) + ' ' + W + ',' + (ys[k] + 33) + ' ' + b + ',' + (ys[k + 1] + 15) + ' ' + a + ',' + (ys[k + 1] + 15), fill: COL.yellow, opacity: 0.55 }));
+  }
+  rows.forEach((row, k) => {
+    const y = ys[k];
+    s += svg('g', { class: reduce ? '' : 'fade', style: 'animation-delay:' + (k * 0.5) + 's' }, (() => {
+      let q = T(0, y + 9, row.label, { fill: COL.ink, 'font-weight': 800, 'font-size': 10 });
+      const by = y + 15, dx = row.done * W;
+      if (row.parts) { const tot = row.parts.reduce((a, b) => a + b, 0) + 0.06 * (row.parts.length - 1); let x = 0; row.parts.forEach(p => { const w = p / tot * W; q += svg('rect', { x, y: by, width: w, height: 18, fill: COL.ink }); x += w + 0.06 / tot * W; }); }
+      else { q += svg('rect', { x: 0, y: by, width: dx, height: 18, fill: COL.ink }); q += svg('rect', { x: dx + 1.5, y: by + 1.5, width: W - dx - 3, height: 15, fill: COL.plaster, stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '7 5' }); }
+      q += svg('circle', { cx: dx, cy: by + 9, r: 8, fill: COL.ink, stroke: COL.plaster, 'stroke-width': 2.5 });
+      return q; })());
+  });
+  $('#psalm').setAttribute('viewBox', '0 0 348 ' + (y - 14)); $('#psalm').innerHTML = s;
+}
+
+// expose for the scripted session
+window.__augustine = { get g() { return g; }, get ui() { return ui; } };
+})();
+</script>
+</body>
+</html>
