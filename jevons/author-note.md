@@ -1,6 +1,6 @@
 # Jevons's Noon: author note
 
-**Look first at** the 1885 engine: fit it "to make the coal last", set a stand, and watch the solid line climb over your dotted one. Then play to the end and press *The curve, continued*: the last screen has no words, by design (your Given).
+**Look first at** the ruler: slide it and read both rows, how big the fire gets and how long the coal lasts. Then the 1885 engine: fit it "to make the coal last", set a stand, and watch the solid line climb over your dotted one. Play to the end: the sheet runs on to 2065 so a fast fire is seen to fall, and the verdict reads height and length. Then *The curve, continued*: the last screen has no words, by design (your Given).
 
 **The config block** is at the top of `jevons/mechanism.js`. Every number is tagged with where it comes from: the frontispiece, the preface, ch. I, ch. VII, or "our choice". The words the game says are in `jevons/words.js`, and the page is built by `python3 jevons/build.py`.
 

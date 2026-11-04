@@ -1,373 +1,497 @@
 
 ==================== A stranger: as now, fits the engine to make the coal last, then holds it level
 
-[1865] ruler at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year; the fire doubles in a generation. By 1885 the fire would be about twice what it is now. These twenty years would take about 5 squares of coal out of the ground."
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1885 Britain would burn about twice what it burns now. The next twenty years would use about 5 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1970."
   BURN 1865-1885: fire 1.99x (plan 2.00x) -> 189 Mt; ground 3% gone; gone 0.0M; America/Britain 0.36
-  You set Britain's fire for 1885 at about twice that of 1865. It about doubled, as you set it.
-  About 5 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1885 at about twice that of 1865. The fire doubled. That is what you set.
+  About 5 squares of coal came out of the ground; the pits are still shallow. 162 of the 167 squares are left.
   America burns about a third as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. XVIII): Our new industry and civilization had an obscure and unregarded commencement; it is great already, and will be far greater yet before it is less.
 
-[1885] A NEW ENGINE: Inventors offer an air-engine that does the same work on half the coal. For one horse-power for an hour, the best engines now burn 4 lb of coal; the air-engine burns 2 lb. Whatever Britain does, America fits it at once.
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1885] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1905 than now. By 1905 the fire would be the same as what it is now. These twenty years would take about 8 squares of coal out of the ground."
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2310 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x1.00: "A stand: hold the fire where it is, so that in 1905 Britain burns the same as now. By 1905 Britain would burn the same as what it burns now. The next twenty years would use about 8 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2310."
   BURN 1885-1905: fire 1.39x (plan 1.00x) -> 263 Mt; ground 9% gone; gone 0.0M; America/Britain 1.13
-  You set Britain's fire for 1905 at the same as that of 1885 and fitted the new engine. It grew by about a third, higher than you set it.
-  Each ton did more work, so power was cheaper, and new works were built on it: ploughs, pumps, mills, ships. More coal was burnt, not less. America fitted it too.
-  About 9 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1905 at the same as that of 1885. You fitted the new engine. The fire grew by about a third. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 9 squares of coal came out of the ground; the pits are still shallow. 153 of the 167 squares are left.
   America now burns more coal than Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. VII): It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.
 
-[1905] ruler at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year; the fire doubles in a generation. By 1925 the fire would be about twice what it is now. These twenty years would take about 15 squares of coal out of the ground."
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2200 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1980 | faster: more than twice, coal lasts to about 1970
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1925 Britain would burn about twice what it burns now. The next twenty years would use about 15 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1980."
   BURN 1905-1925: fire 1.87x (plan 2.00x) -> 492 Mt; ground 17% gone; gone 0.0M; America/Britain 1.59
-  You set Britain's fire for 1925 at about twice that of 1905. It about doubled, as you set it.
-  About 15 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1925 at about twice that of 1905. The fire doubled. That is what you set.
+  About 15 squares of coal came out of the ground; the pits are still shallow. 138 of the 167 squares are left.
   America burns half as much again as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (preface): It is simply that we cannot long progress as we are now doing.
 
-[1925] THE AIR-ENGINE PERFECTED: The air-engine is perfected: it does the same work on a third less coal than Britain's engines. For one horse-power for an hour, Britain's engines burn 2 lb of coal; the new one burns under 1⅓ lb. Whatever Britain does, America fits it at once.
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third less coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 2 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
   -> REFUSE IT
 
-[1925] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1945 than now. By 1945 the fire would be the same as what it is now. These twenty years would take about 20 squares of coal out of the ground."
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2070 | slower: half as much again, coal lasts to about 1990 | as now: twice as much, coal lasts to about 1980 | faster: more than twice, coal lasts to about 1970
+  set at x1.00: "A stand: hold the fire where it is, so that in 1945 Britain burns the same as now. By 1945 Britain would burn the same as what it burns now. The next twenty years would use about 20 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2070."
   BURN 1925-1945: fire 0.69x (plan 1.00x) -> 340 Mt; ground 27% gone; gone 6.0M; America/Britain 5.22
-  You set Britain's fire for 1945 at the same as that of 1925 and refused the new engine. It fell by about a third, short of your line.
-  America fitted the engine Britain refused; power there was cheaper, and works went there.
-  Coal from 1,100 feet is a little dearer than in 1865, and works went to America, where coal is cheap.
-  About 17 squares of coal came out of the ground; the pits now dig at about 1,100 feet.
+  You set the fire for 1945 at the same as that of 1925. You refused the new engine. The fire fell by about a third. That is short of your dotted line.
+  America fitted the engine Britain refused. Power there was cheaper, and works moved there.
+  Why short? Coal from 1,100 feet is a little dearer than in 1865. Works moved to America, where coal is cheap.
+  About 17 squares of coal came out of the ground; the pits now dig at about 1,100 feet. 122 of the 167 squares are left.
   America burns about 5 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 6 million people went over the sea for want of work.
+  The people grew faster than the work. About 6 million people went over the sea to find it.
   Jevons (ch. XVIII): To secure a safe smallness we should have to go back, and strangle in their birth those thoughts and inventions which redeemed us from dullness and degeneration a century ago.
 
-[1945] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1965 than now. By 1965 the fire would be the same as what it is now. These twenty years would take about 14 squares of coal out of the ground."
+[1945] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2120 | slower: half as much again, coal lasts to about 2020 | as now: twice as much, coal lasts to about 2000 | faster: more than twice, coal lasts to about 2000
+  set at x1.00: "A stand: hold the fire where it is, so that in 1965 Britain burns the same as now. By 1965 Britain would burn the same as what it burns now. The next twenty years would use about 14 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2120."
   BURN 1945-1965: fire 0.83x (plan 1.00x) -> 284 Mt; ground 35% gone; gone 10.9M; America/Britain 7.88
-  You set Britain's fire for 1965 at the same as that of 1945. It fell by about a fifth, short of your line.
-  Coal from 1,400 feet is a little dearer than in 1865, and works went to America, where coal is cheap.
-  About 13 squares of coal came out of the ground; the pits now dig at about 1,400 feet.
+  You set the fire for 1965 at the same as that of 1945. The fire fell by about a fifth. That is short of your dotted line.
+  Why short? Coal from 1,400 feet is a little dearer than in 1865. Works moved to America, where coal is cheap.
+  About 13 squares of coal came out of the ground; the pits now dig at about 1,400 feet. 109 of the 167 squares are left.
   America burns about 8 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 5 million people went over the sea for want of work.
+  The people grew faster than the work. About 5 million people went over the sea to find it.
   Jevons (preface): It is easy to set a boulder rolling on the mountain-side; it is perilous to try to stop it.
 
-[1965] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1985 than now. By 1985 the fire would be the same as what it is now. These twenty years would take about 11 squares of coal out of the ground."
+[1965] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2160 | slower: half as much again, coal lasts to about 2040 | as now: twice as much, coal lasts to about 2030 | faster: more than twice, coal lasts to about 2020
+  set at x1.00: "A stand: hold the fire where it is, so that in 1985 Britain burns the same as now. By 1985 Britain would burn the same as what it burns now. The next twenty years would use about 11 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2160. This is the last pace you set: from 1985 the sheet runs on at it."
   BURN 1965-1985: fire 0.82x (plan 1.00x) -> 232 Mt; ground 41% gone; gone 17.0M; America/Britain 10.40
-  You set Britain's fire for 1985 at the same as that of 1965. It fell by about a fifth, short of your line.
-  Coal from 1,600 feet is about half as dear again as in 1865, and works went to America, where coal is cheap.
-  About 10 squares of coal came out of the ground; the pits now dig at about 1,600 feet.
+  You set the fire for 1985 at the same as that of 1965. The fire fell by about a fifth. That is short of your dotted line.
+  Why short? Coal from 1,600 feet is about half as dear again as in 1865. Works moved to America, where coal is cheap.
+  About 10 squares of coal came out of the ground; the pits now dig at about 1,600 feet. 99 of the 167 squares are left.
   America burns about 10 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 6 million people went over the sea for want of work.
+  The people grew faster than the work. About 6 million people went over the sea to find it.
   Jevons (preface): We must either maintain the expansion of our trade and employment, or else witness a sore pressure of population and a great exodus of our people.
 
+[1985] You have set six generations. From 1985 the sheet runs on to 2065 at the last pace you set.
+
 VERDICT: A BRIEF GREATNESS
+  How high: about 5 times the fire of 1865, at its noon in 1925.
+  How long: still burning in 2065, at about a fifth more than the fire of 1865, with 73 of the 167 squares still in the ground. At that pace the coal lasts until about 2400.
   You let the fire double, then held it level, then let it double, then held it level for three generations, and fitted the air-engine but refused the perfected one.
-  Your noon came in 1925, at about 5 times the fire of 1865. In 1985 it was about two and a half times the fire of 1865, with the pits at about 1,600 feet; at that pace the coal within 4,000 feet would last until about 2200.
-  America passed Britain in 1903. About 17 million people went over the sea for want of work, nearly all of them after your noon.
+  America passed Britain in 1903. About 54 million people went over the sea for want of work, nearly all of them after the noon.
   Jevons (ch. XVIII): In fearlessly following our instincts of rapid growth we may rear a fabric of varied civilization, we may develop talents and virtues, and propagate influences which could not have resulted from slow restricted growth however prolonged.
   Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
   Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.
 
 ==================== Free trade to the last: as now every generation, fits both engines
 
-[1865] ruler at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year; the fire doubles in a generation. By 1885 the fire would be about twice what it is now. These twenty years would take about 5 squares of coal out of the ground."
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1885 Britain would burn about twice what it burns now. The next twenty years would use about 5 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1970."
   BURN 1865-1885: fire 1.99x (plan 2.00x) -> 189 Mt; ground 3% gone; gone 0.0M; America/Britain 0.36
-  You set Britain's fire for 1885 at about twice that of 1865. It about doubled, as you set it.
-  About 5 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1885 at about twice that of 1865. The fire doubled. That is what you set.
+  About 5 squares of coal came out of the ground; the pits are still shallow. 162 of the 167 squares are left.
   America burns about a third as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. XVIII): Our new industry and civilization had an obscure and unregarded commencement; it is great already, and will be far greater yet before it is less.
 
-[1885] A NEW ENGINE: Inventors offer an air-engine that does the same work on half the coal. For one horse-power for an hour, the best engines now burn 4 lb of coal; the air-engine burns 2 lb. Whatever Britain does, America fits it at once.
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1885] ruler at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year; the fire doubles in a generation. By 1905 the fire would be about twice what it is now. These twenty years would take about 11 squares of coal out of the ground."
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2310 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1905 Britain would burn about twice what it burns now. The next twenty years would use about 11 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1970."
   BURN 1885-1905: fire 2.74x (plan 2.00x) -> 520 Mt; ground 11% gone; gone 0.0M; America/Britain 0.57
-  You set Britain's fire for 1905 at about twice that of 1885 and fitted the new engine. It grew about two and a half times, higher than you set it.
-  Each ton did more work, so power was cheaper, and new works were built on it: ploughs, pumps, mills, ships. More coal was burnt, not less. America fitted it too.
-  About 13 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1905 at about twice that of 1885. You fitted the new engine. The fire grew about two and a half times bigger. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 13 squares of coal came out of the ground; the pits are still shallow. 149 of the 167 squares are left.
   America burns about half as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. VII): It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.
 
-[1905] ruler at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year; the fire doubles in a generation. By 1925 the fire would be about twice what it is now. These twenty years would take about 30 squares of coal out of the ground."
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2050 | slower: half as much again, coal lasts to about 1970 | as now: twice as much, coal lasts to about 1960 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1925 Britain would burn about twice what it burns now. The next twenty years would use about 29 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1960."
   BURN 1905-1925: fire 1.62x (plan 2.00x) -> 844 Mt; ground 27% gone; gone 0.0M; America/Britain 0.92
-  You set Britain's fire for 1925 at about twice that of 1905. It grew by about two-thirds, short of your line.
-  Coal from 1,100 feet is a little dearer than in 1865, and works went to America, where coal is cheap.
-  About 27 squares of coal came out of the ground; the pits now dig at about 1,100 feet.
+  You set the fire for 1925 at about twice that of 1905. The fire grew by about two-thirds. That is short of your dotted line.
+  Why short? Coal from 1,100 feet is a little dearer than in 1865. Works moved to America, where coal is cheap.
+  About 27 squares of coal came out of the ground; the pits now dig at about 1,100 feet. 122 of the 167 squares are left.
   America burns nearly as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (preface): It is simply that we cannot long progress as we are now doing.
 
-[1925] THE AIR-ENGINE PERFECTED: The air-engine is perfected: it does the same work on a third less coal than Britain's engines. For one horse-power for an hour, Britain's engines burn 2 lb of coal; the new one burns under 1⅓ lb. Whatever Britain does, America fits it at once.
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third less coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 2 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1925] ruler at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year; the fire doubles in a generation. By 1945 the fire would be about twice what it is now. These twenty years would take about 48 squares of coal out of the ground."
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2000 | slower: half as much again, coal lasts to about 1970 | as now: twice as much, coal lasts to about 1960 | faster: more than twice, coal lasts to about 1960
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1945 Britain would burn about twice what it burns now. The next twenty years would use about 48 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1960."
   BURN 1925-1945: fire 1.14x (plan 2.00x) -> 960 Mt; ground 50% gone; gone 1.8M; America/Britain 1.85
-  You set Britain's fire for 1945 at about twice that of 1925 and fitted the new engine. It grew by about a fifth, short of your line.
-  Coal from 2,000 feet is about half as dear again as in 1865, and works went to America, where coal is cheap.
-  About 39 squares of coal came out of the ground; the pits now dig at about 2,000 feet.
+  You set the fire for 1945 at about twice that of 1925. You fitted the new engine. The fire grew by about a fifth. That is short of your dotted line.
+  Why short? Coal from 2,000 feet is about half as dear again as in 1865. Works moved to America, where coal is cheap.
+  About 38 squares of coal came out of the ground; the pits now dig at about 2,000 feet. 83 of the 167 squares are left.
   America now burns more coal than Britain.
-  In some years the trade grew slower than the people; about 2 million people went over the sea for want of work.
+  The people grew faster than the work. About 2 million people went over the sea to find it.
   Jevons (ch. VII): No one must suppose that coal thus saved is spared—it is only saved from one use to be employed in others.
 
-[1945] Coal from 2,000 feet is about half as dear again as in 1865, and America's is cheap. From here the trade cannot grow at any pace you set: the fire falls. The sheet draws itself to 1985 at the last pace you set.
+[1945] THE EVENING. The pits are deep: coal from 2,000 feet is about half as dear again as in 1865, and America's is cheap. Works are moving there. Whatever pace you set now, the fire will fall. The sheet draws itself to 2065 at the last pace you set.
   Jevons: The maintenance of such a position is physically impossible.
 
 VERDICT: A BRIEF GREATNESS
+  How high: about 11 times the fire of 1865, at its noon in 1938.
+  How long: until about 2050. After that the fire burnt less than in 1865. By 2065 only 7 of the 167 squares were left.
   You let the fire double for four generations, and fitted both new engines.
-  Your noon came in 1938, above the top of the sheet, at about 11 times the fire of 1865. By 1945 the pits were at about 2,000 feet and coal about half as dear again as in 1865; the works went where coal was cheap, and the fire fell whatever pace was set. In 1985 it was less than half its noon.
-  America passed Britain in 1928. About 21 million people went over the sea for want of work, nearly all of them after your noon.
+  By 1945 the pits were at about 2,000 feet and coal about half as dear again as in 1865. The works went where coal was cheap, and the fire fell whatever pace was set. America passed Britain in 1928. About 70 million people went over the sea for want of work, nearly all of them after the noon.
   Jevons (ch. XVIII): In fearlessly following our instincts of rapid growth we may rear a fabric of varied civilization, we may develop talents and virtues, and propagate influences which could not have resulted from slow restricted growth however prolonged.
   Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
   Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.
 
 ==================== Long mediocrity: a stand every generation, refuses both engines
 
-[1865] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1885 than now. By 1885 the fire would be the same as what it is now. These twenty years would take about 4 squares of coal out of the ground."
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x1.00: "A stand: hold the fire where it is, so that in 1885 Britain burns the same as now. By 1885 Britain would burn the same as what it burns now. The next twenty years would use about 4 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2750."
   BURN 1865-1885: fire 1.00x (plan 1.00x) -> 95 Mt; ground 2% gone; gone 1.2M; America/Britain 0.72
-  You set Britain's fire for 1885 at the same as that of 1865. It stayed about where it was, as you set it.
-  About 4 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1885 at the same as that of 1865. The fire stayed about the same. That is what you set.
+  About 4 squares of coal came out of the ground; the pits are still shallow. 163 of the 167 squares are left.
   America burns about three-quarters as much coal as Britain.
-  In some years the trade grew slower than the people; about a million people went over the sea for want of work.
+  The people grew faster than the work. About a million people went over the sea to find it.
   Jevons (preface): It is easy to set a boulder rolling on the mountain-side; it is perilous to try to stop it.
 
-[1885] A NEW ENGINE: Inventors offer an air-engine that does the same work on half the coal. For one horse-power for an hour, the best engines now burn 4 lb of coal; the air-engine burns 2 lb. Whatever Britain does, America fits it at once.
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
   -> REFUSE IT
 
-[1885] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1905 than now. By 1905 the fire would be the same as what it is now. These twenty years would take about 4 squares of coal out of the ground."
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2030 | as now: twice as much, coal lasts to about 1990 | faster: more than twice, coal lasts to about 1970
+  set at x1.00: "A stand: hold the fire where it is, so that in 1905 Britain burns the same as now. By 1905 Britain would burn the same as what it burns now. The next twenty years would use about 4 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2750."
   BURN 1885-1905: fire 0.70x (plan 1.00x) -> 67 Mt; ground 4% gone; gone 4.7M; America/Britain 4.47
-  You set Britain's fire for 1905 at the same as that of 1885 and refused the new engine. It fell by about a quarter, short of your line.
-  America fitted the engine Britain refused; power there was cheaper, and works went there.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1905 at the same as that of 1885. You refused the new engine. The fire fell by about a quarter. That is short of your dotted line.
+  America fitted the engine Britain refused. Power there was cheaper, and works moved there.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 160 of the 167 squares are left.
   America now burns more coal than Britain.
-  In some years the trade grew slower than the people; about 3 million people went over the sea for want of work.
+  The people grew faster than the work. About 3 million people went over the sea to find it.
   Jevons (ch. XVIII): To secure a safe smallness we should have to go back, and strangle in their birth those thoughts and inventions which redeemed us from dullness and degeneration a century ago.
 
-[1905] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1925 than now. By 1925 the fire would be the same as what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2070 | as now: twice as much, coal lasts to about 2010 | faster: more than twice, coal lasts to about 2000
+  set at x1.00: "A stand: hold the fire where it is, so that in 1925 Britain burns the same as now. By 1925 Britain would burn the same as what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would leave coal in the ground for many centuries."
   BURN 1905-1925: fire 1.00x (plan 1.00x) -> 67 Mt; ground 6% gone; gone 6.4M; America/Britain 11.72
-  You set Britain's fire for 1925 at the same as that of 1905. It stayed about where it was, as you set it.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1925 at the same as that of 1905. The fire stayed about the same. That is what you set.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 157 of the 167 squares are left.
   America burns about 12 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 2 million people went over the sea for want of work.
+  The people grew faster than the work. About 2 million people went over the sea to find it.
   Jevons (preface): We must either maintain the expansion of our trade and employment, or else witness a sore pressure of population and a great exodus of our people.
 
-[1925] THE AIR-ENGINE PERFECTED: The air-engine is perfected: it does the same work on a third of the coal Britain's engines burn. For one horse-power for an hour, Britain's engines burn 4 lb of coal; the new one burns under 1⅓ lb. Whatever Britain does, America fits it at once.
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third of the coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 4 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
   -> REFUSE IT
 
-[1925] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1945 than now. By 1945 the fire would be the same as what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2090 | as now: twice as much, coal lasts to about 2030 | faster: more than twice, coal lasts to about 2020
+  set at x1.00: "A stand: hold the fire where it is, so that in 1945 Britain burns the same as now. By 1945 Britain would burn the same as what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would leave coal in the ground for many centuries."
   BURN 1925-1945: fire 0.80x (plan 1.00x) -> 53 Mt; ground 7% gone; gone 10.3M; America/Britain 33.26
-  You set Britain's fire for 1945 at the same as that of 1925 and refused the new engine. It fell by about a fifth, short of your line.
-  America fitted the engine Britain refused; power there was cheaper, and works went there.
-  About 2 squares of coal came out of the ground; the pits are still shallow.
-  America burns far more coal than Britain, many times over.
-  In some years the trade grew slower than the people; about 4 million people went over the sea for want of work.
+  You set the fire for 1945 at the same as that of 1925. You refused the new engine. The fire fell by about a fifth. That is short of your dotted line.
+  America fitted the engine Britain refused. Power there was cheaper, and works moved there.
+  About 2 squares of coal came out of the ground; the pits are still shallow. 155 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 4 million people went over the sea to find it.
   Jevons (preface): How long we may exist in a stationary condition I, for one, should never attempt to conjecture.
 
-[1945] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1965 than now. By 1965 the fire would be the same as what it is now. These twenty years would take about 2 squares of coal out of the ground."
+[1945] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2110 | as now: twice as much, coal lasts to about 2060 | faster: more than twice, coal lasts to about 2040
+  set at x1.00: "A stand: hold the fire where it is, so that in 1965 Britain burns the same as now. By 1965 Britain would burn the same as what it burns now. The next twenty years would use about 2 squares of coal. Kept up, this pace would leave coal in the ground for many centuries."
   BURN 1945-1965: fire 0.99x (plan 1.00x) -> 53 Mt; ground 9% gone; gone 12.8M; America/Britain 42.07
-  You set Britain's fire for 1965 at the same as that of 1945. It stayed about where it was, as you set it.
-  About 2 squares of coal came out of the ground; the pits are still shallow.
-  America burns far more coal than Britain, many times over.
-  In some years the trade grew slower than the people; about 3 million people went over the sea for want of work.
+  You set the fire for 1965 at the same as that of 1945. The fire stayed about the same. That is what you set.
+  About 2 squares of coal came out of the ground; the pits are still shallow. 153 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 3 million people went over the sea to find it.
 
-[1965] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1985 than now. By 1985 the fire would be the same as what it is now. These twenty years would take about 2 squares of coal out of the ground."
+[1965] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2130 | as now: twice as much, coal lasts to about 2080 | faster: more than twice, coal lasts to about 2060
+  set at x1.00: "A stand: hold the fire where it is, so that in 1985 Britain burns the same as now. By 1985 Britain would burn the same as what it burns now. The next twenty years would use about 2 squares of coal. Kept up, this pace would leave coal in the ground for many centuries. This is the last pace you set: from 1985 the sheet runs on at it."
   BURN 1965-1985: fire 0.99x (plan 1.00x) -> 53 Mt; ground 10% gone; gone 15.9M; America/Britain 45.81
-  You set Britain's fire for 1985 at the same as that of 1965. It stayed about where it was, as you set it.
-  About 2 squares of coal came out of the ground; the pits are still shallow.
-  America burns far more coal than Britain, many times over.
-  In some years the trade grew slower than the people; about 3 million people went over the sea for want of work.
+  You set the fire for 1985 at the same as that of 1965. The fire stayed about the same. That is what you set.
+  About 2 squares of coal came out of the ground; the pits are still shallow. 151 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 3 million people went over the sea to find it.
+
+[1985] You have set six generations. From 1985 the sheet runs on to 2065 at the last pace you set.
 
 VERDICT: A LONGER CONTINUED MEDIOCRITY
+  How high: no higher than 1865. The fire never grew.
+  How long: in 2065 Britain still burns about half what it burnt in 1865, and 142 of the 167 squares are still in the ground. At that pace the coal lasts for many centuries.
   You held the fire level for six generations, and refused both new engines.
-  Your noon was 1865 itself: the fire never stood higher than where you found it. In 1985 it was about a third smaller than the fire of 1865, with the pits at about 400 feet; at that pace the coal within 4,000 feet would last for centuries.
-  America passed Britain in 1889. About 16 million people went over the sea for want of work, steadily, generation after generation.
+  America passed Britain in 1889. About 37 million people went over the sea for want of work, steadily, generation after generation.
   Jevons (ch. XVIII): Britain may contract to her former littleness, and her people be again distinguished for homely and hardy virtues, for a clear intellect and a regard for law, rather than for brilliancy and power.
   Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
   Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.
 
 ==================== Pushes faster, fits both
 
-[1865] ruler at x2.40: "Faster: push the trade on, coal sent freely abroad; the fire more than doubles. By 1885 the fire would be about two and a half times what it is now. These twenty years would take about 6 squares of coal out of the ground."
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x2.40: "Faster: push the trade on and send coal freely abroad. The fire more than doubles. By 1885 Britain would burn about two and a half times what it burns now. The next twenty years would use about 6 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1950."
   BURN 1865-1885: fire 2.39x (plan 2.40x) -> 227 Mt; ground 4% gone; gone 0.0M; America/Britain 0.30
-  You set Britain's fire for 1885 at about two and a half times that of 1865. It grew about two and a half times, as you set it.
-  About 6 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1885 at about two and a half times that of 1865. The fire grew about two and a half times bigger. That is what you set.
+  About 6 squares of coal came out of the ground; the pits are still shallow. 161 of the 167 squares are left.
   America burns about a third as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. XVIII): If we lavishly and boldly push forward in the creation and distribution of our riches, it is hard to over-estimate the pitch of beneficial influence to which we may attain in the present.
 
-[1885] A NEW ENGINE: Inventors offer an air-engine that does the same work on half the coal. For one horse-power for an hour, the best engines now burn 4 lb of coal; the air-engine burns 2 lb. Whatever Britain does, America fits it at once.
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1885] ruler at x2.40: "Faster: push the trade on, coal sent freely abroad; the fire more than doubles. By 1905 the fire would be about two and a half times what it is now. These twenty years would take about 14 squares of coal out of the ground."
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2240 | slower: half as much again, coal lasts to about 1990 | as now: twice as much, coal lasts to about 1960 | faster: more than twice, coal lasts to about 1950
+  set at x2.40: "Faster: push the trade on and send coal freely abroad. The fire more than doubles. By 1905 Britain would burn about two and a half times what it burns now. The next twenty years would use about 14 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1950."
   BURN 1885-1905: fire 3.23x (plan 2.40x) -> 733 Mt; ground 14% gone; gone 0.0M; America/Britain 0.41
-  You set Britain's fire for 1905 at about two and a half times that of 1885 and fitted the new engine. It about trebled, higher than you set it.
-  Each ton did more work, so power was cheaper, and new works were built on it: ploughs, pumps, mills, ships. More coal was burnt, not less. America fitted it too.
-  About 17 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1905 at about two and a half times that of 1885. You fitted the new engine. The fire grew about three times bigger. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 17 squares of coal came out of the ground; the pits are still shallow. 144 of the 167 squares are left.
   America burns about half as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. VII): It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.
 
-[1905] ruler at x2.40: "Faster: push the trade on, coal sent freely abroad; the fire more than doubles. By 1925 the fire would be about two and a half times what it is now. These twenty years would take about 46 squares of coal out of the ground."
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2000 | slower: half as much again, coal lasts to about 1960 | as now: twice as much, coal lasts to about 1950 | faster: more than twice, coal lasts to about 1940
+  set at x2.40: "Faster: push the trade on and send coal freely abroad. The fire more than doubles. By 1925 Britain would burn about two and a half times what it burns now. The next twenty years would use about 46 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1940."
   BURN 1905-1925: fire 1.55x (plan 2.40x) -> 1140 Mt; ground 37% gone; gone 0.2M; America/Britain 0.68
-  You set Britain's fire for 1925 at about two and a half times that of 1905. It grew by about half, short of your line.
-  Coal from 1,500 feet is a little dearer than in 1865, and works went to America, where coal is cheap.
-  About 39 squares of coal came out of the ground; the pits now dig at about 1,500 feet.
+  You set the fire for 1925 at about two and a half times that of 1905. The fire grew by about half. That is short of your dotted line.
+  Why short? Coal from 1,500 feet is a little dearer than in 1865. Works moved to America, where coal is cheap.
+  About 39 squares of coal came out of the ground; the pits now dig at about 1,500 feet. 105 of the 167 squares are left.
   America burns about three-quarters as much coal as Britain.
-  In some years the trade grew slower than the people; about 200 thousand people went over the sea for want of work.
+  The people grew faster than the work. About 200 thousand people went over the sea to find it.
   Jevons (preface): So far as cheap fuel and power is the exciting cause of manufactures, these must pass to where fuel is cheapest.
 
-[1925] THE AIR-ENGINE PERFECTED: The air-engine is perfected: it does the same work on a third less coal than Britain's engines. For one horse-power for an hour, Britain's engines burn 2 lb of coal; the new one burns under 1⅓ lb. Whatever Britain does, America fits it at once.
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third less coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 2 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1925] ruler at x2.40: "Faster: push the trade on, coal sent freely abroad; the fire more than doubles. By 1945 the fire would be about two and a half times what it is now. These twenty years would take about 72 squares of coal out of the ground."
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 1970 | slower: half as much again, coal lasts to about 1960 | as now: twice as much, coal lasts to about 1950 | faster: more than twice, coal lasts to about 1950
+  set at x2.40: "Faster: push the trade on and send coal freely abroad. The fire more than doubles. By 1945 Britain would burn about two and a half times what it burns now. The next twenty years would use about 71 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1950."
   BURN 1925-1945: fire 0.78x (plan 2.40x) -> 893 Mt; ground 63% gone; gone 5.1M; America/Britain 1.99
-  You set Britain's fire for 1945 at about two and a half times that of 1925 and fitted the new engine. It fell by about a fifth, short of your line.
-  Coal from 2,500 feet is about twice as dear as in 1865, and works went to America, where coal is cheap.
-  About 44 squares of coal came out of the ground; the pits now dig at about 2,500 feet.
+  You set the fire for 1945 at about two and a half times that of 1925. You fitted the new engine. The fire fell by about a fifth. That is short of your dotted line.
+  Why short? Coal from 2,500 feet is about twice as dear as in 1865. Works moved to America, where coal is cheap.
+  About 44 squares of coal came out of the ground; the pits now dig at about 2,500 feet. 62 of the 167 squares are left.
   America now burns more coal than Britain.
-  In some years the trade grew slower than the people; about 5 million people went over the sea for want of work.
+  The people grew faster than the work. About 5 million people went over the sea to find it.
   Jevons (ch. VII): No one must suppose that coal thus saved is spared—it is only saved from one use to be employed in others.
 
-[1945] Coal from 2,500 feet is about twice as dear as in 1865, and America's is cheap. From here the trade cannot grow at any pace you set: the fire falls. The sheet draws itself to 1985 at the last pace you set.
+[1945] THE EVENING. The pits are deep: coal from 2,500 feet is about twice as dear as in 1865, and America's is cheap. Works are moving there. Whatever pace you set now, the fire will fall. The sheet draws itself to 2065 at the last pace you set.
   Jevons: The maintenance of such a position is physically impossible.
 
 VERDICT: A BRIEF GREATNESS
+  How high: about 12 times the fire of 1865, at its noon in 1929.
+  How long: until about 2030. After that the fire burnt less than in 1865. By 2065 only 3 of the 167 squares were left.
   You pushed the fire faster than ever for four generations, and fitted both new engines.
-  Your noon came in 1929, above the top of the sheet, at about 12 times the fire of 1865. By 1945 the pits were at about 2,500 feet and coal about twice as dear as in 1865; the works went where coal was cheap, and the fire fell whatever pace was set. In 1985 it was less than half its noon.
-  America passed Britain in 1933. About 25 million people went over the sea for want of work, nearly all of them after your noon.
+  By 1945 the pits were at about 2,500 feet and coal about twice as dear as in 1865. The works went where coal was cheap, and the fire fell whatever pace was set. America passed Britain in 1933. About 77 million people went over the sea for want of work, nearly all of them after the noon.
   Jevons (ch. XVIII): In fearlessly following our instincts of rapid growth we may rear a fabric of varied civilization, we may develop talents and virtues, and propagate influences which could not have resulted from slow restricted growth however prolonged.
   Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
   Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.
 
 ==================== Slower every generation, fits both
 
-[1865] ruler at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1885 the fire would be about half as big again as what it is now. These twenty years would take about 5 squares of coal out of the ground."
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1885 Britain would burn about half as much again as what it burns now. The next twenty years would use about 5 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2010."
   BURN 1865-1885: fire 1.50x (plan 1.50x) -> 142 Mt; ground 3% gone; gone 0.0M; America/Britain 0.48
-  You set Britain's fire for 1885 at about half as big again as that of 1865. It grew by about half, as you set it.
-  About 5 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1885 at about half as much again as that of 1865. The fire grew by about half. That is what you set.
+  About 5 squares of coal came out of the ground; the pits are still shallow. 162 of the 167 squares are left.
   America burns about half as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (preface): It is simply that we cannot long progress as we are now doing.
 
-[1885] A NEW ENGINE: Inventors offer an air-engine that does the same work on half the coal. For one horse-power for an hour, the best engines now burn 4 lb of coal; the air-engine burns 2 lb. Whatever Britain does, America fits it at once.
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1885] ruler at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1905 the fire would be about half as big again as what it is now. These twenty years would take about 7 squares of coal out of the ground."
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2460 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1960
+  set at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1905 Britain would burn about half as much again as what it burns now. The next twenty years would use about 7 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2010."
   BURN 1885-1905: fire 2.09x (plan 1.50x) -> 297 Mt; ground 8% gone; gone 0.0M; America/Britain 1.00
-  You set Britain's fire for 1905 at about half as big again as that of 1885 and fitted the new engine. It about doubled, higher than you set it.
-  Each ton did more work, so power was cheaper, and new works were built on it: ploughs, pumps, mills, ships. More coal was burnt, not less. America fitted it too.
-  About 8 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1905 at about half as much again as that of 1885. You fitted the new engine. The fire doubled. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 8 squares of coal came out of the ground; the pits are still shallow. 154 of the 167 squares are left.
   America now burns more coal than Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. VII): It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.
 
-[1905] ruler at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1925 the fire would be about half as big again as what it is now. These twenty years would take about 15 squares of coal out of the ground."
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2170 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1960
+  set at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1925 Britain would burn about half as much again as what it burns now. The next twenty years would use about 15 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2000."
   BURN 1905-1925: fire 1.41x (plan 1.50x) -> 420 Mt; ground 16% gone; gone 0.0M; America/Britain 1.86
-  You set Britain's fire for 1925 at about half as big again as that of 1905. It grew by about half, as you set it.
-  About 14 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1925 at about half as much again as that of 1905. The fire grew by about half. That is what you set.
+  About 14 squares of coal came out of the ground; the pits are still shallow. 140 of the 167 squares are left.
   America burns about twice as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
 
-[1925] THE AIR-ENGINE PERFECTED: The air-engine is perfected: it does the same work on a third less coal than Britain's engines. For one horse-power for an hour, Britain's engines burn 2 lb of coal; the new one burns under 1⅓ lb. Whatever Britain does, America fits it at once.
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third less coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 2 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1925] ruler at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1945 the fire would be about half as big again as what it is now. These twenty years would take about 21 squares of coal out of the ground."
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2090 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1980 | faster: more than twice, coal lasts to about 1970
+  set at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1945 Britain would burn about half as much again as what it burns now. The next twenty years would use about 20 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2000."
   BURN 1925-1945: fire 1.53x (plan 1.50x) -> 640 Mt; ground 29% gone; gone 0.0M; America/Britain 2.77
-  You set Britain's fire for 1945 at about half as big again as that of 1925 and fitted the new engine. It grew by about half, as you set it.
-  About 21 squares of coal came out of the ground; the pits now dig at about 1,200 feet.
+  You set the fire for 1945 at about half as much again as that of 1925. You fitted the new engine. The fire grew by about half. That is what you set.
+  About 21 squares of coal came out of the ground; the pits now dig at about 1,200 feet. 119 of the 167 squares are left.
   America burns about three times as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. VII): No one must suppose that coal thus saved is spared—it is only saved from one use to be employed in others.
 
-[1945] ruler at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1965 the fire would be about half as big again as what it is now. These twenty years would take about 31 squares of coal out of the ground."
+[1945] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2040 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1990 | faster: more than twice, coal lasts to about 1980
+  set at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1965 Britain would burn about half as much again as what it burns now. The next twenty years would use about 31 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2000."
   BURN 1945-1965: fire 0.94x (plan 1.50x) -> 602 Mt; ground 44% gone; gone 3.9M; America/Britain 3.71
-  You set Britain's fire for 1965 at about half as big again as that of 1945. It fell a little, short of your line.
-  Coal from 1,800 feet is about half as dear again as in 1865, and works went to America, where coal is cheap.
-  About 26 squares of coal came out of the ground; the pits now dig at about 1,800 feet.
+  You set the fire for 1965 at about half as much again as that of 1945. The fire fell a little. That is short of your dotted line.
+  Why short? Coal from 1,800 feet is about half as dear again as in 1865. Works moved to America, where coal is cheap.
+  About 25 squares of coal came out of the ground; the pits now dig at about 1,800 feet. 93 of the 167 squares are left.
   America burns about 4 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 4 million people went over the sea for want of work.
+  The people grew faster than the work. About 4 million people went over the sea to find it.
   Jevons (preface): So far as cheap fuel and power is the exciting cause of manufactures, these must pass to where fuel is cheapest.
 
-[1965] ruler at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1985 the fire would be about half as big again as what it is now. These twenty years would take about 30 squares of coal out of the ground."
+[1965] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2040 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 2000 | faster: more than twice, coal lasts to about 2000
+  set at x1.50: "Slower: let the trade grow, but only by half in twenty years. By 1985 Britain would burn about half as much again as what it burns now. The next twenty years would use about 29 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2010. This is the last pace you set: from 1985 the sheet runs on at it."
   BURN 1965-1985: fire 0.78x (plan 1.50x) -> 466 Mt; ground 57% gone; gone 11.5M; America/Britain 5.18
-  You set Britain's fire for 1985 at about half as big again as that of 1965. It fell by about a quarter, short of your line.
-  Coal from 2,300 feet is nearly twice as dear as in 1865, and works went to America, where coal is cheap.
-  About 22 squares of coal came out of the ground; the pits now dig at about 2,300 feet.
+  You set the fire for 1985 at about half as much again as that of 1965. The fire fell by about a quarter. That is short of your dotted line.
+  Why short? Coal from 2,300 feet is nearly twice as dear as in 1865. Works moved to America, where coal is cheap.
+  About 22 squares of coal came out of the ground; the pits now dig at about 2,300 feet. 72 of the 167 squares are left.
   America burns about 5 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 8 million people went over the sea for want of work.
+  The people grew faster than the work. About 8 million people went over the sea to find it.
   Jevons (preface): We cannot get to the bottom of them; and though we may some day have to pay dear for fuel, it will never be positively wanting.
 
+[1985] You have set six generations. From 1985 the sheet runs on to 2065 at the last pace you set.
+
 VERDICT: A BRIEF GREATNESS
+  How high: about 7 times the fire of 1865, at its noon in 1950.
+  How long: still burning in 2065, at about two-thirds more than the fire of 1865, with 28 of the 167 squares still in the ground. At that pace the coal lasts until about 2150.
   You let the fire grow slowly for six generations, and fitted both new engines.
-  Your noon came in 1950, above the top of the sheet, at about 7 times the fire of 1865. In 1985 it was about 5 times the fire of 1865, with the pits at about 2,300 feet; at that pace the coal within 4,000 feet would last until about 2060.
-  America passed Britain in 1905. About 12 million people went over the sea for want of work, nearly all of them after your noon.
+  America passed Britain in 1905. About 59 million people went over the sea for want of work, nearly all of them after the noon.
   Jevons (ch. XVIII): In fearlessly following our instincts of rapid growth we may rear a fabric of varied civilization, we may develop talents and virtues, and propagate influences which could not have resulted from slow restricted growth however prolonged.
   Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
   Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.
 
 ==================== Cuts back once, then a stand, fits both
 
-[1865] ruler at x0.50: "Cut back: forbid the sending of coal abroad and restrain the trade, so that the fire in 1885 is half today's. By 1885 the fire would be about half what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x0.50: "Cut back: forbid the sending of coal abroad and restrain the trade, so that by 1885 Britain burns half what it burns now. By 1885 Britain would burn about half what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would never use up the coal."
   BURN 1865-1885: fire 0.50x (plan 0.50x) -> 47 Mt; ground 2% gone; gone 4.4M; America/Britain 1.44
-  You set Britain's fire for 1885 at about half that of 1865. It about halved, as you set it.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1885 at about half that of 1865. The fire halved. That is what you set.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 164 of the 167 squares are left.
   America now burns more coal than Britain.
-  In some years the trade grew slower than the people; about 4 million people went over the sea for want of work.
+  The people grew faster than the work. About 4 million people went over the sea to find it.
   Jevons (preface): Not only must we meet some limit within our own country, but we must witness the coal produce of other countries approximating to our own, and ultimately passing it.
 
-[1885] A NEW ENGINE: Inventors offer an air-engine that does the same work on half the coal. For one horse-power for an hour, the best engines now burn 4 lb of coal; the air-engine burns 2 lb. Whatever Britain does, America fits it at once.
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1885] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1905 than now. By 1905 the fire would be the same as what it is now. These twenty years would take about 2 squares of coal out of the ground."
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2060 | as now: twice as much, coal lasts to about 2010 | faster: more than twice, coal lasts to about 1990
+  set at x1.00: "A stand: hold the fire where it is, so that in 1905 Britain burns the same as now. By 1905 Britain would burn the same as what it burns now. The next twenty years would use about 2 squares of coal. Kept up, this pace would leave coal in the ground for many centuries."
   BURN 1885-1905: fire 1.41x (plan 1.00x) -> 67 Mt; ground 3% gone; gone 4.4M; America/Britain 4.46
-  You set Britain's fire for 1905 at the same as that of 1885 and fitted the new engine. It grew by about half, higher than you set it.
-  Each ton did more work, so power was cheaper, and new works were built on it: ploughs, pumps, mills, ships. More coal was burnt, not less. America fitted it too.
-  About 2 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1905 at the same as that of 1885. You fitted the new engine. The fire grew by about half. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 2 squares of coal came out of the ground; the pits are still shallow. 162 of the 167 squares are left.
   America burns about 4 times as much coal as Britain.
-  Nobody had to leave for want of work.
+  There was work for everyone. Nobody had to go over the sea.
   Jevons (ch. VII): It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.
 
-[1905] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1925 than now. By 1925 the fire would be the same as what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2070 | as now: twice as much, coal lasts to about 2010 | faster: more than twice, coal lasts to about 2000
+  set at x1.00: "A stand: hold the fire where it is, so that in 1925 Britain burns the same as now. By 1925 Britain would burn the same as what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would leave coal in the ground for many centuries."
   BURN 1905-1925: fire 1.00x (plan 1.00x) -> 67 Mt; ground 5% gone; gone 6.1M; America/Britain 11.68
-  You set Britain's fire for 1925 at the same as that of 1905. It stayed about where it was, as you set it.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
+  You set the fire for 1925 at the same as that of 1905. The fire stayed about the same. That is what you set.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 159 of the 167 squares are left.
   America burns about 12 times as much coal as Britain.
-  In some years the trade grew slower than the people; about 2 million people went over the sea for want of work.
+  The people grew faster than the work. About 2 million people went over the sea to find it.
   Jevons (preface): It is easy to set a boulder rolling on the mountain-side; it is perilous to try to stop it.
 
-[1925] THE AIR-ENGINE PERFECTED: The air-engine is perfected: it does the same work on a third less coal than Britain's engines. For one horse-power for an hour, Britain's engines burn 2 lb of coal; the new one burns under 1⅓ lb. Whatever Britain does, America fits it at once.
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third less coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 2 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
   -> FIT IT
 
-[1925] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1945 than now. By 1945 the fire would be the same as what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2090 | as now: twice as much, coal lasts to about 2030 | faster: more than twice, coal lasts to about 2020
+  set at x1.00: "A stand: hold the fire where it is, so that in 1945 Britain burns the same as now. By 1945 Britain would burn the same as what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would leave coal in the ground for many centuries."
   BURN 1925-1945: fire 1.23x (plan 1.00x) -> 82 Mt; ground 6% gone; gone 6.3M; America/Britain 21.55
-  You set Britain's fire for 1945 at the same as that of 1925 and fitted the new engine. It grew by about a fifth, higher than you set it.
-  Each ton did more work, so power was cheaper, and new works were built on it: ploughs, pumps, mills, ships. More coal was burnt, not less. America fitted it too.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
-  America burns far more coal than Britain, many times over.
-  In some years the trade grew slower than the people; about 300 thousand people went over the sea for want of work.
+  You set the fire for 1945 at the same as that of 1925. You fitted the new engine. The fire grew by about a fifth. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 156 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 300 thousand people went over the sea to find it.
   Jevons (ch. VII): No one must suppose that coal thus saved is spared—it is only saved from one use to be employed in others.
 
-[1945] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1965 than now. By 1965 the fire would be the same as what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1945] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2890 | slower: half as much again, coal lasts to about 2090 | as now: twice as much, coal lasts to about 2050 | faster: more than twice, coal lasts to about 2030
+  set at x1.00: "A stand: hold the fire where it is, so that in 1965 Britain burns the same as now. By 1965 Britain would burn the same as what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 2890."
   BURN 1945-1965: fire 0.99x (plan 1.00x) -> 82 Mt; ground 8% gone; gone 9.0M; America/Britain 27.32
-  You set Britain's fire for 1965 at the same as that of 1945. It stayed about where it was, as you set it.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
-  America burns far more coal than Britain, many times over.
-  In some years the trade grew slower than the people; about 3 million people went over the sea for want of work.
+  You set the fire for 1965 at the same as that of 1945. The fire stayed about the same. That is what you set.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 153 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 3 million people went over the sea to find it.
   Jevons (preface): We must either maintain the expansion of our trade and employment, or else witness a sore pressure of population and a great exodus of our people.
 
-[1965] ruler at x1.00: "A stand: hold the fire where it is, no more coal burnt in 1985 than now. By 1985 the fire would be the same as what it is now. These twenty years would take about 3 squares of coal out of the ground."
+[1965] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts for many centuries | slower: half as much again, coal lasts to about 2110 | as now: twice as much, coal lasts to about 2070 | faster: more than twice, coal lasts to about 2050
+  set at x1.00: "A stand: hold the fire where it is, so that in 1985 Britain burns the same as now. By 1985 Britain would burn the same as what it burns now. The next twenty years would use about 3 squares of coal. Kept up, this pace would leave coal in the ground for many centuries. This is the last pace you set: from 1985 the sheet runs on at it."
   BURN 1965-1985: fire 0.99x (plan 1.00x) -> 81 Mt; ground 10% gone; gone 12.3M; America/Britain 29.87
-  You set Britain's fire for 1985 at the same as that of 1965. It stayed about where it was, as you set it.
-  About 3 squares of coal came out of the ground; the pits are still shallow.
-  America burns far more coal than Britain, many times over.
-  In some years the trade grew slower than the people; about 3 million people went over the sea for want of work.
+  You set the fire for 1985 at the same as that of 1965. The fire stayed about the same. That is what you set.
+  About 3 squares of coal came out of the ground; the pits are still shallow. 150 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 3 million people went over the sea to find it.
   Jevons (preface): How long we may exist in a stationary condition I, for one, should never attempt to conjecture.
 
+[1985] You have set six generations. From 1985 the sheet runs on to 2065 at the last pace you set.
+
 VERDICT: A LONGER CONTINUED MEDIOCRITY
+  How high: no higher than 1865. The fire never grew.
+  How long: in 2065 Britain still burns about a quarter less than what it burnt in 1865, and 137 of the 167 squares are still in the ground. At that pace the coal lasts for many centuries.
   You cut the fire back hard, then held it level for five generations, and fitted both new engines.
-  Your noon was 1865 itself: the fire never stood higher than where you found it. In 1985 it was about a quarter smaller than the fire of 1865, with the pits at about 400 feet; at that pace the coal within 4,000 feet would last for centuries.
-  America passed Britain in 1882. About 12 million people went over the sea for want of work, steadily, generation after generation.
+  America passed Britain in 1882. About 35 million people went over the sea for want of work, steadily, generation after generation.
   Jevons (ch. XVIII): Britain may contract to her former littleness, and her people be again distinguished for homely and hardy virtues, for a clear intellect and a regard for law, rather than for brilliancy and power.
+  Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
+  Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.
+
+==================== As now three times, then cuts back, fits both
+
+[1865] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2750 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1885 Britain would burn about twice what it burns now. The next twenty years would use about 5 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1970."
+  BURN 1865-1885: fire 1.99x (plan 2.00x) -> 189 Mt; ground 3% gone; gone 0.0M; America/Britain 0.36
+  You set the fire for 1885 at about twice that of 1865. The fire doubled. That is what you set.
+  About 5 squares of coal came out of the ground; the pits are still shallow. 162 of the 167 squares are left.
+  America burns about a third as much coal as Britain.
+  There was work for everyone. Nobody had to go over the sea.
+  Jevons (ch. XVIII): Our new industry and civilization had an obscure and unregarded commencement; it is great already, and will be far greater yet before it is less.
+
+[1885] A NEW ENGINE: Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn 4 pounds of coal. The air-engine burns 2 pounds. Whatever Britain does, America fits the new engine at once.
+  -> FIT IT
+
+[1885] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2310 | slower: half as much again, coal lasts to about 2000 | as now: twice as much, coal lasts to about 1970 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1905 Britain would burn about twice what it burns now. The next twenty years would use about 11 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1970."
+  BURN 1885-1905: fire 2.74x (plan 2.00x) -> 520 Mt; ground 11% gone; gone 0.0M; America/Britain 0.57
+  You set the fire for 1905 at about twice that of 1885. You fitted the new engine. The fire grew about two and a half times bigger. That is higher than your dotted line.
+  Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.
+  About 13 squares of coal came out of the ground; the pits are still shallow. 149 of the 167 squares are left.
+  America burns about half as much coal as Britain.
+  There was work for everyone. Nobody had to go over the sea.
+  Jevons (ch. VII): It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.
+
+[1905] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2050 | slower: half as much again, coal lasts to about 1970 | as now: twice as much, coal lasts to about 1960 | faster: more than twice, coal lasts to about 1950
+  set at x2.00: "As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation. By 1925 Britain would burn about twice what it burns now. The next twenty years would use about 29 squares of coal. Kept up, this pace would use the last of the coal within 4,000 feet by about 1960."
+  BURN 1905-1925: fire 1.62x (plan 2.00x) -> 844 Mt; ground 27% gone; gone 0.0M; America/Britain 0.92
+  You set the fire for 1925 at about twice that of 1905. The fire grew by about two-thirds. That is short of your dotted line.
+  Why short? Coal from 1,100 feet is a little dearer than in 1865. Works moved to America, where coal is cheap.
+  About 27 squares of coal came out of the ground; the pits now dig at about 1,100 feet. 122 of the 167 squares are left.
+  America burns nearly as much coal as Britain.
+  There was work for everyone. Nobody had to go over the sea.
+  Jevons (preface): It is simply that we cannot long progress as we are now doing.
+
+[1925] THE AIR-ENGINE PERFECTED: The air-engine has been perfected. It does the same work on a third less coal that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn 2 pounds of coal. The new one burns under 1⅓ pounds. Whatever Britain does, America fits the new engine at once.
+  -> FIT IT
+
+[1925] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2000 | slower: half as much again, coal lasts to about 1970 | as now: twice as much, coal lasts to about 1960 | faster: more than twice, coal lasts to about 1960
+  set at x0.50: "Cut back: forbid the sending of coal abroad and restrain the trade, so that by 1945 Britain burns half what it burns now. By 1945 Britain would burn about half what it burns now. The next twenty years would use about 25 squares of coal. Kept up, this pace would never use up the coal."
+  BURN 1925-1945: fire 0.42x (plan 0.50x) -> 357 Mt; ground 41% gone; gone 10.3M; America/Britain 4.97
+  You set the fire for 1945 at about half that of 1925. You fitted the new engine. The fire fell to less than half. That is short of your dotted line.
+  Why short? Coal from 1,600 feet is about half as dear again as in 1865. Works moved to America, where coal is cheap.
+  About 23 squares of coal came out of the ground; the pits now dig at about 1,600 feet. 99 of the 167 squares are left.
+  America now burns more coal than Britain.
+  The people grew faster than the work. About 10 million people went over the sea to find it.
+  Jevons (ch. VII): No one must suppose that coal thus saved is spared—it is only saved from one use to be employed in others.
+
+[1945] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2080 | slower: half as much again, coal lasts to about 2010 | as now: twice as much, coal lasts to about 2000 | faster: more than twice, coal lasts to about 1990
+  set at x0.50: "Cut back: forbid the sending of coal abroad and restrain the trade, so that by 1965 Britain burns half what it burns now. By 1965 Britain would burn about half what it burns now. The next twenty years would use about 10 squares of coal. Kept up, this pace would never use up the coal."
+  BURN 1945-1965: fire 0.40x (plan 0.50x) -> 142 Mt; ground 47% gone; gone 22.0M; America/Britain 15.69
+  You set the fire for 1965 at about half that of 1945. The fire fell to less than half. That is short of your dotted line.
+  Why short? Coal from 1,900 feet is about half as dear again as in 1865. Works moved to America, where coal is cheap.
+  About 9 squares of coal came out of the ground; the pits now dig at about 1,900 feet. 89 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 12 million people went over the sea to find it.
+  Jevons (preface): It is easy to set a boulder rolling on the mountain-side; it is perilous to try to stop it.
+
+[1965] ruler reads: cut back: half as much, coal lasts never | a stand: the same, coal lasts to about 2280 | slower: half as much again, coal lasts to about 2060 | as now: twice as much, coal lasts to about 2040 | faster: more than twice, coal lasts to about 2030
+  set at x0.50: "Cut back: forbid the sending of coal abroad and restrain the trade, so that by 1985 Britain burns half what it burns now. By 1985 Britain would burn about half what it burns now. The next twenty years would use about 4 squares of coal. Kept up, this pace would never use up the coal. This is the last pace you set: from 1985 the sheet runs on at it."
+  BURN 1965-1985: fire 0.45x (plan 0.50x) -> 64 Mt; ground 49% gone; gone 33.4M; America/Britain 37.90
+  You set the fire for 1985 at about half that of 1965. The fire fell to less than half. That is short of your dotted line.
+  Why short? Coal from 2,000 feet is about half as dear again as in 1865. Works moved to America, where coal is cheap.
+  About 4 squares of coal came out of the ground; the pits now dig at about 2,000 feet. 85 of the 167 squares are left.
+  America burns many times more coal than Britain.
+  The people grew faster than the work. About 11 million people went over the sea to find it.
+  Jevons (preface): We must either maintain the expansion of our trade and employment, or else witness a sore pressure of population and a great exodus of our people.
+
+[1985] You have set six generations. From 1985 the sheet runs on to 2065 at the last pace you set.
+
+VERDICT: A BRIEF GREATNESS
+  How high: about 9 times the fire of 1865, at its noon in 1925.
+  How long: until about 1970. After that the fire burnt less than in 1865. By 2065 only 82 of the 167 squares were left.
+  You let the fire double for three generations, then cut it back hard for three generations, and fitted both new engines.
+  America passed Britain in 1926. About 87 million people went over the sea for want of work, nearly all of them after the noon.
+  Jevons (ch. XVIII): In fearlessly following our instincts of rapid growth we may rear a fabric of varied civilization, we may develop talents and virtues, and propagate influences which could not have resulted from slow restricted growth however prolonged.
   Jevons (ch. XVIII): We have to make the momentous choice between brief greatness and longer continued mediocrity.
   Jevons (preface): We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.

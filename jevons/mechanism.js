@@ -9,7 +9,9 @@ const CONFIG = {
   // ---- the clock -------------------------------------------------------------------------------------------
   START_YEAR: 1865,           // preface: the 1865 return is the last Jevons quotes
   GEN_YEARS: 20,              // our choice: one turn is a generation of twenty years
-  MAX_GENS: 6,                // our choice: six generations, 1865 to 1985 (a little more than Jevons's own century)
+  MAX_GENS: 6,                // our choice: the player sets six generations, 1865 to 1985 (a little more than Jevons's
+                              //   own century); the sheet then runs on at the last pace set, to RUN_TO
+  RUN_TO: 2065,               // our choice: the sheet is drawn to 2065, so that a fire that runs out is seen to run out
 
   // ---- Britain's fire --------------------------------------------------------------------------------------
   C0: 95,                     // preface: Hunt's report puts the 1865 production at "about ninety-five millions of tons"
@@ -89,11 +91,13 @@ const CONFIG = {
                               //   it cannot employ go over the sea; the rest stay and "sink down into poverty" (ch. I)
 
   // ---- the sheet (drawing only; the mechanism reports in tons and years) ----------------------------------------
-  SHEET_X0: 1850, SHEET_X1: 2060, // 21 columns of ten years
+  SHEET_X0: 1850, SHEET_X1: 2070, // 22 columns of ten years
   ROW_TONS: 50,               // one row: 50 million tons a year; one square = 10 years x 50 = 500 million tons
-  ROWS_ABOVE: 12,             // the sheet's top: 600 million tons a year (Jevons's own curve leaves it about 1920)
-  GROUND_ROWS: 8,             // eight bands of 500 feet down to 4,000 feet; 8 x 21 = 168 squares, each 497 million tons
-  PEOPLE_PER_SQUARE: 2,       // millions of people gone over the sea per square of the hatched bar
+  ROWS_ABOVE: 12,             // the sheet's height at the start: 600 million tons a year (Jevons's own curve leaves it
+                              //   about 1920); the page adds paper above when a fire climbs higher
+  GROUND_ROWS: 8,             // eight layers of 500 feet down to 4,000 feet; 8 x 22 = 176 cells, of which 167 hold a
+                              //   square of coal (83,544 / 500); the last nine cells of the bottom layer are empty rock
+  PEOPLE_PER_SQUARE: 4,       // millions of people gone over the sea per square of the hatched bar
 
   // ---- the verdict (words only; see verdict()) ---------------------------------------------------------------
   GREAT_PEAK: 5,              // our choice: a noon at five times the fire of 1865 or more is named a greatness
@@ -110,7 +114,18 @@ function priceOf(S) {
 function paceFromMult(mult) { return Math.pow(mult, 1 / CONFIG.GEN_YEARS) - 1; }
 function multFromPace(pace) { return Math.pow(1 + pace, CONFIG.GEN_YEARS); }
 function clampPace(p) { return Math.min(CONFIG.PACE_MAX, Math.max(CONFIG.PACE_MIN, p)); }
-function squareTons() { return CONFIG.RESERVE / (CONFIG.GROUND_ROWS * ((CONFIG.SHEET_X1 - CONFIG.SHEET_X0) / 10)); }
+function squareTons() { return CONFIG.ROW_TONS * 10; }
+function groundSquares() { return Math.round(CONFIG.RESERVE / squareTons()); }
+// Kept up from now, when would this pace use the last of the coal within 4,000 feet? A year, or Infinity if never
+// (a falling fire burns a finite amount for ever). This is Jevons's own "at same rate of progress" projection; it
+// ignores dear coal and engines, which is what the burn then shows.
+function lastsUntil(st, pace) {
+  pace = clampPace(pace);
+  let C = st.C, S = st.S, y = st.year;
+  if (pace <= 0 && C / Math.max(1e-9, -pace) < CONFIG.RESERVE - S) return Infinity;
+  while (S < CONFIG.RESERVE && y < 5000) { S += C; C *= 1 + pace; y += 1; }
+  return y >= 5000 ? Infinity : y;
+}
 function penaltyOf(lbB, lbA) { return Math.pow(lbB / lbA, CONFIG.REFUSE_EXP); }
 
 // What power costs in Britain against America: the price of British coal, and any engine America has that Britain
@@ -129,13 +144,14 @@ function newGame() {
     year: CONFIG.START_YEAR, gen: 0, C: CONFIG.C0, Chat: CONFIG.C0, S: 0, A: CONFIG.AMERICA0,
     pop: CONFIG.POP0, gone: 0, lbB: CONFIG.LB_1865, lbA: CONFIG.LB_1865, penalty: 1, pending: null,
     history: [{ year: CONFIG.START_YEAR, C: CONFIG.C0, A: CONFIG.AMERICA0, S: 0, gone: 0 }],
-    gens: [], engines: {}, evening: false, eveningYear: null, ended: false, lastPace: null, americaPassed: null,
+    gens: [], engines: {}, evening: false, eveningYear: null, ended: false, playerDone: false, lastPace: null,
+    americaPassed: null,
   };
 }
 
 // The engine offered at the start of this generation, if any and not yet decided, with Britain's engine beside it.
 function engineOffer(st) {
-  if (st.ended || st.evening) return null;
+  if (st.ended || st.evening || st.playerDone) return null;
   const e = CONFIG.ENGINES.find(e => e.year === st.year);
   if (!e || st.engines[e.key]) return null;
   return { key: e.key, year: e.year, lbNew: e.lbNew, lbBritain: st.lbB, lbAmerica: st.lbA, gain: st.lbB / e.lbNew };
@@ -162,7 +178,12 @@ function previewPlan(st, pace) {
   pace = clampPace(pace);
   let C = st.C, S = st.S; const pts = [{ year: st.year, C }];
   for (let i = 0; i < CONFIG.GEN_YEARS; i++) { S += C; C *= 1 + pace; pts.push({ year: st.year + i + 1, C }); }
-  return { pace, mult: C / st.C, target: C, burnt: S - st.S, squares: (S - st.S) / squareTons(), points: pts };
+  const target = C, burnt = S - st.S;
+  // the same pace kept up to the edge of the sheet (drawn dotted beyond the generation, as Jevons drew his)
+  const beyond = [{ year: st.year + CONFIG.GEN_YEARS, C }];
+  for (let y = st.year + CONFIG.GEN_YEARS; y < CONFIG.SHEET_X1 && S < CONFIG.RESERVE; y++) { S += C; C *= 1 + pace; beyond.push({ year: y + 1, C }); }
+  return { pace, mult: target / st.C, target, burnt, squares: burnt / squareTons(), points: pts, beyond,
+    lastsUntil: lastsUntil(st, pace) };
 }
 
 // Has the evening come? Even at the hardest push, with any engine just decided, the fire could not grow.
@@ -214,19 +235,22 @@ function burnGeneration(st, pace) {
   st.pending = null;
   if (!st.autoRun) st.lastPace = pace;
   st.gen += 1;
-  if (st.gen >= CONFIG.MAX_GENS) st.ended = true;
+  if (st.gen >= CONFIG.MAX_GENS) st.playerDone = true;
+  if (st.year >= CONFIG.RUN_TO) st.ended = true;
   return rec;
 }
 
 // Between generations: if the evening has come (and no engine is waiting to be offered), it is declared, and the
-// rest of the sheet to 1985 is drawn at the last pace the player set (runOut).
+// rest of the sheet is drawn at the last pace the player set (runOut). The player's turns are over when the evening
+// comes or MAX_GENS have been set; either way the sheet runs on to RUN_TO.
 function checkEvening(st) {
-  if (st.ended || st.evening) return false;
+  if (st.ended || st.evening || st.playerDone) return false;
   if (engineOffer(st)) return false;
   if (!eveningNow(st)) return false;
   st.evening = true; st.eveningYear = st.year;
   return true;
 }
+function playerTurnsOver(st) { return st.ended || st.evening || st.playerDone; }
 function runOut(st) {
   const recs = [];
   st.autoRun = true;
@@ -245,6 +269,11 @@ function verdict(st) {
   const kind = peakMult >= CONFIG.GREAT_PEAK ? 'greatness' : peakMult <= CONFIG.MEDIOCRE_PEAK ? 'mediocrity' : 'between';
   const left = Math.max(0, CONFIG.RESERVE - st.S);
   const yearsLeft = last.C > 0 ? left / last.C : Infinity;
+  // the length of the fire: the last year it still burnt as much as in 1865 (null if it never fell below that for
+  // good, which on the sheet means it was still burning at least as much in the last year)
+  let outYear = null;
+  for (let i = h.length - 1; i >= 0; i--) if (h[i].C >= CONFIG.C0) { outYear = i === h.length - 1 ? null : h[i].year; break; }
+  const neverAbove = h.every(p => p.C < CONFIG.C0 * 0.999) ? true : false;
   // when did most of the people go? the year by which half of them had gone
   let halfYear = null;
   for (const p of h) if (halfYear === null && st.gone > 0 && p.gone >= st.gone / 2) halfYear = p.year;
@@ -257,7 +286,8 @@ function verdict(st) {
     americaPassed: st.americaPassed, gone: st.gone, goneBeforeNoon: peak.gone, goneAfterNoon: st.gone - peak.gone,
     goneHalfYear: halfYear, shareBurnt: shareBurnt(st.S), depth: depthOf(st.S), price: priceOf(st.S),
     relCost: relCost(st), yearsLeft, untilYear: last.year + yearsLeft, engines: Object.assign({}, st.engines),
-    popHome: st.pop,
+    popHome: st.pop, outYear, neverAbove, squaresBurnt: st.S / squareTons(), squaresAll: groundSquares(),
+    fireOut: last.C < 0.1 * CONFIG.C0,
   };
 }
 
@@ -291,7 +321,7 @@ const REAL = [
   [2020, 1.8], [2021, 1.2], [2022, 0.7], [2023, 0.6], [2024, 0.1],
 ];
 
-const MECH = { CONFIG, newGame, engineOffer, decideEngine, previewPlan, burnGeneration, checkEvening, runOut, verdict,
-  depthOf, priceOf, shareBurnt, fireOf, paceFromMult, multFromPace, clampPace, squareTons, dragOf, relCost, eveningNow,
-  REAL };
+const MECH = { CONFIG, newGame, engineOffer, decideEngine, previewPlan, burnGeneration, checkEvening, playerTurnsOver,
+  runOut, verdict, depthOf, priceOf, shareBurnt, fireOf, paceFromMult, multFromPace, clampPace, squareTons,
+  groundSquares, lastsUntil, dragOf, relCost, eveningNow, REAL };
 if (typeof module !== 'undefined' && module.exports) module.exports = MECH;
