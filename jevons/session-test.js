@@ -51,9 +51,16 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
       await page.click('#helpback'); await page.waitForTimeout(250);
       say(`  How to play opened after a burn and closed: back on ${await page.evaluate(() => document.querySelector('.screen.on').id)}, scroll ${y} -> ${await page.evaluate(() => window.scrollY)}, Next button present: ${!!(await page.$('#next'))}`);
     }
-    const last = (await text('#next')).toLowerCase().includes('read the sheet');
-    if (!last) { await page.click('#next'); await page.waitForTimeout(500); }
-    return last ? 'end' : 'next';
+    const runon = (await text('#next')).toLowerCase().includes('run on');
+    await page.click('#next'); await page.waitForTimeout(500);
+    if (runon) {
+      say(`  RUN ON: ${await text('#panel .res')}`);
+      if (opts.shotRunOn) await shot(opts.shotRunOn, true);
+      await page.click('#runout'); await waitFor('#next'); await page.waitForTimeout(300);
+      if (opts.shotRunOn) await shot(opts.shotRunOn + '-drawn', true);
+      return 'end';
+    }
+    return 'next';
   }
   async function evening(shotName) {
     say(`  EVENING: ${await text('#panel .res')} || ${(await page.$('#panel .quote')) ? await text('#panel .quote') : ''}`);
@@ -78,7 +85,7 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
   await generation('now', { shotResult: 'a-1905-result' });
   let r = await generation('stand', { fit: false, shotEngine: 'a-1925-engine', shotResult: 'a-1925-refused' });
   if (r === 'evening') { await evening('a-evening'); }
-  else { await generation('stand', {}); r = await generation('stand', { shotResult: 'a-1965-result' }); }
+  else { await generation('stand', {}); r = await generation('stand', { shotResult: 'a-1965-result', shotRunOn: 'a-runon' }); }
   await verdict('a-end');
   await page.click('#toabout'); await page.waitForTimeout(250); await shot('about', true); await page.click('#aboutback'); await page.waitForTimeout(200);
   await page.click('#tolast'); await page.waitForTimeout(3500); await shot('a-last-drawing'); await page.waitForTimeout(6500); await shot('a-last', true);
@@ -98,7 +105,7 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
   say('SHEET C: a stand every generation, both engines refused');
   await page.click('#again'); await page.waitForTimeout(300);
   for (let i = 0; i < 6; i++) {
-    const res = await generation('stand', { fit: false, shotResult: i === 2 ? 'c-1905-result' : null });
+    const res = await generation('stand', { fit: false, shotResult: i === 2 ? 'c-1905-result' : null, shotRunOn: i === 5 ? 'c-runon' : null });
     if (res === 'evening') { await evening(); break; }
     if (res === 'end') break;
   }
