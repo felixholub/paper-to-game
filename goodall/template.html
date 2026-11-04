@@ -77,6 +77,7 @@ svg.pic{display:block;width:100%;height:auto;touch-action:none;user-select:none;
 /* results */
 .result{margin:6px 0 0;min-height:60px}
 .typed{font-size:15px;line-height:1.38;margin:0}
+.now{font-weight:700;font-size:14px;line-height:1.35;margin:0 0 6px;padding:5px 8px;border-left:3px solid var(--g)}.now:empty{display:none}
 .red{font-family:var(--hand);color:var(--red);font-size:17px;line-height:1.2;margin:4px 0 0;min-height:20px}
 .ruler{margin:6px 0 0}
 .redkey{font-size:12px;color:var(--g2);margin:2px 0 0}
@@ -126,8 +127,9 @@ footer.sig a{color:var(--g2);text-decoration:none}
   <p class="cap"><b>FIG. 1.</b> Old female fishing for termites, seen through binoculars. (Pencil, from the field.)</p>
   <h1>Goodall's<br>Long Grass</h1>
   <p class="small">Gombe Stream, Tanzania. The termite season.</p>
-  <p>Pick a stem in the long grass.<br>Push it down a termite hole.<br>Draw it out without shaking them off.</p>
+  <p>Pick a stem of grass.<br>Push it down a termite hole.<br>Pull it out with the termites still on it.</p>
   <p class="aim" id="aim0">You are a young chimpanzee. Fish termites out of the mound with a stem of grass, before your mother moves on.</p>
+  <p class="small">A game you play with one finger. It is made from a scientific paper by Jane Goodall, who sat in the long grass at Gombe and watched little chimpanzees learn to do this.</p>
   <button class="slip dark" id="begin">Into the long grass →</button>
   <div class="row"><button class="slip" data-help>How to play</button><button class="slip" data-about>About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
@@ -147,6 +149,7 @@ footer.sig a{color:var(--g2);text-decoration:none}
     <div class="row"><button class="slip sm" id="chew">Chew the end</button><button class="slip sm" id="leaves">Pick some leaves</button></div>
   </div>
   <div class="result" id="result">
+    <p class="now" id="now"></p>
     <p class="typed" id="typed"></p>
     <p class="red" id="red"></p>
   </div>
@@ -176,7 +179,8 @@ footer.sig a{color:var(--g2);text-decoration:none}
   <h3>What it means</h3>
   <p id="means"></p>
   <button class="slip dark" id="again">Another afternoon →</button>
-  <button class="slip" id="same">The same long grass again</button>
+  <p class="small" id="nextnote"></p>
+  <button class="slip" id="same">This afternoon again</button>
   <div class="row"><button class="slip" data-help>How to play</button><button class="slip" data-about>About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
@@ -184,18 +188,23 @@ footer.sig a{color:var(--g2);text-decoration:none}
 <!-- ===================== HOW TO PLAY ===================== -->
 <section class="screen" id="help">
   <div class="top"><span class="label">How to play</span></div>
-  <p class="aim">Fish termites out of the mound with a stem of grass, before your mother moves on.</p>
-  <h3>The drawing</h3>
-  <p>One pencil drawing holds the whole afternoon: the long grass on the left with five stems standing in it, the termite mound cut open in the middle, and your mother fishing at her own hole on the right. You can watch her whenever you like; it costs nothing.</p>
-  <h3>Stems</h3>
-  <p><b>Touch a stem in the grass to take it.</b> It comes into your hand, drawn as itself: a grass blade is wide and floppy, a grass stem thin and stiff with a seed head, a twig has leaves, a stick is thick. The line under the drawing tells you how long, how thick and how stiff it is. Whatever was in your hand before goes on the heap at the foot of the mound. The grass grows back, so you can always take another.</p>
+  <p class="aim">You are a young chimpanzee. Fish termites out of the mound with a stem of grass, before your mother moves on.</p>
+  <h3>The picture</h3>
+  <p>The big drawing is the whole afternoon. On the left is the long grass, with five stems standing in it. In the middle is the termite mound, cut open so you can see inside: the hole at the top, the tunnel going down, and the termites waiting at the bottom. On the right, your mother is fishing at her own hole. Watch her as much as you like.</p>
+  <h3>Picking a stem</h3>
+  <p><b>Touch a stem in the grass, and it is in your hand.</b> Each stem is different. A grass blade is wide and floppy. A grass stem is thin and stiff, with a seed head on top. A twig has leaves on it. A stick is thick. The line under the picture tells you about the stem you are holding. If you pick a new stem, the old one is dropped on the heap by the mound, and the grass grows back, so you can always try another.</p>
   <h3>Fishing</h3>
-  <p><b>Press on the mound</b> and your stem goes into the hole by itself, as far as it will go, and waits there. Termites bite on to whatever comes into their passage, and they need a moment. <b>Slide your finger up</b> to draw the stem out: it comes out at the speed of your finger, and if that is faster than the termites can hold on, they fall off. If you lift your finger instead, the stem stays in the hole until you press and slide again. Whatever is on the stem when it comes out, you eat; there is no button for it. The stem goes in until something stops it: too thick for the hole, leaves catching on the rim, a floppy stem folding at a bend, or its own length. When that happens a pencil note on the drawing says what stopped it, and where. If a stem is in the hole and you touch another in the grass, the game draws the first one out for you, slowly, and gives you the other.</p>
-  <p>Each dip takes one sun from the afternoon; when the six suns are gone, your mother moves off. A stem's end bends after a few dips: a note by your hand says <b>touch to bite it off</b>, and biting makes it an inch shorter and straight again. A leafy twig has a note that says <b>touch to strip them</b>. When your mother throws a bent stem down, it lies by her hole: touch it to take it.</p>
-  <p>After each dip the game says what happened (how far in, whether there was a pause, how fast it came out, how many termites). Then, in red, a note from Jane Goodall: which age of young chimpanzee fishes the way you just did, and a tick on her ruler of ages.</p>
+  <p><b>Press on the mound and keep your finger down.</b> Your stem goes into the hole by itself, as far as it can. Then it waits. The termites bite on to it, and you can watch them climb on. <b>Let go, and the stem comes out.</b> Whatever is on it, you eat.</p>
+  <p>Two things to know. If you let go too soon, you yank the stem out, and the termites fall off. If you wait a little, you pull it out gently, and they stay on. And some stems do not work: a stick is too thick for the hole, a floppy blade folds up, a twig with leaves on gets stuck at the top. When that happens, a little note on the picture tells you what went wrong.</p>
+  <p>Every go costs one sun. When the suns are gone, the afternoon is over. If your stem gets a bent end, a note by your hand says <b>touch to bite it off</b>. If your twig has leaves, a note says <b>touch to strip them</b>. If your mother throws her stem away, it lies between the holes, and you can touch it to take it.</p>
+  <p>After every go, the game tells you what happened. Then Jane Goodall's notes, in red, tell you which little chimpanzees fished the way you just did: the two-year-olds, the three-year-olds, the four-year-olds, or the grown-ups. The red ruler keeps count.</p>
+  <h3>Afternoons</h3>
+  <p>Every afternoon is different. The mound is a different shape inside. The grass has different stems in it. Sometimes your mother has gone ahead, and you are on your own. And on the way home there is either water or ants.</p>
   <div id="helphollow" class="hidden">
-    <h3>The hollow</h3>
-    <p>Rainwater in a hollow of a tree, too deep for your lips. Press on the tree and what you hold goes in; let go and it comes out; whatever comes up wet, you suck. Touch <b>your hand</b>, <b>the stem</b> or <b>the leaves</b> to hold one of them. <b>Chew the end</b> crumples a grass end; <b>Pick some leaves</b> gives you a handful from the branch, which you can chew too. Five suns; the tube at the right fills with sips until you have drunk your fill.</p>
+  <h3>The hollow tree</h3>
+  <p>There is rainwater in a hollow tree, but your lips cannot reach it. Choose what to use: your hand, your stem, or some leaves from the branch. <b>Press on the tree, and let go.</b> Whatever comes up wet, you suck. <b>Chew the end</b> of a grass stem and it holds more water. <b>Pick some leaves</b> and chew them, and they hold a lot.</p>
+  <h3>The ants' nest</h3>
+  <p>Driver ants are good to eat, but they bite. <b>Press on the nest and keep your finger down.</b> Your stick goes in, and the ants run up it. <b>Let go before they reach your fingers</b>, and you eat the ants off the stick. Wait too long, and they bite you. A long stick gives you more time.</p>
   </div>
   <button class="slip dark" id="helpback">Back</button>
 </section>
@@ -321,18 +330,19 @@ function vultureArt() {
 const K = 21;                         // pixels per inch in the passage
 const HOLE = { x: 216, y: 90 };       // your hole
 const HER = { x: 282, y: 72 };        // your mother's hole
-const SEGS = [ // your passage's centreline, in inches along it
+const SEGS = () => [ // your passage's centreline, in inches along it (read live: the mound differs from afternoon to afternoon)
   { s0: 0, s1: P.bend1, dx: 0, dy: 1 },
   { s0: P.bend1, s1: P.bend2, dx: -0.68, dy: 0.73 },
   { s0: P.bend2, s1: P.end + 0.6, dx: 0.36, dy: 0.93 },
 ];
-const HSEGS = [ { s0: 0, s1: 1.5, dx: 0, dy: 1 }, { s0: 1.5, s1: P.end + 0.6, dx: 0.2, dy: 0.98 } ];
+const HSEGS = () => [ { s0: 0, s1: 1.5, dx: 0, dy: 1 }, { s0: 1.5, s1: P.end + 0.6, dx: 0.2, dy: 0.98 } ];
+const NEST = { x: 236, y: 118 };   // the driver ants' nest: its mouth
 function alongFrom(o, segs, s) {
   let x = o.x, y = o.y;
   for (const sg of segs) { const a = Math.max(0, Math.min(s, sg.s1) - sg.s0); x += sg.dx * a * K; y += sg.dy * a * K; if (s <= sg.s1) return { x, y, dx: sg.dx, dy: sg.dy }; }
   const L = segs[segs.length - 1]; return { x, y, dx: L.dx, dy: L.dy };
 }
-const along = s => alongFrom(HOLE, SEGS, s), alongHer = s => alongFrom(HER, HSEGS, s);
+const along = s => alongFrom(HOLE, SEGS(), s), alongHer = s => alongFrom(HER, HSEGS(), s);
 function tunnel(o, segs) { // the passage cut open: paper inside, two pencil walls, a chamber at the bottom
   const pts = []; for (let s2 = 0; s2 <= P.end + 0.6; s2 += 0.25) pts.push(alongFrom(o, segs, s2));
   const w = 6, left = pts.map(p => [p.x - p.dy * w, p.y + p.dx * w]), right = pts.map(p => [p.x + p.dy * w, p.y - p.dx * w]);
@@ -352,7 +362,7 @@ function moundStatic() {
   let s = grassStrokes(41, 70, 0, 135, 160, 12, 60, G3, 0.75);
   s += hatch(earth, [0, 50, 348, 285], { angle: 35, n: 1500, len: 7, op: 0.3, w: 0.7, seed: 42, color: G2 });
   s += hatch(earth, [0, 50, 348, 285], { angle: 140, n: 520, len: 5, op: 0.2, w: 0.6, seed: 43, color: G2 });
-  s += tunnel(HOLE, SEGS) + tunnel(HER, HSEGS);
+  s += tunnel(HOLE, SEGS()) + tunnel(HER, HSEGS());
   s += `<path d="${moundTop}" fill="none" stroke="${G}" stroke-width="1.3"/>`;
   for (let i = 1; i <= P.end; i++) { const p = along(i); const nx = p.dy, ny = -p.dx; // inches, on the right of your passage
     s += `<line x1="${fx(p.x + nx * 7)}" y1="${fx(p.y + ny * 7)}" x2="${fx(p.x + nx * 11)}" y2="${fx(p.y + ny * 11)}" stroke="${G}" stroke-width="1"/>`;
@@ -363,7 +373,7 @@ function moundLabels() {
   const c = along(7.2);
   return `<g font-family="Courier Prime,monospace" font-size="10" fill="${G2}">
     <text x="${HOLE.x + 11}" y="${HOLE.y + 15}">the hole</text>
-    <text x="${HER.x + 16}" y="${HER.y + 58}">her hole</text>
+    <text x="${HER.x + 16}" y="${HER.y + 58}">her hole</text>${g.mother.away ? `<text x="340" y="${HER.y + 72}" text-anchor="end">(she has gone ahead today)</text>` : ''}
     <text x="${fx(c.x - 18)}" y="${fx(c.y - 2)}" text-anchor="end">termites</text><text x="${fx(c.x - 18)}" y="${fx(c.y + 10)}" text-anchor="end">down here</text>
     <text x="${GRASS.x0 - 8}" y="${GRASS.base + 15}">the long grass</text></g>`;
 }
@@ -480,8 +490,9 @@ function heldStem(view, who) { // who: 'you' | 'her'. view: { stem, d, excess, o
     s += st.chewed ? `<path d="M ${HOLLOW.x - 5} ${fx(tipY)} q 4 -6 9 -1 q -2 6 -8 4 q -3 -4 2 -6 q 4 1 3 5" fill="${G2}" stroke="${G}" stroke-width="1.2"/>`
       : `<path d="M ${HOLLOW.x} ${fx(tipY)} q -10 -2 -12 -12 q 8 2 12 12 q 2 -10 10 -14 q 0 10 -10 14 q -4 -10 0 -18 q 4 8 0 18" fill="${PAPER}" stroke="${G}" stroke-width="0.9"/>`;
     return s; }
-  const top = hollow ? HOLLOW : who === 'her' ? HER : HOLE;
-  const al = hollow ? (x => ({ x: HOLLOW.x, y: HOLLOW.y + x * K, dx: 0, dy: 1 })) : who === 'her' ? alongHer : along;
+  const ants = view.place === 'ants';
+  const top = hollow ? HOLLOW : ants ? NEST : who === 'her' ? HER : HOLE;
+  const al = hollow ? (x => ({ x: HOLLOW.x, y: HOLLOW.y + x * K, dx: 0, dy: 1 })) : ants ? (x => ({ x: NEST.x, y: NEST.y + x * K, dx: 0, dy: 1 })) : who === 'her' ? alongHer : along;
   const dir = hollow ? { x: -0.62, y: -0.785 } : who === 'her' ? HERDIR : YOURDIR;
   // outside: foreshortened so the hand stays on the page, and moves as the stem goes in
   const full = Math.max(0.3, st.len - C.GRIP) * K, f = Math.min(1, (who === 'her' ? 52 : hollow ? 70 : 186) / full);
@@ -501,7 +512,13 @@ function heldStem(view, who) { // who: 'you' | 'her'. view: { stem, d, excess, o
   if (hollow && view.wetLen > 0) { const a = al(Math.max(0, view.d - view.wetLen)), b = al(view.d); s += `<path d="M ${fx(a.x)} ${fx(a.y)} L ${fx(b.x)} ${fx(b.y)}" stroke="${G}" stroke-width="${SW(st) + 2.2}" stroke-linecap="round" opacity="0.8"/>`; }
   // termites on the stem, measured from the tip
   const L = polyLen(pts);
-  for (const off of view.on || []) { const q = pointAt(pts, Math.max(0, L - off * K)); s += termiteGlyph(q.x + q.dy * 2.6, q.y - q.dx * 2.6, Math.atan2(q.dy, q.dx) + 0.5); }
+  if (!ants) for (const off of view.on || []) { const q = pointAt(pts, Math.max(0, L - off * K)); s += termiteGlyph(q.x + q.dy * 2.6, q.y - q.dx * 2.6, Math.atan2(q.dy, q.dx) + 0.5); }
+  // ants running up the stick from the nest's mouth towards the fingers (the drawn outside part is foreshortened, so the front is placed by its share of it)
+  if (ants && view.antsOn > 0) { const out = polyLen(outside), inside = L - out, outsideIn = Math.max(0.5, st.len - C.GRIP - view.d);
+    const frontPx = out * Math.min(1, view.front / outsideIn); const n = Math.min(60, Math.round(view.antsOn)); const rr = srand(st.id * 3 + n);
+    for (let i = 0; i < n; i++) { const q = pointAt(pts, Math.max(0, Math.min(L, inside - (i / Math.max(1, n)) * frontPx - rr() * 8)));
+      const side = i % 2 ? 1 : -1; s += antGlyph(q.x + q.dy * 2.4 * side, q.y - q.dx * 2.4 * side, Math.atan2(-q.dy, -q.dx) + (rr() - 0.5) * 0.6, 0.85); }
+    if (view.bitten) s += `<text x="${fx(hx)}" y="${fx(hy - 14)}" font-family="Kalam,cursive" font-size="16" fill="${RED}" text-anchor="middle">ow!</text>`; }
   // the hand, pinching the top
   const ang = Math.atan2(-dir.y, -dir.x) * 180 / Math.PI;
   s += who === 'her' ? `<g transform="translate(${fx(hx)} ${fx(hy)}) rotate(${fx(Math.atan2(-dir.y, dir.x) * 180 / Math.PI)}) scale(-0.85 0.85)"><use href="#handart"/></g>`
@@ -512,7 +529,7 @@ function heldStem(view, who) { // who: 'you' | 'her'. view: { stem, d, excess, o
 // ---------- the play screen
 let play = { mode: 'mound', anim: null, drag: null, target: 0, view: null, busy: false, falling: '', note: '', her: null, dipsHere: 0 };
 function suns() {
-  const n = play.mode === 'mound' ? C.SUNS : C.HOLLOW.suns, left = play.mode === 'mound' ? g.suns : g.hollow.suns;
+  const n = play.mode === 'mound' ? C.SUNS : play.mode === 'ants' ? C.ANTS.suns : C.HOLLOW.suns, left = play.mode === 'mound' ? g.suns : play.mode === 'ants' ? g.ants.suns : g.hollow.suns;
   $('#suns').innerHTML = Array.from({ length: n }, (_, i) => `<span class="sun${i < n - left ? ' used' : ''}"></span>`).join('');
 }
 function tallySVG(n, h) {
@@ -523,6 +540,7 @@ function tallySVG(n, h) {
   return `<svg width="${W}" height="${h}" viewBox="0 0 ${W} ${h}"><g stroke="${G}" stroke-width="1.4" stroke-linecap="round" filter="url(#pencil-line)">${s}</g></svg>`;
 }
 function tally(n) {
+  if (play.mode === 'ants') { antTally(); return; }
   if (play.mode === 'mound') { $('#tally').innerHTML = n ? (n > 20 ? `<span class="tallyn">${n}</span>` : tallySVG(n) + `<span class="tallyn">${n}</span>`) : '<span class="tallyn">none yet</span>'; }
 }
 const AGEX = { '2-3': 46, '3-4': 132, '4': 218, adult: 300 };
@@ -557,8 +575,30 @@ function hollowStatic() {
   gauge += `<text x="${gx}" y="${gy0 - 6}" font-family="Courier Prime,monospace" font-size="10" fill="${G2}" text-anchor="middle">enough</text><text x="${gx}" y="${gy0 + gh + 14}" font-family="Courier Prime,monospace" font-size="10" fill="${G2}" text-anchor="middle">sips</text>`;
   return `<g filter="url(#pencil)">${s}</g>${lab}<g filter="url(#pencil-line)">${gauge}</g>`;
 }
+function antGlyph(x, y, ang, k) { // a driver ant: three dark beads and legs, smaller and darker than a termite
+  k = k || 1; const a = ang * 180 / Math.PI;
+  return `<g transform="translate(${fx(x)} ${fx(y)}) rotate(${fx(a)}) scale(${k})"><ellipse cx="-2.6" cy="0" rx="2.2" ry="1.3" fill="${G}"/><circle cx="0.2" cy="0" r="1.1" fill="${G}"/><circle cx="2.6" cy="0" r="1.4" fill="${G}"/><path d="M -1 -1 l -1.5 -2.2 M 0.5 -1 l 0.6 -2.4 M 1.6 -1 l 2 -1.8 M -1 1 l -1.5 2.2 M 0.5 1 l 0.6 2.4 M 1.6 1 l 2 1.8" stroke="${G}" stroke-width="0.55" fill="none"/></g>`;
+}
+function antsStatic() { // a low nest of earth with its mouth, a column of ants coming and going on the ground, the long grass at the left
+  const r = srand(g.seed + 3); let s = grassStrokes(61, 60, 0, 140, 160, 12, 60, G3, 0.75);
+  const dome = `M 130 160 C 150 150, 185 126, 236 118 C 287 126, 322 150, 348 160`;
+  const earth = dome + ' L 348 250 L 0 250 L 0 160 Z';
+  s += hatch(earth, [0, 118, 348, 250], { angle: 35, n: 900, len: 7, op: 0.28, w: 0.7, seed: 44, color: G2 });
+  s += hatch(earth, [0, 118, 348, 250], { angle: 140, n: 300, len: 5, op: 0.2, w: 0.6, seed: 45, color: G2 });
+  const w = 7, bottom = NEST.y + C.ANTS.nest * K;
+  s += `<path d="M ${NEST.x - w} ${NEST.y} L ${NEST.x - w - 2} ${bottom} L ${NEST.x + w + 2} ${bottom} L ${NEST.x + w} ${NEST.y} Z" fill="${PAPER}"/>`;
+  s += `<ellipse cx="${NEST.x}" cy="${bottom + 4}" rx="26" ry="12" fill="${PAPER}" stroke="${G}" stroke-width="1.1"/>`;
+  s += `<path d="M ${NEST.x - w} ${NEST.y} L ${NEST.x - w - 2} ${bottom} M ${NEST.x + w} ${NEST.y} L ${NEST.x + w + 2} ${bottom}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
+  s += `<path d="M 0 160 L 130 160 ${dome.slice(9)}" fill="none" stroke="${G}" stroke-width="1.3"/>`;
+  for (let i = 0; i < 26; i++) s += antGlyph(NEST.x - 10 + r() * 20, bottom + r() * 10 - 2, r() * 6.3, 0.9); // the nest, full of ants
+  for (let i = 0; i < 24; i++) { const x = 150 + i * 3.4 + r() * 3; s += antGlyph(x, 160 - (x - 130) * 0.4 + (r() - 0.5) * 3, -0.38 + (r() - 0.5) * 0.5, 0.9); } // a column up the dome to the mouth
+  for (let i = 0; i < 16; i++) s += antGlyph(NEST.x + 12 + i * 6.5 + r() * 4, 121 + i * 2.4 + (r() - 0.5) * 3, 0.35 + (r() - 0.5) * 0.5, 0.9);
+  let lab = `<g font-family="Courier Prime,monospace" font-size="10" fill="${G2}"><text x="${NEST.x + 14}" y="${NEST.y - 6}">the ants' nest</text><text x="${NEST.x + 32}" y="${bottom + 22}">driver ants</text><text x="${GRASS.x0 - 8}" y="${GRASS.base + 15}">the long grass</text></g>`;
+  return `<g filter="url(#pencil)">${s}</g>${lab}`;
+}
 function sectionStatic() {
   if (play.mode === 'mound') return `<g filter="url(#pencil)">${moundStatic()}</g>${moundLabels()}`;
+  if (play.mode === 'ants') return antsStatic();
   return hollowStatic();
 }
 let WAIT = '', waitOn = null;
@@ -567,7 +607,7 @@ function setStatic() {
   $('#sStatic').innerHTML = sectionStatic(); WAIT = play.mode === 'mound' ? waitingTermites(g.seed) : ''; waitOn = null;
 }
 function herView() { // your mother at her hole: at rest, or a frame of her last dip
-  if (play.mode !== 'mound') return null;
+  if (play.mode !== 'mound' || g.mother.away) return null;
   if (play.her) { const f = play.her.film[Math.min(play.her.i, play.her.film.length - 1)]; return { stem: play.her.stem, d: f.d, excess: 0, on: f.on, place: 'mound' }; }
   return { stem: g.mother.stem, d: 0, excess: 0, on: [], place: 'mound' };
 }
@@ -576,7 +616,7 @@ function drawSection() {
   const w = play.mode === 'mound' && !(v.d > P.chamber);
   if (w !== waitOn) { $('#sWait').innerHTML = w ? WAIT : ''; waitOn = w; }
   const hv = herView();
-  $('#sStem').innerHTML = (play.mode === 'mound' ? clumpArt() + heapArt() + herDroppedArt() + (hv ? heldStem(hv, 'her') : '') : '') + heldStem(v, 'you') + actTags(v);
+  $('#sStem').innerHTML = (play.mode === 'mound' ? clumpArt() + heapArt() + herDroppedArt() + (hv ? heldStem(hv, 'her') : '') : play.mode === 'ants' ? clumpArt() : '') + heldStem(v, 'you') + actTags(v);
   $('#sFall').innerHTML = play.falling || '';
   $('#sNote').innerHTML = g.dip ? (play.note || '') : '';
 }
@@ -594,8 +634,8 @@ function renderPlay() {
   play.view = play.view && g.dip ? play.view : { stem: st, d: 0, excess: 0, on: [], place: play.mode };
   drawSection();
   const leaving = g.phase === 'leaving', ended = g.phase === 'end', mound = play.mode === 'mound', busy = play.busy || !!g.dip;
-  $('#hrow').classList.toggle('hidden', mound || ended);
-  if (!mound) { // the hollow: what you hold, and what you can do to it
+  $('#hrow').classList.toggle('hidden', play.mode !== 'hollow' || ended);
+  if (play.mode === 'hollow') { // the hollow: what you hold, and what you can do to it
     const items = [];
     if (g.carried[0]) items.push({ k: 0, label: g.carried[0].label.replace(/^an? /, ''), on: !g.hollow.hand && g.held === 0 });
     items.push({ k: 'hand', label: 'your hand', on: g.hollow.hand });
@@ -610,7 +650,22 @@ function renderPlay() {
   $('#donebox').classList.toggle('hidden', !ended || play.busy);
   $('#rulerwrap').classList.toggle('hidden', !mound);
   const firstHere = play.dipsHere === 0 && !leaving && !ended;
-  $('#hint').textContent = firstHere && !g.dip ? (mound ? (st ? 'press on the mound: the stem goes in and waits · slide up: it comes out' : 'touch a stem in the long grass to take it') : 'press on the tree: it goes in · let go: it comes out, and you suck it') : '';
+  $('#hint').textContent = firstHere && !g.dip ? (mound ? (st ? 'press here and hold: the stem goes in · let go: it comes out' : 'touch a stem in the long grass to take it')
+    : play.mode === 'ants' ? (st ? 'press here and hold: the stick goes in · let go before the ants reach your fingers' : 'touch a stem in the long grass to take it') : 'press here: it goes in · let go: it comes out, and you suck it') : '';
+  coach();
+}
+function coach(moment) { // the bold line that says what to do now, for a player who reads nothing else
+  const st = M.inHand(g), mound = play.mode === 'mound', ph = g.phase; let t = '';
+  if (moment === 'holding') t = mound ? 'Keep your finger down. The stem is going in.' : play.mode === 'ants' ? 'Keep your finger down. Watch the ants. Let go before they reach your fingers!' : 'Keep your finger down.';
+  else if (moment === 'arrived') t = mound ? 'It is in. Now wait: the termites are climbing on. When you have waited enough, let go.' : 'Let go when you like.';
+  else if (ph === 'end') t = 'Turn to the last page.';
+  else if (ph === 'leaving') t = g.mother.away ? 'The sun is going down. Go on.' : 'Your mother is leaving. Follow her.';
+  else if (mound && !st) t = 'Touch a stem in the long grass to pick it up.';
+  else if (mound && g.dips.length === 0) t = 'Now press on the mound and keep your finger down.';
+  else if (mound) t = 'Press on the mound to fish again, or touch a different stem in the grass.' + (st.leaves ? ' Your stem still has leaves on it.' : '') + (st.bent ? ' Your stem has a bent end.' : '');
+  else if (play.mode === 'ants') t = !st ? 'Touch a stem in the long grass. A long stick is good here.' : g.ants.dips.length === 0 ? 'Press on the nest and keep your finger down. The ants will run up the stick. Let go before they reach your fingers!' : 'Press on the nest to try again, or touch a longer stick in the grass.';
+  else t = g.hollow.dips.length === 0 ? 'Press on the tree, and let go. Try your hand, your stem, or some leaves.' : 'Press on the tree again, or try something else from the row above.';
+  $('#now').textContent = t;
 }
 function setResult(typed, red, fresh) {
   $('#typed').textContent = typed; $('#red').textContent = red || '';
@@ -625,43 +680,42 @@ function onDown(e) {
   if (play.busy) return;
   const hit = e.target && e.target.closest ? e.target.closest('[data-pick],[data-act]') : null;
   if (hit) { e.preventDefault(); if (hit.dataset.pick != null) pickStem(+hit.dataset.pick); else doAct(hit.dataset.act); return; }
-  if (!(g.phase === 'mound' || (g.phase === 'hollow' && !g.over))) return;
+  if (!(g.phase === 'mound' || ((g.phase === 'hollow' || g.phase === 'ants') && !g.over))) return;
   const st = M.inHand(g);
-  if (!st) { setResult('Nothing in your hand. Touch a stem in the long grass to take it.', ''); return; }
-  const ds = M.startDip(g); if (!ds) return;
+  if (!st) { setResult('Your hand is empty. Touch a stem in the long grass to pick it up.', ''); return; }
+  const ds = g.phase === 'ants' ? M.startAntDip(g) : M.startDip(g); if (!ds) return;
   e.preventDefault(); $('#sec').setPointerCapture && $('#sec').setPointerCapture(e.pointerId);
-  play.drag = { y0: e.clientY, dRef: ds.d, scale: svgScale(), phase: ds.d >= ds.lim.depth - 0.05 ? 'out' : 'in', yRef: e.clientY }; if (ds.d === 0) play.note = '';
-  play.target = ds.d; $('#hint').textContent = ''; drawSection();
+  play.drag = { y0: e.clientY }; play.arrived = ds.d >= ds.lim.depth - 0.05 ? performance.now() : 0; if (ds.d === 0) play.note = '';
+  play.target = ds.d; $('#hint').textContent = ''; coach('holding'); drawSection();
   if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); }
 }
 const FOLD_MAX = 1.5;
-function onMove(e) {
-  if (!play.drag || !g.dip) return;
-  const d = play.drag, px = d.scale * K;
-  if (d.phase === 'in') { if (d.y0 - e.clientY > 5) { d.phase = 'out'; d.yRef = e.clientY; d.dRef = g.dip.d; } else return; } // the stem is going in by itself; a slide up starts the pull
-  let raw = d.dRef + (e.clientY - d.yRef) / px;                    // only upward movement pulls; moving down again pushes back no deeper than it was
-  if (raw > d.dRef) { d.yRef += (raw - d.dRef) * px; raw = d.dRef; }
-  if (raw < -0.5) { d.yRef += (raw + 0.5) * px; raw = -0.5; }
-  play.target = raw;
-}
+function onMove() {} // the hand has nothing to steer: press, hold, let go
+const QUICK = 0.5;   // ours: let go within half a second of the stem arriving, and it comes out as a snatch
 function onUp() {
-  if (!play.drag) return; const wasIn = play.drag.phase === 'in'; play.drag = null;
+  if (!play.drag) return; play.drag = null;
   if (!g.dip || play.autoPull) return;
-  if (g.dip.place === 'hollow') { play.autoPull = true; if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); } return; } // at the hollow, letting go brings it out
-  if (wasIn) { play.target = g.dip.lim.depth + 0.3; return; }  // the stem stays in, pushed home, until you slide it out
-  if (g.dip.d < 1.2) { play.autoPull = true; if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); } return; } // nearly out: the last inch comes out by itself
-  play.target = Math.min(play.target, g.dip.d);
+  if (g.dip.place === 'ants') return;                                   // antStep sees the finger lift and pulls out
+  const heldFor = play.arrived ? (performance.now() - play.arrived) / 1000 : 0;
+  play.autoPull = g.dip.place === 'hollow' ? 3 : (heldFor < QUICK ? C.TERMITES.gripHi * 1.4 : 3); // a snatch, or a gentle pull
+  if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); }
 }
 function stopAnim() { if (play.anim) cancelAnimationFrame(play.anim); play.anim = null; }
 function tick(now) {
   const dt = Math.min(0.05, Math.max(0.001, (now - play.last) / 1000)); play.last = now;
   const st = M.inHand(g);
-  if (g.dip) {
-    if (play.autoPull) play.target = Math.max(-0.5, g.dip.d - 3 * dt);
-    else if (play.drag && play.drag.phase === 'in') play.target = Math.min(g.dip.lim.depth + 0.3, play.target + 6 * dt); // going in by itself, at a grown-up's push
+  if (g.dip && g.dip.place === 'ants') {
+    const ds = g.dip; const ev = M.antStep(g, dt, !!play.drag || !!play.pending);
+    if (g.dip) { play.view = { stem: st, d: ds.d, excess: ds.excess, on: [], place: 'ants', antsOn: ds.on, front: ds.front, bitten: ds.bitten }; drawSection(); }
+    if (ev && ev.done) { play.drag = null; finishAnt(ev.result); }
+  } else if (g.dip) {
+    const speed = typeof play.autoPull === 'number' ? play.autoPull : play.autoPull ? 3 : 0;
+    if (speed) play.target = Math.max(-0.5, g.dip.d - speed * dt);
+    else if (play.drag) play.target = Math.min(g.dip.lim.depth + 0.3, play.target + 6 * dt); // going in by itself, at a grown-up's push
     const ev = M.dipStep(g, play.target, dt);
     const ds = g.dip;
     if (ds) {
+      if (!play.arrived && ds.d >= ds.lim.depth - 0.05) { play.arrived = performance.now(); coach('arrived'); }
       play.view = { stem: st, d: ds.d, excess: ds.excess, on: ds.on.map(x => x.off), place: ds.place, wetLen: ds.place === 'hollow' ? Math.max(0, ds.d - C.HOLLOW.water) : 0 };
       if (ev && ev.drops.length) addFalling(ev.drops);
       if (ev && ev.blocked) blockedNote(ds);
@@ -680,7 +734,7 @@ function addFalling(depths) {
 function blockedNote(ds) {
   const why = ds.lim.reason;
   const t = { thick: 'It won\'t go in: too thick for the hole.', leaves: 'The leaves catch on the rim.', fold1: 'It folds at the first bend.', bent: 'The bent end folds at the first bend.', fold2: 'It folds at the second bend.', length: 'That\'s as far as this stem reaches.', end: 'The bottom of the passage.', reach: 'As far as it goes.' }[why] || '';
-  if (t) { $('#typed').textContent = t; $('#red').textContent = ''; }
+  if (t && why !== 'end' && why !== 'reach') { $('#typed').textContent = t; $('#red').textContent = ''; }
   play.note = plateNote(ds);
 }
 function plateNote(ds) { // what stopped the stem, written on the plate where it stopped
@@ -721,6 +775,12 @@ function finishDip(res) {
     }, 300);
   }
 }
+function finishAnt(res) {
+  play.busy = true; play.dipsHere = (play.dipsHere || 0) + 1; play.note = ''; play.view = null; drawSection(); antTally();
+  setTimeout(() => { setResult(res.words.typed, res.words.red); play.busy = false; applyPending(); renderPlay();
+    if (g.phase === 'end') { $('#typed').textContent = res.words.typed + (g.ants.eaten >= C.ANTS.enough ? ' That is a meal.' : ' The light is going.'); } }, 300);
+}
+function antTally() { const n = g.ants.eaten; $('#tally').innerHTML = n ? (n > 20 ? `<span class="tallyn">${n}</span>` : tallySVG(n) + `<span class="tallyn">${n}</span>`) : '<span class="tallyn">none yet</span>'; }
 function herTurn() { // your mother fishes at her own hole, in the picture, every sun
   const m = g.mother; if (!m.film) return;
   play.her = { film: m.film, i: 0, t: 0, stem: m.last ? m.last.stem : m.stem };
@@ -732,8 +792,8 @@ function applyPending() { // the stem touched while another was in the hole
   if (k === 'hers') M.pickUpHers(g); else M.pickFromGrass(g, k);
 }
 function pickStem(i) {
-  if (g.phase !== 'mound') return;
-  if (g.dip) { if (g.dip.maxD < C.ENTER_MIN) { M.cancelDip(g); stopAnim(); } else { play.pending = i; play.autoPull = true; play.drag = null; setResult('You draw the stem out first…', ''); if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); } return; } }
+  if (!(g.phase === 'mound' || g.phase === 'ants')) return;
+  if (g.dip) { if (g.dip.maxD < C.ENTER_MIN) { M.cancelDip(g); stopAnim(); } else { play.pending = i; play.autoPull = 3; play.drag = null; setResult('First the stem comes out…', ''); if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); } return; } }
   const old = M.inHand(g);
   if (M.pickFromGrass(g, i)) { const st = M.inHand(g); setResult(`${M.describe(st)}${old ? ' The other one goes on the heap.' : ''}`, ''); play.view = null; renderPlay(); }
 }
@@ -744,13 +804,15 @@ function doAct(act) {
   if (act === 'bite') { if (M.prepare(g, 'bite').ok) { setResult('You bite off the bent end: an inch shorter, and straight again.', ''); play.view = null; renderPlay(); } return; }
 }
 function leaving() {
-  $('#leavingtext').textContent = `The last sun is shaded: your mother gets up and moves off into the long grass. You caught ${g.eaten === 0 ? 'no termites' : g.eaten === 1 ? 'one termite' : g.eaten + ' termites'}.`;
+  const got = g.eaten === 0 ? 'no termites' : g.eaten === 1 ? 'one termite' : g.eaten + ' termites';
+  $('#leavingtext').textContent = g.mother.away ? `The last sun is gone. You caught ${got}. Time to move on.` : `The last sun is gone: your mother gets up and walks off into the long grass. You caught ${got}.`;
+  $('#follow').textContent = g.mother.away ? 'Go on →' : 'Follow her →';
 }
 
 // ---------- screens
 function show(id) { current = id; $$('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); }
-function startGame(seed) {
-  g = M.beginMound(M.newGame(seed)); window.__goodall = { get g() { return g; }, play };
+function startGame(seed, afternoon) {
+  g = M.beginMound(M.newGame(seed), afternoon || 1); window.__goodall = { get g() { return g; }, play };
   $('#pageno').textContent = 'p. ' + g.seed; $('#pageno2').textContent = 'p. ' + g.seed;
   play = Object.assign(play, { mode: 'mound', view: null, busy: false, falling: '', dipsHere: 0, her: null, note: '', pending: null, autoPull: false });
   $('#helphollow').classList.add('hidden');
@@ -759,11 +821,27 @@ function startGame(seed) {
 function enterMound() {
   play.mode = 'mound'; play.dipsHere = 0; setStatic();
   $('#paim').textContent = 'Fish termites out of the mound with a stem of grass, before your mother moves on.';
-  $('#sunlab').textContent = 'The afternoon'; $('#tallylab').textContent = 'Termites eaten';
-  $('#intro').innerHTML = '<b>FIG. 4.</b> The mound cut open, the long grass beside it, your mother at her own hole. Each dip takes one sun.';
-  setResult('Your mother fishes at her own hole. Termites bite on to whatever comes into their passage. Touch a stem in the long grass to take it. Then press on the mound: the stem goes into the hole by itself and waits there. Slide your finger up, and it comes out. What comes up on the stem, you eat.', '');
+  $('#sunlab').textContent = g.afternoon === 1 ? 'The afternoon' : 'Afternoon ' + g.afternoon; $('#tallylab').textContent = 'Termites eaten';
+  $('#intro').innerHTML = `<b>FIG. 4.</b> The termite mound cut open, the long grass beside it${g.mother.away ? '' : ', your mother at her own hole'}. Every go costs one sun.`;
+  const noStem = !g.grass.some(x => x.type === 'stem');
+  const intro = g.afternoon === 1
+    ? 'Termites live deep inside the mound. If you push a stem of grass into their hole, they bite on to it, and you can pull them out and eat them. Your mother is doing it right now, at her own hole. First, touch a stem in the long grass to pick it up.'
+    : g.afternoon === 2
+      ? 'A new afternoon, and a different mound: the hole inside it bends in different places. Your mother has gone ahead, so today you are on your own.' + (noStem ? ' And look at the grass: there is no stiff grass stem in it today. You will have to make do.' : '')
+      : `Afternoon ${g.afternoon}. A different mound again.` + (g.mother.away ? ' Your mother has gone ahead: you are on your own.' : ' Your mother is fishing beside you.') + (noStem ? ' No stiff grass stem in the clump today.' : '');
+  setResult(intro, '');
   drawRuler($('#ruler'), g.dips, 46);
   show('play'); renderPlay();
+}
+function enterFinale() { if (g.finale === 'ants') enterAnts(); else enterHollow(); }
+function enterAnts() {
+  M.goAnts(g); play.mode = 'ants'; play.dipsHere = 0; play.view = null; play.her = null; setStatic();
+  $('#helphollow').classList.remove('hidden');
+  $('#paim').textContent = 'Eat driver ants off a stick, without getting bitten.';
+  $('#sunlab').textContent = 'Before dark'; $('#tallylab').textContent = 'Ants eaten'; antTally();
+  $('#intro').innerHTML = '<b>FIG. 6.</b> The driver ants\' nest. Push a stick in, and the ants run up it. Five suns before dark.';
+  $('#typed').textContent = 'On the way home you pass a nest of driver ants. They are good to eat, but they bite hard. Push a stick into the nest and the ants run up it. Pull it out before they reach your fingers, and eat them off the stick.'; $('#red').textContent = '';
+  window.scrollTo(0, 0); renderPlay();
 }
 function enterHollow() {
   M.goHollow(g); play.mode = 'hollow'; play.dipsHere = 0; play.view = null; play.her = null; setStatic();
@@ -771,7 +849,7 @@ function enterHollow() {
   $('#paim').textContent = 'Drink the rainwater in the hollow. Your lips can\'t reach it.';
   $('#sunlab').textContent = 'Before dark'; $('#tallylab').textContent = ''; $('#tally').innerHTML = '';
   $('#intro').innerHTML = '<b>FIG. 5.</b> A tree trunk cut open: rainwater in a hollow. Five suns before dark; the tube at the right fills with sips.';
-  $('#typed').textContent = 'You are thirsty. Your lips can\'t reach the water. You still have your stem, and your hand, and there are leaves on the branch.'; $('#red').textContent = '';
+  $('#typed').textContent = 'On the way home there is rainwater in a hollow tree. You are thirsty, but your lips cannot reach the water. You have your stem, your hand, and there are leaves on the branch.'; $('#red').textContent = '';
   window.scrollTo(0, 0); renderPlay();
 }
 function enterEnd() {
@@ -783,6 +861,9 @@ function enterEnd() {
   $('#paper').textContent = v.paper; $('#means').textContent = v.means;
   $('#figv').innerHTML = vultureArt();
   $('#figc').innerHTML = `<g filter="url(#pencil)">${chimpArt(0.7, 2, 4, 13)}</g>`;
+  $('#again').textContent = `Afternoon ${g.afternoon + 1} →`;
+  $('#nextnote').textContent = g.afternoon === 1 ? 'Every afternoon is different. Tomorrow the mound is a different shape, the grass is different, and your mother may have gone ahead. And on the way home there may be ants instead of water.'
+    : 'Every afternoon is different: a different mound, different grass, your mother there or not, and water or ants on the way home.';
   show('end');
 }
 
@@ -797,10 +878,10 @@ function init() {
   sec.addEventListener('pointerup', onUp); sec.addEventListener('pointercancel', onUp); sec.addEventListener('lostpointercapture', onUp);
   $('#chew').addEventListener('click', () => { if (g.dip || play.busy) return; const st = M.inHand(g); if (M.prepare(g, 'chew').ok) { setResult(st.type === 'leaves' ? 'You chew the leaves for a moment: a crumpled wad.' : 'You chew the end: it crumples into a little mass.', ''); play.view = null; renderPlay(); } });
   $('#leaves').addEventListener('click', () => { if (g.dip || play.busy) return; M.pickLeaves(g); setResult('You pull a handful of leaves off the branch.', ''); play.view = null; renderPlay(); });
-  $('#follow').addEventListener('click', enterHollow);
+  $('#follow').addEventListener('click', enterFinale);
   $('#lastpage').addEventListener('click', enterEnd);
-  $('#again').addEventListener('click', () => { startGame(null); enterMound(); });
-  $('#same').addEventListener('click', () => { const s = g.seed; startGame(s); enterMound(); });
+  $('#again').addEventListener('click', () => { const n = g.afternoon + 1; startGame(null, n); enterMound(); });
+  $('#same').addEventListener('click', () => { const s = g.seed, n = g.afternoon; startGame(s, n); enterMound(); });
   $$('[data-help]').forEach(b => b.addEventListener('click', () => { back = current; show('help'); }));
   $$('[data-about]').forEach(b => b.addEventListener('click', () => { back = current; show('about'); }));
   $('#helpback').addEventListener('click', () => { show(back); if (back === 'play') renderPlay(); });

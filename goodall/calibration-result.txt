@@ -11,18 +11,18 @@ PASS  a floppy stem (the 3–4-year-olds’ “too flexible”) goes in one or t
 PASS  an infant of 2–3 (wrong stems, a jerk) catches about two termites in twenty-two bouts (p. 230)  — 3.1 per 22 bouts, over 22000 bouts
 PASS  your mother: every dip five to eight inches and classed a grown-up’s  — depth 6.0–8.0; 1200 dips; termites per dip 6.5 (ours)
 PASS  termites per dip rise with the ages: 2–3 ≈ 3–4 < 4 < grown-up  — 4: 2.28; 2-3: 1.44; 3-4: 0.33; adult: 7.90
-PASS  each age’s way of fishing is classed at that age by the notebook  — 4 → 4 (100 %); 2-3 → 2-3 (76 %); 3-4 → 3-4 (67 %); adult → adult (100 %)
+PASS  each age’s way of fishing is classed at that age by the notebook  — 4 → 4 (51 %); 2-3 → 2-3 (76 %); 3-4 → 3-4 (100 %); adult → adult (100 %)
 PASS  the hollow: hand alone and fresh leaves fall short; the infant’s sucked stem, a chewed stem and chewed leaves each drink their fill  — hand 5, fresh leaves 10, stem sucked 14, stem chewed 15, chewed leaves 12 (enough 12)
 
 C. PLAYING IT IN NUMBERS (300 afternoons each; termites eaten, last dip’s age, hollow)
-  long is best (three longest, no prep, all the way in, slow)                termites   5.3 (min  0, max 32); last dip 3-4 (30 %)
+  long is best (three longest, no prep, all the way in, slow)                termites   5.3 (min  0, max 32); last dip 3-4 (52 %)
   fast hands (good stems, stripped, but pulled out at a flick)               termites   0.0 (min  0, max  0); last dip 2-3 (100 %)
   trial and error (a mixed kit; slows down after a jerk, drops what folds)   termites  22.8 (min  0, max 28); last dip adult (81 %)
   copy your mother (watch once, then do as she does)                         termites  39.8 (min 38, max 40); last dip adult (100 %)
   watcher (watch four times first)                                           termites  16.0 (min 16, max 16); last dip adult (100 %)
   never bites a bent end (good kit, good hands)                              termites  23.7 (min 21, max 24); last dip 3-4 (100 %)
   best possible (good kit, stripped, bitten, slow, never watches)            termites  47.7 (min 45, max 48); last dip adult (100 %)
-  four-year-old (shorter or springier tools, good hands)                     termites   7.6 (min  6, max 26); last dip 4 (100 %)
+  four-year-old (shorter or springier tools, good hands)                     termites   7.6 (min  6, max 26); last dip 3-4 (85 %)
   your mother, every afternoon: about 38.6 termites
 PASS  the decisions matter: best possible catches at least four times what “long is best” or “fast hands” does  — 47.7 against 5.3 and 0.0
 PASS  learning by trying gets near half of the way to the best in a six-sun afternoon  — 22.8 of 47.7
@@ -54,7 +54,7 @@ PASS  termites on a still stem fill to the cap (per inch in the chamber) and no 
 PASS  after three dips the end is bent and folds at the first bend; biting it off restores it, an inch shorter  — bent, then 7.0 in
 PASS  your mother throws down her bent stem after three dips, and you can pick it up
 PASS  the same afternoon, played the same way, comes out the same
-PASS  the verdict has a headline and five lines of words, and no decimals or NaN  — By the end of the afternoon you fished like a grown-up chimpanzee, which took the infants Goodall watched about two years; then you made a sponge out of a termite stem.
+PASS  the verdict has a headline and five lines of words, and no decimals or NaN  — By the end of the afternoon you fished like a grown-up chimpanzee. The little chimpanzees Goodall watched took about two years to learn that. Then you made a sponge out of a termite stem.
 PASS  a preview changes nothing
 
 26 passed, 0 failed
