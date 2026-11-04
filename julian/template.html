@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Julian's Window</title>
+<script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<meta name="description" content="A night in one room, from Julian of Norwich's Revelations of Divine Love: choose where to look, and find out what brings the heaviness.">
+<style>
+@font-face { font-family: 'Delius'; font-weight: 400; font-display: block; src: url(data:font/woff2;base64,/*__FONT_DELIUS__*/) format('woff2'); }
+@font-face { font-family: 'Italiana'; font-weight: 400; font-display: block; src: url(data:font/woff2;base64,/*__FONT_ITALIANA__*/) format('woff2'); }
+:root { --page: #FBFAF5; --ink: #17150F; --rose: #E7A2B6; --w: 348px; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--page); color: var(--ink); }
+body { font-family: 'Delius', 'Comic Sans MS', sans-serif; font-size: 16px; line-height: 1.35; min-height: 100vh; overflow-x: hidden; }
+.screen { display: none; width: 100%; max-width: 380px; margin: 0 auto; padding: 14px 16px 28px; }
+.screen.on { display: block; }
+h1 { font-family: 'Italiana', serif; font-weight: 400; font-size: 46px; line-height: 1; margin: 6px 0 2px; letter-spacing: .5px; }
+h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-height: 1.1; margin: 18px 0 8px; }
+.sub { font-size: 15px; margin: 0 0 10px; }
+.aim { font-size: 15px; line-height: 1.3; margin: 10px 0 8px; }
+.aim b { font-weight: 400; }
+.cap { border: 1.5px solid var(--ink); background: #fff; padding: 7px 9px; margin: 8px 0; font-size: 15px; line-height: 1.32; }
+.cap.plain { border: none; background: transparent; padding: 0 2px; }
+.cap.weather { font-size: 15px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+.btn { font-family: inherit; font-size: 16px; color: var(--ink); background: #fff; border: 1.5px solid var(--ink); border-radius: 0; padding: 9px 13px; cursor: pointer; min-height: 44px; line-height: 1.2; text-align: center; }
+.btn.primary { background: var(--ink); color: var(--page); }
+.btn.wide { width: 100%; }
+.btn:disabled { opacity: .35; cursor: default; }
+.btn.small { font-size: 14px; min-height: 36px; padding: 6px 10px; }
+.topbar { display: flex; align-items: flex-start; gap: 8px; }
+.topbar .aim { flex: 1; margin: 2px 0 6px; font-size: 14px; }
+.qbtn { width: 36px; height: 36px; flex: 0 0 36px; border: 1.5px solid var(--ink); background: #fff; font-family: 'Italiana', serif; font-size: 22px; line-height: 1; cursor: pointer; color: var(--ink); }
+.pagewrap { position: relative; width: var(--w); height: 300px; border: 2px solid var(--ink); background: #fff; margin: 4px auto 6px; overflow: hidden; }
+.pagewrap svg { display: block; width: 100%; height: 100%; }
+.beat { position: absolute; left: 6px; top: 4px; font-family: 'Italiana', serif; font-size: 15px; letter-spacing: .6px; background: rgba(255,255,255,.75); padding: 0 4px; }
+.hour { position: absolute; right: 6px; top: 4px; font-family: 'Italiana', serif; font-size: 15px; letter-spacing: .6px; background: rgba(255,255,255,.75); padding: 0 4px; }
+.choices { display: flex; flex-direction: column; gap: 6px; margin: 6px 0; }
+.choice { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--ink); background: #fff; padding: 6px 8px; cursor: pointer; min-height: 48px; text-align: left; font-family: inherit; font-size: 14px; color: var(--ink); line-height: 1.25; }
+.choice .ico { flex: 0 0 34px; width: 34px; height: 34px; }
+.choice .ico svg { width: 34px; height: 34px; display: block; }
+.choice b { font-weight: 400; display: block; font-size: 15px; }
+.choice.sel { border-width: 3px; padding: 4.5px 6.5px; }
+.choice[aria-pressed="true"] { border-width: 3px; padding: 4.5px 6.5px; }
+.hint { font-size: 13px; margin: 2px 2px 6px; opacity: .85; }
+.sight { width: var(--w); height: 190px; border: 1.5px solid var(--ink); background: #fff; margin: 8px auto 6px; overflow: hidden; position: relative; }
+.sight svg { display: block; width: 100%; height: 100%; }
+.balloon { position: relative; border: 1.5px solid var(--ink); border-radius: 18px; background: #fff; padding: 7px 12px; margin: 8px 0 8px 10px; font-size: 15px; max-width: 92%; }
+.balloon.his { border-radius: 50% / 40%; padding: 9px 16px; margin-left: 0; margin-right: 12px; }
+.balloon.his::after { content: ''; position: absolute; left: 28px; bottom: -10px; width: 12px; height: 12px; background: #fff; border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: skewX(30deg) rotate(10deg); }
+.balloon.hers { border-style: dashed; margin-left: 24px; }
+.balloon.hers::before { content: ''; position: absolute; left: -16px; bottom: -4px; width: 9px; height: 9px; border: 1.5px dashed var(--ink); border-radius: 50%; background: #fff; }
+.balloon.hers::after { content: ''; position: absolute; left: -8px; bottom: 6px; width: 5px; height: 5px; border: 1.5px dashed var(--ink); border-radius: 50%; background: #fff; }
+.strip { display: flex; gap: 2px; width: var(--w); margin: 10px auto 0; }
+.strip .fr { flex: 1 1 0; height: 28px; border: 1.2px solid var(--ink); background: #fff; position: relative; overflow: hidden; }
+.strip .fr.empty { border-style: dotted; opacity: .5; }
+.strip .fr svg { display: block; width: 100%; height: 100%; }
+.blanketline { width: var(--w); height: 5px; background: var(--rose); margin: 4px auto 0; border-radius: 3px; }
+.striplabel { width: var(--w); margin: 3px auto 0; font-size: 12.5px; display: flex; justify-content: space-between; opacity: .85; }
+.record { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; width: var(--w); margin: 8px auto 0; }
+.record .fr { height: 48px; border: 1.2px solid var(--ink); background: #fff; overflow: hidden; }
+.record .fr svg { display: block; width: 100%; height: 100%; }
+.verd h3 { font-family: 'Italiana', serif; font-weight: 400; font-size: 22px; margin: 14px 0 4px; }
+.sentence { font-family: 'Italiana', serif; font-size: 26px; line-height: 1.15; margin: 18px 0 10px; text-align: center; }
+.sig { margin-top: 26px; font-style: italic; font-size: 14px; opacity: .55; }
+.sig a { color: inherit; text-decoration: none; }
+.help p, .about p { font-size: 15px; margin: 8px 0; }
+.help h3, .about h3 { font-family: 'Italiana', serif; font-weight: 400; font-size: 22px; margin: 14px 0 4px; }
+.about ul { padding-left: 18px; font-size: 14.5px; }
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: var(--w); margin: 8px auto; }
+.panels .p { border: 1.5px solid var(--ink); background: #fff; height: 150px; position: relative; overflow: hidden; }
+.panels .p svg { display: block; width: 100%; height: 110px; }
+.panels .p .c { font-size: 12.5px; line-height: 1.2; padding: 2px 5px; position: absolute; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1.2px solid var(--ink); }
+.cover { width: var(--w); height: 260px; border: 2px solid var(--ink); background: #fff; margin: 8px auto; overflow: hidden; }
+.cover svg { display: block; width: 100%; height: 100%; }
+.cheerflash { animation: flash .5s ease-out; }
+.cheerin { position: absolute; inset: 0; background: #fff; opacity: 0; animation: cheerin .4s ease-out 1.3s forwards; }
+@keyframes cheerin { to { opacity: 1; } }
+@keyframes flash { from { background: #fff; } to { background: transparent; } }
+.drop { animation: fall 1.6s linear infinite; }
+@keyframes fall { from { transform: translateY(-6px); opacity: 0; } 15% { opacity: 1; } to { transform: translateY(70px); opacity: 0; } }
+.twinkle { animation: tw 2.4s ease-in-out infinite; }
+@keyframes tw { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .drop, .twinkle, .cheerflash { animation: none; } .cheerin { animation: none; opacity: 1; } }
+@media (max-width: 379px) { :root { --w: calc(100vw - 32px); } .pagewrap { height: calc((100vw - 32px) * 300 / 348); } }
+</style>
+</head>
+<body>
+
+<section id="cover" class="screen on">
+  <h1>Julian's Window</h1>
+  <p class="sub">A night in one room, from <i>Revelations of Divine Love</i> (Norwich, 1373).</p>
+  <div class="cover" id="coverArt"></div>
+  <p class="cap plain">You lie in a bed, dying, in a cell with one window. A cross hangs on the wall in front of you. You tap where you look, and turn the page.</p>
+  <p class="aim"><b>See the night through. Each time, choose where to look — the cross, the window, or within — and find out what brings the heaviness.</b></p>
+  <div class="row"><button class="btn primary wide" id="startBtn">Turn the page</button></div>
+  <div class="row"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<section id="intro" class="screen">
+  <h2>Three days and three nights</h2>
+  <div class="panels" id="introPanels"></div>
+  <p class="cap plain">Now the room is dark except for the cross, which keeps a plain light of its own. All night a heaviness will come over the room and go again. The blanket is how you are kept; the tone over the page is how it feels.</p>
+  <div class="row"><button class="btn primary wide" id="introBtn">Turn the page</button></div>
+</section>
+
+<section id="play" class="screen">
+  <div class="topbar"><p class="aim" id="playAim">See the night through: choose where to look, and find out what brings the heaviness.</p><button class="qbtn" data-go="help" aria-label="How to play">?</button></div>
+  <div class="pagewrap" id="pagewrap"><div class="beat" id="beatLbl"></div><div class="hour" id="hourLbl"></div></div>
+  <p class="cap weather" id="weatherLine"></p>
+  <div id="chooser">
+    <p class="hint" id="chooseHint">Tap a place, in the picture or below, then <b>Look</b>.</p>
+    <div class="choices" id="choices"></div>
+    <div class="row"><button class="btn primary wide" id="lookBtn" disabled>Look</button></div>
+  </div>
+  <div id="result" style="display:none">
+    <div class="sight" id="sightArt"></div>
+    <p class="cap" id="resCaption"></p>
+    <div id="balloons"></div>
+    <p class="cap plain" id="resLine"></p>
+    <div class="row"><button class="btn primary wide" id="nextBtn">Turn the page</button></div>
+  </div>
+  <div class="strip" id="strip"></div>
+  <div class="blanketline" title="the blanket"></div>
+  <div class="striplabel"><span>the night so far: tone is the heaviness, stars the sureness; the mark is where you looked</span></div>
+</section>
+
+<section id="end" class="screen">
+  <h2 id="endTitle">Morning</h2>
+  <p class="sub" id="nightNo"></p>
+  <div class="verd">
+    <h3>What you did</h3><p class="cap plain" id="vDid"></p>
+    <h3>What Julian says</h3><p class="cap plain" id="vSays"></p>
+    <h3>What that means</h3><p class="cap plain" id="vMeans"></p>
+    <p class="cap plain" id="vMorning" style="display:none"></p>
+  </div>
+  <h3 class="verd" style="font-family:'Italiana',serif;font-weight:400;font-size:22px;margin:16px 0 4px">The night</h3>
+  <div class="record" id="recordGrid"></div>
+  <div class="blanketline"></div>
+  <div class="striplabel"><span>sixteen beats: tone is the heaviness, stars the sureness, the mark is where you looked; the blanket under all of them</span></div>
+  <p class="sentence" id="vSentence"></p>
+  <div class="row"><button class="btn primary wide" id="againBtn">Another night</button></div>
+  <div class="row"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
+  <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
+</section>
+
+<section id="help" class="screen help">
+  <h2>How to play</h2>
+  <p><b>See the night through. Each time, choose where to look — the cross, the window, or within — and find out what brings the heaviness.</b></p>
+  <p>The picture is one room: your bed on the left with you in it under a rose blanket, a cross on the wall in front of you, a window on the right. The night has sixteen beats; the small label at the top right of the picture gives the hour, and the sky in the window changes with it.</p>
+  <p><b>The weather.</b> Sometimes the room is light, with stars and petals over it: that is a sureness. Sometimes a heavy dot-tone lies over everything and scribbles creep in at the edges: that is the heaviness. The line under the picture says which it is now, and, when it has just changed, what you looked at just before. <b>The blanket</b> is how you are kept. It is the one thing in colour.</p>
+  <p><b>Looking.</b> Each beat, tap a place: the cross, the window, or you yourself (within), in the picture or on the three panels under it. Your eyes turn there and the panel says what looking there is. Then tap <b>Look</b>. <b>The cross</b> shows the next sight of the Passion; in the heaviness the same sight is hard to look at. <b>The window</b> shows the sky and nothing else; nothing there can harm you, and nothing is shown. <b>Within</b> asks a question and gets an answer, one per beat, in order; in the heaviness the first question is what brought it.</p>
+  <p><b>After a look</b> the game says in its own words what you did and what came of it, then His words in a round balloon and yours in a dashed one, then what the heaviness did and what that means. <b>Turn the page</b> starts the next beat. Nothing carries over: every beat starts with your eyes on nothing.</p>
+  <p><b>The strip</b> along the bottom is the night so far: a small frame per beat, toned for the heaviness, starred for the sureness, with a mark for where you looked. The rose line under it is the blanket.</p>
+  <p><b>Morning.</b> The strip is shown whole, and then three things in words: what you did, what Julian says, and what that means. There is no score. <b>Another night</b> draws a new night: the weather will come and go on a different schedule, and you can try the other ways of looking.</p>
+  <div class="row"><button class="btn primary wide" id="helpBack">Back</button></div>
+</section>
+
+<section id="about" class="screen about">
+  <h2>About</h2>
+  /*__ABOUT__*/
+  <div class="row"><button class="btn primary wide" id="aboutBack">Back</button></div>
+</section>
+
+<script>
+/*__MECHANISM__*/
+</script>
+<script>
+/*__PAGE__*/
+</script>
+</body>
+</html>
