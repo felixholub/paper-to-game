@@ -1,6 +1,6 @@
   shot start
   start: page width 380 (no horizontal scroll: true)
-EVENING A (9771, first evening): a first-timer; counts the kicked wheel; How to play opened in round 2
+EVENING A (4567, first evening): a first-timer; counts the kicked wheel; How to play opened in round 2
   shot a-r1-intro
   shot a-r1-voice
   shot a-r1-result
@@ -31,7 +31,7 @@ EVENING A (9771, first evening): a first-timer; counts the kicked wheel; How to 
   shot a-end
   last page: page width 380 (no horizontal scroll: true)
   shot about
-EVENING B (3452, another evening): held from memory throughout
+EVENING B (5056, another evening): held from memory throughout
   shot b-r1-intro
   shot b-r1-voice
   shot b-r1-result
@@ -41,7 +41,7 @@ EVENING B (3452, another evening): held from memory throughout
   shot b-r2-result
   round 2 wheel: the same | About the same as the voice. | The wheel kept its pace. The voice lasted three turns of it; your hold lasted three turns.
   shot b-r3-result
-  round 3 kick (wheel ×2): a tenth over | About a tenth longer than the voice. | When you pressed, the potter kicked the wheel. It ran faster, so three turns took less time than the voice. | You let go after six turns, not three: you saw it race. | How did you know it was racing? Not by the wheel.
+  round 3 kick (wheel ×0.5): a tenth over | About a tenth longer than the voice. | When you pressed, the potter dragged on the wheel. It ran slower, so three turns took more time than the voice. | You let go after one and a half turns, not three: you saw it slow. | How did you know it was slowing? Not by the wheel.
   shot b-r4-voice
   shot b-r4-result
   round 4 sun: the same | About the same as the voice. | The sun stood still the whole time you held. | You let go all the same. Time went on.
@@ -55,10 +55,10 @@ EVENING B (3452, another evening): held from memory throughout
   shot b-r7-result
   round 7 first: the same | About the same as the first voice. | You heard it in the first minute of the evening, and it was still there to measure by.
   LAST PAGE: You kept time with no clock but your mind.
-  You measured seven times with no clock. Going by the voice in your memory, you came within a twentieth or so of it. | When the wheel raced, you held on: you saw it race, with something that isn’t the wheel. | When the sun stood still, you let go all the same: time went on. | Your long syllables came out about double your short ones, and you held the first voice to about its own length, minutes after it stopped.
+  You measured seven times with no clock. Going by the voice in your memory, you came within a twentieth or so of it. | When the wheel slowed, you let go in time: you saw it slow, with something that isn’t the wheel. | When the sun stood still, you let go all the same: time went on. | Your long syllables came out about double your short ones, and you held the first voice to about its own length, minutes after it stopped.
   shot b-end
-EVENING C: evening 3452 again by its number (same as B: true); counts the wheel, waits for the sun
-  same voices as B: [3.653,2.688,3.072,2.456,3.338,5.53,3.653]
+EVENING C: evening 5056 again by its number (same as B: true); counts the wheel, waits for the sun
+  same voices as B: [3.648,3.79,3.383,3.094,2.941,5.53,3.648]
   (playing)
   shot c-r1-intro
   shot c-r1-voice
@@ -70,7 +70,7 @@ EVENING C: evening 3452 again by its number (same as B: true); counts the wheel,
   round 2 wheel: a tenth over | About a tenth longer than the voice. | The wheel kept its pace. The voice lasted three turns of it; your hold lasted three and a half turns.
   shot c-r3-kicked
   shot c-r3-result
-  round 3 kick (wheel ×2): half | About half the voice: well short. | When you pressed, the potter kicked the wheel. It ran faster, so three turns took less time than the voice. | You let go after three turns, just where counting the wheel would put you. | How did you know it was racing? Not by the wheel.
+  round 3 kick (wheel ×0.5): double | About double the voice. | When you pressed, the potter dragged on the wheel. It ran slower, so three turns took more time than the voice. | You let go after three turns, just where counting the wheel would put you. | How did you know it was slowing? Not by the wheel.
   shot c-r4-voice
   shot c-r4-result
   round 4 sun: four times | About four times the voice. | The sun stood still the whole time you held. | You waited for it to move. It never did, so your hold was stopped at four times the voice.
@@ -84,7 +84,7 @@ EVENING C: evening 3452 again by its number (same as B: true); counts the wheel,
   shot c-r7-result
   round 7 first: three quarters | About three quarters of the first voice: short. | You heard it in the first minute of the evening, and it was still there to measure by.
   LAST PAGE: You kept time by the wheel and the sun, like the learned man.
-  You measured seven times with no clock. Going by the voice in your memory, you came within about a third of it. | When the wheel raced, you let go at about half the voice, just where counting its turns would put you. | When the sun stood still, you waited for it: about four times the voice. | Your long syllables came out about a quarter longer than your short ones, and you held the first voice to about three quarters of its length, minutes after it stopped.
+  You measured seven times with no clock. Going by the voice in your memory, you came within about a third of it. | When the wheel slowed, you let go at about double the voice, just where counting its turns would put you. | When the sun stood still, you waited for it: about four times the voice. | Your long syllables came out about a quarter longer than your short ones, and you held the first voice to about three quarters of its length, minutes after it stopped.
   shot c-end
 
 page errors: none

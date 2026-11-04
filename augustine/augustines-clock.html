@@ -70,7 +70,8 @@ footer.sig a{color:var(--mute);text-decoration:none}
 #now.silence{border-style:dashed;border-color:var(--ink)}
 #now.idle{border-color:var(--faint);color:var(--faint);cursor:default}
 #now:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
-#chips{display:flex;gap:4px;margin:6px 0 0}
+#chips{display:flex;gap:4px;margin:10px 0 0}
+#layforme{margin-top:8px}
 #chips button{flex:1;min-width:0;height:44px;border:2px solid var(--blue);background:var(--plaster);color:var(--blue);font-family:var(--sans);font-weight:800;font-size:13px;padding:0;cursor:pointer;line-height:1}
 #chips button small{display:block;font-weight:600;font-size:12px;margin-top:2px}
 #chips button.sel{background:var(--blue);color:#fff}
@@ -132,11 +133,12 @@ footer.sig a{color:var(--mute);text-decoration:none}
       <svg id="mind" viewBox="0 0 348 260"></svg>
       <button id="now" aria-label="The present: press and hold">NOW</button>
     </div>
-    <div id="chips" class="hidden"></div>
   </div>
   <div id="res" class="hidden">
     <div class="big" id="big"></div>
     <div class="lines" id="lines"></div>
+    <div id="chips" class="hidden"></div>
+    <button class="btn line hidden" id="layforme">Lay them for me</button>
     <div class="quote" id="rquote"></div>
     <button class="btn" id="next">Next round</button>
   </div>
@@ -613,8 +615,8 @@ const ASK = {
     ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
   silence: { intro: 'Outside, nothing moves. Touch the circle to hear the voice. Then keep silent <b>as long as it lasted</b>, and tap the circle once when the silence is over.',
     ready: 'Silence. Tap the circle once when the silence has lasted <b>as long as the voice</b>.' },
-  hymn: { intro: 'A voice sings the first line of a hymn: <b>eight syllables, short, long, short, long</b>. Touch the circle to hear it.',
-    ready: 'Now sing it back: hold the circle once for each syllable, <b>each long one twice as long as a short one</b>.' },
+  hymn: { intro: 'A voice sings the first line of a hymn: <b>eight syllables, short, long, short, long</b>. Touch the circle to hear it. Then you sing it back.',
+    ready: 'Now sing it back: <b>eight holds, one for each syllable</b>, the long ones twice as long as the short ones.' },
   first: { ready: 'No voice this time. Hold the circle <b>as long as the very first voice</b>, from round one. Its bar is at the bottom of your memory.' },
 };
 const DONE = {
@@ -635,7 +637,7 @@ function enterRound() {
     turnsShown: 0, kicked: false, kickAt: 0, lay: [], heard: 0, layAnim: null, frozenT: 0 };
   show('round');
   $('#rtitle').textContent = r.title;
-  $('#res').classList.add('hidden'); $('#chips').classList.add('hidden'); $('#chips').innerHTML = '';
+  $('#res').classList.add('hidden'); $('#chips').classList.add('hidden'); $('#chips').innerHTML = ''; $('#layforme').classList.add('hidden');
   drawStrip(); setAsk(); drawWorld(); drawMind(); setCircle();
   loop();
 }
@@ -644,7 +646,7 @@ function setAsk(extra) {
   let h = ui.phase === 'intro' ? a.intro : ui.phase === 'voice' ? LISTEN[r.id] : a.ready;
   if (r.id === 'hymn' && (ui.phase === 'ready' || ui.phase === 'holding')) {
     const k = ui.syl, s = A.hymnVoice()[k];
-    h = (k === 0 ? a.ready + ' ' : '') + 'Hold for <b>' + s.text.toUpperCase() + '</b> (' + (s.long ? 'long' : 'short') + ').';
+    h = (k === 0 ? a.ready + ' ' : '') + (k + 1) + ' of 8: hold for <b>' + s.text.toUpperCase() + '</b> (' + (s.long ? 'long' : 'short') + ').';
   }
   if (r.id === 'voice' && ui.phase === 'intro') h += '<br><span class="small">Nothing is drawn while it lasts. When it is over, it drops below the line into memory.</span>';
   $('#ask').innerHTML = h + (extra ? ' ' + extra : '');
@@ -889,24 +891,42 @@ function endSilence() {
 }
 
 // the hymn: lay a short against a long
+const LAY_PROMPT = '<p><b>One more thing: touch one of your short syllables and one of your long ones, below.</b></p><p>The short one is laid along the long one, to see how many times it goes in.</p>';
+function layPrompt() {
+  const L = A.CONFIG.PAPER.HYMN_LONG, names = A.CONFIG.PAPER.HYMN_LINE, picked = ui.lay[0];
+  if (picked == null) return LAY_PROMPT;
+  const kind = L[picked] ? 'long' : 'short', other = L[picked] ? 'short' : 'long';
+  const rest = names.map((n, k) => L[k] !== L[picked] ? n.toUpperCase() : null).filter(Boolean);
+  return '<p><b>' + esc(names[picked].toUpperCase()) + ' (' + kind + ') is picked. Now touch one of your ' + other + ' ones: ' + rest.join(', ') + '.</b></p>';
+}
 function showLay(res) {
-  $('#ask').innerHTML = esc(res.lines[0]) + (res.lines.length > 2 ? ' ' + esc(res.lines[1]) : '') + '<br><b>Now touch one of your short syllables and one of your long ones.</b> The short one is laid against the long one.';
+  $('#ask').innerHTML = esc(res.lines[0]) + (res.lines.length > 2 ? ' ' + esc(res.lines[1]) : '') + ' <b>One more thing, below: lay a short syllable of yours along a long one.</b>';
   const q = A.QUOTES.hymnAsk;
   const ch = $('#chips'); ch.innerHTML = '';
   A.hymnVoice().forEach((x, k) => { const b = document.createElement('button'); b.innerHTML = esc(x.text.toUpperCase()) + '<small>' + (x.long ? 'long' : 'short') + '</small>'; b.dataset.k = k; b.addEventListener('click', () => pickLay(k)); ch.appendChild(b); });
   ch.classList.remove('hidden');
-  $('#res').classList.remove('hidden'); $('#big').textContent = res.big; $('#lines').innerHTML = ''; $('#rquote').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>';
-  $('#next').classList.add('hidden');
+  $('#res').classList.remove('hidden'); $('#lines').innerHTML = LAY_PROMPT; $('#rquote').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>';
+  $('#next').classList.add('hidden'); $('#layforme').classList.remove('hidden');
   $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">your longs against your shorts</div>';
-  ch.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+  $('#res').scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
 }
+$('#layforme').addEventListener('click', () => { if (ui.lay.length >= 2 || ui.phase !== 'done') return; audio();
+  const L = A.CONFIG.PAPER.HYMN_LONG, iS = ui.lay.find(j => !L[j]), iL = ui.lay.find(j => L[j]);
+  if (iS == null) pickLay(L.findIndex(x => !x)); if (iL == null) pickLay(L.findIndex(x => x)); });
 function pickLay(k) {
+  if (ui.lay.length >= 2 || ui.phase !== 'done') return;
   const isLong = A.CONFIG.PAPER.HYMN_LONG[k];
+  const swapped = ui.lay.find(j => A.CONFIG.PAPER.HYMN_LONG[j] === isLong && j !== k);
   ui.lay = ui.lay.filter(j => A.CONFIG.PAPER.HYMN_LONG[j] !== isLong); ui.lay.push(k);
   $$('#chips button').forEach(b => b.classList.toggle('sel', ui.lay.includes(+b.dataset.k)));
   drawMind();
-  if (ui.lay.length < 2) return;
+  if (ui.lay.length < 2) {
+    $('#lines').innerHTML = (swapped != null ? '<p>That is another ' + (isLong ? 'long' : 'short') + ' one, so it takes the place of ' + esc(A.CONFIG.PAPER.HYMN_LINE[swapped].toUpperCase()) + '.</p>' : '') + layPrompt();
+    return;
+  }
+  $('#layforme').classList.add('hidden');
   const iS = ui.lay.find(j => !A.CONFIG.PAPER.HYMN_LONG[j]), iL = ui.lay.find(j => A.CONFIG.PAPER.HYMN_LONG[j]);
+  $('#lines').innerHTML = '<p>' + esc(A.CONFIG.PAPER.HYMN_LINE[iS].toUpperCase()) + ' is laid along ' + esc(A.CONFIG.PAPER.HYMN_LINE[iL].toUpperCase()) + '. Watch memory.</p>';
   $$('#chips button').forEach(b => b.disabled = true);
   const line = ui.bars.find(b => b.kind === 'youline'), sS = line.segs[iS], sL = line.segs[iL], kRatio = sL.d / sS.d;
   const t0 = performance.now(), D = reduce ? 1 : 1400;
