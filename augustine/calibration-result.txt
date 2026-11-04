@@ -4,44 +4,43 @@ pass  every voice within 2–4.2 s
 pass  the top one at least 1.4× or at most 1/1.4 of the low one  (most draws needed: 778)
 pass  the crowd: the low one, two others and a stranger; the others outlast the low one
 pass  the sun stops after the low one begins and before it ends
-pass  first evening always doubles the wheel
-pass  later evenings double or halve it about evenly  (773 / 727)
+pass  the wheel’s third turn lands at least 1.3× off the voice, either way
+pass  the low one never enters the crowd first
 pass  the same number deals the same evening
 B. The wheel in the silence
 pass  the heard voice lasts exactly three turns
-pass  steady before the kick
-pass  the kick lands 0.8 turns after the press
-pass  after the kick the wheel runs at 2× its pace
-pass  counting three turns gives 0.633 of the voice (doubled)
+pass  steady until the press
+pass  the first segment runs at its pace for its turns
+pass  the pace changes at the segment’s end
+pass  turns and seconds agree: the third turn is done when turnsSince says three
+pass  on this evening three counted turns give 0.655 of the voice
 pass  a hold at the counting point reads as counted
 pass  a hold at the voice reads as saw
-pass  halved: counting gives 1.733 of the voice
-pass  halved: the counting point reads as counted, the voice as saw
 C. Against a voice, the tumult, the last silence
 pass  a hold at the top one’s length reads as pulled
 pass  a hold at the low one’s length reads as held
 pass  a release on the moment reads as caught
 pass  a release at the crowd’s end reads as waited
-pass  never pressing reads as missed
-pass  a late press is said as late, an early release as early
+pass  a release before the low one came in reads as early
+pass  an early release is said as before it stopped
 pass  naming the crowd exactly: 5 of 5
 pass  naming two: the missing ones are listed
 pass  the last silence is measured against the low one
 D. Words
-pass  no decimal or digit reaches a sentence (the chips’ "n of 5" aside)  (38563 lines)
+pass  no decimal or digit reaches a sentence (the chips’ "n of 5" aside)  (37472 lines)
 pass  fraction words never go down as the ratio goes up
 pass  seconds words at their values
 E. Playing it in numbers: 400 evenings per player
   player | typical miss (plain holds) | pulled | counted | waited | commonest headline
-  memory, steady (12%) | ×1.09 | 1% | 2% | 0% | You kept the low one in you all evening, with no clock but your mind. (97%)
+  memory, steady (12%) | ×1.09 | 3% | 6% | 0% | You kept the low one in you all evening, with no clock but your mind. (92%)
 pass  a steady memory player gets the clean headline nearly always
-  memory, shaky (30%) | ×1.23 | 20% | 21% | 0% | You kept the low one in you all evening, with no clock but your mind. (64%)
-  half pulled by the live voice | ×1.09 | 48% | 2% | 0% | You kept the low one in you all evening, with no clock but your mind. (51%)
+  memory, shaky (30%) | ×1.23 | 25% | 22% | 0% | You kept the low one in you all evening, with no clock but your mind. (60%)
+  half pulled by the live voice | ×1.09 | 50% | 6% | 0% | You kept the low one in you, until a voice in your ears pulled you off it. (48%)
   wheel counter | ×1.09 | 3% | 100% | 0% | You kept the low one in you, until a wheel ran away with you. (97%)
 pass  a wheel counter is read as counted every time
-  sun watcher | ×1.08 | 3% | 4% | 100% | You kept the low one in you, until you waited for the sun. (93%)
+  sun watcher | ×1.09 | 4% | 6% | 100% | You kept the low one in you, until you waited for the sun. (90%)
 pass  a sun watcher is read as waited every time
   the learned man (all three) | ×1.09 | 98% | 100% | 100% | You kept the low one in you, mostly: a voice in your ears pulled you off it, a wheel ran away with you, and you waited for the sun. (98%)
 pass  the learned man gets all three faults named
 
-33 checks passed, 0 failed
+32 checks passed, 0 failed

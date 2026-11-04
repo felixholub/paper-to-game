@@ -4,7 +4,7 @@
   about: page width 380 (no horizontal scroll: true)
 
 EVENING A (pulled)
-  number 6293: low 2.058 s, middle 3.907 s, high 2.594 s, top 3.139 s; wheel ×2; crowd low, top, middle, stranger; the low one 0–2.058 s of 4.36 s
+  number 8896: low 3.418 s, middle 4.066 s, high 2.859 s, top 2.375 s; three turns of the wheel at 1.65 of the voice; crowd high, stranger, middle, low; the low one 1.8–5.218 s of 8.217 s
   shot a-1-intro
   shot a-1-ready
   1 the low one: THE SAME / YOURS AGAINST THE LOW ONE || About the same as the low one. | The voice had stopped before you began. It wasn’t there to hold up against yours; what you held was what it left in you.
@@ -13,7 +13,7 @@ EVENING A (pulled)
   2 the middle one: A TENTH OVER / YOURS AGAINST THE MIDDLE ONE || About a tenth longer than the middle one. | A second voice, higher and its own length. It is in your memory now beside the first.
   shot a-2-result
   shot a-help
-  How to play opened and closed; still at {"phase":"ready","id":"back","T":2.058,"i":2,"seed":6293}
+  How to play opened and closed; still at {"phase":"ready","id":"back","T":3.418,"i":2,"seed":8896}
   shot a-3-ready
   3 one back: NINE TENTHS / YOURS AGAINST THE LOW ONE || About nine tenths of the low one: a little short. | Nothing sounded this time. You went back for the low one, from before the middle one, and held it.
   shot a-3-result
@@ -21,58 +21,59 @@ EVENING A (pulled)
   4 through static: A TENTH OVER / YOURS AGAINST THE MIDDLE ONE || About a tenth longer than the middle one. | The static told you nothing about how long. It was there to fill your ears while you went back two voices for the middle one.
   shot a-4-result
   shot a-5-ready
-  5 against a voice: HALF AGAIN / YOURS AGAINST THE LOW ONE || About half as long again as the low one. | While you held, the top one sounded in your ears, about half as long again as the low one. | Your hold lay nearer the top one, the voice that was there, than the low one, the voice you were asked for.
+  5 against a voice: NINE TENTHS / YOURS AGAINST THE LOW ONE || About nine tenths of the low one: a little short. | While you held, the top one sounded in your ears, about two thirds of the low one. | Your hold lay nearer the top one, the voice that was there, than the low one, the voice you were asked for.
   shot a-5-result
   shot a-6-ready
-  6 the silence: TWO THIRDS / YOUR SILENCE AGAINST THE HIGH ONE || Your silence was about two thirds of the high one: short. | The voice lasted three turns of the wheel. Early in your silence the potter kicked it, and it ran faster: your silence lasted three turns. | You let go just where counting three turns would put you.
+  6 the silence: NEARLY DOUBLE / YOUR SILENCE AGAINST THE HIGH ONE || Your silence was nearly double the high one. | The voice lasted three turns of the wheel. In your silence the potter worked it unevenly, now slower, now quicker: your silence lasted three turns of it, and three turns would have been nearly double the voice. | You let go just where counting three turns would put you.
   shot a-6-result
   shot a-7-intro
+  shot a-7-ready
   shot a-7-holding
-  7 the tumult: HALF A SECOND LATE / YOUR HOLD AGAINST THE LOW ONE || You found the low one at once. | You let go half a second after it stopped, while the others went on. | The sun climbed, and stood still before the low one stopped. Time went on. | One more thing: which voices were in the crowd? Touch every one you heard, then say so.
+  7 the tumult: HALF A SECOND LATE / YOUR HOLD AGAINST THE LOW ONE || You let go half a second after the low one stopped, while the others went on. | The sun climbed, and stood still before the low one stopped. Time went on. | One more thing: which voices were in the crowd? Touch every one you heard, then say so.
   shot a-7-heard
-  7 the crowd named: HALF A SECOND LATE / YOUR HOLD AGAINST THE LOW ONE || You found the low one at once. | You let go half a second after it stopped, while the others went on. | The sun climbed, and stood still before the low one stopped. Time went on. | You got four of the five right. | In the crowd, unnamed: a stranger. | The chips show who was there; a red one is a miss, either way.
+  7 the crowd named: HALF A SECOND LATE / YOUR HOLD AGAINST THE LOW ONE || You let go half a second after the low one stopped, while the others went on. | The sun climbed, and stood still before the low one stopped. Time went on. | You got three of the five right. | In the crowd, unnamed: a stranger. | Named, but not there: the top one. | The chips show who was there; a red one is a miss, either way.
   shot a-7-result
   shot a-8-ready
   shot a-8-count
   8 the last silence: NINE TENTHS / IN YOUR HEAD, AGAINST THE LOW ONE || About nine tenths of the low one: a little short. | Nothing sounded and nothing was held. The low one sounded only in you, minutes after you last heard it, through static and a crowd.
   shot a-8-result
   LAST PAGE: You kept the low one in you, mostly: a voice in your ears pulled you off it, and a wheel ran away with you.
-  Fresh, you held the low one to about its length. Minutes later, in silence, with nothing but what had stayed in you, you said it to about nine tenths of its length. | One back, you came about nine tenths of the low one; through static, a little over the middle one. | With the top one in your ears, your hold went to it: about one and a half times the low one, near the top one’s own length. | When the wheel raced in the silence, you let go at about two thirds of the voice, just where counting its turns would put you. | In the tumult you found the low one at once and let go half a second late, under a sun that had stopped. | Afterwards you named four of the five voices rightly.
+  Fresh, you held the low one to about its length. Minutes later, in silence, with nothing but what had stayed in you, you said it to about nine tenths of its length. | One back, you came about nine tenths of the low one; through static, a little over the middle one. | With the top one in your ears, your hold went to it: about nine tenths of the low one, near the top one’s own length. | In the silence the wheel ran unevenly, and you let go at nearly double the voice, just where counting its turns would put you. | In the tumult you let go half a second after the low one stopped, under a sun that had stopped. | Afterwards you named three of the five voices rightly.
   shot a-end
   shot a-end-full
   last page: page width 380 (no horizontal scroll: true)
 
 EVENING B (memory)
-  number 5785: low 3.35 s, middle 3.873 s, high 2.613 s, top 2.002 s; wheel ×0.5; crowd low, high, stranger, top; the low one 0–3.35 s of 5.5 s
+  number 5070: low 3.456 s, middle 2.887 s, high 3.951 s, top 2.192 s; three turns of the wheel at 1.37 of the voice; crowd top, low, stranger, middle; the low one 0.6–4.056 s of 6.592 s
   1 the low one: THE SAME / YOURS AGAINST THE LOW ONE || About the same as the low one. | The voice had stopped before you began. It wasn’t there to hold up against yours; what you held was what it left in you.
   station: page width 380 (no horizontal scroll: true)
   2 the middle one: A TENTH OVER / YOURS AGAINST THE MIDDLE ONE || About a tenth longer than the middle one. | A second voice, higher and its own length. It is in your memory now beside the first.
   3 one back: NINE TENTHS / YOURS AGAINST THE LOW ONE || About nine tenths of the low one: a little short. | Nothing sounded this time. You went back for the low one, from before the middle one, and held it.
   4 through static: A TENTH OVER / YOURS AGAINST THE MIDDLE ONE || About a tenth longer than the middle one. | The static told you nothing about how long. It was there to fill your ears while you went back two voices for the middle one.
   5 against a voice: A TENTH OVER / YOURS AGAINST THE LOW ONE || About a tenth longer than the low one. | While you held, the top one sounded in your ears, about two thirds of the low one. | Your hold stayed nearer the low one, the voice in your memory, than the top one in your ears.
-  6 the silence: THE SAME / YOUR SILENCE AGAINST THE HIGH ONE || Your silence was about the same as the high one. | The voice lasted three turns of the wheel. Early in your silence the potter dragged on it, and it ran slower: your silence lasted two turns. | You did not let go at three turns: you saw it slow. How did you know? Not by the wheel.
-  7 the tumult: A QUARTER OF A SECOND LATE / YOUR HOLD AGAINST THE LOW ONE || You found the low one at once. | You let go a quarter of a second after it stopped, while the others went on. | The sun climbed, and stood still before the low one stopped. Time went on. | One more thing: which voices were in the crowd? Touch every one you heard, then say so.
-  7 the crowd named: A QUARTER OF A SECOND LATE / YOUR HOLD AGAINST THE LOW ONE || You found the low one at once. | You let go a quarter of a second after it stopped, while the others went on. | The sun climbed, and stood still before the low one stopped. Time went on. | You named every voice in the crowd, and nobody who wasn’t there. | The chips show who was there; a red one is a miss, either way.
+  6 the silence: THE SAME / YOUR SILENCE AGAINST THE HIGH ONE || Your silence was about the same as the high one. | The voice lasted three turns of the wheel. In your silence the potter worked it unevenly, now slower, now quicker: your silence lasted two turns of it, and three turns would have been about one and a quarter times the voice. | You did not let go at three turns. The wheel was no measure, and you measured anyway: with something that isn’t the wheel.
+  7 the tumult: ON THE MOMENT / YOUR HOLD AGAINST THE LOW ONE || You let go on the moment the low one stopped, with the others still going. | The sun climbed, and stood still before the low one stopped. Time went on. | One more thing: which voices were in the crowd? Touch every one you heard, then say so.
+  7 the crowd named: ON THE MOMENT / YOUR HOLD AGAINST THE LOW ONE || You let go on the moment the low one stopped, with the others still going. | The sun climbed, and stood still before the low one stopped. Time went on. | You named every voice in the crowd, and nobody who wasn’t there. | The chips show who was there; a red one is a miss, either way.
   8 the last silence: THE SAME / IN YOUR HEAD, AGAINST THE LOW ONE || About the same as the low one. | Nothing sounded and nothing was held. The low one sounded only in you, minutes after you last heard it, through static and a crowd.
   LAST PAGE: You kept the low one in you all evening, with no clock but your mind.
-  Fresh, you held the low one to about its length. Minutes later, in silence, with nothing but what had stayed in you, you said it to about its length. | One back, you came about nine tenths of the low one; through static, a little over the middle one. | With the top one in your ears, you kept to the low one: a little over its length. | When the wheel slowed in the silence, you let go in time: you saw it, with something that isn’t the wheel. | In the tumult you found the low one at once and let go a quarter of a second late, under a sun that had stopped. | Afterwards you named every voice that had been in the crowd.
+  Fresh, you held the low one to about its length. Minutes later, in silence, with nothing but what had stayed in you, you said it to about its length. | One back, you came about nine tenths of the low one; through static, a little over the middle one. | With the top one in your ears, you kept to the low one: a little over its length. | In the silence the wheel ran unevenly, and you did not count it: about the voice, measured with something that isn’t the wheel. | In the tumult you let go on the moment the low one stopped, under a sun that had stopped. | Afterwards you named every voice that had been in the crowd.
   last page: page width 380 (no horizontal scroll: true)
 
 EVENING C (learned)
-  number 6293: low 2.058 s, middle 3.907 s, high 2.594 s, top 3.139 s; wheel ×2; crowd low, top, high, stranger; the low one 0–2.058 s of 4.36 s
+  number 8896: low 3.418 s, middle 4.066 s, high 2.859 s, top 2.375 s; three turns of the wheel at 1.65 of the voice; crowd high, stranger, middle, low; the low one 1.8–5.218 s of 8.217 s
   1 the low one: THE SAME / YOURS AGAINST THE LOW ONE || About the same as the low one. | The voice had stopped before you began. It wasn’t there to hold up against yours; what you held was what it left in you.
   station: page width 380 (no horizontal scroll: true)
   2 the middle one: A TENTH OVER / YOURS AGAINST THE MIDDLE ONE || About a tenth longer than the middle one. | A second voice, higher and its own length. It is in your memory now beside the first.
   3 one back: NINE TENTHS / YOURS AGAINST THE LOW ONE || About nine tenths of the low one: a little short. | Nothing sounded this time. You went back for the low one, from before the middle one, and held it.
   4 through static: A TENTH OVER / YOURS AGAINST THE MIDDLE ONE || About a tenth longer than the middle one. | The static told you nothing about how long. It was there to fill your ears while you went back two voices for the middle one.
-  5 against a voice: NEARLY DOUBLE / YOURS AGAINST THE LOW ONE || Nearly double the low one. | While you held, the top one sounded in your ears, about half as long again as the low one. | Your hold lay nearer the top one, the voice that was there, than the low one, the voice you were asked for.
-  6 the silence: TWO THIRDS / YOUR SILENCE AGAINST THE HIGH ONE || Your silence was about two thirds of the high one: short. | The voice lasted three turns of the wheel. Early in your silence the potter kicked it, and it ran faster: your silence lasted three turns. | You let go just where counting three turns would put you.
-  7 the tumult: TO THE END / YOUR HOLD AGAINST THE LOW ONE || You found the low one at once. | You held to the end of the crowd. The low one had stopped two and a half seconds before the others did. | The sun climbed, and stood still before the low one stopped. It never moved again, and the crowd took its own time. | One more thing: which voices were in the crowd? Touch every one you heard, then say so.
-  7 the crowd named: TO THE END / YOUR HOLD AGAINST THE LOW ONE || You found the low one at once. | You held to the end of the crowd. The low one had stopped two and a half seconds before the others did. | The sun climbed, and stood still before the low one stopped. It never moved again, and the crowd took its own time. | You got two of the five right. | In the crowd, unnamed: the top one, a stranger. | Named, but not there: the middle one. | The chips show who was there; a red one is a miss, either way.
-  8 the last silence: NINE TENTHS / IN YOUR HEAD, AGAINST THE LOW ONE || About nine tenths of the low one: a little short. | Nothing sounded and nothing was held. The low one sounded only in you, minutes after you last heard it, through static and a crowd.
+  5 against a voice: THREE QUARTERS / YOURS AGAINST THE LOW ONE || About three quarters of the low one: short. | While you held, the top one sounded in your ears, about two thirds of the low one. | Your hold lay nearer the top one, the voice that was there, than the low one, the voice you were asked for.
+  6 the silence: NEARLY DOUBLE / YOUR SILENCE AGAINST THE HIGH ONE || Your silence was nearly double the high one. | The voice lasted three turns of the wheel. In your silence the potter worked it unevenly, now slower, now quicker: your silence lasted three turns of it, and three turns would have been nearly double the voice. | You let go just where counting three turns would put you.
+  7 the tumult: TO THE END / YOUR HOLD AGAINST THE LOW ONE || You held to the end of the crowd. The low one had stopped three seconds before the others did. | The sun climbed, and stood still before the low one stopped. It never moved again, and the crowd took its own time. | One more thing: which voices were in the crowd? Touch every one you heard, then say so.
+  7 the crowd named: TO THE END / YOUR HOLD AGAINST THE LOW ONE || You held to the end of the crowd. The low one had stopped three seconds before the others did. | The sun climbed, and stood still before the low one stopped. It never moved again, and the crowd took its own time. | You got four of the five right. | In the crowd, unnamed: a stranger. | The chips show who was there; a red one is a miss, either way.
+  8 the last silence: THREE QUARTERS / IN YOUR HEAD, AGAINST THE LOW ONE || About three quarters of the low one: short. | Nothing sounded and nothing was held. The low one sounded only in you, minutes after you last heard it, through static and a crowd.
   LAST PAGE: You kept the low one in you, mostly: a voice in your ears pulled you off it, a wheel ran away with you, and you waited for the sun.
-  Fresh, you held the low one to about its length. Minutes later, in silence, with nothing but what had stayed in you, you said it to about nine tenths of its length. | One back, you came about nine tenths of the low one; through static, a little over the middle one. | With the top one in your ears, your hold went to it: nearly double the low one, near the top one’s own length. | When the wheel raced in the silence, you let go at about two thirds of the voice, just where counting its turns would put you. | In the tumult you held to the end, under a sun that had stopped. The low one had stopped first. | Afterwards you named two of the five voices rightly.
+  Fresh, you held the low one to about its length. Minutes later, in silence, with nothing but what had stayed in you, you said it to about three quarters of its length. | One back, you came about nine tenths of the low one; through static, a little over the middle one. | With the top one in your ears, your hold went to it: about three quarters of the low one, near the top one’s own length. | In the silence the wheel ran unevenly, and you let go at nearly double the voice, just where counting its turns would put you. | In the tumult you held to the end, under a sun that had stopped. The low one had stopped first. | Afterwards you named four of the five voices rightly.
   last page: page width 380 (no horizontal scroll: true)
 
-evening C used evening A's number (6293) by its address: true
+evening C used evening A's number (8896) by its address: true
 page errors: none

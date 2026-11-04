@@ -113,7 +113,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
   </svg>
   <h1><span class="a">AUGUSTINE'S</span><span class="b">CLOCK</span></h1>
   <div class="quote">What then is time? If no one asks me, I know: if I wish to explain it to one that asketh, I know not.<span class="cite">Augustine, Confessions XI</span></div>
-  <p class="lead">You will hear four voices, one at a time. Then the game asks for them again, later and under worse conditions: after another voice, through static, with a different voice in your ears, in a silence with a wheel turning in it, in a crowd under the sun. Each time you press and hold a black circle for as long as a voice lasted. There is no clock.</p>
+  <p class="lead">You will hear four voices, one at a time. Then the game asks for them again, later and under worse conditions: after another voice, through static, with a different voice in your ears, in a silence with a wheel turning in it, in a crowd under the sun. Each time you press and hold a black circle for as long as a voice lasted. There is no clock, and nothing out there can be trusted.</p>
   <p class="aim">Measure how long things last, with no clock but your memory.</p>
   <button class="btn" id="begin">Hear the low one</button>
   <p class="small">Sound is needed: the voices are the game. Headphones help. Six or seven minutes.</p>
@@ -190,8 +190,8 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <p><b>Nothing is drawn while it lasts.</b> While a voice sounds, the circle turns red, and that is all. When the voice stops, a red bar drops into memory. While you hold, the circle turns blue. When you let go, a blue bar drops in under the red one, so you can see which was longer.</p>
   <p><b>Four voices.</b> The low one, the middle one, the high one and the top one, each its own length. You hear a voice by touching the circle. You give it back by pressing and holding the circle as long as it lasted. The game says how close you came: the same, nine tenths, half, double.</p>
   <p><b>Asked for again.</b> The game asks for a voice you heard earlier: with nothing sounding, through static, or with a different voice in your ears. Hold the one you are asked for.</p>
-  <p><b>The silence.</b> After the high one, a hum starts and a wheel turns. Pressing the circle cuts the hum: your silence. Hold the silence as long as the high one lasted. The wheel is out there and you may count it if you like.</p>
-  <p><b>The tumult.</b> Several voices at once, and the sun climbing. Press when you hear the low one, and let go when it stops; the others go on. Afterwards, say which voices were in the crowd.</p>
+  <p><b>The silence.</b> After the high one, a hum starts and a wheel turns. Pressing the circle cuts the hum: your silence. Hold the silence as long as the high one lasted. The wheel is out there, and the potter works it unevenly.</p>
+  <p><b>The tumult.</b> You hear the low one once more, alone. Then press and hold: the crowd starts when you press, several voices at once under the sun, the low one among them. Let go the moment the low one stops; the others go on. Afterwards, say which voices were in the crowd.</p>
   <p><b>The last silence.</b> Nothing sounds. Tap once to begin, say the low one in your head, and tap again when it would have ended.</p>
   <p><b>The last page</b> says what you did, what Augustine says about it, and shows the low one each time you held it across the evening.</p>
   <button class="btn" id="helpback">Back</button>
@@ -323,10 +323,11 @@ const ASK = {
   against: { ready: 'Nothing sounds yet. Press and hold <b>as long as the low one lasted</b>. While you hold, a fourth voice, <b>the top one</b>, will sound in your ears. Keep to the low one.',
     done: 'You held the low one while the top one sounded. Three bars: the low one, the top one as it sounded, and yours.' },
   silence: { intro: 'Outside, a potter’s wheel turns. Touch the circle to hear <b>the high one</b> again: it lasts <b>three turns</b> of the wheel. Then a hum starts.',
-    ready: 'The hum. Pressing the circle cuts it: that is your silence. Press, and hold the silence <b>as long as the high one lasted</b>. The wheel keeps turning out there.',
+    ready: 'The hum. Pressing the circle cuts it: that is your silence. Press, and hold the silence <b>as long as the high one lasted</b>. The wheel keeps turning out there, as the potter works it.',
     done: 'You kept a silence as long as the high one. Its outline is under the high one’s bar.' },
-  tumult: { intro: 'A crowd: several voices at once, and the sun climbing. Touch the circle to begin. <b>Press when you hear the low one, and let go when it stops.</b> The others will go on.',
-    run: '<b>Press when you hear the low one. Let go when it stops.</b> The others go on.',
+  tumult: { intro: 'A crowd is coming: several voices at once, under the sun. First, touch the circle to hear <b>the low one</b> once more, alone.',
+    ready: 'Now press and hold. <b>The crowd starts when you press.</b> The low one comes in after the others have begun. <b>Let go the moment the low one stops.</b> The others go on.',
+    run: '<b>Let go the moment the low one stops.</b> The others go on.',
     done: 'The crowd is over. The low one is drawn where it was; your hold is drawn where it fell.' },
   last: { ready: 'Nothing sounds, and nothing will. <b>Tap the circle once to begin. Say the low one in your head, and tap again when it would have ended.</b>',
     count: 'The low one is sounding in you, and nowhere else. <b>Tap when it would have ended.</b>',
@@ -338,7 +339,7 @@ function enterStation() {
   if (ui && ui.raf) cancelAnimationFrame(ui.raf);
   stopAll();
   ui = { r, phase: ['back', 'against', 'last'].includes(r.id) ? 'ready' : 'intro', v0: null, h0: null, s0: null, t0: null, bars: [], raf: null,
-    turnsShown: 0, kicked: false, kickAt: 0, picks: [], liveStarted: false, tumultPress: null, tumultRelease: null, lowOn: false, frozenT: 0, staticOn: false };
+    turnsShown: 0, picks: [], liveStarted: false, lowOn: false, frozenT: 0, staticOn: false };
   show('round');
   $('#rtitle').textContent = r.title;
   $('#res').classList.add('hidden'); $('#chips').classList.add('hidden'); $('#chips').innerHTML = ''; $('#heardgo').classList.add('hidden');
@@ -353,7 +354,7 @@ function setAsk(extra) {
 }
 function listen() {
   const r = ui.r;
-  return r.id === 'silence' ? 'Listen, and watch the wheel.' : r.id === 'static' ? 'Listen: the high one.' : 'Listen: ' + A.nameOf(g, r.hear) + '.';
+  return r.id === 'silence' ? 'Listen, and watch the wheel.' : r.id === 'tumult' ? 'Listen: the low one, once more.' : 'Listen: ' + A.nameOf(g, r.hear) + '.';
 }
 function drawStrip() {
   let s = '';
@@ -384,7 +385,7 @@ function drawWorld() {
     s += svg('rect', { x: 168, y: 92, width: 12, height: 14, fill: COL.ink });
     s += svg('polygon', { points: '174,4 168,-6 180,-6', fill: COL.ink, transform: 'translate(0,8)' }); // the mark at the top
     s += svg('g', { id: 'wheel', transform: 'rotate(0 174 54)' }, svg('circle', { cx: 174, cy: 54, r: 44, fill: COL.yellow }) + svg('polygon', { points: '174,14 164,32 184,32', fill: COL.ink }) + svg('circle', { cx: 174, cy: 54, r: 6, fill: COL.ink }));
-    s += svg('polygon', { id: 'wedge', points: '0,90 46,104 0,118', fill: COL.ink, transform: 'translate(40,0)' });
+    s += svg('circle', { id: 'hand', cx: 60, cy: 100, r: 9, fill: COL.ink });                     // the potter's hand, nearer the wheel when he works it
   } else {
     s += svg('g', { id: 'staticfield' });
     s += T(174, 112, 'STATIC', { 'text-anchor': 'middle', fill: COL.ink, 'font-weight': 800 });
@@ -408,10 +409,9 @@ function updateWorld() {
     if (running) {
       const whole = Math.floor(turns + 1e-6);
       if (whole > ui.turnsShown) { ui.turnsShown = whole; tick(); }
-      if (tp != null && t > A.kickAt(r, tp) && !ui.kicked) { ui.kicked = true; ui.kickAt = performance.now(); thud(); }
     }
-    const wd = $('#wedge');
-    if (wd) { const since = ui.kicked ? (performance.now() - ui.kickAt) / 1000 : 9; const k = since < 0.12 ? since / 0.12 : since < 0.5 ? 1 - (since - 0.12) / 0.38 : 0; wd.setAttribute('transform', 'translate(' + (40 + 12 * Math.max(0, k)) + ',0)'); }
+    const hd = $('#hand');
+    if (hd) { const pace = tp != null && t > tp && running ? A.paceAt(r, t - tp) : 1; hd.setAttribute('cx', pace === 1 ? 60 : pace > 1 ? 112 : 84); hd.setAttribute('cy', pace === 1 ? 100 : 96); }
   } else if (r.id === 'static') {
     const f = $('#staticfield'); if (!f) return;
     if (!ui.staticOn) { f.innerHTML = ''; return; }
@@ -425,10 +425,9 @@ function loop() {
     const r = ui.r, now = performance.now();
     if (ui.phase === 'holding' && r.id !== 'tumult' && (now - ui.h0) / 1000 >= A.holdCap(r)) { release(); }
     if (ui.phase === 'count' && (now - ui.s0) / 1000 >= A.holdCap(r)) { endCount(); }
-    if (r.id === 'tumult' && (ui.phase === 'tumult' || ui.phase === 'tholding') && ui.t0 != null) {
+    if (r.id === 'tumult' && ui.phase === 'tholding' && ui.t0 != null) {
       const t = (now - ui.t0) / 1000;
-      if (ui.phase === 'tumult' && t >= r.plan.end + 1.0) finishTumult(null, null);
-      if (ui.phase === 'tholding' && t >= r.plan.end + C.TUMULT.lateCap) finishTumult(ui.tumultPress, r.plan.end + C.TUMULT.lateCap);
+      if (t >= r.plan.end + C.TUMULT.lateCap) finishTumult(r.plan.end + C.TUMULT.lateCap);
     }
     if (r.id === 'against' && ui.phase === 'holding' && !ui.liveStarted && (now - ui.h0) / 1000 >= C.AGAINST.delay) {
       ui.liveStarted = true; ui.liveAt = now; sing(g.voices.top.midi, r.liveT); setCircle();
@@ -450,7 +449,7 @@ function slipsFor() {
   if (r.id === 'static') { if (p === 'intro') voice('THE HIGH ONE'); if (['intro', 'voice'].includes(p)) out.push({ w: 70, label: 'STATIC', c: COL.mute }); if (['intro', 'voice', 'ready'].includes(p)) you('YOU: THE MIDDLE ONE'); }
   if (r.id === 'against') { if (p === 'ready') { you('YOU: AS THE LOW ONE'); voice('THE TOP ONE, IN YOUR EARS'); } if (p === 'holding' && !ui.liveStarted) voice('THE TOP ONE, IN YOUR EARS'); }
   if (r.id === 'silence') { if (p === 'intro') voice('THE HIGH ONE: 3 TURNS'); if (['intro', 'voice'].includes(p)) out.push({ w: 70, label: 'THE HUM', c: COL.mute }); if (['intro', 'voice', 'ready'].includes(p)) out.push({ w: 150, label: 'YOUR SILENCE: AS LONG', c: COL.ink }); }
-  if (r.id === 'tumult') { if (p === 'intro') { voice('THE CROWD'); you('YOU: THE LOW ONE'); } if (p === 'tumult') you('YOU: THE LOW ONE'); }
+  if (r.id === 'tumult') { if (p === 'intro') voice('THE LOW ONE, ONCE MORE'); if (['intro', 'voice', 'ready'].includes(p)) { voice('THE CROWD'); you('YOU: TILL THE LOW ONE STOPS'); } }
   if (r.id === 'last') { if (p === 'ready') out.push({ w: 176, label: 'THE LOW ONE, IN YOUR HEAD', c: COL.blue }); }
   return out;
 }
@@ -527,8 +526,7 @@ function setCircle() {
   else if (p === 'voice') { lab = SHORT[r.hear]; c.classList.add('voice'); }
   else if (p === 'ready') { if (r.id === 'silence') { lab = 'SILENCE'; c.classList.add('quietready'); } else if (r.id === 'last') { lab = 'BEGIN'; c.classList.add('ready'); } else { lab = 'HOLD'; c.classList.add('ready'); } }
   else if (p === 'holding') { if (r.id === 'silence') c.classList.add('quiet'); else { c.classList.add('holding'); if (r.id === 'against' && ui.liveStarted && !ui.liveOver) { c.classList.add('live'); lab = 'TOP'; } } }
-  else if (p === 'tumult') { lab = 'LOW?'; c.classList.add('voice'); }
-  else if (p === 'tholding') { c.classList.add('holding'); if (ui.lowOn || (performance.now() - ui.t0) / 1000 < r.plan.end) c.classList.add('live'); }
+  else if (p === 'tholding') { c.classList.add('holding'); if ((performance.now() - ui.t0) / 1000 < r.plan.end) c.classList.add('live'); lab = ui.lowOn ? 'LOW' : ''; }
   else if (p === 'count') { lab = 'END'; c.classList.add('ready'); }
   else c.classList.add('idle');
   c.textContent = lab;
@@ -550,13 +548,13 @@ function playVoice() {
     setCircle(); setAsk(); drawMind(); settle();
   }, r.T * 1000);
 }
-function startTumult() {
-  const r = ui.r, plan = r.plan; ui.phase = 'tumult'; ui.t0 = performance.now(); setCircle(); setAsk(); drawMind();
+function startTumult() {                       // the press starts the crowd; the finger stays down until the low one stops
+  const r = ui.r, plan = r.plan; ui.phase = 'tholding'; ui.t0 = performance.now(); ui.h0 = ui.t0; setCircle(); setAsk(); drawMind();
   plan.entries.forEach(e => {
     sing(g.voices[e.id].midi, e.dur, e.at, 0.8);
-    if (e.id === 'low') { setTimeout(() => { if (ui && ui.r === r) ui.lowOn = true; }, e.at * 1000); setTimeout(() => { if (ui && ui.r === r) { ui.lowOn = false; setCircle(); } }, e.end * 1000); }
+    if (e.id === 'low') { setTimeout(() => { if (ui && ui.r === r && ui.phase === 'tholding') { ui.lowOn = true; setCircle(); } }, e.at * 1000); setTimeout(() => { if (ui && ui.r === r && ui.phase === 'tholding') { ui.lowOn = false; setCircle(); } }, e.end * 1000); }
   });
-  setTimeout(() => { if (ui && ui.r === r && (ui.phase === 'tumult' || ui.phase === 'tholding')) setCircle(); }, plan.end * 1000 + 20);
+  setTimeout(() => { if (ui && ui.r === r && ui.phase === 'tholding') setCircle(); }, plan.end * 1000 + 20);
 }
 
 // the hold
@@ -566,18 +564,18 @@ function down(e) {
   audio();
   const p = ui && ui.phase, r = ui && ui.r;
   if (!ui) return;
-  if (p === 'intro') { if (r.id === 'tumult') startTumult(); else playVoice(); return; }
-  if (p === 'tumult') { ui.phase = 'tholding'; ui.tumultPress = (performance.now() - ui.t0) / 1000; ui.h0 = performance.now(); setCircle(); return; }
+  if (p === 'intro') { playVoice(); return; }
   if (p === 'count') { endCount(); return; }
   if (p !== 'ready') return;
   if (r.id === 'last') { ui.phase = 'count'; ui.s0 = performance.now(); setCircle(); setAsk(); drawMind(); return; }
+  if (r.id === 'tumult') { startTumult(); return; }
   ui.phase = 'holding'; ui.h0 = performance.now();
   if (r.id === 'silence') droneSet(false); else humStart();
   setCircle(); setAsk(); drawMind();
 }
 function up(e) {
   if (!ui) return;
-  if (ui.phase === 'tholding') { ui.tumultRelease = (performance.now() - ui.t0) / 1000; finishTumult(ui.tumultPress, ui.tumultRelease); return; }
+  if (ui.phase === 'tholding') { finishTumult((performance.now() - ui.t0) / 1000); return; }
   if (ui.phase !== 'holding') return;
   const secs = (performance.now() - ui.h0) / 1000;
   if (secs < 0.12) { ui.phase = 'ready'; humStop(); if (ui.r.id === 'silence') droneSet(true); setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down.</span>'); return; }
@@ -617,13 +615,13 @@ function endCount() {
   drawMind(); settle();
   setTimeout(() => showResult(res), reduce ? 0 : 450);
 }
-function finishTumult(pressAt, releaseAt) {
+function finishTumult(releaseAt) {
   const r = ui.r, plan = r.plan;
   ui.phase = 'done'; ui.frozenT = Math.min((performance.now() - ui.t0) / 1000, plan.end); setCircle(); setAsk();
   live.splice(0).forEach(n => n.stop());
   ui.bars.push({ kind: 'crowd', label: 'THE CROWD, AS IT WAS', rows: plan.entries.map(e => ({ id: e.id, at: e.at, dur: e.dur, hidden: e.id !== 'low' })) });
-  if (pressAt != null) ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.max(0.05, releaseAt - pressAt), at: pressAt, fresh: true });
-  const res = A.tumult(g, pressAt, releaseAt);
+  ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.max(0.05, releaseAt), at: 0, fresh: true });
+  const res = A.tumult(g, releaseAt);
   drawMind(); settle();
   setTimeout(() => showHeard(res), reduce ? 0 : 450);
 }
@@ -700,13 +698,13 @@ function showEnd() {
   show('end');
 }
 function drawDrift(v) {                          // the low one in red, then every time you held it, in blue, in the order of the evening
-  const sc = Math.min(PXS, 300 / Math.max.apply(null, [v.low].concat(v.drift.map(d => (d.made || 0) + (d.late || 0) ))));
+  const sc = Math.min(PXS, 300 / Math.max.apply(null, [v.low].concat(v.drift.map(d => d.made || 0))));
   let s = '', y = 0;
   s += T(0, y + 9, 'THE LOW ONE, AS IT SOUNDED', { fill: COL.red, 'font-weight': 800 });
   s += svg('rect', { x: 0, y: y + 13, width: v.low * sc, height: 18, fill: COL.red }); y += 44;
   v.drift.forEach(d => {
     s += T(0, y + 9, d.label, { fill: COL.blue, 'font-weight': 800 });
-    const x0 = (d.late || 0) * sc;
+    const x0 = 0;
     s += svg('line', { x1: v.low * sc, x2: v.low * sc, y1: y + 10, y2: y + 33, stroke: COL.red, 'stroke-width': 2, 'stroke-dasharray': '3 3' });
     if (d.label.indexOf('END') >= 0) s += svg('rect', { x: 1.5, y: y + 14.5, width: Math.max(0, d.made * sc - 3), height: 15, fill: 'none', stroke: COL.blue, 'stroke-width': 3, 'stroke-dasharray': '7 5' });
     else s += svg('rect', { x: x0, y: y + 13, width: d.made * sc, height: 18, fill: COL.blue });
@@ -715,7 +713,7 @@ function drawDrift(v) {                          // the low one in red, then eve
     y += d.live ? 48 : 42;
   });
   $('#drift').setAttribute('viewBox', '0 0 348 ' + (y + 4)); $('#drift').innerHTML = s;
-  $('#drifttext').textContent = 'The dotted line is where the low one ended. A bar in the tumult starts where you pressed. Plain holds you came ' + v.med + ' of the mark.';
+  $('#drifttext').textContent = 'The dotted line is where the low one ended. In the tumult the bar counts from the moment the low one came in. Plain holds you came ' + v.med + ' of the mark.';
 }
 function drawPsalm() {                           // the line inside the evening inside a life inside the ages (ch. XXVIII)
   const rows = [

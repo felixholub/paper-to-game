@@ -9,7 +9,7 @@
 // evening of measurements made with nothing but the player's mind: four voices, each heard and then asked for again,
 // later and under worse conditions (after another voice, through static, against a voice sounding in the ear, in a
 // silence with a wheel turning in it, inside a tumult under a sun that stops, and at the end in silence, said in the
-// head). Every length, the static, the kick, the sun's stop, the words and the readings are ours; the book gives none.
+// head). Every length, the static, the wheel's paces, the sun's stop, the words and the readings are ours; the book gives none.
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(); else root.AUGUSTINE = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
@@ -43,21 +43,21 @@
     STATIC: { level: 0.5 },                    // the static's loudness relative to a voice (a sound that tells nothing)
     WHEEL: {
       turns: 3,                                // the heard voice lasts exactly three turns of the wheel (countable)
-      kickAfterTurns: 0.8,                     // in the silence, the kick lands this many turns after the press (early in a count)
-      kickFirst: 2,                            // on the first evening the kick doubles the wheel's pace
-      kickChoices: [2, 0.5],                   // on later evenings, doubled or halved (the paper's "quicker" and "slower")
-    },
+      segMin: 0.35, segMax: 0.8,               // in the silence the potter works the wheel unevenly: the pace holds for this many
+      paces: [0.45, 0.6, 1.5, 2.2, 3],         //   turns (dealt), then changes to another of these multiples of its old pace
+      segments: 7,                             //   (ch. XXIII: "sometimes slower, otherwhiles quicker"); seven changes, enough for any hold
+      countOff: 1.3,                           // the schedule is redealt until three counted turns land at least this far (in
+    },                                         //   proportion, either way) from the voice, so counting the wheel visibly fails
     SUN: { start: 0.08, climb: 0.62, stopAt: 0.55 }, // where the sun starts, how far it would climb over the tumult, and when it
                                                      //   stops: this fraction of the low one's length after the low one begins
-    TUMULT: { stagger: 0.3, others: 2, extraMin: 1.1, extraMax: 2.4, lateCap: 1.5 }, // voices enter 0.3 s apart; two of the three
-                                                     //   other voices join the low one and the stranger; they outlast the low one by
-                                                     //   1.1–2.4 s; a hold still going 1.5 s after the last voice is stopped
+    TUMULT: { stagger: 0.6, others: 2, extraMin: 1.6, extraMax: 3.0, lateCap: 1.5 }, // voices enter 0.6 s apart, the low one never
+                                                     //   first; two of the three other voices join the low one and the stranger; they
+                                                     //   outlast the low one by 1.6–3 s; a hold still going 1.5 s after the last voice is stopped
     HOLD_CAP: 4,                               // a hold ends by itself at four times its target
     READ: {                                    // how a measure is read for the verdict
       pulled: true,                            //   against: a hold nearer (in proportion) to the live voice's length than to its target
       counted: true,                           //   silence: a hold nearer to what counting three turns from the press would give than to the voice
       waitedTol: 0.2,                          //   tumult: a release within this of the last voice's end (or after it) is "waited for the sun"
-      foundTol: 0.6,                           //   tumult: a press within this of the low one's start is "found it at once"
     },
     SEED: { min: 1000, max: 9999 },            // the evening's number, shown on the last page and in About
   };
@@ -70,7 +70,7 @@
     { id: 'static', title: 'Through static', voice: 'middle', hear: 'high', source: 'XI.xxviii' },
     { id: 'against', title: 'Against a voice', voice: 'low', live: 'top', source: 'XI.xxviii' },
     { id: 'silence', title: 'The silence', voice: 'high', hear: 'high', source: 'XI.xxiii–xxiv, xxvii' },
-    { id: 'tumult', title: 'The tumult', voice: 'low', source: 'XI.xxiii, xxix' },
+    { id: 'tumult', title: 'The tumult', voice: 'low', hear: 'low', source: 'XI.xxiii, xxix' },
     { id: 'last', title: 'The last silence', voice: 'low', source: 'XI.xxvii; X.xi' },
   ];
 
@@ -123,10 +123,16 @@
     const voices = {};
     CONFIG.VOICES.forEach((v, k) => { voices[v.id] = { id: v.id, name: v.name, midi: v.midi, T: lens[k] }; });
     voices.stranger = { id: 'stranger', name: CONFIG.STRANGER.name, midi: CONFIG.STRANGER.midi, T: round3(L.min + R() * (L.max - L.min)) };
-    const kick = opts.first ? W.kickFirst : W.kickChoices[Math.floor(R() * W.kickChoices.length)];
-    // the tumult: the low one, two of the other three, and a stranger; a seeded order of entry; the others outlast the low one
+    // the wheel in the silence: a schedule of paces from the press, redealt until counting three turns lands well off the voice
+    let wheel;
+    for (;;) {
+      wheel = []; for (let k = 0; k < W.segments; k++) wheel.push({ turns: round3(W.segMin + R() * (W.segMax - W.segMin)), pace: W.paces[Math.floor(R() * W.paces.length)] });
+      const cr = countSecs(wheel, voices.high.T / W.turns, W.turns) / voices.high.T;
+      if (cr >= W.countOff || cr <= 1 / W.countOff) break;
+    }
+    // the tumult: the low one, two of the other three, and a stranger; a seeded order of entry, the low one never first; the others outlast it
     const others = shuffle(['middle', 'high', 'top'], R).slice(0, TU.others);
-    const order = shuffle(['low'].concat(others, ['stranger']), R);
+    let order; do { order = shuffle(['low'].concat(others, ['stranger']), R); } while (order[0] === 'low');
     const entries = order.map((id, k) => ({ id, at: round3(k * TU.stagger) }));
     const low = entries.find(e => e.id === 'low');
     const lowStart = low.at, lowEnd = round3(lowStart + voices.low.T);
@@ -137,33 +143,41 @@
       r.T = voices[spec.voice].T;
       if (spec.hear) r.hearMidi = voices[spec.hear].midi;
       if (spec.live) r.liveT = voices[spec.live].T;
-      if (spec.id === 'silence') r.factor = kick;
+      if (spec.id === 'silence') r.wheel = wheel;
       if (spec.id === 'tumult') r.plan = tumult;
       return r;
     });
     const P = rng(seed ^ 0x5bd1e995);
     const present = CONFIG.PAPER.PRESENT_CHAIN.map(s => ({ label: s.label, parts: s.parts, part: s.part, now: Math.floor(s.parts * (0.3 + 0.4 * P())) }));
-    return { seed, first: !!opts.first, voices, kick, stations, present, i: 0, results: [], done: false, tries };
+    return { seed, first: !!opts.first, voices, stations, present, i: 0, results: [], done: false, tries };
   }
   function current(g) { return g.stations[g.i]; }
   const nameOf = (g, id) => g.voices[id].name;
 
   // ---- the world's clocks
   function wheelPeriod(r) { return r.T / CONFIG.WHEEL.turns; }
+  // turns of the wheel since the press, s seconds in, under a schedule of paces (each segment holds for `turns` turns at `pace` × the base pace)
+  function turnsSince(wheel, P, s) {
+    let turns = 0, left = s;
+    for (const seg of wheel) { const secs = seg.turns * P / seg.pace; if (left <= secs) return turns + left * seg.pace / P; turns += seg.turns; left -= secs; }
+    const last = wheel[wheel.length - 1]; return turns + left * last.pace / P;
+  }
+  // seconds since the press at which n turns are complete under the schedule
+  function countSecs(wheel, P, n) {
+    let s = 0, turns = 0;
+    for (const seg of wheel) { if (turns + seg.turns >= n) return s + (n - turns) * P / seg.pace; s += seg.turns * P / seg.pace; turns += seg.turns; }
+    const last = wheel[wheel.length - 1]; return s + (n - turns) * P / last.pace;
+  }
   // turns of the wheel at time t (seconds since the heard voice began); tPress: when the silence began (same clock), or null
   function wheelTurns(r, t, tPress) {
     const P = wheelPeriod(r);
-    if (r.id !== 'silence' || tPress == null) return t / P;
-    const tk = tPress + CONFIG.WHEEL.kickAfterTurns * P;
-    return t <= tk ? t / P : tk / P + (t - tk) * r.factor / P;
+    if (r.id !== 'silence' || tPress == null || t <= tPress) return t / P;
+    return tPress / P + turnsSince(r.wheel, P, t - tPress);
   }
-  function kickAt(r, tPress) { return tPress + CONFIG.WHEEL.kickAfterTurns * wheelPeriod(r); }
+  // the wheel's pace, as a multiple of its steady pace, s seconds after the press
+  function paceAt(r, s) { const P = wheelPeriod(r); let left = s; for (const seg of r.wheel) { const secs = seg.turns * P / seg.pace; if (left <= secs) return seg.pace; left -= secs; } return r.wheel[r.wheel.length - 1].pace; }
   // what a player who counts three turns of the wheel from the press would hold, as a ratio of the voice
-  function countRatio(r) {
-    const P = wheelPeriod(r), n = CONFIG.WHEEL.turns, k = CONFIG.WHEEL.kickAfterTurns;
-    const secs = k * P + (n - k) * P / r.factor;
-    return secs / r.T;
-  }
+  function countRatio(r) { return countSecs(r.wheel, wheelPeriod(r), CONFIG.WHEEL.turns) / r.T; }
   // the sun over the tumult: its place on the arc at time t (seconds since the tumult began)
   function sunAt(plan, t) { const S = CONFIG.SUN; const tt = Math.min(t, plan.sunStop); return S.start + S.climb * Math.max(0, Math.min(1, tt / plan.end)); }
   function holdCap(r) { return r.T * CONFIG.HOLD_CAP; }
@@ -269,40 +283,31 @@
     const r = current(g);
     if (r.id !== 'silence') throw new Error('not the silence station');
     const capped = secs >= holdCap(r) - 1e-9;
-    const made = Math.min(secs, holdCap(r)), x = made / r.T, fast = r.factor > 1;
-    const turns = wheelTurns(r, r.T + made, r.T) - wheelTurns(r, r.T, r.T);   // turns of the wheel during the silence (press at the voice's end, as the clock sees it)
-    const counted = Math.abs(Math.log(x / countRatio(r))) < Math.abs(Math.log(x));
-    const res = { id: r.id, title: r.title, voice: r.voice, target: r.T, made: round3(made), ratio: x, turns, factor: r.factor, capped,
+    const made = Math.min(secs, holdCap(r)), x = made / r.T;
+    const turns = turnsSince(r.wheel, wheelPeriod(r), made);   // turns of the wheel during the silence
+    const cr = countRatio(r), counted = Math.abs(Math.log(x / cr)) < Math.abs(Math.log(x));
+    const res = { id: r.id, title: r.title, voice: r.voice, target: r.T, made: round3(made), ratio: x, turns, countRatio: cr, capped,
       big: amount(x).big, reading: counted ? 'counted' : 'saw', quote: QUOTES.silence,
       lines: ['Your silence was ' + amount(x).pre + ' the high one' + (verdictWord(x) ? ': ' + verdictWord(x) + '.' : '.')] };
-    res.lines.push('The voice lasted ' + turnsWords(CONFIG.WHEEL.turns) + ' of the wheel. Early in your silence the potter ' + (fast ? 'kicked it, and it ran faster' : 'dragged on it, and it ran slower') + ': your silence lasted ' + turnsWords(turns) + '.');
+    res.lines.push('The voice lasted ' + turnsWords(CONFIG.WHEEL.turns) + ' of the wheel. In your silence the potter worked it unevenly, now slower, now quicker: your silence lasted ' + turnsWords(turns) + ' of it, and ' + turnsWords(CONFIG.WHEEL.turns) + ' would have been ' + amount(cr).n + ' the voice.');
     res.lines.push(counted ? 'You let go just where counting ' + turnsWords(CONFIG.WHEEL.turns) + ' would put you.'
-      : 'You did not let go at ' + turnsWords(CONFIG.WHEEL.turns) + ': you saw it ' + (fast ? 'race' : 'slow') + '. How did you know? Not by the wheel.');
+      : 'You did not let go at ' + turnsWords(CONFIG.WHEEL.turns) + '. The wheel was no measure, and you measured anyway: with something that isn\u2019t the wheel.');
     return finish(g, res);
   }
 
-  // ---- the tumult (station tumult): pressAt and releaseAt in seconds since the tumult began (pressAt null: never pressed)
-  function tumult(g, pressAt, releaseAt) {
+  // ---- the tumult (station tumult): the press starts the crowd; releaseAt is seconds after it, when the finger came off
+  function tumult(g, releaseAt) {
     const r = current(g), plan = r.plan, RD = CONFIG.READ;
     if (r.id !== 'tumult') throw new Error('not the tumult station');
-    const res = { id: r.id, title: r.title, voice: 'low', target: r.T, plan, pressAt: pressAt == null ? null : round3(pressAt), releaseAt: releaseAt == null ? null : round3(releaseAt), lines: [], quote: QUOTES.sun };
-    if (pressAt == null) {
-      res.reading = 'missed'; res.made = 0; res.ratio = 0; res.big = 'not found';
-      res.lines.push('You never pressed: the low one was there, from ' + (plan.lowStart < 0.2 ? 'the start' : 'a moment in') + ', and the crowd went on after it.');
-      res.lines.push('The sun stood still partway through. Time went on.');
-      return finish(g, res);
-    }
-    const late = pressAt - plan.lowStart, off = releaseAt - plan.lowEnd;
-    res.made = round3(Math.max(0, releaseAt - pressAt)); res.ratio = res.made / r.T;
-    res.found = late <= RD.foundTol ? 'atonce' : 'late';
-    const waited = releaseAt >= plan.end - RD.waitedTol;
-    res.reading = waited ? 'waited' : Math.abs(off) <= 0.35 ? 'caught' : 'off';
-    res.off = round3(off); res.late = round3(late);
-    res.big = waited ? 'to the end' : Math.abs(off) <= 0.15 ? 'on the moment' : secondsWords(off) + (off < 0 ? ' early' : ' late');
-    res.lines.push(late <= RD.foundTol ? 'You found the low one at once.' : 'You found the low one after ' + secondsWords(late) + '.');
+    const off = releaseAt - plan.lowEnd, waited = releaseAt >= plan.end - RD.waitedTol;
+    const res = { id: r.id, title: r.title, voice: 'low', target: r.T, plan, releaseAt: round3(releaseAt), off: round3(off), lines: [], quote: QUOTES.sun };
+    res.made = round3(Math.max(0, releaseAt - plan.lowStart)); res.ratio = res.made / r.T;
+    res.reading = waited ? 'waited' : releaseAt < plan.lowStart ? 'early' : Math.abs(off) <= 0.35 ? 'caught' : 'off';
+    res.big = waited ? 'to the end' : releaseAt < plan.lowStart ? 'before it began' : Math.abs(off) <= 0.15 ? 'on the moment' : secondsWords(off) + (off < 0 ? ' early' : ' late');
     res.lines.push(waited ? 'You held to the end of the crowd. The low one had stopped ' + secondsWords(plan.end - plan.lowEnd) + ' before the others did.'
-      : Math.abs(off) <= 0.15 ? 'You let go on the moment it stopped, with the others still going.'
-        : off < 0 ? 'You let go ' + secondsWords(off) + ' before it stopped.' : 'You let go ' + secondsWords(off) + ' after it stopped, while the others went on.');
+      : releaseAt < plan.lowStart ? 'You let go before the low one had even come in: it was the ' + ['first', 'second', 'third', 'fourth'][plan.present.indexOf('low')] + ' voice to enter.'
+        : Math.abs(off) <= 0.15 ? 'You let go on the moment the low one stopped, with the others still going.'
+          : off < 0 ? 'You let go ' + secondsWords(off) + ' before the low one stopped.' : 'You let go ' + secondsWords(off) + ' after the low one stopped, while the others went on.');
     res.lines.push('The sun climbed, and stood still ' + (plan.sunStop < plan.lowEnd ? 'before the low one stopped' : 'as it stopped') + '. ' + (waited ? 'It never moved again, and the crowd took its own time.' : 'Time went on.'));
     return finish(g, res);
   }
@@ -342,7 +347,7 @@
   function verdict(g) {
     const R = g.results, by = id => R.find(r => r && r.id === id);
     const first = by('first'), back = by('back'), stat = by('static'), ag = by('against'), sil = by('silence'), tu = by('tumult'), la = by('last');
-    const pulled = ag && ag.reading === 'pulled', counted = sil && sil.reading === 'counted', waited = tu && tu.reading === 'waited', missed = tu && tu.reading === 'missed';
+    const pulled = ag && ag.reading === 'pulled', counted = sil && sil.reading === 'counted', waited = tu && tu.reading === 'waited', missed = tu && tu.reading === 'early';
     const faults = [];
     if (pulled) faults.push('a voice in your ears pulled you off it');
     if (counted) faults.push('a wheel ran away with you');
@@ -357,7 +362,7 @@
     if (first) drift.push({ label: 'FRESH', made: first.made, ratio: first.ratio });
     if (back) drift.push({ label: 'ONE BACK', made: back.made, ratio: back.ratio });
     if (ag) drift.push({ label: 'AGAINST THE TOP ONE', made: ag.made, ratio: ag.ratio, live: ag.liveT });
-    if (tu && tu.pressAt != null) drift.push({ label: 'IN THE TUMULT', made: tu.made, ratio: tu.ratio, off: tu.off, late: tu.late });
+    if (tu && tu.reading !== 'early') drift.push({ label: 'IN THE TUMULT', made: tu.made, ratio: tu.ratio, off: tu.off });
     if (la) drift.push({ label: 'AT THE END, IN SILENCE', made: la.made, ratio: la.ratio });
     const plain = [first, back, la].filter(Boolean).map(r => Math.abs(Math.log(r.ratio))).sort((a, b) => a - b);
     const med = plain.length ? plain[Math.floor((plain.length - 1) / 2)] : 0;
@@ -366,11 +371,11 @@
     if (back && stat) did.push('One back, you came ' + amount(back.ratio).n + ' the low one; through static, ' + amount(stat.ratio).n + ' the middle one.');
     if (ag) did.push(pulled ? 'With the top one in your ears, your hold went to it: ' + amount(ag.ratio).n + ' the low one, near the top one’s own length.'
       : 'With the top one in your ears, you kept to the low one: ' + amount(ag.ratio).n + ' its length.');
-    if (sil) did.push(counted ? 'When the wheel ' + (sil.factor > 1 ? 'raced' : 'slowed') + ' in the silence, you let go at ' + amount(sil.ratio).n + ' the voice, just where counting its turns would put you.'
-      : 'When the wheel ' + (sil.factor > 1 ? 'raced' : 'slowed') + ' in the silence, you ' + (sil.factor > 1 ? 'held on' : 'let go in time') + ': you saw it, with something that isn’t the wheel.');
-    if (tu) did.push(missed ? 'In the tumult you never found the low one.'
+    if (sil) did.push(counted ? 'In the silence the wheel ran unevenly, and you let go at ' + amount(sil.ratio).n + ' the voice, just where counting its turns would put you.'
+      : 'In the silence the wheel ran unevenly, and you did not count it: ' + amount(sil.ratio).n + ' the voice, measured with something that isn’t the wheel.');
+    if (tu) did.push(missed ? 'In the tumult you let go before the low one had come in.'
       : waited ? 'In the tumult you held to the end, under a sun that had stopped. The low one had stopped first.'
-        : 'In the tumult you found the low one ' + (tu.found === 'atonce' ? 'at once' : 'after ' + secondsWords(tu.late)) + ' and let go ' + (Math.abs(tu.off) <= 0.15 ? 'on the moment it stopped' : secondsWords(tu.off) + (tu.off < 0 ? ' early' : ' late')) + ', under a sun that had stopped.');
+        : 'In the tumult you let go ' + (Math.abs(tu.off) <= 0.15 ? 'on the moment the low one stopped' : secondsWords(tu.off) + (tu.off < 0 ? ' before the low one stopped' : ' after the low one stopped')) + ', under a sun that had stopped.');
     if (tu && tu.right) did.push(tu.wrong.length === 0 ? 'Afterwards you named every voice that had been in the crowd.' : 'Afterwards you named ' + COUNT[tu.right.length] + ' of the five voices rightly.');
     return {
       headline, did, seed: g.seed, drift, low, med: closeness(med),
@@ -388,6 +393,6 @@
     };
   }
 
-  return { CONFIG, STATIONS, QUOTES, rng, newSeed, newGame, current, nameOf, wheelPeriod, wheelTurns, kickAt, countRatio, sunAt, holdCap,
+  return { CONFIG, STATIONS, QUOTES, rng, newSeed, newGame, current, nameOf, wheelPeriod, wheelTurns, turnsSince, countSecs, paceAt, countRatio, sunAt, holdCap,
     amount, verdictWord, closeness, amountSentence, turnsWords, secondsWords, hold, against, silence, tumult, heard, last, next, verdict, AMOUNTS };
 });

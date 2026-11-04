@@ -11,7 +11,7 @@ const out = []; const say = s => { out.push(s); console.log(s); };
   const shot = async (name, full) => { await page.screenshot({ path: path.join(__dirname, `screenshot-${name}.png`), fullPage: !!full }); say(`  shot ${name}`); };
   const noScroll = async where => { const w = await page.evaluate(() => document.documentElement.scrollWidth); say(`  ${where}: page width ${w} (no horizontal scroll: ${w <= 380})`); };
   const st = () => page.evaluate(() => { const u = window.__augustine.ui, g = window.__augustine.g; return { phase: u.phase, id: u.r.id, T: u.r.T, i: g.i, seed: g.seed }; });
-  const G = () => page.evaluate(() => { const g = window.__augustine.g; return { voices: g.voices, plan: g.stations[6].plan, kick: g.kick, seed: g.seed }; });
+  const G = () => page.evaluate(() => { const g = window.__augustine.g, A = window.AUGUSTINE; return { voices: g.voices, plan: g.stations[6].plan, countRatio: A.countRatio(g.stations[5]), seed: g.seed }; });
   const center = () => page.$eval('#now', e => { const r = e.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
   const press = async () => { await page.$eval('#now', e => e.scrollIntoView({ block: 'center' })); const c = await center(); await page.mouse.move(c.x, c.y); await page.mouse.down(); };
   const lift = async () => { await page.mouse.up(); };
@@ -27,7 +27,7 @@ const out = []; const say = s => { out.push(s); console.log(s); };
     say(`\nEVENING ${tag} (${player})`);
     await page.click(opts.again ? '#again' : '#begin'); await page.waitForTimeout(300);
     const info = await G(); const L = info.voices, P = info.plan;
-    say(`  number ${info.seed}: low ${L.low.T} s, middle ${L.middle.T} s, high ${L.high.T} s, top ${L.top.T} s; wheel ×${info.kick}; crowd ${P.present.join(', ')}; the low one ${P.lowStart}–${P.lowEnd} s of ${P.end} s`);
+    say(`  number ${info.seed}: low ${L.low.T} s, middle ${L.middle.T} s, high ${L.high.T} s, top ${L.top.T} s; three turns of the wheel at ${info.countRatio.toFixed(2)} of the voice; crowd ${P.present.join(', ')}; the low one ${P.lowStart}–${P.lowEnd} s of ${P.end} s`);
     const S = (n) => opts.shots ? shot(`${tag.toLowerCase()}-${n}`) : Promise.resolve();
     // 1 the low one
     await S('1-intro'); await tap(); await waitPhase(['ready']); await S('1-ready'); await hold(L.low.T * 1000 * (player === 'shaky' ? 0.8 : 0.95)); await waitPhase(['result']); await result('1 the low one'); await S('1-result'); await noScroll('station'); await page.click('#next'); await page.waitForTimeout(250);
@@ -43,11 +43,11 @@ const out = []; const say = s => { out.push(s); console.log(s); };
     await hold(target5 * 1000 + 350); await waitPhase(['result']); await result('5 against a voice'); await S('5-result'); await page.click('#next'); await page.waitForTimeout(250);
     // 6 the silence
     await tap(); await waitPhase(['ready']); await S('6-ready'); await page.waitForTimeout(700);
-    if (player === 'learned' || player === 'pulled') { const Pd = L.high.T / 3; await press(); await page.waitForTimeout((0.8 * Pd + 2.2 * Pd / info.kick) * 1000); await lift(); } else await hold(L.high.T * 1000 * 1.02);
+    if (player === 'learned' || player === 'pulled') await hold(info.countRatio * L.high.T * 1000); else await hold(L.high.T * 1000 * 1.02);
     await waitPhase(['result']); await result('6 the silence'); await S('6-result'); await page.click('#next'); await page.waitForTimeout(250);
     // 7 the tumult
-    await S('7-intro'); await tap(); await page.waitForTimeout((P.lowStart + 0.3) * 1000); await press(); await S('7-holding');
-    if (player === 'learned') await page.waitForTimeout((P.end - P.lowStart) * 1000 + 300); else await page.waitForTimeout((L.low.T - 0.3 + (player === 'pulled' ? 0.45 : 0.1)) * 1000);
+    await S('7-intro'); await tap(); await waitPhase(['ready']); await S('7-ready'); await press(); await page.waitForTimeout(1200); await S('7-holding');
+    if (player === 'learned') await page.waitForTimeout((P.end - 1.2) * 1000 + 300); else await page.waitForTimeout((P.lowEnd - 1.2 + (player === 'pulled' ? 0.45 : 0.1)) * 1000);
     await lift(); await waitPhase(['heard']); await result('7 the tumult'); await S('7-heard');
     const picks = player === 'learned' ? ['low', 'middle', 'high'] : player === 'pulled' ? P.present.filter(id => id !== 'stranger').concat(P.present.includes('top') ? [] : ['top']) : P.present;
     for (const id of picks) await page.click('#chips button[data-id="' + id + '"]');
