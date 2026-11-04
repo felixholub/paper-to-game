@@ -134,5 +134,20 @@ for (const [name, opt] of variants) {
 console.log('\n== 7. Claim boundaries');
 ok(typeof C.fundingEdge === 'object' && !('fundingEdge' in M.evaluate(T)), 'the correlational funding edge is quoted, never computed from the player\'s panel');
 
+console.log('\n== 8. The four applicant-group bars (passport row × workplace column)');
+for (const [name, pan] of [['ERC-like', C.ercPanel], ['mirror', 'DE/DE DE/DE UK/UK UK/UK FR/FR IT/IT ES/ES IT/UK DE/CH NL/NL PL/PL SE/SE IL/IL PT/PT GR/GR']]) {
+  const e = M.evaluate(P(pan)), c = e.cells;
+  const wsum = M.CELLS.reduce((a, k) => a + c[k].weight, 0);
+  ok(Math.abs(wsum - 100) < 1e-9 && M.CELLS.every(k => c[k].weight > 0), `${name}: the four groups partition the applicants (${M.CELLS.map(k => k + ' ' + f(c[k].weight, 1) + '%').join(', ')})`);
+  const wavg = (a, b) => (c[a].stars * c[a].weight + c[b].stars * c[b].weight) / (c[a].weight + c[b].weight);
+  const big = wavg('bigP_bigW', 'othP_bigW'), oth = wavg('bigP_othW', 'othP_othW');
+  ok(Math.abs(big - e.big.stars) < 1e-9 && Math.abs(oth - e.other.stars) < 1e-9,
+    `${name}: weighted cells reproduce the success measure (works in Big Five ${f(big)} = ${f(e.big.stars)}, elsewhere ${f(oth)} = ${f(e.other.stars)})`);
+  const naive = (c.bigP_bigW.stars + c.othP_bigW.stars) / 2;
+  console.log(`     (an unweighted average of the two bar heights would say ${f(naive)} instead of ${f(big)}; not used)`);
+}
+ok(M.cellOf({ p: 'DE', w: 'FR' }) === 'bigP_bigW' && M.matchType({ p: 'DE', w: 'FR' }, { p: 'FR', w: 'DE' }) === null,
+  '"same" means the same named country: a German in France and a French judge in Germany do not match');
+
 console.log(`\n${fails ? 'FAILURES: ' + fails : 'ALL PASS'}`);
 process.exitCode = fails ? 1 : 0;

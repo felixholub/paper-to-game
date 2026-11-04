@@ -1,36 +1,36 @@
-START: Seat 15 judges. Give small countries as much home advantage as big ones.
+START: You choose the judges for a big science funder.
   [screenshot-start.png] scrollWidth 380
 rules on: true
   [screenshot-rules.png] scrollWidth 380
 round 1 on: true
   [screenshot-r1-empty.png] scrollWidth 380
-  info after first tap: German passport, works in Germany. Full home star for Germans working in Germany (about 1 applicant in 9). Half a star for Germans working elsewhere (about 1 applicant in 30). A third for foreigners working in Germany (about 1 applicant in 29).
+  info after first tap: Passport DE, works in DE (German, works in Germany). Full home star (3 on the key) for Germans who work in Germany (about 1 applicant in 9). About half a star for Germans who work elsewhere (about 1 applicant in 30). About a third for applicants with other passports who work in Germany (about 1 applicant in 29).
   [screenshot-r1-half.png] scrollWidth 380
   help on: true
   [screenshot-help.png] scrollWidth 380
   back on round 1: true | seated kept: 7/15
-  info for IT/UK: Italian passport, works in the UK. Full home star for Italians working in the UK (about 1 applicant in 83). Half a star for Italians working elsewhere (about 1 applicant in 10). A third for anyone else working in the UK (about 1 applicant in 8).
-REVEAL: THE COVERS COME OFF / Your panel gives big-five applicants 3½ times the home advantage of everyone else. / Real ERC panels: about 2½ times (dashed lines). Big countries send thousands of applicants, so each of their home judges is a home judge for many. / ROUND 2
-  jars: BIG FIVE / DE · UK · FR · IT · ES / ERC / 4.4★ / ? / EVERYONE ELSE / all other countries / ERC / 1.4★ / ?
+  info for IT/UK: Passport IT, works in UK (Italian, works in the UK). Full home star (3 on the key) for Italians who work in the UK (about 1 applicant in 83). About half a star for Italians who work elsewhere (about 1 applicant in 10). About a third for applicants with other passports who work in the UK (about 1 applicant in 8).
+REVEAL: THE COVERS COME OFF / Your panel gives applicants who work in the Big Five 3½ times the home advantage of applicants who work elsewhere. / Real ERC panels: about 2½ times (3.3★ against 1.4★). Big countries send thousands of applicants, so each of their home judges is a home judge for many. / ROUND 2
+  bars: APPLICANTS · HOME STARS PER 10 JURIES / Big Five passport, works in the Big Five / 4.8★ / Big Five passport, works elsewhere / 4.2★ / Other passport, works in the Big Five / 2.1★ / Other passport, works elsewhere / 1.1★ / ? COVERED UNTIL THE 15TH JUDGE IS SEATED / Works in Big Five 4.4★ · elsewhere 1.4★ · gap 3.0★
   [screenshot-r1-reveal.png] scrollWidth 380
-round 2 on: true | Gap: 2.3★. Target: half a star or less.
+round 2 on: true | Works in Big Five 3.5★ · elsewhere 1.2★ · gap 2.3★ (target ≤ 0.5★)
   [screenshot-r2-start.png] scrollWidth 380
-  swap GR/GR -> PT/PT: Greek in Greece out, Portuguese in Portugal in. Big five −0.01★, everyone else +0.04★. One Portuguese judge is a home judge for few applicants, so the teal jar barely moves. | Gap: 2.3★. Target: half a star or less.
+  swap GR/GR -> PT/PT: Out: passport GR, works in GR. In: passport PT, works in PT. Works in the Big Five −0.01★, works elsewhere +0.04★. A judge from Portugal is a home judge for few applicants, so the gap barely moves. | Works in Big Five 3.5★ · elsewhere 1.2★ · gap 2.3★ (target ≤ 0.5★)
   [screenshot-r2-naive.png] scrollWidth 380
-  RESET: Gap: 2.3★. Target: half a star or less. | pips used 0
-  swap DE/DE -> PT/PT: German in Germany out, Portuguese in Portugal in. Big five −0.68★, everyone else +0.07★. | Gap: 1.5★. Target: half a star or less.
-  swap IT/UK -> FI/FI: Italian in the UK out, Finnish in Finland in. Big five −0.49★, everyone else +0.07★. | Gap: 1.0★. Target: half a star or less.
-  swap UK/UK -> NO/NO: British in the UK out, Norwegian in Norway in. Big five −0.45★, everyone else +0.09★. | LEVEL: within half a star.
-RESULT: LEVEL! / Solved in 3 swaps. Big five 1.9★, everyone else 1.4★. / THE VERDICT
+  RESET: Works in Big Five 3.5★ · elsewhere 1.2★ · gap 2.3★ (target ≤ 0.5★) | pips used 0
+  swap DE/DE -> PT/PT: Out: passport DE, works in DE. In: passport PT, works in PT. Works in the Big Five −0.68★, works elsewhere +0.07★. | Works in Big Five 2.8★ · elsewhere 1.3★ · gap 1.5★ (target ≤ 0.5★)
+  swap IT/UK -> FI/FI: Out: passport IT, works in UK. In: passport FI, works in FI. Works in the Big Five −0.49★, works elsewhere +0.07★. | Works in Big Five 2.3★ · elsewhere 1.3★ · gap 1.0★ (target ≤ 0.5★)
+  swap UK/UK -> NO/NO: Out: passport UK, works in UK. In: passport NO, works in NO. Works in the Big Five −0.45★, works elsewhere +0.09★. | Works in Big Five 1.9★ · elsewhere 1.4★ · gap 0.4★ (target ≤ 0.5★)
+RESULT: LEVEL! / Solved in 3 swaps. Works in the Big Five 1.9★, works elsewhere 1.4★. / THE VERDICT
   [screenshot-r2-level.png] scrollWidth 380
-VERDICT: Your own panel gave the big five 3½ times the home advantage of everyone else. Then you levelled the ERC-style panel in 3 swaps. / ERC judges give the same proposal about a sixth of a point more when the applicant shares their passport and workplace. Sharing just one of the two is worth two to three times what shared gender is worth. Real ERC panels hand big-five applicants about 2½ times as many home stars as everyone else. / One judge's nudge is small. But it falls on the same side again and again. The study links it to a funding edge of about 1.7 percentage points for the big five against 0.8 for everyone else, where about 14 in 100 get funded. That last part is a correlation, not a proven cause.
+VERDICT: Your own panel gave applicants who work in the Big Five 3½ times the home advantage of everyone else. Then you fixed the ERC-style panel in 3 swaps. / ERC judges give the same proposal about a sixth of a point more when the applicant has the same passport and works in the same country. Sharing just one of the two is worth two to three times what shared gender is worth. Real ERC panels hand applicants who work in the Big Five about 2½ times as many home stars as everyone else. / One judge's nudge is small. But it falls on the same side again and again. The study links it to a funding edge of about 1.7 percentage points for the Big Five against 0.8 for everyone else, where about 14 in 100 get funded. That last part is a correlation, not a proven cause.
   [screenshot-end.png] scrollWidth 380
 about on true
   [screenshot-about.png] scrollWidth 380
 back on end true
-REPLAY REVEAL: THE COVERS COME OFF / Your panel gives big-five applicants 1½ times the home advantage of everyone else. / Real ERC panels: about 2½ times (dashed lines). Big countries send thousands of applicants, so each of their home judges is a home judge for many. / ROUND 2
-  swap ES/ES -> US/US: Spanish in Spain out, American in the US in. Big five −0.43★, everyone else +0.00★. | Gap: 1.9★. Target: half a star or less.
-REPLAY RESULT: NOT YET / The jars are still 1.9★ apart. Try RESET: which judges are home judges for the most applicants? / THE VERDICT
+REPLAY REVEAL: THE COVERS COME OFF / Your panel gives applicants who work in the Big Five 1½ times the home advantage of applicants who work elsewhere. / Real ERC panels: about 2½ times (3.3★ against 1.4★). Big countries send thousands of applicants, so each of their home judges is a home judge for many. / ROUND 2
+  swap ES/ES -> US/US: Out: passport ES, works in ES. In: passport US, works in US. Works in the Big Five −0.43★, works elsewhere +0.00★. | Works in Big Five 3.1★ · elsewhere 1.2★ · gap 1.9★ (target ≤ 0.5★)
+REPLAY RESULT: NOT YET / The gap is still 1.9★. Try RESET: which judges are home judges for the most applicants? / THE VERDICT
   [screenshot-r2-notyet.png] scrollWidth 380
-REPLAY VERDICT: Your own panel gave the big five 1½ times the home advantage of everyone else. The ERC-style panel stayed tilted.
+REPLAY VERDICT: Your own panel gave applicants who work in the Big Five 1½ times the home advantage of everyone else. The ERC-style panel stayed tilted.
 errors []

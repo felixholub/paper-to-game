@@ -18,32 +18,31 @@ const D = (process.argv[2] || __dirname) + '/';
   const order = ['DE/DE', 'DE/DE', 'UK/UK', 'UK/UK', 'FR/FR', 'IT/IT', 'ES/ES', 'IT/UK', 'NL/NL', 'PL/PL', 'SE/SE', 'PT/PT', 'GR/GR', 'IL/IL', 'DE/CH'];
   for (let k = 0; k < order.length; k++) {
     const [pp, ww] = order[k].split('/');
-    const ids = await p.$$eval('#pool .tok:not(.ghost)', (els, a) => els.filter(e => e.querySelector('.mid').textContent === a[1] &&
-      (a[0] === a[1] ? (!e.querySelector('.pp') || e.querySelector('.pp').textContent === a[0]) : (e.querySelector('.pp') || {}).textContent === a[0])).map(e => e.dataset.id), [pp, ww]);
-    await p.click(`#pool .tok[data-id="${ids[0]}"]`); await p.waitForTimeout(60);
+    const ids = await p.$$eval(`#pool .jc:not(.ghost)[data-p="${pp}"][data-w="${ww}"]`, els => els.map(e => e.dataset.id));
+    await p.click(`#pool .jc[data-id="${ids[0]}"]`); await p.waitForTimeout(60);
     if (k === 0) console.log('  info after first tap: ' + await txt('#info1'));
     if (k === 6) { await shot('r1-half'); await p.click('#s-r1 [data-help]'); console.log('  help on:', await on('#s-help')); await shot('help');
-      await p.click('#b-help-back'); console.log('  back on round 1:', await on('#s-r1'), '| seated kept:', await txt('#table1 .cnt')); }
+      await p.click('#b-help-back'); console.log('  back on round 1:', await on('#s-r1'), '| seated kept:', await txt('#cnt1')); }
     if (k === 7) console.log('  info for IT/UK: ' + await txt('#info1'));
   }
   await p.waitForTimeout(900);
-  console.log('REVEAL: ' + await txt('#r1-reveal')); console.log('  jars: ' + await txt('#jars1'));
+  console.log('REVEAL: ' + await txt('#r1-reveal')); console.log('  bars: ' + await txt('#groups1'));
   await p.evaluate(() => window.scrollTo(0, 0)); await shot('r1-reveal');
-  await p.click('#b-r2'); await p.waitForTimeout(300); console.log('round 2 on:', await on('#s-r2'), '|', await txt('#r2-gap')); await shot('r2-start');
-  const seatOf = code => p.$$eval('#table2 .tok', (els, c) => { const [a, w] = c.split('/'); const e = els.find(e => e.querySelector('.mid').textContent === w && (a === w ? (!e.querySelector('.pp') || e.querySelector('.pp').textContent === a) : (e.querySelector('.pp') || {}).textContent === a)); return e ? e.dataset.seat : null; }, code);
-  const benchOf = code => p.$$eval('#bench .tok', (els, c) => { const [a, w] = c.split('/'); const e = els.find(e => e.querySelector('.mid').textContent === w && (a === w ? (!e.querySelector('.pp') || e.querySelector('.pp').textContent === a) : (e.querySelector('.pp') || {}).textContent === a)); return e ? e.dataset.bench : null; }, code);
-  const doSwap = async (o, i) => { await p.click(`#table2 .tok[data-seat="${await seatOf(o)}"]`); await p.waitForTimeout(80); await p.click(`#bench .tok[data-bench="${await benchOf(i)}"]`); await p.waitForTimeout(500);
-    console.log(`  swap ${o} -> ${i}: ${await txt('#info2')} | ${await txt('#r2-gap')}`); };
+  await p.click('#b-r2'); await p.waitForTimeout(300); console.log('round 2 on:', await on('#s-r2'), '|', await txt('#groups2 .agg')); await shot('r2-start');
+  const seatOf = code => { const [a, w] = code.split('/'); return p.$eval(`#table2 .jc[data-p="${a}"][data-w="${w}"]`, e => e.dataset.seat); };
+  const benchOf = code => { const [a, w] = code.split('/'); return p.$eval(`#bench .jc[data-p="${a}"][data-w="${w}"]`, e => e.dataset.bench); };
+  const doSwap = async (o, i) => { await p.click(`#table2 .jc[data-seat="${await seatOf(o)}"]`); await p.waitForTimeout(80); await p.click(`#bench .jc[data-bench="${await benchOf(i)}"]`); await p.waitForTimeout(500);
+    console.log(`  swap ${o} -> ${i}: ${await txt('#info2')} | ${await txt('#groups2 .agg')}`); };
   await doSwap('GR/GR', 'PT/PT'); await shot('r2-naive');
-  await p.click('#b-reset'); await p.waitForTimeout(200); console.log('  RESET:', await txt('#r2-gap'), '| pips used', await p.$$eval('.pip.used', x => x.length));
+  await p.click('#b-reset'); await p.waitForTimeout(200); console.log('  RESET:', await txt('#groups2 .agg'), '| pips used', await p.$$eval('.pip.used', x => x.length));
   await doSwap('DE/DE', 'PT/PT'); await doSwap('IT/UK', 'FI/FI'); await doSwap('UK/UK', 'NO/NO');
   await p.waitForTimeout(500); console.log('RESULT: ' + await txt('#r2-result')); await shot('r2-level');
   await p.click('#b-end'); await p.waitForTimeout(300); console.log('VERDICT: ' + await txt('#verdict')); await p.evaluate(() => window.scrollTo(0, 0)); await shot('end');
   await p.click('#b-about-end'); console.log('about on', await on('#s-about')); await shot('about'); await p.click('#b-about-back'); console.log('back on end', await on('#s-end'));
   // replay: a diverse first panel, then DONE in round 2 without levelling
   await p.click('#b-again'); await p.click('#b-r1'); await p.waitForTimeout(200);
-  const pool = await p.$$eval('#pool .tok', els => els.map(e => e.dataset.id));
-  for (const id of pool.slice(9)) { await p.click(`#pool .tok[data-id="${id}"]`); await p.waitForTimeout(30); }
+  const pool = await p.$$eval('#pool .jc', els => els.map(e => e.dataset.id));
+  for (const id of pool.slice(9)) { await p.click(`#pool .jc[data-id="${id}"]`); await p.waitForTimeout(30); }
   await p.waitForTimeout(800); console.log('REPLAY REVEAL: ' + await txt('#r1-reveal'));
   await p.click('#b-r2'); await p.waitForTimeout(200); await doSwap('ES/ES', 'US/US'); await p.click('#b-done'); await p.waitForTimeout(400);
   console.log('REPLAY RESULT: ' + await txt('#r2-result')); await shot('r2-notyet');
