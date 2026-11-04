@@ -1,0 +1,181 @@
+--- 1. Numbers the text gives ---
+PASS  frontispiece 1861: 83.6 million tons; 3½ per cent from 83.6 gives 83.6 (within 1.2%)
+PASS  frontispiece 1871: 117.9 million tons; 3½ per cent from 83.6 gives 117.9 (within 1.2%)
+PASS  frontispiece 1881: 166.3 million tons; 3½ per cent from 83.6 gives 166.3 (within 1.2%)
+PASS  frontispiece 1891: 234.7 million tons; 3½ per cent from 83.6 gives 234.6 (within 1.2%)
+PASS  frontispiece 1901: 331 million tons; 3½ per cent from 83.6 gives 331.0 (within 1.2%)
+PASS  frontispiece 1911: 466 million tons; 3½ per cent from 83.6 gives 466.9 (within 1.2%)
+PASS  frontispiece 1921: 658 million tons; 3½ per cent from 83.6 gives 658.6 (within 1.2%)
+PASS  frontispiece 1931: 929 million tons; 3½ per cent from 83.6 gives 929.0 (within 1.2%)
+PASS  frontispiece 1941: 1310 million tons; 3½ per cent from 83.6 gives 1310.5 (within 1.2%)
+PASS  frontispiece 1951: 1848 million tons; 3½ per cent from 83.6 gives 1848.6 (within 1.2%)
+PASS  frontispiece 1961: 2607 million tons; 3½ per cent from 83.6 gives 2607.6 (within 1.2%)
+PASS  preface: 1865 production about 95 million tons
+PASS  ch. I: at the same rate from 1865, Hull's 83544 million tons last 101 years ("rather more than a century")
+PASS  "as now" = 3½ per cent a year = x1.990 in twenty years
+PASS  ch. VII: a good engine of the present day burns about 4 lb per horse-power per hour
+PASS  ch. VII: the air-engine has worked at about one-half the expenditure
+PASS  ch. VII: the perfected air-engine at "less than one-third of the present consumption"
+PASS  ch. I: no rise of importance yet: after 1865–1885 as now, coal is x1.001 the 1865 price
+PASS  ch. I: with nine-tenths of the coal within 4,000 ft gone, coal is x9.1 the 1865 price ("much higher than the highest price now paid")
+PASS  preface: "we cannot get to the bottom of them": the last of the coal is dearer than any trade will pay
+PASS  the sheet: one square of ground = 497 million tons = one square of fire (10 years x 50 million tons a year)
+PASS  last screen: UK production 1900 225.2, 1913 287.5, 1920 229.5, 1950 216.3 (published 225.2, 287.4, 229.5, 216.3)
+PASS  last screen: the real curve peaks in 1913
+PASS  last screen: every year 1865–2024, in order
+
+--- 2. The discoveries, at the game's parameters ---
+PASS  (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  (d) 1905–1925: a stand after two generations of rising sends 2.9 million over the sea, keeping on 0.0 million
+PASS  (d) a stand from the start: 15.9 million go over the sea, steadily
+PASS  (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1896, 1903, 1925
+
+--- 3. Robustness: the same discoveries when the designer's choices change ---
+PASS  {"ETA":1.5} (a) engines fitted: noon x1.0 < x1.7 < x7.9 < x13.0 < x15.3; ground gone by 1985 4% < 19% < 64% < 90% < 97%
+PASS  {"ETA":1.5} (a) engines refused: noon x1.0 < x1.0 < x5.8 < x9.8 < x12.1; ground gone by 1985 3% < 11% < 39% < 76% < 91%
+PASS  {"ETA":1.5} (b) as now with engines: the evening comes (1945) and the fire falls (x0.28 of its noon by 1985)
+PASS  {"ETA":1.5} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3103)
+PASS  {"ETA":1.5} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.26, cut/perfect 1.49, stand/air 1.31, stand/perfect 1.57, slower/air 1.33, slower/perfect 1.60, now/air 1.34, now/perfect 1.54, faster/air 1.35, faster/perfect 1.42)
+PASS  {"ETA":1.5} (c') engines fitted: British power still no cheaper than American (x9.61)
+PASS  {"ETA":1.5} (d) 1905–1925: a stand after two generations of rising sends 2.6 million over the sea, keeping on 0.0 million
+PASS  {"ETA":1.5} (d) a stand from the start: 14.7 million go over the sea, steadily
+PASS  {"ETA":1.5} (e) America passes Britain on every steady path: 1882, 1891, 1906, 1933, 1938, 1882, 1889, 1897, 1906, 1932
+PASS  {"ETA":3.5} (a) engines fitted: noon x1.0 < x1.7 < x6.2 < x9.1 < x10.6; ground gone by 1985 4% < 19% < 52% < 71% < 79%
+PASS  {"ETA":3.5} (a) engines refused: noon x1.0 < x1.0 < x3.7 < x6.3 < x7.5; ground gone by 1985 3% < 9% < 28% < 53% < 67%
+PASS  {"ETA":3.5} (b) as now with engines: the evening comes (1945) and the fire falls (x0.36 of its noon by 1985)
+PASS  {"ETA":3.5} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3800)
+PASS  {"ETA":3.5} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.41, cut/perfect 1.83, stand/air 1.48, stand/perfect 1.97, slower/air 1.51, slower/perfect 2.01, now/air 1.54, now/perfect 1.88, faster/air 1.55, faster/perfect 1.67)
+PASS  {"ETA":3.5} (c') engines fitted: British power still no cheaper than American (x2.71)
+PASS  {"ETA":3.5} (d) 1905–1925: a stand after two generations of rising sends 3.2 million over the sea, keeping on 0.0 million
+PASS  {"ETA":3.5} (d) a stand from the start: 17.1 million go over the sea, steadily
+PASS  {"ETA":3.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1925, 1930, 1882, 1889, 1895, 1901, 1912
+PASS  {"REBOUND_EXP":0.3} (a) engines fitted: noon x1.0 < x1.4 < x6.1 < x9.9 < x11.9; ground gone by 1985 4% < 17% < 52% < 76% < 85%
+PASS  {"REBOUND_EXP":0.3} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"REBOUND_EXP":0.3} (b) as now with engines: the evening comes (1945) and the fire falls (x0.41 of its noon by 1985)
+PASS  {"REBOUND_EXP":0.3} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"REBOUND_EXP":0.3} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.26, cut/perfect 1.48, stand/air 1.30, stand/perfect 1.56, slower/air 1.32, slower/perfect 1.58, now/air 1.33, now/perfect 1.52, faster/air 1.34, faster/perfect 1.41)
+PASS  {"REBOUND_EXP":0.3} (c') engines fitted: British power still no cheaper than American (x3.41)
+PASS  {"REBOUND_EXP":0.3} (d) 1905–1925: a stand after two generations of rising sends 2.7 million over the sea, keeping on 0.0 million
+PASS  {"REBOUND_EXP":0.3} (d) a stand from the start: 15.9 million go over the sea, steadily
+PASS  {"REBOUND_EXP":0.3} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1929, 1935, 1882, 1889, 1897, 1905, 1929
+PASS  {"REBOUND_EXP":0.8} (a) engines fitted: noon x1.0 < x2.3 < x8.3 < x11.3 < x12.8; ground gone by 1985 4% < 24% < 63% < 82% < 89%
+PASS  {"REBOUND_EXP":0.8} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"REBOUND_EXP":0.8} (b) as now with engines: the evening comes (1945) and the fire falls (x0.28 of its noon by 1985)
+PASS  {"REBOUND_EXP":0.8} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"REBOUND_EXP":0.8} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.47, cut/perfect 1.96, stand/air 1.54, stand/perfect 2.12, slower/air 1.59, slower/perfect 2.16, now/air 1.62, now/perfect 1.98, faster/air 1.63, faster/perfect 1.71)
+PASS  {"REBOUND_EXP":0.8} (c') engines fitted: British power still no cheaper than American (x4.73)
+PASS  {"REBOUND_EXP":0.8} (d) 1905–1925: a stand after two generations of rising sends 3.3 million over the sea, keeping on 0.1 million
+PASS  {"REBOUND_EXP":0.8} (d) a stand from the start: 15.9 million go over the sea, steadily
+PASS  {"REBOUND_EXP":0.8} (e) America passes Britain on every steady path: 1882, 1891, 1906, 1927, 1931, 1882, 1889, 1894, 1900, 1909
+PASS  {"PRICE_K":0.6} (a) engines fitted: noon x1.0 < x1.7 < x7.8 < x12.6 < x14.8; ground gone by 1985 4% < 19% < 63% < 86% < 92%
+PASS  {"PRICE_K":0.6} (a) engines refused: noon x1.0 < x1.0 < x5.1 < x9.0 < x10.8; ground gone by 1985 3% < 10% < 34% < 69% < 84%
+PASS  {"PRICE_K":0.6} (b) as now with engines: the evening comes (1945) and the fire falls (x0.25 of its noon by 1985)
+PASS  {"PRICE_K":0.6} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3399)
+PASS  {"PRICE_K":0.6} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.80, now/air 1.44, now/perfect 1.74, faster/air 1.45, faster/perfect 1.57)
+PASS  {"PRICE_K":0.6} (c') engines fitted: British power still no cheaper than American (x6.16)
+PASS  {"PRICE_K":0.6} (d) 1905–1925: a stand after two generations of rising sends 2.6 million over the sea, keeping on 0.0 million
+PASS  {"PRICE_K":0.6} (d) a stand from the start: 15.9 million go over the sea, steadily
+PASS  {"PRICE_K":0.6} (e) America passes Britain on every steady path: 1882, 1891, 1906, 1932, 1937, 1882, 1889, 1896, 1903, 1928
+PASS  {"PRICE_K":1.8} (a) engines fitted: noon x1.0 < x1.6 < x5.8 < x8.4 < x9.9; ground gone by 1985 4% < 19% < 50% < 69% < 79%
+PASS  {"PRICE_K":1.8} (a) engines refused: noon x1.0 < x1.0 < x3.8 < x6.0 < x7.6; ground gone by 1985 3% < 10% < 31% < 55% < 68%
+PASS  {"PRICE_K":1.8} (b) as now with engines: the evening comes (1945) and the fire falls (x0.44 of its noon by 1985)
+PASS  {"PRICE_K":1.8} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3444)
+PASS  {"PRICE_K":1.8} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.75, slower/air 1.42, slower/perfect 1.77, now/air 1.43, now/perfect 1.64, faster/air 1.44, faster/perfect 1.50)
+PASS  {"PRICE_K":1.8} (c') engines fitted: British power still no cheaper than American (x2.58)
+PASS  {"PRICE_K":1.8} (d) 1905–1925: a stand after two generations of rising sends 3.5 million over the sea, keeping on 0.1 million
+PASS  {"PRICE_K":1.8} (d) a stand from the start: 16.1 million go over the sea, steadily
+PASS  {"PRICE_K":1.8} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1924, 1929, 1882, 1889, 1896, 1903, 1919
+PASS  {"EMIGRATE_SHARE":0.08} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"EMIGRATE_SHARE":0.08} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"EMIGRATE_SHARE":0.08} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"EMIGRATE_SHARE":0.08} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"EMIGRATE_SHARE":0.08} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  {"EMIGRATE_SHARE":0.08} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"EMIGRATE_SHARE":0.08} (d) 1905–1925: a stand after two generations of rising sends 1.6 million over the sea, keeping on 0.0 million
+PASS  {"EMIGRATE_SHARE":0.08} (d) a stand from the start: 9.2 million go over the sea, steadily
+PASS  {"EMIGRATE_SHARE":0.08} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1896, 1903, 1925
+PASS  {"EMIGRATE_SHARE":0.3} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"EMIGRATE_SHARE":0.3} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"EMIGRATE_SHARE":0.3} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"EMIGRATE_SHARE":0.3} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"EMIGRATE_SHARE":0.3} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  {"EMIGRATE_SHARE":0.3} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"EMIGRATE_SHARE":0.3} (d) 1905–1925: a stand after two generations of rising sends 5.7 million over the sea, keeping on 0.0 million
+PASS  {"EMIGRATE_SHARE":0.3} (d) a stand from the start: 26.9 million go over the sea, steadily
+PASS  {"EMIGRATE_SHARE":0.3} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1896, 1903, 1925
+PASS  {"AMERICA_RATE":0.05} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"AMERICA_RATE":0.05} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"AMERICA_RATE":0.05} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"AMERICA_RATE":0.05} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"AMERICA_RATE":0.05} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  {"AMERICA_RATE":0.05} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"AMERICA_RATE":0.05} (d) 1905–1925: a stand after two generations of rising sends 2.9 million over the sea, keeping on 0.0 million
+PASS  {"AMERICA_RATE":0.05} (d) a stand from the start: 15.9 million go over the sea, steadily
+PASS  {"AMERICA_RATE":0.05} (e) America passes Britain on every steady path: 1883, 1896, 1919, 1941, 1941, 1883, 1892, 1900, 1924, 1938
+PASS  {"AMERICA_RATE":0.07} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"AMERICA_RATE":0.07} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"AMERICA_RATE":0.07} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"AMERICA_RATE":0.07} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"AMERICA_RATE":0.07} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  {"AMERICA_RATE":0.07} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"AMERICA_RATE":0.07} (d) 1905–1925: a stand after two generations of rising sends 2.9 million over the sea, keeping on 0.0 million
+PASS  {"AMERICA_RATE":0.07} (d) a stand from the start: 15.9 million go over the sea, steadily
+PASS  {"AMERICA_RATE":0.07} (e) America passes Britain on every steady path: 1880, 1887, 1897, 1913, 1925, 1880, 1887, 1892, 1898, 1903
+PASS  {"REFUSE_EXP":0.1} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"REFUSE_EXP":0.1} (a) engines refused: noon x1.0 < x1.0 < x5.0 < x8.0 < x10.2; ground gone by 1985 3% < 11% < 39% < 67% < 80%
+PASS  {"REFUSE_EXP":0.1} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"REFUSE_EXP":0.1} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3055)
+PASS  {"REFUSE_EXP":0.1} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.25, cut/perfect 1.45, stand/air 1.28, stand/perfect 1.52, slower/air 1.31, slower/perfect 1.54, now/air 1.32, now/perfect 1.46, faster/air 1.33, faster/perfect 1.35)
+PASS  {"REFUSE_EXP":0.1} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"REFUSE_EXP":0.1} (d) 1905–1925: a stand after two generations of rising sends 2.9 million over the sea, keeping on 0.0 million
+PASS  {"REFUSE_EXP":0.1} (d) a stand from the start: 14.5 million go over the sea, steadily
+PASS  {"REFUSE_EXP":0.1} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1897, 1907, 1929
+PASS  {"REFUSE_EXP":0.35} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"REFUSE_EXP":0.35} (a) engines refused: noon x1.0 < x1.0 < x3.5 < x7.2 < x8.4; ground gone by 1985 3% < 8% < 25% < 54% < 71%
+PASS  {"REFUSE_EXP":0.35} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"REFUSE_EXP":0.35} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 4187)
+PASS  {"REFUSE_EXP":0.35} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.47, cut/perfect 2.01, stand/air 1.56, stand/perfect 2.19, slower/air 1.60, slower/perfect 2.26, now/air 1.63, now/perfect 2.15, faster/air 1.65, faster/perfect 1.91)
+PASS  {"REFUSE_EXP":0.35} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"REFUSE_EXP":0.35} (d) 1905–1925: a stand after two generations of rising sends 2.9 million over the sea, keeping on 0.0 million
+PASS  {"REFUSE_EXP":0.35} (d) a stand from the start: 18.0 million go over the sea, steadily
+PASS  {"REFUSE_EXP":0.35} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1894, 1900, 1905
+PASS  {"POP_RATE":0.009} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"POP_RATE":0.009} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"POP_RATE":0.009} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"POP_RATE":0.009} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"POP_RATE":0.009} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  {"POP_RATE":0.009} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"POP_RATE":0.009} (d) 1905–1925: a stand after two generations of rising sends 2.1 million over the sea, keeping on 0.0 million
+PASS  {"POP_RATE":0.009} (d) a stand from the start: 11.1 million go over the sea, steadily
+PASS  {"POP_RATE":0.009} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1896, 1903, 1925
+PASS  {"POP_RATE":0.015} (a) engines fitted: noon x1.0 < x1.7 < x6.8 < x10.5 < x12.3; ground gone by 1985 4% < 19% < 57% < 79% < 87%
+PASS  {"POP_RATE":0.015} (a) engines refused: noon x1.0 < x1.0 < x4.5 < x7.5 < x9.2; ground gone by 1985 3% < 10% < 33% < 62% < 77%
+PASS  {"POP_RATE":0.015} (b) as now with engines: the evening comes (1945) and the fire falls (x0.35 of its noon by 1985)
+PASS  {"POP_RATE":0.015} (b) a stand: no evening by 1985, and the coal still runs out at that pace (about 3414)
+PASS  {"POP_RATE":0.015} (c) fitting an engine burns more coal that generation than refusing it, at every pace (ratios cut/air 1.34, cut/perfect 1.65, stand/air 1.39, stand/perfect 1.76, slower/air 1.42, slower/perfect 1.79, now/air 1.44, now/perfect 1.69, faster/air 1.45, faster/perfect 1.53)
+PASS  {"POP_RATE":0.015} (c') engines fitted: British power still no cheaper than American (x3.89)
+PASS  {"POP_RATE":0.015} (d) 1905–1925: a stand after two generations of rising sends 3.9 million over the sea, keeping on 0.0 million
+PASS  {"POP_RATE":0.015} (d) a stand from the start: 22.4 million go over the sea, steadily
+PASS  {"POP_RATE":0.015} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1928, 1933, 1882, 1889, 1896, 1903, 1925
+
+--- 4. The obvious ways of playing (build.md, section 3) ---
+strategy | shape | noon | noon, x 1865 | evening | 1985, x 1865 | ground gone | America passed | over the sea (M) | coal lasts at last pace
+as now, fit both | greatness | 1938 | 10.5 (off sheet) | 1945 | 3.7 | 79% | 1928 | 20.9 | 2036
+as now, refuse both | greatness | 1961 | 7.5 (off sheet) | - | 5.9 | 62% | 1903 | 9.4 | 2040
+faster, fit both | greatness | 1929 | 12.3 (off sheet) | 1945 | 2.8 | 87% | 1933 | 25.2 | 2026
+slower, fit both | greatness | 1950 | 6.8 (off sheet) | - | 4.9 | 57% | 1905 | 11.5 | 2062
+slower, refuse both | between | 1985 | 4.5 | - | 4.5 | 33% | 1896 | 2.7 | 2117
+a stand, fit both | mediocrity | 1945 | 1.7 | - | 1.6 | 19% | 1891 | 10.8 | 2438
+a stand, refuse both | mediocrity | 1865 | 1.0 | - | 0.6 | 10% | 1889 | 15.9 | 3414
+cut back, then a stand, refuse | mediocrity | 1865 | 1.0 | - | 0.3 | 5% | 1882 | 17.5 | 4925
+as now twice, then a stand, fit | greatness | 1905 | 5.4 | - | 2.6 | 50% | 1915 | 18.9 | 2158
+a stand three times, then as now, refuse | between | 1985 | 4.1 | - | 4.1 | 18% | 1889 | 6.4 | 2162
+as now, fit the air-engine only | greatness | 1928 | 8.9 (off sheet) | 1965 | 4.2 | 74% | 1927 | 18.2 | 2040
+as now, fit the perfected one only | greatness | 1945 | 15.4 (off sheet) | 1945 | 4.0 | 78% | 1903 | 23.1 | 2033
+
+159 of 159 checks pass.
