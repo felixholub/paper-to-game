@@ -53,13 +53,13 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 .balloon.hers::before { content: ''; position: absolute; left: -16px; bottom: -4px; width: 9px; height: 9px; border: 1.5px dashed var(--ink); border-radius: 50%; background: #fff; }
 .balloon.hers::after { content: ''; position: absolute; left: -8px; bottom: 6px; width: 5px; height: 5px; border: 1.5px dashed var(--ink); border-radius: 50%; background: #fff; }
 .strip { display: flex; gap: 2px; width: var(--w); margin: 10px auto 0; }
-.strip .fr { flex: 1 1 0; height: 28px; border: 1.2px solid var(--ink); background: #fff; position: relative; overflow: hidden; }
+.strip .fr { flex: 1 1 0; height: 30px; border: 1.2px solid var(--ink); background: #fff; position: relative; overflow: hidden; }
 .strip .fr.empty { border-style: dotted; opacity: .5; }
 .strip .fr svg { display: block; width: 100%; height: 100%; }
 .blanketline { width: var(--w); height: 5px; background: var(--rose); margin: 4px auto 0; border-radius: 3px; }
 .striplabel { width: var(--w); margin: 3px auto 0; font-size: 12.5px; display: flex; justify-content: space-between; opacity: .85; }
-.record { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; width: var(--w); margin: 8px auto 0; }
-.record .fr { height: 48px; border: 1.2px solid var(--ink); background: #fff; overflow: hidden; }
+.record { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: var(--w); margin: 8px auto 0; }
+.record .fr { height: 54px; border: 1.2px solid var(--ink); background: #fff; overflow: hidden; }
 .record .fr svg { display: block; width: 100%; height: 100%; }
 .verd h3 { font-family: 'Italiana', serif; font-weight: 400; font-size: 22px; margin: 14px 0 4px; }
 .sentence { font-family: 'Italiana', serif; font-size: 26px; line-height: 1.15; margin: 18px 0 10px; text-align: center; }
@@ -139,7 +139,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
   <h3 class="verd" style="font-family:'Italiana',serif;font-weight:400;font-size:22px;margin:16px 0 4px">The night</h3>
   <div class="record" id="recordGrid"></div>
   <div class="blanketline"></div>
-  <div class="striplabel"><span>sixteen beats: tone is the heaviness, stars the sureness, the mark is where you looked; the blanket under all of them</span></div>
+  <div class="striplabel"><span>ten beats: tone is the heaviness, stars the sureness, the mark is where you looked; the blanket under all of them</span></div>
   <p class="sentence" id="vSentence"></p>
   <div class="row"><button class="btn primary wide" id="againBtn">Another night</button></div>
   <div class="row"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -149,7 +149,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 <section id="help" class="screen help">
   <h2>How to play</h2>
   <p><b>See the night through. Each time, choose where to look — the cross, the window, or within — and find out what brings the heaviness.</b></p>
-  <p>The picture is one room: your bed on the left with you in it under a rose blanket, a cross on the wall in front of you, a window on the right. The night has sixteen beats; the small label at the top right of the picture gives the hour, and the sky in the window changes with it.</p>
+  <p>The picture is one room: your bed on the left with you in it under a rose blanket, a cross on the wall in front of you, a window on the right. The night has ten beats, one for each sight at the cross, so no night shows everything; the small label at the top right of the picture gives the hour, and the sky in the window changes with it.</p>
   <p><b>The weather.</b> Sometimes the room is light, with stars and petals over it: that is a sureness. Sometimes a heavy dot-tone lies over everything and scribbles creep in at the edges: that is the heaviness. The line under the picture says which it is now, and, when it has just changed, what you looked at just before. <b>The blanket</b> is how you are kept. It is the one thing in colour.</p>
   <p><b>Looking.</b> Each beat, tap a place: the cross, the window, or you yourself (within), in the picture or on the three panels under it. Your eyes turn there and the panel says what looking there is. Then tap <b>Look</b>. <b>The cross</b> shows the next sight of the Passion; in the heaviness the same sight is hard to look at. <b>The window</b> shows the sky and nothing else; nothing there can harm you, and nothing is shown. <b>Within</b> asks a question and gets an answer, one per beat, in order; in the heaviness the first question is what brought it.</p>
   <p><b>After a look</b> the game says in its own words what you did and what came of it, then His words in a round balloon and yours in a dashed one, then what the heaviness did and what that means. <b>Turn the page</b> starts the next beat. Nothing carries over: every beat starts with your eyes on nothing.</p>

@@ -14,7 +14,7 @@ console.log('NIGHT ' + seed + '  weather: ' + st.weather.map(function (w) { retu
 console.log('AIM: See the night through. Each time, choose where to look — the cross, the window, or within — and find out what brings the heaviness.\n');
 while (!st.done) {
   var t = st.beat;
-  console.log('--- beat ' + (t + 1) + ' of 16 · ' + J.hour(st) + ' · page: ' + (J.weal(st) ? '[stars, petals]' : '[heavy tone, scribbles at the edges]') + ' · blanket: rose, unchanged');
+  console.log('--- beat ' + (t + 1) + ' of ' + J.CONFIG.beats + ' · ' + J.hour(st) + ' · page: ' + (J.weal(st) ? '[stars, petals]' : '[heavy tone, scribbles at the edges]') + ' · blanket: rose, unchanged');
   console.log('    ' + J.pageLine(st));
   var opts = J.options(st);
   opts.forEach(function (o) { console.log('    [' + o.label + '] ' + o.line); });

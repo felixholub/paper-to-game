@@ -6,18 +6,17 @@
   'use strict';
 
   var CONFIG = {
-    beats: 16,          // ch. i: "Sixteen Shewings"; our choice: one beat of the night per shewing (a count, not a mapping)
+    beats: 10,          // our choice: ten beats, one per sight at the cross (ch. iv–xxvi), so a night cannot show everything; the first build had sixteen, for the sixteen shewings (ch. i), and ran dry after the tenth
     swingsInText: 20,   // ch. xv: "now that one, and now that other, divers times — I suppose about twenty times" (in one shewing)
-    turnProb: 0.5,      // our choice: the weather turns on about half the beats; ~8 turns in 16 beats stands for the twenty in the text
+    turnProb: 0.6,      // our choice: the weather turns on about six beats in ten; ~5–6 turns in 10 beats stands for the twenty in the text
     firstTurnBy: 3,     // our choice (a floor): the first heaviness no later than beat 3, so the discovery arrives early
-    maxRun: 4,          // our choice: no stretch of one weather longer than 4 beats (ch. xv: "This lasted but a while")
+    maxRun: 3,          // our choice: no stretch of one weather longer than 3 beats (ch. xv: "This lasted but a while")
     startWeal: true,    // ch. xv: the sureness came first ("I was fulfilled with the everlasting sureness")
     keeping: 1,         // ch. xv: "He keepeth us even alike secure in woe and in weal" — constant by construction, never read by the weather
     actsAffectWeather: 0, // ch. xv: "freely our Lord giveth when He will" — the schedule is drawn from the seed before the first look; 0 = no effect
     cheerNeedsCross: 1, // ch. xxi: "willingly abiding in the same Cross ... unto the last point, suddenly He shall change His Cheer" — our tie
     profferAfterDrying: 1, // ch. xix: "Look up to Heaven" is offered while she beholds the drying (ch. xvi–xvii); our tie to the first dark after it
-    hours: ['deep night', 'deep night', 'deep night', 'deep night', 'night', 'night', 'night', 'night',
-            'small hours', 'small hours', 'small hours', 'small hours', 'before dawn', 'before dawn', 'first light', 'morning'] // our choice: the window's clock; the text gives no hour in these chapters
+    hours: ['deep night', 'deep night', 'night', 'night', 'small hours', 'small hours', 'before dawn', 'before dawn', 'first light', 'morning'] // our choice: the window's clock; the text gives no hour in these chapters
   };
 
   // ---- the weather: a seeded schedule, drawn once, independent of every look ----------------------------------------

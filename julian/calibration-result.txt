@@ -1,18 +1,19 @@
-ok   schedule has 16 beats (ch. i: sixteen shewings, as a count)
+ok   schedule has 10 beats (one per sight at the cross)
 ok   the night begins in sureness (ch. xv)
 ok   first heaviness by beat 3 on every seed (our floor)
-ok   no stretch of one weather longer than 4 beats ("this lasted but a while")
-ok   mean turns per night between 7 and 9 (the text's ~20 in one shewing, compressed; declared)  [mean 8.21]
-ok   5th–95th percentile of turns within [5, 11]  [6–11]
+ok   no stretch of one weather longer than 3 beats ("this lasted but a while")
+ok   mean turns per night between 5 and 7 (the text's ~20 in one shewing, compressed; declared)  [mean 5.83]
+ok   5th–95th percentile of turns within [4, 8]  [4–8]
 ok   the twenty is in CONFIG with its chapter
 ok   the weather is the same under every policy for the same seed
-ok   P(heaviness comes next | last look) equal across the three places within 0.06  [0.558 / 0.553 / 0.550]
+ok   P(heaviness comes next | last look) equal across the three places within 0.06  [0.659 / 0.666 / 0.653]
 ok   the keeping is constant on every beat of every night (ch. xv)
 ok   CONFIG.actsAffectWeather is 0 and the schedule takes no argument but the seed
 ok   cross sights in the text's order
-ok   a player at the cross all night sees all ten sights then seeks (ch. x: seeking is as good as beholding)
+ok   a player at the cross all night sees exactly the ten sights, in order, and never seeks
+ok   the heaviness arrives at least twice on 95% of nights and three times on most (the superstition needs arrivals to fail)
 ok   every sight at the cross carries a line for sureness and one for heaviness (ch. vii: "horrifying and dreadful, sweet and lovely")
-ok   a player within all night asks the cause in the first dark, then the questions in order (v, xi, xvii, xxvii, xxix, xxx/xxxii), then rests  [hazelnut,sin,cause,pain,whysin,howwell,hid,rest,rest,rest,rest,rest,rest,rest,rest,rest]
+ok   a player within all night asks the cause in the first dark, then the questions in order (v, xi, xvii, xxvii, xxix, xxx/xxxii), then rests  [hazelnut,sin,cause,pain,whysin,howwell,hid,rest,rest,rest]
 ok   the cause is asked at most once a night and only as the first within-look in heaviness, or as "what earned it" once the rest are done
 ok   the window never shows a sight and always names the sky and the blanket (ch. xix: "nothing betwixt the Cross and Heaven that might have harmed me")
 ok   cheer fires iff at the cross, in heaviness, with sureness next
@@ -24,18 +25,18 @@ ok   stay: at the cross on every dark beat; cheer on every lift
 ok   julian: the cause was checked once, in the dark; the verdict does not scold
 ok   the verdict ends with her sentence (ch. xxvii)
 ok   the onsets named in the verdict are the places looked at just before each heaviness
-ok   independence survives {"turnProb":0.3}  [0.422 / 0.430 / 0.446]
-ok   independence survives {"turnProb":0.7}  [0.712 / 0.734 / 0.708]
-ok   independence survives {"maxRun":3}  [0.592 / 0.579 / 0.591]
-ok   independence survives {"firstTurnBy":2}  [0.583 / 0.581 / 0.604]
+ok   independence survives {"turnProb":0.4}  [0.513 / 0.527 / 0.558]
+ok   independence survives {"turnProb":0.8}  [0.849 / 0.823 / 0.798]
+ok   independence survives {"maxRun":4}  [0.645 / 0.654 / 0.641]
+ok   independence survives {"firstTurnBy":2}  [0.709 / 0.731 / 0.692]
 
-ways of playing, over 400 nights (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked
-  cross     7.64   7.64  10.00   0.00   3.85   0.00
-  window    7.64   0.00   0.00   0.00   0.00   0.00
-  within    7.64   0.00   0.00   7.00   0.00   1.00
-  flee      7.64   0.00   8.28   0.00   0.00   0.00
-  stay      7.64   7.64   7.60   0.00   3.85   0.00
-  julian    7.64   6.64  10.00   1.00   3.37   1.00
-  random    7.64   2.46   5.34   5.08   1.21   0.95
+ways of playing, over 400 nights of 10 beats (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked
+  cross     4.70   4.70  10.00   0.00   2.67   0.00
+  window    4.70   0.00   0.00   0.00   0.00   0.00
+  within    4.70   0.00   0.00   7.00   0.00   1.00
+  flee      4.70   0.00   5.30   0.00   0.00   0.00
+  stay      4.70   4.70   4.70   0.00   2.67   0.00
+  julian    4.70   3.70   9.00   1.00   2.09   1.00
+  random    4.70   1.55   3.35   3.24   0.84   0.84
 
-30 of 30 checks passed
+31 of 31 checks passed

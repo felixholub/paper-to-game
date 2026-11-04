@@ -15,7 +15,8 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
   const noScroll = async (where) => { const w = await page.evaluate(() => document.documentElement.scrollWidth); if (w > 380) errors.push('horizontal scroll at ' + where + ': ' + w); };
   const log = [];
   async function playNight(tag, policy, shots) {
-    for (let beat = 0; beat < 16; beat++) {
+    const BEATS = await page.evaluate(() => window.Julian.CONFIG.beats);
+    for (let beat = 0; beat < BEATS; beat++) {
       const st = await page.evaluate(() => { const s = window.__julian.state; return { beat: s.beat, weal: s.weather[s.beat], causeAsked: s.causeAsked, line: document.getElementById('weatherLine').textContent }; });
       const place = policy(st);
       if (shots.indexOf('b' + beat) >= 0) await shot(tag + '-beat' + (beat + 1) + '-choose');
@@ -28,7 +29,7 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
       log.push(tag + ' beat ' + (beat + 1) + ' [' + (st.weal ? 'sureness' : 'HEAVINESS') + '] ' + st.line + ' > ' + place + ' :: ' + res.cap.slice(0, 70) + '... | ' + res.line.slice(0, 80));
       if (shots.indexOf('r' + beat) >= 0) await shot(tag + '-beat' + (beat + 1) + '-result');
       await noScroll(tag + ' beat ' + beat);
-      if (beat === 5 && tag === 'a') { // help from mid-play, and back
+      if (beat === 4 && tag === 'a') { // help from mid-play, and back
         await page.click('#play .qbtn'); await shot('help'); await page.click('#helpBack');
         const back = await page.evaluate(() => document.querySelector('.screen.on').id); if (back !== 'play') errors.push('help did not return to play');
         const still = await page.evaluate(() => document.getElementById('result').style.display); if (still === 'none') errors.push('result lost after help');
@@ -46,7 +47,7 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
   await page.click('#startBtn'); await shot('intro'); await noScroll('intro');
   await page.click('#introBtn');
   // A: Julian's own night — the cross, and one look within in the first dark
-  await playNight('a', st => (!st.weal && !st.causeAsked) ? 'within' : 'cross', ['b0', 's0', 'r0', 'b1', 'r1', 'r2', 'r3', 'r6', 'r7', 's8', 'r8', 'r12', 'b14']);
+  await playNight('a', st => (!st.weal && !st.causeAsked) ? 'within' : 'cross', ['b0', 's0', 'r0', 'b1', 'r1', 'r2', 'r3', 'r5', 'r6', 's7', 'r7', 'r8', 'b9']);
   await page.click('#end [data-go="about"]'); await shot('about'); await page.click('#aboutBack');
   const backTo = await page.evaluate(() => document.querySelector('.screen.on').id); if (backTo !== 'end') errors.push('about did not return to end');
   // B: the stranger's first instinct — the window in every dark
@@ -54,7 +55,7 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
   await playNight('b', st => st.weal ? 'cross' : 'window', ['r1', 'r2', 'r5', 'r8']);
   // C: within all night
   await page.click('#againBtn');
-  await playNight('c', () => 'within', ['r0', 'r2', 'r8', 'r12']);
+  await playNight('c', () => 'within', ['r0', 'r2', 'r6', 'r9']);
   // D: the window all night (never a sight)
   await page.click('#againBtn');
   await playNight('d', () => 'window', ['r3']);

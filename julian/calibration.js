@@ -18,16 +18,16 @@ var POLICIES = {
 function play(seed, policy) { var st = J.newNight(seed); while (!st.done) J.look(st, policy(st)); return st; }
 function turns(w) { var k = 0; for (var i = 1; i < w.length; i++) if (w[i] !== w[i - 1]) k++; return k; }
 
-// 1. The weather's shape (ch. xv): sixteen beats, sureness first, the first heaviness by beat 3, no run longer than maxRun,
-//    about half the beats turn: the twenty of the text compressed to about eight, between five and eleven at the 5th–95th percentile.
+// 1. The weather's shape (ch. xv): ten beats, sureness first, the first heaviness by beat 3, no run longer than maxRun,
+//    about six beats in ten turn: the twenty of the text compressed to about five or six, between four and eight at the 5th–95th percentile.
 var T = SEEDS.map(function (s) { return turns(J.schedule(s)); }).sort(function (a, b) { return a - b; });
 var mean = T.reduce(function (a, b) { return a + b; }, 0) / T.length;
-check('schedule has ' + C.beats + ' beats (ch. i: sixteen shewings, as a count)', SEEDS.every(function (s) { return J.schedule(s).length === C.beats; }));
+check('schedule has ' + C.beats + ' beats (one per sight at the cross)', SEEDS.every(function (s) { return J.schedule(s).length === C.beats; }));
 check('the night begins in sureness (ch. xv)', SEEDS.every(function (s) { return J.schedule(s)[0] === true; }));
 check('first heaviness by beat ' + C.firstTurnBy + ' on every seed (our floor)', SEEDS.every(function (s) { var w = J.schedule(s); return w.slice(0, C.firstTurnBy).indexOf(false) >= 0; }));
 check('no stretch of one weather longer than ' + C.maxRun + ' beats ("this lasted but a while")', SEEDS.every(function (s) { var w = J.schedule(s), run = 1; for (var i = 1; i < w.length; i++) { run = w[i] === w[i - 1] ? run + 1 : 1; if (run > C.maxRun) return false; } return true; }));
-check('mean turns per night between 7 and 9 (the text\'s ~20 in one shewing, compressed; declared)', mean >= 7 && mean <= 9, 'mean ' + mean.toFixed(2));
-check('5th–95th percentile of turns within [5, 11]', T[Math.floor(0.05 * T.length)] >= 5 && T[Math.floor(0.95 * T.length)] <= 11, T[Math.floor(0.05 * T.length)] + '–' + T[Math.floor(0.95 * T.length)]);
+check('mean turns per night between 5 and 7 (the text\'s ~20 in one shewing, compressed; declared)', mean >= 5 && mean <= 7, 'mean ' + mean.toFixed(2));
+check('5th–95th percentile of turns within [4, 8]', T[Math.floor(0.05 * T.length)] >= 4 && T[Math.floor(0.95 * T.length)] <= 8, T[Math.floor(0.05 * T.length)] + '–' + T[Math.floor(0.95 * T.length)]);
 check('the twenty is in CONFIG with its chapter', C.swingsInText === 20);
 
 // 2. Independence (ch. xv: "freely our Lord giveth when He will"; "sin is not always the cause"): the same seed gives the same weather
@@ -47,7 +47,8 @@ check('CONFIG.actsAffectWeather is 0 and the schedule takes no argument but the 
 var order = J.CROSS.map(function (c) { return c.ch; });
 check('cross sights in the text\'s order', order.join('|') === 'iv|vii|x|xii|xiii|xvi–xvii|xxii|xxiv|xxv|xxvi');
 var allCross = play(1, POLICIES.cross);
-check('a player at the cross all night sees all ten sights then seeks (ch. x: seeking is as good as beholding)', allCross.record.slice(0, 10).every(function (r, i) { return r.sight === J.CROSS[i].id; }) && allCross.record.slice(10).every(function (r) { return r.sight === 'seeking'; }));
+check('a player at the cross all night sees exactly the ten sights, in order, and never seeks', allCross.record.length === 10 && allCross.record.every(function (r, i) { return r.sight === J.CROSS[i].id; }));
+check('the heaviness arrives at least twice on 95% of nights and three times on most (the superstition needs arrivals to fail)', (function () { var two = 0, three = 0; SEEDS.forEach(function (s) { var w = J.schedule(s), k = 0; for (var t = 1; t < w.length; t++) if (!w[t] && w[t - 1]) k++; if (k >= 2) two++; if (k >= 3) three++; }); return two / SEEDS.length >= 0.95 && three / SEEDS.length >= 0.5; })());
 check('every sight at the cross carries a line for sureness and one for heaviness (ch. vii: "horrifying and dreadful, sweet and lovely")', J.CROSS.every(function (c) { return c.sweet && c.dread; }));
 var allWithin = play(1, POLICIES.within);
 check('a player within all night asks the cause in the first dark, then the questions in order (v, xi, xvii, xxvii, xxix, xxx/xxxii), then rests', (function () {
@@ -94,7 +95,7 @@ check('the onsets named in the verdict are the places looked at just before each
 }));
 
 // 7. Robustness of the discovery (build.md §1): under other values of our own choices the heaviness still follows nothing.
-[{ turnProb: 0.3 }, { turnProb: 0.7 }, { maxRun: 3 }, { firstTurnBy: 2 }].forEach(function (alt) {
+[{ turnProb: 0.4 }, { turnProb: 0.8 }, { maxRun: 4 }, { firstTurnBy: 2 }].forEach(function (alt) {
   var saved = {}; Object.keys(alt).forEach(function (k) { saved[k] = C[k]; C[k] = alt[k]; });
   var o = { cross: [0, 0], window: [0, 0], within: [0, 0] };
   SEEDS.forEach(function (s) { var st = play(s, POLICIES.random); for (var t = 1; t < C.beats; t++) if (st.weather[t - 1]) { var p = st.record[t - 1].place; o[p][1]++; if (!st.weather[t]) o[p][0]++; } });
@@ -104,7 +105,7 @@ check('the onsets named in the verdict are the places looked at just before each
 });
 
 // 8. Playing it in numbers (build.md §3): what each way of playing sees and gets; no score exists, so the table is what is seen.
-console.log('\nways of playing, over 400 nights (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked');
+console.log('\nways of playing, over 400 nights of ' + C.beats + ' beats (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked');
 Object.keys(POLICIES).forEach(function (p) {
   var acc = [0, 0, 0, 0, 0, 0];
   SEEDS.forEach(function (s) { var v = J.verdict(play(s, POLICIES[p])).counts; acc[0] += v.darks; acc[1] += v.stay; acc[2] += v.seen; acc[3] += v.asked; acc[4] += v.cheers; acc[5] += (play(s, POLICIES[p]).causeAsked ? 1 : 0); });
