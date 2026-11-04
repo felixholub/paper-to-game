@@ -1,0 +1,89 @@
+EVENING 4821 (first evening: the kicked wheel runs faster)
+PROLOGUE: find the present
+  touch 1: a hundred years, in 100 years; now is part 69, with 68 past and 31 to come
+  touch 2: one year, in 12 months; now is part 5, with 4 past and 7 to come
+  touch 3: one month, in 30 days; now is part 17, with 16 past and 13 to come
+  touch 4: one day, in 24 hours; now is part 10, with 9 past and 14 to come
+  touch 5: one hour, in 60 particles; now is part 39, with 38 past and 21 to come
+  touch 6: only the point is left. The present hath no space.
+
+ROUND 1 OF 7: A VOICE   (ch. XXVII)
+  [memory] target ################  2.67 s
+  [memory] yours  ##############  2.35 s
+  BIG: NINE TENTHS
+  > About nine tenths of the voice: a little short.
+  > The voice had stopped before you began. It wasn’t there to hold up against yours.
+  ~ "Before it sounded, it was to come, and could not be measured, because as yet it was not, and now it cannot, because it is no longer." (XI.xxvii, p. 173)
+
+ROUND 2 OF 7: THE WHEEL   (ch. XXIII)
+  outside: a wheel, one turn every 0.81 s; the voice lasts three turns
+  [memory] target ###############  2.43 s
+  [memory] yours  ###############  2.50 s
+  BIG: THE SAME
+  > About the same as the voice.
+  > The wheel kept its pace. The voice lasted three turns of it; your hold lasted three turns.
+  ~ "I heard once from a learned man, that the motions of the sun, moon, and stars, constituted time, and I assented not." (XI.xxiii, p. 170)
+
+ROUND 3 OF 7: THE WHEEL AGAIN   (ch. XXIII)
+  outside: a wheel, one turn every 1.16 s; the voice lasts three turns
+  the press lands; 0.3 s later the wheel is kicked to ×2
+  [memory] target #####################  3.47 s
+  [memory] yours  ###########  1.88 s
+  BIG: HALF
+  > About half the voice: well short.
+  > When you pressed, the potter kicked the wheel. It ran faster, so three turns took less time than the voice.
+  > You let go after three turns, just where counting the wheel would put you.
+  > How did you know it was racing? Not by the wheel.
+  ~ "If the lights of heaven should cease, and a potter’s wheel run round, should there be no time by which we might measure those whirlings, and say … if it turned sometimes slower, otherwhiles quicker, that some rounds were longer, other shorter?" (XI.xxiii, p. 170)
+
+ROUND 4 OF 7: THE SUN   (ch. XXIII)
+  outside: the sun climbs from 0.10 to 0.50 of its arc while the voice sounds, then stands still
+  [memory] target #################  2.87 s
+  [memory] yours  ###################  3.21 s
+  BIG: A TENTH OVER
+  > About a tenth longer than the voice.
+  > The sun stood still the whole time you held.
+  > You let go all the same. Time went on.
+  ~ "The sun stood still, but time went on. For in its own allotted space of time was that battle waged and ended." (XI.xxiii, p. 171)
+
+ROUND 5 OF 7: A SILENCE   (ch. XXVII)
+  [memory] target ################  2.72 s
+  [memory] yours  #################  2.91 s
+  BIG: A TENTH OVER
+  > Your silence was about a tenth longer than the voice.
+  > Nothing moved out there, and nothing sounded. All you had was a voice that had stopped.
+  ~ "When we measure silence, and say that this silence hath held as long time as did that voice, do we not stretch out our thought to the measure of a voice, as if it sounded?" (XI.xxvii, pp. 173–174)
+
+ROUND 6 OF 7: THE HYMN   (chs. XXVI–XXVII)
+  the voice sings: De˘ us— cre˘ a— tor˘ om— ni˘ um—
+  you sing: 0.38 0.60 0.41 0.66 0.36 0.64 0.40 0.72
+  > Your long syllables were nearly double your short ones. Augustine hears them as double.
+  > Now lay one of your short syllables against one of your long ones: touch one of each.
+  you touch CRE (short) and A (long)
+  [memory] target #################################  5.53 s
+  [memory] yours  #################################  5.57 s
+  BIG: NEARLY DOUBLE
+  > Your long syllables were nearly double your short ones. Augustine hears them as double.
+  > Laid against your long A, your short CRE goes in about one and a half times.
+  > When your long one sounded, your short one had already stopped. You laid them side by side here, in memory.
+  ~ "It is not then themselves, which now are not, that I measure, but something in my memory, which there remains fixed." (XI.xxvii, p. 173)
+
+ROUND 7 OF 7: THE FIRST VOICE   (ch. XXVII; X.viii–xi)
+  no voice: the target is round 1’s voice, 2.67 s
+  [memory] target ################  2.67 s
+  [memory] yours  ###############  2.49 s
+  BIG: NINE TENTHS
+  > About nine tenths of the first voice: a little short.
+  > You heard it in the first minute of the evening, and it was still there to measure by.
+  ~ "It is in thee, my mind, that I measure times." (XI.xxvii, p. 173)
+
+THE LAST PAGE
+  YOU KEPT TIME WITH YOUR MIND, UNTIL A WHEEL RAN AWAY WITH YOU.
+  1. You measured seven times with no clock. Going by the voice in your memory, you came within about a tenth of it.
+  1. When the wheel raced, you let go at about half the voice, just where counting its turns would put you.
+  1. When the sun stood still, you let go all the same: time went on.
+  1. Your long syllables came out nearly double your short ones, and you held the first voice to about nine tenths of its length, minutes after it stopped.
+  2. Augustine: a wheel and the sun are motions, and we measure motions by time, so they are not time. A voice can’t be measured while it sounds, and it is gone once it stops. What you measured each time was what it left in you.
+  3. "It is in thee, my mind, that I measure times." For Augustine, time is a stretching of the mind (his word is distentio), between what it expects and what it remembers.
+  psalm: This evening too: before you began, all seven rounds lay ahead of you, in expectation. Now they are all in memory. Augustine says it is the same with a psalm said by heart, with every syllable of it, and with each longer thing it is part of.
+  before: And before there was anything at all? Augustine refuses the old joke that God was “preparing hell for pryers into mysteries”. There was no before: time began with the things that were made. "There was no “then,” when there was no time."
