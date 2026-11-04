@@ -46,47 +46,54 @@ b { font-weight: 700; }
 .card { background: var(--chalk); color: var(--ink); border: 3px solid var(--ink); border-radius: 16px; box-shadow: 5px 5px 0 var(--ink); padding: 14px; margin: 14px 0; }
 .card h2 { color: var(--ink); }
 .card .dim { color: #5a5f80; }
-/* tokens: ring = passport, middle = workplace */
-.tok { position: relative; width: 46px; height: 46px; border-radius: 50%; border: 7px solid var(--ring); background: var(--ink); flex: none; cursor: pointer;
-  box-shadow: 0 3px 0 rgba(0,0,0,.45); padding: 0; transition: transform .25s, opacity .2s; }
-.tok .mid { position: absolute; inset: 3px; border-radius: 50%; background: var(--core); display: flex; align-items: center; justify-content: center;
-  font-family: 'Bungee', sans-serif; font-size: 12px; color: var(--ink); }
-.tok .pp { position: absolute; top: -12px; left: -12px; font-family: 'Bungee', sans-serif; font-size: 9.5px; color: var(--ink); background: var(--ring);
-  border: 2px solid var(--ink); border-radius: 7px; padding: 0 3px; line-height: 14px; }
-.tok .st { position: absolute; top: -13px; right: -13px; width: 24px; height: 24px; }
-.tok.sel { transform: scale(1.18); outline: 3px solid var(--chalk); outline-offset: 3px; }
-.tok.ghost { opacity: .18; pointer-events: none; }
-.tok.big-tok { width: 64px; height: 64px; border-width: 9px; }
-.tok.big-tok .mid { font-size: 16px; inset: 4px; }
-.tok.big-tok .pp { font-size: 11px; top: -14px; left: -14px; line-height: 16px; }
-.tok.big-tok .st { width: 30px; height: 30px; top: -16px; right: -16px; }
-/* jars */
-.jars { display: flex; gap: 14px; justify-content: center; margin: 8px -16px 4px; padding: 6px 16px 8px; }
-.jars.sticky { position: sticky; top: 0; z-index: 20; background: var(--board); border-bottom: 2px solid var(--line); }
-.jar { width: 150px; text-align: center; }
-.jar .sub { white-space: nowrap; }
-.jar .lab { font-family: 'Bungee', sans-serif; font-size: 14px; line-height: 1.05; }
-.jar .sub { font-size: 11.5px; color: var(--dim); margin-bottom: 4px; }
-.jar .glass { position: relative; height: 120px; margin: 0 auto; width: 104px; border: 4px solid var(--chalk); border-top: none; border-radius: 0 0 26px 26px;
-  background: rgba(255,255,255,.05); overflow: hidden; }
-.jar .fill { position: absolute; left: 0; right: 0; bottom: 0; height: 0; transition: height .7s cubic-bezier(.3,1.4,.5,1); }
-.jar.big .fill { background: var(--big); } .jar.oth .fill { background: var(--oth); }
-.jar .tick { position: absolute; left: 0; right: 0; border-top: 2px dotted rgba(255,255,255,.18); }
-.jar .erc { position: absolute; left: -4px; right: -4px; border-top: 3px dashed var(--star); z-index: 2; }
-.jar .erc span { position: absolute; left: 8px; top: -15px; font-family: 'Bungee', sans-serif; font-size: 9px; color: var(--star); }
-.jar .num { position: absolute; left: 0; right: 0; bottom: 6px; font-family: 'Bungee', sans-serif; font-size: 24px; color: var(--ink); z-index: 3; text-shadow: 0 0 6px rgba(255,255,255,.6); }
-.jar .cover { position: absolute; inset: 0; background: repeating-linear-gradient(45deg, #39468c 0 10px, #33407f 10px 20px); display: flex; align-items: center;
-  justify-content: center; font-family: 'Bungee', sans-serif; font-size: 44px; color: var(--chalk); z-index: 4; transition: transform .6s ease-in; }
-.jar .cover.off { transform: translateY(-110%); }
-.jarnote { text-align: center; font-size: 13px; color: var(--dim); margin: 2px 0 0; }
-/* table */
-.table { position: relative; width: 300px; height: 300px; margin: 6px auto 0; }
-.table .felt { position: absolute; inset: 42px; border-radius: 50%; background: var(--felt); border: 4px solid var(--ink); box-shadow: inset 0 0 0 6px var(--line);
-  display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; }
-.table .felt .disp { font-size: 14px; color: var(--dim); }
-.table .felt .cnt { font-family: 'Bungee', sans-serif; font-size: 30px; color: var(--chalk); }
-.seat { position: absolute; width: 46px; height: 46px; border-radius: 50%; border: 3px dashed rgba(255,255,255,.25); }
-.seat .tok { position: absolute; left: -3px; top: -3px; }
+/* judge cards: two facts in words; colour is decorative (top = passport group, bottom = workplace group) */
+.jc { position: relative; width: 100%; min-height: 50px; border: 3px solid var(--ink); border-radius: 10px; padding: 0; cursor: pointer; overflow: hidden;
+  background: var(--chalk); color: var(--ink); box-shadow: 0 3px 0 rgba(0,0,0,.45); display: grid; grid-template-rows: 1fr 1fr; transition: transform .15s, opacity .2s; }
+.jc .ln { display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 2px 6px; }
+.jc .ln.p { background: var(--pc); } .jc .ln.w { background: var(--wc); border-top: 2px solid var(--ink); }
+.jc .l { font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .04em; }
+.jc .c { font-family: 'Bungee', sans-serif; font-size: 16px; line-height: 1; flex: none; }
+.jc.sel { transform: scale(1.08); outline: 3px solid var(--chalk); outline-offset: 2px; z-index: 2; }
+.jc.ghost { opacity: .18; pointer-events: none; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tray.cards { display: grid; padding: 10px; }
+.seatbox { min-height: 50px; border: 3px dashed rgba(255,255,255,.25); border-radius: 10px; }
+.tablebox { background: var(--felt); border: 4px solid var(--ink); box-shadow: inset 0 0 0 4px var(--line); border-radius: 18px; padding: 10px; margin: 10px 0 0; }
+.tablehead { display: flex; justify-content: space-between; align-items: baseline; font-family: 'Bungee', sans-serif; font-size: 13px; color: var(--dim); margin: 0 2px 8px; }
+.tablehead .cnt { color: var(--chalk); font-size: 18px; }
+/* four applicant-group bars */
+.groups { margin: 6px -16px 4px; padding: 6px 16px 8px; }
+.groups.sticky { position: sticky; top: 0; z-index: 20; background: var(--board); border-bottom: 2px solid var(--line); }
+.ghead { font-family: 'Bungee', sans-serif; font-size: 11.5px; color: var(--dim); margin-bottom: 4px; }
+.ggrid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.gcell { background: var(--board2); border: 2px solid var(--line); border-radius: 10px; padding: 5px 7px 6px; }
+.gcell .gl { font-size: 11px; line-height: 1.2; color: var(--chalk); min-height: 27px; }
+.gcell .gl b { color: inherit; }
+.gtrack { position: relative; height: 16px; border-radius: 8px; background: rgba(255,255,255,.08); margin-top: 4px; overflow: hidden; }
+.gfill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 8px; transition: width .6s cubic-bezier(.3,1.3,.5,1); }
+.gcell.bigW .gfill { background: var(--big); } .gcell.othW .gfill { background: var(--oth); }
+.gnum { font-family: 'Bungee', sans-serif; font-size: 13px; margin-top: 3px; }
+.gcover { position: absolute; inset: 0; border-radius: 10px; background: repeating-linear-gradient(45deg, #39468c 0 10px, #33407f 10px 20px); display: flex; align-items: center;
+  justify-content: center; font-family: 'Bungee', sans-serif; font-size: 15px; color: var(--chalk); z-index: 4; text-align: center; padding: 8px; transition: opacity .5s; }
+.gcover.off { opacity: 0; pointer-events: none; }
+.agg { position: relative; margin-top: 6px; font-size: 13px; text-align: center; background: var(--board2); border: 2px solid var(--line); border-radius: 10px; padding: 5px 6px; }
+.agg b { font-family: 'Bungee', sans-serif; font-weight: 400; }
+.agg .y { color: var(--big); } .agg .t { color: var(--oth); }
+.agg .ok { color: var(--oth); } .agg .no { color: var(--star); }
+/* match key */
+.key { width: 100%; border-collapse: separate; border-spacing: 3px; font-size: 12px; }
+.key th { font-weight: 700; text-align: center; line-height: 1.15; padding: 2px; }
+.key th.rh { text-align: left; }
+.key td { text-align: center; font-family: 'Bungee', sans-serif; font-size: 18px; background: var(--chalk); color: var(--ink); border: 2px solid var(--ink); border-radius: 8px; padding: 2px 0; }
+.key td.k3 { background: var(--star); color: var(--chalk); }
+.keybox { background: var(--board2); border: 2px solid var(--line); border-radius: 12px; padding: 6px 8px; margin: 10px 0; }
+.keybox .kt { font-family: 'Bungee', sans-serif; font-size: 11.5px; color: var(--dim); }
+.keybox .kn { font-size: 11.5px; color: var(--dim); margin-top: 2px; }
+.card .keybox { background: #efe6cf; border-color: var(--ink); }
+.card .keybox .kt, .card .keybox .kn { color: #4a4f70; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+.duo .cap { font-size: 12.5px; color: var(--dim); margin-top: 5px; text-align: center; }
+.endbars .gcell { margin-bottom: 6px; }
 .info { min-height: 62px; background: var(--board2); border: 2px solid var(--line); border-radius: 12px; padding: 8px 10px; font-size: 13.5px; margin: 10px 0; }
 .info b { color: var(--big); }
 .tray { display: flex; flex-wrap: wrap; gap: 16px 12px; justify-content: center; padding: 14px 4px 6px; background: var(--board2); border: 2px solid var(--line); border-radius: 14px; }
@@ -97,9 +104,6 @@ b { font-weight: 700; }
 .verdict { font-size: 18px; line-height: 1.35; }
 .verdict p { margin: 10px 0; }
 .verdict .v1 { font-family: 'Bungee', sans-serif; font-size: 20px; line-height: 1.2; color: var(--big); }
-.legend { display: grid; grid-template-columns: 74px 1fr; gap: 14px 10px; align-items: center; margin: 10px 0; }
-.legend .bar { height: 16px; border-radius: 8px; background: var(--star); border: 2px solid var(--ink); }
-.legend .lbl { font-size: 14px; }
 .hide { display: none !important; }
 .banner { font-family: 'Bungee', sans-serif; font-size: 30px; text-align: center; margin: 4px 0; }
 .banner.ok { color: var(--oth); } .banner.no { color: var(--star); }
@@ -116,15 +120,16 @@ a { color: var(--big); }
 <section class="screen on" id="s-start">
   <div style="height:8px"></div>
   <h1>HOME<br>JUDGES</h1>
-  <p class="dim" style="margin-top:10px">A game about who sits on the panel of Europe's biggest science prize.</p>
-  <div class="table" id="start-table" aria-hidden="true"></div>
-  <div class="aim" id="aim-start"></div>
+  <div class="aim" id="aim-start">You choose the judges for a big science funder.</div>
+  <p><b>Round 1:</b> Seat 15 judges. Then see which applicants get more home advantage.</p>
+  <p><b>Round 2:</b> Fix a tilted ERC-style panel. Bring the Big Five and everyone else within the target in four swaps or fewer.</p>
+  <div class="duo" id="start-duo"></div>
   <button class="btn wide" id="b-play">PLAY</button>
   <div class="row" style="margin-top:14px">
     <button class="btn chalk sm" id="b-help0" style="flex:1">HOW TO PLAY</button>
     <button class="btn chalk sm" id="b-about0" style="flex:1">ABOUT</button>
   </div>
-  <p class="small dim" style="margin-top:16px">Built from Fuchs-Schündeln &amp; Holub, <i>Homophily in Grant Evaluations</i> (WZB / Goethe University Frankfurt). About four minutes.</p>
+  <p class="small dim" style="margin-top:16px">Built from Fuchs-Schündeln &amp; Holub, <i>Homophily in Grant Evaluations</i> (WZB / Goethe University Frankfurt). Big Five: Germany (DE), the UK, France (FR), Italy (IT), Spain (ES). About four minutes.</p>
 </section>
 
 <!-- RULES CARD -->
@@ -132,50 +137,50 @@ a { color: var(--big); }
   <div class="top"><span class="tag">THE RULES CARD</span><button class="q" data-help>?</button></div>
   <div class="card">
     <h2>THE HOME BONUS</h2>
-    <p>Every judge is a token. <b>Ring = passport. Middle = where they work.</b></p>
-    <p>The study found that a judge gives <b>the very same proposal</b> a better mark when the applicant shares their passport and workplace. Marks run from 1 to 5.</p>
-    <div class="legend" id="legend"></div>
-    <p class="small dim">Same gender: about a seventh of a star. Too small to show here.</p>
+    <p>Every judge card shows two facts: the judge's <b>passport</b> and the country the judge <b>works in</b>.</p>
+    <p>The study found that a judge gives <b>the very same proposal</b> a better mark when the applicant has the same passport and works in the same country: about <b>a sixth of a point</b> on a 1–5 scale. Sharing only one of the two gives roughly a third to a half as much. Same gender: about a seventh. Too small to show here.</p>
+    <div class="keybox" data-key></div>
   </div>
-  <p>Each proposal is read by about <b>4 of the 15 judges</b>, picked at random. The jars show how many <b>home stars</b> an applicant collects, on average, <b>per 10 juries</b>.</p>
+  <p>Each proposal is read by about <b>4 of the 15 judges</b>, picked at random. The four bars sort <b>applicants</b> by their passport and where they work. Each bar shows the home advantage that group collects on average, counted in <b>home stars per 10 juries</b>. One home star is one judge who shares both passport and work country with the applicant.</p>
   <button class="btn wide" id="b-r1">SEAT MY PANEL</button>
 </section>
 
 <!-- ROUND 1 -->
 <section class="screen" id="s-r1">
   <div class="top"><span class="tag">ROUND 1 · YOUR PANEL</span><button class="q" data-help>?</button></div>
-  <div class="aim" id="aim-r1">Seat the 15 judges you think are fair. The jars stay covered until the last seat is taken.</div>
-  <div class="jars sticky" id="jars1"></div>
+  <div class="aim" id="aim-r1">Seat the 15 judges you think are fair. The bars stay covered until the 15th judge is seated.</div>
+  <div class="groups sticky" id="groups1"></div>
   <div id="r1-reveal" class="card hide"></div>
-  <div class="table" id="table1"></div>
+  <div class="keybox" data-key></div>
+  <div class="tablebox"><div class="tablehead"><span>THE PANEL</span><span class="cnt" id="cnt1"></span></div><div class="cards" id="table1"></div></div>
   <div class="info" id="info1">Tap a judge below to seat them. Tap a seated judge to send them back.</div>
   <div class="traylab" id="r1-traylab">THE POOL · 24 EXPERTS</div>
-  <div class="tray" id="pool"></div>
+  <div class="tray cards" id="pool"></div>
 </section>
 
 <!-- ROUND 2 -->
 <section class="screen" id="s-r2">
-  <div class="top"><span class="tag">ROUND 2 · LEVEL THE JARS</span><button class="q" data-help>?</button></div>
-  <div class="aim" id="aim-r2">This panel is built like the ERC's. Get the two jars within half a star of each other.</div>
-  <div class="jars sticky" id="jars2"></div>
-  <p class="jarnote" id="r2-gap"></p>
+  <div class="top"><span class="tag">ROUND 2 · FIX THE TILT</span><button class="q" data-help>?</button></div>
+  <div class="aim" id="aim-r2">This panel is built like the ERC's. Bring applicants who work in the Big Five and everyone else within half a star. Four swaps.</div>
+  <div class="groups sticky" id="groups2"></div>
   <div id="r2-result" class="card hide"></div>
-  <div class="table" id="table2"></div>
+  <div class="keybox" data-key></div>
+  <div class="tablebox"><div class="tablehead"><span>THE PANEL</span><span class="cnt" id="cnt2"></span></div><div class="cards" id="table2"></div></div>
   <div class="info" id="info2">Tap a judge at the table, then a judge on the bench, to swap them.</div>
   <div class="row spread" style="margin-top:10px">
     <div><div class="traylab" style="margin:0 0 4px">SWAPS LEFT</div><div class="pips" id="pips"></div></div>
     <div class="row"><button class="btn chalk sm" id="b-reset">RESET</button><button class="btn teal sm" id="b-done">DONE</button></div>
   </div>
   <div class="traylab">THE BENCH · 10 EXPERTS</div>
-  <div class="tray" id="bench"></div>
+  <div class="tray cards" id="bench"></div>
 </section>
 
 <!-- END -->
 <section class="screen" id="s-end">
   <div class="top"><span class="tag">THE VERDICT</span><button class="q" data-help>?</button></div>
   <div class="verdict" id="verdict"></div>
-  <div class="jars" id="jars-end"></div>
-  <p class="jarnote">The real ERC, from the study's Table 2.</p>
+  <div class="ghead">THE REAL ERC, FROM THE STUDY'S TABLE 2</div>
+  <div class="endbars" id="endbars"></div>
   <h3>HOW DO THEY KNOW IT'S NOT JUST BETTER PROPOSALS?</h3>
   <p>The researchers compared <b>the same proposal</b> as marked by its different judges, so quality is held fixed. They also compared each judge with their own marks for other applicants, so a generous judge is not mistaken for a biased one. The extra marks are <b>top marks</b>, not a wider spread, so it does not look like inside knowledge. And the bonus stays when they account for judges who work on the same topics or have written papers with the same people.</p>
   <p class="small dim">The study calls it homophily: favouring people like yourself. It does not say whether anyone means to.</p>
@@ -189,15 +194,17 @@ a { color: var(--big); }
 <!-- HOW TO PLAY -->
 <section class="screen" id="s-help">
   <div class="top"><span class="tag">HOW TO PLAY</span></div>
-  <div class="aim" id="aim-help"></div>
+  <div class="aim">You choose the judges for a big science funder.</div>
   <div class="helpbody">
     <p>The European Research Council gives out big grants. Each research field has a <b>panel of about 15 judges</b>, and each proposal is marked by about <b>four</b> of them.</p>
-    <p><b>Tokens.</b> Every judge is a token. The <b>ring</b> is their passport. The <b>middle</b> is the country they work in. Yellow means one of the five biggest applicant countries (Germany, the UK, France, Italy, Spain). Teal means any other country. Lilac means outside Europe.</p>
-    <p><b>The home bonus.</b> The study found that a judge gives the same proposal about <b>a sixth of a point more</b> (marks run 1–5) when the applicant shares the judge's passport <i>and</i> workplace. That is a <b>home star</b>. Sharing only the passport is worth about half a star. Sharing only the workplace is worth about a third.</p>
-    <p><b>The jars.</b> BIG FIVE is for applicants who work in those five countries; EVERYONE ELSE is for the rest. Each jar shows how many home stars an average applicant in that group collects per 10 juries. The dashed line is the real ERC's level.</p>
+    <p><b>Judge cards.</b> Each card says the judge's <b>passport</b> and the country the judge <b>works in</b>, for example PASSPORT DE, WORKS IN UK: a German who works in the UK. The colours only help the eye: yellow for the Big Five (Germany, the UK, France, Italy, Spain), teal for other countries, lilac for outside Europe.</p>
+    <p><b>The home bonus.</b> The study found that a judge gives the same proposal about <b>a sixth of a point more</b> (marks run 1–5) when the applicant has the same passport <i>and</i> works in the same country as the judge. That is one <b>home star</b>. The same passport only is worth about half a star; the same work country only, about a third. "Same" means the same named country: a German and a French judge are not the same just because both countries are in the Big Five.</p>
+    <div class="keybox" data-key></div>
+    <p><b>The four bars</b> sort <b>applicants</b>, never judges: by passport (Big Five or other) and by where they work (in the Big Five or elsewhere). Each bar is that group's average home advantage, in home stars per 10 juries, weighted by how many applicants are in it.</p>
+    <p><b>The target.</b> Under the bars: all applicants who work in the Big Five (both passport rows together, weighted by size), all who work elsewhere, and the gap between them. The four bars do not have to be equal.</p>
     <ul>
-      <li><b>Round 1:</b> tap judges in the pool to seat them; tap a seated judge to send them back. When the 15th seat is taken, the jars are uncovered.</li>
-      <li><b>Round 2:</b> a panel built like the ERC's. Tap a judge at the table, then one on the bench, to swap them. You have four swaps. Get the jars within half a star of each other. RESET starts the round again.</li>
+      <li><b>Round 1:</b> tap judges in the pool to seat them; tap a seated judge to send them back. When the 15th judge is seated, the bars are uncovered.</li>
+      <li><b>Round 2:</b> a tilted panel built like the ERC's. Tap a judge at the table, then one on the bench, to swap them. Get the gap to half a star or less in four swaps or fewer. RESET starts the round again.</li>
     </ul>
     <p>Tap any judge to see whom they favour, and how many applicants that is.</p>
   </div>
@@ -218,68 +225,71 @@ a { color: var(--big); }
 (function () {
   const M = MECH, C = M.CONFIG;
   const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
-  const AIM = 'Seat 15 judges. Give small countries as much home advantage as big ones.';
-  ['#aim-start', '#aim-help'].forEach(s => { $(s).textContent = AIM; });
-  const STAR = '<svg viewBox="0 0 24 24"><path d="M12 1.8l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.6l-6.3 3.6 1.5-7.1L1.8 9.2 9 8.4z" fill="#ff5d5d" stroke="#12183a" stroke-width="2" stroke-linejoin="round"/></svg>';
   const grp = c => M.isBig(c) ? 'var(--big)' : (c === 'US' ? 'var(--none)' : 'var(--oth)');
   const one = x => (Math.round(x * 10) / 10).toFixed(1);
   const t2 = M.table2Stars();
   const ratioWords = r => r >= 10 ? 'many times' : (r < 1.15 && r > 0.87) ? 'about the same' : (Math.round(r * 2) / 2).toString().replace('.5', '½') + ' times';
+  const BAR_MAX = 6; // display: a full bar is 6 home stars per 10 juries
 
-  function tokenEl(j, opts) {
-    opts = opts || {};
+  // ---------- judge cards ----------
+  function cardEl(j) {
     const b = document.createElement('button');
-    b.className = 'tok' + (opts.big ? ' big-tok' : '');
-    b.style.setProperty('--ring', grp(j.p)); b.style.setProperty('--core', grp(j.w));
-    b.dataset.id = j.id || '';
-    const home = j.p === j.w && j.p !== 'US';
-    b.setAttribute('aria-label', `${C.people[j.p] || j.p} passport, works in ${C.names[j.w] || j.w}`);
-    b.innerHTML = `<span class="mid">${j.w}</span>` + (home ? `<span class="st">${STAR}</span>` : `<span class="pp">${j.p}</span>`);
+    b.className = 'jc';
+    b.style.setProperty('--pc', grp(j.p)); b.style.setProperty('--wc', grp(j.w));
+    b.dataset.id = j.id || ''; b.dataset.p = j.p; b.dataset.w = j.w;
+    b.setAttribute('aria-label', `Passport ${C.names[j.p] || j.p}, works in ${C.names[j.w] || j.w}`);
+    b.innerHTML = `<span class="ln p"><span class="l">PASSPORT</span><span class="c">${j.p}</span></span>` +
+      `<span class="ln w"><span class="l">WORKS IN</span><span class="c">${j.w}</span></span>`;
     return b;
   }
-  function seatPos(i, n, R) { const a = -Math.PI / 2 + 2 * Math.PI * i / n; return [150 + R * Math.cos(a) - 23, 150 + R * Math.sin(a) - 23]; }
-  function drawTable(el, judges, opts) {
-    opts = opts || {};
-    el.innerHTML = `<div class="felt"><div class="disp">${opts.label || 'THE PANEL'}</div><div class="cnt">${opts.count != null ? opts.count : ''}</div></div>`;
+  function drawSeats(el, judges, sel) {
+    el.innerHTML = '';
     for (let i = 0; i < C.panelSize; i++) {
-      const [x, y] = seatPos(i, C.panelSize, 127);
-      const s = document.createElement('div'); s.className = 'seat'; s.style.left = x + 'px'; s.style.top = y + 'px';
       const j = judges[i];
-      if (j) { const t = tokenEl(j); if (opts.sel === j.id) t.classList.add('sel'); t.dataset.seat = i; s.appendChild(t); s.style.border = 'none'; }
-      el.appendChild(s);
+      if (j) { const t = cardEl(j); t.dataset.seat = i; if (sel === j.id) t.classList.add('sel'); el.appendChild(t); }
+      else { const e = document.createElement('div'); e.className = 'seatbox'; el.appendChild(e); }
     }
   }
-  function jarHTML(cls, label, sub) {
-    let ticks = '';
-    for (let k = 1; k < C.jarMax; k++) ticks += `<div class="tick" style="bottom:${100 * k / C.jarMax}%"></div>`;
-    return `<div class="jar ${cls}"><div class="lab">${label}</div><div class="sub">${sub}</div><div class="glass">${ticks}` +
-      `<div class="erc hide"><span>ERC</span></div><div class="fill"></div><div class="num"></div><div class="cover">?</div></div></div>`;
+
+  // ---------- match key (relative visual marks only) ----------
+  const KEY = '<div class="kt">MATCH KEY · JUDGE vs APPLICANT</div><table class="key"><tr><th class="rh"></th><th>Same work country</th><th>Different work country</th></tr>' +
+    '<tr><th class="rh">Same passport</th><td class="k3">3</td><td>1</td></tr><tr><th class="rh">Different passport</th><td>1</td><td>0</td></tr></table>' +
+    '<div class="kn">Relative strength, not points. 3 is one combined match, the strongest; not 1 + 1. Same = the same named country.</div>';
+  $$('[data-key]').forEach(k => { k.innerHTML = KEY; });
+
+  // ---------- the four applicant-group bars ----------
+  const LAB = { bigP_bigW: '<b>Big Five passport</b>, works in the Big Five', bigP_othW: '<b>Big Five passport</b>, works elsewhere',
+    othP_bigW: '<b>Other passport</b>, works in the Big Five', othP_othW: '<b>Other passport</b>, works elsewhere' };
+  function buildGroups(el) {
+    el.innerHTML = '<div class="ghead">APPLICANTS · HOME STARS PER 10 JURIES</div><div class="ggrid">' +
+      M.CELLS.map(k => `<div class="gcell ${k.split('_')[1]}" data-cell="${k}"><div class="gl">${LAB[k]}</div><div class="gtrack"><div class="gfill"></div></div><div class="gnum"></div></div>`).join('') +
+      '<div class="gcover">? COVERED UNTIL THE 15TH JUDGE IS SEATED</div></div><div class="agg"></div>';
   }
-  function buildJars(el) { el.innerHTML = jarHTML('big', 'BIG FIVE', 'DE · UK · FR · IT · ES') + jarHTML('oth', 'EVERYONE ELSE', 'all other countries'); }
-  function setJars(el, e, opts) {
+  function setGroups(el, e, opts) {
     opts = opts || {};
-    const set = (cls, v, ref) => {
-      const j = el.querySelector('.jar.' + cls);
-      j.querySelector('.fill').style.height = Math.min(100, 100 * v / C.jarMax) + '%';
-      j.querySelector('.num').textContent = one(v) + '★';
-      const er = j.querySelector('.erc');
-      if (opts.erc) { er.classList.remove('hide'); er.style.bottom = (100 * ref / C.jarMax) + '%'; } else er.classList.add('hide');
-      j.querySelector('.cover').classList.toggle('off', !opts.covered);
-    };
-    set('big', e.big.stars, t2.big); set('oth', e.other.stars, t2.other);
+    M.CELLS.forEach(k => {
+      const c = el.querySelector(`[data-cell="${k}"]`), v = e.cells[k].stars;
+      c.querySelector('.gfill').style.width = Math.min(100, 100 * v / BAR_MAX) + '%';
+      c.querySelector('.gnum').textContent = one(v) + '★';
+    });
+    el.querySelector('.gcover').classList.toggle('off', !opts.covered);
+    const gap = Math.abs(e.gap);
+    el.querySelector('.agg').innerHTML = opts.covered ? '<span class="dim">Works in the Big Five vs works elsewhere: covered</span>' :
+      `Works in Big Five <b class="y">${one(e.big.stars)}★</b> · elsewhere <b class="t">${one(e.other.stars)}★</b> · gap <b class="${e.level ? 'ok' : 'no'}">${one(gap)}★</b>` +
+      (opts.target ? ` <span class="dim">(target ≤ ${C.levelTol}★)</span>` : '');
   }
   function inN(p) { if (p < 0.05) return null; const n = Math.round(100 / p); return n <= 1 ? 'almost everyone' : `about 1 applicant in ${n}`; }
   const PL = { DE: 'Germans', UK: 'Brits', FR: 'French people', IT: 'Italians', ES: 'Spaniards', NL: 'Dutch people', CH: 'Swiss people', IL: 'Israelis',
     BE: 'Belgians', SE: 'Swedes', AT: 'Austrians', PT: 'Portuguese people', PL: 'Poles', GR: 'Greeks', DK: 'Danes', IE: 'Irish people', HU: 'Hungarians',
     CZ: 'Czechs', FI: 'Finns', NO: 'Norwegians', US: 'Americans' };
   function favoursText(j) {
-    const v = M.favours(j), pe = C.people[j.p] || j.p, wn = C.names[j.w] || j.w, pl = PL[j.p] || pe;
-    const head = `<b>${pe} passport, works in ${wn}.</b> `;
-    if (!inN(v.both) && !inN(v.citz) && !inN(v.country)) return head + 'A home judge for nobody here: no applicant holds that passport or works there.';
+    const v = M.favours(j), wn = C.names[j.w] || j.w, pl = PL[j.p] || j.p;
+    const head = `<b>Passport ${j.p}, works in ${j.w}</b> (${C.people[j.p] || j.p}, works in ${wn}). `;
+    if (!inN(v.both) && !inN(v.citz) && !inN(v.country)) return head + 'A home judge for nobody here: no applicant has that passport or works there.';
     const parts = [];
-    if (inN(v.both)) parts.push(`Full home star for ${pl} working in ${wn} (${inN(v.both)}).`);
-    if (inN(v.citz)) parts.push(`Half a star for ${pl} working elsewhere (${inN(v.citz)}).`);
-    if (inN(v.country)) parts.push(`A third for ${j.p === j.w ? 'foreigners' : 'anyone else'} working in ${wn} (${inN(v.country)}).`);
+    if (inN(v.both)) parts.push(`Full home star (3 on the key) for ${pl} who work in ${wn} (${inN(v.both)}).`);
+    if (inN(v.citz)) parts.push(`About half a star for ${pl} who work elsewhere (${inN(v.citz)}).`);
+    if (inN(v.country)) parts.push(`About a third for applicants with other passports who work in ${wn} (${inN(v.country)}).`);
     return head + parts.join(' ');
   }
 
@@ -294,80 +304,68 @@ a { color: var(--big); }
   $('#b-about-end').onclick = () => { aboutReturn = 's-end'; show('s-about'); };
   $('#b-about-back').onclick = () => show(aboutReturn);
 
-  // ---------- start screen picture ----------
-  const demo = M.parseJudges('IT/IT DE/DE IT/UK UK/UK PL/PL', 'd');
-  const demoSeats = [0, 3, 6, 9, 12]; const dj = []; demoSeats.forEach((s, k) => { dj[s] = demo[k]; });
-  drawTable($('#start-table'), dj, { label: 'THE PANEL', count: '15 SEATS' });
-
-  // ---------- rules card ----------
-  const leg = [
-    [{ p: 'IT', w: 'IT' }, 1, 'Shares passport <b>and</b> workplace: <b>+⅙ point</b>. One home star.'],
-    [{ p: 'IT', w: 'UK' }, M.starWeight('citz'), 'Shares only the passport (ring): about <b>half</b> a star.'],
-    [{ p: 'UK', w: 'IT' }, M.starWeight('country'), 'Shares only the workplace (middle): about <b>a third</b>.'],
-  ];
-  const lg = $('#legend');
-  leg.forEach(([j, w, txt]) => {
-    const cell = document.createElement('div'); cell.style.paddingLeft = '8px'; cell.appendChild(tokenEl(j, { big: true }));
-    const r = document.createElement('div'); r.innerHTML = `<div class="bar" style="width:${Math.round(100 * w)}%"></div><div class="lbl">${txt}</div>`;
-    lg.appendChild(cell); lg.appendChild(r);
+  // ---------- start screen: two cards a player must tell apart ----------
+  [[{ p: 'DE', w: 'UK' }, 'A German who works in the UK'], [{ p: 'UK', w: 'DE' }, 'A Brit who works in Germany']].forEach(([j, cap]) => {
+    const d = document.createElement('div'); const c = cardEl(j); c.tabIndex = -1; c.style.pointerEvents = 'none';
+    d.appendChild(c); d.insertAdjacentHTML('beforeend', `<div class="cap">${cap}</div>`); $('#start-duo').appendChild(d);
   });
   $('#b-play').onclick = () => show('s-rules');
   $('#b-r1').onclick = () => startR1();
 
   // ---------- round 1 ----------
-  let s1 = null, r1Ratio = null, r1Info = null;
-  buildJars($('#jars1'));
+  let s1 = null, r1Ratio = null;
+  buildGroups($('#groups1'));
   function startR1() {
     s1 = M.newRound1(); $('#r1-reveal').classList.add('hide'); $('#aim-r1').classList.remove('hide');
+    $('#r1-traylab').textContent = 'THE POOL · 24 EXPERTS';
     $('#info1').innerHTML = 'Tap a judge below to seat them. Tap a seated judge to send them back.';
-    setJars($('#jars1'), M.evaluate([]), { covered: true }); renderR1(); show('s-r1');
+    setGroups($('#groups1'), M.evaluate([]), { covered: true }); renderR1(); show('s-r1');
   }
   function renderR1(lastId) {
-    const panel = M.panelOf(s1);
-    drawTable($('#table1'), panel, { count: `${s1.seated.length}/15`, sel: lastId });
+    drawSeats($('#table1'), M.panelOf(s1), lastId);
+    $('#cnt1').textContent = `${s1.seated.length}/15`;
     const pool = $('#pool'); pool.innerHTML = '';
-    s1.pool.forEach(j => { const t = tokenEl(j); if (s1.seated.indexOf(j.id) >= 0) t.classList.add('ghost'); pool.appendChild(t); });
-    $$('#table1 .tok, #pool .tok').forEach(t => t.addEventListener('click', () => tapR1(t.dataset.id)));
+    s1.pool.forEach(j => { const t = cardEl(j); if (s1.seated.indexOf(j.id) >= 0) t.classList.add('ghost'); pool.appendChild(t); });
+    $$('#table1 .jc, #pool .jc').forEach(t => t.addEventListener('click', () => tapR1(t.dataset.id)));
   }
   function tapR1(id) {
-    if (s1.revealed) { const j = s1.pool.find(x => x.id === id); $('#info1').innerHTML = favoursText(j); renderR1(id); return; }
-    s1 = M.toggleSeat(s1, id);
     const j = s1.pool.find(x => x.id === id);
+    if (s1.revealed) { $('#info1').innerHTML = favoursText(j); renderR1(id); return; }
+    s1 = M.toggleSeat(s1, id);
     $('#info1').innerHTML = favoursText(j);
     renderR1(s1.seated.indexOf(id) >= 0 ? id : null);
     if (s1.revealed) revealR1();
   }
   function revealR1() {
-    const e = M.evaluate(M.panelOf(s1)); r1Ratio = e.ratio; r1Info = e;
-    setJars($('#jars1'), e, { covered: false, erc: true });
+    const e = M.evaluate(M.panelOf(s1)); r1Ratio = e.ratio;
+    setGroups($('#groups1'), e, { covered: false });
     let msg;
-    if (e.ratio >= 1.4) msg = `Your panel gives big-five applicants <b>${ratioWords(e.ratio)}</b> the home advantage of everyone else.`;
+    if (e.ratio >= 1.4) msg = `Your panel gives applicants who work in the Big Five <b>${ratioWords(e.ratio)}</b> the home advantage of applicants who work elsewhere.`;
     else if (e.ratio > 0.8) msg = 'Your panel is close to level. That is rare: real panels lean.';
-    else msg = 'Your panel leans the other way: small countries collect more home stars.';
+    else msg = 'Your panel leans the other way: applicants who work elsewhere collect more home stars.';
     $('#r1-reveal').innerHTML = `<h2>THE COVERS COME OFF</h2><p>${msg}</p>` +
-      `<p>Real ERC panels: about <b>${ratioWords(t2.ratio)}</b> (dashed lines). Big countries send thousands of applicants, so each of their home judges is a home judge for many.</p>` +
+      `<p>Real ERC panels: about <b>${ratioWords(t2.ratio)}</b> (${one(t2.big)}★ against ${one(t2.other)}★). Big countries send thousands of applicants, so each of their home judges is a home judge for many.</p>` +
       `<button class="btn wide" id="b-r2">ROUND 2</button>`;
     $('#r1-reveal').classList.remove('hide'); $('#aim-r1').classList.add('hide'); $('#r1-traylab').textContent = 'THE POOL · TAP A JUDGE TO SEE WHOM THEY FAVOUR';
-    $('#jars1').classList.add('flash');
+    $('#groups1').classList.add('flash');
     $('#b-r2').onclick = () => startR2();
-    setTimeout(() => $('#jars1').scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 150);
   }
 
   // ---------- round 2 ----------
   let s2 = null, sel = null; // sel: {kind:'seat'|'bench', idx}
-  buildJars($('#jars2'));
+  buildGroups($('#groups2'));
   function startR2() { s2 = M.newRound2(); sel = null; $('#r2-result').classList.add('hide'); $('#info2').innerHTML = 'Tap a judge at the table, then a judge on the bench, to swap them.'; renderR2(); show('s-r2'); }
   function renderR2() {
     const e = M.evaluate(s2.table);
-    setJars($('#jars2'), e, { covered: false, erc: true });
-    const gap = Math.abs(e.gap);
-    $('#r2-gap').innerHTML = e.level ? '<b style="color:var(--oth)">LEVEL</b>: within half a star.' : `Gap: <b>${one(gap)}★</b>. Target: half a star or less.`;
-    drawTable($('#table2'), s2.table, { count: e.level ? 'LEVEL' : one(gap) + '★', label: 'GAP', sel: sel && sel.kind === 'seat' ? s2.table[sel.idx].id : null });
+    setGroups($('#groups2'), e, { covered: false, target: true });
+    drawSeats($('#table2'), s2.table, sel && sel.kind === 'seat' ? s2.table[sel.idx].id : null);
+    $('#cnt2').textContent = e.level ? 'LEVEL' : 'GAP ' + one(Math.abs(e.gap)) + '★';
     const bench = $('#bench'); bench.innerHTML = '';
-    s2.bench.forEach((j, i) => { const t = tokenEl(j); t.dataset.bench = i; if (sel && sel.kind === 'bench' && sel.idx === i) t.classList.add('sel'); bench.appendChild(t); });
+    s2.bench.forEach((j, i) => { const t = cardEl(j); t.dataset.bench = i; if (sel && sel.kind === 'bench' && sel.idx === i) t.classList.add('sel'); bench.appendChild(t); });
     $('#pips').innerHTML = ''; for (let k = 0; k < C.swaps; k++) { const p = document.createElement('div'); p.className = 'pip' + (k < s2.swapsUsed ? ' used' : ''); $('#pips').appendChild(p); }
-    $$('#table2 .tok').forEach(t => t.addEventListener('click', () => tapR2('seat', +t.dataset.seat)));
-    $$('#bench .tok').forEach(t => t.addEventListener('click', () => tapR2('bench', +t.dataset.bench)));
+    $$('#table2 .jc').forEach(t => t.addEventListener('click', () => tapR2('seat', +t.dataset.seat)));
+    $$('#bench .jc').forEach(t => t.addEventListener('click', () => tapR2('bench', +t.dataset.bench)));
     $('#b-done').disabled = s2.done;
   }
   function tapR2(kind, idx) {
@@ -379,9 +377,9 @@ a { color: var(--big); }
       s2 = M.swap(s2, seatIdx, benchIdx); sel = null;
       const e = M.evaluate(s2.table);
       const d = (a, b) => { const x = a - b; return (x >= 0 ? '+' : '−') + Math.abs(x).toFixed(2) + '★'; };
-      $('#info2').innerHTML = `<b>${C.people[out.p]} in ${C.names[out.w]} out, ${C.people[inn.p]} in ${C.names[inn.w]} in.</b> ` +
-        `Big five ${d(e.big.stars, before.big.stars)}, everyone else ${d(e.other.stars, before.other.stars)}.` +
-        (Math.abs(e.other.stars - before.other.stars) < 0.1 && Math.abs(e.big.stars - before.big.stars) < 0.1 && !M.isBig(inn.w) && inn.p !== 'US' ? ` One ${C.people[inn.p]} judge is a home judge for few applicants, so the teal jar barely moves.` : '');
+      $('#info2').innerHTML = `<b>Out: passport ${out.p}, works in ${out.w}. In: passport ${inn.p}, works in ${inn.w}.</b> ` +
+        `Works in the Big Five ${d(e.big.stars, before.big.stars)}, works elsewhere ${d(e.other.stars, before.other.stars)}.` +
+        (Math.abs(e.other.stars - before.other.stars) < 0.1 && Math.abs(e.big.stars - before.big.stars) < 0.1 && !M.isBig(inn.w) && inn.p !== 'US' ? ` A judge from ${C.names[inn.w]} is a home judge for few applicants, so the gap barely moves.` : '');
       renderR2();
       if (s2.done) endR2();
       return;
@@ -393,28 +391,28 @@ a { color: var(--big); }
   function endR2() {
     s2 = M.finishRound2(s2);
     const e = M.evaluate(s2.table);
-    $('#r2-result').innerHTML = (e.level ? `<div class="banner ok">LEVEL!</div><p>Solved in <b>${s2.swapsUsed}</b> swap${s2.swapsUsed === 1 ? '' : 's'}. Big five ${one(e.big.stars)}★, everyone else ${one(e.other.stars)}★.</p>`
-      : `<div class="banner no">NOT YET</div><p>The jars are still ${one(Math.abs(e.gap))}★ apart. Try RESET: which judges are home judges for the most applicants?</p>`) +
+    $('#r2-result').innerHTML = (e.level ? `<div class="banner ok">LEVEL!</div><p>Solved in <b>${s2.swapsUsed}</b> swap${s2.swapsUsed === 1 ? '' : 's'}. Works in the Big Five ${one(e.big.stars)}★, works elsewhere ${one(e.other.stars)}★.</p>`
+      : `<div class="banner no">NOT YET</div><p>The gap is still ${one(Math.abs(e.gap))}★. Try RESET: which judges are home judges for the most applicants?</p>`) +
       `<button class="btn wide" id="b-end">THE VERDICT</button>`;
     $('#r2-result').classList.remove('hide');
     $('#b-end').onclick = () => toEnd();
     renderR2();
-    setTimeout(() => $('#r2-result').scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 150);
   }
   $('#b-reset').onclick = () => startR2();
   $('#b-done').onclick = () => { if (!s2.done) endR2(); };
 
   // ---------- end ----------
-  buildJars($('#jars-end'));
   function toEnd() {
     const e2 = M.evaluate(s2.table);
-    let v1 = r1Ratio >= 1.4 ? `Your own panel gave the big five ${ratioWords(r1Ratio)} the home advantage of everyone else.`
-      : r1Ratio > 0.8 ? 'Your own panel came out close to level, which real panels do not.' : 'Your own panel leaned towards small countries.';
-    v1 += e2.level ? ` Then you levelled the ERC-style panel in ${s2.swapsUsed} swap${s2.swapsUsed === 1 ? '' : 's'}.` : ' The ERC-style panel stayed tilted.';
+    let v1 = r1Ratio >= 1.4 ? `Your own panel gave applicants who work in the Big Five ${ratioWords(r1Ratio)} the home advantage of everyone else.`
+      : r1Ratio > 0.8 ? 'Your own panel came out close to level, which real panels do not.' : 'Your own panel leaned towards applicants who work elsewhere.';
+    v1 += e2.level ? ` Then you fixed the ERC-style panel in ${s2.swapsUsed} swap${s2.swapsUsed === 1 ? '' : 's'}.` : ' The ERC-style panel stayed tilted.';
     $('#verdict').innerHTML = `<p class="v1">${v1}</p>` +
-      `<p>ERC judges give the same proposal about <b>a sixth of a point more</b> when the applicant shares their passport and workplace. Sharing just one of the two is worth two to three times what shared gender is worth. Real ERC panels hand big-five applicants about <b>${ratioWords(t2.ratio)}</b> as many home stars as everyone else.</p>` +
-      `<p>One judge's nudge is small. But it falls on the same side again and again. The study links it to a funding edge of about <b>${C.fundingEdge.big} percentage points</b> for the big five against <b>${C.fundingEdge.other}</b> for everyone else, where about ${Math.round(C.fundingEdge.base)} in 100 get funded. That last part is a correlation, not a proven cause.</p>`;
-    setJars($('#jars-end'), { big: { stars: t2.big }, other: { stars: t2.other } }, { covered: false, erc: true });
+      `<p>ERC judges give the same proposal about <b>a sixth of a point more</b> when the applicant has the same passport and works in the same country. Sharing just one of the two is worth two to three times what shared gender is worth. Real ERC panels hand applicants who work in the Big Five about <b>${ratioWords(t2.ratio)}</b> as many home stars as everyone else.</p>` +
+      `<p>One judge's nudge is small. But it falls on the same side again and again. The study links it to a funding edge of about <b>${C.fundingEdge.big} percentage points</b> for the Big Five against <b>${C.fundingEdge.other}</b> for everyone else, where about ${Math.round(C.fundingEdge.base)} in 100 get funded. That last part is a correlation, not a proven cause.</p>`;
+    $('#endbars').innerHTML = [['bigW', 'Works in the Big Five', t2.big], ['othW', 'Works elsewhere', t2.other]].map(([cls, lab, v]) =>
+      `<div class="gcell ${cls}"><div class="gl" style="min-height:0">${lab}</div><div class="gtrack"><div class="gfill" style="width:${Math.min(100, 100 * v / BAR_MAX)}%"></div></div><div class="gnum">${one(v)}★</div></div>`).join('');
     show('s-end');
   }
   $('#b-again').onclick = () => { show('s-rules'); };

@@ -50,4 +50,13 @@ PASS exactly 4 judges per proposal: mirror ratio 3.25, ERC-like ratio 2.94, bigg
 == 7. Claim boundaries
 PASS the correlational funding edge is quoted, never computed from the player's panel
 
+== 8. The four applicant-group bars (passport row × workplace column)
+PASS ERC-like: the four groups partition the applicants (bigP_bigW 45.3%, bigP_othW 3.9%, othP_bigW 8.5%, othP_othW 42.3%)
+PASS ERC-like: weighted cells reproduce the success measure (works in Big Five 3.49 = 3.49, elsewhere 1.19 = 1.19)
+     (an unweighted average of the two bar heights would say 2.81 instead of 3.49; not used)
+PASS mirror: the four groups partition the applicants (bigP_bigW 45.3%, bigP_othW 3.9%, othP_bigW 8.5%, othP_othW 42.3%)
+PASS mirror: weighted cells reproduce the success measure (works in Big Five 4.39 = 4.39, elsewhere 1.35 = 1.35)
+     (an unweighted average of the two bar heights would say 3.45 instead of 4.39; not used)
+PASS "same" means the same named country: a German in France and a French judge in Germany do not match
+
 ALL PASS

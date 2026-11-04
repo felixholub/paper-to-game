@@ -88,27 +88,41 @@ function starWeight(type, bonus) { bonus = bonus || CONFIG.bonus; return type ? 
 // shares: % of panel members matching (Table 2's measure). stars: expected home stars per 10 juries, i.e.
 // starsPer × reviewersPerProposal × Σ_judges (1/panelSize) × weight(match) — random assignment within the panel.
 // bonusPts: the expected bonus on one mark, in points (stars × 0.164 / (starsPer × reviewers)).
+// The four applicant groups shown as bars: passport row × workplace column. They classify applicants, never judges.
+// bigP = passport of a Big Five country; bigW = works in a Big Five country. XX/ZZ passports count as "other".
+const CELLS = ['bigP_bigW', 'bigP_othW', 'othP_bigW', 'othP_othW'];
+function cellOf(a) { return (isBig(a.p) ? 'bigP' : 'othP') + '_' + (isBig(a.w) ? 'bigW' : 'othW'); }
+
+// Expected exposure and home stars for a panel (any size), by applicant group.
+// shares: % of panel members matching (Table 2's measure). stars: expected home stars per 10 juries, i.e.
+// starsPer × reviewersPerProposal × Σ_judges (1/panelSize) × weight(match) — random assignment within the panel.
+// Every group value is the applicant-weighted average over the applicants in that group (never an average of other groups' values).
+// big / other: by workplace, as in Table 2 (the success measure). cells: the four passport × workplace groups.
 function evaluate(panel, opts) {
   opts = opts || {};
   const bonus = opts.bonus || CONFIG.bonus, apps = opts.applicants || APPLICANTS;
   const R = opts.reviewers || CONFIG.reviewersPerProposal;
-  const g = { big: { both: 0, country: 0, citz: 0, wsum: 0, w: 0 }, other: { both: 0, country: 0, citz: 0, wsum: 0, w: 0 } };
+  const blank = () => ({ both: 0, country: 0, citz: 0, wsum: 0, w: 0 });
+  const g = { big: blank(), other: blank() }, c = {};
+  CELLS.forEach(k => { c[k] = blank(); });
   const n = panel.length;
   for (const a of apps) {
-    const G = isBig(a.w) ? g.big : g.other;
-    G.w += a.s;
+    const G = isBig(a.w) ? g.big : g.other, Cc = c[cellOf(a)];
+    G.w += a.s; Cc.w += a.s;
     if (!n) continue;
-    for (const j of panel) { const t = matchType(a, j); if (t) { G[t] += a.s / n; G.wsum += a.s * starWeight(t, bonus) / n; } }
+    for (const j of panel) {
+      const t = matchType(a, j);
+      if (t) { for (const X of [G, Cc]) { X[t] += a.s / n; X.wsum += a.s * starWeight(t, bonus) / n; } }
+    }
   }
-  const out = {};
-  for (const k of ['big', 'other']) {
-    const G = g[k];
-    out[k] = {
-      both: 100 * G.both / G.w, country: 100 * G.country / G.w, citz: 100 * G.citz / G.w,
-      stars: CONFIG.starsPer * R * G.wsum / G.w,
-      bonusPts: G.wsum / G.w * bonus.both, // expected bonus on one mark, in points
-    };
-  }
+  const summ = G => ({
+    both: 100 * G.both / G.w, country: 100 * G.country / G.w, citz: 100 * G.citz / G.w,
+    stars: CONFIG.starsPer * R * G.wsum / G.w,
+    bonusPts: G.wsum / G.w * bonus.both, // expected bonus on one mark, in points
+    weight: G.w,                          // % of all applicants in this group
+  });
+  const out = { big: summ(g.big), other: summ(g.other), cells: {} };
+  CELLS.forEach(k => { out.cells[k] = summ(c[k]); });
   out.ratio = out.other.stars > 0 ? out.big.stars / out.other.stars : Infinity;
   out.gap = out.big.stars - out.other.stars;
   out.level = Math.abs(out.gap) <= CONFIG.levelTol;
@@ -187,6 +201,6 @@ function simulate(panel, nProps, seed) {
   return { big: CONFIG.starsPer * acc.big[0] / acc.big[1], other: CONFIG.starsPer * acc.other[0] / acc.other[1] };
 }
 
-const MECH = { CONFIG, APPLICANTS, parseApplicants, parseJudges, isBig, matchType, starWeight, evaluate, table2Stars,
+const MECH = { CONFIG, APPLICANTS, CELLS, cellOf, parseApplicants, parseJudges, isBig, matchType, starWeight, evaluate, table2Stars,
   favours, newRound1, toggleSeat, panelOf, newRound2, swap, finishRound2, simulate, rng };
 if (typeof module !== 'undefined') module.exports = MECH;
