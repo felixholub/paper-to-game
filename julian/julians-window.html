@@ -53,13 +53,13 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 .balloon.hers::before { content: ''; position: absolute; left: -16px; bottom: -4px; width: 9px; height: 9px; border: 1.5px dashed var(--ink); border-radius: 50%; background: #fff; }
 .balloon.hers::after { content: ''; position: absolute; left: -8px; bottom: 6px; width: 5px; height: 5px; border: 1.5px dashed var(--ink); border-radius: 50%; background: #fff; }
 .strip { display: flex; gap: 2px; width: var(--w); margin: 10px auto 0; }
-.strip .fr { flex: 1 1 0; height: 28px; border: 1.2px solid var(--ink); background: #fff; position: relative; overflow: hidden; }
+.strip .fr { flex: 1 1 0; height: 30px; border: 1.2px solid var(--ink); background: #fff; position: relative; overflow: hidden; }
 .strip .fr.empty { border-style: dotted; opacity: .5; }
 .strip .fr svg { display: block; width: 100%; height: 100%; }
 .blanketline { width: var(--w); height: 5px; background: var(--rose); margin: 4px auto 0; border-radius: 3px; }
 .striplabel { width: var(--w); margin: 3px auto 0; font-size: 12.5px; display: flex; justify-content: space-between; opacity: .85; }
-.record { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; width: var(--w); margin: 8px auto 0; }
-.record .fr { height: 48px; border: 1.2px solid var(--ink); background: #fff; overflow: hidden; }
+.record { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: var(--w); margin: 8px auto 0; }
+.record .fr { height: 54px; border: 1.2px solid var(--ink); background: #fff; overflow: hidden; }
 .record .fr svg { display: block; width: 100%; height: 100%; }
 .verd h3 { font-family: 'Italiana', serif; font-weight: 400; font-size: 22px; margin: 14px 0 4px; }
 .sentence { font-family: 'Italiana', serif; font-size: 26px; line-height: 1.15; margin: 18px 0 10px; text-align: center; }
@@ -139,7 +139,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
   <h3 class="verd" style="font-family:'Italiana',serif;font-weight:400;font-size:22px;margin:16px 0 4px">The night</h3>
   <div class="record" id="recordGrid"></div>
   <div class="blanketline"></div>
-  <div class="striplabel"><span>sixteen beats: tone is the heaviness, stars the sureness, the mark is where you looked; the blanket under all of them</span></div>
+  <div class="striplabel"><span>ten beats: tone is the heaviness, stars the sureness, the mark is where you looked; the blanket under all of them</span></div>
   <p class="sentence" id="vSentence"></p>
   <div class="row"><button class="btn primary wide" id="againBtn">Another night</button></div>
   <div class="row"><button class="btn" data-go="help">How to play</button><button class="btn" data-go="about">About</button></div>
@@ -149,7 +149,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 <section id="help" class="screen help">
   <h2>How to play</h2>
   <p><b>See the night through. Each time, choose where to look — the cross, the window, or within — and find out what brings the heaviness.</b></p>
-  <p>The picture is one room: your bed on the left with you in it under a rose blanket, a cross on the wall in front of you, a window on the right. The night has sixteen beats; the small label at the top right of the picture gives the hour, and the sky in the window changes with it.</p>
+  <p>The picture is one room: your bed on the left with you in it under a rose blanket, a cross on the wall in front of you, a window on the right. The night has ten beats, one for each sight at the cross, so no night shows everything; the small label at the top right of the picture gives the hour, and the sky in the window changes with it.</p>
   <p><b>The weather.</b> Sometimes the room is light, with stars and petals over it: that is a sureness. Sometimes a heavy dot-tone lies over everything and scribbles creep in at the edges: that is the heaviness. The line under the picture says which it is now, and, when it has just changed, what you looked at just before. <b>The blanket</b> is how you are kept. It is the one thing in colour.</p>
   <p><b>Looking.</b> Each beat, tap a place: the cross, the window, or you yourself (within), in the picture or on the three panels under it. Your eyes turn there and the panel says what looking there is. Then tap <b>Look</b>. <b>The cross</b> shows the next sight of the Passion; in the heaviness the same sight is hard to look at. <b>The window</b> shows the sky and nothing else; nothing there can harm you, and nothing is shown. <b>Within</b> asks a question and gets an answer, one per beat, in order; in the heaviness the first question is what brought it.</p>
   <p><b>After a look</b> the game says in its own words what you did and what came of it, then His words in a round balloon and yours in a dashed one, then what the heaviness did and what that means. <b>Turn the page</b> starts the next beat. Nothing carries over: every beat starts with your eyes on nothing.</p>
@@ -165,7 +165,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 <p>In the Seventh Shewing (ch. xv) Julian is filled with sureness, then "turned and left to myself in heaviness", then comforted, "now that one, and now that other, divers times — I suppose about twenty times". She checks the obvious cause and rules it out: "in this time I sinned not wherefore I should be left to myself"; "also I deserved not to have this blessed feeling." She concludes that the swing is given freely, that "He keepeth us even alike secure in woe and in weal", and that we should not "follow the feelings of pain in sorrow and mourning for them, but ... suddenly pass over." The game is that night: the heaviness comes and goes on a schedule drawn before your first look, it follows nothing you do, and the blanket is the same in every panel.</p>
 <p>Where she looks is her one act all night, and the sights are the text's, in its order: the garland bleeding (ch. iv), the drops like pellets, herring scales and rain off the eaves (vii), the face half covered and "seeking is as good as beholding" (x), the scourging (xii), the laugh (xiii), the drying and "I thirst" (xvi–xvii), "Look up to Heaven" and "Nay; I may not" (xix), the change of cheer with "no time between" (xxi), "Art thou well pleased?" (xxii), the side (xxiv), His mother (xxv), "It is I" (xxvi). Within: the hazelnut (v), "sin is no deed" (xi), "Is any pain like this?" (xvii), the check of the cause (xv), "It behoved that there should be sin; but all shall be well" (xxvii), "I have made well the most harm" (xxix), and the hidden part (xxx, xxxii).</p>
 <h3>Mechanism: a toy</h3>
-<p>The game runs a model built to illustrate the text's argument, not a model the text contains. <b>It demonstrates</b> that a night can be played in which the feeling swings on its own clock, follows nothing the player does, and leaves the keeping untouched; and that the sights can be reached in the text's order by looking. <b>It assumes</b> the toy: sixteen beats for sixteen shewings; the twenty swings of one shewing compressed to about eight across the night, on a seeded random schedule with the first heaviness forced by the third beat; a window that carries "Look up to Heaven" and the hour; the horror "away from the Cross" (ch. iii) drawn as scribbles at the edges; a sight dreadful in heaviness and sweet in sureness where ch. vii says one sight was both at once; the change of cheer tied to being at the cross when the weather turns; the blanket for "He is our clothing" (ch. v); the questions asked when the player chooses rather than when He shows. <b>The text establishes</b> an argument from a vision, not a finding: that the swing was not caused by her sin, that the keeping is constant, that the right act is to pass over. Under this game's assumptions those three hold by construction; the game is a way of meeting them, not evidence for them.</p>
+<p>The game runs a model built to illustrate the text's argument, not a model the text contains. <b>It demonstrates</b> that a night can be played in which the feeling swings on its own clock, follows nothing the player does, and leaves the keeping untouched; and that the sights can be reached in the text's order by looking. <b>It assumes</b> the toy: ten beats, one per sight at the cross, so that no night shows everything; the twenty swings of one shewing compressed to about five or six across the night, on a seeded random schedule with the first heaviness forced by the third beat; a window that carries "Look up to Heaven" and the hour; the horror "away from the Cross" (ch. iii) drawn as scribbles at the edges; a sight dreadful in heaviness and sweet in sureness where ch. vii says one sight was both at once; the change of cheer tied to being at the cross when the weather turns; the blanket for "He is our clothing" (ch. v); the questions asked when the player chooses rather than when He shows. <b>The text establishes</b> an argument from a vision, not a finding: that the swing was not caused by her sin, that the keeping is constant, that the right act is to pass over. Under this game's assumptions those three hold by construction; the game is a way of meeting them, not evidence for them.</p>
 <p>Every number and every line the game says sits in a config block at the top of <code>mechanism.js</code>, tagged with its chapter or marked as our choice. The weather is drawn from the night's number, shown on the morning page, so a night can be replayed.</p>
 <h3>Game built from this text</h3>
 <p>Julian of Norwich, <i>Revelations of Divine Love</i>, tr. Grace Warrack (London: Methuen, 1901), chapters i–xxxii. Game built from this text; the text is the authority where the two disagree. Her words appear in balloons as the text gives them, lightly shortened; the game's own voice is in the boxes. Steffen Huck, 2026, with Claude under the <a href="https://github.com/steffenhuck/paper-to-game">paper-to-game</a> skill. Type: Delius (Natalia Raices) and Italiana (Santiago Orozco), both under the SIL Open Font License.</p>
@@ -182,18 +182,17 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
   'use strict';
 
   var CONFIG = {
-    beats: 16,          // ch. i: "Sixteen Shewings"; our choice: one beat of the night per shewing (a count, not a mapping)
+    beats: 10,          // our choice: ten beats, one per sight at the cross (ch. iv–xxvi), so a night cannot show everything; the first build had sixteen, for the sixteen shewings (ch. i), and ran dry after the tenth
     swingsInText: 20,   // ch. xv: "now that one, and now that other, divers times — I suppose about twenty times" (in one shewing)
-    turnProb: 0.5,      // our choice: the weather turns on about half the beats; ~8 turns in 16 beats stands for the twenty in the text
+    turnProb: 0.6,      // our choice: the weather turns on about six beats in ten; ~5–6 turns in 10 beats stands for the twenty in the text
     firstTurnBy: 3,     // our choice (a floor): the first heaviness no later than beat 3, so the discovery arrives early
-    maxRun: 4,          // our choice: no stretch of one weather longer than 4 beats (ch. xv: "This lasted but a while")
+    maxRun: 3,          // our choice: no stretch of one weather longer than 3 beats (ch. xv: "This lasted but a while")
     startWeal: true,    // ch. xv: the sureness came first ("I was fulfilled with the everlasting sureness")
     keeping: 1,         // ch. xv: "He keepeth us even alike secure in woe and in weal" — constant by construction, never read by the weather
     actsAffectWeather: 0, // ch. xv: "freely our Lord giveth when He will" — the schedule is drawn from the seed before the first look; 0 = no effect
     cheerNeedsCross: 1, // ch. xxi: "willingly abiding in the same Cross ... unto the last point, suddenly He shall change His Cheer" — our tie
     profferAfterDrying: 1, // ch. xix: "Look up to Heaven" is offered while she beholds the drying (ch. xvi–xvii); our tie to the first dark after it
-    hours: ['deep night', 'deep night', 'deep night', 'deep night', 'night', 'night', 'night', 'night',
-            'small hours', 'small hours', 'small hours', 'small hours', 'before dawn', 'before dawn', 'first light', 'morning'] // our choice: the window's clock; the text gives no hour in these chapters
+    hours: ['deep night', 'deep night', 'night', 'night', 'small hours', 'small hours', 'before dawn', 'before dawn', 'first light', 'morning'] // our choice: the window's clock; the text gives no hour in these chapters
   };
 
   // ---- the weather: a seeded schedule, drawn once, independent of every look ----------------------------------------
