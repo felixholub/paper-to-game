@@ -1,195 +1,128 @@
-// Augustine's Clock — the calibration check. Runs the mechanism headless, through the same functions the browser calls.
+// Augustine's Clock (rebuild): the mechanism run headless, through the functions the browser calls.
 // Run: node calibration.js   (calibration-result.txt is the saved output)
-//
-// A. The paper's numbers: the hymn line, its long and short syllables, the chain of ch. XV, the sun that stands still,
-//    the wheel that keeps its pace or is kicked. B. The draw, over 2000 evenings. C. Words: no digits on screen, the
-//    fraction words right at their anchors. D. Playing it in numbers: simulated players through whole evenings.
-//    E. Robustness: the central discovery under other choices of ours.
 const A = require('./mechanism.js');
-const out = []; let pass = 0, fail = 0;
-const log = s => { out.push(s); console.log(s); };
-const check = (name, ok, detail) => { (ok ? pass++ : fail++); log((ok ? 'PASS ' : 'FAIL ') + name + (detail ? '  [' + detail + ']' : '')); };
-const P = A.CONFIG.PAPER;
-const near = (a, b, tol) => Math.abs(a - b) <= tol;
-const gauss = R => { let u = 0, v = 0; while (u === 0) u = R(); while (v === 0) v = R(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-const fmt = x => (Math.round(x * 100) / 100).toFixed(2);
+const C = A.CONFIG, out = [], say = s => { out.push(s); console.log(s); };
+let pass = 0, fail = 0;
+const check = (name, ok, note) => { if (ok) pass++; else fail++; say((ok ? 'pass' : 'FAIL') + '  ' + name + (note ? '  (' + note + ')' : '')); };
+const log = Math.log, abs = Math.abs;
+const noDigits = s => !/\d/.test(s);
 
-log('Augustine’s Clock: calibration check');
-log('');
-log('A. The paper’s numbers');
+say('A. The book and the deal');
 {
-  const syl = A.hymnVoice();
-  check('A1 the hymn line has eight syllables, "De-us cre-a-tor om-ni-um" (ch. XXVII)', syl.length === 8 && syl.map(s => s.text).join('') === 'Deuscreatoromnium');
-  check('A2 the second, fourth, sixth and eighth are long; the others short (ch. XXVII)', syl.every((s, k) => s.long === (k % 2 === 1)));
-  const shorts = syl.filter(s => !s.long).map(s => s.dur), longs = syl.filter(s => s.long).map(s => s.dur);
-  check('A3 every long is exactly double every short: "hath a double time" (ch. XXVII)', longs.every(l => shorts.every(s => Math.abs(l / s - 2) < 1e-12)), 'long/short = ' + fmt(longs[0] / shorts[0]));
-  const ch = P.PRESENT_CHAIN;
-  check('A4 the chain of ch. XV: a hundred years, twelve months, (a month), twenty-four hours, (an hour)', ch[0].parts === 100 && ch[1].parts === 12 && ch[3].parts === 24 && ch.length === 5);
-  let mid = true;
-  for (let s = 1000; s < 3000; s++) { const g = A.newGame(s); g.prologue.forEach(st => { if (st.now <= 0 || st.now >= st.parts - 1) mid = false; }); }
-  check('A5 "now" is always a middle part, with some past and some to come (ch. XV: "any middle year")', mid);
-  let still = true, climbs = true;
-  for (let s = 1000; s < 1500; s++) { const r = A.newGame(s).rounds[3];
-    for (let k = 1; k <= 20; k++) { const t = r.T * k / 20; if (!(A.sunAt(r, t) > A.sunAt(r, t - r.T / 20))) climbs = false; }
-    for (let k = 0; k <= 40; k++) { const t = r.T + k * 0.5; if (A.sunAt(r, t) !== A.sunAt(r, r.T)) still = false; } }
-  check('A6 the sun climbs while the voice sounds, and stands still from the moment it stops (ch. XXIII)', climbs && still);
-  let three = true, steady = true, kickOk = true;
-  for (let s = 1000; s < 1500; s++) { const g = A.newGame(s, { first: s % 2 === 0 });
-    const w = g.rounds[1], k = g.rounds[2];
-    if (!near(A.wheelTurns(w, w.T, null), 3, 1e-9) || !near(A.wheelTurns(k, k.T, null), 3, 1e-9)) three = false;
-    for (let t = 0; t < 20; t += 0.37) if (!near(A.wheelTurns(w, t, 4) * A.wheelPeriod(w), t, 1e-9)) steady = false;
-    const tp = k.T + 0.5, d = A.CONFIG.WHEEL.kickDelay, P0 = A.wheelPeriod(k);
-    const rate = (A.wheelTurns(k, tp + d + 2, tp) - A.wheelTurns(k, tp + d + 1, tp)) * P0;
-    const before = (A.wheelTurns(k, tp + d, tp) - A.wheelTurns(k, tp + d - 0.2, tp)) * P0 / 0.2;
-    if (!near(rate, k.factor, 1e-9) || !near(before, 1, 1e-9)) kickOk = false; }
-  check('A7 the voice lasts exactly three turns of the wheel, in both wheel rounds', three);
-  check('A8 the steady wheel keeps its pace through the hold, "with equal pauses" (ch. XXIII)', steady);
-  check('A9 the kicked wheel keeps its pace until the kick lands, then runs at the kick’s pace (ch. XXIII: "sometimes slower, otherwhiles quicker")', kickOk);
-  let firstSame = true; for (let s = 1000; s < 3000; s++) { const g = A.newGame(s); if (g.rounds[6].T !== g.rounds[0].T) firstSame = false; }
-  check('A10 the last round’s target is exactly the first voice', firstSame);
-}
-
-log('');
-log('B. The draw, over 2000 evenings (seeds 1000–2999)');
-{
-  const V = A.CONFIG.VOICE, Ts = [], facs = { 2: 0, 0.5: 0 }; let firstTwo = true, det = true;
-  for (let s = 1000; s < 3000; s++) {
-    const g = A.newGame(s), f = A.newGame(s, { first: true });
-    g.rounds.forEach(r => { if (['voice', 'wheel', 'kick', 'sun', 'silence'].includes(r.id)) Ts.push(r.T); });
-    facs[g.rounds[2].factor]++;
-    if (f.rounds[2].factor !== 2) firstTwo = false;
-    if (JSON.stringify(A.newGame(s)) !== JSON.stringify(g)) det = false;
+  let apartOK = true, rangeOK = true, liveOK = true, crowdOK = true, sunOK = true, detOK = true, firstKick = true, laterKicks = { 2: 0, 0.5: 0 }, tries = 0;
+  for (let s = 1000; s < 4000; s++) {
+    const g = A.newGame(s, { first: s % 2 === 0 }), v = g.voices, lens = ['low', 'middle', 'high', 'top'].map(id => v[id].T).sort((a, b) => a - b);
+    tries = Math.max(tries, g.tries);
+    for (let k = 1; k < 4; k++) if (lens[k] - lens[k - 1] < C.LENGTH.apart - 1e-9) apartOK = false;
+    lens.forEach(T => { if (T < C.LENGTH.min || T > C.LENGTH.max) rangeOK = false; });
+    const ratio = v.top.T / v.low.T; if (ratio < C.LENGTH.liveVsLow && ratio > 1 / C.LENGTH.liveVsLow) liveOK = false;
+    const p = g.stations[6].plan;
+    if (!p.present.includes('low') || !p.present.includes('stranger') || p.present.length !== 2 + C.TUMULT.others) crowdOK = false;
+    p.entries.forEach(e => { if (e.id !== 'low' && e.end <= p.lowEnd + C.TUMULT.extraMin - 1e-9) crowdOK = false; });
+    if (p.sunStop >= p.lowEnd || p.sunStop <= p.lowStart) sunOK = false;
+    if (s % 2 === 0 && g.kick !== C.WHEEL.kickFirst) firstKick = false; else if (s % 2 !== 0) laterKicks[g.kick]++;
+    const g2 = A.newGame(s, { first: s % 2 === 0 }); if (JSON.stringify(g2.voices) !== JSON.stringify(v) || JSON.stringify(g2.stations[6].plan) !== JSON.stringify(p)) detOK = false;
   }
-  const mn = Math.min(...Ts), mx = Math.max(...Ts), mean = Ts.reduce((a, b) => a + b, 0) / Ts.length;
-  check('B1 every voice lasts between ' + V.min + ' and ' + V.max + ' seconds; the draw is flat (mean near the middle)', mn >= V.min && mx <= V.max && near(mean, (V.min + V.max) / 2, 0.05), 'min ' + fmt(mn) + ', max ' + fmt(mx) + ', mean ' + fmt(mean));
-  check('B2 the first evening’s kick always doubles the wheel', firstTwo);
-  check('B3 later evenings: the wheel is doubled or halved, about evenly', near(facs[2] / 2000, 0.5, 0.04), 'doubled ' + facs[2] + ', halved ' + facs[0.5]);
-  check('B4 the same evening number deals the same evening', det);
+  check('four voices at least ' + C.LENGTH.apart + ' s apart', apartOK);
+  check('every voice within ' + C.LENGTH.min + '–' + C.LENGTH.max + ' s', rangeOK);
+  check('the top one at least ' + C.LENGTH.liveVsLow + '× or at most 1/' + C.LENGTH.liveVsLow + ' of the low one', liveOK, 'most draws needed: ' + tries);
+  check('the crowd: the low one, two others and a stranger; the others outlast the low one', crowdOK);
+  check('the sun stops after the low one begins and before it ends', sunOK);
+  check('first evening always doubles the wheel', firstKick);
+  check('later evenings double or halve it about evenly', abs(laterKicks[2] - laterKicks[0.5]) < 150, laterKicks[2] + ' / ' + laterKicks[0.5]);
+  check('the same number deals the same evening', detOK);
 }
 
-log('');
-log('C. Words');
+say('B. The wheel in the silence');
 {
-  const anchors = A.AMOUNTS.every(a => A.amount(a.x) === a);
-  check('C1 each fraction word is chosen at its own value (a half is "half", one is "the same", two is "double")', anchors && A.amount(0.5).big === 'half' && A.amount(1).big === 'the same' && A.amount(2).big === 'double');
-  let mono = true, prev = -1; for (let x = 0.2; x < 5; x *= 1.01) { const i = A.AMOUNTS.indexOf(A.amount(x)); if (i < prev) mono = false; prev = i; }
-  check('C2 the words never go down as the ratio goes up', mono);
-  let agree = true; for (let x = 0.2; x < 5; x *= 1.003) { const a = A.amount(x).x, q = A.verdictWord(x); if ((a >= 1 && q) || (a < 1 && !q) || (a === 0.9 && q !== 'a little short') || (a <= 0.5 && q !== 'well short')) agree = false; }
-  check('C3 the qualifier always agrees with the fraction word: "the same" and longer are unqualified; nine tenths is "a little short"; half or less "well short"', agree);
-  // play 3000 random evenings with wild holds; no digit may reach a line on screen
-  let digits = 0, total = 0, sample = '';
-  for (let s = 0; s < 3000; s++) {
-    const R = A.rng(s + 7), g = A.newGame(1000 + s, { first: s % 3 === 0 }), wild = () => Math.exp(gauss(R) * 0.8);
-    const rs = [];
-    for (const r of g.rounds) {
-      if (r.id === 'silence') rs.push(A.silence(g, r.T * wild()));
-      else if (r.id === 'hymn') { const d = A.hymnVoice().map(x => x.dur * wild()); rs.push(A.sing(g, d, d.reduce((a, b) => a + b, 0) + 0.5)); const iS = 2 * Math.floor(R() * 4), iL = 2 * Math.floor(R() * 4) + 1; rs.push(A.lay(g, iS, iL)); }
-      else rs.push(A.hold(g, Math.min(r.T * wild(), r.T * 6), r.T + 0.4 + R()));
-      A.next(g);
-    }
+  const g = A.newGame(2024, { first: true }), r = g.stations[5];
+  check('the heard voice lasts exactly three turns', abs(A.wheelTurns(r, r.T, null) - 3) < 1e-9);
+  const tp = r.T + 0.4;                           // the press, 0.4 s into the hum
+  check('steady before the kick', abs(A.wheelTurns(r, tp + 0.5 * A.wheelPeriod(r), tp) - (tp / A.wheelPeriod(r) + 0.5)) < 1e-9);
+  check('the kick lands ' + C.WHEEL.kickAfterTurns + ' turns after the press', abs(A.kickAt(r, tp) - (tp + C.WHEEL.kickAfterTurns * A.wheelPeriod(r))) < 1e-9);
+  const after = A.wheelTurns(r, A.kickAt(r, tp) + A.wheelPeriod(r), tp) - A.wheelTurns(r, A.kickAt(r, tp), tp);
+  check('after the kick the wheel runs at ' + r.factor + '× its pace', abs(after - r.factor) < 1e-9);
+  const cr = A.countRatio(r);
+  check('counting three turns gives ' + cr.toFixed(3) + ' of the voice (doubled)', cr < 0.7 && cr > 0.55);
+  g.i = 5; const counted = A.silence(g, cr * r.T), saw = A.silence(g, r.T);
+  check('a hold at the counting point reads as counted', counted.reading === 'counted');
+  check('a hold at the voice reads as saw', saw.reading === 'saw');
+  const gh = A.newGame(2025, { first: false }); gh.kick = 0.5; gh.stations[5].factor = 0.5; gh.i = 5; const rh = gh.stations[5];
+  const crh = A.countRatio(rh); check('halved: counting gives ' + crh.toFixed(3) + ' of the voice', crh > 1.5 && crh < 2);
+  check('halved: the counting point reads as counted, the voice as saw', A.silence(gh, crh * rh.T).reading === 'counted' && A.silence(gh, rh.T).reading === 'saw');
+}
+
+say('C. Against a voice, the tumult, the last silence');
+{
+  const g = A.newGame(3101, { first: true }), r = g.stations[4]; g.i = 4;
+  check('a hold at the top one’s length reads as pulled', A.against(g, r.liveT).reading === 'pulled');
+  check('a hold at the low one’s length reads as held', A.against(g, r.T).reading === 'held');
+  g.i = 6; const p = g.stations[6].plan;
+  const caught = A.tumult(g, p.lowStart + 0.2, p.lowEnd + 0.1), waited = A.tumult(g, p.lowStart + 0.2, p.end + 0.5), missed = A.tumult(g, null, null), late = A.tumult(g, p.lowStart + 1.2, p.lowEnd - 0.8);
+  check('a release on the moment reads as caught', caught.reading === 'caught' && caught.found === 'atonce');
+  check('a release at the crowd’s end reads as waited', waited.reading === 'waited');
+  check('never pressing reads as missed', missed.reading === 'missed' && missed.pressAt == null);
+  check('a late press is said as late, an early release as early', late.found === 'late' && /before it stopped/.test(late.lines[1]));
+  const h = A.heard(g, p.present.slice()); check('naming the crowd exactly: 5 of 5', h.right.length === 5 && h.wrong.length === 0);
+  const h2 = A.heard(g, ['low', 'stranger']); check('naming two: the missing ones are listed', h2.heardLines.some(l => /unnamed/.test(l)));
+  g.i = 7; const la = A.last(g, g.voices.low.T * 0.9); check('the last silence is measured against the low one', abs(la.ratio - 0.9) < 1e-9);
+}
+
+say('D. Words');
+{
+  let digits = 0, lines = 0, mono = true;
+  for (let s = 1000; s < 2200; s++) {
+    const g = A.newGame(s, { first: s % 3 === 0 }), R = () => 0.3 + Math.random() * 2;
+    g.i = 0; A.hold(g, g.voices.low.T * R()); g.i = 1; A.hold(g, g.voices.middle.T * R()); g.i = 2; A.hold(g, g.voices.low.T * R()); g.i = 3; A.hold(g, g.voices.middle.T * R());
+    g.i = 4; A.against(g, g.voices.low.T * R()); g.i = 5; A.silence(g, g.voices.high.T * R());
+    const p = g.stations[6].plan; g.i = 6; const pr = Math.random() < 0.1 ? null : p.lowStart + Math.random() * 1.5; A.tumult(g, pr, pr == null ? null : pr + Math.random() * (p.end + 1 - pr)); A.heard(g, ['low', 'top'].filter(() => Math.random() < 0.7));
+    g.i = 7; A.last(g, g.voices.low.T * R()); g.i = 8; g.done = true;
     const v = A.verdict(g);
-    const texts = [].concat(...rs.map(x => x.lines.concat([x.big])), v.did, [v.headline, v.says, v.means, v.psalm, v.before]);
-    texts.forEach(t => { total++; if (/\d/.test(t)) { digits++; sample = t; } });
+    [].concat.apply([], g.results.map(r => r.lines.concat(r.heardLines || []))).concat(v.did, [v.headline, v.says, v.means, v.torn, v.present]).forEach(l => { lines++; if (!noDigits(l)) digits++; });
   }
-  check('C4 no digit in any line on screen, over 3000 evenings of wild holds', digits === 0, total + ' lines' + (sample ? '; e.g. ' + sample : ''));
+  check('no decimal or digit reaches a sentence (the chips’ "n of 5" aside)', digits === 0, lines + ' lines');
+  let last = -1; for (let x = 0.2; x < 5; x += 0.01) { const k = A.AMOUNTS.indexOf(A.amount(x)); if (k < last) mono = false; last = k; }
+  check('fraction words never go down as the ratio goes up', mono);
+  check('seconds words at their values', A.secondsWords(0.05) === 'a tenth of a second' && A.secondsWords(0.5) === 'half a second' && A.secondsWords(1) === 'a second' && A.secondsWords(2.6) === 'two and a half seconds');
 }
 
-// ---- simulated players
-function playEvening(seed, who, first) {
-  const g = A.newGame(seed, { first }), R = A.rng(seed * 31 + 5);
-  const noisy = (T, cv, bias) => T * (bias || 1) * Math.exp(gauss(R) * cv);
-  for (const r of g.rounds) {
-    const react = 0.4 + 0.5 * R(), tp = r.T + react;           // press comes a little after the voice stops
-    if (r.id === 'silence') A.silence(g, noisy(r.T, who.cv, who.bias));
-    else if (r.id === 'hymn') {
-      const sh = 0.42 * Math.exp(gauss(R) * 0.15) * (who.bias || 1), ratio = who.ls || 1.6;
-      const d = A.hymnVoice().map(x => x.long ? sh * ratio * Math.exp(gauss(R) * 0.12) : sh * Math.exp(gauss(R) * 0.12));
-      A.sing(g, d, d.reduce((a, b) => a + b, 0) + 7 * 0.15); A.lay(g, 0, 1);
-    } else if (r.id === 'kick' && who.counts) {
-      // count as many turns from the press as the voice lasted: solve wheelTurns(tp + h) - wheelTurns(tp) = turns
-      const n = A.CONFIG.WHEEL.turns;
-      let lo = 0, hi = r.T * 6; for (let k = 0; k < 60; k++) { const m = (lo + hi) / 2; if (A.wheelTurns(r, tp + m, tp) - A.wheelTurns(r, tp, tp) < n) lo = m; else hi = m; }
-      A.hold(g, lo * Math.exp(gauss(R) * 0.05), tp);
-    } else if (r.id === 'sun' && who.waits) A.hold(g, A.holdCap(r), tp);
-    else A.hold(g, noisy(r.T, who.cv, who.bias), tp);
-    A.next(g);
-  }
-  return g;
-}
-
-log('');
-log('D. Playing it in numbers: 300 evenings per player (later evenings: the wheel doubled or halved)');
-const PLAYERS = [
-  { name: 'Memory, steady (holds the voice in mind; 12% scatter)', cv: 0.12 },
-  { name: 'Memory, shaky (30% scatter)', cv: 0.30 },
-  { name: 'Hurrier (memory, but a fifth short)', cv: 0.12, bias: 0.8 },
-  { name: 'Wheel counter (counts the voice\u2019s three turns after the kick)', cv: 0.12, counts: true },
-  { name: 'Sun watcher (waits for the sun to move)', cv: 0.12, waits: true },
-  { name: 'The learned man (counts the wheel, waits for the sun)', cv: 0.12, counts: true, waits: true },
-];
-const table = [];
-for (const who of PLAYERS) {
-  const heads = {}, close = {}, kickErr = [], sunErr = [], memErr = [];
-  let counted = 0, waited = 0;
-  for (let s = 0; s < 300; s++) {
-    const g = playEvening(2000 + s, who, false), v = A.verdict(g);
-    heads[v.headline] = (heads[v.headline] || 0) + 1;
-    const c = v.did[0].replace(/^.*you came (.*) of it\.$/, '$1'); close[c] = (close[c] || 0) + 1;
-    const k = g.results[2], su = g.results[3];
-    if (k.reading === 'counted') counted++; if (su.reading === 'waited') waited++;
-    kickErr.push(Math.abs(Math.log(k.ratio))); sunErr.push(Math.abs(Math.log(su.ratio)));
-    g.results.filter(r => ['voice', 'wheel', 'silence', 'first'].includes(r.id)).forEach(r => memErr.push(Math.abs(Math.log(r.ratio))));
-  }
-  const med = a => { const b = a.slice().sort((x, y) => x - y); return b[Math.floor(b.length / 2)]; };
-  const top = o => Object.entries(o).sort((a, b) => b[1] - a[1])[0];
-  table.push({ who, counted, waited, kick: Math.exp(med(kickErr)), sun: Math.exp(med(sunErr)), mem: Math.exp(med(memErr)), head: top(heads), close: top(close) });
-}
-log('| Player | Memory rounds: typical miss | Kick round: typical miss | Sun round: typical miss | Read as counting | Read as waiting | Commonest headline |');
-log('|---|---|---|---|---|---|---|');
-table.forEach(t => log('| ' + t.who.name + ' | ×' + fmt(t.mem) + ' | ×' + fmt(t.kick) + ' | ×' + fmt(t.sun) + ' | ' + Math.round(t.counted / 3) + '% | ' + Math.round(t.waited / 3) + '% | ' + t.head[0] + ' (' + Math.round(t.head[1] / 3) + '%) |'));
-log('(typical miss: the median factor by which a hold missed its target; ×1.00 is exact)');
+say('E. Playing it in numbers: 400 evenings per player');
 {
-  const mem = table[0], cnt = table[3], sw = table[4], lm = table[5];
-  check('D1 the decisions matter: in the kick round the counter misses by about the kick (×2), the memory player by its own scatter', cnt.kick > 1.7 && mem.kick < 1.15, 'counter ×' + fmt(cnt.kick) + ', memory ×' + fmt(mem.kick));
-  check('D2 counting is read as counting nearly always; memory is almost never read as counting', cnt.counted / 300 > 0.97 && mem.counted / 300 < 0.05, 'counter ' + cnt.counted + '/300, memory ' + mem.counted + '/300');
-  check('D3 the sun watcher is read as waiting; the memory player is not', sw.waited === 300 && mem.waited / 300 < 0.02, 'watcher ' + sw.waited + '/300, memory ' + mem.waited + '/300');
-  check('D4 the four headlines go to the four kinds of player', mem.head[0].startsWith('You kept time with no clock') && cnt.head[0].includes('a wheel ran away') && sw.head[0].includes('waited for the sun') && lm.head[0].includes('learned man'));
-  check('D5 the steady memory player is told "within about a tenth"; the shaky one is told less', table[0].close[0] === 'within about a tenth' && table[1].close[0] !== 'within about a tenth', 'steady: ' + table[0].close[0] + '; shaky: ' + table[1].close[0]);
-}
-
-log('');
-log('E. Robustness: the discovery is that counting a moving body fails when its pace changes, while a hold made from the');
-log('   voice in memory does not. Each of our choices varied in turn; 300 evenings each, counter and steady memory player.');
-const W = A.CONFIG.WHEEL, V = A.CONFIG.VOICE;
-const saved = JSON.parse(JSON.stringify({ W, V }));
-const variants = [
-  ['kick ×1.5 / ×⅔', () => { W.kickChoices = [1.5, 2 / 3]; }],
-  ['kick ×3 / ×⅓', () => { W.kickChoices = [3, 1 / 3]; }],
-  ['kick lands at 0.1 s', () => { W.kickDelay = 0.1; }],
-  ['kick lands at 0.6 s', () => { W.kickDelay = 0.6; }],
-  ['two turns per voice', () => { W.turns = 2; }],
-  ['five turns per voice', () => { W.turns = 5; }],
-  ['short voices, 1.5–2.5 s', () => { V.min = 1.5; V.max = 2.5; }],
-  ['long voices, 4–6 s', () => { V.min = 4; V.max = 6; }],
-];
-for (const [name, set] of variants) {
-  set();
-  let cMiss = [], mMiss = [], cRead = 0, mRead = 0;
-  for (let s = 0; s < 300; s++) {
-    const gc = playEvening(5000 + s, PLAYERS[3], false), gm = playEvening(5000 + s, PLAYERS[0], false);
-    const kc = gc.results[2], km = gm.results[2];
-    cMiss.push(Math.abs(Math.log(kc.ratio * kc.factor)));   // the counter's hold against 1/kick
-    mMiss.push(Math.abs(Math.log(km.ratio)));
-    if (kc.reading === 'counted') cRead++; if (km.reading === 'counted') mRead++;
+  const scatter = sd => Math.exp(sd * (Math.random() + Math.random() + Math.random() - 1.5) * 2);
+  const players = {
+    'memory, steady (12%)': { sd: 0.12, pull: 0, count: false, wait: false },
+    'memory, shaky (30%)': { sd: 0.30, pull: 0, count: false, wait: false },
+    'half pulled by the live voice': { sd: 0.12, pull: 0.5, count: false, wait: false },
+    'wheel counter': { sd: 0.12, pull: 0, count: true, wait: false },
+    'sun watcher': { sd: 0.12, pull: 0, count: false, wait: true },
+    'the learned man (all three)': { sd: 0.12, pull: 1, count: true, wait: true },
+  };
+  say('  player | typical miss (plain holds) | pulled | counted | waited | commonest headline');
+  for (const name in players) {
+    const P = players[name], heads = {}, reads = { pulled: 0, counted: 0, waited: 0 }, misses = [];
+    for (let s = 0; s < 400; s++) {
+      const g = A.newGame(5000 + s, { first: s % 2 === 0 }), v = g.voices;
+      const hold = (T) => T * scatter(P.sd);
+      g.i = 0; A.hold(g, hold(v.low.T)); g.i = 1; A.hold(g, hold(v.middle.T)); g.i = 2; A.hold(g, hold(v.low.T)); g.i = 3; A.hold(g, hold(v.middle.T));
+      g.i = 4; const target = Math.exp((1 - P.pull) * log(v.low.T) + P.pull * log(v.top.T)); const ag = A.against(g, hold(target));
+      g.i = 5; const r5 = g.stations[5]; const sil = A.silence(g, P.count ? A.countRatio(r5) * r5.T * scatter(0.05) : hold(v.high.T));
+      g.i = 6; const p = g.stations[6].plan; const tu = A.tumult(g, p.lowStart + 0.2 + Math.random() * 0.3, P.wait ? p.end + 0.3 : p.lowEnd + (Math.random() - 0.5) * 0.4); A.heard(g, p.present);
+      g.i = 7; A.last(g, hold(v.low.T)); g.i = 8; g.done = true;
+      const vd = A.verdict(g); heads[vd.headline] = (heads[vd.headline] || 0) + 1;
+      if (ag.reading === 'pulled') reads.pulled++; if (sil.reading === 'counted') reads.counted++; if (tu.reading === 'waited') reads.waited++;
+      [0, 2, 7].forEach(k => misses.push(abs(log(g.results[k].ratio))));
+    }
+    misses.sort((a, b) => a - b); const med = misses[Math.floor(misses.length / 2)];
+    const top = Object.keys(heads).sort((a, b) => heads[b] - heads[a])[0];
+    say('  ' + name + ' | ×' + Math.exp(med).toFixed(2) + ' | ' + (reads.pulled / 4).toFixed(0) + '% | ' + (reads.counted / 4).toFixed(0) + '% | ' + (reads.waited / 4).toFixed(0) + '% | ' + top + ' (' + (heads[top] / 4).toFixed(0) + '%)');
+    if (name === 'memory, steady (12%)') check('a steady memory player gets the clean headline nearly always', heads[top] >= 360 && /all evening/.test(top));
+    if (name === 'wheel counter') check('a wheel counter is read as counted every time', reads.counted >= 390);
+    if (name === 'sun watcher') check('a sun watcher is read as waited every time', reads.waited >= 390);
+    if (name === 'the learned man (all three)') check('the learned man gets all three faults named', /pulled.*wheel.*sun|mostly/.test(top));
   }
-  const med = a => Math.exp(a.slice().sort((x, y) => x - y)[150]);
-  check('E ' + name + ': the counter lands near 1/kick of the voice, the memory player near the voice; readings right',
-    med(cMiss) < 1.3 && med(mMiss) < 1.15 && cRead / 300 > 0.9 && mRead / 300 < 0.1,
-    'counter off 1/kick by ×' + fmt(med(cMiss)) + ', memory off by ×' + fmt(med(mMiss)) + '; read as counting: counter ' + cRead + ', memory ' + mRead);
-  Object.assign(W, saved.W); Object.assign(V, saved.V);
 }
 
-log('');
-log('Result: ' + pass + ' passed, ' + fail + ' failed.');
-require('fs').writeFileSync(require('path').join(__dirname, 'calibration-result.txt'), out.join('\n') + '\n');
+say('');
+say(pass + ' checks passed, ' + fail + ' failed');
+require('fs').writeFileSync(__dirname + '/calibration-result.txt', out.join('\n') + '\n');
 process.exit(fail ? 1 : 0);

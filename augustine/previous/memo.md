@@ -1,0 +1,271 @@
+# Augustine's Clock: design memo
+
+Augustine, *Confessions* XI (with X as background), tr. Pusey. Built under `SKILL.md` and `build.md`.
+
+## 0. Given
+
+**Mine,** by inference: the prompt does not say, and every classic text in the table (Einstein, Cantor, Benjamin, Foot, Weil, Goodall) carries Steffen's signature and counter (build.md, section 7). If this one is a gift, the signature line is the only thing to change.
+
+**Ideas, from the author.** *Focus on Book XI, with Book X as possible background. No biography.*
+
+This binds the content, not the look. The game plays Book XI's inquiry into time (chs. XIV–XXVIII). Its opening question (chs. X–XIII and XXX: what was God doing before he made heaven and earth?) and its close (ch. XXXI: a mind that knew everything as I know a psalm) are read on the last page, not played. Book X comes in only where it serves XI. Memory as a store of impressions that stay when the things are gone (X.viii–xi) is the picture's lower half and the last round, in which a voice from the first minute has to be fetched back. No biography: no Monica, no Carthage, no conversion, no garden, no Ambrose as a person, no bishop at his desk. Augustine is named only as the author of the sentences quoted. Nothing here overrides the precedent rule.
+
+## 1. Paper
+
+Augustine of Hippo, *Confessions*, Books X and XI (written c. 397–400), in the translation by Edward B. Pusey (1838), as published by the Christian Classics Ethereal Library (Grand Rapids, MI; print basis: Logos Research Systems, Oak Harbor, WA, 1999), pp. 130–176; public domain. Online at ccel.org/ccel/augustine/confess.html. No DOI. **Available:** that 49-page PDF, read in full. Book X is pp. 130–158; Book XI is pp. 159–176. Below, chapters are Pusey's (they match the standard book.chapter numbering) and page numbers are the PDF's. All quotations are Pusey's English. The text has no data and no figures. Its only numbers are a long syllable worth two short ones (ch. XXVII), the hymn line of eight syllables, four short and four long (ch. XXVII), a hundred years taken apart into twelve months and twenty-four hours (ch. XV), and the sun's circuit run in twelve hours rather than twenty-four (ch. XXIII).
+
+## 2. What the paper hands over
+
+**An argument, primary and only.** It runs like this:
+
+1. *There was no "before".* People ask what God was doing before he made heaven and earth (ch. X, p. 164). There was no time before there was anything made: "there was no 'then,' when there was no time" (ch. XIII, p. 165). Augustine will not answer with the joke "He was preparing hell for pryers into mysteries" (ch. XII).
+2. *What is time?* "If no one asks me, I know: if I wish to explain it to one that asketh, I know not" (ch. XIV, p. 165). The past is no longer and the future is not yet. A present that never passed would be eternity, not time.
+3. *The present has no length.* A hundred years cannot all be present: if one year is now, the rest are past or to come. Nor can a whole year be present, nor a month, a day or an hour. "If an instant of time be conceived, which cannot be divided into the smallest particles of moments, that alone is it, which may be called present ... The present hath no space" (ch. XV, pp. 166–167).
+4. *Yet we measure.* "We perceive intervals of times, and compare them, and say, some are shorter, and others longer ... This is double, or treble" (ch. XVI, p. 167). We measure times "as they are passing" (ch. XXI).
+5. *Past and future exist only as present, in the mind.* "A present of things past, memory; present of things present, sight; present of things future, expectation" (ch. XX, p. 169). We tell the past from images the things left behind (ch. XVIII). We foretell the sunrise from the daybreak, which is present (ch. XVIII).
+6. *Time is not the motion of the sun, or of any body.* A learned man said the motions of sun, moon and stars are time. But if the heavens stopped and a potter's wheel ran round, we would still say it "moved with equal pauses, or if it turned sometimes slower, otherwhiles quicker, that some rounds were longer, other shorter" (ch. XXIII, p. 170). If the sun went round in twelve hours, we would say it took half the time it used to. When the sun stood still at one man's prayer, "the sun stood still, but time went on" (ch. XXIII, p. 171). We measure a body's rest as well as its motion, and we measure both by time: "Time then is not the motion of a body" (ch. XXIV, p. 171).
+7. *No fixed unit in the things either.* We measure a long syllable by a short one, a verse by its feet, a stanza by its verses. But "a shorter verse, pronounced more fully, may take up more time than a longer, pronounced hurriedly" (ch. XXVI, p. 172). So time seems to be "nothing else than protraction; but of what, I know not; and I marvel, if it be not of the mind itself?" ("Protraction" is Pusey's word for *distentio*, a stretching.)
+8. *The voice.* A voice cannot be measured before it sounds, because it is not yet. It cannot be measured while it sounds, because it has not ended, and "the very space between is the thing we measure, namely, from some beginning unto some end". Once it has ended it is no more. "We measure neither times to come, nor past, nor present, nor passing; and yet we do measure times" (ch. XXVII, pp. 172–173).
+9. *"Deus Creator omnium".* "This verse of eight syllables alternates between short and long syllables ... Every one of these to every one of those, hath a double time." But the long one only begins once the short one has stopped: "how shall I detain the short one, and how, measuring, shall I apply it to the long?" Both are gone, "and yet I measure". So "it is not then themselves, which now are not, that I measure, but something in my memory, which there remains fixed. It is in thee, my mind, that I measure times" (ch. XXVII, p. 173).
+10. *Silence.* "When we measure silence, and say that this silence hath held as long time as did that voice, do we not stretch out our thought to the measure of a voice, as if it sounded?" A man who plans a long sound "hath in silence already gone through a space of time", and sounds on "until it be brought unto the end proposed" (ch. XXVII, pp. 173–174).
+11. *The psalm.* "I am about to repeat a Psalm that I know. Before I begin, my expectation is extended over the whole; but when I have begun, how much soever of it I shall separate off into the past, is extended along my memory ... till the whole expectation be at length exhausted." The same holds for each syllable, for "that longer action, whereof this Psalm may be part", for "the whole life of man", and for "the whole age of the sons of men" (ch. XXVIII, p. 174).
+12. *Coda.* Life as *distentio*, a scattering ("not distended but extended ... not distractedly but intently", ch. XXIX, p. 175). A mind that knew all past and future as I know one psalm would be wonderful, but God does not know that way: he knows without expectation and memory (ch. XXXI).
+
+**Secondary, from Book X: memory as a store.** "The fields and spacious palaces of my memory" hold images of things the senses brought in (X.viii, p. 134). The things themselves do not go in, only their images. When I repeat a thing by heart, "those in front making way for the following" come up in order (X.viii). Things not called to mind for a while "glide back, as it were, into the deeper recesses" and have to be drawn together again (X.xi, p. 137; *cogito* from *cogo*, to collect).
+
+To play it, items 3, 6, 8, 9, 10 and 11 become a sequence of measurements made with nothing but the player's mind, with the paper's own candidate clocks (a sounding voice, a potter's wheel, the sun, a hymn's syllables) set out in the world (section 12). Where the formalisation chose something the paper did not, it is listed in section 15.
+
+## 3. The discovery, and its kind
+
+**A counterintuitive result**, carried by **a mechanism made intelligible**. The stranger believes what the learned man believed: time is out there, in the sun's course or the clock's hand, and we read it off. Augustine shows that every clock is a motion, and a motion is measured by time, so it cannot be time. Nothing can be measured while it lasts, and once it is over it is gone. Yet we measure, and confidently: this was double that. So what we measure is the impression a thing leaves in the mind, which stays. The clock is in us: "It is in thee, my mind, that I measure times." The mechanism made intelligible is how the mind does it: expectation, attention and memory, with the future passing through a present that has no length into a past that keeps growing. It is the same in a syllable, a psalm and a life.
+
+The game plays the discovery in three steps. First, the wheel the player was counting on runs fast and betrays them (or doesn't, because they noticed, and noticed by what?). Second, the sun stops and the player measures anyway. Third, in the hymn the long syllable is laid against a short one that stopped sounding before it began.
+
+## 4. The core narrative
+
+A man wanted to know what time is. Everybody said: time is the sun going round, or the potter's wheel spinning, or the clock ticking. But he noticed something odd. While a sound is still going on, you can't say how long it is, because it isn't finished. When it is finished, it's gone. So how can you ever say that one sound was twice as long as another? He decided that you measure what the sound left behind inside you. If the wheel spins faster, you notice, and you notice with something that isn't the wheel. If the sun stops in the sky, time goes on. The clock was in you all along.
+
+## 5. Who lives in the paper
+
+- **The measurer** ("I pronounce them, report on them, and find it so", ch. XXVII). Hears a voice, a silence, a hymn line, and says how long, and double or single, with nothing but a mind. Controls when a sound of their own begins and ends. Could be asked to anticipate when a span equal to one that has gone will be over. The player, in the pick (A).
+- **The reciter** (ch. XXVIII). Knows a psalm by heart and says it, the future of it passing through attention into memory. Controls the syllables. The player in concept B.
+- **The learned man** (ch. XXIII), who said the heavens' motions are time. Never seen; his claim is what the clocks in the world stand for.
+- **The sun** (ch. XXIII), whose circuit makes a day. Could run its round in twelve hours, or stand still for a battle. The player in the reckless concept C.
+- **The potter's wheel** (ch. XXIII), running "with equal pauses" or "sometimes slower, otherwhiles quicker". Kept as the treacherous clock.
+- **The voice** (ch. XXVII), which sounds, sounds on, and stops. It is the thing measured in every round.
+- **Memory**, the store (X.viii–xi), where images stay when the things are gone and older ones glide into deeper recesses. Kept as the lower half of the picture, and as the place the last round's voice is fetched from.
+- **The questioner and the joker** (chs. X, XII), the one who asks what God did before and the one who answers with hell. Kept as one line on the last page.
+- **God**, who knows without expectation or memory (ch. XXXI). Not a player. One line on the last page.
+
+## 6. Precedent
+
+The three most recent games in the README table:
+
+| Game | Position | Format | Feedback device | Chassis |
+|---|---|---|---|---|
+| Foot's Bad Man (foot) | dilemma: the player as themselves, deciding seven deeds | dilemma sequence read case by case by the house | the feedback card and the staircase chart with four rows; the stalls reacting | silent-film melodrama (Retro): nitrate black, silver, villain's amber, scandal red; Limelight + Libre Baskerville; intertitle-frame buttons |
+| Weil's Vase (weil) | subject: the soul inside a warrior | a single life through a seesaw (challenge; real time at the top of the swing) | the player's own figure glazing to stone, and Zeus's scales | Attic red-figure vase (Worldly): black glaze, Attic clay, dilute glaze, added white, added red; Forum; potsherd buttons |
+| Goodall's Long Grass (goodall) | subject: a young chimpanzee learning a skill | challenge of mastery against a clock of suns, then one new problem | the stem drawn in section in the mound, and Goodall's age ruler ticked in red pencil | graphite field notebook (Drawn): cream, graphite, squared-rule blue, red pencil; Courier Prime + Kalam; pencil-ruled paper slips |
+
+**What this game does differently.**
+
+- **Position: experimenter, with the paper's own instrument in hand, and the instrument is the player's mind.** Not a person deciding cases, not a soul, not an animal learning a skill: the one who measures. *I held a note as long as a voice I could no longer hear. When the wheel ran fast I stopped counting it. When the sun stood still I let go anyway.* The player is not the thing studied. They run Augustine's experiment ("I pronounce them, report on them, and find it so") with themselves as the only apparatus.
+- **Format: discovery by measurement.** Seven trials, each a measurement. The world offers clocks, and the player has to find out which can be trusted. Foot was a sequence of cases, Weil a seesaw life, Goodall a skill against a clock of suns. Here nothing is spent and nobody opposes the player. Getting better matters, but what the player is finding out is what they measure with.
+- **Device: two bars laid side by side in memory, appearing only when the thing is over.** While the voice sounds or the player holds, nothing grows; only a point glows. When it ends, it drops into memory as a bar beside the one it is measured against. No card, no chart, no figure turning colour, no stem, no ruler.
+- **Chassis: a Bauhaus poster** (Clean family, new to the table). Plaster ground; the three primaries and black; a geometric sans; circles, bars and one point. After nitrate black, black glaze and graphite on cream: flat primary colour, and not one drawn or aged line.
+
+## 7. The aim and the verdict
+
+**The aim** (start screen, top of every play screen, first line of How to play):
+
+> *Measure how long things last, with no clock but your mind.*
+
+Each round turns the aim into one instruction ("Hold as long as the voice sounded"). The yardstick is in its units: the player's span against the one it should match, as a fraction in words ("about nine tenths of the voice", "about double: you were asked for the same"), with the two bars side by side. It is shown the moment the player lets go, for that round only.
+
+**The verdict** (last page) opens with three lines, composed from the run:
+
+0. *The headline,* one of four: "You kept time with no clock but your mind." / "You kept time with your mind, until a wheel ran away with you." / "You kept time with your mind, until you waited for the sun." / "You kept time by the wheel and the sun, like the learned man." Under it, in blue, the discovery: "The clock was in you. That is where Augustine says time is measured."
+1. *What you did.* "You measured seven times with no clock. Going by the voice in your memory, you came within about a tenth of it. When the wheel raced, you let go at about half the voice, just where counting its turns would put you." (Or: "When the wheel raced, you held on: you saw it race, with something that isn't the wheel.") Then the sun: "When the sun stood still, you let go all the same: time went on." (Or: "When the sun stood still, you waited for it: about four times the voice.") Then the hymn and the first voice in one sentence.
+2. *What Augustine says.* "The wheel and the sun are motions, and we measure motions by time, so they are not time. A voice can't be measured while it sounds, and it's gone once it stops. What you measured each time was what it left in you."
+3. *What it means.* "'It is in thee, my mind, that I measure times.' For Augustine, time is a stretching of the mind, between what it expects and what it remembers."
+
+Under the three lines: the seven pairs of bars from the run; the psalm, drawn as one line inside a longer one inside a life inside the ages; and one line on the question of "before". No score, no best path, no "could have done". The fraction words are the yardstick during play. The paper ranks nothing, so the verdict compares the player with nobody.
+
+## 8. Three concepts
+
+**A. Augustine's Clock** (experimenter: the measurer; discovery by measurement).
+- *Controls:* one. Press and hold the point of *now* to sound your own note, and let go to end it. In the silence round, one tap ends the silence. After the hymn, two taps lay a short syllable against a long one.
+- *Deliberation:* how long was that voice, which is gone? When will my note have lasted as long? There is a wheel turning, and I could count it, but it has just been kicked: do I keep counting? The sun has stopped: what do I go by now?
+- *After:* the bar of what was heard and the bar of what the player made drop into memory side by side. The game says the fraction in words. When something in the world misbehaved, the game says what it did and what that shows.
+- *Moment:* round 3. The voice lasted three turns of the wheel. The player presses and starts counting, the potter kicks the wheel, and it races; three turns come in half the time. The player either lets go at three turns and finds their bar half the voice's, or holds on because they saw it race. Either way the game asks: by what did you know it raced? Not by the wheel.
+- *Fun:* anticipation (let go, and watch the bar land beside the voice's), agency (the hold is entirely the player's, and so is the strategy), discovery (the wheel betrays, the sun stops, the long syllable is compared with one that is gone), mastery (holds get truer, and the player learns to trust the voice in their head over the motion in front of their eyes).
+- *Second play:* another strategy, not just a new seed. Sing the hymn inside as a clock, ignore the bodies from the start, try to beat the first-voice round. The wheel is kicked the other way (slowed) on a replay, and the voices are dealt new lengths.
+
+**B. Augustine's Psalm** (subject: the mind reciting; challenge of rhythm).
+- *Controls:* hold for each syllable of a stanza known by heart, short and long.
+- *Deliberation:* timing only. Is this long one twice my short ones?
+- *After:* the stanza drains from expectation, through a line with no width, into memory, as an hourglass of words that runs only while the player recites.
+- *Moment:* the stanza is over and lies whole in memory. The player lays the first short beside the last long, which never sounded together.
+- *Fun:* mastery, and a quiet discovery. *Second play:* a steadier pulse; little else.
+- *Why it loses:* it is a rhythm game with a beautiful picture (and the table already has one tap per syllable in *Live from Brussels*). The learned man's clocks, which carry the counterintuitive half, are not in it, and the deliberation is timing alone. Kept: its picture (expectation above, a line with no width, memory below) is A's picture, and its hymn is A's sixth round.
+
+**C. Augustine's Sun** (agent: the sun; **the reckless one**).
+- *Controls:* drag the sun across the sky at any pace. Stop it, race it, hold it.
+- *Deliberation:* the learned man says you are time. Make a day short. Make time stop.
+- *After:* below, a town goes about its business in its own measures: a potter throws a pot, a choir sings, an army fights. It reports the day in psalms: "today the sun went round in six psalms; it used to take twelve." Stop the sun, and the battle goes on to its end "in its own allotted space of time".
+- *Moment:* the player stops the sun at noon, and the battle is fought and finished below a sun that doesn't move.
+- *Fun:* agency (you are the sun), discovery. *Second play:* none. Every attempt fails, as the paper says it must, and once the player has seen that, there is nothing left to want.
+- *Why it is reckless:* a heavenly body as the agent, real time, no words on the play screen but the town's reports. It plays the learned man's claim to destruction and nothing else. The mind, where Augustine finds time, appears only offstage in the town's reports.
+
+## 9. The first five minutes
+
+**A (the pick).** *0:00.* A poster: a huge yellow sun at the top right, a red bar and a blue bar, a black point between them. AUGUSTINE'S CLOCK in heavy geometric capitals. One line: "What is time? If no one asks me, I know." The aim. FIND THE PRESENT.
+
+*0:10.* A tall bar labelled *a hundred years*, with a black point on it. "Touch the point: the present." I touch it. The bar splits: below the point, solid (past); above, dashed (to come); the label becomes *a year*. "A hundred years can't all be present. One year is now; the rest are past or to come." Touch: *a month*, *a day*, *an hour*. The fifth touch leaves only the point: "The present has no length. If it had any, part of it would be past and part to come." I get it: the point is *now*. NEXT.
+
+*0:40.* Round 1, *A voice*. The picture has two halves. OUTSIDE: empty, "nothing moves out here". IN YOU: a dashed slip above a black line (*to come: a voice, then you*); on the line a big black circle (*now*); below the line, *memory*, empty. "Nothing is drawn while it lasts. It appears when it's over." The circle turns red and a sung note sounds; nothing grows. It stops. A red bar drops below the line. "Now hold the circle as long as the voice sounded." I press; it turns blue and hums; nothing grows. I let go. A blue bar drops under the red one, a little shorter. "About nine tenths of the voice: a little short." I grin. That was hard and I nearly had it.
+
+*1:20.* Round 2, *The wheel*. OUTSIDE: a big yellow wheel with a black mark, ticking once a turn. The voice sounds, and the wheel ticks three times. Hold. I count three ticks and let go: "About the same." The wheel is a fine clock, I think.
+
+*1:50.* Round 3, *The wheel again*. Same voice, three ticks. I press, I count, and a black wedge kicks the wheel with a thud: it races, tick-tick-tick. I let go at three ticks. My blue bar is half the red one. "About half. The potter kicked the wheel, and its three turns came twice as fast." Then: "How did you know it was racing? Not by the wheel." Augustine, small: "...some rounds were longer, other shorter." I frown, then grin: I *did* know it was racing.
+
+*2:40.* Round 4, *The sun*. OUTSIDE: a sky band, the yellow sun climbing while the voice sounds. The voice stops, and so does the sun. Hold. I look at the sun, which isn't moving, and think: so what am I going by? I hum the voice to myself and let go. "About the same. The sun stood still the whole time you held. Time went on." Augustine: "the sun stood still, but time went on."
+
+*3:20.* Round 5, *A silence*. Nothing outside. The voice sounds, then silence. "Tap once when the silence has lasted as long as the voice." I catch myself replaying the note in my head and tap. A hollow black bar beside the red. "About the same." Augustine: "do we not stretch out our thought to the measure of a voice, as if it sounded?" That is exactly what I did.
+
+*4:00.* Round 6, *The hymn*. Above the line, to come: eight slips, *DE-US CRE-A-TOR OM-NI-UM*, short, long, short, long, the long slips twice the short. The voice sings it. Now me: eight holds, each one landing in memory as I let go, while the slips above run out. "Lay a short against a long: touch one of each." I touch my second short, then my third long; the short slides onto the long and fits about one and a half times. "Your longs were about one and a half times your shorts. Augustine says twice. When each long sounded, its short had already gone; you laid them side by side here, in memory."
+
+*4:50.* Round 7, *The first voice*. "Hold as long as the very first voice, from the start." Down at the bottom of memory, faded, the first red bar. I fetch it back, hum it, hold, let go. "About nine tenths of it, four minutes later." That feels like a small miracle.
+
+*5:20.* The last page. Three lines: what I did, what Augustine says, what it means. My seven pairs. Then the line I just sang, inside the evening, inside a life, inside all the ages, each with the same shape: what's to come draining through *now* into what's done. "This game too: before you began, it lay in your expectation. Now it is in your memory."
+
+**C (the reckless one; the runner-up is B, whose walkthrough is A's round 6 played eight times).** *0:00.* A sky, a town, a yellow sun at the eastern edge, no words but the title. *0:10.* I touch the sun; it follows my thumb. I drag it fast across the sky: night falls, dawn, again. The town reports: "A short day: the sun went round in four psalms. It used to take twelve." *0:40.* I try slower: "A long day: twenty psalms." *1:10.* So the town measures me in psalms. I stop the sun at noon. Below, an army fights; a counter of psalms goes on; the battle ends. "The sun stood still, but time went on." *1:40.* I run it backwards. The psalms go on forwards. *2:00.* I don't know what else to try: nothing I do to the sun changes the psalms. The lesson has landed, and I am out of reasons to press. The mind where Augustine finds time is only the psalms in the corner.
+
+## 10. The pick, and why
+
+**A, Augustine's Clock.** The player sits where Book XI puts its weight: measuring, with nothing but a mind, things that are no longer there. Every round is a commitment, a hold whose length is entirely the player's, followed by a consequence they can see. The paper's own candidate clocks are laid out in the world, and each fails where Augustine says it fails. The wheel, run "sometimes slower, otherwhiles quicker", betrays anyone counting it. The sun "stood still, but time went on". A syllable is no fixed unit. What is left is the voice held in memory, which is Augustine's answer, and the player finds they have been using it all along. The discovery lands at about two minutes. The sentence afterwards has no "guess": *I held a note as long as a voice that had stopped; when the wheel raced I stopped counting it; when the sun stood still I let go anyway; I laid a short syllable against a long one that never sounded with it.* On originality: no game in the table has had the player measure with their own mind, made the absence of a clock the rule, or drawn nothing while it happens.
+
+**Author test.** Steffen knows "If no one asks me, I know". He does not know, until his thumb tells him, how readily he counts a wheel that has just been kicked, or that he can hold a voice from four minutes ago to within a tenth. The game operates the argument rather than quizzing on it. The learned man's thesis is a wheel and a sun; *distentio* is the picture; "Deus Creator omnium" is sung, with its four short and four long; the psalm is the whole game. A philosopher will enjoy the gag that the game's referee is the phone's clock, itself a motion of a body. About says so.
+
+**Runner-up: B, Augustine's Psalm.** Switch if the author wants ch. XXVIII's mechanism, expectation draining into memory, played for its own sake as a rhythm piece, and will give up the learned man's clocks.
+
+**What the reckless concept would have given.** The learned man's claim played to destruction from the inside, with the player as the clock that turns out not to be time. Kept: the sun that stands still while the player measures (round 4), and the wheel run faster (round 3). Given up: being the sun, and the town's reports in psalms.
+
+## 11. The shape
+
+One run, about five and a half minutes: a prologue of five touches, seven rounds, the last page. Screens: start (poster, aim, FIND THE PRESENT, How to play, About); prologue (the hundred years taken apart); the round screen (one layout for all seven); the last page; How to play; About.
+
+Rounds, in the order played, with their sources:
+
+1. *A voice*: hold as long as the voice (ch. XXVII, the voice that "sounds, and sounds on, and lo, it ceases").
+2. *The wheel*: the wheel turns steadily while the voice sounds; hold as long (ch. XXIII, "moved with equal pauses").
+3. *The wheel again*: the same, but the wheel is kicked when you press; faster on a first run, faster or slower on a replay (ch. XXIII, "sometimes slower, otherwhiles quicker").
+4. *The sun*: the sun climbs while the voice sounds and stands still from the moment it stops (ch. XXIII, "the sun stood still, but time went on").
+5. *A silence*: tap when the silence after the voice has lasted as long as the voice; nothing moves outside (ch. XXVII, measuring silence).
+6. *The hymn*: the voice sings "De-us cre-a-tor om-ni-um", short and long; sing it back; lay a short against a long (chs. XXVI–XXVII).
+7. *The first voice*: hold as long as round 1's voice (ch. XXVII, "something in my memory, which there remains fixed"; X.viii–xi).
+
+Ordered for the player, not the paper. The paper's order is the present (XV), then the motions (XXIII–XXIV), then syllables and voice (XXVI–XXVII), then the psalm (XXVIII). The game puts the voice first because every round measures one. The wheel's betrayal comes third, so the discovery lands early. The sun follows while the point is fresh. The silence then removes every clock outside. The hymn is the paper's own example and its sharpest case. The first voice closes on memory, from Book X.
+
+No presets: the paper has no regimes. No score: the fraction words are the yardstick for each round, and the last page compares the player with nobody. The game ends once; ANOTHER EVENING starts a new run (new lengths, the wheel kicked either way).
+
+## 12. Controls, mechanism, feedback, moment
+
+- **Controls.** The *now* circle (88 px) on the line between "to come" and "memory" is the only control during play. Press and hold to sound your note; let go to end it. In round 5, one tap ends the silence. In round 6, eight holds, then two taps on bars in memory to lay a short against a long. The space bar does the same as the circle. The circle is dead while the voice sounds, and it says so. Every round starts from the same place, with nothing kept from the round before but memory.
+- **Mechanism (formalised from the argument; numbers in CONFIG).** A *voice* lasts a dealt length (2.4–3.8 s; the first voice's length is kept for round 7). A *hold* lasts as long as the player's finger, measured by the referee clock (the phone's), and capped at four times its target (the sun round's runaway case). *The wheel* turns at a pace set so the voice lasts exactly three turns. In round 3, at the moment of the press, the pace is multiplied by 2 (or by ½ on a replay, dealt), so a player who lets go at three turns makes a hold of half (or double) the voice. *The sun* climbs a fixed arc during the voice and stands still from the moment the voice ends until the round is over. *The hymn*: eight syllables, the odd ones short (0.42 s) and the even ones long (0.84 s), so each long is exactly double a short (ch. XXVII); the voice sings them on a melody of ours. *Measures*: every hold or silence is reported as the ratio of its length to its target, put into words by nearest friendly fraction (about the same, nine tenths, three quarters, two thirds, half, a third; one and a quarter, one and a half, double, three times, four times). *Reading the player*: in round 3, a hold is read as "counting the wheel" when it lies nearer, in proportion, to what counting three turns from the press would give than to the voice itself (with the wheel doubled, the boundary is about three quarters of the voice; halved, about one and two fifths), so the boundary moves with the kick if the kick is changed. In round 4, a hold over 1.6 of the voice is read as "waiting for the sun". Both readings feed the verdict and nothing else, and the words never claim what the player was thinking: "just where counting the wheel would put you".
+- **Feedback.** While anything lasts, only the *now* circle shows it: red for the voice, blue for you, the outline pulsing for a silence. Nothing grows. When it is over, it drops through the line into memory as a bar at a fixed scale (36 px a second, the same in every round), beside the bar it is measured against, both starting from the same left edge. Then the game's own line (what happened, the fraction, and what the world did if it did anything), then Augustine's sentence in italic where it applies, then NEXT. In round 6, the eight syllables move from dashed slips above the line to solid bars below it, one per hold.
+- **Moment.** Round 3, the kick: the wheel races under the player's count. Then round 4, when the sun has stopped and the player lets go all the same. Then round 6: a short laid against a long that never sounded with it.
+
+## 13. The look
+
+**Register: a Bauhaus poster** (Clean family), Dessau in the 1920s, in the geometry of Kandinsky's *Point and Line to Plane* (1926), where the point is the smallest unit and a line is a point set moving. Where it came from: Book XI has no picture but the ones Augustine draws in words. There is a point with no space (the present), a span measured against a span (a long syllable as double a short), and a circle going round (the sun, the wheel). Bauhaus geometry is those shapes and nothing else, and the paper's world can live inside it without a single period prop. It is also the paper's day off: a fourth-century prayer, set in flat primary colour.
+
+- **Palette:** plaster `#ECE9E2` (the ground); black `#151515` (type, the line, the *now* point, silence); Bauhaus red `#D7372A` (what sounded: the voice and its trace); Bauhaus blue `#1E4FA0` (yours: your holds and their trace); Bauhaus yellow `#F2B41C` (bodies that move: the sun, the wheel).
+- **Type:** Jost (Owen Earl, indestructible type, SIL OFL), a revival of the geometric sans of the period, in 400, 600 and 800. Titles in 800 capitals, set big and tight; text in 400; labels in 600 capitals, tracked. Embedded as data.
+- **Buttons:** flat black slabs, square corners, white 600 capitals, with a small primary disc at the left end (yellow for go-on, blue for the player's own choices); secondary buttons are a 2 px black outline. No shadow, no rounding, no texture. The one control during play is the *now* circle itself.
+- **The one visual rule:** *nothing is drawn while it lasts.* A sound, a hold or a silence appears only once it is over, as a bar in memory. While it lasts, only the *now* point shows it, by colour. Red is what sounded, blue is yours, yellow is a body moving, and black is now.
+- **Round screen at 380 px.** The aim, one line, 13 px, with ? at the right. The game strip: seven segments, solid for rounds done and dashed for rounds to come, with a black point between (answers "where am I in this?"; on the last page it turns out to be the psalm). The round title (Jost 800, 30 px: "3 THE WHEEL AGAIN") and the instruction, two lines at most. OUTSIDE, 348 × 120: the wheel (a yellow disc 100 px across with a black triangle on its rim, a tick per turn) or the sun (a 40 px yellow disc on a shallow arc across a plaster band) or nothing ("nothing moves out here"). Answers "what is moving out there, and how fast?" IN YOU, 348 × about 260: above the black line, *to come*: dashed slips naming what's next (a voice; you; the eight syllables). On the line, the *now* circle, 88 px. Below the line, *memory*: this round's bars, 22 px tall, left-aligned at the panel's edge, at 36 px a second; earlier rounds' bars sit below them, thinner and fainter ("the deeper recesses"). Answers "what just happened, and how does mine compare?" Under the panel, the result line in the game's voice, Augustine's sentence, and NEXT.
+- **Last page:** the heading; the three verdict lines; the seven pairs of bars; the nested psalm (a line of eight syllables, shrunk to one segment of an evening, shrunk to one segment of a life, shrunk to one segment of the ages, each drawn in the same three parts: dashed to come, a point, solid done); the line on "before"; ANOTHER EVENING, How to play, About.
+
+## 14. What is cut
+
+- **Chs. I–IX of Book XI**, the prayer and the account of creation by the Word: not about time's measure.
+- **The opening question** ("what did God before?", chs. X–XIII, XXX) and **God's knowledge** (ch. XXXI): one line each on the last page, not played. A round that asked the player to measure the time before anything was would be a last choice with nothing at stake.
+- **Prophecy and the daybreak** (chs. XVII–XIX), foretelling from present signs: a fine point, but a different game (forecasting) and a third mechanism. Cut.
+- **Distentio as distraction** (ch. XXIX), the moral turn: Augustine's word "protraction" is used in the verdict's third line; the lament is cut.
+- **"A shorter verse, pronounced more fully"** (ch. XXVI) is not a round. It is said in round 6's result only when the player's line came out noticeably longer or shorter than the voice's, which is when it is true of what they did.
+- **Book X** apart from memory's store: the temptations (chs. XXX–XLI), the happy life (XX–XXIII), forgetfulness (XVI), the lost coin (XVIII). All biography.
+- **Sound as a requirement.** The voice is also always seen (the *now* point turns red), so the game plays on a muted phone.
+
+## 15. Divergences
+
+- **Clock.** Every length in the game is ours: voices of 2.4–3.8 s, a short syllable of 0.42 s. Augustine gives no lengths, only ratios. The one ratio he gives (long = 2 × short) is kept exactly.
+- **The referee.** The phone's clock measures the player's holds. Augustine would say it is a motion, measured by time like the wheel. The game uses it as a referee and About says so; nothing on screen calls it time.
+- **The wheel's kick.** The paper says only that a wheel could turn "sometimes slower, otherwhiles quicker". The game kicks it at the moment the player presses, by a factor of 2 (or ½), so the counting strategy fails by a visible amount.
+- **The sun.** Ch. XXIII cites the sun standing still for a battle (Joshua 10). The game stops it when the voice stops, a smaller miracle on a shorter clock.
+- **The hymn.** "Deus Creator omnium" is the opening of Ambrose's evening hymn. Augustine uses only its first line and its metre as he describes it (four short, four long, alternating). The melody is ours; the Ambrosian chant is not reproduced.
+- **The scoring words.** The fraction words and the two readings (counting the wheel, waiting for the sun) are ours. Augustine measures and compares; he scores nobody.
+- **The prologue.** Ch. XV's chain (a hundred years, a year, a month, a day, an hour, an instant) is shown in five touches; the "particles of moments" are compressed into the last.
+- **The psalm extended to the game.** Ch. XXVIII extends the psalm to "that longer action, whereof this Psalm may be part". The game takes itself as that action: its strip of seven rounds is drawn as a psalm, and the last page says so.
+- **Memory's recesses.** X.xi's "deeper recesses" is drawn as earlier bars turning thinner and fainter. The paper says such things must be drawn together again to be known; the last round asks the player to do that once.
+
+## 16. Mechanism kind and claim boundaries
+
+**Kind: a toy, built to illustrate the book's argument.** Book XI hands over an argument and no data. The game turns it into seven measurements made with the player's own mind. A voice of a dealt length is matched by a hold, a silence or a sung line, while the book's own candidate clocks are set out in the world: a potter's wheel that keeps its pace or is kicked faster or slower at the press, and a sun that climbs while the voice sounds and stands still once it stops. The book's numbers are kept exactly: eight syllables, odd short and even long, each long double each short, and the chain of ch. XV.
+
+- **Demonstrates:** under its own assumptions, that a sound can be matched only once it is over, against what it left in you; that counting a moving body misleads by exactly as much as its pace changes, while a hold made from the voice in memory does not; that a stopped sun stops nothing; and that a long syllable can be laid against a short one that stopped before it began, in memory.
+- **Assumes:** every length (voices of 2.4–3.8 s, a short syllable of 0.42 s); three turns per voice; the kick (doubled on a first evening, doubled or halved later) and when it lands; the sun's arc; the melody; the fraction words; the two readings (counting the wheel, waiting for the sun). The referee is the phone's clock, which Augustine would call one more motion measured by time.
+- **The book establishes:** an argument, not a measurement. The present has no length; past and future are in the mind as memory and expectation; time is not the motion of a body; we measure times in the mind. How close a player's holds come is no evidence for it, or against it. About says so in those words.
+
+**Which discoveries come from the book and which from the rules.**
+(1) *A voice can't be measured until it is over:* from the book (ch. XXVII). The game enforces it with its one visual rule (nothing drawn while it lasts), so the player cannot do otherwise; that is the book's claim made into the interface, not a finding of play.
+(2) *Counting the kicked wheel fails:* the kick is ours. The arithmetic follows from it: counting n turns at a changed pace gives about 1/kick of the voice. What the game presents as Augustine's is the point he draws from a wheel that "turned sometimes slower, otherwhiles quicker": we tell that it changed pace by time, so its turns are not time. The line "How did you know it was racing? Not by the wheel" is his argument, said at the moment it applies.
+(3) *The sun stands still and you measure anyway:* from the book (ch. XXIII); the stop is staged by us.
+(4) *A long is laid against a short in memory:* from the book (ch. XXVII); the laying is a picture of his question, not evidence.
+(5) *The first voice can be fetched back minutes later:* the player's own memory does this, and the game only asks for it. Book X describes images that stay; the game claims nothing about how well they stay.
+(6) *A syllable is no fixed measure:* from the book (ch. XXVI). It is said only when the player's own line came out noticeably longer or shorter than the voice's.
+
+**Robustness.** The central discovery (2) was re-run with the kick at ×1.5 and ×3, landing at 0.1 s and 0.6 s, two and five turns per voice, and voices of 1.5–2.5 s and 4–6 s (calibration E). In every variant the counter lands near 1/kick of the voice and the memory player near the voice, and the readings sort them correctly in at least 95 of 100 evenings. The discovery does not rest on our particular numbers. One honest limit: a shaky player (30% scatter) is read as "counting the wheel" on about one evening in six without counting. That is why the words never say what the player was thinking, only where the hold landed ("just where counting the wheel would put you").
+
+## 17. Calibration plan and result
+
+`calibration.js` runs the mechanism headless, through the functions the browser calls:
+
+- **A. The book's numbers** (10 checks): eight syllables, "De-us cre-a-tor om-ni-um"; long at 2, 4, 6, 8; every long exactly double every short; the chain of ch. XV (100, 12, 24, with our 30 and 60); "now" always a middle part; the sun climbing during the voice and standing still from its end; the voice exactly three turns of the wheel; the steady wheel keeping its pace through the hold; the kicked wheel keeping its pace until the kick lands and the kick's pace after; the last round's target exactly the first voice.
+- **B. The draw** over 2000 evenings: voice lengths in range and flat (mean 3.10 s); the first evening always doubles the wheel; later evenings double or halve it about evenly (1030 / 970); the same number deals the same evening.
+- **C. Words:** each fraction word at its own value; words never go down as the ratio goes up; the qualifier always agrees with the fraction word; no digit in any of 118,320 lines over 3000 evenings of wild holds.
+- **D. Playing it in numbers** (section 18), 5 checks.
+- **E. Robustness** (section 16), 8 variants.
+
+Result: 31 checks, 31 passed (`calibration-result.txt`). Two failures on the first run were the harness's own: its counter always counted three turns, even in the variants with two and five. Fixed in the harness; the mechanism was not changed for it.
+
+## 18. Playing it in numbers (build.md §3)
+
+300 evenings per player, through the real mechanism (later evenings: the wheel doubled or halved). "Typical miss" is the median factor by which a hold missed its target.
+
+| Player | Memory rounds | Kick round | Sun round | Read as counting | Read as waiting | Commonest headline |
+|---|---|---|---|---|---|---|
+| Memory, steady (12% scatter) | ×1.08 | ×1.09 | ×1.08 | 1% | 0% | You kept time with no clock but your mind. (99%) |
+| Memory, shaky (30% scatter) | ×1.23 | ×1.25 | ×1.20 | 16% | 5% | You kept time with no clock but your mind. (80%) |
+| Hurrier (a fifth short) | ×1.25 | ×1.27 | ×1.25 | 15% | 0% | You kept time with no clock but your mind. (85%) |
+| Wheel counter | ×1.08 | ×1.85 | ×1.08 | 100% | 0% | …until a wheel ran away with you. (100%) |
+| Sun watcher | ×1.08 | ×1.09 | ×4.00 | 1% | 100% | …until you waited for the sun. (99%) |
+| The learned man (both) | ×1.08 | ×1.85 | ×4.00 | 100% | 100% | …like the learned man. (100%) |
+
+The decisions matter where the book says they should. In the kick round the counter misses by about the kick, the memory player only by their own scatter. In the sun round the watcher runs to the cap. Everywhere else the strategies are alike, since nothing outside misleads. No single rule wins everywhere except "go by the voice in your memory", which is the sentence the player should leave with. The scatter in the memory player is a modelling assumption (ours, for this table only); nothing on screen depends on it.
+
+## 19. Build log
+
+- **Mechanism first** (`mechanism.js`, headless; `calibration.js`, 31 checks). The first version read "counting the wheel" with fixed thresholds (under 0.7 after a doubling, over 1.4 after a halving). They were replaced by the rule in section 12 (nearer to the counting prediction than to the voice), which moves with the kick, after the robustness variants showed fixed thresholds would misread a gentler kick. The first wording said "you were counting the wheel". It became "just where counting the wheel would put you", because a shaky timer lands there one evening in six without counting.
+- **Loop on placeholders** (`loop.js`, `loop-log.txt`): a scripted first evening (a short first hold, the kicked wheel counted, the sun let go, a silence a tenth long, the hymn sung at about five to three). Every action printed a plain statement of what happened and, where the world did something, what it did. Two fixes from reading it as a stranger. "About a quarter longer than the voice: long" said the same thing twice; holds that run over now carry no qualifier. "About the same as the voice: a little short" contradicted itself; the qualifier now follows the fraction word.
+- **Skin.** A Bauhaus poster on plaster: the three primaries and black, Jost, flat slabs. The round screen is two panels under heavy black rules, OUTSIDE and IN YOU. IN YOU has dashed slips above a black line (to come), a 96 px circle on it (now, and the control), and solid bars below (memory) at 36 px a second in every round. Earlier rounds sit underneath, thinner and fainter. The circle never pulses, and nothing grows while a sound or a hold lasts, so the screen offers no clock but the wheel, the sun and the player.
+- **Fixes from the screenshots.** The prologue's bar label collided with the "now" tag (moved apart; the hundred years' ticks dropped where they were too fine to see). The round strip ran past 380 px and its point covered the "7" (narrowed and moved). The title repeated the round number (dropped). After a result the page scrolled the bars out of view (it now scrolls to memory, with the result under it). The instruction went stale after a result (it now says what was done). The laying picture in the hymn was too small and ran into its label; it is now its own row: your long syllable drawn 230 px wide, with copies of your short one laid along it, numbered. The last page's sections were unlabelled, and the headline gave the player's result but not the discovery; three labels (what you did, what Augustine says, what it means) and a blue line under the headline ("The clock was in you. That is where Augustine says time is measured.") were added. The yellow zoom funnels of the psalm now sit under its rows. About showed its heading twice.
+- **Full browser session** (`session-test.js`, `session-log.txt`, 380 × 780, real-time holds through the actual circle). Evening A, the first evening: a first-timer counting the kicked wheel by its ticks, How to play opened in round 2 and closed back to the round in the same phase, the hymn sung and laid, the last page, About and back. Evening B, another evening: held from memory throughout; the wheel was halved that evening, and the player let go in time. Evening C, the same evening number by its address: the same voices confirmed, played by the learned man (counts the wheel, waits for the sun to the cap). Headlines as expected; no page errors; no horizontal scroll at 380 px on any screen.
+- **Self-review from the screenshots.** The aim is on the start screen on its own line, after one line saying what the hands will do. The top of the last page states the result and the discovery. On every round, the instruction says what the things on screen are and what to do, the circle's label says what touching it does (LISTEN, HOLD, TAP, a syllable), and after a move the game's own line says what happened before Augustine's sentence. It looks like no game in the table: no comic, no vase, no graphite, no film; the nearest is the Swiss poster of *Who Started It?*, which has another palette, other type, flat lowercase slabs and no circles.
+- **Length:** about five to six minutes for a first evening, by the scripted sessions (the rounds themselves take a little over three); an estimate until a person has played it.
+
+## 20. Revision 1 (4 Nov 2026, in chat)
+
+**The prologue is cut.** Played, it was five taps of one button with nothing to do: the bar looked the same after every zoom, the captions read as questions to the player, and the start screen's FIND THE PRESENT promised a search and delivered a slide show. The one thing it taught, the present as a point between what is to come and what is in memory, the round screen already shows and labels. The start button is now HEAR THE FIRST VOICE and goes straight to round 1; ANOTHER EVENING does too. Ch. XV's chain (a hundred years, a year, a month, a day, an hour, a point) is read, not played: it is drawn on the last page as "Where is the present?" between the psalm and "And before?", in the psalm's own funnel picture, with the quote. Mechanism unchanged (`g.prologue` still deals the chain; it only draws it now). Scripted sessions re-run: no page errors, no horizontal scroll.
+
+**The hymn's laying step, same revision.** Played, the screen after the eight holds looked finished (a result box, no NEXT) and the prompt sat at the top while the chips sat at the bottom; picking two syllables of the same kind silently swapped them, so a player could tap and tap and go nowhere. Now: the prompt is in the result box directly above the chips; after the first pick the line names what is picked and which ones are still wanted; a same-kind pick says it took the other's place; and LAY THEM FOR ME lays the first short along the first long, so nobody is stuck. The singing instruction counts the holds (3 of 8: hold for CRE, short). Mechanism unchanged.

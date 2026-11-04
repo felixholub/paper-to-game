@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Augustine's Clock (Confessions XI)</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="Augustine's Confessions, Book XI, as a Bauhaus poster: measure how long things last with no clock but your mind. A voice sounds and stops; hold a circle as long as it lasted. A potter's wheel turns, the sun climbs; can you trust them?">
+<meta name="description" content="Augustine's Confessions, Book XI, as a Bauhaus poster: four voices, heard once and asked for again, through static, against a voice in your ears, in a silence with a wheel in it, in a crowd under a sun that stops. Measure with no clock but your memory.">
 <style>
 @font-face{font-family:'Jost';font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,/*__FONT_JOST__*/) format('woff2');font-display:block}
 :root{
@@ -35,7 +35,6 @@ h3{font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.06em;
 .btn.line::before{background:var(--ink);flex-basis:10px;height:10px;border-radius:0}
 .btn:active{transform:translateY(1px)}
 .btn[disabled]{opacity:.35}
-.row2{display:flex;gap:10px}.row2 .btn{flex:1}
 .q{position:absolute;right:16px;top:12px;width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);background:transparent;font-family:var(--sans);font-weight:800;font-size:17px;color:var(--ink);cursor:pointer}
 .q[disabled]{opacity:.25}
 footer.sig{font-family:var(--sans);font-style:italic;font-size:13px;color:var(--mute);text-transform:lowercase;margin:26px 0 0;text-align:center}
@@ -63,19 +62,24 @@ footer.sig a{color:var(--mute);text-decoration:none}
 #mindwrap{position:relative}
 #mind{display:block;width:100%;height:auto;overflow:visible}
 #now{position:absolute;width:96px;height:96px;border-radius:50%;border:5px solid var(--ink);background:var(--plaster);display:flex;align-items:center;justify-content:center;
-  font-family:var(--sans);font-weight:800;font-size:15px;letter-spacing:.12em;color:var(--ink);cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;padding:0;transition:background .08s, border-color .08s}
+  font-family:var(--sans);font-weight:800;font-size:14px;letter-spacing:.1em;color:var(--ink);cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;padding:0;transition:background .08s, border-color .08s, box-shadow .08s;text-align:center;line-height:1.05}
 #now.voice{background:var(--red);border-color:var(--red);color:#fff}
 #now.ready{border-color:var(--blue);color:var(--blue);border-width:7px}
 #now.holding{background:var(--blue);border-color:var(--blue);color:#fff}
-#now.silence{border-style:dashed;border-color:var(--ink)}
+#now.live{box-shadow:0 0 0 7px var(--red)}
+#now.quietready{border-style:dashed;border-color:var(--ink);color:var(--ink);border-width:5px}
+#now.quiet{background:var(--ink);border-color:var(--ink);color:var(--plaster)}
 #now.idle{border-color:var(--faint);color:var(--faint);cursor:default}
 #now:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
-#chips{display:flex;gap:4px;margin:10px 0 0}
-#layforme{margin-top:8px}
-#chips button{flex:1;min-width:0;height:44px;border:2px solid var(--blue);background:var(--plaster);color:var(--blue);font-family:var(--sans);font-weight:800;font-size:13px;padding:0;cursor:pointer;line-height:1}
-#chips button small{display:block;font-weight:600;font-size:12px;margin-top:2px}
+#chips{display:flex;gap:4px;margin:10px 0 0;flex-wrap:wrap}
+#chips button{flex:1 1 60px;min-width:0;height:48px;border:2px solid var(--blue);background:var(--plaster);color:var(--blue);font-family:var(--sans);font-weight:800;font-size:12px;padding:0 2px;cursor:pointer;line-height:1.05;letter-spacing:.04em}
+#chips button small{display:block;font-weight:600;font-size:10px;margin-top:2px;letter-spacing:.06em}
 #chips button.sel{background:var(--blue);color:#fff}
-#chips button[disabled]{opacity:.35}
+#chips button[disabled]{opacity:.5}
+#chips button.right.sel{background:var(--blue)}
+#chips button.wrong{border-color:var(--red);color:var(--red)}
+#chips button.wrong.sel{background:var(--red);border-color:var(--red);color:#fff}
+#heardgo{margin-top:8px}
 #res{border-top:3px solid var(--ink);padding-top:10px;margin-top:4px}
 #res .big{font-weight:800;font-size:40px;line-height:.95;text-transform:uppercase;color:var(--blue);letter-spacing:-.01em;margin:4px 0 6px}
 #res .lines p{margin:.35em 0}
@@ -85,7 +89,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
 #end .did p{margin:.4em 0}
 #end .kicker{font-weight:800;font-size:19px;line-height:1.15;color:var(--blue);margin:0 0 6px}
 #end .lab{margin:18px 0 2px;color:var(--ink)}
-#pairs,#psalm,#present{display:block;width:100%;height:auto;margin:6px 0}
+#drift,#psalm,#present{display:block;width:100%;height:auto;margin:6px 0}
 .help p,.about p{font-size:15px}
 .help b{font-weight:800}
 .fade{animation:fade .5s both}
@@ -109,17 +113,17 @@ footer.sig a{color:var(--mute);text-decoration:none}
   </svg>
   <h1><span class="a">AUGUSTINE'S</span><span class="b">CLOCK</span></h1>
   <div class="quote">What then is time? If no one asks me, I know: if I wish to explain it to one that asketh, I know not.<span class="cite">Augustine, Confessions XI</span></div>
-  <p class="lead">You will hear a voice. When it stops, you press and hold a black circle for as long as it sounded, then let go. A potter's wheel will turn; the sun will climb. There is no clock.</p>
-  <p class="aim">Measure how long things last, with no clock but your mind.</p>
-  <button class="btn" id="begin">Hear the first voice</button>
-  <p class="small">Sound helps: the voice sings. It also works on a silent phone, because the circle turns red while the voice sounds.</p>
+  <p class="lead">You will hear four voices, one at a time. Then the game asks for them again, later and under worse conditions: after another voice, through static, with a different voice in your ears, in a silence with a wheel turning in it, in a crowd under the sun. Each time you press and hold a black circle for as long as a voice lasted. There is no clock.</p>
+  <p class="aim">Measure how long things last, with no clock but your memory.</p>
+  <button class="btn" id="begin">Hear the low one</button>
+  <p class="small">Sound is needed: the voices are the game. Headphones help. Six or seven minutes.</p>
   <div class="links"><button class="btn line" data-help>How to play</button><button class="btn line" data-about>About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
 </section>
 
-<!-- ROUND: one layout for all seven -->
+<!-- STATION: one layout for all eight -->
 <section id="round" class="screen">
-  <div class="top"><div class="aimline">Measure how long things last, with no clock but your mind.</div></div>
+  <div class="top"><div class="aimline">Measure how long things last, with no clock but your memory.</div></div>
   <button class="q" data-help aria-label="How to play">?</button>
   <svg id="strip" viewBox="0 0 348 22" aria-hidden="true"></svg>
   <h2 id="rtitle"></h2>
@@ -138,9 +142,9 @@ footer.sig a{color:var(--mute);text-decoration:none}
     <div class="big" id="big"></div>
     <div class="lines" id="lines"></div>
     <div id="chips" class="hidden"></div>
-    <button class="btn line hidden" id="layforme">Lay them for me</button>
+    <button class="btn blue hidden" id="heardgo">That is what I heard</button>
     <div class="quote" id="rquote"></div>
-    <button class="btn" id="next">Next round</button>
+    <button class="btn" id="next">Next</button>
   </div>
 </section>
 
@@ -148,7 +152,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
 <section id="end" class="screen">
   <div class="top"><div class="cap" id="evening"></div></div>
   <div class="headline" id="headline"></div>
-  <div class="kicker">The clock was in you. That is where Augustine says time is measured.</div>
+  <div class="kicker">Every measure you made, you made in you. That is where Augustine says time is measured, and where it gets torn.</div>
   <div class="cap lab">What you did</div>
   <div class="did" id="did"></div>
   <div class="cap lab">What Augustine says</div>
@@ -156,8 +160,9 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <div class="cap lab">What it means</div>
   <div class="quote" id="mq"></div>
   <p id="means"></p>
-  <h3>Your seven measures</h3>
-  <svg id="pairs" viewBox="0 0 348 300" aria-label="Each round: the voice in red, yours in blue"></svg>
+  <h3>The low one, across the evening</h3>
+  <svg id="drift" viewBox="0 0 348 300" aria-label="The low one in red, and each time you held it in blue"></svg>
+  <p id="drifttext" class="small"></p>
   <h3>Psalm, evening, life</h3>
   <svg id="psalm" viewBox="0 0 348 250" aria-hidden="true"></svg>
   <p id="psalmtext"></p>
@@ -166,6 +171,9 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <svg id="present" viewBox="0 0 348 250" aria-hidden="true"></svg>
   <p id="presenttext"></p>
   <div class="quote" id="prq"></div>
+  <h3>Torn among times</h3>
+  <p id="torn"></p>
+  <div class="quote" id="tq"></div>
   <h3>And before?</h3>
   <p id="before"></p>
   <div class="quote" id="bq"></div>
@@ -177,14 +185,15 @@ footer.sig a{color:var(--mute);text-decoration:none}
 <!-- HOW TO PLAY -->
 <section id="help" class="screen help">
   <div class="top"><div class="cap">How to play</div></div>
-  <p class="aim">Measure how long things last, with no clock but your mind.</p>
+  <p class="aim">Measure how long things last, with no clock but your memory.</p>
   <p><b>The circle is now.</b> In the middle of the screen is a black circle on a black line. It is the present moment. Above the line is what is still to come, drawn dashed. Below the line is memory: what is over, drawn solid.</p>
   <p><b>Nothing is drawn while it lasts.</b> While a voice sounds, the circle turns red, and that is all. When the voice stops, a red bar drops into memory. While you hold, the circle turns blue. When you let go, a blue bar drops in under the red one, so you can see which was longer.</p>
-  <p><b>A round.</b> Touch the circle to hear the voice. When it stops, press and hold the circle as long as the voice lasted, and let go. The game says how close you came: the same, nine tenths, half, double.</p>
-  <p><b>Outside.</b> Some rounds have a potter's wheel turning, or the sun climbing. You can measure by them if you like. Watch what they do.</p>
-  <p><b>The silence.</b> Once, you don't hold: you keep silent as long as the voice lasted, and tap the circle once when the silence is over.</p>
-  <p><b>The hymn.</b> A voice sings eight syllables, short, long, short, long. You sing them back by holding the circle once for each, the long ones twice as long as the short ones. Then you touch one short and one long of yours to lay one against the other.</p>
-  <p><b>The last round</b> asks for the very first voice again. Then the last page says what you did and what Augustine says about it.</p>
+  <p><b>Four voices.</b> The low one, the middle one, the high one and the top one, each its own length. You hear a voice by touching the circle. You give it back by pressing and holding the circle as long as it lasted. The game says how close you came: the same, nine tenths, half, double.</p>
+  <p><b>Asked for again.</b> The game asks for a voice you heard earlier: with nothing sounding, through static, or with a different voice in your ears. Hold the one you are asked for.</p>
+  <p><b>The silence.</b> After the high one, a hum starts and a wheel turns. Pressing the circle cuts the hum: your silence. Hold the silence as long as the high one lasted. The wheel is out there and you may count it if you like.</p>
+  <p><b>The tumult.</b> Several voices at once, and the sun climbing. Press when you hear the low one, and let go when it stops; the others go on. Afterwards, say which voices were in the crowd.</p>
+  <p><b>The last silence.</b> Nothing sounds. Tap once to begin, say the low one in your head, and tap again when it would have ended.</p>
+  <p><b>The last page</b> says what you did, what Augustine says about it, and shows the low one each time you held it across the evening.</p>
   <button class="btn" id="helpback">Back</button>
 </section>
 
@@ -204,13 +213,14 @@ footer.sig a{color:var(--mute);text-decoration:none}
 'use strict';
 const A = window.AUGUSTINE, C = A.CONFIG;
 const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s));
-const NS = 'http://www.w3.org/2000/svg';
 const COL = { ink: '#151515', red: '#D7372A', blue: '#1E4FA0', yellow: '#F2B41C', plaster: '#ECE9E2', mute: '#625F59', faint: '#BDB8AE' };
-const PXS = 36;                                  // layout: pixels per second in memory, the same in every round
+const PXS = 36;                                  // layout: pixels per second in memory, the same at every station
 const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const svg = (tag, at, kids) => { let s = '<' + tag; for (const k in at) s += ' ' + k + '="' + at[k] + '"'; return s + (kids == null ? '/>' : '>' + kids + '</' + tag + '>'); };
 const T = (x, y, txt, at) => svg('text', Object.assign({ x, y, 'font-family': 'Jost, sans-serif', 'font-size': 11, 'font-weight': 600, 'letter-spacing': '1.4', fill: COL.mute }, at || {}), esc(txt));
+const SHORT = { low: 'LOW', middle: 'MIDDLE', high: 'HIGH', top: 'TOP', stranger: 'STRANGER' };
+const upName = id => A.nameOf(g, id).toUpperCase();
 
 // ---------------- sound (Web Audio; everything also shows on screen)
 let ac = null, master = null;
@@ -222,25 +232,52 @@ function audio() {
   return ac;
 }
 const hz = m => 440 * Math.pow(2, (m - 69) / 12);
-function sing(midi, dur) {                       // a sung "ah": two oscillators through two formants, soft at both ends
-  const c = audio(); if (!c) return;
-  const t = c.currentTime + 0.01, g = c.createGain(), f1 = c.createBiquadFilter(), f2 = c.createBiquadFilter(), lp = c.createBiquadFilter();
+const live = [];                                 // every sounding node, so a screen change can stop them all
+function sing(midi, dur, delay, level) {         // a sung "ah": two oscillators through two formants, soft at both ends
+  const c = audio(); if (!c) return null;
+  const t = c.currentTime + 0.01 + (delay || 0), g = c.createGain(), f1 = c.createBiquadFilter(), f2 = c.createBiquadFilter(), lp = c.createBiquadFilter();
   f1.type = 'bandpass'; f1.frequency.value = 760; f1.Q.value = 4; f2.type = 'bandpass'; f2.frequency.value = 1180; f2.Q.value = 5; lp.type = 'lowpass'; lp.frequency.value = 2600;
   const o1 = c.createOscillator(), o2 = c.createOscillator(); o1.type = 'sawtooth'; o2.type = 'triangle'; o1.frequency.value = hz(midi); o2.frequency.value = hz(midi) * 1.003;
   const mix = c.createGain(); mix.gain.value = 0.5; o1.connect(mix); o2.connect(mix); mix.connect(f1); mix.connect(f2); mix.connect(lp);
   const fg = c.createGain(); fg.gain.value = 1.4; f1.connect(fg); f2.connect(fg); lp.connect(g); fg.connect(g); g.connect(master);
-  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.28, t + 0.04); g.gain.setValueAtTime(0.28, t + Math.max(0.05, dur - 0.05)); g.gain.linearRampToValueAtTime(0, t + dur);
+  const v = (level || 1) * 0.28;
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + 0.04); g.gain.setValueAtTime(v, t + Math.max(0.05, dur - 0.05)); g.gain.linearRampToValueAtTime(0, t + dur);
   o1.start(t); o2.start(t); o1.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
+  const node = { g, stop: () => { try { const n = c.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value, n); g.gain.linearRampToValueAtTime(0, n + 0.03); o1.stop(n + 0.05); o2.stop(n + 0.05); } catch (e) { } } };
+  live.push(node); return node;
 }
+function stopAll() { live.splice(0).forEach(n => n.stop()); humStop(); staticStop(); droneStop(); }
 let humNode = null;
-function humStart() {                            // your own note: rounder and lower than the voice
+function humStart() {                            // your own note while you hold: rounder and lower than the voices
   const c = audio(); if (!c) return;
   const t = c.currentTime, g = c.createGain(), o = c.createOscillator(), o2 = c.createOscillator(), lp = c.createBiquadFilter();
   o.type = 'sine'; o2.type = 'triangle'; o.frequency.value = 220; o2.frequency.value = 220; lp.type = 'lowpass'; lp.frequency.value = 900;
-  o.connect(g); o2.connect(lp); lp.connect(g); g.connect(master); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.32, t + 0.03);
+  o.connect(g); o2.connect(lp); lp.connect(g); g.connect(master); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.3, t + 0.03);
   o.start(t); o2.start(t); humNode = { g, o, o2 };
 }
 function humStop() { if (!humNode || !ac) return; const t = ac.currentTime, h = humNode; h.g.gain.cancelScheduledValues(t); h.g.gain.setValueAtTime(h.g.gain.value, t); h.g.gain.linearRampToValueAtTime(0, t + 0.04); h.o.stop(t + 0.06); h.o2.stop(t + 0.06); humNode = null; }
+let staticNode = null;
+function staticStart() {                         // static: white noise through a band, telling nothing about how long
+  const c = audio(); if (!c) return;
+  const len = 2 * c.sampleRate, buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  const src = c.createBufferSource(); src.buffer = buf; src.loop = true;
+  const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1400; bp.Q.value = 0.5;
+  const g = c.createGain(); src.connect(bp); bp.connect(g); g.connect(master);
+  const t = c.currentTime; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.28 * C.STATIC.level * 1.6, t + 0.25);
+  src.start(t); staticNode = { g, src };
+}
+function staticStop() { if (!staticNode || !ac) return; const t = ac.currentTime, s = staticNode; s.g.gain.cancelScheduledValues(t); s.g.gain.setValueAtTime(s.g.gain.value, t); s.g.gain.linearRampToValueAtTime(0, t + 0.15); s.src.stop(t + 0.2); staticNode = null; }
+let droneNode = null;
+function droneStart() {                          // the ground hum of the silence station: pressing cuts it
+  const c = audio(); if (!c) return;
+  const t = c.currentTime, g = c.createGain(), o = c.createOscillator(), o2 = c.createOscillator(), lp = c.createBiquadFilter();
+  o.type = 'sawtooth'; o2.type = 'sine'; o.frequency.value = 110; o2.frequency.value = 110.7; lp.type = 'lowpass'; lp.frequency.value = 420;
+  o.connect(lp); o2.connect(lp); lp.connect(g); g.connect(master); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.16, t + 0.2);
+  o.start(t); o2.start(t); droneNode = { g, o, o2 };
+}
+function droneSet(on) { if (!droneNode || !ac) return; const t = ac.currentTime, d = droneNode; d.g.gain.cancelScheduledValues(t); d.g.gain.setValueAtTime(d.g.gain.value, t); d.g.gain.linearRampToValueAtTime(on ? 0.16 : 0, t + 0.03); }
+function droneStop() { if (!droneNode || !ac) return; const t = ac.currentTime, d = droneNode; d.g.gain.cancelScheduledValues(t); d.g.gain.setValueAtTime(d.g.gain.value, t); d.g.gain.linearRampToValueAtTime(0, t + 0.15); d.o.stop(t + 0.2); d.o2.stop(t + 0.2); droneNode = null; }
 function click(f, len, vol) {
   const c = audio(); if (!c) return;
   const t = c.currentTime, o = c.createOscillator(), g = c.createGain(); o.type = 'square'; o.frequency.value = f; o.connect(g); g.connect(master);
@@ -259,69 +296,70 @@ $('#helpback').addEventListener('click', () => { show(back); if (back === 'round
 $('#aboutback').addEventListener('click', () => show(back));
 
 // ---------------- the evening
-let g = null, firstLoad = true;
+let g = null;
 function hashSeed() { const m = /e=(\d{4})/.exec(location.hash || ''); return m ? +m[1] : null; }
 function startEvening(seed, first) {
   g = A.newGame(seed, { first });
-  $('#aboutseed').textContent = 'This is evening number ' + g.seed + '. The same number deals the same voices and the same wheel again: add #e=' + g.seed + ' to the address.';
+  $('#aboutseed').textContent = 'This is evening number ' + g.seed + '. The same number deals the same voices and the same crowd again: add #e=' + g.seed + ' to the address.';
   try { history.replaceState(null, '', '#e=' + g.seed); } catch (e) { }
 }
-$('#begin').addEventListener('click', () => { audio(); if (!g) { const h = hashSeed(); startEvening(h || A.newSeed(), !h); } enterRound(); });
-$('#again').addEventListener('click', () => { audio(); startEvening(A.newSeed(), false); enterRound(); });
+$('#begin').addEventListener('click', () => { audio(); if (!g) { const h = hashSeed(); startEvening(h || A.newSeed(), !h); } enterStation(); });
+$('#again').addEventListener('click', () => { audio(); startEvening(A.newSeed(), false); enterStation(); });
 
-// ---------------- a round
+// ---------------- a station
+// what the screen says, by station and phase: what this is, what you can do, what to expect
 const ASK = {
-  voice: { intro: 'Touch the circle to hear a voice. When it stops, press and hold the circle for <b>as long as the voice lasted</b>, then let go.',
-    ready: 'The voice has stopped. Now press and hold the circle <b>as long as the voice lasted</b>. Let go when it is the same.' },
-  wheel: { intro: 'Outside, a potter’s wheel turns. The voice will last <b>three turns</b> of it. Touch the circle to hear it.',
-    ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
-  kick: { intro: 'The same wheel. Again the voice will last <b>three turns</b> of it. Touch the circle to hear it.',
-    ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
-  sun: { intro: 'Outside, the sun. It will climb while the voice sounds. Touch the circle to hear it.',
-    ready: 'Now press and hold <b>as long as the voice lasted</b>.' },
-  silence: { intro: 'Outside, nothing moves. Touch the circle to hear the voice. Then keep silent <b>as long as it lasted</b>, and tap the circle once when the silence is over.',
-    ready: 'Silence. Tap the circle once when the silence has lasted <b>as long as the voice</b>.' },
-  hymn: { intro: 'A voice sings the first line of a hymn: <b>eight syllables, short, long, short, long</b>. Touch the circle to hear it. Then you sing it back.',
-    ready: 'Now sing it back: <b>eight holds, one for each syllable</b>, the long ones twice as long as the short ones.' },
-  first: { ready: 'No voice this time. Hold the circle <b>as long as the very first voice</b>, from round one. Its bar is at the bottom of your memory.' },
+  first: { intro: 'Touch the circle to hear <b>the low one</b>. When it stops, press and hold the circle <b>as long as it lasted</b>, then let go.',
+    ready: 'The low one has stopped. Now press and hold the circle <b>as long as it lasted</b>. Let go when it is the same.',
+    done: 'You held the circle as long as you thought the low one lasted. Your bar is under its bar.' },
+  second: { intro: 'A second voice. Touch the circle to hear <b>the middle one</b>. When it stops, press and hold <b>as long as it lasted</b>.',
+    ready: 'The middle one has stopped. Press and hold <b>as long as it lasted</b>.',
+    done: 'Your bar is under the middle one’s. Both voices are in your memory now.' },
+  back: { ready: 'Nothing sounds this time. Go back one voice: press and hold <b>as long as the low one lasted</b>, the first voice you heard.',
+    done: 'You held as long as the low one, from memory. Its bar and yours are side by side.' },
+  static: { intro: 'A third voice. Touch the circle to hear <b>the high one</b>. Then static will come up and stay, and you will be asked for the middle one through it.',
+    ready: 'Static. Go back two voices: press and hold <b>as long as the middle one lasted</b>. The static tells you nothing about how long.',
+    done: 'You held the middle one through the static.' },
+  against: { ready: 'Nothing sounds yet. Press and hold <b>as long as the low one lasted</b>. While you hold, a fourth voice, <b>the top one</b>, will sound in your ears. Keep to the low one.',
+    done: 'You held the low one while the top one sounded. Three bars: the low one, the top one as it sounded, and yours.' },
+  silence: { intro: 'Outside, a potter’s wheel turns. Touch the circle to hear <b>the high one</b> again: it lasts <b>three turns</b> of the wheel. Then a hum starts.',
+    ready: 'The hum. Pressing the circle cuts it: that is your silence. Press, and hold the silence <b>as long as the high one lasted</b>. The wheel keeps turning out there.',
+    done: 'You kept a silence as long as the high one. Its outline is under the high one’s bar.' },
+  tumult: { intro: 'A crowd: several voices at once, and the sun climbing. Touch the circle to begin. <b>Press when you hear the low one, and let go when it stops.</b> The others will go on.',
+    run: '<b>Press when you hear the low one. Let go when it stops.</b> The others go on.',
+    done: 'The crowd is over. The low one is drawn where it was; your hold is drawn where it fell.' },
+  last: { ready: 'Nothing sounds, and nothing will. <b>Tap the circle once to begin. Say the low one in your head, and tap again when it would have ended.</b>',
+    count: 'The low one is sounding in you, and nowhere else. <b>Tap when it would have ended.</b>',
+    done: 'You said the low one in your head. Its bar and yours are side by side.' },
 };
-const DONE = {
-  voice: 'You held the circle for as long as you thought the voice lasted. Your bar is under the voice\u2019s.',
-  wheel: 'You held while the wheel turned. Your bar is under the voice\u2019s.',
-  kick: 'You held while the wheel turned. Your bar is under the voice\u2019s.',
-  sun: 'You held under the sun. Your bar is under the voice\u2019s.',
-  silence: 'You kept a silence and tapped. Its outline is under the voice\u2019s bar.',
-  hymn: 'You sang the line back, and laid one of your short syllables along one of your long ones.',
-  first: 'You held as long as the first voice. Its bar and yours are side by side.',
-};
-const LISTEN = { voice: 'Listen.', wheel: 'Listen, and watch the wheel.', kick: 'Listen, and watch the wheel.', sun: 'Listen, and watch the sun.', silence: 'Listen.', hymn: 'Listen: short, long, short, long…' };
-let ui = null;                                   // per-round state
-function enterRound() {
+let ui = null;                                   // per-station state
+function enterStation() {
   const r = A.current(g);
   if (ui && ui.raf) cancelAnimationFrame(ui.raf);
-  ui = { r, phase: r.id === 'first' ? 'ready' : 'intro', v0: null, vEnd: null, tPress: null, h0: null, s0: null, bars: [], syl: 0, vSyl: 0, durs: [], hymnStart: null, raf: null,
-    turnsShown: 0, kicked: false, kickAt: 0, lay: [], heard: 0, layAnim: null, frozenT: 0 };
+  stopAll();
+  ui = { r, phase: ['back', 'against', 'last'].includes(r.id) ? 'ready' : 'intro', v0: null, h0: null, s0: null, t0: null, bars: [], raf: null,
+    turnsShown: 0, kicked: false, kickAt: 0, picks: [], liveStarted: false, tumultPress: null, tumultRelease: null, lowOn: false, frozenT: 0, staticOn: false };
   show('round');
   $('#rtitle').textContent = r.title;
-  $('#res').classList.add('hidden'); $('#chips').classList.add('hidden'); $('#chips').innerHTML = ''; $('#layforme').classList.add('hidden');
+  $('#res').classList.add('hidden'); $('#chips').classList.add('hidden'); $('#chips').innerHTML = ''; $('#heardgo').classList.add('hidden');
   drawStrip(); setAsk(); drawWorld(); drawMind(); setCircle();
   loop();
 }
 function setAsk(extra) {
-  const r = ui.r, a = ASK[r.id];
-  let h = ui.phase === 'intro' ? a.intro : ui.phase === 'voice' ? LISTEN[r.id] : a.ready;
-  if (r.id === 'hymn' && (ui.phase === 'ready' || ui.phase === 'holding')) {
-    const k = ui.syl, s = A.hymnVoice()[k];
-    h = (k === 0 ? a.ready + ' ' : '') + (k + 1) + ' of 8: hold for <b>' + s.text.toUpperCase() + '</b> (' + (s.long ? 'long' : 'short') + ').';
-  }
-  if (r.id === 'voice' && ui.phase === 'intro') h += '<br><span class="small">Nothing is drawn while it lasts. When it is over, it drops below the line into memory.</span>';
+  const r = ui.r, a = ASK[r.id], p = ui.phase;
+  let h = p === 'intro' ? a.intro : p === 'voice' ? listen() : p === 'tumult' || p === 'tholding' ? a.run : p === 'count' ? a.count : p === 'done' || p === 'result' || p === 'heard' ? a.done : a.ready;
+  if (r.id === 'first' && p === 'intro') h += '<br><span class="small">Nothing is drawn while it lasts. When it is over, it drops below the line into memory.</span>';
   $('#ask').innerHTML = h + (extra ? ' ' + extra : '');
+}
+function listen() {
+  const r = ui.r;
+  return r.id === 'silence' ? 'Listen, and watch the wheel.' : r.id === 'static' ? 'Listen: the high one.' : 'Listen: ' + A.nameOf(g, r.hear) + '.';
 }
 function drawStrip() {
   let s = '';
-  const w = 28, gap = 4, x0 = 120;
-  s += T(0, 15, 'ROUND ' + (g.i + 1) + ' OF 7', { fill: COL.ink, 'font-weight': 800 });
-  for (let k = 0; k < 7; k++) {
+  const w = 22, gap = 3, x0 = 134, n = g.stations.length;
+  s += T(0, 15, 'STATION ' + (g.i + 1) + ' OF ' + n, { fill: COL.ink, 'font-weight': 800 });
+  for (let k = 0; k < n; k++) {
     const x = x0 + k * (w + gap);
     s += k < g.i ? svg('rect', { x, y: 6, width: w, height: 10, fill: COL.ink })
       : svg('rect', { x: x + 1, y: 7, width: w - 2, height: 8, fill: 'none', stroke: COL.ink, 'stroke-width': 2, 'stroke-dasharray': '5 4' });
@@ -331,193 +369,264 @@ function drawStrip() {
   $('#strip').innerHTML = s;
 }
 
-// the world outside: a wheel, the sun, or nothing
+// the world outside: a wheel, the sun over the crowd, static, or nothing
 function drawWorld() {
-  const r = ui.r, has = r.id === 'wheel' || r.id === 'kick' || r.id === 'sun';
-  $('#world').classList.toggle('hidden', !has); $('#outside .none').classList.toggle('hidden', has);
-  if (!has) { $('#world').innerHTML = ''; return; }
+  const r = ui.r, kind = r.id === 'silence' ? 'wheel' : r.id === 'tumult' ? 'sun' : r.id === 'static' ? 'static' : null;
+  $('#world').classList.toggle('hidden', !kind); $('#outside .none').classList.toggle('hidden', !!kind);
+  if (!kind) { $('#world').innerHTML = ''; return; }
   let s = '';
-  if (r.id === 'sun') {
+  if (kind === 'sun') {
     s += svg('path', { d: 'M 22 100 Q 174 -38 326 100', fill: 'none', stroke: COL.faint, 'stroke-width': 2, 'stroke-dasharray': '4 6' });
     s += svg('circle', { id: 'sunb', cx: 0, cy: 0, r: 20, fill: COL.yellow });
     s += svg('rect', { x: 0, y: 100, width: 348, height: 18, fill: COL.ink });
-  } else {
+  } else if (kind === 'wheel') {
     s += svg('rect', { x: 96, y: 104, width: 156, height: 14, fill: COL.ink });          // the potter's bench
     s += svg('rect', { x: 168, y: 92, width: 12, height: 14, fill: COL.ink });
     s += svg('polygon', { points: '174,4 168,-6 180,-6', fill: COL.ink, transform: 'translate(0,8)' }); // the mark at the top
     s += svg('g', { id: 'wheel', transform: 'rotate(0 174 54)' }, svg('circle', { cx: 174, cy: 54, r: 44, fill: COL.yellow }) + svg('polygon', { points: '174,14 164,32 184,32', fill: COL.ink }) + svg('circle', { cx: 174, cy: 54, r: 6, fill: COL.ink }));
     s += svg('polygon', { id: 'wedge', points: '0,90 46,104 0,118', fill: COL.ink, transform: 'translate(40,0)' });
+  } else {
+    s += svg('g', { id: 'staticfield' });
+    s += T(174, 112, 'STATIC', { 'text-anchor': 'middle', fill: COL.ink, 'font-weight': 800 });
   }
   $('#world').innerHTML = s;
-  updateWorld(0);
+  updateWorld();
 }
-function voiceT() { return ui.v0 == null ? 0 : (performance.now() - ui.v0) / 1000; }
+function sinceVoice() { return ui.v0 == null ? 0 : (performance.now() - ui.v0) / 1000; }
 function updateWorld() {
   const r = ui.r;
-  if (r.id === 'sun') {
-    const t = ui.v0 == null ? 0 : voiceT(), p = A.sunAt(r, t);
+  if (r.id === 'tumult') {
+    const t = ui.t0 == null ? 0 : Math.min((performance.now() - ui.t0) / 1000, r.plan.end + 9), p = A.sunAt(r.plan, ui.phase === 'done' || ui.phase === 'heard' || ui.phase === 'result' ? ui.frozenT : t);
     const x = 22 + 304 * p, y = (1 - p) * (1 - p) * 100 + 2 * (1 - p) * p * -38 + p * p * 100;
     const b = $('#sunb'); if (b) { b.setAttribute('cx', x); b.setAttribute('cy', y); }
-  } else if (r.id === 'wheel' || r.id === 'kick') {
-    const running = ui.v0 != null && ui.phase !== 'done' && ui.phase !== 'result';
-    const t = running ? voiceT() : (ui.frozenT || 0);
-    const tp = ui.tPress == null ? null : (ui.tPress - ui.v0) / 1000;
+  } else if (r.id === 'silence') {
+    const running = ui.v0 != null && !['done', 'result'].includes(ui.phase);
+    const t = running ? sinceVoice() : (ui.frozenT || 0);
+    const tp = ui.h0 == null ? null : (ui.h0 - ui.v0) / 1000;
     const turns = ui.v0 == null ? 0 : A.wheelTurns(r, t, tp);
     const w = $('#wheel'); if (w) w.setAttribute('transform', 'rotate(' + (turns * 360 % 360) + ' 174 54)');
     if (running) {
       const whole = Math.floor(turns + 1e-6);
       if (whole > ui.turnsShown) { ui.turnsShown = whole; tick(); }
-      if (A.kicked(r, t, tp) && !ui.kicked) { ui.kicked = true; ui.kickAt = performance.now(); thud(); }
+      if (tp != null && t > A.kickAt(r, tp) && !ui.kicked) { ui.kicked = true; ui.kickAt = performance.now(); thud(); }
     }
     const wd = $('#wedge');
     if (wd) { const since = ui.kicked ? (performance.now() - ui.kickAt) / 1000 : 9; const k = since < 0.12 ? since / 0.12 : since < 0.5 ? 1 - (since - 0.12) / 0.38 : 0; wd.setAttribute('transform', 'translate(' + (40 + 12 * Math.max(0, k)) + ',0)'); }
+  } else if (r.id === 'static') {
+    const f = $('#staticfield'); if (!f) return;
+    if (!ui.staticOn) { f.innerHTML = ''; return; }
+    let s = ''; for (let i = 0; i < 90; i++) { const x = Math.random() * 348, y = Math.random() * 96, w = 2 + Math.random() * 10; s += svg('rect', { x, y, width: w, height: 3, fill: Math.random() < 0.5 ? COL.ink : COL.mute, opacity: 0.35 + Math.random() * 0.5 }); }
+    f.innerHTML = s;
   }
 }
 function loop() {
   updateWorld();
-  if (ui && ui.phase === 'holding') capCheck();
-  if (ui && ui.phase === 'silence' && (performance.now() - ui.s0) / 1000 >= A.holdCap(ui.r)) endSilence();
+  if (ui) {
+    const r = ui.r, now = performance.now();
+    if (ui.phase === 'holding' && r.id !== 'tumult' && (now - ui.h0) / 1000 >= A.holdCap(r)) { release(); }
+    if (ui.phase === 'count' && (now - ui.s0) / 1000 >= A.holdCap(r)) { endCount(); }
+    if (r.id === 'tumult' && (ui.phase === 'tumult' || ui.phase === 'tholding') && ui.t0 != null) {
+      const t = (now - ui.t0) / 1000;
+      if (ui.phase === 'tumult' && t >= r.plan.end + 1.0) finishTumult(null, null);
+      if (ui.phase === 'tholding' && t >= r.plan.end + C.TUMULT.lateCap) finishTumult(ui.tumultPress, r.plan.end + C.TUMULT.lateCap);
+    }
+    if (r.id === 'against' && ui.phase === 'holding' && !ui.liveStarted && (now - ui.h0) / 1000 >= C.AGAINST.delay) {
+      ui.liveStarted = true; ui.liveAt = now; sing(g.voices.top.midi, r.liveT); setCircle();
+      setTimeout(() => { if (ui && ui.r.id === 'against') { ui.liveOver = true; if (ui.phase === 'holding') setCircle(); } }, r.liveT * 1000);
+    }
+  }
   ui.raf = requestAnimationFrame(loop);
 }
 
 // the mind: to come (dashed slips) above the line; the circle on the line; memory (solid bars) below
 const Y = { slips: 22, line: 108, mem: 172 };
+function slipsFor() {
+  const r = ui.r, p = ui.phase, out = [];
+  const W = label => Math.max(96, Math.round(label.length * 6.4) + 18);
+  const you = (label) => out.push({ w: W(label), label, c: COL.blue });
+  const voice = (label) => out.push({ w: W(label), label, c: COL.red });
+  if (r.id === 'first' || r.id === 'second') { if (p === 'intro') voice('THE ' + SHORT[r.hear] + ' ONE'); if (['intro', 'voice', 'ready'].includes(p)) you('YOU: AS LONG'); }
+  if (r.id === 'back') { if (p === 'ready') you('YOU: AS THE LOW ONE'); }
+  if (r.id === 'static') { if (p === 'intro') voice('THE HIGH ONE'); if (['intro', 'voice'].includes(p)) out.push({ w: 70, label: 'STATIC', c: COL.mute }); if (['intro', 'voice', 'ready'].includes(p)) you('YOU: THE MIDDLE ONE'); }
+  if (r.id === 'against') { if (p === 'ready') { you('YOU: AS THE LOW ONE'); voice('THE TOP ONE, IN YOUR EARS'); } if (p === 'holding' && !ui.liveStarted) voice('THE TOP ONE, IN YOUR EARS'); }
+  if (r.id === 'silence') { if (p === 'intro') voice('THE HIGH ONE: 3 TURNS'); if (['intro', 'voice'].includes(p)) out.push({ w: 70, label: 'THE HUM', c: COL.mute }); if (['intro', 'voice', 'ready'].includes(p)) out.push({ w: 150, label: 'YOUR SILENCE: AS LONG', c: COL.ink }); }
+  if (r.id === 'tumult') { if (p === 'intro') { voice('THE CROWD'); you('YOU: THE LOW ONE'); } if (p === 'tumult') you('YOU: THE LOW ONE'); }
+  if (r.id === 'last') { if (p === 'ready') out.push({ w: 176, label: 'THE LOW ONE, IN YOUR HEAD', c: COL.blue }); }
+  return out;
+}
 function drawMind() {
   const r = ui.r; let s = '';
   s += T(0, 12, 'TO COME');
-  // slips: what is still to come in this round
-  const slips = [];
-  if (r.id === 'hymn') {
-    const syl = A.hymnVoice(), sc = 26;
-    if (!ui.heard) syl.forEach((x, k) => { if (k >= ui.vSyl) slips.push({ w: x.dur * sc * 2.2, label: x.text.toUpperCase(), c: COL.red }); });
-    else for (let k = ui.syl; k < 8; k++) slips.push({ w: syl[k].dur * sc * 2.2, label: syl[k].text.toUpperCase(), c: COL.blue });
-  } else {
-    if (ui.phase === 'intro' && r.id !== 'first') slips.push({ w: 110, label: r.id === 'wheel' || r.id === 'kick' ? 'THE VOICE: 3 TURNS' : 'THE VOICE', c: COL.red });
-    if (['intro', 'voice', 'ready'].includes(ui.phase)) slips.push({ w: r.id === 'silence' ? 110 : 110, label: r.id === 'silence' ? 'SILENCE: AS LONG' : r.id === 'first' ? 'YOU: AS THE FIRST' : 'YOU: AS LONG', c: r.id === 'silence' ? COL.ink : COL.blue });
-  }
+  const slips = slipsFor();
   let x = 0;
   slips.forEach(sl => { if (x + sl.w > 348) return; s += svg('rect', { x: x + 1.2, y: Y.slips, width: sl.w - 2.4, height: 26, fill: 'none', stroke: sl.c, 'stroke-width': 2.4, 'stroke-dasharray': '6 5' });
-    s += T(x + sl.w / 2, Y.slips + 17.5, sl.label, { 'text-anchor': 'middle', fill: sl.c, 'font-size': sl.w > 60 ? 10 : 9, 'letter-spacing': sl.w > 60 ? '1.4' : '0.3' });
+    s += T(x + sl.w / 2, Y.slips + 17.5, sl.label, { 'text-anchor': 'middle', fill: sl.c, 'font-size': sl.w > 100 ? 9 : 9, 'letter-spacing': '0.6' });
     x += sl.w + 5; });
   if (!slips.length) s += T(0, Y.slips + 17, 'nothing more', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' });
   // the line of now
   s += svg('rect', { x: 0, y: Y.line - 2.5, width: 348, height: 5, fill: COL.ink });
   s += T(348, Y.line - 10, 'NOW', { 'text-anchor': 'end', fill: COL.ink, 'font-weight': 800 });
   s += T(0, Y.mem - 10, 'MEMORY');
-  // memory: this round's bars, then earlier rounds, thinner and fainter
+  // memory: this station's bars, then earlier stations, thinner and fainter
   let y = Y.mem;
-  const bars = ui.bars;
-  if (r.id === 'hymn') y = drawHymnRows(bars, y, (str) => { s += str; });
-  else bars.forEach(b => { s += barRow(b, y); y += 40; });
-  if (!bars.length) { s += T(0, y + 14, 'nothing yet', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' }); y += 30; }
+  ui.bars.forEach(b => { s += barRow(b, y); y += b.kind === 'crowd' ? 16 + b.rows.length * 17 : 40; });
+  if (!ui.bars.length) { s += T(0, y + 14, 'nothing yet', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' }); y += 30; }
   y += 6;
   const older = g.results.slice(0, g.i).map((res, k) => ({ res, k })).reverse();
   if (older.length) { s += T(0, y + 8, 'EARLIER', { 'font-size': 9 }); y += 14; }
   older.forEach(({ res, k }, age) => {
-    const op = Math.max(0.3, 0.85 - age * 0.11), first = r.id === 'first' && k === 0;
-    const tw = Math.min(340, res.target * PXS), mw = Math.min(340, res.made * PXS);
-    s += svg('g', { opacity: first ? 1 : op }, T(0, y + 7, (k + 1) + '  ' + res.title.toUpperCase(), { 'font-size': 8.5, fill: first ? COL.ink : COL.mute, 'font-weight': first ? 800 : 600 })
-      + svg('rect', { x: 0, y: y + 10, width: tw, height: first ? 7 : 4, fill: COL.red }) + svg('rect', { x: 0, y: y + (first ? 18 : 15), width: mw, height: first ? 7 : 4, fill: res.id === 'silence' ? 'none' : COL.blue, stroke: res.id === 'silence' ? COL.ink : 'none', 'stroke-width': 1.2 }));
-    y += first ? 30 : 23;
+    const wanted = res.voice === r.voice && ['back', 'against', 'last', 'static'].includes(r.id) && (r.id !== 'static' || res.voice === 'middle');
+    const op = wanted ? 1 : Math.max(0.3, 0.85 - age * 0.11);
+    const tw = Math.min(340, res.target * PXS), mw = Math.min(340, (res.made || 0) * PXS);
+    s += svg('g', { opacity: op }, T(0, y + 7, (k + 1) + '  ' + res.title.toUpperCase() + '  ·  ' + upName(res.voice), { 'font-size': 8.5, fill: wanted ? COL.ink : COL.mute, 'font-weight': wanted ? 800 : 600 })
+      + svg('rect', { x: 0, y: y + 10, width: tw, height: wanted ? 7 : 4, fill: COL.red })
+      + (res.id === 'tumult' && res.pressAt == null ? '' : svg('rect', { x: 0, y: y + (wanted ? 18 : 15), width: mw, height: wanted ? 7 : 4, fill: res.id === 'silence' || res.id === 'last' ? 'none' : COL.blue, stroke: res.id === 'silence' ? COL.ink : res.id === 'last' ? COL.blue : 'none', 'stroke-width': 1.2 })));
+    y += wanted ? 30 : 23;
   });
   const H = Math.max(260, y + 6);
   $('#mind').setAttribute('viewBox', '0 0 348 ' + H);
   $('#mind').innerHTML = s;
   placeCircle();
+  if (ui.bars.some(b => b.fresh)) settle();
 }
-function barRow(b, y) {                          // one span in memory: label, then the bar at PXS pixels a second
-  const w = b.secs * PXS, over = w > 344, ww = Math.min(w, 344);
-  let s = T(0, y + 8, b.label, { fill: b.kind === 'you' ? COL.blue : b.kind === 'silence' ? COL.ink : COL.red, 'font-weight': 800 });
-  if (b.kind === 'silence') s += svg('rect', { x: 1.5, y: y + 13.5, width: ww - 3, height: 19, fill: 'none', stroke: COL.ink, 'stroke-width': 3 });
-  else s += svg('rect', { x: 0, y: y + 12, width: ww, height: 22, fill: b.kind === 'you' ? COL.blue : COL.red });
+function barRow(b, y) {                          // one span in memory: label, then the bar at PXS pixels a second; `at` offsets it
+  const colour = { you: COL.blue, voice: COL.red, ref: COL.red, live: COL.red, stranger: COL.mute, static: COL.mute, silence: COL.ink, said: COL.blue }[b.kind] || COL.ink;
+  let s = '';
+  if (b.kind === 'crowd') {
+    s += T(0, y + 8, b.label, { fill: COL.red, 'font-weight': 800 });
+    b.rows.forEach((row, k) => {
+      const yy = y + 12 + k * 17, x0 = row.at * PXS, w = Math.min(344 - x0, row.dur * PXS);
+      s += svg('rect', { x: x0, y: yy, width: w, height: 12, fill: row.id === 'stranger' ? COL.mute : COL.red, opacity: row.id === 'low' ? 1 : 0.55 });
+      if (w > 40) s += T(x0 + 4, yy + 9.5, row.id === 'low' ? 'THE LOW ONE' : row.hidden ? '?' : upName(row.id), { fill: '#fff', 'font-size': 8, 'font-weight': 800, 'letter-spacing': '0.8' });
+    });
+    return svg('g', {}, s);
+  }
+  const x0 = (b.at || 0) * PXS, w = b.secs * PXS, over = x0 + w > 344, ww = Math.min(w, 344 - x0);
+  s += T(0, y + 8, b.label, { fill: colour, 'font-weight': 800 });
+  if (b.kind === 'silence') s += svg('rect', { x: x0 + 1.5, y: y + 13.5, width: Math.max(0, ww - 3), height: 19, fill: 'none', stroke: COL.ink, 'stroke-width': 3 });
+  else if (b.kind === 'said') s += svg('rect', { x: x0 + 1.5, y: y + 13.5, width: Math.max(0, ww - 3), height: 19, fill: 'none', stroke: COL.blue, 'stroke-width': 3, 'stroke-dasharray': '7 5' });
+  else if (b.kind === 'static') s += svg('rect', { x: x0, y: y + 16, width: Math.max(0, ww), height: 14, fill: COL.mute, opacity: 0.45 });
+  else if (b.kind === 'ref') s += svg('rect', { x: x0, y: y + 12, width: Math.max(0, ww), height: 22, fill: COL.red, opacity: 0.55 });
+  else s += svg('rect', { x: x0, y: y + 12, width: Math.max(0, ww), height: 22, fill: colour });
   if (over) s += svg('polygon', { points: '338,' + (y + 12) + ' 348,' + (y + 23) + ' 338,' + (y + 34), fill: COL.ink });
   return svg('g', { class: b.fresh ? 'drop' : '', style: b.fresh && !reduce ? 'transform:translateY(' + (Y.line - y - 23) + 'px);transition:transform .35s cubic-bezier(.2,.8,.3,1)' : '' }, s);
 }
-function hymnScale(bars) {
-  const v = bars.find(b => b.kind === 'voiceline'), u = bars.find(b => b.kind === 'youline');
-  const L = Math.max(v ? v.total : 0, u ? u.total : 0, A.lineLength(A.hymnVoice()));
-  return Math.min(56, 340 / L);
-}
-function drawHymnRows(bars, y, put) {
-  const sc = hymnScale(bars);
-  bars.forEach(b => {
-    put(T(0, y + 8, b.label, { fill: b.kind === 'youline' ? COL.blue : COL.red, 'font-weight': 800 }));
-    b.segs.forEach((sg, k) => {
-      const sel = ui.lay.includes(k) && b.kind === 'youline';
-      put(svg('rect', { x: sg.at * sc, y: y + 12, width: Math.max(2, sg.d * sc), height: 22, fill: b.kind === 'youline' ? COL.blue : COL.red, stroke: sel ? COL.yellow : 'none', 'stroke-width': sel ? 4 : 0 }));
-      if (sg.d * sc > 13) put(T(sg.at * sc + sg.d * sc / 2, y + 27.5, A.CONFIG.PAPER.HYMN_LINE[k].toUpperCase(), { 'text-anchor': 'middle', fill: '#fff', 'font-size': 9, 'letter-spacing': '0.3', 'font-weight': 800 }));
-    });
-    y += 40;
-  });
-  if (ui.layAnim) { put(ui.layAnim(sc, y - 40)); y += 44; }
-  return y;
-}
+function settle() { requestAnimationFrame(() => requestAnimationFrame(() => { $$('#mind .drop').forEach(el => { el.style.transform = 'translateY(0)'; el.classList.remove('drop'); }); ui.bars.forEach(b => b.fresh = false); })); }
 function placeCircle() {
   const svgEl = $('#mind'), vb = svgEl.viewBox.baseVal, k = svgEl.clientWidth / vb.width, c = $('#now');
   c.style.left = (174 * k - 48) + 'px'; c.style.top = (Y.line * k - 48) + 'px';
 }
 window.addEventListener('resize', () => { if (ui && $('#round').classList.contains('on')) placeCircle(); });
+
+// the circle: what touching it does, by phase
 function setCircle() {
-  const c = $('#now'), p = ui.phase, r = ui.r;
+  const c = $('#now'), r = ui.r, p = ui.phase;
   c.className = '';
-  const lab = { intro: 'LISTEN', voice: '', ready: r.id === 'silence' ? 'TAP' : 'HOLD', holding: '', silence: 'TAP', done: '', result: '' }[p];
-  if (p === 'voice') c.classList.add('voice');
-  else if (p === 'ready') c.classList.add('ready');
-  else if (p === 'holding') c.classList.add('holding');
-  else if (p === 'silence') c.classList.add('silence', 'ready');
-  else if (p === 'done' || p === 'result') c.classList.add('idle');
-  c.textContent = r.id === 'hymn' && (p === 'ready') ? A.hymnVoice()[ui.syl].text.toUpperCase() : lab;
-  c.setAttribute('aria-label', p === 'intro' ? 'Touch to hear the voice' : p === 'ready' ? 'Press and hold' : p === 'silence' ? 'Tap when the silence is over' : 'The present');
-  $$('.q').forEach(q => q.disabled = p === 'voice' || p === 'holding');
+  let lab = '';
+  if (p === 'intro') lab = 'LISTEN';
+  else if (p === 'voice') { lab = SHORT[r.hear]; c.classList.add('voice'); }
+  else if (p === 'ready') { if (r.id === 'silence') { lab = 'SILENCE'; c.classList.add('quietready'); } else if (r.id === 'last') { lab = 'BEGIN'; c.classList.add('ready'); } else { lab = 'HOLD'; c.classList.add('ready'); } }
+  else if (p === 'holding') { if (r.id === 'silence') c.classList.add('quiet'); else { c.classList.add('holding'); if (r.id === 'against' && ui.liveStarted && !ui.liveOver) { c.classList.add('live'); lab = 'TOP'; } } }
+  else if (p === 'tumult') { lab = 'LOW?'; c.classList.add('voice'); }
+  else if (p === 'tholding') { c.classList.add('holding'); if (ui.lowOn || (performance.now() - ui.t0) / 1000 < r.plan.end) c.classList.add('live'); }
+  else if (p === 'count') { lab = 'END'; c.classList.add('ready'); }
+  else c.classList.add('idle');
+  c.textContent = lab;
+  c.setAttribute('aria-label', p === 'intro' ? 'Touch to hear the voice' : p === 'ready' ? 'Press and hold' : p === 'count' ? 'Tap when it would have ended' : 'The present');
+  $$('.q').forEach(q => q.disabled = p === 'voice' || p === 'holding' || p === 'tholding');
 }
 
-// the voice: plays, then drops into memory
+// hearing a voice: it sounds, then drops into memory
 function playVoice() {
   const r = ui.r; ui.phase = 'voice'; ui.v0 = performance.now(); ui.turnsShown = 0; setCircle(); setAsk(); drawMind();
-  if (r.id === 'voice' || r.id === 'wheel' || r.id === 'kick' || r.id === 'sun' || r.id === 'silence') {
-    if (r.id === 'wheel' || r.id === 'kick') tick();
-    sing(67, r.T);
-    setTimeout(() => {
-      ui.vEnd = performance.now();
-      ui.bars.push({ kind: 'voice', label: 'THE VOICE', secs: r.T, fresh: true });
-      if (r.id === 'silence') { ui.phase = 'silence'; ui.s0 = performance.now(); } else ui.phase = 'ready';
-      setCircle(); setAsk(); drawMind(); settle();
-    }, r.T * 1000);
-  } else if (r.id === 'hymn') {
-    const syl = A.hymnVoice(); let at = 0; ui.vSyl = 0;
-    const line = { kind: 'voiceline', label: 'THE VOICE', segs: [], total: A.lineLength(syl) };
-    syl.forEach((x, k) => {
-      setTimeout(() => sing(x.pitch, x.dur), at * 1000);
-      const start = at;
-      setTimeout(() => { ui.vSyl = k + 1; line.segs.push({ at: start, d: x.dur }); if (k === 0) ui.bars.push(line); drawMind(); }, (at + x.dur) * 1000);
-      at += x.dur + C.HYMN.gap;
-    });
-    setTimeout(() => { ui.heard = 1; ui.phase = 'ready'; ui.syl = 0; setCircle(); setAsk(); drawMind(); }, (at - C.HYMN.gap) * 1000 + 250);
-  }
+  if (r.id === 'silence') tick();
+  sing(g.voices[r.hear].midi, r.T);
+  setTimeout(() => {
+    if (!ui || ui.r !== r) return;
+    ui.bars.push({ kind: 'voice', label: upName(r.hear), secs: r.T, fresh: true });
+    ui.phase = 'ready';
+    if (r.id === 'static') { ui.staticOn = true; staticStart(); }
+    if (r.id === 'silence') { droneStart(); }
+    setCircle(); setAsk(); drawMind(); settle();
+  }, r.T * 1000);
 }
-function settle() { requestAnimationFrame(() => requestAnimationFrame(() => { $$('#mind .drop').forEach(el => { el.style.transform = 'translateY(0)'; el.classList.remove('drop'); }); ui.bars.forEach(b => b.fresh = false); })); }
+function startTumult() {
+  const r = ui.r, plan = r.plan; ui.phase = 'tumult'; ui.t0 = performance.now(); setCircle(); setAsk(); drawMind();
+  plan.entries.forEach(e => {
+    sing(g.voices[e.id].midi, e.dur, e.at, 0.8);
+    if (e.id === 'low') { setTimeout(() => { if (ui && ui.r === r) ui.lowOn = true; }, e.at * 1000); setTimeout(() => { if (ui && ui.r === r) { ui.lowOn = false; setCircle(); } }, e.end * 1000); }
+  });
+  setTimeout(() => { if (ui && ui.r === r && (ui.phase === 'tumult' || ui.phase === 'tholding')) setCircle(); }, plan.end * 1000 + 20);
+}
 
 // the hold
 const circle = $('#now');
 function down(e) {
   if (e) { e.preventDefault(); try { circle.setPointerCapture(e.pointerId); } catch (x) { } }
   audio();
-  const p = ui && ui.phase;
-  if (p === 'intro') { playVoice(); return; }
-  if (p === 'silence') { endSilence(); return; }
+  const p = ui && ui.phase, r = ui && ui.r;
+  if (!ui) return;
+  if (p === 'intro') { if (r.id === 'tumult') startTumult(); else playVoice(); return; }
+  if (p === 'tumult') { ui.phase = 'tholding'; ui.tumultPress = (performance.now() - ui.t0) / 1000; ui.h0 = performance.now(); setCircle(); return; }
+  if (p === 'count') { endCount(); return; }
   if (p !== 'ready') return;
-  ui.phase = 'holding'; ui.h0 = performance.now(); if (ui.tPress == null) ui.tPress = ui.h0;
-  if (ui.r.id === 'hymn' && ui.syl === 0) ui.hymnStart = ui.h0;
-  humStart(); setCircle();
+  if (r.id === 'last') { ui.phase = 'count'; ui.s0 = performance.now(); setCircle(); setAsk(); drawMind(); return; }
+  ui.phase = 'holding'; ui.h0 = performance.now();
+  if (r.id === 'silence') droneSet(false); else humStart();
+  setCircle(); setAsk(); drawMind();
 }
 function up(e) {
-  if (!ui || ui.phase !== 'holding') return;
+  if (!ui) return;
+  if (ui.phase === 'tholding') { ui.tumultRelease = (performance.now() - ui.t0) / 1000; finishTumult(ui.tumultPress, ui.tumultRelease); return; }
+  if (ui.phase !== 'holding') return;
   const secs = (performance.now() - ui.h0) / 1000;
-  humStop();
-  if (secs < 0.12 && ui.r.id !== 'hymn') { ui.phase = 'ready'; ui.tPress = null; setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down.</span>'); return; }
-  endHold(secs);
+  if (secs < 0.12) { ui.phase = 'ready'; humStop(); if (ui.r.id === 'silence') droneSet(true); setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down.</span>'); return; }
+  release(secs);
 }
-function capCheck() { const r = ui.r; if (r.id === 'hymn') return; if ((performance.now() - ui.h0) / 1000 >= A.holdCap(r)) { humStop(); endHold(A.holdCap(r)); } }
+function release(secs) {
+  const r = ui.r;
+  if (secs == null) secs = (performance.now() - ui.h0) / 1000;
+  humStop();
+  ui.phase = 'done'; setCircle();
+  if (r.id === 'silence') { ui.frozenT = sinceVoice(); droneSet(true); setTimeout(droneStop, 700); }
+  if (r.id === 'static') { ui.staticOn = false; staticStop(); ui.bars.push({ kind: 'static', label: 'THE STATIC', secs: Math.min((performance.now() - ui.v0) / 1000 - r.T, A.holdCap(r) + 1), at: r.T }); updateWorld(); }
+  let res;
+  if (r.id === 'against') {
+    ui.bars.push({ kind: 'ref', label: 'THE LOW ONE, FROM BEFORE', secs: r.T });
+    ui.bars.push({ kind: 'live', label: 'THE TOP ONE, AS IT SOUNDED', secs: r.liveT, at: C.AGAINST.delay, fresh: true });
+    ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.min(secs, A.holdCap(r)), fresh: true });
+    res = A.against(g, secs);
+  } else if (r.id === 'silence') {
+    ui.bars.push({ kind: 'silence', label: 'YOUR SILENCE', secs: Math.min(secs, A.holdCap(r)), fresh: true });
+    res = A.silence(g, secs);
+  } else {
+    if (r.id === 'back') ui.bars.push({ kind: 'ref', label: 'THE LOW ONE, FROM BEFORE', secs: r.T });
+    if (r.id === 'static') ui.bars.push({ kind: 'ref', label: 'THE MIDDLE ONE, FROM BEFORE', secs: r.T });
+    ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.min(secs, A.holdCap(r)), fresh: true });
+    res = A.hold(g, secs);
+  }
+  drawMind(); settle();
+  setTimeout(() => showResult(res), reduce ? 0 : 450);
+}
+function endCount() {
+  const r = ui.r, secs = (performance.now() - ui.s0) / 1000;
+  ui.phase = 'done'; setCircle();
+  ui.bars.push({ kind: 'ref', label: 'THE LOW ONE, FROM THE START', secs: r.T });
+  ui.bars.push({ kind: 'said', label: 'YOU, IN YOUR HEAD', secs: Math.min(secs, A.holdCap(r)), fresh: true });
+  const res = A.last(g, secs);
+  drawMind(); settle();
+  setTimeout(() => showResult(res), reduce ? 0 : 450);
+}
+function finishTumult(pressAt, releaseAt) {
+  const r = ui.r, plan = r.plan;
+  ui.phase = 'done'; ui.frozenT = Math.min((performance.now() - ui.t0) / 1000, plan.end); setCircle(); setAsk();
+  live.splice(0).forEach(n => n.stop());
+  ui.bars.push({ kind: 'crowd', label: 'THE CROWD, AS IT WAS', rows: plan.entries.map(e => ({ id: e.id, at: e.at, dur: e.dur, hidden: e.id !== 'low' })) });
+  if (pressAt != null) ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.max(0.05, releaseAt - pressAt), at: pressAt, fresh: true });
+  const res = A.tumult(g, pressAt, releaseAt);
+  drawMind(); settle();
+  setTimeout(() => showHeard(res), reduce ? 0 : 450);
+}
 circle.addEventListener('pointerdown', down);
 circle.addEventListener('pointerup', up);
 circle.addEventListener('pointercancel', up);
@@ -526,153 +635,98 @@ let spaceDown = false;
 document.addEventListener('keydown', e => { if (e.code !== 'Space' || !$('#round').classList.contains('on')) return; e.preventDefault(); if (spaceDown) return; spaceDown = true; down(null); });
 document.addEventListener('keyup', e => { if (e.code !== 'Space') return; spaceDown = false; if ($('#round').classList.contains('on')) up(null); });
 
-function endHold(secs) {
-  const r = ui.r;
-  if (r.id === 'hymn') {
-    const at = (ui.h0 - ui.hymnStart) / 1000;
-    let line = ui.bars.find(b => b.kind === 'youline');
-    if (!line) { line = { kind: 'youline', label: 'YOU', segs: [], total: 0 }; ui.bars.push(line); }
-    line.segs.push({ at, d: secs }); line.total = at + secs; ui.durs.push(secs);
-    ui.syl++;
-    if (ui.syl < 8) { ui.phase = 'ready'; setCircle(); setAsk(); drawMind(); return; }
-    ui.phase = 'done'; setCircle(); drawMind();
-    const res = A.sing(g, ui.durs.slice(), line.total);
-    showLay(res);
-    return;
-  }
-  ui.phase = 'done'; ui.frozenT = voiceT(); setCircle();
-  ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.min(secs, A.holdCap(r)), fresh: true });
-  drawMind(); settle();
-  const tp = r.id === 'first' ? 0 : (ui.tPress - ui.v0) / 1000;
-  const res = A.hold(g, secs, tp);
-  setTimeout(() => showResult(res), reduce ? 0 : 450);
-}
-function endSilence() {
-  const secs = (performance.now() - ui.s0) / 1000;
-  ui.phase = 'done'; setCircle();
-  ui.bars.push({ kind: 'silence', label: 'YOUR SILENCE', secs: Math.min(secs, A.holdCap(ui.r)), fresh: true });
-  drawMind(); settle();
-  const res = A.silence(g, secs);
-  setTimeout(() => showResult(res), reduce ? 0 : 450);
-}
-
-// the hymn: lay a short against a long
-const LAY_PROMPT = '<p><b>One more thing: touch one of your short syllables and one of your long ones, below.</b></p><p>The short one is laid along the long one, to see how many times it goes in.</p>';
-function layPrompt() {
-  const L = A.CONFIG.PAPER.HYMN_LONG, names = A.CONFIG.PAPER.HYMN_LINE, picked = ui.lay[0];
-  if (picked == null) return LAY_PROMPT;
-  const kind = L[picked] ? 'long' : 'short', other = L[picked] ? 'short' : 'long';
-  const rest = names.map((n, k) => L[k] !== L[picked] ? n.toUpperCase() : null).filter(Boolean);
-  return '<p><b>' + esc(names[picked].toUpperCase()) + ' (' + kind + ') is picked. Now touch one of your ' + other + ' ones: ' + rest.join(', ') + '.</b></p>';
-}
-function showLay(res) {
-  $('#ask').innerHTML = esc(res.lines[0]) + (res.lines.length > 2 ? ' ' + esc(res.lines[1]) : '') + ' <b>One more thing, below: lay a short syllable of yours along a long one.</b>';
-  const q = A.QUOTES.hymnAsk;
+// the tumult, second half: which voices were in it
+function showHeard(res) {
+  ui.phase = 'heard';
+  $('#res').classList.remove('hidden'); $('#next').classList.add('hidden');
+  $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">your hold against the low one</div>';
+  $('#lines').innerHTML = res.lines.map(l => '<p>' + esc(l) + '</p>').join('') + '<p><b>One more thing: which voices were in the crowd? Touch every one you heard, then say so.</b></p>';
+  $('#rquote').innerHTML = '';
   const ch = $('#chips'); ch.innerHTML = '';
-  A.hymnVoice().forEach((x, k) => { const b = document.createElement('button'); b.innerHTML = esc(x.text.toUpperCase()) + '<small>' + (x.long ? 'long' : 'short') + '</small>'; b.dataset.k = k; b.addEventListener('click', () => pickLay(k)); ch.appendChild(b); });
-  ch.classList.remove('hidden');
-  $('#res').classList.remove('hidden'); $('#lines').innerHTML = LAY_PROMPT; $('#rquote').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>';
-  $('#next').classList.add('hidden'); $('#layforme').classList.remove('hidden');
-  $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">your longs against your shorts</div>';
+  ['low', 'middle', 'high', 'top', 'stranger'].forEach(id => { const b = document.createElement('button'); b.innerHTML = (id === 'stranger' ? 'NEW' : esc(SHORT[id])) + '<small>' + (id === 'stranger' ? 'a stranger' : 'one') + '</small>'; b.dataset.id = id; b.addEventListener('click', () => { if (ui.phase !== 'heard') return; b.classList.toggle('sel'); ui.picks = $$('#chips button.sel').map(x => x.dataset.id); }); ch.appendChild(b); });
+  ch.classList.remove('hidden'); $('#heardgo').classList.remove('hidden');
   $('#res').scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
 }
-$('#layforme').addEventListener('click', () => { if (ui.lay.length >= 2 || ui.phase !== 'done') return; audio();
-  const L = A.CONFIG.PAPER.HYMN_LONG, iS = ui.lay.find(j => !L[j]), iL = ui.lay.find(j => L[j]);
-  if (iS == null) pickLay(L.findIndex(x => !x)); if (iL == null) pickLay(L.findIndex(x => x)); });
-function pickLay(k) {
-  if (ui.lay.length >= 2 || ui.phase !== 'done') return;
-  const isLong = A.CONFIG.PAPER.HYMN_LONG[k];
-  const swapped = ui.lay.find(j => A.CONFIG.PAPER.HYMN_LONG[j] === isLong && j !== k);
-  ui.lay = ui.lay.filter(j => A.CONFIG.PAPER.HYMN_LONG[j] !== isLong); ui.lay.push(k);
-  $$('#chips button').forEach(b => b.classList.toggle('sel', ui.lay.includes(+b.dataset.k)));
-  drawMind();
-  if (ui.lay.length < 2) {
-    $('#lines').innerHTML = (swapped != null ? '<p>That is another ' + (isLong ? 'long' : 'short') + ' one, so it takes the place of ' + esc(A.CONFIG.PAPER.HYMN_LINE[swapped].toUpperCase()) + '.</p>' : '') + layPrompt();
-    return;
-  }
-  $('#layforme').classList.add('hidden');
-  const iS = ui.lay.find(j => !A.CONFIG.PAPER.HYMN_LONG[j]), iL = ui.lay.find(j => A.CONFIG.PAPER.HYMN_LONG[j]);
-  $('#lines').innerHTML = '<p>' + esc(A.CONFIG.PAPER.HYMN_LINE[iS].toUpperCase()) + ' is laid along ' + esc(A.CONFIG.PAPER.HYMN_LINE[iL].toUpperCase()) + '. Watch memory.</p>';
-  $$('#chips button').forEach(b => b.disabled = true);
-  const line = ui.bars.find(b => b.kind === 'youline'), sS = line.segs[iS], sL = line.segs[iL], kRatio = sL.d / sS.d;
-  const t0 = performance.now(), D = reduce ? 1 : 1400;
-  ui.layAnim = (sc, y) => {                       // copies of your short one, laid end to end along your long one, drawn large
-    const p = Math.min(1, (performance.now() - t0) / D), n = Math.min(kRatio, 6), shown = n * p;
-    const S = 230 / Math.max(sL.d, sS.d), yy = y + 46, Lw = sL.d * S, Sw = sS.d * S;
-    let s = T(0, yy, 'YOUR ' + A.CONFIG.PAPER.HYMN_LINE[iS].toUpperCase() + ' LAID ALONG YOUR ' + A.CONFIG.PAPER.HYMN_LINE[iL].toUpperCase(), { fill: COL.ink, 'font-size': 10, 'font-weight': 800 });
-    s += svg('rect', { x: 0, y: yy + 6, width: Lw, height: 26, fill: COL.blue });
-    for (let j = 0; j < Math.ceil(shown); j++) {
-      const w = Sw * Math.min(1, shown - j), x = j * Sw;
-      if (x >= Lw + Sw) break;
-      s += svg('rect', { x: x + 1, y: yy + 11, width: Math.max(0, w - 2), height: 16, fill: COL.yellow, stroke: COL.ink, 'stroke-width': 1.5 });
-      if (w > 14 && Math.min(1, shown - j) === 1) s += T(x + Sw / 2, yy + 23, String(j + 1), { 'text-anchor': 'middle', fill: COL.ink, 'font-size': 10, 'font-weight': 800, 'letter-spacing': '0' });
-    }
-    return s;
-  };
-  const anim = () => { drawMind(); if (performance.now() - t0 < D) requestAnimationFrame(anim); else { const res = A.lay(g, iS, iL); setTimeout(() => showResult(res), reduce ? 0 : 250); } };
-  requestAnimationFrame(anim);
-}
+$('#heardgo').addEventListener('click', () => {
+  if (!ui || ui.phase !== 'heard') return; audio();
+  const res = A.heard(g, ui.picks);
+  $$('#chips button').forEach(b => { b.disabled = true; const id = b.dataset.id; b.classList.toggle('right', res.right.includes(id)); b.classList.toggle('wrong', res.wrong.includes(id)); if (ui.r.plan.present.includes(id)) b.classList.add('sel'); });
+  $('#heardgo').classList.add('hidden');
+  const crowd = ui.bars.find(b => b.kind === 'crowd'); if (crowd) crowd.rows.forEach(row => row.hidden = false); drawMind();
+  $('#lines').innerHTML = res.lines.map(l => '<p>' + esc(l) + '</p>').join('') + res.heardLines.map(l => '<p>' + esc(l) + '</p>').join('') + '<p class="small">The chips show who was there; a red one is a miss, either way.</p>';
+  $('#rquote').innerHTML = esc(res.quote.text) + '<span class="cite">' + esc(res.quote.cite) + '</span>';
+  ui.phase = 'result'; setCircle(); setAsk();
+  $('#next').classList.remove('hidden'); $('#next').textContent = 'Next';
+});
 
 function showResult(res) {
   ui.phase = 'result'; setCircle();
   $('#res').classList.remove('hidden');
   const r = ui.r;
-  let big = esc(res.big);
-  const of = r.id === 'hymn' ? 'your longs against your shorts' : r.id === 'first' ? 'yours against the first voice' : r.id === 'silence' ? 'your silence against the voice' : 'yours against the voice';
-  $('#big').innerHTML = big + '<div class="cap" style="color:var(--blue);margin-top:4px">' + of + '</div>';
+  const of = r.id === 'silence' ? 'your silence against the high one' : r.id === 'against' ? 'yours against the low one' : r.id === 'last' ? 'in your head, against the low one' : 'yours against ' + A.nameOf(g, r.voice);
+  $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">' + of + '</div>';
   $('#lines').innerHTML = res.lines.map(l => '<p>' + esc(l) + '</p>').join('');
   $('#rquote').innerHTML = esc(res.quote.text) + '<span class="cite">' + esc(res.quote.cite) + '</span>';
   $('#next').classList.remove('hidden');
-  $('#next').textContent = g.i < 6 ? 'Next round' : 'The last page';
-  $('#ask').innerHTML = DONE[r.id];
+  $('#next').textContent = g.i < g.stations.length - 1 ? 'Next' : 'The last page';
+  setAsk();
   const m = $('#mind'), k = m.clientWidth / m.viewBox.baseVal.width, top = m.getBoundingClientRect().top + window.scrollY + (Y.mem - 26) * k;
   window.scrollTo({ top: Math.max(0, top - 8), behavior: reduce ? 'auto' : 'smooth' });
 }
-$('#next').addEventListener('click', () => { A.next(g); ui.layAnim = null; if (g.done) showEnd(); else enterRound(); });
+$('#next').addEventListener('click', () => { A.next(g); if (g.done) showEnd(); else enterStation(); });
 
 // ---------------- the last page
 function showEnd() {
   if (ui && ui.raf) cancelAnimationFrame(ui.raf);
+  stopAll();
   const v = A.verdict(g);
   $('#evening').textContent = 'The last page · evening ' + v.seed;
   $('#headline').textContent = v.headline;
   $('#did').innerHTML = v.did.map(l => '<p>' + esc(l) + '</p>').join('');
-  $('#says').textContent = v.says.replace(/^Augustine: (.)/, (m, c) => c.toUpperCase());
+  $('#says').textContent = v.says;
   $('#mq').innerHTML = esc(v.meansQuote.text) + '<span class="cite">' + esc(v.meansQuote.cite) + '</span>';
   $('#means').innerHTML = esc(v.means).replace('distentio', '<i>distentio</i>');
-  // the seven pairs
-  let s = '', y = 0;
-  v.pairs.forEach((p, k) => {
-    s += T(0, y + 10, (k + 1) + '  ' + p.title.toUpperCase(), { fill: COL.ink, 'font-weight': 800, 'font-size': 10 });
-    s += T(348, y + 10, p.big.toUpperCase(), { fill: COL.blue, 'font-weight': 800, 'font-size': 10, 'text-anchor': 'end' });
-    s += svg('rect', { x: 0, y: y + 15, width: Math.min(344, p.target * PXS), height: 10, fill: COL.red });
-    s += p.id === 'silence' ? svg('rect', { x: 0.75, y: y + 28.75, width: Math.min(344, p.made * PXS) - 1.5, height: 8.5, fill: 'none', stroke: COL.ink, 'stroke-width': 1.5 })
-      : svg('rect', { x: 0, y: y + 28, width: Math.min(344, p.made * PXS), height: 10, fill: COL.blue });
-    if (p.made * PXS > 344) s += svg('polygon', { points: '340,' + (y + 26) + ' 348,' + (y + 33) + ' 340,' + (y + 40), fill: COL.ink });
-    y += 48;
-  });
-  s += T(0, y + 8, 'RED: WHAT SOUNDED.  BLUE: YOURS.  OUTLINE: YOUR SILENCE.', { 'font-size': 9 });
-  $('#pairs').setAttribute('viewBox', '0 0 348 ' + (y + 14)); $('#pairs').innerHTML = s;
+  drawDrift(v);
   drawPsalm();
   $('#psalmtext').textContent = v.psalm;
-  drawPresent();
   $('#pq').innerHTML = esc(v.psalmQuote.text) + '<span class="cite">' + esc(v.psalmQuote.cite) + '</span>';
+  drawPresent();
+  $('#presenttext').textContent = v.present;
+  $('#prq').innerHTML = esc(v.presentQuote.text) + '<span class="cite">' + esc(v.presentQuote.cite) + '</span>';
+  $('#torn').textContent = v.torn;
+  $('#tq').innerHTML = esc(v.tornQuote.text) + '<span class="cite">' + esc(v.tornQuote.cite) + '</span>';
   $('#before').textContent = v.before;
   $('#bq').innerHTML = esc(v.beforeQuote.text) + '<span class="cite">' + esc(v.beforeQuote.cite) + '</span>';
   show('end');
 }
+function drawDrift(v) {                          // the low one in red, then every time you held it, in blue, in the order of the evening
+  const sc = Math.min(PXS, 300 / Math.max.apply(null, [v.low].concat(v.drift.map(d => (d.made || 0) + (d.late || 0) ))));
+  let s = '', y = 0;
+  s += T(0, y + 9, 'THE LOW ONE, AS IT SOUNDED', { fill: COL.red, 'font-weight': 800 });
+  s += svg('rect', { x: 0, y: y + 13, width: v.low * sc, height: 18, fill: COL.red }); y += 44;
+  v.drift.forEach(d => {
+    s += T(0, y + 9, d.label, { fill: COL.blue, 'font-weight': 800 });
+    const x0 = (d.late || 0) * sc;
+    s += svg('line', { x1: v.low * sc, x2: v.low * sc, y1: y + 10, y2: y + 33, stroke: COL.red, 'stroke-width': 2, 'stroke-dasharray': '3 3' });
+    if (d.label.indexOf('END') >= 0) s += svg('rect', { x: 1.5, y: y + 14.5, width: Math.max(0, d.made * sc - 3), height: 15, fill: 'none', stroke: COL.blue, 'stroke-width': 3, 'stroke-dasharray': '7 5' });
+    else s += svg('rect', { x: x0, y: y + 13, width: d.made * sc, height: 18, fill: COL.blue });
+    if (d.live) s += svg('rect', { x: C.AGAINST.delay * sc, y: y + 33, width: d.live * sc, height: 4, fill: COL.red, opacity: 0.6 });
+    s += T(344, y + 9, d.off != null ? (Math.abs(d.off) <= 0.15 ? 'ON THE MOMENT' : A.secondsWords(d.off).toUpperCase() + (d.off < 0 ? ' EARLY' : ' LATE')) : A.amount(d.ratio).big.toUpperCase(), { 'text-anchor': 'end', fill: COL.ink, 'font-size': 9 });
+    y += d.live ? 48 : 42;
+  });
+  $('#drift').setAttribute('viewBox', '0 0 348 ' + (y + 4)); $('#drift').innerHTML = s;
+  $('#drifttext').textContent = 'The dotted line is where the low one ended. A bar in the tumult starts where you pressed. Plain holds you came ' + v.med + ' of the mark.';
+}
 function drawPsalm() {                           // the line inside the evening inside a life inside the ages (ch. XXVIII)
   const rows = [
-    { label: 'A LINE OF THE HYMN', done: 1, parts: A.hymnVoice().map(x => x.dur) },
-    { label: 'THIS EVENING', done: 1, parts: [1, 1, 1, 1, 1, 1, 1] },
+    { label: 'THE LOW ONE', done: 1, parts: [1] },
+    { label: 'THIS EVENING', done: 1, parts: [1, 1, 1, 1, 1, 1, 1, 1] },
     { label: 'A LIFE', done: 0.42 },
     { label: 'ALL THE AGES OF MEN', done: 0.68 },
   ];
   let s = '';
   const W = 330, ys = rows.map((r, k) => 6 + k * 60), y = 6 + rows.length * 60;
-  // the zoom funnels, drawn first so the rows sit on top: the line is round six of the evening; the evening a sliver of a
-  // life, just before its point; the life a sliver of the ages, just before theirs
-  const piece = [[5 * W / 7, 6 * W / 7 - 2], [rows[2].done * W - 14, rows[2].done * W], [rows[3].done * W - 14, rows[3].done * W]];
+  const piece = [[0, W / 8 - 2], [rows[2].done * W - 14, rows[2].done * W], [rows[3].done * W - 14, rows[3].done * W]];
   for (let k = 0; k < rows.length - 1; k++) {
     const [a, b] = piece[k];
     s += svg('g', { class: reduce ? '' : 'fade', style: 'animation-delay:' + ((k + 1) * 0.5) + 's' },
@@ -690,13 +744,11 @@ function drawPsalm() {                           // the line inside the evening 
   });
   $('#psalm').setAttribute('viewBox', '0 0 348 ' + (y - 14)); $('#psalm').innerHTML = s;
 }
-
 function drawPresent() {                         // a hundred years taken apart (ch. XV): each row is the "now" part of the one above
-  const rows = g.prologue.map(st => ({ label: st.label.toUpperCase(), parts: st.parts, now: st.now }));
+  const rows = g.present.map(st => ({ label: st.label.toUpperCase(), parts: st.parts, now: st.now }));
   rows.push({ label: 'NOW', point: true });
   const W = 330, step = 38, y0 = 6, H = 16;
   let s = '';
-  // the funnels first, so the rows sit on top: the now part of each row opens onto the whole of the next
   for (let k = 0; k < rows.length - 1; k++) {
     const r = rows[k], y = y0 + k * step, a = r.now * W / r.parts, b = (r.now + 1) * W / r.parts;
     s += svg('g', { class: reduce ? '' : 'fade', style: 'animation-delay:' + ((k + 1) * 0.35) + 's' },
@@ -721,8 +773,6 @@ function drawPresent() {                         // a hundred years taken apart 
   });
   const y = y0 + rows.length * step + 10;
   $('#present').setAttribute('viewBox', '0 0 348 ' + y); $('#present').innerHTML = s;
-  $('#presenttext').textContent = 'A hundred years can’t all be present: only one year of it is now, the rest is past or still to come. Nor can that year: only one month. Nor the month, nor the day, nor the hour. Look closer and closer, and nothing is left but a point. The present has no length. That point was the black circle you pressed all evening.';
-  const q = A.QUOTES.present; $('#prq').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>';
 }
 
 // expose for the scripted session
