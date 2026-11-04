@@ -64,12 +64,7 @@ const out = []; const say = s => { out.push(s); console.log(s); };
 
   await page.goto('file://' + path.join(__dirname, 'augustines-clock.html'));
   await page.waitForTimeout(300); await shot('start'); await noScroll('start');
-  await page.click('#begin'); await page.waitForTimeout(300); await shot('prologue-a-hundred-years');
-  say('PROLOGUE: ' + await page.$eval('#pline', e => e.textContent));
-  await page.click('#closer'); await page.waitForTimeout(900); await page.click('#closer'); await page.waitForTimeout(900); await shot('prologue-a-month');
-  for (let k = 0; k < 3; k++) { await page.click('#closer'); await page.waitForTimeout(900); }
-  await shot('prologue-now', true); say('  ' + await page.$eval('#pline', e => e.textContent));
-  await page.click('#tofirst'); await page.waitForTimeout(300);
+  await page.click('#begin'); await page.waitForTimeout(300);
   const seedA = (await st()).seed;
   await evening('EVENING A (' + seedA + ', first evening): a first-timer; counts the kicked wheel; How to play opened in round 2',
     { voice: 0.86, wheel: 1.04, counts: true, sun: 1.12, silence: 1.08, first: 0.9, hymn: [0.4, 0.62, 0.42, 0.7, 0.4, 0.66, 0.44, 0.74] }, { shots: 'a', helpAt: 'wheel' });
@@ -77,8 +72,6 @@ const out = []; const say = s => { out.push(s); console.log(s); };
   await page.click('#end [data-about]'); await page.waitForTimeout(300); await shot('about', true); await page.click('#aboutback'); await page.waitForTimeout(200);
 
   await page.click('#again'); await page.waitForTimeout(300);
-  for (let k = 0; k < 5; k++) { await page.click('#closer'); await page.waitForTimeout(800); }
-  await page.click('#tofirst'); await page.waitForTimeout(300);
   const seedB = (await st()).seed;
   await evening('EVENING B (' + seedB + ', another evening): held from memory throughout',
     { voice: 1.02, wheel: 0.97, kick: 1.05, sun: 0.95, silence: 1.0, first: 1.04, hymn: [0.4, 0.8, 0.42, 0.82, 0.4, 0.78, 0.44, 0.84] }, { shots: 'b' });
@@ -86,8 +79,6 @@ const out = []; const say = s => { out.push(s); console.log(s); };
 
   await page.goto('file://' + path.join(__dirname, 'augustines-clock.html#e=' + seedB)); await page.reload(); await page.waitForTimeout(300);
   await page.click('#begin'); await page.waitForTimeout(300);
-  for (let k = 0; k < 5; k++) { await page.click('#closer'); await page.waitForTimeout(800); }
-  await page.click('#tofirst'); await page.waitForTimeout(300);
   const sC = await st(); say('EVENING C: evening ' + sC.seed + ' again by its number (same as B: ' + (sC.seed === seedB) + '); counts the wheel, waits for the sun');
   const same = await page.evaluate(() => JSON.stringify(window.__augustine.g.rounds.map(r => r.T)));
   say('  same voices as B: ' + same);

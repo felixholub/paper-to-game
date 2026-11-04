@@ -79,16 +79,12 @@ footer.sig a{color:var(--mute);text-decoration:none}
 #res .big{font-weight:800;font-size:40px;line-height:.95;text-transform:uppercase;color:var(--blue);letter-spacing:-.01em;margin:4px 0 6px}
 #res .lines p{margin:.35em 0}
 #res .lines p:first-child{font-weight:600}
-/* prologue */
-#pbar{display:block;width:100%;height:auto;margin:10px 0 0;cursor:pointer}
-#pline{font-size:17px;min-height:70px;margin:8px 0 0}
-#legend{display:block;width:100%;height:auto;margin:6px 0 0}
 /* end */
 #end .headline{font-weight:800;font-size:27px;line-height:1.08;margin:8px 0 10px}
 #end .did p{margin:.4em 0}
 #end .kicker{font-weight:800;font-size:19px;line-height:1.15;color:var(--blue);margin:0 0 6px}
 #end .lab{margin:18px 0 2px;color:var(--ink)}
-#pairs,#psalm{display:block;width:100%;height:auto;margin:6px 0}
+#pairs,#psalm,#present{display:block;width:100%;height:auto;margin:6px 0}
 .help p,.about p{font-size:15px}
 .help b{font-weight:800}
 .fade{animation:fade .5s both}
@@ -114,24 +110,10 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <div class="quote">What then is time? If no one asks me, I know: if I wish to explain it to one that asketh, I know not.<span class="cite">Augustine, Confessions XI</span></div>
   <p class="lead">You will hear a voice. When it stops, you press and hold a black circle for as long as it sounded, then let go. A potter's wheel will turn; the sun will climb. There is no clock.</p>
   <p class="aim">Measure how long things last, with no clock but your mind.</p>
-  <button class="btn" id="begin">Find the present</button>
+  <button class="btn" id="begin">Hear the first voice</button>
   <p class="small">Sound helps: the voice sings. It also works on a silent phone, because the circle turns red while the voice sounds.</p>
   <div class="links"><button class="btn line" data-help>How to play</button><button class="btn line" data-about>About</button></div>
   <footer class="sig"><a href="https://steffenhuck.github.io/">steffen huck</a></footer>
-</section>
-
-<!-- PROLOGUE: find the present (ch. XV) -->
-<section id="prologue" class="screen">
-  <div class="top"><div class="aimline">Measure how long things last, with no clock but your mind.</div></div>
-  <button class="q" data-help aria-label="How to play">?</button>
-  <h2>Where is the present?</h2>
-  <svg id="pbar" viewBox="0 0 348 128" role="button" aria-label="Look closer at now"></svg>
-  <p id="pline"></p>
-  <div id="pquote" class="quote hidden"></div>
-  <svg id="legend" class="hidden" viewBox="0 0 348 70" aria-hidden="true"></svg>
-  <p id="prule" class="hidden"></p>
-  <button class="btn" id="closer">Look closer at now</button>
-  <button class="btn hidden" id="tofirst">The first round</button>
 </section>
 
 <!-- ROUND: one layout for all seven -->
@@ -178,6 +160,10 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <svg id="psalm" viewBox="0 0 348 250" aria-hidden="true"></svg>
   <p id="psalmtext"></p>
   <div class="quote" id="pq"></div>
+  <h3>Where is the present?</h3>
+  <svg id="present" viewBox="0 0 348 250" aria-hidden="true"></svg>
+  <p id="presenttext"></p>
+  <div class="quote" id="prq"></div>
   <h3>And before?</h3>
   <p id="before"></p>
   <div class="quote" id="bq"></div>
@@ -190,7 +176,6 @@ footer.sig a{color:var(--mute);text-decoration:none}
 <section id="help" class="screen help">
   <div class="top"><div class="cap">How to play</div></div>
   <p class="aim">Measure how long things last, with no clock but your mind.</p>
-  <p><b>First, find the present.</b> A bar of a hundred years: touch to look closer at the part that is now, five times, until only a point is left.</p>
   <p><b>The circle is now.</b> In the middle of the screen is a black circle on a black line. It is the present moment. Above the line is what is still to come, drawn dashed. Below the line is memory: what is over, drawn solid.</p>
   <p><b>Nothing is drawn while it lasts.</b> While a voice sounds, the circle turns red, and that is all. When the voice stops, a red bar drops into memory. While you hold, the circle turns blue. When you let go, a blue bar drops in under the red one, so you can see which was longer.</p>
   <p><b>A round.</b> Touch the circle to hear the voice. When it stops, press and hold the circle as long as the voice lasted, and let go. The game says how close you came: the same, nine tenths, half, double.</p>
@@ -279,81 +264,8 @@ function startEvening(seed, first) {
   $('#aboutseed').textContent = 'This is evening number ' + g.seed + '. The same number deals the same voices and the same wheel again: add #e=' + g.seed + ' to the address.';
   try { history.replaceState(null, '', '#e=' + g.seed); } catch (e) { }
 }
-$('#begin').addEventListener('click', () => { audio(); if (!g) { const h = hashSeed(); startEvening(h || A.newSeed(), !h); } prologueStart(); });
-$('#again').addEventListener('click', () => { audio(); startEvening(A.newSeed(), false); prologueStart(); });
-
-// ---------------- prologue: a hundred years taken apart (ch. XV)
-let pk = 0, pzoom = false;
-const PLINES = [
-  'Is a hundred years present? Only one year of it is now. The rest is past, or still to come.',
-  'Is that year present? Only one month of it is now. The rest is past, or to come.',
-  'Is that month present? Only one day.',
-  'Is that day present? Only one hour.',
-  'Is that hour present? It passes in flying moments, some gone, some to come.',
-];
-function prologueStart() {
-  pk = 0; pzoom = false; show('prologue');
-  $('#pquote').classList.add('hidden'); $('#legend').classList.add('hidden'); $('#prule').classList.add('hidden');
-  $('#closer').classList.remove('hidden'); $('#tofirst').classList.add('hidden');
-  drawBar(pk, 0);
-}
-function drawBar(k, zoom) {                      // zoom: 0 = whole bar; 0..1 = the now part growing to fill the bar
-  const W = 348, y = 58, h = 40;
-  let s = '';
-  if (k >= g.prologue.length) {                  // the instant: past and to come meet at a point
-    s += T(0, 14, 'NOW', { fill: COL.ink, 'font-size': 13, 'font-weight': 800 });
-    s += svg('rect', { x: 0, y, width: 172, height: h, fill: COL.ink });
-    s += svg('rect', { x: 176, y: y + 1.5, width: 170.5, height: h - 3, fill: 'none', stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '8 6' });
-    s += svg('circle', { cx: 174, cy: y + h / 2, r: 11, fill: COL.ink, stroke: COL.plaster, 'stroke-width': 3 });
-    s += svg('polygon', { points: '174,' + (y - 6) + ' 167,' + (y - 18) + ' 181,' + (y - 18), fill: COL.ink });
-    s += T(0, y + h + 22, '← PAST'); s += T(348, y + h + 22, 'TO COME →', { 'text-anchor': 'end' });
-    $('#pbar').innerHTML = s; return;
-  }
-  const st = g.prologue[k], n = st.parts, i = st.now;
-  // the now part [i, i+1] of n grows to fill [0, W] as zoom goes 0 → 1
-  const a0 = i * W / n, a1 = (i + 1) * W / n, L = a0 * (1 - zoom), R = a1 + (W - a1) * zoom, scale = (R - L) / (a1 - a0);
-  const X = u => L + (u * W / n - a0) * scale;
-  s += T(0, 14, st.label.toUpperCase(), { fill: COL.ink, 'font-size': 13, 'font-weight': 800 });
-  const pastR = Math.max(0, Math.min(W, X(i))), futL = Math.max(0, Math.min(W, X(i + 1)));
-  if (pastR > 0) s += svg('rect', { x: 0, y, width: pastR, height: h, fill: COL.ink });
-  if (futL < W) s += svg('rect', { x: futL + 1.5, y: y + 1.5, width: Math.max(0, W - futL - 3), height: h - 3, fill: 'none', stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '8 6' });
-  // the now part: white, with a heavy outline, and a pointer
-  s += svg('rect', { x: X(i), y: y - 4, width: Math.max(3, X(i + 1) - X(i)), height: h + 8, fill: '#fff', stroke: COL.ink, 'stroke-width': 3 });
-  const mid = (X(i) + X(i + 1)) / 2;
-  s += svg('polygon', { points: mid + ',' + (y - 8) + ' ' + (mid - 7) + ',' + (y - 20) + ' ' + (mid + 7) + ',' + (y - 20), fill: COL.ink });
-  if (zoom === 0) {
-    const tag = 'NOW: ONE ' + st.part.toUpperCase(), tx = Math.min(Math.max(mid, 70), 278);
-    s += T(tx, y - 24, tag, { 'text-anchor': 'middle', fill: COL.ink, 'font-weight': 800 });
-    // the tick marks of the parts, where they are wide enough to see
-    if (W / n >= 8) for (let u = 1; u < n; u++) { if (u === i || u === i + 1) continue; const x = X(u); s += svg('line', { x1: x, x2: x, y1: y + (u < i ? 0 : 1.5), y2: y + h - (u < i ? 0 : 1.5), stroke: u < i ? COL.plaster : COL.ink, 'stroke-width': u < i ? 1 : 1.2, opacity: 0.55 }); }
-    s += T(0, y + h + 22, '← PAST'); s += T(348, y + h + 22, 'TO COME →', { 'text-anchor': 'end' });
-  }
-  $('#pbar').innerHTML = s;
-  $('#pline').textContent = PLINES[k];
-}
-function closer() {
-  if (pzoom || pk >= g.prologue.length) return;
-  pzoom = true; const t0 = performance.now(), D = reduce ? 1 : 700;
-  const step = now => { const z = Math.min(1, (now - t0) / D); drawBar(pk, z * z * (3 - 2 * z));
-    if (z < 1) requestAnimationFrame(step); else { pk++; pzoom = false; if (pk < g.prologue.length) drawBar(pk, 0); else finishPrologue(); } };
-  requestAnimationFrame(step);
-}
-function finishPrologue() {
-  drawBar(pk, 0);
-  $('#pline').textContent = 'Now nothing is left but a point. The present has no length: if it had any, part of it would already be past and part still to come.';
-  const q = A.QUOTES.present; $('#pquote').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>'; $('#pquote').classList.remove('hidden');
-  let s = '';
-  s += svg('rect', { x: 0, y: 8, width: 60, height: 20, fill: 'none', stroke: COL.ink, 'stroke-width': 2.5, 'stroke-dasharray': '6 5' }) + T(70, 23, 'TO COME: DASHED', { fill: COL.ink });
-  s += svg('circle', { cx: 210, cy: 18, r: 9, fill: COL.ink }) + T(226, 23, 'NOW: A POINT', { fill: COL.ink });
-  s += svg('rect', { x: 0, y: 42, width: 60, height: 20, fill: COL.ink }) + T(70, 57, 'OVER: SOLID, IN MEMORY', { fill: COL.ink });
-  $('#legend').innerHTML = s; $('#legend').classList.remove('hidden');
-  $('#prule').innerHTML = 'In this game <b>nothing is drawn while it lasts</b>. A sound, or your hold, shows only as a colour on the point. Once it is over, it drops below the line into memory, as a bar.';
-  $('#prule').classList.remove('hidden');
-  $('#closer').classList.add('hidden'); $('#tofirst').classList.remove('hidden');
-}
-$('#closer').addEventListener('click', closer);
-$('#pbar').addEventListener('click', closer);
-$('#tofirst').addEventListener('click', () => { audio(); enterRound(); });
+$('#begin').addEventListener('click', () => { audio(); if (!g) { const h = hashSeed(); startEvening(h || A.newSeed(), !h); } enterRound(); });
+$('#again').addEventListener('click', () => { audio(); startEvening(A.newSeed(), false); enterRound(); });
 
 // ---------------- a round
 const ASK = {
@@ -723,6 +635,7 @@ function showEnd() {
   $('#pairs').setAttribute('viewBox', '0 0 348 ' + (y + 14)); $('#pairs').innerHTML = s;
   drawPsalm();
   $('#psalmtext').textContent = v.psalm;
+  drawPresent();
   $('#pq').innerHTML = esc(v.psalmQuote.text) + '<span class="cite">' + esc(v.psalmQuote.cite) + '</span>';
   $('#before').textContent = v.before;
   $('#bq').innerHTML = esc(v.beforeQuote.text) + '<span class="cite">' + esc(v.beforeQuote.cite) + '</span>';
@@ -756,6 +669,40 @@ function drawPsalm() {                           // the line inside the evening 
       return q; })());
   });
   $('#psalm').setAttribute('viewBox', '0 0 348 ' + (y - 14)); $('#psalm').innerHTML = s;
+}
+
+function drawPresent() {                         // a hundred years taken apart (ch. XV): each row is the "now" part of the one above
+  const rows = g.prologue.map(st => ({ label: st.label.toUpperCase(), parts: st.parts, now: st.now }));
+  rows.push({ label: 'NOW', point: true });
+  const W = 330, step = 38, y0 = 6, H = 16;
+  let s = '';
+  // the funnels first, so the rows sit on top: the now part of each row opens onto the whole of the next
+  for (let k = 0; k < rows.length - 1; k++) {
+    const r = rows[k], y = y0 + k * step, a = r.now * W / r.parts, b = (r.now + 1) * W / r.parts;
+    s += svg('g', { class: reduce ? '' : 'fade', style: 'animation-delay:' + ((k + 1) * 0.35) + 's' },
+      svg('polygon', { points: a + ',' + (y + 12 + H) + ' ' + b + ',' + (y + 12 + H) + ' ' + W + ',' + (y + step + 12) + ' 0,' + (y + step + 12), fill: COL.yellow, opacity: 0.55 }));
+  }
+  rows.forEach((r, k) => {
+    const y = y0 + k * step, by = y + 12;
+    s += svg('g', { class: reduce ? '' : 'fade', style: 'animation-delay:' + (k * 0.35) + 's' }, (() => {
+      let q = T(0, y + 8, r.label, { fill: COL.ink, 'font-weight': 800, 'font-size': 10 });
+      if (r.point) {
+        q += svg('rect', { x: 0, y: by, width: W / 2, height: H, fill: COL.ink });
+        q += svg('rect', { x: W / 2 + 1.5, y: by + 1.5, width: W / 2 - 3, height: H - 3, fill: COL.plaster, stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '7 5' });
+        q += svg('circle', { cx: W / 2, cy: by + H / 2, r: 8, fill: COL.ink, stroke: COL.plaster, 'stroke-width': 2.5 });
+        q += T(0, by + H + 14, '← PAST', { 'font-size': 9 }); q += T(W, by + H + 14, 'TO COME →', { 'text-anchor': 'end', 'font-size': 9 });
+        return q;
+      }
+      const a = r.now * W / r.parts, b = (r.now + 1) * W / r.parts;
+      q += svg('rect', { x: 0, y: by, width: a, height: H, fill: COL.ink });
+      q += svg('rect', { x: b + 1.5, y: by + 1.5, width: W - b - 3, height: H - 3, fill: COL.plaster, stroke: COL.ink, 'stroke-width': 3, 'stroke-dasharray': '7 5' });
+      q += svg('rect', { x: a, y: by - 3, width: Math.max(3, b - a), height: H + 6, fill: '#fff', stroke: COL.ink, 'stroke-width': 2.5 });
+      return q; })());
+  });
+  const y = y0 + rows.length * step + 10;
+  $('#present').setAttribute('viewBox', '0 0 348 ' + y); $('#present').innerHTML = s;
+  $('#presenttext').textContent = 'A hundred years can’t all be present: only one year of it is now, the rest is past or still to come. Nor can that year: only one month. Nor the month, nor the day, nor the hour. Look closer and closer, and nothing is left but a point. The present has no length. That point was the black circle you pressed all evening.';
+  const q = A.QUOTES.present; $('#prq').innerHTML = esc(q.text) + '<span class="cite">' + esc(q.cite) + '</span>';
 }
 
 // expose for the scripted session
