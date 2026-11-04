@@ -12,17 +12,17 @@ const say = s => console.log(s);
   const pick = async t => { const j = await page.evaluate(t => window.__goodall.g.grass.findIndex(x => x.type === t), t); if (j < 0) { say(`  (no ${t} in the clump)`); return false; }
     await page.dispatchEvent(`[data-pick="${j}"] path`, 'pointerdown', { bubbles: true, pointerId: 1 }); await page.waitForTimeout(250); say(`  take ${t}: ${await text('#typed')}`); return true; };
   const act = async a => { const el = await page.$(`[data-act="${a}"] rect`); if (!el) { say(`  (no ${a} tag)`); return false; } await page.dispatchEvent(`[data-act="${a}"] rect`, 'pointerdown', { bubbles: true, pointerId: 1 }); await page.waitForTimeout(250); say(`  ${a}: ${await text('#typed')}`); return true; };
-  const geom = async () => { const b = await page.$eval('#sec', e => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; }); return { px: 21 * b.w / 348, x: b.x + b.w * 0.5, y: b.y + b.h * 0.3 }; };
-  async function dip(inches, pause, pullMs, opts) { // a real-time drag on the plate: in at ~6 in/s, a pause, out at pullMs per thirtieth
-    opts = opts || {}; const G = await geom(); const n = 30;
+  const geom = async () => { const b = await page.$eval('#sec', e => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; }); return { px: 21 * b.w / 348, x: b.x + b.w * 0.55, y: b.y + b.h * 0.62 }; };
+  async function dip(inches, pause, pullMs, opts) { // one gesture: press (the stem goes in by itself), wait, slide up at pullMs per thirtieth; at the hollow, press and let go
+    opts = opts || {}; const G = await geom(); const n = 30; const hollow = (await state()).phase === 'hollow';
     await page.mouse.move(G.x, G.y); await page.mouse.down();
-    for (let i = 1; i <= n; i++) { await page.mouse.move(G.x, G.y + inches * G.px * i / n); await page.waitForTimeout(16); }
-    if (opts.release) { await page.mouse.up(); await page.waitForTimeout(pause * 1000); if (opts.mid) await opts.mid(); await page.mouse.move(G.x, G.y + inches * G.px); await page.mouse.down(); }
+    await page.waitForTimeout(Math.max(400, inches / 6 * 1000 + 200));
+    if (opts.release) { await page.mouse.up(); await page.waitForTimeout(pause * 1000); if (opts.mid) await opts.mid(); await page.mouse.move(G.x, G.y); await page.mouse.down(); await page.waitForTimeout(100); }
     else await page.waitForTimeout(pause * 1000);
     if (opts.shotIn) await shot(opts.shotIn);
-    for (let i = n - 1; i >= -2; i--) { await page.mouse.move(G.x, G.y + inches * G.px * i / n); await page.waitForTimeout(pullMs); }
+    if (!hollow) for (let i = 1; i <= n; i++) { await page.mouse.move(G.x, G.y - (inches * G.px + 12) * i / n); await page.waitForTimeout(pullMs); }
     await page.mouse.up(); await page.waitForTimeout(2400);
-    const s = await state(); say(`  dip (push ${inches} in, pause ${pause} s, pull ${pullMs} ms/step): ${await text('#typed')}  [red] ${await text('#red')}  → suns ${s.suns}, termites ${s.eaten}${s.phase === 'hollow' || s.phase === 'end' ? ', sips ' + s.sips : ''}`);
+    const s = await state(); say(`  dip (${hollow ? 'press and let go' : 'press, pause ' + pause + ' s, slide up at ' + pullMs + ' ms/step'}): ${await text('#typed')}  [red] ${await text('#red')}  → suns ${s.suns}, termites ${s.eaten}${s.phase === 'hollow' || s.phase === 'end' ? ', sips ' + s.sips : ''}`);
     return s;
   }
   const hold = async k => { await page.click(`#hold [data-hold="${k}"]`); await page.waitForTimeout(150); say(`  hold ${k}`); };

@@ -190,12 +190,12 @@ footer.sig a{color:var(--g2);text-decoration:none}
   <h3>Stems</h3>
   <p><b>Touch a stem in the grass to take it.</b> It comes into your hand, drawn as itself: a grass blade is wide and floppy, a grass stem thin and stiff with a seed head, a twig has leaves, a stick is thick. The line under the drawing tells you how long, how thick and how stiff it is. Whatever was in your hand before goes on the heap at the foot of the mound. The grass grows back, so you can always take another.</p>
   <h3>Fishing</h3>
-  <p><b>Press on the drawing and drag down</b> to push your stem into the hole. <b>Let go</b> to leave it there: termites bite on to whatever comes into their passage, and they need a moment. <b>Drag up</b> to pull it out: if it moves faster than they can hold on, they fall off. Whatever is on the stem when it comes out, you eat; there is no button for it. The stem goes in until something stops it: too thick for the hole, leaves catching on the rim, a floppy stem folding at a bend, or its own length. When that happens a pencil note on the drawing says what stopped it, and where. If a stem is in the hole and you touch another in the grass, the game draws the first one out for you, slowly, and gives you the other.</p>
+  <p><b>Press on the mound</b> and your stem goes into the hole by itself, as far as it will go, and waits there. Termites bite on to whatever comes into their passage, and they need a moment. <b>Slide your finger up</b> to draw the stem out: it comes out at the speed of your finger, and if that is faster than the termites can hold on, they fall off. If you lift your finger instead, the stem stays in the hole until you press and slide again. Whatever is on the stem when it comes out, you eat; there is no button for it. The stem goes in until something stops it: too thick for the hole, leaves catching on the rim, a floppy stem folding at a bend, or its own length. When that happens a pencil note on the drawing says what stopped it, and where. If a stem is in the hole and you touch another in the grass, the game draws the first one out for you, slowly, and gives you the other.</p>
   <p>Each dip takes one sun from the afternoon; when the six suns are gone, your mother moves off. A stem's end bends after a few dips: a note by your hand says <b>touch to bite it off</b>, and biting makes it an inch shorter and straight again. A leafy twig has a note that says <b>touch to strip them</b>. When your mother throws a bent stem down, it lies by her hole: touch it to take it.</p>
   <p>After each dip the game says what happened (how far in, whether there was a pause, how fast it came out, how many termites). Then, in red, a note from Jane Goodall: which age of young chimpanzee fishes the way you just did, and a tick on her ruler of ages.</p>
   <div id="helphollow" class="hidden">
     <h3>The hollow</h3>
-    <p>Rainwater in a hollow of a tree, too deep for your lips. The same drag: down to push in, up to pull out; whatever comes up wet, you suck. Touch <b>your hand</b>, <b>the stem</b> or <b>the leaves</b> to hold one of them. <b>Chew the end</b> crumples a grass end; <b>Pick some leaves</b> gives you a handful from the branch, which you can chew too. Five suns; the tube at the right fills with sips until you have drunk your fill.</p>
+    <p>Rainwater in a hollow of a tree, too deep for your lips. Press on the tree and what you hold goes in; let go and it comes out; whatever comes up wet, you suck. Touch <b>your hand</b>, <b>the stem</b> or <b>the leaves</b> to hold one of them. <b>Chew the end</b> crumples a grass end; <b>Pick some leaves</b> gives you a handful from the branch, which you can chew too. Five suns; the tube at the right fills with sips until you have drunk your fill.</p>
   </div>
   <button class="slip dark" id="helpback">Back</button>
 </section>
@@ -1028,7 +1028,7 @@ function handArt() { // a chimpanzee's hand from the upper left, pinching the st
 function fingerArt() { // your fingers, alone (the hollow)
   return `<path d="M -6 -40 C -8 -20, -7 -8, -4 0 C -2 4, 2 4, 4 0 C 6 -8, 7 -20, 6 -40" fill="${PAPER}" stroke="${G}" stroke-width="1.2"/><path d="M -2 -10 C 0 -9, 2 -9, 3 -10" stroke="${G2}" stroke-width="0.8" fill="none"/>`;
 }
-const YOURDIR = { x: -0.66, y: -0.75 }, HERDIR = { x: 0.6, y: -0.8 };
+const YOURDIR = { x: -0.96, y: -0.28 }, HERDIR = { x: 0.6, y: -0.8 };
 function heldStem(view, who) { // who: 'you' | 'her'. view: { stem, d, excess, on:[off] }
   const st = view.stem; if (!st) return '';
   const hollow = view.place === 'hollow';
@@ -1041,7 +1041,7 @@ function heldStem(view, who) { // who: 'you' | 'her'. view: { stem, d, excess, o
   const al = hollow ? (x => ({ x: HOLLOW.x, y: HOLLOW.y + x * K, dx: 0, dy: 1 })) : who === 'her' ? alongHer : along;
   const dir = hollow ? { x: -0.62, y: -0.785 } : who === 'her' ? HERDIR : YOURDIR;
   // outside: foreshortened so the hand stays on the page, and moves as the stem goes in
-  const full = Math.max(0.3, st.len - C.GRIP) * K, f = Math.min(1, (who === 'her' ? 52 : 70) / full);
+  const full = Math.max(0.3, st.len - C.GRIP) * K, f = Math.min(1, (who === 'her' ? 52 : hollow ? 70 : 186) / full);
   const outLen = Math.max(8, (st.len - C.GRIP - view.d) * K * f);
   const ex = Math.min(view.excess || 0, 1.5) * K * 1.2 * f;
   const chord = Math.max(8, outLen - ex * [1.0, 0.6, 0.2][st.stiff == null ? 2 : st.stiff]);
@@ -1167,7 +1167,7 @@ function renderPlay() {
   $('#donebox').classList.toggle('hidden', !ended || play.busy);
   $('#rulerwrap').classList.toggle('hidden', !mound);
   const firstHere = play.dipsHere === 0 && !leaving && !ended;
-  $('#hint').textContent = firstHere && !g.dip ? (mound ? (st ? 'drag down: in · let go: stays · drag up: out' : 'touch a stem in the long grass to take it') : 'drag down: in · drag up: out, and suck') : '';
+  $('#hint').textContent = firstHere && !g.dip ? (mound ? (st ? 'press on the mound: the stem goes in and waits · slide up: it comes out' : 'touch a stem in the long grass to take it') : 'press on the tree: it goes in · let go: it comes out, and you suck it') : '';
 }
 function setResult(typed, red, fresh) {
   $('#typed').textContent = typed; $('#red').textContent = red || '';
@@ -1187,23 +1187,27 @@ function onDown(e) {
   if (!st) { setResult('Nothing in your hand. Touch a stem in the long grass to take it.', ''); return; }
   const ds = M.startDip(g); if (!ds) return;
   e.preventDefault(); $('#sec').setPointerCapture && $('#sec').setPointerCapture(e.pointerId);
-  play.drag = { y0: e.clientY, d0: ds.d, scale: svgScale() }; if (ds.d === 0) play.note = '';
+  play.drag = { y0: e.clientY, dRef: ds.d, scale: svgScale(), phase: ds.d >= ds.lim.depth - 0.05 ? 'out' : 'in', yRef: e.clientY }; if (ds.d === 0) play.note = '';
   play.target = ds.d; $('#hint').textContent = ''; drawSection();
   if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); }
 }
 const FOLD_MAX = 1.5;
 function onMove(e) {
   if (!play.drag || !g.dip) return;
-  const px = play.drag.scale * K;
-  let raw = play.drag.d0 + (e.clientY - play.drag.y0) / px;
-  const hi = g.dip.lim.depth + FOLD_MAX, lo = -0.5;
-  if (raw > hi) { play.drag.y0 += (raw - hi) * px; raw = hi; }
-  if (raw < lo) { play.drag.y0 += (raw - lo) * px; raw = lo; }
+  const d = play.drag, px = d.scale * K;
+  if (d.phase === 'in') { if (d.y0 - e.clientY > 5) { d.phase = 'out'; d.yRef = e.clientY; d.dRef = g.dip.d; } else return; } // the stem is going in by itself; a slide up starts the pull
+  let raw = d.dRef + (e.clientY - d.yRef) / px;                    // only upward movement pulls; moving down again pushes back no deeper than it was
+  if (raw > d.dRef) { d.yRef += (raw - d.dRef) * px; raw = d.dRef; }
+  if (raw < -0.5) { d.yRef += (raw + 0.5) * px; raw = -0.5; }
   play.target = raw;
 }
 function onUp() {
-  if (!play.drag) return; play.drag = null;
-  if (g.dip && !play.autoPull) { if (g.dip.maxD < C.ENTER_MIN && play.target < C.ENTER_MIN) { M.cancelDip(g); stopAnim(); play.view = null; renderPlay(); return; } play.target = Math.min(play.target, g.dip.d); }
+  if (!play.drag) return; const wasIn = play.drag.phase === 'in'; play.drag = null;
+  if (!g.dip || play.autoPull) return;
+  if (g.dip.place === 'hollow') { play.autoPull = true; if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); } return; } // at the hollow, letting go brings it out
+  if (wasIn) { play.target = g.dip.lim.depth + 0.3; return; }  // the stem stays in, pushed home, until you slide it out
+  if (g.dip.d < 1.2) { play.autoPull = true; if (!play.anim) { play.last = performance.now(); play.anim = requestAnimationFrame(tick); } return; } // nearly out: the last inch comes out by itself
+  play.target = Math.min(play.target, g.dip.d);
 }
 function stopAnim() { if (play.anim) cancelAnimationFrame(play.anim); play.anim = null; }
 function tick(now) {
@@ -1211,6 +1215,7 @@ function tick(now) {
   const st = M.inHand(g);
   if (g.dip) {
     if (play.autoPull) play.target = Math.max(-0.5, g.dip.d - 3 * dt);
+    else if (play.drag && play.drag.phase === 'in') play.target = Math.min(g.dip.lim.depth + 0.3, play.target + 6 * dt); // going in by itself, at a grown-up's push
     const ev = M.dipStep(g, play.target, dt);
     const ds = g.dip;
     if (ds) {
@@ -1313,7 +1318,7 @@ function enterMound() {
   $('#paim').textContent = 'Fish termites out of the mound with a stem of grass, before your mother moves on.';
   $('#sunlab').textContent = 'The afternoon'; $('#tallylab').textContent = 'Termites eaten';
   $('#intro').innerHTML = '<b>FIG. 4.</b> The mound cut open, the long grass beside it, your mother at her own hole. Each dip takes one sun.';
-  setResult('Your mother fishes at her own hole. Termites bite on to whatever comes into their passage. Touch a stem in the long grass to take it; then press on the drawing and drag it down into the hole, give them a moment, and drag it up. What comes up on the stem, you eat.', '');
+  setResult('Your mother fishes at her own hole. Termites bite on to whatever comes into their passage. Touch a stem in the long grass to take it. Then press on the mound: the stem goes into the hole by itself and waits there. Slide your finger up, and it comes out. What comes up on the stem, you eat.', '');
   drawRuler($('#ruler'), g.dips, 46);
   show('play'); renderPlay();
 }

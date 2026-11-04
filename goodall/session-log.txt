@@ -6,41 +6,41 @@ GAME A (afternoon 7): a first-timer, every mistake
   clump: blade stem leafy stick twig
   take stick: A stick, 10 inches. Thick as a finger, and stiff.
   shot a-stick-blocked
-  dip (push 3 in, pause 0.4 s, pull 30 ms/step): It stopped at the rim: too thick to go in. No termites.  [red] too thick — like the infants of 2 to 3  → suns 5, termites 0
+  dip (press, pause 0.4 s, slide up at 30 ms/step): It stopped at the rim: too thick to go in. No termites.  [red] too thick — like the infants of 2 to 3  → suns 5, termites 0
   take blade: A grass blade, 13 inches. Thin as a straw, and floppy: it droops under its own weight. The other one goes on the heap.
   shot a-blade-folds
-  dip (push 4 in, pause 0.4 s, pull 30 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 4, termites 0
+  dip (press, pause 0.4 s, slide up at 30 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 4, termites 0
   take leafy: A leafy twig, 11 inches. Thin as a straw, and stiff. Leaves on it. The other one goes on the heap.
   shot a-leaves-catch
-  dip (push 3 in, pause 0.4 s, pull 30 ms/step): The leaves caught on the rim. No termites. Your mother has thrown her stem down: its end is bent.  [red] leaves left on — grown-ups strip them first  → suns 3, termites 0
+  dip (press, pause 0.4 s, slide up at 30 ms/step): The leaves caught on the rim. No termites. Your mother has thrown her stem down: its end is bent.  [red] leaves left on — grown-ups strip them first  → suns 3, termites 0
   strip: You strip the leaves off between your lips.
   shot a-stripped
-  dip (push 8 in, pause 1.5 s, pull 4 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 2, termites 8
+  dip (press, pause 1.5 s, slide up at 4 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 2, termites 8
   shot a-after-jerk
   shot a-stem-in
   shot help
   help opened mid-dip and closed
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 1, termites 16
+  dip (press, pause 2 s, slide up at 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 1, termites 16
   shot a-slow
-  dip (push 8 in, pause 1.8 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. Your mother has thrown her stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 0, termites 24
+  dip (press, pause 1.8 s, slide up at 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. Your mother has thrown her stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 0, termites 24
   shot a-leaving
   leaving: The last sun is shaded: your mother gets up and moves off into the long grass. You caught 24 termites.
   shot a-hollow-start
   hollow: page width 380 (no horizontal scroll: true)
   hold hand
   shot a-hollow-hand
-  dip (push 3 in, pause 0.3 s, pull 30 ms/step): You dip your fingers and lick them: a sip.  [red] an infant tried his hand first, too  → suns 0, termites 24, sips 1
+  dip (press and let go): You dip your fingers and lick them: a sip.  [red] an infant tried his hand first, too  → suns 0, termites 24, sips 1
   hold 0
   shot a-hollow-stem
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up with a drop on the end: a sip.  [red]   → suns 0, termites 24, sips 2
+  dip (press and let go): It comes up with a drop on the end: a sip.  [red]   → suns 0, termites 24, sips 2
   (chew the end: not possible with this)
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up with a drop on the end: a sip.  [red]   → suns 0, termites 24, sips 3
+  dip (press and let go): It comes up with a drop on the end: a sip.  [red]   → suns 0, termites 24, sips 3
   pick some leaves: You pull a handful of leaves off the branch.
   hold leaves
   chew the leaves: You chew the leaves for a moment: a crumpled wad.
   shot a-hollow-wad
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): The chewed wad comes up full of water. You suck it: six sips.  [red] the grown-ups’ way here: leaves chewed a moment, pushed in, sucked  → suns 0, termites 24, sips 9
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): The chewed wad comes up full of water. You suck it: six sips. Enough: you have drunk your fill.  [red] the grown-ups’ way here: leaves chewed a moment, pushed in, sucked  → suns 0, termites 24, sips 15
+  dip (press and let go): The chewed wad comes up full of water. You suck it: six sips.  [red] the grown-ups’ way here: leaves chewed a moment, pushed in, sucked  → suns 0, termites 24, sips 9
+  dip (press and let go): The chewed wad comes up full of water. You suck it: six sips. Enough: you have drunk your fill.  [red] the grown-ups’ way here: leaves chewed a moment, pushed in, sucked  → suns 0, termites 24, sips 15
   shot a-hollow-end
   shot a-end
   end: page width 380 (no horizontal scroll: true)
@@ -48,36 +48,36 @@ GAME A (afternoon 7): a first-timer, every mistake
   You caught 24 termites this afternoon; your mother caught about 40. | Your first dip looked like an infant’s of two to three (a stick too thick to go in); your last, like a grown-up’s (a stiff stem, deep in, a pause, out slowly). | Your mother fished at her own hole beside you all afternoon; you tried three stems from the grass. | At the hollow you chewed a handful of leaves into a sponge, pushed it in, and drank your fill.
   shot about
 GAME B (another afternoon): a stiff stem from the start, her way
-  afternoon 2442
-  take stem: A grass stem, 11 inches. Thin as a straw, and stiff.
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 5, termites 8
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 4, termites 16
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. The end is bent now. Your mother has thrown her stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 3, termites 24
+  afternoon 8563
+  take stem: A grass stem, 9 inches. Thin as a straw, and stiff.
+  dip (press, pause 2 s, slide up at 45 ms/step): In seven and a half inches: as far as a stem this length reaches. A pause. Out slowly. Seven termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 5, termites 7
+  dip (press, pause 2 s, slide up at 45 ms/step): In seven and a half inches: as far as a stem this length reaches. A pause. Out slowly. Seven termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 4, termites 14
+  dip (press, pause 2 s, slide up at 45 ms/step): In seven and a half inches: as far as a stem this length reaches. A pause. Out slowly. Seven termites. The end is bent now. Your mother has thrown her stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 3, termites 21
   bite: You bite off the bent end: an inch shorter, and straight again.
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 2, termites 32
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 1, termites 40
-  dip (push 8 in, pause 2 s, pull 45 ms/step): In eight inches, to the bottom of the passage. A pause. Out slowly. Eight termites. The end is bent now. Your mother has thrown her stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 0, termites 48
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up wet. You suck the end: a sip. Sucking it chews the end a little.  [red] an infant of 3½ did this too: poked grass in, the way he fished for termites  → suns 0, termites 48, sips 1
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up wet. You suck the end: two sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 48, sips 3
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up wet. You suck the end: three sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 48, sips 6
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up wet. You suck the end: four sips.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 48, sips 10
-  dip (push 4 in, pause 0.3 s, pull 30 ms/step): It comes up wet. You suck the end: four sips. Enough: you have drunk your fill.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 48, sips 14
+  dip (press, pause 2 s, slide up at 45 ms/step): In six and a half inches: as far as a stem this length reaches. A pause. Out slowly. Six termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 2, termites 27
+  dip (press, pause 2 s, slide up at 45 ms/step): In six and a half inches: as far as a stem this length reaches. A pause. Out slowly. Six termites.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 1, termites 33
+  dip (press, pause 2 s, slide up at 45 ms/step): In six and a half inches: as far as a stem this length reaches. A pause. Out slowly. Six termites. The end is bent now. Your mother has thrown her stem down: its end is bent.  [red] 5 to 8 inches, a pause, out smoothly — a grown-up’s way  → suns 0, termites 39
+  dip (press and let go): It comes up wet. You suck the end: a sip. Sucking it chews the end a little.  [red] an infant of 3½ did this too: poked grass in, the way he fished for termites  → suns 0, termites 39, sips 1
+  dip (press and let go): It comes up wet. You suck the end: two sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 39, sips 3
+  dip (press and let go): It comes up wet. You suck the end: three sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 39, sips 6
+  dip (press and let go): It comes up wet. You suck the end: four sips.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 39, sips 10
+  dip (press and let go): It comes up wet. You suck the end: four sips. Enough: you have drunk your fill.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 39, sips 14
   shot b-end
   END: By the end of the afternoon you fished like a grown-up chimpanzee, which took the infants Goodall watched about two years; then you made a sponge out of a termite stem.
 GAME C (the same long grass again): a careless afternoon with a blade
-  afternoon 2442 (same as B: true)
-  take blade: A grass blade, 12 inches. Thin as a straw, and floppy: it droops under its own weight.
-  dip (push 6 in, pause 0.2 s, pull 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 5, termites 0
-  dip (push 6 in, pause 0.2 s, pull 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 4, termites 0
-  dip (push 6 in, pause 0.2 s, pull 6 ms/step): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown her stem down: its end is bent.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 3, termites 0
-  dip (push 6 in, pause 0.2 s, pull 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 2, termites 0
-  dip (push 6 in, pause 0.2 s, pull 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 1, termites 0
-  dip (push 6 in, pause 0.2 s, pull 6 ms/step): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown her stem down: its end is bent.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 0, termites 0
-  dip (push 4 in, pause 0.2 s, pull 30 ms/step): It comes up wet. You suck the end: a sip. Sucking it chews the end a little.  [red] an infant of 3½ did this too: poked grass in, the way he fished for termites  → suns 0, termites 0, sips 1
-  dip (push 4 in, pause 0.2 s, pull 30 ms/step): It comes up wet. You suck the end: two sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 3
-  dip (push 4 in, pause 0.2 s, pull 30 ms/step): It comes up wet. You suck the end: three sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 6
-  dip (push 4 in, pause 0.2 s, pull 30 ms/step): It comes up wet. You suck the end: four sips.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 10
-  dip (push 4 in, pause 0.2 s, pull 30 ms/step): It comes up wet. You suck the end: four sips. Enough: you have drunk your fill.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 14
+  afternoon 8563 (same as B: true)
+  take blade: A grass blade, 13 inches. Thin as a straw, and floppy: it droops under its own weight.
+  dip (press, pause 0.2 s, slide up at 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 5, termites 0
+  dip (press, pause 0.2 s, slide up at 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 4, termites 0
+  dip (press, pause 0.2 s, slide up at 6 ms/step): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown her stem down: its end is bent.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 3, termites 0
+  dip (press, pause 0.2 s, slide up at 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 2, termites 0
+  dip (press, pause 0.2 s, slide up at 6 ms/step): In an inch and a half: it folded at the first bend. No termites.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 1, termites 0
+  dip (press, pause 0.2 s, slide up at 6 ms/step): In an inch and a half: it folded at the first bend. No termites. Your mother has thrown her stem down: its end is bent.  [red] too floppy: in an inch or two — like the infants of 3 to 4  → suns 0, termites 0
+  dip (press and let go): It comes up wet. You suck the end: a sip. Sucking it chews the end a little.  [red] an infant of 3½ did this too: poked grass in, the way he fished for termites  → suns 0, termites 0, sips 1
+  dip (press and let go): It comes up wet. You suck the end: two sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 3
+  dip (press and let go): It comes up wet. You suck the end: three sips. The end is a little crumpled mass now.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 6
+  dip (press and let go): It comes up wet. You suck the end: four sips.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 10
+  dip (press and let go): It comes up wet. You suck the end: four sips. Enough: you have drunk your fill.  [red] an infant of 3½ did this: chewed the end each time he sucked it, till it was a tiny sponge  → suns 0, termites 0, sips 14
   shot c-end
   END: You never quite got the termites out; nor, at two and three, did the infants Goodall watched; then you made a sponge out of a termite stem.
 
