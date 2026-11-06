@@ -12,12 +12,17 @@ pass  the stillness is not counted in the crossing
 C. Each station, through its functions
 pass  the moment is kept as held
 pass  night and day keep their relation
-pass  a release at the half reads as half
-pass  a release after the end says so
+pass  the zero: every multiple is wrong, the fifth answer sees the trap
+pass  two pairs, the long one 4–5.5 × the short
+pass  betweens at the arithmetic middles read as by the clock, the half as true
+pass  betweens at the geometric middles read as by ratio
+pass  one each way reads as mixed
 pass  the planned silence offers two voices, one of them yours
 pass  picking yours is right
 pass  picking the other is wrong and says yours
 pass  the stillness held at nine tenths
+pass  three things: the longest is the conversation
+pass  the right one is right, the wrong one corrected
 pass  the hymn: longs double shorts, longest found
 pass  the longest syllable named rightly
 pass  a wrong syllable is corrected
@@ -33,18 +38,21 @@ pass  no offered day longer than 6.5 s
 pass  picking your pair is right
 pass  the moment offered beside a decoy
 pass  picking your moment is right
-pass  the evening is done after ten stations
+pass  the evening is done after twelve stations
 pass  the headline counts three inner spans known
 pass  a long moment gets a shorter decoy, never a longer one
 D. Words
-pass  no decimal or digit reaches a sentence  (43200 lines over 1,200 evenings of wild play)
+pass  no decimal or digit reaches a sentence  (54000 lines over 1,200 evenings of wild play)
 pass  fraction words never go down as the ratio goes up
 E. Playing it in numbers: 400 evenings per player
-  player | low one | half | sun | hymn ratio | inner spans known (of 3) | commonest headline
-  steady (12 % scatter), hears relations | ×1.09 | ×1.09 | ×1.09 | ×1.06 | 2.81 | Three spans tonight were only ever in you, and you knew all three again (82%)
-pass  a steady player who hears relations knows all three inner spans most evenings  (328 of 400)
-  shaky (30 %), hears relations | ×1.23 | ×1.22 | ×1.24 | ×1.14 | 2.87 | Three spans tonight were only ever in you, and you knew all three again (88%)
-  steady, guesses the choices | ×1.09 | ×1.10 | ×1.08 | ×1.05 | 1.34 | Three spans tonight were only ever in you (73%)
+  player | low one | half | sun | hymn ratio | betweens read clock/ratio/mixed | inner spans known (of 3) | commonest headline
+  steady (12 % scatter), hears relations, bisects by the clock | ×1.08 | ×1.09 | ×1.09 | ×1.06 | 312/6/82 | 2.87 | Three spans tonight were only ever in you, and you knew all three again (87%)
+pass  a steady clock-bisector is read as by the clock most evenings  (312 of 400)
+pass  a steady player who hears relations knows all three inner spans most evenings  (349 of 400)
+  steady, hears relations, bisects by ratio | ×1.09 | ×1.09 | ×1.09 | ×1.06 | 4/312/84 | 2.83 | Three spans tonight were only ever in you, and you knew all three again (83%)
+pass  a steady ratio-bisector is read as by ratio most evenings  (312 of 400)
+  shaky (30 %), hears relations, by the clock | ×1.24 | ×1.23 | ×1.25 | ×1.16 | 179/47/174 | 2.79 | Three spans tonight were only ever in you, and you knew all three again (80%)
+  steady, guesses the choices | ×1.09 | ×1.09 | ×1.09 | ×1.06 | 299/5/96 | 1.28 | Three spans tonight were only ever in you (73%)
 pass  a guesser knows about one of the three
 
-39 checks passed, 0 failed
+46 checks passed, 0 failed
