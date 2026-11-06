@@ -1,5 +1,5 @@
 // A scripted session in a real browser at phone size, in real time: three evenings through the actual screens, with
-// screenshots. Evening A: a first-timer who holds reasonably, falls into the zero trap, picks wrongly once (How to play
+// screenshots. Evening A: a first-timer who holds reasonably, guesses a length for nothing, picks wrongly once (How to play
 // opened and closed mid-station). Evening B, another evening: steady, sees the trap, every choice right. Evening C,
 // evening A's number again by its address: a hasty player who taps short, holds the crowd to the end and guesses.
 // Run: node session-test.js   (session-log.txt is the saved output)
@@ -44,8 +44,8 @@ const out = []; const say = s => { out.push(s); console.log(s); };
     say('  3: ' + await ask()); await S('3-ready'); await hold(player === 'hasty' ? 600 : 1500); await waitStep(1); say('  3b: ' + await ask()); await hold(player === 'hasty' ? 1100 : 3600); await waitPhase(['result']); await result('3 night and day'); await S('3-result'); await next();
     // 4 nothing, then something
     if (opts.help) { await page.click('#round .q'); await page.waitForTimeout(200); await S('help'); await page.click('#helpback'); await page.waitForTimeout(200); say('  How to play opened and closed; still at ' + JSON.stringify(await st())); }
-    say('  4: ' + await ask()); await S('4-touch'); await tap(); await waitStep(1); say('  4b: ' + await ask()); await S('4-again'); await tap(); await waitPhase(['choose']); say('  4c: ' + await ask() + ' || ' + await big()); await S('4-choose');
-    await choose(player === 'steady' ? 4 : player === 'hasty' ? 0 : 1); await result('4 nothing, then something'); await S('4-result'); await next();
+    say('  4: ' + await ask()); await S('4-listen'); await tap(); await waitStep(1); say('  4b: ' + await ask()); await tap(); await waitStep(2); say('  4c: ' + await ask()); await tap(); await waitStep(3); say('  4d: ' + await ask()); await S('4-guess');
+    await hold(player === 'hasty' ? 300 : 1800); await waitPhase(['result']); await result('4 nothing'); await S('4-result'); await next();
     // 5 between
     say('  5: ' + await ask()); await tap(); await waitStep(1); say('  5b: ' + await ask()); await S('5-hold1'); await hold((player === 'steady' ? PR[0].arith : PR[0].geo) * 1000 * (player === 'hasty' ? 0.7 : 1)); await waitStep(2); await tap(); await waitStep(3); await hold((player === 'steady' ? PR[1].arith : PR[1].geo) * 1000 * (player === 'hasty' ? 0.7 : 1)); await waitStep(4); say('  5c: ' + await ask()); await S('5-half'); await hold(PR[1].long / 2 * 1000 * f); await waitPhase(['result']); await result('5 between'); await S('5-result'); await next();
     // 6 a planned silence
@@ -58,22 +58,18 @@ const out = []; const say = s => { out.push(s); console.log(s); };
     // 8 three things from yesterday
     say('  8: ' + await ask()); await S('8-meal'); await hold(player === 'hasty' ? 500 : 1800); await waitStep(1); say('  8b: ' + await ask()); await hold(player === 'hasty' ? 700 : 4200); await waitStep(2); say('  8c: ' + await ask()); await hold(player === 'hasty' ? 600 : 2600); await waitPhase(['choose']); say('  8d: ' + await ask() + ' || ' + await big()); await S('8-choose');
     await choose(player === 'steady' ? 1 : 2); await result('8 three things'); await S('8-result'); await next();
-    // 9 the hymn
-    say('  9: ' + await ask()); await tap(); await waitPhase(['sing'], 15000); say('  9b: ' + await ask()); await S('9-sing');
-    for (let k = 0; k < 8; k++) { const long = k % 2 === 1; await hold(player === 'hasty' ? 450 : (long ? 820 : 400) * (k === 5 ? 1.25 : 1)); await page.waitForTimeout(120); if (k === 3) say('  9 after four: ' + await page.evaluate(() => window.__augustine.ui.bars.map(b => (b.you ? 'you ' : '') + b.kind + (b.words != null ? ' [' + b.words + ']' : '')).join(', '))); }
-    await waitPhase(['choose']); say('  9c: ' + await ask() + ' || big: ' + await big()); await S('9-choose'); await choose(player === 'steady' ? 5 : 1); await result('9 the hymn'); await S('9-result'); await next();
-    // 10 the tumult
-    say('  10: ' + await ask()); await tap(); await waitStep(1); say('  10b: ' + await ask()); await S('10-ready'); await press(); await page.waitForTimeout(1200); await S('10-holding');
+    // 9 the tumult
+    say('  9: ' + await ask()); await tap(); await waitStep(1); say('  9b: ' + await ask()); await S('9-ready'); await press(); await page.waitForTimeout(1200); await S('9-holding');
     if (player === 'hasty') await page.waitForTimeout((P.end - 1.2) * 1000 + 300); else await page.waitForTimeout((P.lowEnd - 1.2 + (player === 'steady' ? 0.1 : 0.45)) * 1000);
-    await lift(); await waitPhase(['choose']); say('  10c: ' + await ask()); await S('10-choose'); await choose(player === 'steady' ? P.size : Math.min(7, P.size + 1)); await result('10 the tumult'); await S('10-result'); await next();
-    // 11 night and day, again
-    say('  11: ' + await ask()); await tap(); await waitPhase(['choose'], 45000); say('  11b: ' + await ask()); await S('11-choose');
+    await lift(); await waitPhase(['choose']); say('  9c: ' + await ask()); await S('9-choose'); await choose(player === 'steady' ? P.size : Math.min(7, P.size + 1)); await result('9 the tumult'); await S('9-result'); await next();
+    // 10 night and day, again
+    say('  10: ' + await ask()); await tap(); await waitPhase(['choose'], 45000); say('  10b: ' + await ask()); await S('10-choose');
     { const r = await resNow(); const y = r.pairs.findIndex(p => p.yours); await choose(player === 'hasty' ? (y + 1) % 3 : y); }
-    await result('11 night and day, again'); await S('11-result'); await next();
-    // 12 the moment, again
-    say('  12: ' + await ask()); await tap(); await waitPhase(['choose'], 45000); say('  12b: ' + await ask()); await S('12-choose');
+    await result('10 night and day, again'); await S('10-result'); await next();
+    // 11 the moment, again
+    say('  11: ' + await ask()); await tap(); await waitPhase(['choose'], 45000); say('  11b: ' + await ask()); await S('11-choose');
     { const r = await resNow(); const y = r.offered.findIndex(o => o.yours); await choose(player === 'first-timer' ? 1 - y : y); }
-    await result('12 the moment, again'); await S('12-result');
+    await result('11 the moment, again'); await S('11-result');
     await page.click('#next'); await page.waitForTimeout(2600);
     say('  LAST PAGE: ' + await page.$eval('#headline', e => e.innerText));
     say('  ' + (await page.$eval('#did', e => e.innerText)).replace(/\n+/g, ' | '));
