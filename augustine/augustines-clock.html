@@ -201,8 +201,8 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <p><b>Holding.</b> Most stations ask you to press and hold the circle for as long as something lasted: a moment of your own life, a voice you just heard, the sun standing still. The game then says in words how close you came: the same, nine tenths, half, double. Where there is nothing to check against, it says so.</p>
   <p><b>Choosing.</b> Some stations play you two or three voices and ask which of them was yours: as long as a silence you held, or standing in the relation you gave your night and your day. Touch first, second or third.</p>
   <p><b>Night and day.</b> Two holds in a row, a low note for last night and a high note for yesterday, so that the two sounds stand to each other as the night stood to the day. Only the relation is kept.</p>
-  <p><b>Half of it.</b> The low one starts when you press. Let go when you think it is half over, while it still sounds.</p>
-  <p><b>The hymn.</b> Hear a line of eight syllables, short and long. Sing it back with eight holds, each long one twice a short one. Then say which of your eight was the longest.</p>
+  <p><b>Half of it.</b> Press and hold: the low one starts when you press and keeps sounding. Let go when you think it is half over. It goes on to its end, so you hear how much was still to come.</p>
+  <p><b>The hymn.</b> Hear a line of eight syllables, short and long. The line stays in memory as words only. Sing it back with eight holds, each long one twice a short one. Then say which of your eight was the longest.</p>
   <p><b>The tumult.</b> Press and hold, and a crowd of voices starts. Let go the moment the low one stops; the others go on. Then say how many voices there were.</p>
   <p><b>The last page</b> says what you did, what Augustine says about it, and shows the three spans that were only ever in you beside what was offered for them.</p>
   <button class="btn" id="helpback">Back</button>
@@ -746,7 +746,8 @@ const ASK = {
   nightday: { ready: 'Last night you slept. Yesterday you were awake. <b>Press and hold once for the night</b>: a low note will sound while you hold. Then once for the day, a high note. Make the two sounds stand to each other <b>as the night stood to the day</b>.',
     ready2: 'That was the night. <b>Now press and hold for the day</b>, a high note, as long against the night as the day was against the night.',
     done: 'Two sounds, the night and the day, in the relation you gave them.' },
-  half: { ready: 'The low one again. <b>It starts when you press. Let go when it is half over</b>, while it is still sounding.',
+  half: { ready: 'The low one again. <b>Press and hold: it starts sounding when you press, and keeps sounding. Let go when you think it is half over.</b> It goes on to its end, so you will hear how much was still to come.',
+    rest: 'You let go. The low one goes on to its end: listen to how much was still to come.',
     done: 'You let go where you took its half to be. Its bar shows where the half really was.' },
   planned: { ready: '<b>Press and hold for as long as you like.</b> Nothing will sound. When you let go, two voices will sound, one after the other; one of them is as long as your hold.',
     listen: 'Listen: two voices, one after the other.',
@@ -799,6 +800,7 @@ function setAsk(extra) {
   else if (p === 'choose') h = a.choose;
   else if (p === 'ready2') h = a.ready2;
   else if (p === 'tholding') h = a.run;
+  else if (p === 'rest') h = a.rest;
   else if (p === 'done' || p === 'result') h = a.done;
   else if (p === 'sing' || p === 'singing') h = (ui.k === 0 ? a.ready + ' ' : '') + (ui.k + 1) + ' of 8: hold for <b>' + C.PAPER.HYMN_LINE[ui.k].toUpperCase() + '</b> (' + (C.PAPER.HYMN_LONG[ui.k] ? 'long' : 'short') + ').';
   else h = a.ready;
@@ -857,7 +859,7 @@ function loop() {
 }
 
 // the mind: to come (dashed slips) above the line; the circle on the line; memory (solid bars) below
-const Y = { slips: 22, line: 108, mem: 178 };
+const Y = { slips: 22, line: 108, mem: 186 };
 function slipsFor() {
   const r = ui.r, p = ui.phase, out = [];
   const W = label => Math.max(84, Math.round(label.length * 6.4) + 18);
@@ -866,10 +868,10 @@ function slipsFor() {
   if (r.id === 'joy') { if (p === 'ready') inner('THE MOMENT: AS LONG'); }
   if (r.id === 'first') { if (p === 'intro') voice('THE LOW ONE'); if (['intro', 'voice', 'ready'].includes(p)) you('YOU: AS LONG'); }
   if (r.id === 'nightday') { if (p === 'ready') add('THE NIGHT', COL.night); if (['ready', 'holding', 'ready2'].includes(p)) add('THE DAY', COL.day); }
-  if (r.id === 'half') { if (p === 'ready') { voice('THE LOW ONE'); you('YOU: ITS HALF'); } if (p === 'holding') you('YOU: ITS HALF'); }
+  if (r.id === 'half') { if (p === 'ready') { voice('THE LOW ONE'); you('YOU: HOLD TO ITS HALF'); } if (p === 'holding') you('YOU: HOLD TO ITS HALF'); if (p === 'rest') voice('THE REST OF IT'); }
   if (r.id === 'planned') { if (p === 'ready') inner('YOUR SILENCE'); if (['ready', 'holding', 'done', 'listen'].includes(p)) { voice('FIRST'); voice('SECOND'); } }
   if (r.id === 'sun') { if (['intro', 'sun'].includes(p)) add('THE SUN STANDS STILL', COL.yellow); if (['intro', 'sun', 'ready'].includes(p)) you('YOU: AS LONG AS IT STOOD'); }
-  if (r.id === 'hymn') { if (p === 'intro') voice('THE LINE'); if (['intro', 'voice', 'ready', 'sing', 'singing'].includes(p)) { for (let k = ui.k; k < 8; k++) out.push({ w: C.PAPER.HYMN_LONG[k] ? 48 : 30, label: C.PAPER.HYMN_LINE[k].toUpperCase(), c: COL.blue, small: true }); } }
+  if (r.id === 'hymn') { if (p === 'intro') voice('THE LINE'); if (['intro', 'voice', 'ready', 'sing', 'singing'].includes(p)) { for (let k = ui.k; k < 8; k++) out.push({ w: 38, label: C.PAPER.HYMN_LINE[k].toUpperCase(), c: COL.blue, small: true }); } }
   if (r.id === 'tumult') { if (p === 'intro') voice('THE LOW ONE, ONCE MORE'); if (['intro', 'voice', 'ready'].includes(p)) { voice('THE CROWD'); you('YOU: TILL THE LOW ONE STOPS'); } }
   if (r.id === 'nightday2') { if (['intro', 'listen'].includes(p)) { voice('FIRST'); voice('SECOND'); voice('THIRD'); } }
   if (r.id === 'joy2') { if (['intro', 'listen'].includes(p)) { voice('FIRST'); voice('SECOND'); } }
@@ -886,7 +888,7 @@ function drawMind() {
   if (!slips.length) s += T(0, Y.slips + 17, 'nothing more', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' });
   s += svg('rect', { x: 0, y: Y.line - 2.5, width: 348, height: 5, fill: COL.ink });
   s += T(348, Y.line - 10, 'NOW', { 'text-anchor': 'end', fill: COL.ink, 'font-weight': 800 });
-  s += T(0, Y.mem - 10, 'MEMORY');
+  s += T(0, Y.mem - 14, 'MEMORY');
   let y = Y.mem;
   ui.bars.forEach(b => { s += barRow(b, y); y += rowHeight(b); });
   if (!ui.bars.length) { s += T(0, y + 14, 'nothing yet', { fill: COL.faint, 'font-size': 12, 'font-weight': 400, 'letter-spacing': '0.3' }); y += 30; }
@@ -899,7 +901,7 @@ function drawMind() {
     s += svg('g', { opacity: op }, T(0, y + 7, (k + 1) + '  ' + res.title.toUpperCase(), { 'font-size': 8.5, fill: wanted ? COL.ink : COL.mute, 'font-weight': wanted ? 800 : 600 }));
     let yy = y + 10;
     (res.mem || []).forEach(m => {
-      if (m.kind === 'crowd' || m.kind === 'hymnvoice' || m.kind === 'hymnyou') return;
+      if (m.kind === 'crowd' || m.kind === 'hymnvoice' || m.kind === 'hymnyou' || m.kind === 'words') return;
       const w = Math.min(340, (m.kind === 'pair' ? m.day : m.secs) * PXS), h = wanted ? 7 : 4;
       const c = m.kind === 'voice' || m.kind === 'ref' ? COL.red : m.kind === 'night' ? COL.night : m.kind === 'day' ? COL.day : m.kind === 'still' ? COL.yellow : COL.blue;
       s += svg('g', { opacity: op }, m.kind === 'said' ? svg('rect', { x: 1, y: yy + 1, width: Math.max(0, w - 2), height: h - 1, fill: 'none', stroke: COL.blue, 'stroke-width': 1.2, 'stroke-dasharray': '3 2' })
@@ -915,7 +917,7 @@ function drawMind() {
   placeCircle();
   settle();
 }
-function rowHeight(b) { return b.kind === 'crowd' ? 16 + b.rows.length * 17 : b.kind === 'hymnvoice' || b.kind === 'hymnyou' ? 44 : 40; }
+function rowHeight(b) { return b.kind === 'crowd' ? 16 + b.rows.length * 17 : b.kind === 'hymnvoice' || b.kind === 'hymnyou' ? 44 : b.kind === 'words' ? 34 : 40; }
 function barRow(b, y) {
   const colour = { you: COL.blue, voice: COL.red, ref: COL.red, said: COL.blue, night: COL.night, day: COL.day, still: COL.yellow }[b.kind] || COL.ink;
   const labelColour = b.kind === 'still' ? COL.ink : colour;
@@ -928,6 +930,11 @@ function barRow(b, y) {
       if (w > 40) s += T(x0 + 4, yy + 9.5, row.id === 'low' ? 'THE LOW ONE' : row.hidden ? '?' : 'ANOTHER', { fill: '#fff', 'font-size': 8, 'font-weight': 800, 'letter-spacing': '0.8' });
     });
     return svg('g', {}, s);
+  }
+  if (b.kind === 'words') {
+    s += T(0, y + 8, b.label, { fill: COL.red, 'font-weight': 800 });
+    s += T(0, y + 26, b.words, { fill: COL.red, 'font-weight': 800, 'font-size': 14, 'letter-spacing': '2.5' });
+    return svg('g', { class: b.fresh ? 'drop' : '' }, s);
   }
   if (b.kind === 'pair') {
     s += T(0, y + 8, b.label, { fill: COL.ink, 'font-weight': 800 });
@@ -967,6 +974,7 @@ function setCircle() {
   if (p === 'intro') lab = r.id === 'sun' ? 'RISE' : 'LISTEN';
   else if (p === 'voice') { lab = r.id === 'hymn' ? 'LINE' : 'LOW'; c.classList.add('voice'); }
   else if (p === 'sun' || p === 'listen') c.classList.add('idle');
+  else if (p === 'rest') { c.classList.add('voice'); lab = 'LOW'; }
   else if (p === 'ready') { lab = 'HOLD'; c.classList.add('ready'); if (r.id === 'half') lab = 'START'; if (r.id === 'nightday') { lab = 'NIGHT'; c.classList.add('night'); } }
   else if (p === 'ready2') { lab = 'DAY'; c.classList.add('ready', 'day'); }
   else if (p === 'sing') { lab = C.PAPER.HYMN_LINE[ui.k].toUpperCase(); c.classList.add('ready'); }
@@ -976,7 +984,7 @@ function setCircle() {
   else if (p === 'tholding') { c.classList.add('holding'); if ((performance.now() - ui.t0) / 1000 < r.plan.end) c.classList.add('live'); lab = ui.lowOn ? 'LOW' : ''; }
   else c.classList.add('idle');
   c.textContent = lab;
-  $$('.q').forEach(q => q.disabled = ['voice', 'holding', 'holding2', 'tholding', 'singing', 'sun', 'listen'].includes(p));
+  $$('.q').forEach(q => q.disabled = ['voice', 'holding', 'holding2', 'tholding', 'singing', 'sun', 'listen', 'rest'].includes(p));
 }
 
 // hearing a voice: it sounds, then drops into memory
@@ -985,7 +993,7 @@ function playVoice() {
   if (r.id === 'hymn') {
     const H = C.HYMN; let at = 0;
     C.PAPER.HYMN_LINE.forEach((n, k) => { const d = C.PAPER.HYMN_LONG[k] ? H.long : H.short; sing(C.VOICE.hymn, d, at); at += d + H.gap; });
-    later(() => { ui.bars.push({ kind: 'hymnvoice', label: 'THE LINE, AS SUNG TO YOU', syl: C.PAPER.HYMN_LINE.map((n, k) => ({ n, secs: C.PAPER.HYMN_LONG[k] ? H.long : H.short, long: C.PAPER.HYMN_LONG[k] })), fresh: true });
+    later(() => { ui.bars.push({ kind: 'words', label: 'THE LINE, AS SUNG TO YOU', words: C.PAPER.HYMN_LINE.map(n => n.toUpperCase()).join(' '), fresh: true });
       ui.phase = 'sing'; ui.k = 0; setCircle(); setAsk(); drawMind(); }, at * 1000);
     return;
   }
@@ -1029,7 +1037,7 @@ function down(e) {
   if (p !== 'ready') return;
   if (r.id === 'tumult') { startTumult(); return; }
   ui.phase = 'holding'; ui.h0 = performance.now();
-  if (r.id === 'half') { ui.v0 = ui.h0; sing(C.VOICE.low, r.T); later(() => { if (ui.phase === 'holding') { ui.bars.push({ kind: 'voice', label: 'THE LOW ONE', secs: r.T, mark: r.T / 2, fresh: true }); drawMind(); } }, r.T * 1000); }
+  if (r.id === 'half') { ui.v0 = ui.h0; sing(C.VOICE.low, r.T); later(() => { if (ui.phase === 'holding' || ui.phase === 'rest') { ui.bars.push({ kind: 'voice', label: 'THE LOW ONE', secs: r.T, mark: r.T / 2, fresh: true }); drawMind(); if (ui.phase === 'rest') { ui.phase = 'done'; setCircle(); setAsk(); setTimeout(() => showResult(ui.pending), reduce ? 0 : 450); } } }, r.T * 1000); }
   else if (r.id === 'nightday') humStart(C.VOICE.night);
   else if (r.id === 'first' || r.id === 'sun') humStart();
   setCircle(); setAsk(); drawMind();
@@ -1041,13 +1049,13 @@ function up(e) {
   if (!['holding', 'holding2', 'singing'].includes(p)) return;
   const secs = (performance.now() - ui.h0) / 1000;
   humStop();
-  if (secs < 0.12 && r.id !== 'hymn' && r.id !== 'half') { ui.phase = p === 'holding2' ? 'ready2' : 'ready'; setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down.</span>'); return; }
+  if (secs < 0.12 && r.id !== 'hymn') { ui.phase = p === 'holding2' ? 'ready2' : 'ready'; if (r.id === 'half') { live.splice(0).forEach(n => n.stop()); ui.timers.forEach(clearTimeout); ui.timers = []; } setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down' + (r.id === 'half' ? ' while the low one sounds' : '') + '.</span>'); return; }
   if (p === 'singing') {
     ui.holds.push(secs); ui.k++;
     if (ui.k < 8) { ui.phase = 'sing'; setCircle(); setAsk(); drawMind(); return; }
     ui.phase = 'done'; setCircle();
     const res = A.hymnSing(g, ui.holds);
-    ui.bars.push({ kind: 'hymnyou', label: 'THE LINE, AS YOU SANG IT', syl: res.mem[1].syl, fresh: true });
+    ui.bars = [{ kind: 'hymnvoice', label: 'THE LINE, AS SUNG TO YOU', syl: res.mem[0].syl, fresh: true }, { kind: 'hymnyou', label: 'THE LINE, AS YOU SANG IT', syl: res.mem[1].syl, fresh: true }];
     drawMind(); setTimeout(() => { showResult(res); showChoice(); }, reduce ? 0 : 450); return;
   }
   if (p === 'holding' && r.id === 'nightday') { ui.night = secs; ui.bars.push({ kind: 'night', label: 'THE NIGHT', secs: Math.min(secs, C.NIGHTDAY.cap), fresh: true }); ui.phase = 'ready2'; setCircle(); setAsk(); drawMind(); return; }
@@ -1060,7 +1068,7 @@ function release(secs) {
   if (r.id === 'joy') { res = A.joy(g, secs); ui.bars.push({ kind: 'said', label: 'THE MOMENT', secs: res.made, fresh: true }); }
   else if (r.id === 'first') { res = A.hold(g, secs); ui.bars.push({ kind: 'you', label: 'YOU', secs: res.made, fresh: true }); }
   else if (r.id === 'nightday') { res = A.nightDay(g, ui.night, secs); ui.bars = [{ kind: 'pair', label: 'YOUR NIGHT, YOUR DAY', night: res.night, day: res.day, fresh: true }]; }
-  else if (r.id === 'half') { res = A.half(g, secs); live.splice(0).forEach(n => n.stop()); if (!ui.bars.length) ui.bars.push({ kind: 'voice', label: 'THE LOW ONE', secs: r.T, mark: r.T / 2 }); ui.bars.push({ kind: 'you', label: 'YOU: ITS HALF', secs: res.made, fresh: true }); }
+  else if (r.id === 'half') { res = A.half(g, secs); ui.bars.push({ kind: 'you', label: 'YOU: ITS HALF', secs: res.made, fresh: true }); if (secs < r.T) { ui.phase = 'rest'; ui.pending = res; setCircle(); setAsk(); drawMind(); return; } }
   else if (r.id === 'planned') { res = A.planned(g, secs); ui.bars.push({ kind: 'said', label: 'YOUR SILENCE', secs: res.made, fresh: true }); drawMind(); setTimeout(playOffered, 600); return; }
   else if (r.id === 'sun') { res = A.sunHold(g, secs); ui.bars.push({ kind: 'still', label: 'THE SUN STOOD STILL', secs: r.sun.stop }); ui.bars.push({ kind: 'you', label: 'YOU', secs: res.made, fresh: true }); }
   drawMind();

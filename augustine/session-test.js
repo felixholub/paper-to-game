@@ -43,7 +43,9 @@ const out = []; const say = s => { out.push(s); console.log(s); };
     say('  3: ' + await ask()); await S('3-ready'); await hold(player === 'hasty' ? 600 : 1500); await waitPhase(['ready2']); say('  3b: ' + await ask()); await S('3-ready2'); await hold(player === 'hasty' ? 1100 : 3600); await waitPhase(['result']); await result('3 night and day'); await S('3-result'); await next();
     // 4 half of it (How to play opened and closed first, on evening A)
     if (opts.help) { await page.click('#round .q'); await page.waitForTimeout(200); await S('help'); await page.click('#helpback'); await page.waitForTimeout(200); say('  How to play opened and closed; still at ' + JSON.stringify(await st())); }
-    say('  4: ' + await ask()); await S('4-ready'); await hold(L * 1000 * (player === 'hasty' ? 0.3 : player === 'steady' ? 0.5 : 0.62)); await waitPhase(['result']); await result('4 half of it'); await S('4-result'); await next();
+    say('  4: ' + await ask()); await S('4-ready');
+    if (player === 'hasty') { await tap(); await page.waitForTimeout(300); say('  4 after a tap: ' + await ask() + ' | phase ' + (await st()).phase); }
+    await hold(L * 1000 * (player === 'hasty' ? 0.3 : player === 'steady' ? 0.5 : 0.62)); await waitPhase(['rest']); say('  4 rest: ' + await ask()); await S('4-rest'); await waitPhase(['result']); await result('4 half of it'); await S('4-result'); await next();
     // 5 a planned silence
     say('  5: ' + await ask()); await hold(player === 'hasty' ? 500 : 2200); await waitPhase(['choose']); say('  5b: ' + await ask()); await S('5-choose');
     { const r = await resNow(); const y = yoursAmong(r.offered); await choose(player === 'steady' ? y : player === 'hasty' ? 1 - y : y); }
@@ -52,7 +54,7 @@ const out = []; const say = s => { out.push(s); console.log(s); };
     say('  6: ' + await ask()); await tap(); await waitPhase(['sun']); await page.waitForTimeout((SU.stopStart + SU.stop / 2) * 1000); await S('6-sun'); await waitPhase(['ready'], 20000); say('  6b: ' + await ask()); await S('6-ready');
     await hold(SU.stop * 1000 * (player === 'hasty' ? 0.5 : f)); await waitPhase(['result']); await result('6 the sun stands still'); await S('6-result'); await next();
     // 7 the hymn
-    say('  7: ' + await ask()); await tap(); await waitPhase(['sing'], 15000); say('  7b: ' + await ask()); await S('7-sing');
+    say('  7: ' + await ask()); await tap(); await waitPhase(['sing'], 15000); say('  7b: ' + await ask()); await S('7-sing'); say('  7 memory holds: ' + await page.evaluate(() => window.__augustine.ui.bars.map(b => b.kind + (b.words ? ' ' + b.words : '')).join(', ')));
     for (let k = 0; k < 8; k++) { const long = k % 2 === 1; await hold((long ? 820 : 400) * (player === 'hasty' ? 0.6 : 1) * (k === 5 ? 1.25 : 1)); await page.waitForTimeout(120); }
     await waitPhase(['choose']); say('  7c: ' + await ask()); await S('7-choose'); await choose(player === 'steady' ? 5 : 1); await result('7 the hymn'); await S('7-result'); await next();
     // 8 the tumult

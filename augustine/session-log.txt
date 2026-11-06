@@ -4,7 +4,7 @@
   about: page width 380 (no horizontal scroll: true)
 
 EVENING A (first-timer)
-  number 9988: the low one 3.051 s; the sun crosses 0.878 of the sky in 5.014 s and stands still 3.119 s; crowd of 3, the low one 1.2–4.251 s of 7.23 s
+  number 2394: the low one 3.362 s; the sun crosses 0.58 of the sky in 5.212 s and stands still 2.924 s; crowd of 3, the low one 0.6–3.962 s of 6.841 s
   1: Think of a moment of joy in your life. You know which; the game will never ask. Press and hold the circle for as long as that moment lasted. Nothing will sound. Nothing is drawn while it lasts. When it is over, it drops below the line into memory.
   shot a-1-ready
   1 a moment of joy: YOURS / AS LONG AS IT LASTED || That is how long it lasted, as you have it. No clock was running on it then, and none is checking now. | It is in your memory beside nothing else yet. The game will ask for it again, later, when there is more in there.
@@ -19,9 +19,11 @@ EVENING A (first-timer)
   3 night and day: TWO AND A HALF TIMES / YOUR DAY AGAINST YOUR NIGHT || Your day was about two and a half times your night, as you sounded them. | The night is the one span of your life you did not attend to at all. Nothing of it is in you from inside; a clock outside you measured it. The day you lived through, and mostly did not attend to either. What you just sounded was the relation between a thing a clock kept and a thing you half kept.
   shot a-3-result
   shot a-help
-  How to play opened and closed; still at {"phase":"ready","id":"half","i":3,"seed":9988,"k":0}
-  4: The low one again. It starts when you press. Let go when it is half over, while it is still sounding.
+  How to play opened and closed; still at {"phase":"ready","id":"half","i":3,"seed":2394,"k":0}
+  4: The low one again. Press and hold: it starts sounding when you press, and keeps sounding. Let go when you think it is half over. It goes on to its end, so you will hear how much was still to come.
   shot a-4-ready
+  4 rest: You let go. The low one goes on to its end: listen to how much was still to come.
+  shot a-4-rest
   4 half of it: TWO THIRDS / WHERE YOU LET GO OF IT || You let go at about two thirds of the low one. | Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the two times you had heard it.
   shot a-4-result
   5: Press and hold for as long as you like. Nothing will sound. When you let go, two voices will sound, one after the other; one of them is as long as your hold.
@@ -33,11 +35,12 @@ EVENING A (first-timer)
   shot a-6-sun
   6b: The sun has set. Press and hold for as long as the sun stood still. A note will sound while you hold.
   shot a-6-ready
-  6 the sun stands still: NINE TENTHS / YOURS AGAINST THE SUN’S STANDING STILL || About nine tenths of the sun’s standing still: a little short. | The sun crossed the whole sky tonight, quickly; on another evening it crosses another width at another pace, so how far it went says nothing about how long. And while it stood still it was no clock at all. You measured its standing still with a sound you made. So the sun was measured by time; it is not time.
+  6 the sun stands still: NINE TENTHS / YOURS AGAINST THE SUN’S STANDING STILL || About nine tenths of the sun’s standing still: a little short. | The sun crossed half the sky tonight, quickly; on another evening it crosses another width at another pace, so how far it went says nothing about how long. And while it stood still it was no clock at all. You measured its standing still with a sound you made. So the sun was measured by time; it is not time.
   shot a-6-result
   7: A voice will sing the first line of a hymn: eight syllables, short, long, short, long. Touch the circle to hear it. Then you sing it back.
   7b: Now sing it back: eight holds, one for each syllable, the long ones twice as long as the short ones. 1 of 8: hold for DE (short).
   shot a-7-sing
+  7 memory holds: words DE US CRE A TOR OM NI UM
   7c: Which of your eight syllables was the longest? Touch it.
   shot a-7-choose
   7 the hymn: DOUBLE / YOUR LONGS AGAINST YOUR SHORTS || Your longs were about double your shorts. In the line as sung to you they were double. | You took US for your longest. It was OM, about a quarter longer than US. | You measured each long by the short before it, but the short had ceased before the long began. Every comparison was between two things in memory, and the one who sang them can be wrong about them.
@@ -58,16 +61,16 @@ EVENING A (first-timer)
   10: The moment of joy you held at the start. Touch the circle to hear two voices. One of them is as long as you held it.
   10b: Which of the two is as long as you held the moment? Touch first or second.
   shot a-10-choose
-  10 the moment, again: NOT YOURS / YOUR MOMENT AMONG TWO VOICES || You took the second voice for it. Yours was the first, about half as long again as the one you chose. | Everything else tonight was checked against the world: a voice, the sun, a crowd. This was checked against you. The moment itself was never measured by anything; what you held at the start was the shape it has in you, and what you heard just now was that shape, sounded, with a stranger beside it.
+  10 the moment, again: NOT YOURS / YOUR MOMENT AMONG TWO VOICES || You took the second voice for it. Yours was the first, about two thirds of the one you chose. | Everything else tonight was checked against the world: a voice, the sun, a crowd. This was checked against you. The moment itself was never measured by anything; what you held at the start was the shape it has in you, and what you heard just now was that shape, sounded, with a stranger beside it.
   shot a-10-result
   LAST PAGE: Three spans tonight were only ever in you. You knew the silence you planned and your night and your day again; your moment of joy you did not.
-  You held a moment of joy at the start, as long as it has stayed in you. At the end, with a crowd and a hymn and the sun between, you took a voice about two thirds of it for it. | The low one, heard and held: about nine tenths of its length. | Your day you sounded as about two and a half times your night; later, among three pairs at three sizes, you heard that relation again. | Asked for its half while it sounded, you let go of the low one at about two thirds of its length. | You planned a silence and then knew it again among two voices. | The sun stood still, and you measured its standing still with a sound about nine tenths of it. | You sang the hymn back with your longs about double your shorts, and took the wrong syllable for your longest. | In the crowd you let go half a second after the low one stopped, and miscounted the voices.
+  You held a moment of joy at the start, as long as it has stayed in you. At the end, with a crowd and a hymn and the sun between, you took a voice about half as long again as it for it. | The low one, heard and held: about nine tenths of its length. | Your day you sounded as about two and a half times your night; later, among three pairs at three sizes, you heard that relation again. | Asked for its half while it sounded, you let go of the low one at about two thirds of its length. | You planned a silence and then knew it again among two voices. | The sun stood still, and you measured its standing still with a sound about nine tenths of it. | You sang the hymn back with your longs about double your shorts, and took the wrong syllable for your longest. | In the crowd you let go half a second after the low one stopped, and miscounted the voices.
   shot a-end
   shot a-end-full
   last page: page width 380 (no horizontal scroll: true)
 
 EVENING B (steady)
-  number 1673: the low one 4.105 s; the sun crosses 0.878 of the sky in 6.565 s and stands still 2.47 s; crowd of 4, the low one 0.6–4.705 s of 7.043 s
+  number 4094: the low one 2.949 s; the sun crosses 0.679 of the sky in 5.779 s and stands still 2.229 s; crowd of 3, the low one 0.6–3.549 s of 6.543 s
   1: Think of a moment of joy in your life. You know which; the game will never ask. Press and hold the circle for as long as that moment lasted. Nothing will sound. Nothing is drawn while it lasts. When it is over, it drops below the line into memory.
   1 a moment of joy: YOURS / AS LONG AS IT LASTED || That is how long it lasted, as you have it. No clock was running on it then, and none is checking now. | It is in your memory beside nothing else yet. The game will ask for it again, later, when there is more in there.
   station: page width 380 (no horizontal scroll: true)
@@ -75,34 +78,36 @@ EVENING B (steady)
   3: Last night you slept. Yesterday you were awake. Press and hold once for the night: a low note will sound while you hold. Then once for the day, a high note. Make the two sounds stand to each other as the night stood to the day.
   3b: That was the night. Now press and hold for the day, a high note, as long against the night as the day was against the night.
   3 night and day: TWO AND A HALF TIMES / YOUR DAY AGAINST YOUR NIGHT || Your day was about two and a half times your night, as you sounded them. | The night is the one span of your life you did not attend to at all. Nothing of it is in you from inside; a clock outside you measured it. The day you lived through, and mostly did not attend to either. What you just sounded was the relation between a thing a clock kept and a thing you half kept.
-  4: The low one again. It starts when you press. Let go when it is half over, while it is still sounding.
+  4: The low one again. Press and hold: it starts sounding when you press, and keeps sounding. Let go when you think it is half over. It goes on to its end, so you will hear how much was still to come.
+  4 rest: You let go. The low one goes on to its end: listen to how much was still to come.
   4 half of it: HALF / WHERE YOU LET GO OF IT || You let go at about half the low one. | Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the two times you had heard it.
   5: Press and hold for as long as you like. Nothing will sound. When you let go, two voices will sound, one after the other; one of them is as long as your hold.
   5b: Which of the two was as long as your silence? Touch first or second.
   5 a planned silence: YOURS / YOUR SILENCE AMONG TWO VOICES || You knew your own silence again, the second voice. | The span you held never sounded; it went by in silence, and yet it had gone through a space of time. Both voices came after it, so what you compared was two memories of sound against a memory of nothing.
   6: Touch the circle and the sun will rise. Watch it cross the sky. Somewhere on the way it will stand still for a while, then go on and set.
   6b: The sun has set. Press and hold for as long as the sun stood still. A note will sound while you hold.
-  6 the sun stands still: THE SAME / YOURS AGAINST THE SUN’S STANDING STILL || About the same as the sun’s standing still. | The sun crossed the whole sky tonight, at a middling pace; on another evening it crosses another width at another pace, so how far it went says nothing about how long. And while it stood still it was no clock at all. You measured its standing still with a sound you made. So the sun was measured by time; it is not time.
+  6 the sun stands still: THE SAME / YOURS AGAINST THE SUN’S STANDING STILL || About the same as the sun’s standing still. | The sun crossed most of the sky tonight, quickly; on another evening it crosses another width at another pace, so how far it went says nothing about how long. And while it stood still it was no clock at all. You measured its standing still with a sound you made. So the sun was measured by time; it is not time.
   7: A voice will sing the first line of a hymn: eight syllables, short, long, short, long. Touch the circle to hear it. Then you sing it back.
   7b: Now sing it back: eight holds, one for each syllable, the long ones twice as long as the short ones. 1 of 8: hold for DE (short).
+  7 memory holds: words DE US CRE A TOR OM NI UM
   7c: Which of your eight syllables was the longest? Touch it.
   7 the hymn: DOUBLE / YOUR LONGS AGAINST YOUR SHORTS || Your longs were about double your shorts. In the line as sung to you they were double. | Your longest was indeed OM. | You measured each long by the short before it, but the short had ceased before the long began. Every comparison was between two things in memory, and the one who sang them can be wrong about them.
   8: A crowd is coming: several voices at once. First, touch the circle to hear the low one once more, alone.
   8b: Now press and hold. The crowd starts when you press. The low one comes in after the others have begun. Let go the moment the low one stops. The others go on.
   8c: How many voices were in the crowd, the low one included? Touch the number.
-  8 the tumult: ON THE MOMENT / YOUR HOLD AGAINST THE LOW ONE || You let go on the moment the low one stopped, with the others still going. | There were four, and you said four. | A mind stretched among several things at once is holding each of them less. That is the same stretching that measured a voice at the start, and here it is torn.
+  8 the tumult: ON THE MOMENT / YOUR HOLD AGAINST THE LOW ONE || You let go on the moment the low one stopped, with the others still going. | There were three, and you said three. | A mind stretched among several things at once is holding each of them less. That is the same stretching that measured a voice at the start, and here it is torn.
   9: Your night and your day, from earlier. Touch the circle to hear three pairs of voices, a low one and a high one each time, at three different sizes.
   9b: Which pair stands in the relation you gave your night and your day? Touch first, second or third.
   9 night and day, again: YOURS / YOUR RELATION AMONG THREE PAIRS || You knew your own relation again, the third pair. | The pairs were of different sizes, so the lengths of the sounds were no help. What you had to hear was the relation alone, which is what you gave in the first place: not how long the night and the day were, but how the one stood to the other.
   10: The moment of joy you held at the start. Touch the circle to hear two voices. One of them is as long as you held it.
   10b: Which of the two is as long as you held the moment? Touch first or second.
-  10 the moment, again: YOURS / YOUR MOMENT AMONG TWO VOICES || You knew it again, the first voice. | Everything else tonight was checked against the world: a voice, the sun, a crowd. This was checked against you. The moment itself was never measured by anything; what you held at the start was the shape it has in you, and what you heard just now was that shape, sounded, with a stranger beside it.
+  10 the moment, again: YOURS / YOUR MOMENT AMONG TWO VOICES || You knew it again, the second voice. | Everything else tonight was checked against the world: a voice, the sun, a crowd. This was checked against you. The moment itself was never measured by anything; what you held at the start was the shape it has in you, and what you heard just now was that shape, sounded, with a stranger beside it.
   LAST PAGE: Three spans tonight were only ever in you, and you knew all three again: the silence you planned, your night and your day, your moment of joy.
   You held a moment of joy at the start, as long as it has stayed in you. At the end, with a crowd and a hymn and the sun between, you picked it out again beside a voice about two thirds of it. | The low one, heard and held: about its length. | Your day you sounded as about two and a half times your night; later, among three pairs at three sizes, you heard that relation again. | Asked for its half while it sounded, you let go of the low one at about half its length. | You planned a silence and then knew it again among two voices. | The sun stood still, and you measured its standing still with a sound about the same as it. | You sang the hymn back with your longs about double your shorts, and knew which of your syllables was longest. | In the crowd you let go on the moment the low one stopped, and counted the voices rightly.
   last page: page width 380 (no horizontal scroll: true)
 
 EVENING C (hasty)
-  number 9988: the low one 3.051 s; the sun crosses 0.878 of the sky in 5.014 s and stands still 3.119 s; crowd of 3, the low one 1.2–4.251 s of 7.23 s
+  number 2394: the low one 3.362 s; the sun crosses 0.58 of the sky in 5.212 s and stands still 2.924 s; crowd of 3, the low one 0.6–3.962 s of 6.841 s
   1: Think of a moment of joy in your life. You know which; the game will never ask. Press and hold the circle for as long as that moment lasted. Nothing will sound. Nothing is drawn while it lasts. When it is over, it drops below the line into memory.
   1 a moment of joy: YOURS / AS LONG AS IT LASTED || That is how long it lasted, as you have it. No clock was running on it then, and none is checking now. | It is in your memory beside nothing else yet. The game will ask for it again, later, when there is more in there.
   station: page width 380 (no horizontal scroll: true)
@@ -110,16 +115,19 @@ EVENING C (hasty)
   3: Last night you slept. Yesterday you were awake. Press and hold once for the night: a low note will sound while you hold. Then once for the day, a high note. Make the two sounds stand to each other as the night stood to the day.
   3b: That was the night. Now press and hold for the day, a high note, as long against the night as the day was against the night.
   3 night and day: NEARLY DOUBLE / YOUR DAY AGAINST YOUR NIGHT || Your day was nearly double your night, as you sounded them. | The night is the one span of your life you did not attend to at all. Nothing of it is in you from inside; a clock outside you measured it. The day you lived through, and mostly did not attend to either. What you just sounded was the relation between a thing a clock kept and a thing you half kept.
-  4: The low one again. It starts when you press. Let go when it is half over, while it is still sounding.
+  4: The low one again. Press and hold: it starts sounding when you press, and keeps sounding. Let go when you think it is half over. It goes on to its end, so you will hear how much was still to come.
+  4 after a tap: The low one again. Press and hold: it starts sounding when you press, and keeps sounding. Let go when you think it is half over. It goes on to its end, so you will hear how much was still to come. That was a tap. Press, and keep your finger down while the low one sounds. | phase ready
+  4 rest: You let go. The low one goes on to its end: listen to how much was still to come.
   4 half of it: A THIRD / WHERE YOU LET GO OF IT || You let go at about a third of the low one. | Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the two times you had heard it.
   5: Press and hold for as long as you like. Nothing will sound. When you let go, two voices will sound, one after the other; one of them is as long as your hold.
   5b: Which of the two was as long as your silence? Touch first or second.
-  5 a planned silence: NOT YOURS / YOUR SILENCE AMONG TWO VOICES || You took the first voice for yours. Yours was the second, about two thirds of the one you chose. | The span you held never sounded; it went by in silence, and yet it had gone through a space of time. Both voices came after it, so what you compared was two memories of sound against a memory of nothing.
+  5 a planned silence: NOT YOURS / YOUR SILENCE AMONG TWO VOICES || You took the first voice for yours. Yours was the second, about half as long again as the one you chose. | The span you held never sounded; it went by in silence, and yet it had gone through a space of time. Both voices came after it, so what you compared was two memories of sound against a memory of nothing.
   6: Touch the circle and the sun will rise. Watch it cross the sky. Somewhere on the way it will stand still for a while, then go on and set.
   6b: The sun has set. Press and hold for as long as the sun stood still. A note will sound while you hold.
-  6 the sun stands still: HALF / YOURS AGAINST THE SUN’S STANDING STILL || About half the sun’s standing still: well short. | The sun crossed the whole sky tonight, quickly; on another evening it crosses another width at another pace, so how far it went says nothing about how long. And while it stood still it was no clock at all. You measured its standing still with a sound you made. So the sun was measured by time; it is not time.
+  6 the sun stands still: HALF / YOURS AGAINST THE SUN’S STANDING STILL || About half the sun’s standing still: well short. | The sun crossed half the sky tonight, quickly; on another evening it crosses another width at another pace, so how far it went says nothing about how long. And while it stood still it was no clock at all. You measured its standing still with a sound you made. So the sun was measured by time; it is not time.
   7: A voice will sing the first line of a hymn: eight syllables, short, long, short, long. Touch the circle to hear it. Then you sing it back.
   7b: Now sing it back: eight holds, one for each syllable, the long ones twice as long as the short ones. 1 of 8: hold for DE (short).
+  7 memory holds: words DE US CRE A TOR OM NI UM
   7c: Which of your eight syllables was the longest? Touch it.
   7 the hymn: DOUBLE / YOUR LONGS AGAINST YOUR SHORTS || Your longs were about double your shorts. In the line as sung to you they were double. | You took US for your longest. It was OM, about a quarter longer than US. | You measured each long by the short before it, but the short had ceased before the long began. Every comparison was between two things in memory, and the one who sang them can be wrong about them.
   8: A crowd is coming: several voices at once. First, touch the circle to hear the low one once more, alone.
@@ -128,13 +136,13 @@ EVENING C (hasty)
   8 the tumult: TO THE END / YOUR HOLD AGAINST THE LOW ONE || You held to the end of the crowd. The low one had stopped three seconds before the others did. | You said four. There were three. | A mind stretched among several things at once is holding each of them less. That is the same stretching that measured a voice at the start, and here it is torn.
   9: Your night and your day, from earlier. Touch the circle to hear three pairs of voices, a low one and a high one each time, at three different sizes.
   9b: Which pair stands in the relation you gave your night and your day? Touch first, second or third.
-  9 night and day, again: NOT YOURS / YOUR RELATION AMONG THREE PAIRS || You took the second pair for yours, with the day about three times the night. Yours was the first: the day nearly double the night. | The pairs were of different sizes, so the lengths of the sounds were no help. What you had to hear was the relation alone, which is what you gave in the first place: not how long the night and the day were, but how the one stood to the other.
+  9 night and day, again: NOT YOURS / YOUR RELATION AMONG THREE PAIRS || You took the second pair for yours, with the day about a quarter longer than the night. Yours was the first: the day nearly double the night. | The pairs were of different sizes, so the lengths of the sounds were no help. What you had to hear was the relation alone, which is what you gave in the first place: not how long the night and the day were, but how the one stood to the other.
   10: The moment of joy you held at the start. Touch the circle to hear two voices. One of them is as long as you held it.
   10b: Which of the two is as long as you held the moment? Touch first or second.
   10 the moment, again: YOURS / YOUR MOMENT AMONG TWO VOICES || You knew it again, the first voice. | Everything else tonight was checked against the world: a voice, the sun, a crowd. This was checked against you. The moment itself was never measured by anything; what you held at the start was the shape it has in you, and what you heard just now was that shape, sounded, with a stranger beside it.
   LAST PAGE: Three spans tonight were only ever in you. You knew your moment of joy again; the silence you planned and your night and your day you did not.
-  You held a moment of joy at the start, as long as it has stayed in you. At the end, with a crowd and a hymn and the sun between, you picked it out again beside a voice about two thirds of it. | The low one, heard and held: about two thirds of its length. | Your day you sounded as nearly double your night; later, among three pairs at three sizes, you took a pair with the day about three times the night for it. | Asked for its half while it sounded, you let go of the low one at about a third of its length. | You planned a silence and then took a voice about half as long again as it for it. | The sun stood still, and you measured its standing still with a sound about half it. | You sang the hymn back with your longs about double your shorts, and took the wrong syllable for your longest. | In the crowd you held to the end; the low one had stopped first.
+  You held a moment of joy at the start, as long as it has stayed in you. At the end, with a crowd and a hymn and the sun between, you picked it out again beside a voice about half as long again as it. | The low one, heard and held: about two thirds of its length. | Your day you sounded as nearly double your night; later, among three pairs at three sizes, you took a pair with the day about one and a quarter times the night for it. | Asked for its half while it sounded, you let go of the low one at about a third of its length. | You planned a silence and then took a voice about two thirds of it for it. | The sun stood still, and you measured its standing still with a sound about half it. | You sang the hymn back with your longs about double your shorts, and took the wrong syllable for your longest. | In the crowd you held to the end; the low one had stopped first.
   last page: page width 380 (no horizontal scroll: true)
 
-evening C used evening A's number (9988) by its address: true
+evening C used evening A's number (2394) by its address: true
 page errors: none
