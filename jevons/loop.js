@@ -3,6 +3,7 @@
 global.MECH = require('./mechanism.js');
 const W = require('./words.js');
 const M = global.MECH, C = M.CONFIG;
+const opt = require('./optimum.json');
 const marks = Object.fromEntries(W.MARKS.map(m => [m.key, M.paceFromMult(m.mult)]));
 
 function session(label, choose) {
@@ -25,11 +26,10 @@ function session(label, choose) {
     if (r.quote) console.log(`  Jevons (${r.quote.where}): ${r.quote.text}`);
     if (M.checkEvening(st)) { evening(st, used); break; }
   }
-  if (!st.evening) console.log(`\n[${st.year}] ${W.runOn(st)}`);
   M.runOut(st);
-  const v = M.verdict(st), vt = W.verdict(v, st, used);
-  console.log(`\nLEDGER: ${v.ledger.gens.map(g => `${g.from}: per head ${W.mult(g.perHead)}, income ${W.mult(g.income)}, ${g.squares.toFixed(0)} sq`).join(' | ')} | left ${v.ledger.left.toFixed(0)}`);
-  console.log(`\nVERDICT: ${vt.heading}`); vt.lines.forEach(l => console.log('  ' + l));
+  const v = M.verdict(st), sc = M.scoreOf(st, opt.typical), vt = W.verdict(v, st, used, sc);
+  console.log(`\nLEDGER: ${v.ledger.gens.map(g => `${g.from}: per head ${W.mult(g.perHead)}, income ${W.mult(g.income)}, ${g.squares.toFixed(0)} sq`).join(' | ')} | after: ${W.mult(v.ledger.after.perHead)}, ${v.ledger.left.toFixed(0)} sq`);
+  console.log(`\nVERDICT: ${vt.heading}\n  SCORE ${vt.score.head}: ${vt.score.body}`); vt.lines.forEach(l => console.log('  ' + l));
   vt.quotes.forEach(q => console.log(`  Jevons (${q.where}): ${q.text}`));
 }
 function evening(st, used) {
@@ -43,3 +43,4 @@ session('Pushes faster', () => marks.faster);
 session('Slower every generation', () => marks.slower);
 session('Cuts back once, then a stand', st => st.gen === 0 ? marks.cut : marks.stand);
 session('As now three times, then cuts back', st => st.gen < 3 ? marks.now : marks.cut);
+session('The best path found', st => M.paceFromMult(opt.path[Math.min(st.gen, opt.path.length - 1)]));
