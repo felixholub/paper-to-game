@@ -95,15 +95,15 @@ var Art = (function () {
 
   // the room, drawn once; weather and eyes over it. 348 x 300
   function room(opts) {
-    var weal = opts.weal, hour = opts.hour, look = opts.look || 'none', g = '';
+    var uid = 'u' + (patId++), taken = !!opts.taken, weal = taken ? true : opts.weal, hour = opts.hour, look = taken ? 'within' : (opts.look || 'none'), g = '';
     // walls and floor
     g += R(0, 0, 348, 300, '#fff', 0);
     g += L(0, 236, 348, 236, 1.2);
     g += el('g', { opacity: 0.35 }, L(0, 60, 348, 60, 0.8) + L(0, 118, 348, 118, 0.8) + L(0, 176, 348, 176, 0.8) + L(70, 60, 70, 118, 0.8) + L(200, 118, 200, 176, 0.8) + L(330, 60, 330, 118, 0.8) + L(120, 0, 120, 60, 0.8));
     // window (arched) at right
     var wx = 246, wy = 44, ww = 74, wh = 120;
-    g += el('clipPath', { id: 'winclip' }, el('path', { d: 'M' + wx + ' ' + (wy + wh) + ' L' + wx + ' ' + (wy + 37) + ' A37 37 0 0 1 ' + (wx + ww) + ' ' + (wy + 37) + ' L' + (wx + ww) + ' ' + (wy + wh) + 'Z' }));
-    g += el('g', { 'clip-path': 'url(#winclip)' }, sky(wx, wy, ww, wh, hour, opts.seed));
+    g += el('clipPath', { id: 'winclip' + uid }, el('path', { d: 'M' + wx + ' ' + (wy + wh) + ' L' + wx + ' ' + (wy + 37) + ' A37 37 0 0 1 ' + (wx + ww) + ' ' + (wy + 37) + ' L' + (wx + ww) + ' ' + (wy + wh) + 'Z' }));
+    g += el('g', { 'clip-path': 'url(#winclip)'.replace(')', uid + ')') }, sky(wx, wy, ww, wh, hour, opts.seed));
     g += P('M' + wx + ' ' + (wy + wh) + ' L' + wx + ' ' + (wy + 37) + ' A37 37 0 0 1 ' + (wx + ww) + ' ' + (wy + 37) + ' L' + (wx + ww) + ' ' + (wy + wh) + 'Z', 2);
     g += L(wx + ww / 2, wy + 2, wx + ww / 2, wy + wh, 1.4) + R(wx - 6, wy + wh, ww + 12, 7, '#fff', 1.4);
     // cross on the back wall
@@ -124,12 +124,19 @@ var Art = (function () {
       for (var i = 0; i < 16; i++) { var x = 10 + r() * 328, y = 8 + r() * 170; if (x > 230 && y < 175 && x < 330) continue; g += star4(x, y, 4 + r() * 8, INK, 'twinkle'); }
       for (var j = 0; j < 9; j++) { var px = 12 + r() * 324, py = 20 + r() * 240; if (px > 230 && px < 335 && py < 180) continue; g += petal(px, py, 4 + r() * 4, r() * 180); }
     } else {
-      g += el('radialGradient', { id: 'crosslight' }, el('stop', { offset: 0, 'stop-color': '#000' }) + el('stop', { offset: 0.55, 'stop-color': '#000' }) + el('stop', { offset: 1, 'stop-color': '#fff' }));
-      g += el('mask', { id: 'woemask' }, el('rect', { x: 0, y: 0, width: 348, height: 300, fill: '#fff' }) + el('path', { d: 'M118 192 C150 178 200 180 232 196 L234 248 L112 248 C108 230 110 210 118 192Z', fill: '#000' }) + el('circle', { cx: 150, cy: 92, r: 52, fill: 'url(#crosslight)' }));
-      g += el('g', { mask: 'url(#woemask)', 'pointer-events': 'none' }, el('rect', { x: 0, y: 0, width: 348, height: 300, fill: 'url(#t2)', opacity: 0.55 }) +
+      g += el('radialGradient', { id: 'crosslight' + uid }, el('stop', { offset: 0, 'stop-color': '#000' }) + el('stop', { offset: 0.55, 'stop-color': '#000' }) + el('stop', { offset: 1, 'stop-color': '#fff' }));
+      g += el('mask', { id: 'woemask' + uid }, el('rect', { x: 0, y: 0, width: 348, height: 300, fill: '#fff' }) + el('path', { d: 'M118 192 C150 178 200 180 232 196 L234 248 L112 248 C108 230 110 210 118 192Z', fill: '#000' }) + el('circle', { cx: 150, cy: 92, r: 52, fill: 'url(#crosslight)'.replace(')', uid + ')') }));
+      g += el('g', { mask: 'url(#woemask)'.replace(')', uid + ')'), 'pointer-events': 'none' }, el('rect', { x: 0, y: 0, width: 348, height: 300, fill: 'url(#t2)', opacity: 0.55 }) +
         [[0, 0, 110, 0, 0, 90], [348, 0, 240, 0, 348, 80], [0, 300, 0, 200, 120, 300], [348, 300, 348, 210, 230, 300]].map(function (t) { return el('polygon', { points: t.join(' ').replace(/(\d+) (\d+) /g, '$1,$2 '), fill: 'url(#t3)', opacity: 0.6 }); }).join(''));
       var sr = rng(opts.seed * 5 + 2);
       for (var k = 0; k < 9; k++) { var cx0 = k % 2 ? 330 - sr() * 60 : 10 + sr() * 60, cy0 = k < 5 ? 8 + sr() * 70 : 220 + sr() * 70, d = 'M' + cx0 + ' ' + cy0; for (var m = 0; m < 6; m++) d += ' l' + ((sr() - 0.5) * 26) + ' ' + ((sr() - 0.5) * 22); g += P(d, 0.9, 'none', { opacity: 0.8, 'pointer-events': 'none' }); }
+    }
+    if (taken) { // the taking: the room goes to white and stars; the blanket is as it was
+      g += el('mask', { id: 'takenmask' + uid }, el('rect', { x: 0, y: 0, width: 348, height: 300, fill: '#fff' }) + el('path', { d: 'M118 192 C150 178 200 180 232 196 L234 248 L112 248 C108 230 110 210 118 192Z', fill: '#000' }));
+      g += el('rect', { x: 0, y: 0, width: 348, height: 300, fill: '#fff', opacity: 0.74, mask: 'url(#takenmask)'.replace(')', uid + ')'), 'pointer-events': 'none' });
+      var tr = rng(opts.seed * 11 + 5);
+      for (var q = 0; q < 26; q++) g += star4(8 + tr() * 332, 8 + tr() * 284, 5 + tr() * 11, INK, 'twinkle');
+      return svg(348, 300, g);
     }
     // tap targets
     g += el('rect', { x: 110, y: 40, width: 84, height: 110, fill: 'transparent', 'data-place': 'cross', style: 'cursor:pointer' });
@@ -172,7 +179,8 @@ var Art = (function () {
     howwell: function () { var g = C(174, 95, 55, '#fff', 1.6) + P('M150 48 L168 90 L158 110 L180 142', 1.6); var r = rng(29); for (var i = 0; i < 8; i++) g += star4(150 + r() * 36, 50 + r() * 90, 3 + r() * 5, INK, 'twinkle'); return g; },
     hid: function () { var g = ''; for (var row = 0; row < 5; row++) for (var c = 0; c < 6; c++) g += R(10 + c * 56 + (row % 2) * 28 - 28, 10 + row * 36, 56, 36, 'url(#t1)', 1.2); g += P('M150 70 L198 70 L198 170 L150 170Z', 1.8, '#fff') + C(188, 122, 3, INK); return g; },
     rest: function () { var g = face(174, 100, 1.2, 'within', 'weal'); var r = rng(31); for (var i = 0; i < 10; i++) g += star4(10 + r() * 328, 8 + r() * 60, 3 + r() * 6, INK, 'twinkle'); return g; },
-    sky: function (o) { var g = el('clipPath', { id: 'skyclip' }, el('path', { d: 'M120 190 L120 60 A54 54 0 0 1 228 60 L228 190Z' })); g += el('g', { 'clip-path': 'url(#skyclip)' }, sky(120, 6, 108, 184, o.hour, 41)); var dark = o.hour === 'deep night' || o.hour === 'night' || o.hour === 'small hours'; g += P('M120 190 L120 60 A54 54 0 0 1 228 60 L228 190Z', 2) + el('line', { x1: 174, y1: 8, x2: 174, y2: 180, stroke: dark ? '#fff' : INK, 'stroke-width': 2 }) + el('line', { x1: 122, y1: 100, x2: 226, y2: 100, stroke: dark ? '#fff' : INK, 'stroke-width': 1.4 }) + R(110, 180, 128, 10, '#fff', 1.6); return g; }
+    taken: function () { var g = face(174, 100, 1.25, 'within', 'glad', false); var r = rng(37); for (var i = 0; i < 24; i++) g += star4(8 + r() * 332, 6 + r() * 178, 4 + r() * 10, INK, 'twinkle'); return g; },
+    sky: function (o) { var sid = 'skyclip' + (patId++); var g = el('clipPath', { id: sid }, el('path', { d: 'M120 190 L120 60 A54 54 0 0 1 228 60 L228 190Z' })); g += el('g', { 'clip-path': 'url(#' + sid + ')' }, sky(120, 6, 108, 184, o.hour, 41)); var dark = o.hour === 'deep night' || o.hour === 'night' || o.hour === 'small hours'; g += P('M120 190 L120 60 A54 54 0 0 1 228 60 L228 190Z', 2) + el('line', { x1: 174, y1: 8, x2: 174, y2: 180, stroke: dark ? '#fff' : INK, 'stroke-width': 2 }) + el('line', { x1: 122, y1: 100, x2: 226, y2: 100, stroke: dark ? '#fff' : INK, 'stroke-width': 1.4 }) + R(110, 180, 128, 10, '#fff', 1.6); return g; }
   };
   function sight(id, o) { var f = SIGHTS[id] || SIGHTS.seeking; return svg(348, 190, f(o || {})); }
 
@@ -185,6 +193,7 @@ var Art = (function () {
   }
   function frame(rec) {
     if (!rec) return '';
+    if (rec.taken) return svg(34, 28, star4(8, 7, 4, INK) + star4(26, 8, 3, INK) + star4(17, 20, 5, INK) + star4(30, 22, 2.5, INK) + star4(5, 22, 2.5, INK));
     var g = rec.weal ? (star4(8, 8, 3.5, INK) + star4(26, 20, 3, INK) + star4(16, 22, 2.2, INK)) : el('rect', { x: 0, y: 0, width: 34, height: 28, fill: 'url(#t2)', opacity: 0.7 });
     var m = rec.place === 'cross' ? P('M17 6 L17 24 M11 11 L23 11', 2.4) : rec.place === 'window' ? P('M12 24 L12 12 A5 5 0 0 1 22 12 L22 24Z', 1.8, rec.weal ? '#fff' : INK) : P('M10 14 Q17 20 24 14 M10 20 Q17 25 24 20', 1.8);
     return svg(34, 28, g + m);

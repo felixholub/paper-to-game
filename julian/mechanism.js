@@ -17,6 +17,8 @@
     cheerNeedsCross: 1, // ch. xxi: "willingly abiding in the same Cross ... unto the last point, suddenly He shall change His Cheer" — our tie
     cheerAfterDrying: 1, // ch. xxi: the cheer changes at the point of death, after the drying (ch. xvi–xvii, "the most pain, and the last"); before it a lift at the cross is only a lift
     profferAfterDrying: 1, // ch. xix: "Look up to Heaven" is offered while she beholds the drying (ch. xvi–xvii); our tie to the first dark after it
+    takenProb: 1 / 3,   // our choice: on about one night in three the sickness takes her before morning; she asked for a sickness "so hard as to death" (ch. ii) and was not taken (ch. iii, viii); the taking is the Fifteenth Shewing (ch. i) and ch. xxi, drawn as a counterfactual
+    takenBeats: [7, 10], // our choice: the taking, when it comes, comes at the end of beat 7, 8, 9 or 10 (1-indexed), so the night keeps its climb to the drying; drawn from the seed, never from a look
     hours: ['deep night', 'deep night', 'night', 'night', 'small hours', 'small hours', 'before dawn', 'before dawn', 'first light', 'morning'] // our choice: the window's clock; the text gives no hour in these chapters
   };
 
@@ -42,6 +44,14 @@
       if (turn) { turns++; run = 1; } else run++;
     }
     return w;
+  }
+
+  // the night's end: taken before morning, or not; drawn from the seed alone, like the weather (ch. xv: "when He will")
+  function fate(seed) {
+    var rng = mulberry32(seed * 31 + 7);
+    if (rng() >= CONFIG.takenProb) return { taken: null };
+    var lo = CONFIG.takenBeats[0] - 1, hi = CONFIG.takenBeats[1] - 1;
+    return { taken: lo + Math.floor(rng() * (hi - lo + 1)) };
   }
 
   // ---- the sights --------------------------------------------------------------------------------------------------
@@ -98,6 +108,9 @@
     his: 'Where is now any point of thy pain, or of thy grief?', hers: 'And I was as glad and merry as it was possible.' };
   var CHEER_AGAIN = { id: 'cheer', ch: 'xxi',
     caption: 'And again, with no time between, the cheer changes.', his: 'Where is now any point of thy pain?' };
+  var TAKEN = { id: 'taken', ch: 'i (the Fifteenth Shewing), xxi',
+    caption: 'And then, with no time between, you are taken: from all your pain and from all your woe at once. The room goes to stars; the blanket is as it was.',
+    his: 'Suddenly thou shalt be taken from all thy pain and from all thy woe, and of My Goodness thou shalt come up above, and be fulfilled with joy and bliss.' };
   var NAY = { ch: 'xix', line: 'A friendly voice says to look up, to His Father; nothing between the cross and heaven could harm you. You look at the cross instead.',
     after: 'Staying was a choice, not a safety.', hers: 'Nay; I may not: for Thou art my Heaven.' };
 
@@ -161,7 +174,11 @@
     passover: 'And: "it is not God’s will that we follow the feelings of pain in sorrow and mourning for them, but that we suddenly pass over."',
     means: 'The dark that comes over you is not a message about you. Between the dark and the light there is no time. What you saw, you saw by staying; what you sought and did not see counted the same.',
     climb: 'The heaviness had no climb: the last was no worse than the first, and it led nowhere. That is the point, not a fault of the night. What climbed was the sight at the cross, from the garland to the drying, and only past the drying does the cheer change.',
-    lived: 'You did not die. The pain went out of you all at once, as it had come, and you took it that the night was shown for those who live.',
+    lived: 'You were sure you would not see the day. You did: the pain went out of you all at once, as it had come, and it was a marvel to you, and troubling, for you had wanted to go. You took it that the night was shown for those who live.',
+    taken: 'You did not see the day. {hour}, after the {ordinal} beat, you were taken from all your pain and from all your woe, with no time between. It came after you had looked at {place}, as it would have come after anything.',
+    takenSays: 'She was not taken that night; she lived, and marvelled at it, and wrote the taking down as she had been shown it: "we shall suddenly be taken from all our pain and from all our woe, and of His Goodness we shall come up above."',
+    takenMeans: 'The taking came as the heaviness came: after nothing you did, with no time between. Whether you saw the day was never in your hands, any more than the weather was; what was in your hands was where you looked, and what you saw.',
+    noMorning: 'The night ended at the {ordinal} beat; the frames after it are empty.',
     sentence: 'All shall be well, and all shall be well, and all manner of thing shall be well.',
     morningDark: 'The heaviness was on the room when the morning came. It is passing: "pain is passing and shall be brought to nought."'
   };
@@ -169,7 +186,7 @@
   // ---- the night ---------------------------------------------------------------------------------------------------
   function newNight(seed) {
     seed = (seed === undefined || seed === null) ? (Math.floor(Math.random() * 9000) + 1) : seed;
-    return { seed: seed, weather: schedule(seed), beat: 0, crossIx: 0, withinIx: 0, causeAsked: false,
+    return { seed: seed, weather: schedule(seed), taken: fate(seed).taken, died: false, beat: 0, crossIx: 0, withinIx: 0, causeAsked: false,
              dryingSeen: false, proffered: false, profferOpen: false, cheers: 0, record: [], done: false };
   }
 
@@ -244,9 +261,14 @@
       if (q.hers) r.balloons.push({ who: 'hers', text: q.hers });
       if (q.his) r.balloons.push({ who: 'his', text: q.his });
     }
+    if (state.taken === t) { // the taking: by the seed, never by the look
+      r.taken = true; state.died = true;
+      r.takenCaption = TAKEN.caption; r.balloons.push({ who: 'his', text: TAKEN.his });
+      if (!r.cheer) r.balloons.push({ who: 'his', text: CHEER.his });
+    }
     state.record.push(r);
     state.beat++;
-    if (state.beat >= CONFIG.beats) state.done = true;
+    if (state.beat >= CONFIG.beats || state.died) state.done = true;
     return r;
   }
 
@@ -283,11 +305,15 @@
       : afterNames.length === 1 ? 'The heaviness came ' + times(onsets.length) + ', each time ' + onePlace + '; after one thing, as it would have come after any other. '
       : 'The heaviness came ' + times(onsets.length) + ': ' + listNames(places(after)) + '; after everything, and so after nothing you did. ')
       + VERDICT.checked + ' ' + VERDICT.kept + ' ' + VERDICT.passover;
-    return { did: did, says: says, means: VERDICT.means + (causeInDark ? '' : ' You never looked within for what brought it; Julian did, and found nothing.') + ' ' + VERDICT.climb, lived: VERDICT.lived, sentence: VERDICT.sentence,
-             morning: w[n - 1] ? '' : VERDICT.morningDark, counts: { darks: darks, spells: spells, stay: stay, window: win, within: inn, cheers: cheers, onsets: onsets, lifts: lifts, seen: seen.length, asked: asked.length } };
+    var ORD = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
+    var last = rec[n - 1], placeName = last ? (last.place === 'within' ? 'nothing but yourself' : 'the ' + last.place) : '';
+    var HOUR = { 'deep night': 'In the deep night', 'night': 'In the night', 'small hours': 'In the small hours', 'before dawn': 'Before dawn', 'first light': 'At first light', 'morning': 'In the morning' };
+    var lived = state.died ? VERDICT.taken.replace('{hour}', HOUR[last.hour] || last.hour).replace('{ordinal}', ORD[n - 1]).replace('{place}', placeName) : VERDICT.lived;
+    return { did: did, says: says + (state.died ? ' ' + VERDICT.takenSays : ''), means: VERDICT.means + (causeInDark ? '' : ' You never looked within for what brought it; Julian did, and found nothing.') + ' ' + VERDICT.climb + (state.died ? ' ' + VERDICT.takenMeans : ''), lived: lived, died: state.died, title: state.died ? 'No time between' : 'Morning', sentence: VERDICT.sentence,
+             morning: state.died ? VERDICT.noMorning.replace('{ordinal}', ORD[n - 1]) : (w[n - 1] ? '' : VERDICT.morningDark), counts: { darks: darks, spells: spells, stay: stay, window: win, within: inn, cheers: cheers, onsets: onsets, lifts: lifts, seen: seen.length, asked: asked.length } };
   }
 
   var Julian = { CONFIG: CONFIG, CROSS: CROSS, WITHIN: WITHIN, WINDOW: WINDOW, WEATHER: WEATHER, VERDICT: VERDICT, SEEKING: SEEKING, CHEER: CHEER,
-                 schedule: schedule, newNight: newNight, options: options, look: look, verdict: verdict, pageLine: pageLine, hour: hour, weal: weal, mulberry32: mulberry32 };
+                 schedule: schedule, fate: fate, TAKEN: TAKEN, newNight: newNight, options: options, look: look, verdict: verdict, pageLine: pageLine, hour: hour, weal: weal, mulberry32: mulberry32 };
   if (typeof module !== 'undefined' && module.exports) module.exports = Julian; else root.Julian = Julian;
 })(typeof window !== 'undefined' ? window : this);

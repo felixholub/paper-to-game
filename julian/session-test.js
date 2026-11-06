@@ -17,6 +17,8 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
   async function playNight(tag, policy, shots) {
     const BEATS = await page.evaluate(() => window.Julian.CONFIG.beats);
     for (let beat = 0; beat < BEATS; beat++) {
+      const over = await page.evaluate(() => document.querySelector('.screen.on').id === 'end');
+      if (over) break;
       const st = await page.evaluate(() => { const s = window.__julian.state; return { beat: s.beat, weal: s.weather[s.beat], causeAsked: s.causeAsked, line: document.getElementById('weatherLine').textContent }; });
       const place = policy(st);
       if (shots.indexOf('b' + beat) >= 0) await shot(tag + '-beat' + (beat + 1) + '-choose');
@@ -26,7 +28,9 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
       if (shots.indexOf('s' + beat) >= 0) await shot(tag + '-beat' + (beat + 1) + '-selected');
       await page.click('#lookBtn');
       const res = await page.evaluate(() => ({ cap: document.getElementById('resCaption').textContent, line: document.getElementById('resLine').textContent, balloons: Array.from(document.querySelectorAll('.balloon')).map(b => b.textContent) }));
-      log.push(tag + ' beat ' + (beat + 1) + ' [' + (st.weal ? 'sureness' : 'HEAVINESS') + '] ' + st.line + ' > ' + place + ' :: ' + res.cap.slice(0, 70) + '... | ' + res.line.slice(0, 80));
+      const taken = await page.evaluate(() => window.__julian.state.died);
+      log.push(tag + ' beat ' + (beat + 1) + ' [' + (st.weal ? 'sureness' : 'HEAVINESS') + '] ' + st.line + ' > ' + place + ' :: ' + res.cap.slice(0, 70) + '... | ' + res.line.slice(0, 80) + (taken ? ' | TAKEN' : ''));
+      if (taken) await shot(tag + '-taken');
       if (shots.indexOf('r' + beat) >= 0) await shot(tag + '-beat' + (beat + 1) + '-result');
       await noScroll(tag + ' beat ' + beat);
       if (beat === 4 && tag === 'a') { // help from mid-play, and back
@@ -38,8 +42,9 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
     }
     const on = await page.evaluate(() => document.querySelector('.screen.on').id);
     if (on !== 'end') errors.push('did not reach the end screen in ' + tag);
-    const v = await page.evaluate(() => ({ did: document.getElementById('vDid').textContent, says: document.getElementById('vSays').textContent, means: document.getElementById('vMeans').textContent, night: document.getElementById('nightNo').textContent }));
-    log.push(tag + ' END: ' + v.night + '\n  ' + v.did + '\n  ' + v.says + '\n  ' + v.means);
+    const v = await page.evaluate(() => ({ title: document.getElementById('endTitle').textContent, lived: document.getElementById('vLived').textContent, did: document.getElementById('vDid').textContent, says: document.getElementById('vSays').textContent, means: document.getElementById('vMeans').textContent, night: document.getElementById('nightNo').textContent, art: document.getElementById('endArt').querySelector('svg') !== null }));
+    if (!v.art) errors.push('no room drawn on the end page in ' + tag);
+    log.push(tag + ' END (' + v.title + '): ' + v.night + '\n  ' + v.lived + '\n  ' + v.did + '\n  ' + v.says + '\n  ' + v.means);
     await shot(tag + '-end'); await noScroll(tag + ' end');
   }
   await page.goto(file + '?night=7');
@@ -47,7 +52,7 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
   await page.click('#startBtn'); await shot('intro'); await noScroll('intro');
   await page.click('#introBtn');
   // A: Julian's own night — the cross, and one look within in the first dark
-  await playNight('a', st => (!st.weal && !st.causeAsked) ? 'within' : 'cross', ['b0', 's0', 'r0', 'b1', 'r1', 'r2', 'r3', 'r5', 'r6', 's7', 'r7', 'r8', 'b9']);
+  await playNight('a', st => (!st.weal && !st.causeAsked) ? 'within' : 'cross', ['b0', 's0', 'r0', 'b1', 'r1', 'r2', 'r3', 'r5', 'r6', 's7', 'r7']);
   await page.click('#end [data-go="about"]'); await shot('about'); await page.click('#aboutBack');
   const backTo = await page.evaluate(() => document.querySelector('.screen.on').id); if (backTo !== 'end') errors.push('about did not return to end');
   // B: the stranger's first instinct — the window in every dark
@@ -59,6 +64,9 @@ const file = 'file://' + path.resolve(__dirname, 'julians-window.html');
   // D: the window all night (never a sight)
   await page.click('#againBtn');
   await playNight('d', () => 'window', ['r3']);
+  // E: a night that is not taken (seed 1), the cross all night, to the morning
+  await page.goto(file + '?night=1'); await page.click('#startBtn'); await page.click('#introBtn');
+  await playNight('e', () => 'cross', ['r5', 'r9']);
   require('fs').writeFileSync(path.join(__dirname, 'session-log.txt'), log.join('\n') + '\n\nerrors: ' + (errors.length ? errors.join('\n') : 'none') + '\n');
   console.log(log.filter(l => /END|beat (1|2|3|4) /.test(l)).join('\n'));
   console.log('\nerrors: ' + (errors.length ? errors.join('\n') : 'none'));

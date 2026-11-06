@@ -61,6 +61,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 .record { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: var(--w); margin: 8px auto 0; }
 .record .fr { height: 54px; border: 1.2px solid var(--ink); background: #fff; overflow: hidden; }
 .record .fr svg { display: block; width: 100%; height: 100%; }
+.record .fr.empty { border-style: dotted; opacity: .45; }
 .verd h3 { font-family: 'Italiana', serif; font-weight: 400; font-size: 22px; margin: 14px 0 4px; }
 .sentence { font-family: 'Italiana', serif; font-size: 26px; line-height: 1.15; margin: 18px 0 10px; text-align: center; }
 .sig { margin-top: 26px; font-style: italic; font-size: 14px; opacity: .55; }
@@ -102,7 +103,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 <section id="intro" class="screen">
   <h2>Three days and three nights</h2>
   <div class="panels" id="introPanels"></div>
-  <p class="cap plain">Now the room is dark except for the cross, which keeps a plain light of its own. All night a heaviness will come over the room and go again. The blanket is how you are kept; the tone over the page is how it feels.</p>
+  <p class="cap plain">Now the room is dark except for the cross, which keeps a plain light of its own. All night a heaviness will come over the room and go again. The blanket is how you are kept; the tone over the page is how it feels. Whether you see the day is not in your hands tonight, any more than the weather is.</p>
   <div class="row"><button class="btn primary wide" id="introBtn">Turn the page</button></div>
 </section>
 
@@ -130,6 +131,7 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
 <section id="end" class="screen">
   <h2 id="endTitle">Morning</h2>
   <p class="sub" id="nightNo"></p>
+  <div class="pagewrap" id="endArt"></div>
   <p class="cap plain" id="vLived"></p>
   <div class="verd">
     <h3>What you did</h3><p class="cap plain" id="vDid"></p>
@@ -155,7 +157,8 @@ h2 { font-family: 'Italiana', serif; font-weight: 400; font-size: 28px; line-hei
   <p><b>Looking.</b> Each beat, tap a place: the cross, the window, or you yourself (within), in the picture or on the three panels under it. Your eyes turn there and the panel says what looking there is. Then tap <b>Look</b>. <b>The cross</b> shows the next sight of the Passion, and the sights climb, to the drying and past it; in the heaviness the same sight is hard to look at. Only past the drying, when the heaviness goes while you are at the cross, does the cheer change. <b>The window</b> shows the sky and nothing else; nothing there can harm you, and nothing is shown. <b>Within</b> asks a question and gets an answer, one per beat, in order; in the heaviness the first question is what brought it.</p>
   <p><b>After a look</b> the game says in its own words what you did and what came of it, then His words in a round balloon and yours in a dashed one, then what the heaviness did and what that means. <b>Turn the page</b> starts the next beat. Nothing carries over: every beat starts with your eyes on nothing.</p>
   <p><b>The strip</b> along the bottom is the night so far: a small frame per beat, toned for the heaviness, starred for the sureness, with a mark for where you looked. The rose line under it is the blanket.</p>
-  <p><b>Morning.</b> The strip is shown whole, and then three things in words: what you did, what Julian says, and what that means. There is no score. <b>Another night</b> draws a new night: the weather will come and go on a different schedule, and you can try the other ways of looking.</p>
+  <p><b>The end.</b> Most nights end at morning. On some, the sickness takes you before it, in the last beats: the page goes to white and stars, with no time between, and the blanket is as it was. It is drawn with the night's number before your first look, like the weather, and it follows nothing you do.</p>
+  <p><b>The last page.</b> The room as it ended, then the strip, and then three things in words: what you did, what Julian says, and what that means. There is no score. <b>Another night</b> draws a new night: the weather will come and go on a different schedule, and you can try the other ways of looking.</p>
   <div class="row"><button class="btn primary wide" id="helpBack">Back</button></div>
 </section>
 
