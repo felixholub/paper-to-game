@@ -11,7 +11,7 @@
 
   document.body.insertAdjacentHTML('afterbegin', Art.defsSvg()); // the tone patterns, once, in a drawing that is never hidden
   $('coverArt').innerHTML = Art.cover();
-  var INTRO = ['Three days and three nights of sickness, in a cell with one window.', 'On the fourth night, the rites; you do not expect to see the day.', 'Your body is dead from the middle down; then the upper part begins to go, and the room goes dark around you.', 'The priest sets a cross before your face: "look thereupon and comfort thee therewith." It keeps a light of its own.'];
+  var INTRO = ['Three days and three nights of sickness, in a cell with one window.', 'On the fourth night, the rites; you are sure you will not see the day.', 'Your body is dead from the middle down; then the upper part begins to go, and the room goes dark around you.', 'The priest sets a cross before your face: "look thereupon and comfort thee therewith." It keeps a light of its own.'];
   $('introPanels').innerHTML = INTRO.map(function (c, i) { return '<div class="p">' + Art.intro(i) + '<div class="c">' + c + '</div></div>'; }).join('');
 
   function seedFromUrl() { var m = /[?&]night=(\d+)/.exec(location.search); return m ? parseInt(m[1], 10) : undefined; }
@@ -57,22 +57,31 @@
     $('resCaption').textContent = r.caption;
     $('balloons').innerHTML = r.balloons.map(function (b) { return '<div class="balloon ' + b.who + '">' + b.text + '</div>'; }).join('');
     $('resLine').textContent = r.line + (r.cheerCaption ? ' ' + r.cheerCaption : '');
-    if (r.cheer) {
+    if (r.taken) {
+      $('pagewrap').innerHTML = Art.room({ taken: true, hour: r.hour, seed: state.seed + r.beat }) + '<div class="beat">' + (r.beat + 1) + ' of ' + J.CONFIG.beats + '</div><div class="hour">' + r.hour + '</div>';
+      $('pagewrap').classList.remove('cheerflash'); void $('pagewrap').offsetWidth; $('pagewrap').classList.add('cheerflash');
+      $('sightArt').innerHTML += '<div class="cheerin">' + Art.sight('taken', {}) + '</div>';
+      $('weatherLine').textContent = r.takenCaption;
+    } else if (r.cheer) {
       // with no time between: the room is drawn in sureness now, although the beat was heaviness
       $('pagewrap').innerHTML = Art.room({ weal: true, hour: r.hour, look: 'cross', seed: state.seed + r.beat }) + '<div class="beat">' + (r.beat + 1) + ' of ' + J.CONFIG.beats + '</div><div class="hour">' + r.hour + '</div>';
       $('pagewrap').classList.remove('cheerflash'); void $('pagewrap').offsetWidth; $('pagewrap').classList.add('cheerflash');
       $('weatherLine').textContent = J.WEATHER.went + ' It went with no time between.';
     }
-    $('nextBtn').textContent = state.done ? 'Morning' : 'Turn the page';
+    $('nextBtn').textContent = state.done ? 'The last page' : 'Turn the page';
     drawStrip();
     $('result').scrollIntoView({ block: 'start', behavior: 'smooth' });
   });
   $('nextBtn').addEventListener('click', function () { if (state.done) renderEnd(); else renderBeat(); window.scrollTo(0, 0); });
 
   function renderEnd() {
-    var v = J.verdict(state);
-    $('nightNo').textContent = 'Night ' + state.seed + '. ' + (state.weather[J.CONFIG.beats - 1] ? 'The room is light.' : 'The heaviness is on the room.');
-    $('recordGrid').innerHTML = state.record.map(function (r) { return '<div class="fr">' + Art.frame(r) + '</div>'; }).join('');
+    var v = J.verdict(state), n = state.record.length, last = state.record[n - 1];
+    $('endTitle').textContent = v.title;
+    $('nightNo').textContent = 'Night ' + state.seed + '. ' + (state.died ? 'The night ended early.' : (state.weather[J.CONFIG.beats - 1] ? 'The room is light.' : 'The heaviness is on the room.'));
+    $('endArt').innerHTML = (state.died ? Art.room({ taken: true, hour: last.hour, seed: state.seed + n }) : Art.room({ weal: state.weather[n - 1], hour: 'morning', look: 'window', seed: state.seed + n })) + '<div class="hour">' + (state.died ? last.hour : 'morning') + '</div>';
+    var frames = [];
+    for (var i = 0; i < J.CONFIG.beats; i++) frames.push(state.record[i] ? '<div class="fr">' + Art.frame(state.record[i]) + '</div>' : '<div class="fr empty"></div>');
+    $('recordGrid').innerHTML = frames.join('');
     $('vLived').textContent = v.lived; $('vDid').textContent = v.did; $('vSays').textContent = v.says; $('vMeans').textContent = v.means; $('vSentence').textContent = v.sentence;
     $('vMorning').style.display = v.morning ? '' : 'none'; $('vMorning').textContent = v.morning;
     show('end');

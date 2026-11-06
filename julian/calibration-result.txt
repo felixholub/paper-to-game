@@ -6,7 +6,7 @@ ok   mean turns per night between 5 and 7 (the text's ~20 in one shewing, compre
 ok   5th–95th percentile of turns within [4, 8]  [4–8]
 ok   the twenty is in CONFIG with its chapter
 ok   the weather is the same under every policy for the same seed
-ok   P(heaviness comes next | last look) equal across the three places within 0.06  [0.659 / 0.666 / 0.653]
+ok   P(heaviness comes next | last look) equal across the three places within 0.06  [0.657 / 0.663 / 0.652]
 ok   the keeping is constant on every beat of every night (ch. xv)
 ok   CONFIG.actsAffectWeather is 0 and the schedule takes no argument but the seed
 ok   cross sights in the text's order
@@ -21,6 +21,13 @@ ok   no cheer before the drying, on any night, under any policy
 ok   a player who flees to the window in every dark never sees the cheer; one at the cross all night sees it on every lift past the drying
 ok   a player at the cross all night reaches the drying on beat 6 and sees the cheer on most nights
 ok   the proffer comes once, after the drying, in heaviness; taking the cross answers Nay, taking the window looks up
+ok   the sickness takes her on about one night in three (0.28–0.40 over 400 seeds)  [0.347]
+ok   the taking comes only at the end of beats 7–10, and each of the four occurs
+ok   the taking is drawn from the seed alone: fate takes one argument, and the same seed ends the same way under every policy
+ok   a taken night ends after the taken beat, is marked died, and its last look carries the taking
+ok   the taking never comes before the drying is reachable: a cross player sees the drying on beat 6, and no taking is earlier than beat 7
+ok   a taken night is titled "No time between", says she was taken and after what, and shows the empty frames; a living night is titled "Morning" and says she lived
+ok   neither ending has a digit
 ok   verdict has no digits anywhere
 ok   the verdict names the heaviness, says she lived, and says the heaviness had no climb
 ok   flee: never at the cross in the dark, no cheer
@@ -28,18 +35,18 @@ ok   stay: at the cross on every dark beat
 ok   julian: the cause was checked once, in the dark; the verdict does not scold
 ok   the verdict ends with her sentence (ch. xxvii)
 ok   the onsets named in the verdict are the places looked at just before each heaviness
-ok   independence survives {"turnProb":0.4}  [0.513 / 0.527 / 0.558]
-ok   independence survives {"turnProb":0.8}  [0.849 / 0.823 / 0.798]
-ok   independence survives {"maxRun":4}  [0.645 / 0.654 / 0.641]
-ok   independence survives {"firstTurnBy":2}  [0.709 / 0.731 / 0.692]
+ok   independence survives {"turnProb":0.4}  [0.511 / 0.528 / 0.561]
+ok   independence survives {"turnProb":0.8}  [0.859 / 0.824 / 0.795]
+ok   independence survives {"maxRun":4}  [0.642 / 0.652 / 0.642]
+ok   independence survives {"firstTurnBy":2}  [0.713 / 0.735 / 0.692]
 
-ways of playing, over 400 nights of 10 beats (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked
-  cross     4.70   4.70  10.00   0.00   1.33   0.00
-  window    4.70   0.00   0.00   0.00   0.00   0.00
-  within    4.70   0.00   0.00   7.00   0.00   1.00
-  flee      4.70   0.00   5.30   0.00   0.00   0.00
-  stay      4.70   4.70   4.70   0.00   0.04   0.00
-  julian    4.70   3.70   9.00   1.00   1.00   1.00
-  random    4.70   1.55   3.35   3.24   0.02   0.84
+ways of playing, over 400 nights of 10 beats (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked / taken
+  cross     4.45   4.45   9.53   0.00   1.24   0.00   0.35
+  window    4.45   0.00   0.00   0.00   0.00   0.00   0.35
+  within    4.45   0.00   0.00   7.00   0.00   1.00   0.35
+  flee      4.45   0.00   5.08   0.00   0.00   0.00   0.35
+  stay      4.45   4.45   4.45   0.00   0.04   0.00   0.35
+  julian    4.45   3.45   8.53   1.00   0.92   1.00   0.35
+  random    4.45   1.46   3.17   3.10   0.01   0.83   0.35
 
-34 of 34 checks passed
+41 of 41 checks passed

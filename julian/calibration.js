@@ -37,7 +37,7 @@ check('the weather is the same under every policy for the same seed', SEEDS.slic
   return Object.keys(POLICIES).every(function (p) { return JSON.stringify(play(s, POLICIES[p]).weather) === ref; });
 }));
 var onset = { cross: [0, 0], window: [0, 0], within: [0, 0] };
-SEEDS.forEach(function (s) { var st = play(s, POLICIES.random); for (var t = 1; t < C.beats; t++) if (st.weather[t - 1]) { var p = st.record[t - 1].place; onset[p][1]++; if (!st.weather[t]) onset[p][0]++; } });
+SEEDS.forEach(function (s) { var st = play(s, POLICIES.random); for (var t = 1; t < st.record.length; t++) if (st.weather[t - 1]) { var p = st.record[t - 1].place; onset[p][1]++; if (!st.weather[t]) onset[p][0]++; } });
 var rates = Object.keys(onset).map(function (p) { return onset[p][0] / onset[p][1]; });
 check('P(heaviness comes next | last look) equal across the three places within 0.06', Math.max.apply(null, rates) - Math.min.apply(null, rates) < 0.06, rates.map(function (r) { return r.toFixed(3); }).join(' / '));
 check('the keeping is constant on every beat of every night (ch. xv)', SEEDS.slice(0, 100).every(function (s) { return play(s, POLICIES.random).record.every(function (r) { return r.keeping === C.keeping; }); }));
@@ -68,7 +68,7 @@ check('cheer fires iff at the cross, in heaviness, past the drying, with surenes
 }));
 check('no cheer before the drying, on any night, under any policy', SEEDS.slice(0, 100).every(function (s) { return Object.keys(POLICIES).every(function (p) { var st = play(s, POLICIES[p]), dry = false; return st.record.every(function (r) { if (r.sight === 'drying') dry = true; return !r.cheer || dry; }); }); }));
 check('a player who flees to the window in every dark never sees the cheer; one at the cross all night sees it on every lift past the drying', SEEDS.slice(0, 100).every(function (s) {
-  return play(s, POLICIES.flee).record.every(function (r) { return !r.cheer; }) && (function () { var st = play(s, POLICIES.cross); var lifts = 0; for (var t = 1; t < C.beats; t++) if (st.weather[t] && !st.weather[t - 1] && t - 1 >= 5) lifts++; return st.record.filter(function (r) { return r.cheer; }).length === lifts; })();
+  return play(s, POLICIES.flee).record.every(function (r) { return !r.cheer; }) && (function () { var st = play(s, POLICIES.cross); var lifts = 0; for (var t = 1; t <= st.record.length && t < C.beats; t++) if (st.weather[t] && !st.weather[t - 1] && t - 1 >= 5) lifts++; return st.record.filter(function (r) { return r.cheer; }).length === lifts; })();
 }));
 check('a player at the cross all night reaches the drying on beat 6 and sees the cheer on most nights', (function () { var k = 0; SEEDS.forEach(function (s) { var st = play(s, POLICIES.cross); if (st.record[5].sight === 'drying' && st.record.some(function (r) { return r.cheer; })) k++; }); return k / SEEDS.length >= 0.6; })());
 
@@ -84,16 +84,28 @@ check('the proffer comes once, after the drying, in heaviness; taking the cross 
   return offered <= 1;
 }));
 
+// 5b. The taking (ch. ii, the Fifteenth Shewing in ch. i, ch. xxi): on about a third of nights, at the end of beat 7–10, from the seed alone.
+var F = SEEDS.map(function (s) { return J.fate(s).taken; });
+var takenShare = F.filter(function (t) { return t !== null; }).length / SEEDS.length;
+check('the sickness takes her on about one night in three (0.28–0.40 over 400 seeds)', takenShare >= 0.28 && takenShare <= 0.40, takenShare.toFixed(3));
+check('the taking comes only at the end of beats 7–10, and each of the four occurs', F.every(function (t) { return t === null || (t >= 6 && t <= 9); }) && [6, 7, 8, 9].every(function (b) { return F.indexOf(b) >= 0; }));
+check('the taking is drawn from the seed alone: fate takes one argument, and the same seed ends the same way under every policy', J.fate.length === 1 && SEEDS.slice(0, 100).every(function (s) { var ref = play(s, POLICIES.cross).died; return Object.keys(POLICIES).every(function (p) { return play(s, POLICIES[p]).died === ref; }); }));
+check('a taken night ends after the taken beat, is marked died, and its last look carries the taking', SEEDS.every(function (s) { var st = play(s, POLICIES.random), t = J.fate(s).taken; return t === null ? (!st.died && st.record.length === C.beats) : (st.died && st.record.length === t + 1 && st.record[t].taken === true && st.record.slice(0, t).every(function (r) { return !r.taken; })); }));
+check('the taking never comes before the drying is reachable: a cross player sees the drying on beat 6, and no taking is earlier than beat 7', C.takenBeats[0] >= 7 && play(1, POLICIES.cross).record[5].sight === 'drying');
+var vTaken = J.verdict(play(3, POLICIES.cross)), vLived = J.verdict(play(1, POLICIES.cross));
+check('a taken night is titled "No time between", says she was taken and after what, and shows the empty frames; a living night is titled "Morning" and says she lived', vTaken.title === 'No time between' && /were taken/.test(vTaken.lived) && /as it would have come after anything/.test(vTaken.lived) && /ended at the/.test(vTaken.morning) && vLived.title === 'Morning' && /You did:/.test(vLived.lived));
+check('neither ending has a digit', !/\d/.test(vTaken.lived + vTaken.did + vTaken.says + vTaken.means + vTaken.morning + vLived.lived));
+
 // 6. The verdict is words, not a tally; it reads the record right on the boundary strategies.
 var vFlee = J.verdict(play(5, POLICIES.flee)), vStay = J.verdict(play(5, POLICIES.stay)), vJul = J.verdict(play(5, POLICIES.julian));
 check('verdict has no digits anywhere', [vFlee, vStay, vJul].every(function (v) { return !/\d/.test(v.did + v.says + v.means + v.sentence + v.morning + v.lived); }));
-check('the verdict names the heaviness, says she lived, and says the heaviness had no climb', [vFlee, vStay, vJul].every(function (v) { return /^The heaviness/.test(v.says) && /did not die/.test(v.lived) && /no climb/.test(v.means); }));
+check('the verdict names the heaviness, says she lived, and says the heaviness had no climb', [vFlee, vStay, vJul].every(function (v) { return /^The heaviness/.test(v.says) && /You did:/.test(v.lived) && /no climb/.test(v.means); }));
 check('flee: never at the cross in the dark, no cheer', vFlee.counts.stay === 0 && vFlee.counts.cheers === 0 && /never saw the cheer change|never reached the drying/.test(vFlee.did));
 check('stay: at the cross on every dark beat', vStay.counts.stay === vStay.counts.darks);
 check('julian: the cause was checked once, in the dark; the verdict does not scold', vJul.counts.within === 1 && !/never looked within/.test(vJul.means));
 check('the verdict ends with her sentence (ch. xxvii)', vJul.sentence === 'All shall be well, and all shall be well, and all manner of thing shall be well.');
 check('the onsets named in the verdict are the places looked at just before each heaviness', SEEDS.slice(0, 100).every(function (s) {
-  var st = play(s, POLICIES.random), v = J.verdict(st), exp = []; for (var t = 1; t < C.beats; t++) if (!st.weather[t] && st.weather[t - 1]) exp.push(st.record[t - 1].place);
+  var st = play(s, POLICIES.random), v = J.verdict(st), exp = []; for (var t = 1; t < st.record.length; t++) if (!st.weather[t] && st.weather[t - 1]) exp.push(st.record[t - 1].place);
   return JSON.stringify(v.counts.onsets) === JSON.stringify(exp);
 }));
 
@@ -101,17 +113,17 @@ check('the onsets named in the verdict are the places looked at just before each
 [{ turnProb: 0.4 }, { turnProb: 0.8 }, { maxRun: 4 }, { firstTurnBy: 2 }].forEach(function (alt) {
   var saved = {}; Object.keys(alt).forEach(function (k) { saved[k] = C[k]; C[k] = alt[k]; });
   var o = { cross: [0, 0], window: [0, 0], within: [0, 0] };
-  SEEDS.forEach(function (s) { var st = play(s, POLICIES.random); for (var t = 1; t < C.beats; t++) if (st.weather[t - 1]) { var p = st.record[t - 1].place; o[p][1]++; if (!st.weather[t]) o[p][0]++; } });
+  SEEDS.forEach(function (s) { var st = play(s, POLICIES.random); for (var t = 1; t < st.record.length; t++) if (st.weather[t - 1]) { var p = st.record[t - 1].place; o[p][1]++; if (!st.weather[t]) o[p][0]++; } });
   var r = Object.keys(o).map(function (p) { return o[p][0] / o[p][1]; });
   check('independence survives ' + JSON.stringify(alt), Math.max.apply(null, r) - Math.min.apply(null, r) < 0.07, r.map(function (x) { return x.toFixed(3); }).join(' / '));
   Object.keys(saved).forEach(function (k) { C[k] = saved[k]; });
 });
 
 // 8. Playing it in numbers (build.md §3): what each way of playing sees and gets; no score exists, so the table is what is seen.
-console.log('\nways of playing, over 400 nights of ' + C.beats + ' beats (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked');
+console.log('\nways of playing, over 400 nights of ' + C.beats + ' beats (means): dark beats / cross in dark / sights seen / questions asked / cheers / cause checked / taken');
 Object.keys(POLICIES).forEach(function (p) {
-  var acc = [0, 0, 0, 0, 0, 0];
-  SEEDS.forEach(function (s) { var v = J.verdict(play(s, POLICIES[p])).counts; acc[0] += v.darks; acc[1] += v.stay; acc[2] += v.seen; acc[3] += v.asked; acc[4] += v.cheers; acc[5] += (play(s, POLICIES[p]).causeAsked ? 1 : 0); });
+  var acc = [0, 0, 0, 0, 0, 0, 0];
+  SEEDS.forEach(function (s) { var st = play(s, POLICIES[p]), v = J.verdict(st).counts; acc[0] += v.darks; acc[1] += v.stay; acc[2] += v.seen; acc[3] += v.asked; acc[4] += v.cheers; acc[5] += (st.causeAsked ? 1 : 0); acc[6] += (st.died ? 1 : 0); });
   console.log('  ' + p.padEnd(8) + acc.map(function (x) { return (x / SEEDS.length).toFixed(2).padStart(6); }).join(' '));
 });
 
