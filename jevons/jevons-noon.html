@@ -32,7 +32,7 @@ a{color:var(--soot)}
 .aim{flex:1;font-style:italic;font-size:15px;line-height:1.3;padding-top:4px}
 .q{flex:0 0 38px;height:38px;border:2px solid var(--soot);background:var(--paper);box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px var(--soot);
   font:italic 700 18px/1 var(--serif);color:var(--soot);cursor:pointer;padding:0}
-.gens{display:flex;justify-content:space-between;margin:10px 2px 6px;font-style:italic;font-size:13.5px;color:var(--ash)}
+.gens{display:flex;justify-content:space-between;margin:10px 0 6px;font-style:italic;font-size:11.5px;color:var(--ash)}
 .gens span{padding:0 1px 1px}
 .gens .done{text-decoration:line-through;text-decoration-thickness:1px}
 .gens .now{color:var(--soot);font-weight:700;border-bottom:2px solid var(--soot)}
@@ -73,6 +73,9 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 .helpbody h3,.aboutbody h3{font-style:italic;font-weight:600;text-transform:uppercase;letter-spacing:.16em;font-size:13.5px;margin:18px 0 4px}
 .cov-top{padding-top:18px;font-size:12px}
 .vtwo p{font-size:16.5px;font-weight:600;margin:.3em 0}
+.score{margin:12px 0 8px;padding:10px 14px 8px;border:2px solid var(--soot);box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px var(--soot)}
+.scorehead{font-size:11px;color:var(--ash)}
+.scorenum{font-style:italic;font-weight:700;font-size:34px;line-height:1.05;margin:2px 0 4px}
 </style>
 </head>
 <body>
@@ -82,7 +85,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   <h1 class="title">Jevons's<br>Noon</h1>
   <div class="sheetwrap"><svg id="coversheet" class="sheet" aria-label="Jevons's frontispiece: the shaded past, and the supposed future at the same rate of progress, climbing off the top of the sheet"></svg></div>
   <p class="small" style="margin-top:8px">It is 1865. Britain runs on coal: its mills, its engines, its ships. Every year it burns more than the year before. The dotted line is what happens if that goes on.</p>
-  <p class="small">All the coal Britain has is in the ground, drawn here as black squares. Burn it fast and it makes a big fire that runs out. Burn it slow and it makes a small fire that lasts. You decide the pace, one generation at a time, and a ledger keeps what each generation got.</p>
+  <p class="small">All the coal Britain has is in the ground, drawn here as black squares. Burn it fast and it makes a big fire that runs out. Burn it slow and it makes a small fire that lasts. You decide the pace, one generation at a time, for ten generations; a ledger keeps what each one got, and the score is how well the typical generation did.</p>
   <p class="aimline">Choose for Britain: a brief greatness, or a long mediocrity.</p>
   <button class="btn" id="begin">Begin in 1865</button>
   <button class="btn line" id="coverhelp">How to play</button>
@@ -101,6 +104,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   <div class="aimrow"><div class="aim ash">1865 to 2065</div><button class="q" data-help aria-label="How to play">?</button></div>
   <h2 class="big" id="vhead"></h2>
   <div class="sheetwrap"><svg id="vsheet" class="sheet" aria-label="Your sheet, with your morning, noon and evening, and the ledger"></svg></div>
+  <div class="score"><div class="scorehead caps">Score</div><div class="scorenum" id="scorenum"></div><p class="small" id="scorebody"></p></div>
   <div class="vtwo" id="vtwo"></div>
   <div class="res" id="vlines"></div>
   <div id="vquotes"></div>
@@ -124,18 +128,17 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     <p><b>Above the line</b> is Britain's fire: how much coal it burns in a year. The higher the curve, the bigger the fire. The black under the curve is coal that has been burnt, and you can count it in squares. If the fire grows taller than the paper, more paper is added at the top.</p>
     <p><b>Below the line</b> is the coal still in the ground: 167 black squares, in eight layers, down to 4,000 feet. One square below is the same amount of coal as one square above. When a square is burnt above, a square goes from below. The top layer is dug first. The deeper the digging, the dearer the coal.</p>
     <p>The dashed line is America's coal. The hatched bar is people who went over the sea because there was no work for them. Orange is whatever is burning now.</p>
-    <p><b>The ledger</b> at the bottom says what each generation got: its income per head (the bar and the big figure) and Britain's whole income (the small figure), both against 1865. Income comes from power, and power comes from coal and from how much work a ton of it does.</p>
+    <p><b>The ledger</b> at the bottom says what each generation got: its income per head (the bar and the big figure) and Britain's whole income (the small figure), both against 1865. Income comes from power, and power comes from coal and from how much work a ton of it does. Heads are all the people Britain would have had, those who went over the sea counted in. The last box, <i>after</i>, is what the coal still in the ground in 2065 could give ten more generations, burnt evenly.</p>
     <h3>Each generation</h3>
-    <p>You set six turns of twenty years, from 1865 to 1985. Slide along the ruler under the sheet to say how much coal Britain should burn twenty years from now: <i>cut back</i> (half as much), <i>a stand</i> (the same), <i>slower</i> (half as much again), <i>as now</i> (twice as much: Jevons's own pace in 1865) or <i>faster</i>. Under each mark the ruler says how long the coal would last at that pace. The dotted line on the sheet is your plan, and the crossed squares are the coal it would take. Then press <b>Burn</b>. The solid line is what actually burnt, and it may leave your dotted line.</p>
-    <p>After your sixth turn the sheet runs on by itself to 2065, at the last pace you set, so that you can see where your fire ends up and what the later generations get.</p>
+    <p>You set ten turns of twenty years, from 1865 to 2045. Slide along the ruler under the sheet to say how much coal Britain should burn twenty years from now: <i>cut back</i> (half as much), <i>a stand</i> (the same), <i>slower</i> (half as much again), <i>as now</i> (twice as much: Jevons's own pace in 1865) or <i>faster</i>. Under each mark the ruler says how long the coal would last at that pace. The dotted line on the sheet is your plan, and the crossed squares are the coal it would take. Then press <b>Burn</b>. The solid line is what actually burnt, and it may leave your dotted line.</p>
     <h3>The engines</h3>
     <p>In 1885 and 1925 a new engine appears that does the same work on less coal, but costs more to build. It pays where coal is dear, and it gets cheaper every year. Britain's works fit it as soon as it pays for them; America fits it when it has become cheap enough. Nobody chooses. Watch what the fire does when an engine comes in.</p>
     <h3>The price</h3>
     <p>The price of coal is told as the days of a year's earnings that fuel takes: about 18 days in 1865. Deeper pits make it more; a better engine makes it less. Works go where fuel takes fewer days.</p>
     <h3>The evening</h3>
     <p>If coal has grown so dear that the fire could not grow at any pace, the evening has come: the fire falls whatever you set, and the rest of the sheet draws itself.</p>
-    <h3>The end</h3>
-    <p>There is no score. The last page reads your sheet: how high the fire went, how long it lasted, and who got the coal. Then the curve, continued.</p>
+    <h3>The score</h3>
+    <p>Count every generation the same, the one after 2065 too, and let a doubling count the same for a poor generation as for a rich one. That gives the typical generation on your sheet. Your score is that against the best path we could find, out of 100. The last page also reads your sheet: how high the fire went, how long it lasted, and who got the coal. Then the curve, continued.</p>
   </div>
   <button class="btn" id="helpback">Back</button>
 </section>
@@ -152,8 +155,11 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 <p><b>It assumes</b> everything the toy had to choose: the production engine's form and its two anchors (0.7, a twentieth), how fast price rises with depth, how strongly works follow cheap power and how fast they move, how big the rebound from a better engine is, what an engine costs and how fast it cheapens, how the people's increase follows income and how many of those without work emigrate, America's growth, and the coal lying evenly to 4,000 feet. Under this game's assumptions the shapes on your sheet and the figures in the ledger follow; under others the sizes would differ, and the far generations' income per head most of all, because it rests on a toy population two centuries long. The directions were checked to hold when each of these choices is changed.</p>
 <p><b>The text establishes</b> the argument and its numbers: the rate of 3½ per cent and the frontispiece's projection (2,607 million tons by 1961), "rather more than a century" at that rate to reach 4,000 feet, Hull's estimate of the coal within that depth (83,544 million tons, which Jevons adopts; the figure is in chapter II), the engine figures of chapter VII (4 lb of coal per horse-power an hour in a good engine, about half in an air-engine, under a third when perfected), and the reasoning. It does not establish any one future, and Jevons says so.</p>
 <h3>What is ours</h3>
-<p>Turns of twenty years, six of them, after which the sheet runs on to 2065 at the last pace set, so that a fire that runs out is seen to run out. The engines: the air-engine exists from 1885 and the perfected one from 1925; each pays where coal is three times the 1865 price when it appears, and gets 4 per cent a year cheaper to build, so that it pays at the 1865 price about 27 years later, which is when America, whose coal stays cheap, fits it (the preface: "a wasteful engine pays better where coals are cheap than a more perfect but costly engine"). Britain fits it as soon as it pays there, which is earlier only if Britain's coal is dearer. The price of coal: flat at first ("no recent rise of importance"), twice the 1865 price when about three-fifths of the coal within 4,000 feet is gone, and without limit near the bottom ("we cannot get to the bottom of them"). The pull of cheap power: the trade Britain keeps falls with the price of British power against American, to the power 2½. The rebound: twice the work per ton brings about 1.4 times the coal within the generation. Chapter VII's own magnitudes are larger (Scottish iron: a third of the coal per ton, ten times the coal), but they mix in ordinary growth. The people: 30 million in 1865, increasing 1.2 per cent a year while income per head holds, more slowly as it falls (the preface's "prevalence of marriage" following trade), and about one in seven of those the trade cannot employ go over the sea while the rest "sink down into poverty". America: a fifth of Britain's coal in 1865, growing about 6 per cent a year, always cheap, and fitting every new engine at once. The words <i>noon</i> and <i>evening</i> are the preface's ("we are now in the full morning of our national prosperity, and are approaching noon"); our noon is the top of your curve, and our evening is the point where the trade could not grow at any pace. The shapes are named in Jevons's words when the noon is at least five times the fire of 1865 (greatness) or at most twice it (mediocrity).</p>
+<p>Turns of twenty years, ten of them, from 1865 to 2065, so that a fire that runs out is seen to run out and every generation scored is the player's; after the evening, the rest is drawn at the last pace set. The engines: the air-engine exists from 1885 and the perfected one from 1925; each pays where coal is three times the 1865 price when it appears, and gets 4 per cent a year cheaper to build, so that it pays at the 1865 price about 27 years later, which is when America, whose coal stays cheap, fits it (the preface: "a wasteful engine pays better where coals are cheap than a more perfect but costly engine"). Britain fits it as soon as it pays there, which is earlier only if Britain's coal is dearer. The price of coal: flat at first ("no recent rise of importance"), twice the 1865 price when about three-fifths of the coal within 4,000 feet is gone, and without limit near the bottom ("we cannot get to the bottom of them"). The pull of cheap power: the trade Britain keeps falls with the price of British power against American, to the power 2½. The rebound: twice the work per ton brings about 1.4 times the coal within the generation. Chapter VII's own magnitudes are larger (Scottish iron: a third of the coal per ton, ten times the coal), but they mix in ordinary growth. The people: 30 million in 1865, increasing 1.2 per cent a year while income per head holds, more slowly as it falls (the preface's "prevalence of marriage" following trade), and about one in seven of those the trade cannot employ go over the sea while the rest "sink down into poverty". America: a fifth of Britain's coal in 1865, growing about 6 per cent a year, always cheap, and fitting every new engine at once. The words <i>noon</i> and <i>evening</i> are the preface's ("we are now in the full morning of our national prosperity, and are approaching noon"); our noon is the top of your curve, and our evening is the point where the trade could not grow at any pace. The shapes are named in Jevons's words when the noon is at least five times the fire of 1865 (greatness) or at most twice it (mediocrity).</p>
 <p>Left out: the household grate, a third of the coal and the one saving Jevons says is real ("laid up for the use of posterity"); substitutes, imports and iron (chapters not given); the two parties of chapter I by name; the preface's duties (schooling, the end of child labour, the national debt), which are read on the last page rather than played.</p>
+<h3>Income per head, and the score</h3>
+<p>Income per head in the ledger is per head of all the people Britain would have had at the census rate, those who went over the sea counted in. Per head of the people at home it would be higher on every path that sends people away, and the best path would then be to send them away first; counting them in removes that. The last box of the ledger, <i>after</i>, values the coal still in the ground in 2065 as if it were burnt evenly over ten more generations, with the engines of 2065, for the people of 2065: what the generations after the sheet could have from it.</p>
+<p>The score is our choice, and the one place the game ranks what Jevons would not. It is the <i>typical generation</i>: the geometric mean of income per head over the ten generations on the sheet and the box after, which is what a planner gets who counts every generation the same, discounts nothing, and lets a doubling count the same for a poor generation as for a rich one (log utility). Your score is that against the best path found by a search over the ruler's settings (optimum.js), out of 100. Under this planner the best path is to push early, hold for three generations, and push again at the end; a steady "slower" scores about 90, "as now" about 70, a stand about 56, "faster" about 52. A planner who weighed the present more, or the far generations more, would rank them differently; the text does not rank them at all.</p>
 <h3>The future on the sheet</h3>
 <p>The ledger's boxes from 1985 on say what the toy gives the generations after the player's turns, and they carry a line: supposing, as Jevons did, that no substitute for coal is found. He supposed it in chapter I ("no probability that when our coal is used up any more powerful substitute will be forthcoming"), and Tyndall's letter in the preface supposes it harder. The real curve on the last screen fell for other reasons: oil, gas, nuclear power, renewables, imports, and the end of heavy industry in Britain, with about two-thirds of Hull's coal still in the ground. The sheet knows none of them.</p>
 <h3>The last screen</h3>
@@ -175,14 +181,22 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 // Revision 2: one production engine underneath. Power = coal x what a ton does; income = people x (power per
 // head)^ALPHA; fuel's share of income, shown as days of a year's earnings, is the price; works go where power is
 // cheap; an engine is fitted when the fuel it saves is worth its cost; the people's increase follows income per head.
+// Revision 3: the player sets all ten generations; income per head is told per head of the people Britain would have
+// had at the census rate (the gone counted in); a box for after 2065 values the coal left; and a score: the typical
+// generation (the geometric mean of income per head over the ten and the box after) against the best path found.
 
 const CONFIG = {
   // ---- the clock -------------------------------------------------------------------------------------------
   START_YEAR: 1865,           // preface: the 1865 return is the last Jevons quotes
   GEN_YEARS: 20,              // our choice: one turn is a generation of twenty years
-  MAX_GENS: 6,                // our choice: the player sets six generations, 1865 to 1985 (a little more than Jevons's
-                              //   own century); the sheet then runs on at the last pace set, to RUN_TO
-  RUN_TO: 2065,               // our choice: the sheet is drawn to 2065, so that a fire that runs out is seen to run out
+  MAX_GENS: 10,               // our choice: the player sets ten generations, 1865 to 2065, so that a fire that runs
+                              //   out is seen to run out and every generation scored is the player's
+  RUN_TO: 2065,               // the sheet's last year (START_YEAR + MAX_GENS x GEN_YEARS); after the evening the rest
+                              //   is drawn at the last pace set
+  FUTURE_FROM: 1985,          // our choice: from here the ledger's boxes are hatched and flagged as supposing, with
+                              //   Jevons, that no substitute for coal is found (a little more than his own century)
+  AFTER_YEARS: 200,           // our choice: the box after 2065 values the coal left as if burnt evenly over ten more
+                              //   generations, with the engines of 2065, for the people of 2065
 
   // ---- Britain's fire --------------------------------------------------------------------------------------
   C0: 95,                     // preface: Hunt's report puts the 1865 production at "about ninety-five millions of tons"
@@ -299,6 +313,9 @@ function squareTons() { return CONFIG.ROW_TONS * 10; }
 function groundSquares() { return Math.round(CONFIG.RESERVE / squareTons()); }
 function doesOf(lb) { return CONFIG.LB_1865 / lb; }           // what a ton does, relative to 1865
 // The production engine. power in 1865-ton-equivalents; income relative to 1865's; both for Britain only.
+// Heads, for income per head, are the people Britain would have had at the census rate, the gone counted in (our
+// choice: otherwise a path scores by sending people away); the people at home decide the fire's growth and the exodus.
+function naturalPop(year) { return CONFIG.POP0 * Math.pow(1 + CONFIG.POP_RATE, year - CONFIG.START_YEAR); }
 function powerOf(C, lb) { return C * doesOf(lb); }
 function incomeOf(C, lb, N) {
   const perHead = (powerOf(C, lb) / N) / (CONFIG.C0 / CONFIG.POP0);
@@ -345,8 +362,9 @@ function newGame() {
   return st;
 }
 function snapshot(st) {
+  const income = incomeOf(st.C, st.lbB, st.pop);
   return { year: st.year, C: st.C, A: st.A, S: st.S, gone: st.gone, pop: st.pop, lbB: st.lbB, lbA: st.lbA,
-    income: incomeOf(st.C, st.lbB, st.pop), perHead: incomePerHeadOf(st.C, st.lbB, st.pop),
+    income, perHead: income / (naturalPop(st.year) / CONFIG.POP0), perHeadHome: incomePerHeadOf(st.C, st.lbB, st.pop),
     days: daysOf(st.C, st.lbB, st.pop, st.S), price: priceOf(st.S), power: powerOf(st.C, st.lbB) };
 }
 
@@ -489,21 +507,51 @@ function runOut(st) {
 // the same span) and its income per head (relative to 1865's); and a last entry for what is left after RUN_TO.
 function ledgerOf(history) {
   const out = [];
-  const first = CONFIG.START_YEAR, playerEnd = first + CONFIG.MAX_GENS * CONFIG.GEN_YEARS;
+  const first = CONFIG.START_YEAR;
   for (let from = first; from < CONFIG.RUN_TO; from += CONFIG.GEN_YEARS) {
     const to = from + CONFIG.GEN_YEARS;
     const ys = history.filter(h => h.year > from && h.year <= to && h.burnt != null);
-    if (!ys.length) { out.push({ from, to, n: 0, squares: 0, income: null, perHead: null, days: null, future: from >= playerEnd }); continue; }
+    if (!ys.length) { out.push({ from, to, n: 0, squares: 0, income: null, perHead: null, days: null, future: from >= CONFIG.FUTURE_FROM }); continue; }
     const mean = k => ys.reduce((a, h) => a + h[k], 0) / ys.length;
     out.push({ from, to, n: ys.length, squares: ys.reduce((a, h) => a + h.burnt, 0) / squareTons(), income: mean('income'),
-      perHead: mean('perHead'), perHeadEnd: ys[ys.length - 1].perHead, days: ys[ys.length - 1].days, future: from >= playerEnd });
+      perHead: mean('perHead'), perHeadHome: mean('perHeadHome'), perHeadEnd: ys[ys.length - 1].perHead, days: ys[ys.length - 1].days,
+      future: from >= CONFIG.FUTURE_FROM });
   }
   return out;
 }
+// The box after: the coal left, burnt evenly over AFTER_YEARS with the engines of the last year, for the people of
+// the last year (at the census rate): what the generations after the sheet could have from it, as income per head.
+function afterBox(st) {
+  const left = Math.max(0, CONFIG.RESERVE - st.S), N = naturalPop(CONFIG.RUN_TO);
+  return { squares: left / squareTons(), perHead: incomeOf(left / CONFIG.AFTER_YEARS, st.lbB, N) / (N / CONFIG.POP0) };
+}
 function ledger(st) {
   const gens = ledgerOf(st.history).filter(g => g.n === CONFIG.GEN_YEARS);
-  const left = Math.max(0, CONFIG.RESERVE - st.S) / squareTons();
-  return { gens, left, total: CONFIG.RESERVE / squareTons() };
+  const after = afterBox(st);
+  return { gens, after, left: after.squares, total: CONFIG.RESERVE / squareTons() };
+}
+// The score: the typical generation, the geometric mean of income per head over the generations on the sheet and
+// the box after (a planner who counts every generation the same, and a doubling the same for a poor generation as
+// for a rich one: log utility, no discounting; our choice), against the best path found (optimum.js).
+function typicalOf(st) {
+  const L = ledger(st);
+  const xs = L.gens.map(g => g.perHead).concat([L.after.perHead]);
+  return Math.exp(xs.reduce((a, x) => a + Math.log(Math.max(1e-6, x)), 0) / xs.length);
+}
+function scoreOf(st, best) {
+  const typical = typicalOf(st);
+  return { typical, best, score: 100 * typical / best };
+}
+// A whole game played as the page plays it: a pace per generation; after the evening, the rest at the last pace.
+function playPath(mults) {
+  const st = newGame(); let i = 0;
+  while (!playerTurnsOver(st)) {
+    if (checkEvening(st)) break;
+    burnGeneration(st, paceFromMult(mults[Math.min(i, mults.length - 1)])); i++;
+    if (checkEvening(st)) break;
+  }
+  runOut(st);
+  return st;
 }
 
 // ---- the verdict ---------------------------------------------------------------------------------------------
@@ -532,6 +580,7 @@ function verdict(st) {
     yearsLeft, untilYear: last.year + yearsLeft, engines: JSON.parse(JSON.stringify(st.engines)),
     popHome: st.pop, outYear, squaresBurnt: st.S / squareTons(), squaresAll: groundSquares(),
     ledger: L, bestGen: best, worstGen: worst, lastGen, endDays: last.days, endPerHead: last.perHead,
+    typical: typicalOf(st),
   };
 }
 
@@ -567,7 +616,7 @@ const REAL = [
 
 
 const MECH = { CONFIG, newGame, engineNews, previewPlan, burnGeneration, checkEvening, playerTurnsOver, runOut,
-  verdict, ledger, ledgerOf, depthOf, priceOf, shareBurnt, fireOf, keepTarget, cloneState, paceFromMult, multFromPace, clampPace, squareTons,
+  verdict, ledger, ledgerOf, afterBox, typicalOf, scoreOf, playPath, naturalPop, depthOf, priceOf, shareBurnt, fireOf, keepTarget, cloneState, paceFromMult, multFromPace, clampPace, squareTons,
   groundSquares, lastsUntil, dragOf, relCost, eveningNow, doesOf, powerOf, incomeOf, incomePerHeadOf, fuelShareOf,
   daysOf, powerCost, paysAt, americaFitsIn, REAL };
 if (typeof module !== 'undefined' && module.exports) module.exports = MECH;
@@ -703,8 +752,8 @@ const WORDS = (function () {
   function planReading(st, plan, lastTurn) {
     const y = st.year + 20, m = markNear(plan.mult);
     const head = m ? m.def(y) + ' ' : '';
-    const runOn = lastTurn ? ` This is the last pace you set: from ${y} the sheet runs on at it.` : '';
-    return `${head}By ${y} Britain would burn ${sizeAgainst(plan.mult, 'what it burns now')}. The next twenty years would use ${squaresWords(plan.squares)} of coal. ${lastsSentence(plan.lastsUntil)}${runOn}`;
+    const last = lastTurn ? ' This is the last generation on the sheet.' : '';
+    return `${head}By ${y} Britain would burn ${sizeAgainst(plan.mult, 'what it burns now')}. The next twenty years would use ${squaresWords(plan.squares)} of coal. ${lastsSentence(plan.lastsUntil)}${last}`;
   }
   function paceVerb(m) {
     const k = markNear(m);
@@ -769,12 +818,11 @@ const WORDS = (function () {
     const lines = [];
     const cmp = am > pm * 1.08 ? 'That is higher than your dotted line.' : am < pm * 0.92 ? 'That is short of your dotted line.' : 'That is what you set.';
     const lead = `You set the fire for ${rec.to} at ${sizeAgainst(pm, 'that of ' + rec.from)}. The fire ${fireChange(am)}. ${cmp}`;
-    // engines fitted this generation
     const fitted = rec.engines.filter(e => e.who === 'britain'), fittedA = rec.engines.filter(e => e.who === 'america');
     for (const e of fitted) {
       const a = fittedA.find(x => x.key === e.key), aPrev = st.engines[e.key] && st.engines[e.key].america;
-      const whyNow = rec.years.find(y => y.year === e.year + 1) && rec.years.find(y => y.year === e.year + 1).price >= 1.08
-        ? 'coal was dear enough' : 'the engine was cheap enough';
+      const y1 = rec.years.find(y => y.year === e.year + 1);
+      const whyNow = y1 && y1.price >= 1.08 ? 'coal was dear enough' : 'the engine was cheap enough';
       let s = `In ${e.year} ${whyNow} that ${engineName(e.key)} paid, and Britain's works fitted it. Each ton now does ${does(st.lbB)}.`;
       if (a) s += a.year === e.year ? ' America fitted it the same year.' : a.year < e.year ? ` America had fitted it in ${a.year}.` : ` America fitted it in ${a.year}.`;
       else if (aPrev && aPrev < rec.from) s += ` America had fitted it in ${aPrev}.`;
@@ -790,7 +838,6 @@ const WORDS = (function () {
     if (am < pm * 0.92 && rec.relCost >= 1.08)
       lines.push(`Why short? Power costs more in Britain than in America: coal from ${depthWords(rec.depth)} is ${priceWords(rec.price)}. Works moved to America.`);
     lines.push(`${cap(squaresWords(rec.squares))} of coal came out of the ground; ${pitsWords(rec.depth)}. ${R(squaresLeft)} of the ${squaresAll} squares are left.`);
-    // the ledger line
     lines.push(`Fuel took ${daysWords(rec.days)} of a year's earnings. Income per head was ${sizeAgainst(rec.perHead, 'in 1865')}; Britain's whole income ${sizeAgainst(rec.income, '1865’s')}.`);
     lines.push(rec.americaPassedNow ? 'America now burns more coal than Britain.' : americaWords(rec.americaRatio) + '.');
     const pw = peopleWords(rec.gone);
@@ -815,13 +862,10 @@ const WORDS = (function () {
     const text = `The pits are deep: coal from ${depthWords(MECH.depthOf(st.S))} is ${priceWords(MECH.priceOf(st.S))}, and fuel takes ${daysWords(last.days)} of a year's earnings. America's coal is cheap, and the works are moving there. Whatever pace you set now, the fire will fall. The sheet draws itself to 2065 at the last pace you set.`;
     return { text, quote: pick(used, ['impossible', 'spring']) };
   }
-  function runOn(st) {
-    return `You have set six generations. From ${st.year} the sheet runs on to 2065 at the last pace you set.`;
-  }
 
   // ---- the ledger ---------------------------------------------------------------------------------------------
   const LEDGER_HEADING = 'WHAT EACH GENERATION GOT: INCOME PER HEAD, AGAINST 1865';
-  const LEDGER_CAPTION = 'the big figure is income per head; the small one, the whole income; both against 1865';
+  const LEDGER_CAPTION = 'big figure: income per head; small: the whole income; after: the coal left, for ten more generations';
   const FUTURE_FLAG = 'from 1985: supposing, as Jevons did, that no substitute for coal is found';
 
   // ---- the verdict -----------------------------------------------------------------------------------------
@@ -832,14 +876,21 @@ const WORDS = (function () {
       const v = paceVerb(g.planMult);
       if (runs.length && runs[runs.length - 1].v === v) runs[runs.length - 1].n++; else runs.push({ v, n: 1 });
     }
-    const N = ['', '', 'for two generations', 'for three generations', 'for four generations', 'for five generations', 'for six generations'];
+    const N = ['', '', 'for two generations', 'for three generations', 'for four generations', 'for five generations', 'for six generations', 'for seven generations', 'for eight generations', 'for nine generations', 'for ten generations'];
     const parts = runs.map((r, i) => (i === 0 ? '' : 'then ') + r.v + (r.n > 1 ? ' ' + N[r.n] : (runs.length === 1 ? ' every generation' : '')));
     let s = 'You ' + parts.join(', ');
     s = s.replace(/^You let it/, 'You let the fire').replace(/^You held it/, 'You held the fire').replace(/^You cut it/, 'You cut the fire').replace(/^You pushed it/, 'You pushed the fire');
     return s + '.';
   }
   function span(g) { return `${g.from}–${g.to}`; }
-  function verdict(v, st, used) {
+  function scoreWords(sc) {
+    const n = Math.min(100, Math.max(0, R(sc.score)));
+    const beat = sc.score > 100.5;
+    const head = beat ? `${n} of 100, and a little better than the best path we found` : `${n} of 100`;
+    const body = `Count every generation the same, the one after 2065 too, and let a doubling count the same for a poor generation as for a rich one. Then the typical generation on your sheet had ${sizeAgainst(sc.typical, 'the income per head of 1865')}; the best path we could find gives ${sizeAgainst(sc.best, 'it')}.`;
+    return { head, body };
+  }
+  function verdict(v, st, used, sc) {
     const heading = v.kind === 'greatness' ? 'A BRIEF GREATNESS' : v.kind === 'mediocrity' ? 'A LONGER CONTINUED MEDIOCRITY' : 'BETWEEN THE TWO';
     const C0 = MECH.CONFIG.START_YEAR;
     let high;
@@ -855,7 +906,6 @@ const WORDS = (function () {
     } else {
       long = `How long: still burning in ${v.endYear}, at ${sizeAgainst(v.endMult, 'the fire of 1865')}, with ${left} of the ${v.squaresAll} squares still in the ground. At that pace the coal lasts ${until}.`;
     }
-    // the generations
     const b = v.bestGen, w = v.worstGen, l = v.lastGen;
     let gens = `Who got the coal: the best-off generation was ${span(b)}, with income per head ${sizeAgainst(b.perHead, '1865’s')}`;
     if (w.from === l.from) gens += `; the worst-off was the last on the sheet, ${span(w)}, with ${sizeAgainst(w.perHead, '1865’s')}, and fuel took ${daysWords(l.days)} of its year's earnings.`;
@@ -863,7 +913,8 @@ const WORDS = (function () {
       gens += w.from === b.from ? '.' : `; the worst-off was ${span(w)}, with ${sizeAgainst(w.perHead, '1865’s')}.`;
       gens += ` The last generation on the sheet, ${span(l)}, had ${sizeAgainst(l.perHead, '1865’s')} per head, and fuel took ${daysWords(l.days)} of its year's earnings.`;
     }
-    gens += left > 0 ? ` ${left} square${left === 1 ? '' : 's'} of coal ${left === 1 ? 'is' : 'are'} left for the generations after 2065.` : ' Nothing is left for the generations after 2065.';
+    const aft = v.ledger.after;
+    gens += left > 0 ? ` ${left} square${left === 1 ? '' : 's'} of coal ${left === 1 ? 'is' : 'are'} left for the generations after 2065: burnt evenly over ten more, with the engines of 2065, that would give them ${sizeAgainst(aft.perHead, '1865’s')} per head.` : ' Nothing is left for the generations after 2065.';
     const lines = [high, long, whatYouDid(st)];
     let after = '';
     if (v.evening) {
@@ -887,15 +938,47 @@ const WORDS = (function () {
     qs.push({ text: Q[k][0], where: Q[k][1] });
     qs.push({ text: Q.choice[0], where: Q.choice[1], big: true });
     qs.push({ text: Q.noon[0], where: Q.noon[1] });
-    return { heading, lines, quotes: qs };
+    return { heading, lines, quotes: qs, score: sc ? scoreWords(sc) : null };
   }
 
   return { fireChange, sizeAgainst, mult, priceWords, daysWords, americaWords, peopleWords, depthWords, pitsWords, squaresWords,
-    lastsWords, lastsShort, lastsSentence, MARKS, markNear, planReading, engineCard, engineName, result, evening, runOn,
-    LEDGER_HEADING, LEDGER_CAPTION, FUTURE_FLAG, verdict, whatYouDid, Q };
+    lastsWords, lastsShort, lastsSentence, MARKS, markNear, planReading, engineCard, engineName, result, evening,
+    LEDGER_HEADING, LEDGER_CAPTION, FUTURE_FLAG, scoreWords, verdict, whatYouDid, Q };
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
 
+const OPTIMUM = {
+ "typical": 1.5226215762719657,
+ "path": [
+  2.4,
+  1.5,
+  1,
+  1,
+  1.25,
+  1.25,
+  1.75,
+  2.4,
+  2,
+  2
+ ],
+ "perHead": [
+  1.274,
+  1.653,
+  2.315,
+  2.529,
+  2.791,
+  2.548,
+  2.02,
+  1.792,
+  1.414,
+  0.899
+ ],
+ "after": 0.253,
+ "left": 18.8,
+ "noonMult": 5.09,
+ "runs": 3534,
+ "ms": 1631
+};
 
 // ================================================================================================================
 // The page. Everything that decides what happens is in MECH (mechanism.js); everything that is said is in WORDS.
@@ -912,7 +995,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
   const SB = 14, HB = 13, GH = CF.GROUND_ROWS * SQ, DB = 12, PHB = 12, PH = SQ;
   const LHB = 26, LBAR = 48, LNUM = 22, LCAP = 11, LFLAG = 11, LH = LBAR + LNUM;
   const NSQ = M.groundSquares(), NCELL = NC * CF.GROUND_ROWS, SQT = M.squareTons();
-  const NGEN = (CF.RUN_TO - CF.START_YEAR) / CF.GEN_YEARS, PLAYER_END = CF.START_YEAR + CF.MAX_GENS * CF.GEN_YEARS;
+  const NGEN = (CF.RUN_TO - CF.START_YEAR) / CF.GEN_YEARS, CELLW = SW / (NGEN + 1);
   const LEDGER_UNIT = 9, LEDGER_MAX = (LBAR - 6) / LEDGER_UNIT;   // 1865 = one unit of bar; the panel holds about five
   const xOf = y => (y - CF.SHEET_X0) / 10 * SQ;
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
@@ -1010,23 +1093,23 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
       // the ledger: one cell per generation, under the years it covers
       heading(W.LEDGER_HEADING, 5, L0 - 3.5, svg);
       const base = L0 + LBAR;
-      el('rect', { x: xOf(CF.START_YEAR), y: L0, width: xOf(CF.RUN_TO) - xOf(CF.START_YEAR), height: LH, fill: 'none', stroke: '#94AEC3', 'stroke-width': 1 }, svg);
-      for (let i = 0; i < NGEN; i++) {
-        const from = CF.START_YEAR + i * CF.GEN_YEARS, x0 = xOf(from), x1 = xOf(from + CF.GEN_YEARS), w = x1 - x0;
-        const future = from >= PLAYER_END;
+      el('rect', { x: .5, y: L0, width: SW - 1, height: LH, fill: 'none', stroke: '#94AEC3', 'stroke-width': 1 }, svg);
+      for (let i = 0; i <= NGEN; i++) {
+        const isAfter = i === NGEN, from = isAfter ? CF.RUN_TO : CF.START_YEAR + i * CF.GEN_YEARS, x0 = i * CELLW, w = CELLW;
+        const future = from >= CF.FUTURE_FROM;
         if (future) el('rect', { x: x0, y: L0, width: w, height: LH, fill: `url(#${svg.id}-fhatch)` }, svg);
-        if (i) el('line', { x1: x0, y1: L0, x2: x0, y2: L0 + LH, stroke: '#C3D2DE', 'stroke-width': .6 }, svg);
+        if (i) el('line', { x1: x0, y1: L0, x2: x0, y2: L0 + LH, stroke: isAfter ? '#1D1B18' : '#C3D2DE', 'stroke-width': isAfter ? .8 : .6 }, svg);
+        txt(isAfter ? 'after' : String(from), { x: x0 + w / 2, y: L0 + 7.5, 'text-anchor': 'middle', 'font-size': 6.6, 'font-style': 'italic', fill: '#5f594f' }, svg);
         const barEl = el('rect', { x: x0 + 3, y: base, width: w - 6, height: 0, fill: '#1D1B18' }, svg);
-        const over = txt('', { x: x0 + w / 2, y: L0 + 7, 'text-anchor': 'middle', 'font-size': 7, fill: '#1D1B18' }, svg);
+        const over = txt('', { x: x0 + w / 2, y: L0 + 15, 'text-anchor': 'middle', 'font-size': 7, fill: '#1D1B18' }, svg);
         const big = txt('', { x: x0 + w / 2, y: base + 9.5, 'text-anchor': 'middle', 'font-size': 8.4, 'font-style': 'italic', 'font-weight': 700, fill: '#1D1B18' }, svg);
         const small = txt('', { x: x0 + w / 2, y: base + 19, 'text-anchor': 'middle', 'font-size': 7.4, 'font-style': 'italic', fill: '#5f594f' }, svg);
-        cells.push({ from, barEl, big, small, over, x0, w });
+        cells.push({ from, isAfter, barEl, big, small, over, x0, w });
       }
       // the 1865 line across the ledger
-      el('line', { x1: xOf(CF.START_YEAR), y1: base - LEDGER_UNIT, x2: xOf(CF.RUN_TO), y2: base - LEDGER_UNIT, stroke: '#8B847A', 'stroke-width': .7, 'stroke-dasharray': '2 2' }, svg);
-      txt('1865', { x: xOf(CF.START_YEAR) - 2, y: base - LEDGER_UNIT + 2.5, 'text-anchor': 'end', 'font-size': 6.8, 'font-style': 'italic', fill: '#5f594f' }, svg);
-      el('line', { x1: xOf(CF.START_YEAR), y1: base, x2: xOf(CF.RUN_TO), y2: base, stroke: '#1D1B18', 'stroke-width': .8 }, svg);
-      txt(W.LEDGER_CAPTION, { x: 5, y: L0 + LH + 9.5, 'font-size': 7.6, 'font-style': 'italic', fill: '#5f594f' }, svg);
+      el('line', { x1: 0, y1: base - LEDGER_UNIT, x2: SW, y2: base - LEDGER_UNIT, stroke: '#8B847A', 'stroke-width': .7, 'stroke-dasharray': '2 2' }, svg);
+      el('line', { x1: 0, y1: base, x2: SW, y2: base, stroke: '#1D1B18', 'stroke-width': .8 }, svg);
+      txt(W.LEDGER_CAPTION, { x: 5, y: L0 + LH + 9.5, 'font-size': 7.2, 'font-style': 'italic', fill: '#5f594f' }, svg);
       txt(W.FUTURE_FLAG, { x: 5, y: L0 + LH + LCAP + 9.5, 'font-size': 7.6, 'font-style': 'italic', fill: '#5f594f' }, svg);
     }
     const S = { svg, mode, rows, H1, yOf, L, sqs, planG, digG, bar, cells, H };
@@ -1105,15 +1188,15 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
         txt(e.key === 'air' ? 'air-engine' : 'perfected', { x: x + 2, y: y - 13, 'font-size': 7.4, 'font-style': 'italic', fill: '#1D1B18', 'paint-order': 'stroke', stroke: '#F2EBD9', 'stroke-width': 2.4 }, L.engines);
       }
     };
-    S.ledger = function (rows) {
+    S.ledger = function (rows, after) {
       if (!cells.length) return;
       for (const c of cells) {
-        const r = rows.find(q => q.from === c.from);
+        const r = c.isAfter ? (after ? { n: CF.GEN_YEARS, perHead: after.perHead, income: null, squares: after.squares } : null) : rows.find(q => q.from === c.from);
         if (!r || !r.n) { c.barEl.setAttribute('height', 0); c.big.textContent = ''; c.small.textContent = ''; c.over.textContent = ''; continue; }
         const h = Math.min(LEDGER_MAX, r.perHead) * LEDGER_UNIT;
         c.barEl.setAttribute('y', fmt(L0 + LBAR - h)); c.barEl.setAttribute('height', fmt(h));
         c.over.textContent = r.perHead > LEDGER_MAX ? '▲' : '';
-        c.big.textContent = W.mult(r.perHead); c.small.textContent = W.mult(r.income);
+        c.big.textContent = W.mult(r.perHead); c.small.textContent = c.isAfter ? `${Math.round(r.squares)} sq` : W.mult(r.income);
         c.barEl.setAttribute('fill', r.n < CF.GEN_YEARS ? '#E2611B' : '#1D1B18');
       }
     };
@@ -1159,7 +1242,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
       sp.textContent = y; sp.className = i < U.st.gen ? 'done' : i === U.st.gen && !M.playerTurnsOver(U.st) ? 'now' : '';
       g.appendChild(sp);
     }
-    const sp = document.createElement('span'); sp.textContent = 'runs on to 2065'; sp.className = 'auto' + (M.playerTurnsOver(U.st) && !U.st.ended ? ' now' : U.st.ended ? ' done' : ''); g.appendChild(sp);
   }
   function maxFire(hist) { let m = 0; for (const h of hist) if (h.C > m) m = h.C; return m; }
   function ensureRows(need) {
@@ -1178,7 +1260,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
     S.people(opts.gone != null ? opts.gone : st.gone);
     S.pencil(opts.pencil || null, opts.beyond || null);
     S.engineMarks(st.events.filter(e => e.year <= hist[hist.length - 1].year), hist);
-    S.ledger(M.ledgerOf(hist));
+    S.ledger(M.ledgerOf(hist), st.ended ? M.afterBox(st) : null);
   }
   const KEY = `<b>Above the line</b> is Britain's fire: how much coal it burns in a year. The black under the curve is coal that has been burnt. <b>Below the line</b> is the coal still in the ground, in squares. One square below is the same coal as one square above: burn a square above, and a square goes from below. The top layer is dug first, and the deeper the digging, the dearer the coal. The dashed line is America's fire. <b>The ledger</b> at the bottom says what each generation got: its income per head, and Britain's whole income, against 1865.`;
 
@@ -1194,7 +1276,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
     const news = M.engineNews(U.st);
     if (news) return showEngine(news);
     if (M.checkEvening(U.st)) return showEvening();
-    if (M.playerTurnsOver(U.st)) return showRunOn();
     showPace();
   }
 
@@ -1271,7 +1352,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
 
   // ---- burning -------------------------------------------------------------------------------------------------------
   function animateGen(rec, ms, done) {
-    const st = U.st, startIdx = st.history.length - rec.years.length - 1;
+    const st = U.st, startIdx = st.history.findIndex(h => h.year === rec.from);
     const base = st.history.slice(0, startIdx + 1);
     const t0 = performance.now(), from = rec.from;
     const plan = rec.auto ? null : (U.lastPlan || null);
@@ -1307,10 +1388,10 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
     gensStrip();
     const left = M.groundSquares() - U.st.S / M.squareTons();
     const r = W.result(rec, U.st, U.used, left, M.groundSquares());
-    const over = M.playerTurnsOver(U.st);
+    const over = U.st.ended;
     $('#panel').innerHTML = `<h2>${rec.from}–${rec.to}</h2><div class="res"><p class="lead">${r.lead}</p>${r.lines.map(l => `<p>${l}</p>`).join('')}</div>${quoteHtml(r.quote)}
-      <button class="btn" id="next">${over ? 'Run on to 2065' : 'Next generation: ' + rec.to}</button>`;
-    $('#next').onclick = () => { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); turn(); };
+      <button class="btn" id="next">${over ? 'Read the sheet' : 'Next generation: ' + rec.to}</button>`;
+    $('#next').onclick = () => { if (over) return toVerdict(); window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); turn(); };
   }
   function drawRest() {
     if (U.busy) return; U.busy = true;
@@ -1330,20 +1411,16 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
     $('#panel').innerHTML = `<h2>The evening, ${U.st.year}</h2><div class="res"><p class="lead">${e.text}</p></div>${quoteHtml(e.quote)}<button class="btn" id="runout">Draw the sheet to 2065</button>`;
     $('#runout').onclick = drawRest;
   }
-  function showRunOn() {
-    $('#panel').innerHTML = `<h2>${U.st.year}</h2><div class="res"><p class="lead">${W.runOn(U.st)}</p></div><button class="btn" id="runout">Draw the sheet to 2065</button>`;
-    $('#runout').onclick = drawRest;
-  }
 
   // ---- the verdict -------------------------------------------------------------------------------------------------
   function toVerdict() {
-    const st = U.st, v = M.verdict(st), t = W.verdict(v, st, U.used);
+    const st = U.st, v = M.verdict(st), sc = M.scoreOf(st, OPTIMUM.typical), t = W.verdict(v, st, U.used, sc);
     show('verdict'); window.scrollTo(0, 0);
     $('#vhead').textContent = t.heading;
     const S = makeSheet($('#vsheet'), 'verdict', rowsFor(maxFire(st.history)));
     S.fire(st.history); drawAmerica(S, st.history); S.clearLabels(); americaLabel(S, st.history);
     S.ground(st.S, false, null); S.people(st.gone); S.emberAt(null);
-    S.engineMarks(st.events, st.history); S.ledger(M.ledgerOf(st.history));
+    S.engineMarks(st.events, st.history); S.ledger(M.ledgerOf(st.history), M.afterBox(st));
     if (v.noonYear > CF.START_YEAR) {
       S.label('morning', xOf(1868), S.yOf(95) - 8, { size: 10 });
       const nx = xOf(v.noonYear), ny = S.yOf(v.noonC), right = nx < SW - 90;
@@ -1353,6 +1430,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;
       const e = st.history.find(h => h.year === v.eveningYear);
       S.label(`evening, ${v.eveningYear}`, Math.min(SW - 92, xOf(e.year) + 8), Math.max(50, S.yOf(e.C) + 4), { size: 10.5, weight: 700 });
     }
+    $('#scorenum').textContent = t.score.head; $('#scorebody').textContent = t.score.body;
     $('#vtwo').innerHTML = t.lines.slice(0, 2).map(l => `<p>${l}</p>`).join('');
     $('#vlines').innerHTML = t.lines.slice(2).map(l => `<p>${l}</p>`).join('');
     $('#vquotes').innerHTML = t.quotes.map(q => quoteHtml(q, q.big)).join('');

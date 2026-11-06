@@ -1,6 +1,6 @@
 // A scripted session in a real browser at phone size, through the actual screens, with screenshots.
 // Sheet A: a first-timer: as now; a stand when the engine is announced (thinking it will burn less); opens How to
-//   play mid-game and comes back; as now; a stand to the end; the run-on; the verdict; About; the last screen.
+//   play mid-game and comes back; as now; a stand to the end of the ten generations; the verdict; About; the last screen.
 // Sheet B (from ANOTHER SHEET): free trade to the last, as now every generation: the evening, the sheet drawn on.
 // Sheet C: a stand every generation.
 // Run: node session-test.js   (session-log.txt is the saved output)
@@ -51,26 +51,22 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
       await page.click('#helpback'); await page.waitForTimeout(250);
       say(`  How to play opened after a burn and closed: back on ${await page.evaluate(() => document.querySelector('.screen.on').id)}, scroll ${y} -> ${await page.evaluate(() => window.scrollY)}, Next button present: ${!!(await page.$('#next'))}`);
     }
-    const runon = (await text('#next')).toLowerCase().includes('run on');
+    if ((await text('#next')).toLowerCase().includes('read the sheet')) return 'end';
     await page.click('#next'); await page.waitForTimeout(500);
-    if (runon) {
-      say(`  RUN ON: ${await text('#panel .res')}`);
-      if (opts.shotRunOn) await shot(opts.shotRunOn, true);
-      await page.click('#runout'); await waitFor('#next'); await page.waitForTimeout(300);
-      if (opts.shotRunOn) await shot(opts.shotRunOn + '-drawn', true);
-      return 'end';
-    }
+    if (await page.$('#runout')) return 'evening';
     return 'next';
   }
   async function evening(shotName) {
     say(`  EVENING: ${await text('#panel .res')} || ${(await page.$('#panel .quote')) ? await text('#panel .quote') : ''}`);
     if (shotName) await shot(shotName, true);
     await page.click('#runout'); await waitFor('#next');
+    const n = await page.$$eval('#panel .res', e => e.length);
+    say(`  the sheet drawn on: Next button reads "${await text('#next')}"`);
     if (shotName) await shot(shotName + '-drawn', true);
   }
   async function verdict(name) {
     await page.click('#next'); await page.waitForTimeout(500);
-    say(`  VERDICT: ${await text('#vhead')} | ${await text('#vlines')}`);
+    say(`  VERDICT: ${await text('#vhead')} | SCORE ${await text('#scorenum')}: ${await text('#scorebody')} | ${await text('#vtwo')} | ${await text('#vlines')}`);
     await shot(name, true); await noScroll('verdict');
   }
 
@@ -79,13 +75,16 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
 
   say('SHEET A: a first-timer');
   await page.click('#begin'); await page.waitForTimeout(300);
-  await generation('now', { shotEmpty: 'a-1865-empty', shotSet: 'a-1865-set', shotBurning: 'a-1865-burning', shotResult: 'a-1865-result' });
-  await noScroll('play screen');
-  await generation('stand', { shotEngine: 'a-1885-engine', shotSet: 'a-1885-set', shotResult: 'a-1885-result', help: true });
-  await generation('now', { shotResult: 'a-1905-paradox' });
-  let r = await generation('stand', { shotEngine: 'a-1925-engine', shotResult: 'a-1925-result' });
-  if (r === 'evening') { await evening('a-evening'); }
-  else { await generation('stand', {}); r = await generation('stand', { shotResult: 'a-1965-result', shotRunOn: 'a-runon' }); }
+  const planA = ['now', 'stand', 'now', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand'];
+  const optsA = [{ shotEmpty: 'a-1865-empty', shotSet: 'a-1865-set', shotBurning: 'a-1865-burning', shotResult: 'a-1865-result' },
+    { shotEngine: 'a-1885-engine', shotSet: 'a-1885-set', shotResult: 'a-1885-result', help: true }, { shotResult: 'a-1905-paradox' },
+    { shotEngine: 'a-1925-engine', shotResult: 'a-1925-result' }, {}, { shotResult: 'a-1965-result' }, {}, {}, {}, { shotResult: 'a-2045-result' }];
+  for (let i = 0; i < 10; i++) {
+    const res = await generation(planA[i], optsA[i]);
+    if (i === 0) await noScroll('play screen');
+    if (res === 'evening') { await evening('a-evening'); break; }
+    if (res === 'end') break;
+  }
   await verdict('a-end');
   await page.click('#toabout'); await page.waitForTimeout(250); await shot('about', true); await page.click('#aboutback'); await page.waitForTimeout(200);
   await page.click('#tolast'); await page.waitForTimeout(3500); await shot('a-last-drawing'); await page.waitForTimeout(6500); await shot('a-last', true);
@@ -94,7 +93,7 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
 
   say('SHEET B (ANOTHER SHEET): free trade to the last, both engines fitted');
   await page.click('#again'); await page.waitForTimeout(300);
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 10; i++) {
     const res = await generation('now', { shotResult: i === 3 ? 'b-1925-result' : null });
     if (res === 'evening') { await evening('b-evening'); break; }
     if (res === 'end') break;
@@ -104,8 +103,8 @@ const MARK = { cut: 0.5, stand: 1, slower: 1.5, now: 2, faster: 2.4 };
 
   say('SHEET C: a stand every generation, both engines refused');
   await page.click('#again'); await page.waitForTimeout(300);
-  for (let i = 0; i < 6; i++) {
-    const res = await generation('stand', { shotResult: i === 2 ? 'c-1905-result' : null, shotRunOn: i === 5 ? 'c-runon' : null });
+  for (let i = 0; i < 10; i++) {
+    const res = await generation('stand', { shotResult: i === 2 ? 'c-1905-result' : null });
     if (res === 'evening') { await evening(); break; }
     if (res === 'end') break;
   }

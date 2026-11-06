@@ -8,14 +8,22 @@
 // Revision 2: one production engine underneath. Power = coal x what a ton does; income = people x (power per
 // head)^ALPHA; fuel's share of income, shown as days of a year's earnings, is the price; works go where power is
 // cheap; an engine is fitted when the fuel it saves is worth its cost; the people's increase follows income per head.
+// Revision 3: the player sets all ten generations; income per head is told per head of the people Britain would have
+// had at the census rate (the gone counted in); a box for after 2065 values the coal left; and a score: the typical
+// generation (the geometric mean of income per head over the ten and the box after) against the best path found.
 
 const CONFIG = {
   // ---- the clock -------------------------------------------------------------------------------------------
   START_YEAR: 1865,           // preface: the 1865 return is the last Jevons quotes
   GEN_YEARS: 20,              // our choice: one turn is a generation of twenty years
-  MAX_GENS: 6,                // our choice: the player sets six generations, 1865 to 1985 (a little more than Jevons's
-                              //   own century); the sheet then runs on at the last pace set, to RUN_TO
-  RUN_TO: 2065,               // our choice: the sheet is drawn to 2065, so that a fire that runs out is seen to run out
+  MAX_GENS: 10,               // our choice: the player sets ten generations, 1865 to 2065, so that a fire that runs
+                              //   out is seen to run out and every generation scored is the player's
+  RUN_TO: 2065,               // the sheet's last year (START_YEAR + MAX_GENS x GEN_YEARS); after the evening the rest
+                              //   is drawn at the last pace set
+  FUTURE_FROM: 1985,          // our choice: from here the ledger's boxes are hatched and flagged as supposing, with
+                              //   Jevons, that no substitute for coal is found (a little more than his own century)
+  AFTER_YEARS: 200,           // our choice: the box after 2065 values the coal left as if burnt evenly over ten more
+                              //   generations, with the engines of 2065, for the people of 2065
 
   // ---- Britain's fire --------------------------------------------------------------------------------------
   C0: 95,                     // preface: Hunt's report puts the 1865 production at "about ninety-five millions of tons"
@@ -132,6 +140,9 @@ function squareTons() { return CONFIG.ROW_TONS * 10; }
 function groundSquares() { return Math.round(CONFIG.RESERVE / squareTons()); }
 function doesOf(lb) { return CONFIG.LB_1865 / lb; }           // what a ton does, relative to 1865
 // The production engine. power in 1865-ton-equivalents; income relative to 1865's; both for Britain only.
+// Heads, for income per head, are the people Britain would have had at the census rate, the gone counted in (our
+// choice: otherwise a path scores by sending people away); the people at home decide the fire's growth and the exodus.
+function naturalPop(year) { return CONFIG.POP0 * Math.pow(1 + CONFIG.POP_RATE, year - CONFIG.START_YEAR); }
 function powerOf(C, lb) { return C * doesOf(lb); }
 function incomeOf(C, lb, N) {
   const perHead = (powerOf(C, lb) / N) / (CONFIG.C0 / CONFIG.POP0);
@@ -178,8 +189,9 @@ function newGame() {
   return st;
 }
 function snapshot(st) {
+  const income = incomeOf(st.C, st.lbB, st.pop);
   return { year: st.year, C: st.C, A: st.A, S: st.S, gone: st.gone, pop: st.pop, lbB: st.lbB, lbA: st.lbA,
-    income: incomeOf(st.C, st.lbB, st.pop), perHead: incomePerHeadOf(st.C, st.lbB, st.pop),
+    income, perHead: income / (naturalPop(st.year) / CONFIG.POP0), perHeadHome: incomePerHeadOf(st.C, st.lbB, st.pop),
     days: daysOf(st.C, st.lbB, st.pop, st.S), price: priceOf(st.S), power: powerOf(st.C, st.lbB) };
 }
 
@@ -322,21 +334,51 @@ function runOut(st) {
 // the same span) and its income per head (relative to 1865's); and a last entry for what is left after RUN_TO.
 function ledgerOf(history) {
   const out = [];
-  const first = CONFIG.START_YEAR, playerEnd = first + CONFIG.MAX_GENS * CONFIG.GEN_YEARS;
+  const first = CONFIG.START_YEAR;
   for (let from = first; from < CONFIG.RUN_TO; from += CONFIG.GEN_YEARS) {
     const to = from + CONFIG.GEN_YEARS;
     const ys = history.filter(h => h.year > from && h.year <= to && h.burnt != null);
-    if (!ys.length) { out.push({ from, to, n: 0, squares: 0, income: null, perHead: null, days: null, future: from >= playerEnd }); continue; }
+    if (!ys.length) { out.push({ from, to, n: 0, squares: 0, income: null, perHead: null, days: null, future: from >= CONFIG.FUTURE_FROM }); continue; }
     const mean = k => ys.reduce((a, h) => a + h[k], 0) / ys.length;
     out.push({ from, to, n: ys.length, squares: ys.reduce((a, h) => a + h.burnt, 0) / squareTons(), income: mean('income'),
-      perHead: mean('perHead'), perHeadEnd: ys[ys.length - 1].perHead, days: ys[ys.length - 1].days, future: from >= playerEnd });
+      perHead: mean('perHead'), perHeadHome: mean('perHeadHome'), perHeadEnd: ys[ys.length - 1].perHead, days: ys[ys.length - 1].days,
+      future: from >= CONFIG.FUTURE_FROM });
   }
   return out;
 }
+// The box after: the coal left, burnt evenly over AFTER_YEARS with the engines of the last year, for the people of
+// the last year (at the census rate): what the generations after the sheet could have from it, as income per head.
+function afterBox(st) {
+  const left = Math.max(0, CONFIG.RESERVE - st.S), N = naturalPop(CONFIG.RUN_TO);
+  return { squares: left / squareTons(), perHead: incomeOf(left / CONFIG.AFTER_YEARS, st.lbB, N) / (N / CONFIG.POP0) };
+}
 function ledger(st) {
   const gens = ledgerOf(st.history).filter(g => g.n === CONFIG.GEN_YEARS);
-  const left = Math.max(0, CONFIG.RESERVE - st.S) / squareTons();
-  return { gens, left, total: CONFIG.RESERVE / squareTons() };
+  const after = afterBox(st);
+  return { gens, after, left: after.squares, total: CONFIG.RESERVE / squareTons() };
+}
+// The score: the typical generation, the geometric mean of income per head over the generations on the sheet and
+// the box after (a planner who counts every generation the same, and a doubling the same for a poor generation as
+// for a rich one: log utility, no discounting; our choice), against the best path found (optimum.js).
+function typicalOf(st) {
+  const L = ledger(st);
+  const xs = L.gens.map(g => g.perHead).concat([L.after.perHead]);
+  return Math.exp(xs.reduce((a, x) => a + Math.log(Math.max(1e-6, x)), 0) / xs.length);
+}
+function scoreOf(st, best) {
+  const typical = typicalOf(st);
+  return { typical, best, score: 100 * typical / best };
+}
+// A whole game played as the page plays it: a pace per generation; after the evening, the rest at the last pace.
+function playPath(mults) {
+  const st = newGame(); let i = 0;
+  while (!playerTurnsOver(st)) {
+    if (checkEvening(st)) break;
+    burnGeneration(st, paceFromMult(mults[Math.min(i, mults.length - 1)])); i++;
+    if (checkEvening(st)) break;
+  }
+  runOut(st);
+  return st;
 }
 
 // ---- the verdict ---------------------------------------------------------------------------------------------
@@ -365,6 +407,7 @@ function verdict(st) {
     yearsLeft, untilYear: last.year + yearsLeft, engines: JSON.parse(JSON.stringify(st.engines)),
     popHome: st.pop, outYear, squaresBurnt: st.S / squareTons(), squaresAll: groundSquares(),
     ledger: L, bestGen: best, worstGen: worst, lastGen, endDays: last.days, endPerHead: last.perHead,
+    typical: typicalOf(st),
   };
 }
 
@@ -400,7 +443,7 @@ const REAL = [
 
 
 const MECH = { CONFIG, newGame, engineNews, previewPlan, burnGeneration, checkEvening, playerTurnsOver, runOut,
-  verdict, ledger, ledgerOf, depthOf, priceOf, shareBurnt, fireOf, keepTarget, cloneState, paceFromMult, multFromPace, clampPace, squareTons,
+  verdict, ledger, ledgerOf, afterBox, typicalOf, scoreOf, playPath, naturalPop, depthOf, priceOf, shareBurnt, fireOf, keepTarget, cloneState, paceFromMult, multFromPace, clampPace, squareTons,
   groundSquares, lastsUntil, dragOf, relCost, eveningNow, doesOf, powerOf, incomeOf, incomePerHeadOf, fuelShareOf,
   daysOf, powerCost, paysAt, americaFitsIn, REAL };
 if (typeof module !== 'undefined' && module.exports) module.exports = MECH;

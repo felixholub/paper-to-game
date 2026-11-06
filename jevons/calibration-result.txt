@@ -24,7 +24,9 @@ PASS  ch. I: no rise of importance yet: after 1865–1885 as now, coal is x1.001
 PASS  ch. I: with nine-tenths of the coal within 4,000 ft gone, coal is x9.1 the 1865 price
 PASS  preface: "we cannot get to the bottom of them": the last of the coal is dearer than any trade will pay
 PASS  the sheet: one square = 500 million tons; 167 squares hold Hull's 83544
+PASS  the sheet: ten generations of twenty years from 1865 reach 2065
 PASS  engine: income and income per head are 1 in 1865
+PASS  engine: heads at the census rate: 30 million in 1865, 326 million in 2065
 PASS  engine: fuel takes 18.3 days of a year's earnings in 1865 (a twentieth: our anchor)
 PASS  engine: an engine that doubles what a ton does cuts the days fuel takes from 18.3 to 11.2 (by 2^ALPHA: the extra income it brings)
 PASS  engine: power = coal x what a ton does
@@ -35,27 +37,29 @@ PASS  last screen: the real curve peaks in 1913
 PASS  last screen: every year 1865–2024, in order
 
 --- 2. The discoveries, at the game's parameters ---
-PASS  (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  (d) a stand from the start: 32.1 million go over the sea
-PASS  (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  (g) best-off generation per head: as now x6.5 (1945), a stand x1.4 (1965)
-PASS  (g) left for after 2065: a stand 116 squares, as now 6
-PASS  (g) as now: the last generation (x0.61) is far worse off than the best (x6.5)
-PASS  (g) as now: fuel takes 130 days of the last generation's year (18 in 1865)
+PASS  (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  (g) left for after 2065: a stand 116 squares, as now 5
+PASS  (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  (g) as now: fuel takes 133 days of the last generation's year (18 in 1865)
+PASS  (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
 
 --- 3. Robustness: the same discoveries when the designer's choices change ---
-PASS  {"ETA":1.5} (a) noon x1.0 < x1.7 < x10.0 < x21.8 < x25.0 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 32% < 97% < 100% < 100%
+PASS  {"ETA":1.5} (a) noon x1.0 < x1.7 < x10.0 < x21.8 < x24.1 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 32% < 97% < 100% < 100%
 PASS  {"ETA":1.5} (a') no path burns more than the ground holds (5.9, 52.7, 162.1, 167.1, 167.1 of 167.1)
 PASS  {"ETA":1.5} (b) as now: noon x21.8, by 2065 x0.00 of its noon, 100% of the ground gone
 PASS  {"ETA":1.5} (b) a stand: 32% gone by 2065, still burning x1.46, coal to about 2477
@@ -63,380 +67,470 @@ PASS  {"ETA":1.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 
 PASS  {"ETA":1.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.15, 32.86, 501.00, 501.00)
 PASS  {"ETA":1.5} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"ETA":1.5} (d) a stand from the start: 30.9 million go over the sea
-PASS  {"ETA":1.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1940, 1949
+PASS  {"ETA":1.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1941, 1949
 PASS  {"ETA":1.5} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"ETA":1.5} (f) Britain fits each engine no later than America (as now: 1912, 1943)
 PASS  {"ETA":1.5} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1943) than the stand (1953)
-PASS  {"ETA":1.5} (g) ledger sums to the ground: 5+11+23+49+63+12+3+1+0+0 + 0 left = 167.1
+PASS  {"ETA":1.5} (g) ledger sums to the ground: 5+11+23+50+62+12+3+1+0+0 + 0 left = 167.1
 PASS  {"ETA":1.5} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+6 + 114 left = 167.1
-PASS  {"ETA":1.5} (g) best-off generation per head: as now x7.4 (1945), a stand x1.4 (1965)
+PASS  {"ETA":1.5} (g) best-off generation per head: as now x7.0 (1945), a stand x1.2 (1965)
 PASS  {"ETA":1.5} (g) left for after 2065: a stand 114 squares, as now 0
-PASS  {"ETA":1.5} (g) as now: the last generation (x0.05) is far worse off than the best (x7.4)
+PASS  {"ETA":1.5} (g) as now: the last generation (x0.01) is far worse off than the best (x7.0)
 PASS  {"ETA":1.5} (g) as now: fuel takes more than the whole of the last generation's year (18 in 1865)
-PASS  {"ETA":3.5} (a) noon x1.0 < x1.6 < x7.3 < x19.0 < x17.5 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 30% < 78% < 90% < 95%
-PASS  {"ETA":3.5} (a') no path burns more than the ground holds (5.9, 49.6, 129.6, 150.8, 158.3 of 167.1)
-PASS  {"ETA":3.5} (b) as now: noon x19.0, by 2065 x0.05 of its noon, 90% of the ground gone
+PASS  {"ETA":1.5} (g) the box after: a stand leaves the next ten generations x0.89 per head, as now x0.00
+PASS  {"ETA":1.5} (h) typical generation: cut x0.08, stand x0.87, slower x1.29, now x0.21, faster x0.00 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"ETA":3.5} (a) noon x1.0 < x1.6 < x7.3 < x18.9 < x17.6 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 30% < 78% < 90% < 95%
+PASS  {"ETA":3.5} (a') no path burns more than the ground holds (5.9, 49.6, 129.6, 151.1, 158.3 of 167.1)
+PASS  {"ETA":3.5} (b) as now: noon x18.9, by 2065 x0.05 of its noon, 90% of the ground gone
 PASS  {"ETA":3.5} (b) a stand: 30% gone by 2065, still burning x1.21, coal to about 2578
-PASS  {"ETA":3.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 50 vs 36 without; 130 vs 122 without; 151 vs 147 without; 158 vs 156 without
-PASS  {"ETA":3.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 3.68, 9.36, 18.11)
+PASS  {"ETA":3.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 50 vs 36 without; 130 vs 122 without; 151 vs 148 without; 158 vs 156 without
+PASS  {"ETA":3.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 3.68, 9.52, 18.05)
 PASS  {"ETA":3.5} (d) 1905–1925: a stand after two generations of rising sends 0.9 million over the sea, keeping on 0.0 million
 PASS  {"ETA":3.5} (d) a stand from the start: 33.0 million go over the sea
 PASS  {"ETA":3.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1932, 1938
 PASS  {"ETA":3.5} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"ETA":3.5} (f) Britain fits each engine no later than America (as now: 1912, 1945)
 PASS  {"ETA":3.5} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1945) than the stand (1953)
-PASS  {"ETA":3.5} (g) ledger sums to the ground: 5+11+22+41+45+8+5+5+5+4 + 16 left = 167.1
+PASS  {"ETA":3.5} (g) ledger sums to the ground: 5+11+22+41+44+8+5+5+5+4 + 16 left = 167.1
 PASS  {"ETA":3.5} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+5+5 + 118 left = 167.1
-PASS  {"ETA":3.5} (g) best-off generation per head: as now x6.0 (1945), a stand x1.4 (1965)
+PASS  {"ETA":3.5} (g) best-off generation per head: as now x5.5 (1945), a stand x1.1 (1965)
 PASS  {"ETA":3.5} (g) left for after 2065: a stand 118 squares, as now 16
-PASS  {"ETA":3.5} (g) as now: the last generation (x0.76) is far worse off than the best (x6.0)
-PASS  {"ETA":3.5} (g) as now: fuel takes 47 days of the last generation's year (18 in 1865)
-PASS  {"REBOUND_EXP":0.3} (a) noon x1.0 < x1.3 < x7.3 < x18.8 < x18.9 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 3% < 27% < 84% < 96% < 99%
-PASS  {"REBOUND_EXP":0.3} (a') no path burns more than the ground holds (5.8, 44.5, 140.5, 160.7, 165.0 of 167.1)
-PASS  {"REBOUND_EXP":0.3} (b) as now: noon x18.8, by 2065 x0.04 of its noon, 96% of the ground gone
+PASS  {"ETA":3.5} (g) as now: the last generation (x0.39) is far worse off than the best (x5.5)
+PASS  {"ETA":3.5} (g) as now: fuel takes 48 days of the last generation's year (18 in 1865)
+PASS  {"ETA":3.5} (g) the box after: a stand leaves the next ten generations x0.91 per head, as now x0.23
+PASS  {"ETA":3.5} (h) typical generation: cut x0.08, stand x0.84, slower x1.34, now x1.16, faster x0.98 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"REBOUND_EXP":0.3} (a) noon x1.0 < x1.3 < x7.3 < x18.9 < x18.9 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 3% < 27% < 84% < 96% < 99%
+PASS  {"REBOUND_EXP":0.3} (a') no path burns more than the ground holds (5.8, 44.5, 140.5, 160.8, 165.0 of 167.1)
+PASS  {"REBOUND_EXP":0.3} (b) as now: noon x18.9, by 2065 x0.04 of its noon, 96% of the ground gone
 PASS  {"REBOUND_EXP":0.3} (b) a stand: 27% gone by 2065, still burning x1.14, coal to about 2633
 PASS  {"REBOUND_EXP":0.3} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 45 vs 36 without; 140 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"REBOUND_EXP":0.3} (c') British power is never cheaper than American in 2065 (x1.00, 1.10, 5.44, 25.04, 78.21)
+PASS  {"REBOUND_EXP":0.3} (c') British power is never cheaper than American in 2065 (x1.00, 1.10, 5.44, 25.79, 77.69)
 PASS  {"REBOUND_EXP":0.3} (d) 1905–1925: a stand after two generations of rising sends 1.3 million over the sea, keeping on 0.0 million
 PASS  {"REBOUND_EXP":0.3} (d) a stand from the start: 29.9 million go over the sea
-PASS  {"REBOUND_EXP":0.3} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1950
+PASS  {"REBOUND_EXP":0.3} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1950
 PASS  {"REBOUND_EXP":0.3} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"REBOUND_EXP":0.3} (f) Britain fits each engine no later than America (as now: 1912, 1945)
 PASS  {"REBOUND_EXP":0.3} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1945) than the stand (1953)
-PASS  {"REBOUND_EXP":0.3} (g) ledger sums to the ground: 5+11+21+40+50+13+7+6+4+3 + 6 left = 167.1
+PASS  {"REBOUND_EXP":0.3} (g) ledger sums to the ground: 5+11+22+41+50+13+7+5+4+3 + 6 left = 167.1
 PASS  {"REBOUND_EXP":0.3} (g) ledger sums to the ground: 4+4+4+5+5+5+5+5+5+4 + 123 left = 167.1
-PASS  {"REBOUND_EXP":0.3} (g) best-off generation per head: as now x6.4 (1945), a stand x1.2 (1965)
+PASS  {"REBOUND_EXP":0.3} (g) best-off generation per head: as now x6.0 (1945), a stand x1.0 (1945)
 PASS  {"REBOUND_EXP":0.3} (g) left for after 2065: a stand 123 squares, as now 6
-PASS  {"REBOUND_EXP":0.3} (g) as now: the last generation (x0.65) is far worse off than the best (x6.4)
-PASS  {"REBOUND_EXP":0.3} (g) as now: fuel takes 116 days of the last generation's year (18 in 1865)
-PASS  {"REBOUND_EXP":0.8} (a) noon x1.0 < x2.3 < x9.7 < x20.7 < x21.9 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 37% < 88% < 97% < 99%
-PASS  {"REBOUND_EXP":0.8} (a') no path burns more than the ground holds (6.2, 62.4, 147.6, 162.5, 165.6 of 167.1)
-PASS  {"REBOUND_EXP":0.8} (b) as now: noon x20.7, by 2065 x0.02 of its noon, 97% of the ground gone
+PASS  {"REBOUND_EXP":0.3} (g) as now: the last generation (x0.32) is far worse off than the best (x6.0)
+PASS  {"REBOUND_EXP":0.3} (g) as now: fuel takes 119 days of the last generation's year (18 in 1865)
+PASS  {"REBOUND_EXP":0.3} (g) the box after: a stand leaves the next ten generations x0.94 per head, as now x0.12
+PASS  {"REBOUND_EXP":0.3} (h) typical generation: cut x0.07, stand x0.79, slower x1.40, now x1.13, faster x0.87 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"REBOUND_EXP":0.8} (a) noon x1.0 < x2.3 < x9.7 < x20.6 < x21.9 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 37% < 88% < 97% < 99%
+PASS  {"REBOUND_EXP":0.8} (a') no path burns more than the ground holds (6.2, 62.4, 147.6, 162.7, 165.6 of 167.1)
+PASS  {"REBOUND_EXP":0.8} (b) as now: noon x20.6, by 2065 x0.02 of its noon, 97% of the ground gone
 PASS  {"REBOUND_EXP":0.8} (b) a stand: 37% gone by 2065, still burning x1.56, coal to about 2417
 PASS  {"REBOUND_EXP":0.8} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 62 vs 36 without; 148 vs 135 without; 163 vs 159 without; 166 vs 164 without
-PASS  {"REBOUND_EXP":0.8} (c') British power is never cheaper than American in 2065 (x1.00, 1.22, 7.68, 35.61, 111.84)
+PASS  {"REBOUND_EXP":0.8} (c') British power is never cheaper than American in 2065 (x1.00, 1.22, 7.68, 36.69, 111.09)
 PASS  {"REBOUND_EXP":0.8} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"REBOUND_EXP":0.8} (d) a stand from the start: 36.6 million go over the sea
 PASS  {"REBOUND_EXP":0.8} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1946
 PASS  {"REBOUND_EXP":0.8} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"REBOUND_EXP":0.8} (f) Britain fits each engine no later than America (as now: 1912, 1943)
 PASS  {"REBOUND_EXP":0.8} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1943) than the stand (1953)
-PASS  {"REBOUND_EXP":0.8} (g) ledger sums to the ground: 5+11+23+52+51+7+4+4+3+2 + 5 left = 167.1
+PASS  {"REBOUND_EXP":0.8} (g) ledger sums to the ground: 5+11+24+53+51+7+4+3+3+2 + 4 left = 167.1
 PASS  {"REBOUND_EXP":0.8} (g) ledger sums to the ground: 4+4+4+6+7+8+8+8+7+6 + 105 left = 167.1
-PASS  {"REBOUND_EXP":0.8} (g) best-off generation per head: as now x6.5 (1945), a stand x1.8 (1965)
-PASS  {"REBOUND_EXP":0.8} (g) left for after 2065: a stand 105 squares, as now 5
-PASS  {"REBOUND_EXP":0.8} (g) as now: the last generation (x0.57) is far worse off than the best (x6.5)
-PASS  {"REBOUND_EXP":0.8} (g) as now: fuel takes 156 days of the last generation's year (18 in 1865)
-PASS  {"PRICE_K":0.6} (a) noon x1.0 < x1.7 < x9.8 < x22.9 < x22.6 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 92% < 98% < 100%
-PASS  {"PRICE_K":0.6} (a') no path burns more than the ground holds (5.9, 52.6, 153.6, 164.5, 166.3 of 167.1)
-PASS  {"PRICE_K":0.6} (b) as now: noon x22.9, by 2065 x0.01 of its noon, 98% of the ground gone
+PASS  {"REBOUND_EXP":0.8} (g) best-off generation per head: as now x5.9 (1925), a stand x1.4 (1965)
+PASS  {"REBOUND_EXP":0.8} (g) left for after 2065: a stand 105 squares, as now 4
+PASS  {"REBOUND_EXP":0.8} (g) as now: the last generation (x0.24) is far worse off than the best (x5.9)
+PASS  {"REBOUND_EXP":0.8} (g) as now: fuel takes 160 days of the last generation's year (18 in 1865)
+PASS  {"REBOUND_EXP":0.8} (g) the box after: a stand leaves the next ten generations x0.84 per head, as now x0.09
+PASS  {"REBOUND_EXP":0.8} (h) typical generation: cut x0.09, stand x0.95, slower x1.32, now x0.96, faster x0.67 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"PRICE_K":0.6} (a) noon x1.0 < x1.7 < x9.8 < x23.5 < x22.6 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 92% < 98% < 100%
+PASS  {"PRICE_K":0.6} (a') no path burns more than the ground holds (5.9, 52.6, 153.6, 164.6, 166.3 of 167.1)
+PASS  {"PRICE_K":0.6} (b) as now: noon x23.5, by 2065 x0.01 of its noon, 98% of the ground gone
 PASS  {"PRICE_K":0.6} (b) a stand: 31% gone by 2065, still burning x1.46, coal to about 2479
-PASS  {"PRICE_K":0.6} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 53 vs 37 without; 154 vs 147 without; 164 vs 163 without; 166 vs 166 without
-PASS  {"PRICE_K":0.6} (c') British power is never cheaper than American in 2065 (x1.00, 1.09, 7.30, 38.50, 122.81)
+PASS  {"PRICE_K":0.6} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 53 vs 37 without; 154 vs 147 without; 165 vs 163 without; 166 vs 166 without
+PASS  {"PRICE_K":0.6} (c') British power is never cheaper than American in 2065 (x1.00, 1.09, 7.30, 39.68, 121.99)
 PASS  {"PRICE_K":0.6} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"PRICE_K":0.6} (d) a stand from the start: 31.0 million go over the sea
-PASS  {"PRICE_K":0.6} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1940, 1949
+PASS  {"PRICE_K":0.6} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1941, 1949
 PASS  {"PRICE_K":0.6} (f) America fits the air-engine in 1913, the perfected one in 1953
-PASS  {"PRICE_K":0.6} (f) Britain fits each engine no later than America (as now: 1913, 1946)
-PASS  {"PRICE_K":0.6} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1946) than the stand (1953)
-PASS  {"PRICE_K":0.6} (g) ledger sums to the ground: 5+11+22+49+58+10+4+3+2+1 + 3 left = 167.1
+PASS  {"PRICE_K":0.6} (f) Britain fits each engine no later than America (as now: 1913, 1945)
+PASS  {"PRICE_K":0.6} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1945) than the stand (1953)
+PASS  {"PRICE_K":0.6} (g) ledger sums to the ground: 5+11+23+49+59+8+3+3+2+1 + 3 left = 167.1
 PASS  {"PRICE_K":0.6} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+6 + 114 left = 167.1
-PASS  {"PRICE_K":0.6} (g) best-off generation per head: as now x7.0 (1945), a stand x1.4 (1965)
+PASS  {"PRICE_K":0.6} (g) best-off generation per head: as now x6.7 (1945), a stand x1.2 (1965)
 PASS  {"PRICE_K":0.6} (g) left for after 2065: a stand 114 squares, as now 3
-PASS  {"PRICE_K":0.6} (g) as now: the last generation (x0.45) is far worse off than the best (x7.0)
-PASS  {"PRICE_K":0.6} (g) as now: fuel takes 151 days of the last generation's year (18 in 1865)
-PASS  {"PRICE_K":1.8} (a) noon x1.0 < x1.6 < x7.3 < x16.3 < x17.0 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 29% < 77% < 93% < 97%
-PASS  {"PRICE_K":1.8} (a') no path burns more than the ground holds (5.9, 48.5, 129.0, 154.8, 162.6 of 167.1)
-PASS  {"PRICE_K":1.8} (b) as now: noon x16.3, by 2065 x0.07 of its noon, 93% of the ground gone
+PASS  {"PRICE_K":0.6} (g) as now: the last generation (x0.17) is far worse off than the best (x6.7)
+PASS  {"PRICE_K":0.6} (g) as now: fuel takes 156 days of the last generation's year (18 in 1865)
+PASS  {"PRICE_K":0.6} (g) the box after: a stand leaves the next ten generations x0.89 per head, as now x0.06
+PASS  {"PRICE_K":0.6} (h) typical generation: cut x0.08, stand x0.87, slower x1.33, now x0.85, faster x0.51 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"PRICE_K":1.8} (a) noon x1.0 < x1.6 < x7.3 < x16.2 < x17.0 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 29% < 77% < 93% < 97%
+PASS  {"PRICE_K":1.8} (a') no path burns more than the ground holds (5.9, 48.5, 129.0, 155.1, 162.5 of 167.1)
+PASS  {"PRICE_K":1.8} (b) as now: noon x16.2, by 2065 x0.07 of its noon, 93% of the ground gone
 PASS  {"PRICE_K":1.8} (b) a stand: 29% gone by 2065, still burning x1.13, coal to about 2619
 PASS  {"PRICE_K":1.8} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 48 vs 35 without; 129 vs 119 without; 155 vs 151 without; 163 vs 161 without
-PASS  {"PRICE_K":1.8} (c') British power is never cheaper than American in 2065 (x1.00, 1.21, 5.71, 22.07, 63.93)
+PASS  {"PRICE_K":1.8} (c') British power is never cheaper than American in 2065 (x1.00, 1.21, 5.71, 22.67, 63.52)
 PASS  {"PRICE_K":1.8} (d) 1905–1925: a stand after two generations of rising sends 0.9 million over the sea, keeping on 0.0 million
 PASS  {"PRICE_K":1.8} (d) a stand from the start: 33.6 million go over the sea
 PASS  {"PRICE_K":1.8} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1930, 1937
 PASS  {"PRICE_K":1.8} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"PRICE_K":1.8} (f) Britain fits each engine no later than America (as now: 1912, 1942)
 PASS  {"PRICE_K":1.8} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1942) than the stand (1952)
-PASS  {"PRICE_K":1.8} (g) ledger sums to the ground: 5+11+22+39+43+10+7+7+6+5 + 12 left = 167.1
+PASS  {"PRICE_K":1.8} (g) ledger sums to the ground: 5+11+22+40+43+10+7+7+6+5 + 12 left = 167.1
 PASS  {"PRICE_K":1.8} (g) ledger sums to the ground: 4+4+4+5+5+6+6+5+5+4 + 119 left = 167.1
-PASS  {"PRICE_K":1.8} (g) best-off generation per head: as now x5.8 (1945), a stand x1.4 (1965)
+PASS  {"PRICE_K":1.8} (g) best-off generation per head: as now x5.3 (1945), a stand x1.1 (1965)
 PASS  {"PRICE_K":1.8} (g) left for after 2065: a stand 119 squares, as now 12
-PASS  {"PRICE_K":1.8} (g) as now: the last generation (x0.81) is far worse off than the best (x5.8)
-PASS  {"PRICE_K":1.8} (g) as now: fuel takes 113 days of the last generation's year (18 in 1865)
-PASS  {"EMIGRATE_SHARE":0.08} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"EMIGRATE_SHARE":0.08} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"EMIGRATE_SHARE":0.08} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"PRICE_K":1.8} (g) as now: the last generation (x0.45) is far worse off than the best (x5.3)
+PASS  {"PRICE_K":1.8} (g) as now: fuel takes 116 days of the last generation's year (18 in 1865)
+PASS  {"PRICE_K":1.8} (g) the box after: a stand leaves the next ten generations x0.92 per head, as now x0.18
+PASS  {"PRICE_K":1.8} (h) typical generation: cut x0.08, stand x0.83, slower x1.37, now x1.24, faster x1.06 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"EMIGRATE_SHARE":0.08} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"EMIGRATE_SHARE":0.08} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"EMIGRATE_SHARE":0.08} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"EMIGRATE_SHARE":0.08} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"EMIGRATE_SHARE":0.08} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"EMIGRATE_SHARE":0.08} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"EMIGRATE_SHARE":0.08} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"EMIGRATE_SHARE":0.08} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"EMIGRATE_SHARE":0.08} (d) 1905–1925: a stand after two generations of rising sends 0.4 million over the sea, keeping on 0.0 million
 PASS  {"EMIGRATE_SHARE":0.08} (d) a stand from the start: 18.0 million go over the sea
-PASS  {"EMIGRATE_SHARE":0.08} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"EMIGRATE_SHARE":0.08} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"EMIGRATE_SHARE":0.08} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"EMIGRATE_SHARE":0.08} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"EMIGRATE_SHARE":0.08} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"EMIGRATE_SHARE":0.08} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"EMIGRATE_SHARE":0.08} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"EMIGRATE_SHARE":0.08} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"EMIGRATE_SHARE":0.08} (g) best-off generation per head: as now x6.4 (1945), a stand x1.4 (1965)
-PASS  {"EMIGRATE_SHARE":0.08} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"EMIGRATE_SHARE":0.08} (g) as now: the last generation (x0.51) is far worse off than the best (x6.4)
-PASS  {"EMIGRATE_SHARE":0.08} (g) as now: fuel takes 120 days of the last generation's year (18 in 1865)
-PASS  {"EMIGRATE_SHARE":0.3} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"EMIGRATE_SHARE":0.3} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"EMIGRATE_SHARE":0.3} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"EMIGRATE_SHARE":0.08} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"EMIGRATE_SHARE":0.08} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"EMIGRATE_SHARE":0.08} (g) as now: the last generation (x0.31) is far worse off than the best (x6.1)
+PASS  {"EMIGRATE_SHARE":0.08} (g) as now: fuel takes 124 days of the last generation's year (18 in 1865)
+PASS  {"EMIGRATE_SHARE":0.08} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"EMIGRATE_SHARE":0.08} (h) typical generation: cut x0.08, stand x0.87, slower x1.40, now x1.10, faster x0.82 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"EMIGRATE_SHARE":0.3} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"EMIGRATE_SHARE":0.3} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"EMIGRATE_SHARE":0.3} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"EMIGRATE_SHARE":0.3} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"EMIGRATE_SHARE":0.3} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"EMIGRATE_SHARE":0.3} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"EMIGRATE_SHARE":0.3} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"EMIGRATE_SHARE":0.3} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"EMIGRATE_SHARE":0.3} (d) 1905–1925: a stand after two generations of rising sends 1.7 million over the sea, keeping on 0.0 million
 PASS  {"EMIGRATE_SHARE":0.3} (d) a stand from the start: 56.5 million go over the sea
-PASS  {"EMIGRATE_SHARE":0.3} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"EMIGRATE_SHARE":0.3} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"EMIGRATE_SHARE":0.3} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"EMIGRATE_SHARE":0.3} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"EMIGRATE_SHARE":0.3} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"EMIGRATE_SHARE":0.3} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"EMIGRATE_SHARE":0.3} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"EMIGRATE_SHARE":0.3} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"EMIGRATE_SHARE":0.3} (g) best-off generation per head: as now x6.9 (1945), a stand x1.5 (1965)
-PASS  {"EMIGRATE_SHARE":0.3} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"EMIGRATE_SHARE":0.3} (g) as now: the last generation (x0.94) is far worse off than the best (x6.9)
-PASS  {"EMIGRATE_SHARE":0.3} (g) as now: fuel takes 157 days of the last generation's year (18 in 1865)
-PASS  {"AMERICA_RATE":0.05} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"AMERICA_RATE":0.05} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"AMERICA_RATE":0.05} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"EMIGRATE_SHARE":0.3} (g) best-off generation per head: as now x6.0 (1945), a stand x1.1 (1965)
+PASS  {"EMIGRATE_SHARE":0.3} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"EMIGRATE_SHARE":0.3} (g) as now: the last generation (x0.24) is far worse off than the best (x6.0)
+PASS  {"EMIGRATE_SHARE":0.3} (g) as now: fuel takes 161 days of the last generation's year (18 in 1865)
+PASS  {"EMIGRATE_SHARE":0.3} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"EMIGRATE_SHARE":0.3} (h) typical generation: cut x0.07, stand x0.82, slower x1.33, now x0.99, faster x0.73 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"AMERICA_RATE":0.05} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"AMERICA_RATE":0.05} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"AMERICA_RATE":0.05} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"AMERICA_RATE":0.05} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"AMERICA_RATE":0.05} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"AMERICA_RATE":0.05} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"AMERICA_RATE":0.05} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"AMERICA_RATE":0.05} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"AMERICA_RATE":0.05} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"AMERICA_RATE":0.05} (d) a stand from the start: 32.1 million go over the sea
 PASS  {"AMERICA_RATE":0.05} (e) America passes Britain on every steady path: 1883, 1896, 1919, 1956, 1952
 PASS  {"AMERICA_RATE":0.05} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"AMERICA_RATE":0.05} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"AMERICA_RATE":0.05} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"AMERICA_RATE":0.05} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"AMERICA_RATE":0.05} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"AMERICA_RATE":0.05} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"AMERICA_RATE":0.05} (g) best-off generation per head: as now x6.5 (1945), a stand x1.4 (1965)
-PASS  {"AMERICA_RATE":0.05} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"AMERICA_RATE":0.05} (g) as now: the last generation (x0.61) is far worse off than the best (x6.5)
-PASS  {"AMERICA_RATE":0.05} (g) as now: fuel takes 130 days of the last generation's year (18 in 1865)
-PASS  {"AMERICA_RATE":0.07} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"AMERICA_RATE":0.07} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"AMERICA_RATE":0.07} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"AMERICA_RATE":0.05} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"AMERICA_RATE":0.05} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"AMERICA_RATE":0.05} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"AMERICA_RATE":0.05} (g) as now: fuel takes 133 days of the last generation's year (18 in 1865)
+PASS  {"AMERICA_RATE":0.05} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"AMERICA_RATE":0.05} (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"AMERICA_RATE":0.07} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"AMERICA_RATE":0.07} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"AMERICA_RATE":0.07} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"AMERICA_RATE":0.07} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"AMERICA_RATE":0.07} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"AMERICA_RATE":0.07} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"AMERICA_RATE":0.07} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"AMERICA_RATE":0.07} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"AMERICA_RATE":0.07} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"AMERICA_RATE":0.07} (d) a stand from the start: 32.1 million go over the sea
-PASS  {"AMERICA_RATE":0.07} (e) America passes Britain on every steady path: 1880, 1887, 1897, 1913, 1934
+PASS  {"AMERICA_RATE":0.07} (e) America passes Britain on every steady path: 1880, 1887, 1897, 1914, 1934
 PASS  {"AMERICA_RATE":0.07} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"AMERICA_RATE":0.07} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"AMERICA_RATE":0.07} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"AMERICA_RATE":0.07} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"AMERICA_RATE":0.07} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"AMERICA_RATE":0.07} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"AMERICA_RATE":0.07} (g) best-off generation per head: as now x6.5 (1945), a stand x1.4 (1965)
-PASS  {"AMERICA_RATE":0.07} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"AMERICA_RATE":0.07} (g) as now: the last generation (x0.61) is far worse off than the best (x6.5)
-PASS  {"AMERICA_RATE":0.07} (g) as now: fuel takes 130 days of the last generation's year (18 in 1865)
-PASS  {"POP_RATE":0.009} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"POP_RATE":0.009} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"POP_RATE":0.009} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"AMERICA_RATE":0.07} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"AMERICA_RATE":0.07} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"AMERICA_RATE":0.07} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"AMERICA_RATE":0.07} (g) as now: fuel takes 133 days of the last generation's year (18 in 1865)
+PASS  {"AMERICA_RATE":0.07} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"AMERICA_RATE":0.07} (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"POP_RATE":0.009} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"POP_RATE":0.009} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"POP_RATE":0.009} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"POP_RATE":0.009} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"POP_RATE":0.009} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"POP_RATE":0.009} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"POP_RATE":0.009} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"POP_RATE":0.009} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"POP_RATE":0.009} (d) 1905–1925: a stand after two generations of rising sends 0.6 million over the sea, keeping on 0.0 million
 PASS  {"POP_RATE":0.009} (d) a stand from the start: 19.3 million go over the sea
-PASS  {"POP_RATE":0.009} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"POP_RATE":0.009} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"POP_RATE":0.009} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"POP_RATE":0.009} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"POP_RATE":0.009} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"POP_RATE":0.009} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"POP_RATE":0.009} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"POP_RATE":0.009} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"POP_RATE":0.009} (g) best-off generation per head: as now x7.8 (1945), a stand x1.7 (1965)
-PASS  {"POP_RATE":0.009} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"POP_RATE":0.009} (g) as now: the last generation (x0.84) is far worse off than the best (x7.8)
-PASS  {"POP_RATE":0.009} (g) as now: fuel takes 149 days of the last generation's year (18 in 1865)
-PASS  {"POP_RATE":0.015} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"POP_RATE":0.015} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"POP_RATE":0.015} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"POP_RATE":0.009} (g) best-off generation per head: as now x7.3 (1945), a stand x1.5 (1965)
+PASS  {"POP_RATE":0.009} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"POP_RATE":0.009} (g) as now: the last generation (x0.44) is far worse off than the best (x7.3)
+PASS  {"POP_RATE":0.009} (g) as now: fuel takes 153 days of the last generation's year (18 in 1865)
+PASS  {"POP_RATE":0.009} (g) the box after: a stand leaves the next ten generations x1.37 per head, as now x0.16
+PASS  {"POP_RATE":0.009} (h) typical generation: cut x0.10, stand x1.05, slower x1.67, now x1.30, faster x0.97 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"POP_RATE":0.015} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"POP_RATE":0.015} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"POP_RATE":0.015} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"POP_RATE":0.015} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"POP_RATE":0.015} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"POP_RATE":0.015} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"POP_RATE":0.015} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"POP_RATE":0.015} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"POP_RATE":0.015} (d) 1905–1925: a stand after two generations of rising sends 1.3 million over the sea, keeping on 0.0 million
 PASS  {"POP_RATE":0.015} (d) a stand from the start: 46.8 million go over the sea
-PASS  {"POP_RATE":0.015} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"POP_RATE":0.015} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"POP_RATE":0.015} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"POP_RATE":0.015} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"POP_RATE":0.015} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"POP_RATE":0.015} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"POP_RATE":0.015} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"POP_RATE":0.015} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"POP_RATE":0.015} (g) best-off generation per head: as now x5.4 (1945), a stand x1.2 (1965)
-PASS  {"POP_RATE":0.015} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"POP_RATE":0.015} (g) as now: the last generation (x0.47) is far worse off than the best (x5.4)
-PASS  {"POP_RATE":0.015} (g) as now: fuel takes 116 days of the last generation's year (18 in 1865)
-PASS  {"POP_ELAST":0.5} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"POP_ELAST":0.5} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"POP_ELAST":0.5} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"POP_RATE":0.015} (g) best-off generation per head: as now x5.1 (1945), a stand x0.9 (1945)
+PASS  {"POP_RATE":0.015} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"POP_RATE":0.015} (g) as now: the last generation (x0.18) is far worse off than the best (x5.1)
+PASS  {"POP_RATE":0.015} (g) as now: fuel takes 119 days of the last generation's year (18 in 1865)
+PASS  {"POP_RATE":0.015} (g) the box after: a stand leaves the next ten generations x0.60 per head, as now x0.07
+PASS  {"POP_RATE":0.015} (h) typical generation: cut x0.06, stand x0.69, slower x1.13, now x0.87, faster x0.64 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"POP_ELAST":0.5} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"POP_ELAST":0.5} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"POP_ELAST":0.5} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"POP_ELAST":0.5} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"POP_ELAST":0.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"POP_ELAST":0.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"POP_ELAST":0.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"POP_ELAST":0.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"POP_ELAST":0.5} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"POP_ELAST":0.5} (d) a stand from the start: 34.4 million go over the sea
-PASS  {"POP_ELAST":0.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"POP_ELAST":0.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"POP_ELAST":0.5} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"POP_ELAST":0.5} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"POP_ELAST":0.5} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"POP_ELAST":0.5} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"POP_ELAST":0.5} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"POP_ELAST":0.5} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"POP_ELAST":0.5} (g) best-off generation per head: as now x6.5 (1945), a stand x1.4 (1965)
-PASS  {"POP_ELAST":0.5} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"POP_ELAST":0.5} (g) as now: the last generation (x0.60) is far worse off than the best (x6.5)
-PASS  {"POP_ELAST":0.5} (g) as now: fuel takes 128 days of the last generation's year (18 in 1865)
-PASS  {"POP_ELAST":2} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"POP_ELAST":2} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"POP_ELAST":2} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"POP_ELAST":0.5} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"POP_ELAST":0.5} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"POP_ELAST":0.5} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"POP_ELAST":0.5} (g) as now: fuel takes 131 days of the last generation's year (18 in 1865)
+PASS  {"POP_ELAST":0.5} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"POP_ELAST":0.5} (h) typical generation: cut x0.08, stand x0.86, slower x1.38, now x1.07, faster x0.80 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"POP_ELAST":2} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"POP_ELAST":2} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"POP_ELAST":2} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"POP_ELAST":2} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"POP_ELAST":2} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"POP_ELAST":2} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"POP_ELAST":2} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"POP_ELAST":2} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"POP_ELAST":2} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"POP_ELAST":2} (d) a stand from the start: 29.1 million go over the sea
-PASS  {"POP_ELAST":2} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"POP_ELAST":2} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"POP_ELAST":2} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"POP_ELAST":2} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"POP_ELAST":2} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"POP_ELAST":2} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"POP_ELAST":2} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"POP_ELAST":2} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"POP_ELAST":2} (g) best-off generation per head: as now x6.5 (1945), a stand x1.5 (1965)
-PASS  {"POP_ELAST":2} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"POP_ELAST":2} (g) as now: the last generation (x0.63) is far worse off than the best (x6.5)
-PASS  {"POP_ELAST":2} (g) as now: fuel takes 133 days of the last generation's year (18 in 1865)
-PASS  {"ALPHA":0.5} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"ALPHA":0.5} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"ALPHA":0.5} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"POP_ELAST":2} (g) best-off generation per head: as now x6.1 (1945), a stand x1.1 (1965)
+PASS  {"POP_ELAST":2} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"POP_ELAST":2} (g) as now: the last generation (x0.28) is far worse off than the best (x6.1)
+PASS  {"POP_ELAST":2} (g) as now: fuel takes 136 days of the last generation's year (18 in 1865)
+PASS  {"POP_ELAST":2} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"POP_ELAST":2} (h) typical generation: cut x0.07, stand x0.84, slower x1.38, now x1.06, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"ALPHA":0.5} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"ALPHA":0.5} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"ALPHA":0.5} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"ALPHA":0.5} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"ALPHA":0.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"ALPHA":0.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"ALPHA":0.5} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"ALPHA":0.5} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"ALPHA":0.5} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"ALPHA":0.5} (d) a stand from the start: 33.3 million go over the sea
-PASS  {"ALPHA":0.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"ALPHA":0.5} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"ALPHA":0.5} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"ALPHA":0.5} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"ALPHA":0.5} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"ALPHA":0.5} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"ALPHA":0.5} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"ALPHA":0.5} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"ALPHA":0.5} (g) best-off generation per head: as now x3.8 (1945), a stand x1.3 (1965)
-PASS  {"ALPHA":0.5} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"ALPHA":0.5} (g) as now: the last generation (x0.70) is far worse off than the best (x3.8)
-PASS  {"ALPHA":0.5} (g) as now: fuel takes 107 days of the last generation's year (18 in 1865)
-PASS  {"ALPHA":0.9} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"ALPHA":0.9} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"ALPHA":0.9} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"ALPHA":0.5} (g) best-off generation per head: as now x3.5 (1945), a stand x1.1 (1965)
+PASS  {"ALPHA":0.5} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"ALPHA":0.5} (g) as now: the last generation (x0.33) is far worse off than the best (x3.5)
+PASS  {"ALPHA":0.5} (g) as now: fuel takes 109 days of the last generation's year (18 in 1865)
+PASS  {"ALPHA":0.5} (g) the box after: a stand leaves the next ten generations x0.93 per head, as now x0.20
+PASS  {"ALPHA":0.5} (h) typical generation: cut x0.12, stand x0.85, slower x1.18, now x0.92, faster x0.71 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"ALPHA":0.9} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"ALPHA":0.9} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"ALPHA":0.9} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"ALPHA":0.9} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"ALPHA":0.9} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"ALPHA":0.9} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"ALPHA":0.9} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"ALPHA":0.9} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"ALPHA":0.9} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"ALPHA":0.9} (d) a stand from the start: 31.1 million go over the sea
-PASS  {"ALPHA":0.9} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"ALPHA":0.9} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"ALPHA":0.9} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"ALPHA":0.9} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"ALPHA":0.9} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"ALPHA":0.9} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"ALPHA":0.9} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"ALPHA":0.9} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"ALPHA":0.9} (g) best-off generation per head: as now x11.3 (1945), a stand x1.6 (1965)
-PASS  {"ALPHA":0.9} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"ALPHA":0.9} (g) as now: the last generation (x0.54) is far worse off than the best (x11.3)
-PASS  {"ALPHA":0.9} (g) as now: fuel takes 156 days of the last generation's year (18 in 1865)
-PASS  {"ADJUST":0.05} (a) noon x1.0 < x1.7 < x9.5 < x20.7 < x22.4 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 89% < 97% < 100%
-PASS  {"ADJUST":0.05} (a') no path burns more than the ground holds (5.9, 51.6, 148.7, 162.9, 166.4 of 167.1)
-PASS  {"ADJUST":0.05} (b) as now: noon x20.7, by 2065 x0.02 of its noon, 97% of the ground gone
+PASS  {"ALPHA":0.9} (g) best-off generation per head: as now x10.6 (1945), a stand x1.3 (1965)
+PASS  {"ALPHA":0.9} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"ALPHA":0.9} (g) as now: the last generation (x0.25) is far worse off than the best (x10.6)
+PASS  {"ALPHA":0.9} (g) as now: fuel takes 161 days of the last generation's year (18 in 1865)
+PASS  {"ALPHA":0.9} (g) the box after: a stand leaves the next ten generations x0.88 per head, as now x0.06
+PASS  {"ALPHA":0.9} (h) typical generation: cut x0.05, stand x0.86, slower x1.61, now x1.24, faster x0.90 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"ADJUST":0.05} (a) noon x1.0 < x1.7 < x9.5 < x20.7 < x22.4 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 89% < 98% < 100%
+PASS  {"ADJUST":0.05} (a') no path burns more than the ground holds (5.9, 51.6, 148.7, 163.0, 166.4 of 167.1)
+PASS  {"ADJUST":0.05} (b) as now: noon x20.7, by 2065 x0.02 of its noon, 98% of the ground gone
 PASS  {"ADJUST":0.05} (b) a stand: 31% gone by 2065, still burning x1.35, coal to about 2514
-PASS  {"ADJUST":0.05} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 52 vs 37 without; 149 vs 141 without; 163 vs 161 without; 166 vs 165 without
-PASS  {"ADJUST":0.05} (c') British power is never cheaper than American in 2065 (x1.00, 1.14, 8.21, 38.58, 229.71)
+PASS  {"ADJUST":0.05} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 52 vs 37 without; 149 vs 141 without; 163 vs 162 without; 166 vs 165 without
+PASS  {"ADJUST":0.05} (c') British power is never cheaper than American in 2065 (x1.00, 1.14, 8.21, 39.74, 226.28)
 PASS  {"ADJUST":0.05} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"ADJUST":0.05} (d) a stand from the start: 32.0 million go over the sea
-PASS  {"ADJUST":0.05} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1939, 1949
+PASS  {"ADJUST":0.05} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1940, 1949
 PASS  {"ADJUST":0.05} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"ADJUST":0.05} (f) Britain fits each engine no later than America (as now: 1912, 1943)
 PASS  {"ADJUST":0.05} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1943) than the stand (1953)
-PASS  {"ADJUST":0.05} (g) ledger sums to the ground: 5+11+23+49+61+10+2+1+1+1 + 4 left = 167.1
+PASS  {"ADJUST":0.05} (g) ledger sums to the ground: 5+11+23+49+60+10+2+1+1+1 + 4 left = 167.1
 PASS  {"ADJUST":0.05} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 115 left = 167.1
-PASS  {"ADJUST":0.05} (g) best-off generation per head: as now x7.2 (1945), a stand x1.4 (1965)
+PASS  {"ADJUST":0.05} (g) best-off generation per head: as now x6.9 (1945), a stand x1.2 (1965)
 PASS  {"ADJUST":0.05} (g) left for after 2065: a stand 115 squares, as now 4
-PASS  {"ADJUST":0.05} (g) as now: the last generation (x0.44) is far worse off than the best (x7.2)
-PASS  {"ADJUST":0.05} (g) as now: fuel takes 161 days of the last generation's year (18 in 1865)
-PASS  {"ADJUST":0.2} (a) noon x1.0 < x1.7 < x7.8 < x20.7 < x20.5 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 30% < 84% < 96% < 99%
-PASS  {"ADJUST":0.2} (a') no path burns more than the ground holds (5.9, 50.7, 141.2, 160.5, 164.8 of 167.1)
-PASS  {"ADJUST":0.2} (b) as now: noon x20.7, by 2065 x0.03 of its noon, 96% of the ground gone
+PASS  {"ADJUST":0.05} (g) as now: the last generation (x0.14) is far worse off than the best (x6.9)
+PASS  {"ADJUST":0.05} (g) as now: fuel takes 166 days of the last generation's year (18 in 1865)
+PASS  {"ADJUST":0.05} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.09
+PASS  {"ADJUST":0.05} (h) typical generation: cut x0.08, stand x0.86, slower x1.32, now x0.74, faster x0.18 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"ADJUST":0.2} (a) noon x1.0 < x1.7 < x7.8 < x21.2 < x20.5 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 30% < 84% < 96% < 99%
+PASS  {"ADJUST":0.2} (a') no path burns more than the ground holds (5.9, 50.7, 141.2, 160.7, 164.8 of 167.1)
+PASS  {"ADJUST":0.2} (b) as now: noon x21.2, by 2065 x0.03 of its noon, 96% of the ground gone
 PASS  {"ADJUST":0.2} (b) a stand: 30% gone by 2065, still burning x1.30, coal to about 2535
 PASS  {"ADJUST":0.2} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 141 vs 132 without; 161 vs 158 without; 165 vs 164 without
-PASS  {"ADJUST":0.2} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 5.60, 24.59, 72.84)
+PASS  {"ADJUST":0.2} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 5.60, 25.30, 72.39)
 PASS  {"ADJUST":0.2} (d) 1905–1925: a stand after two generations of rising sends 0.9 million over the sea, keeping on 0.0 million
 PASS  {"ADJUST":0.2} (d) a stand from the start: 32.1 million go over the sea
-PASS  {"ADJUST":0.2} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1932, 1938
+PASS  {"ADJUST":0.2} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1933, 1938
 PASS  {"ADJUST":0.2} (f) America fits the air-engine in 1913, the perfected one in 1953
-PASS  {"ADJUST":0.2} (f) Britain fits each engine no later than America (as now: 1912, 1945)
-PASS  {"ADJUST":0.2} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1945) than the stand (1953)
-PASS  {"ADJUST":0.2} (g) ledger sums to the ground: 5+11+22+42+46+12+9+6+5+3 + 7 left = 167.1
+PASS  {"ADJUST":0.2} (f) Britain fits each engine no later than America (as now: 1912, 1944)
+PASS  {"ADJUST":0.2} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
+PASS  {"ADJUST":0.2} (g) ledger sums to the ground: 5+11+22+42+47+11+8+6+5+3 + 6 left = 167.1
 PASS  {"ADJUST":0.2} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+5+5 + 116 left = 167.1
-PASS  {"ADJUST":0.2} (g) best-off generation per head: as now x6.1 (1945), a stand x1.4 (1965)
-PASS  {"ADJUST":0.2} (g) left for after 2065: a stand 116 squares, as now 7
-PASS  {"ADJUST":0.2} (g) as now: the last generation (x0.66) is far worse off than the best (x6.1)
-PASS  {"ADJUST":0.2} (g) as now: fuel takes 114 days of the last generation's year (18 in 1865)
-PASS  {"FUEL_SHARE_1865":0.03} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"FUEL_SHARE_1865":0.03} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"FUEL_SHARE_1865":0.03} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"ADJUST":0.2} (g) best-off generation per head: as now x5.6 (1945), a stand x1.2 (1965)
+PASS  {"ADJUST":0.2} (g) left for after 2065: a stand 116 squares, as now 6
+PASS  {"ADJUST":0.2} (g) as now: the last generation (x0.32) is far worse off than the best (x5.6)
+PASS  {"ADJUST":0.2} (g) as now: fuel takes 117 days of the last generation's year (18 in 1865)
+PASS  {"ADJUST":0.2} (g) the box after: a stand leaves the next ten generations x0.91 per head, as now x0.12
+PASS  {"ADJUST":0.2} (h) typical generation: cut x0.08, stand x0.85, slower x1.39, now x1.15, faster x0.94 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"FUEL_SHARE_1865":0.03} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"FUEL_SHARE_1865":0.03} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"FUEL_SHARE_1865":0.03} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"FUEL_SHARE_1865":0.03} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"FUEL_SHARE_1865":0.03} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"FUEL_SHARE_1865":0.03} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"FUEL_SHARE_1865":0.03} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"FUEL_SHARE_1865":0.03} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"FUEL_SHARE_1865":0.03} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"FUEL_SHARE_1865":0.03} (d) a stand from the start: 32.1 million go over the sea
-PASS  {"FUEL_SHARE_1865":0.03} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"FUEL_SHARE_1865":0.03} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"FUEL_SHARE_1865":0.03} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"FUEL_SHARE_1865":0.03} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"FUEL_SHARE_1865":0.03} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"FUEL_SHARE_1865":0.03} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"FUEL_SHARE_1865":0.03} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"FUEL_SHARE_1865":0.03} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"FUEL_SHARE_1865":0.03} (g) best-off generation per head: as now x6.5 (1945), a stand x1.4 (1965)
-PASS  {"FUEL_SHARE_1865":0.03} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"FUEL_SHARE_1865":0.03} (g) as now: the last generation (x0.61) is far worse off than the best (x6.5)
-PASS  {"FUEL_SHARE_1865":0.03} (g) as now: fuel takes 78 days of the last generation's year (18 in 1865)
-PASS  {"FUEL_SHARE_1865":0.08} (a) noon x1.0 < x1.7 < x8.3 < x19.9 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
-PASS  {"FUEL_SHARE_1865":0.08} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.5, 165.3 of 167.1)
-PASS  {"FUEL_SHARE_1865":0.08} (b) as now: noon x19.9, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"FUEL_SHARE_1865":0.03} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"FUEL_SHARE_1865":0.03} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"FUEL_SHARE_1865":0.03} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"FUEL_SHARE_1865":0.03} (g) as now: fuel takes 80 days of the last generation's year (18 in 1865)
+PASS  {"FUEL_SHARE_1865":0.03} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"FUEL_SHARE_1865":0.03} (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"FUEL_SHARE_1865":0.08} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"FUEL_SHARE_1865":0.08} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"FUEL_SHARE_1865":0.08} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
 PASS  {"FUEL_SHARE_1865":0.08} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
-PASS  {"FUEL_SHARE_1865":0.08} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 161 vs 159 without; 165 vs 164 without
-PASS  {"FUEL_SHARE_1865":0.08} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 28.80, 90.32)
+PASS  {"FUEL_SHARE_1865":0.08} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"FUEL_SHARE_1865":0.08} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
 PASS  {"FUEL_SHARE_1865":0.08} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
 PASS  {"FUEL_SHARE_1865":0.08} (d) a stand from the start: 32.1 million go over the sea
-PASS  {"FUEL_SHARE_1865":0.08} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1934, 1948
+PASS  {"FUEL_SHARE_1865":0.08} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
 PASS  {"FUEL_SHARE_1865":0.08} (f) America fits the air-engine in 1913, the perfected one in 1953
 PASS  {"FUEL_SHARE_1865":0.08} (f) Britain fits each engine no later than America (as now: 1912, 1944)
 PASS  {"FUEL_SHARE_1865":0.08} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
-PASS  {"FUEL_SHARE_1865":0.08} (g) ledger sums to the ground: 5+11+22+45+52+10+5+5+4+3 + 6 left = 167.1
+PASS  {"FUEL_SHARE_1865":0.08} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
 PASS  {"FUEL_SHARE_1865":0.08} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
-PASS  {"FUEL_SHARE_1865":0.08} (g) best-off generation per head: as now x6.5 (1945), a stand x1.4 (1965)
-PASS  {"FUEL_SHARE_1865":0.08} (g) left for after 2065: a stand 116 squares, as now 6
-PASS  {"FUEL_SHARE_1865":0.08} (g) as now: the last generation (x0.61) is far worse off than the best (x6.5)
-PASS  {"FUEL_SHARE_1865":0.08} (g) as now: fuel takes 208 days of the last generation's year (18 in 1865)
+PASS  {"FUEL_SHARE_1865":0.08} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"FUEL_SHARE_1865":0.08} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"FUEL_SHARE_1865":0.08} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"FUEL_SHARE_1865":0.08} (g) as now: fuel takes 214 days of the last generation's year (18 in 1865)
+PASS  {"FUEL_SHARE_1865":0.08} (g) the box after: a stand leaves the next ten generations x0.90 per head, as now x0.11
+PASS  {"FUEL_SHARE_1865":0.08} (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"AFTER_YEARS":100} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"AFTER_YEARS":100} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"AFTER_YEARS":100} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"AFTER_YEARS":100} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
+PASS  {"AFTER_YEARS":100} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"AFTER_YEARS":100} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
+PASS  {"AFTER_YEARS":100} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
+PASS  {"AFTER_YEARS":100} (d) a stand from the start: 32.1 million go over the sea
+PASS  {"AFTER_YEARS":100} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
+PASS  {"AFTER_YEARS":100} (f) America fits the air-engine in 1913, the perfected one in 1953
+PASS  {"AFTER_YEARS":100} (f) Britain fits each engine no later than America (as now: 1912, 1944)
+PASS  {"AFTER_YEARS":100} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
+PASS  {"AFTER_YEARS":100} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
+PASS  {"AFTER_YEARS":100} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
+PASS  {"AFTER_YEARS":100} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"AFTER_YEARS":100} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"AFTER_YEARS":100} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"AFTER_YEARS":100} (g) as now: fuel takes 133 days of the last generation's year (18 in 1865)
+PASS  {"AFTER_YEARS":100} (g) the box after: a stand leaves the next ten generations x1.47 per head, as now x0.17
+PASS  {"AFTER_YEARS":100} (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
+PASS  {"AFTER_YEARS":400} (a) noon x1.0 < x1.7 < x8.3 < x19.8 < x19.7 (faster at least 0.85 of as now: dear coal bites sooner); ground gone by 2065 4% < 31% < 86% < 97% < 99%
+PASS  {"AFTER_YEARS":400} (a') no path burns more than the ground holds (5.9, 51.0, 143.6, 161.6, 165.2 of 167.1)
+PASS  {"AFTER_YEARS":400} (b) as now: noon x19.8, by 2065 x0.03 of its noon, 97% of the ground gone
+PASS  {"AFTER_YEARS":400} (b) a stand: 31% gone by 2065, still burning x1.32, coal to about 2528
+PASS  {"AFTER_YEARS":400} (c) with the engines, coal burnt by 2065 at each pace: 6 vs 6 without; 51 vs 36 without; 144 vs 135 without; 162 vs 159 without; 165 vs 164 without
+PASS  {"AFTER_YEARS":400} (c') British power is never cheaper than American in 2065 (x1.00, 1.13, 6.25, 29.67, 89.73)
+PASS  {"AFTER_YEARS":400} (d) 1905–1925: a stand after two generations of rising sends 0.8 million over the sea, keeping on 0.0 million
+PASS  {"AFTER_YEARS":400} (d) a stand from the start: 32.1 million go over the sea
+PASS  {"AFTER_YEARS":400} (e) America passes Britain on every steady path: 1882, 1891, 1905, 1935, 1948
+PASS  {"AFTER_YEARS":400} (f) America fits the air-engine in 1913, the perfected one in 1953
+PASS  {"AFTER_YEARS":400} (f) Britain fits each engine no later than America (as now: 1912, 1944)
+PASS  {"AFTER_YEARS":400} (f) the fast burner, with dearer coal, fits the perfected engine earlier (1944) than the stand (1953)
+PASS  {"AFTER_YEARS":400} (g) ledger sums to the ground: 5+11+22+45+51+10+5+5+4+3 + 5 left = 167.1
+PASS  {"AFTER_YEARS":400} (g) ledger sums to the ground: 4+4+4+5+5+6+6+6+6+5 + 116 left = 167.1
+PASS  {"AFTER_YEARS":400} (g) best-off generation per head: as now x6.1 (1945), a stand x1.2 (1965)
+PASS  {"AFTER_YEARS":400} (g) left for after 2065: a stand 116 squares, as now 5
+PASS  {"AFTER_YEARS":400} (g) as now: the last generation (x0.29) is far worse off than the best (x6.1)
+PASS  {"AFTER_YEARS":400} (g) as now: fuel takes 133 days of the last generation's year (18 in 1865)
+PASS  {"AFTER_YEARS":400} (g) the box after: a stand leaves the next ten generations x0.56 per head, as now x0.07
+PASS  {"AFTER_YEARS":400} (h) typical generation: cut x0.08, stand x0.85, slower x1.38, now x1.07, faster x0.79 (the interior beats both corners: slower > as now and slower > a stand; a stand > cut back)
 
---- 4. The obvious ways of playing (build.md, section 3) ---
-strategy | shape | noon | noon, x 1865 | evening | below 1865 from | 2065, x 1865 | squares burnt of 167 | left | America passed | over the sea (M) | people at home 2065 (M) | engines B/A | best gen per head | last gen per head | last gen days
-as now | greatness | 1952 | 19.9 | 1965 | 2035 | 0.62 | 161 | 6 | 1934 | 65 | 142 | air 1912/1913, perfected 1944/1953 | x6.5 (1945) | x0.61 | 130
-faster | greatness | 1944 | 19.7 | 1945 | 1967 | 0.28 | 165 | 2 | 1948 | 61 | 106 | air 1912/1913, perfected 1939/1953 | x7.4 (1925) | x0.45 | 351
-slower | greatness | 1968 | 8.3 | - | - | 1.38 | 144 | 24 | 1905 | 63 | 201 | air 1913/1913, perfected 1950/1953 | x4.0 (1945) | x0.83 | 32
-a stand | mediocrity | 1973 | 1.7 | - | - | 1.32 | 51 | 116 | 1891 | 32 | 203 | air 1913/1913, perfected 1953/1953 | x1.4 (1965) | x0.75 | 6
-cut back, then a stand | mediocrity | 1865 | 1.0 | - | 1865 | 0.81 | 28 | 139 | 1882 | 22 | 148 | air 1913/1913, perfected 1953/1953 | x1.1 (1965) | x0.65 | 5
-as now twice, then a stand | greatness | 1933 | 5.0 | - | - | 1.04 | 109 | 58 | 1915 | 57 | 185 | air 1913/1913, perfected 1950/1953 | x2.9 (1945) | x0.70 | 11
-a stand three times, then as now | greatness | 1991 | 10.2 | - | - | 1.77 | 149 | 18 | 1891 | 62 | 188 | air 1913/1913, perfected 1952/1953 | x4.2 (1965) | x1.08 | 47
-as now three times, then cut back | greatness | 1925 | 9.0 | - | 1978 | 0.04 | 83 | 84 | 1927 | 71 | 70 | air 1912/1913, perfected 1948/1953 | x3.4 (1925) | x0.16 | 4
-slower, then as now from 1925 | greatness | 1962 | 11.8 | - | 2062 | 0.96 | 158 | 9 | 1905 | 69 | 175 | air 1913/1913, perfected 1950/1953 | x5.1 (1945) | x0.72 | 83
+--- 4. The score's best path, against a fresh search ---
+PASS  optimum.json: typical x1.523 on 2.4 1.5 1 1 1.25 1.25 1.75 2.4 2 2; a fresh search gives x1.523 on 2.4 1.5 1 1 1.25 1.25 1.75 2.4 2 2 (within 0.5%; if not, run node optimum.js and rebuild)
+PASS  the best path is interior: it neither burns at the top all the way nor holds all the way (2.4 1.5 1 1 1.25 1.25 1.75 2.4 2 2)
+PASS  the best path scores 100
+PASS  the best path leaves 19 squares for after 2065 (the box after counts)
 
-ledgers (income per head, x 1865, per generation from 1865; then left):
-  as now: 1.2 1.6 3.3 5.2 6.5 2.1 1.3 1.0 0.8 0.6 | left 6
-  faster: 1.3 2.0 4.5 7.4 4.8 1.0 0.8 0.8 0.6 0.5 | left 2
-  slower: 1.1 1.2 1.9 2.9 4.0 3.7 2.4 1.6 1.1 0.8 | left 24
-  a stand: 0.9 0.8 1.0 1.3 1.4 1.4 1.2 1.0 0.9 0.7 | left 116
-  cut back, then a stand: 0.8 0.6 0.7 0.9 1.0 1.1 0.9 0.8 0.7 0.7 | left 139
-  as now twice, then a stand: 1.2 1.6 2.4 2.8 2.9 2.4 1.7 1.2 0.9 0.7 | left 58
-  a stand three times, then as now: 0.9 0.8 1.0 1.6 2.8 4.2 4.1 2.8 1.7 1.1 | left 18
-  as now three times, then cut back: 1.2 1.6 3.3 3.4 2.4 1.3 0.7 0.4 0.3 0.2 | left 84
-  slower, then as now from 1925: 1.1 1.2 1.9 3.2 5.1 4.3 2.4 1.4 1.0 0.7 | left 9
+--- 5. The obvious ways of playing (build.md, section 3) ---
+strategy | score | typical | shape | noon | noon, x 1865 | evening | 2065, x 1865 | squares burnt of 167 | left | America passed | over the sea (M) | engines B/A | best gen per head | last gen per head | after per head
+as now | 70 | x1.07 | greatness | 1952 | 19.8 | 1965 | 0.61 | 162 | 5 | 1935 | 65 | air 1912/1913, perfected 1944/1953 | x6.1 (1945) | x0.29 | x0.11
+faster | 52 | x0.79 | greatness | 1944 | 19.7 | 1945 | 0.28 | 165 | 2 | 1948 | 61 | air 1912/1913, perfected 1939/1953 | x7.3 (1925) | x0.17 | x0.05
+slower | 90 | x1.38 | greatness | 1968 | 8.3 | 1985 | 1.38 | 144 | 24 | 1905 | 63 | air 1913/1913, perfected 1950/1953 | x3.9 (1945) | x0.54 | x0.30
+a stand | 56 | x0.85 | mediocrity | 1973 | 1.7 | - | 1.32 | 51 | 116 | 1891 | 32 | air 1913/1913, perfected 1953/1953 | x1.2 (1965) | x0.49 | x0.90
+cut back, then a stand | 36 | x0.55 | mediocrity | 1865 | 1.0 | - | 0.81 | 28 | 139 | 1882 | 22 | air 1913/1913, perfected 1953/1953 | x0.7 (1865) | x0.31 | x1.03
+as now twice, then a stand | 83 | x1.26 | greatness | 1933 | 5.1 | - | 1.02 | 109 | 58 | 1916 | 57 | air 1913/1913, perfected 1949/1953 | x2.8 (1945) | x0.42 | x0.55
+a stand three times, then as now | 81 | x1.23 | greatness | 1991 | 10.3 | 2005 | 1.75 | 149 | 18 | 1891 | 62 | air 1913/1913, perfected 1952/1953 | x3.7 (1965) | x0.65 | x0.24
+as now three times, then cut back | 41 | x0.63 | greatness | 1925 | 9.2 | - | 0.04 | 84 | 83 | 1928 | 71 | air 1912/1913, perfected 1947/1953 | x3.3 (1905) | x0.04 | x0.72
+slower, then as now from 1925 | 83 | x1.26 | greatness | 1962 | 11.9 | 1985 | 0.95 | 158 | 9 | 1905 | 70 | air 1913/1913, perfected 1950/1953 | x5.1 (1945) | x0.41 | x0.15
+as now twice, then slower | 84 | x1.29 | greatness | 1953 | 12.7 | 1965 | 1.00 | 150 | 17 | 1922 | 63 | air 1912/1913, perfected 1947/1953 | x4.9 (1945) | x0.40 | x0.24
+the best path found | 100 | x1.52 | greatness | 1970 | 5.1 | 2025 | 2.44 | 148 | 19 | 1914 | 54 | air 1912/1913, perfected 1950/1953 | x2.8 (1945) | x0.90 | x0.25
 
-412 of 412 checks pass.
+ledgers (income per head, x 1865, per generation from 1865; then after):
+  as now: 1.2 1.6 3.3 5.2 6.1 1.5 0.8 0.6 0.4 0.3 | after 0.11 (5 sq)
+  faster: 1.3 2.0 4.5 7.3 4.2 0.6 0.4 0.4 0.3 0.2 | after 0.05 (2 sq)
+  slower: 1.1 1.2 1.9 2.9 3.9 3.5 2.1 1.2 0.8 0.5 | after 0.30 (24 sq)
+  a stand: 0.9 0.8 0.9 1.1 1.1 1.2 1.0 0.8 0.6 0.5 | after 0.90 (116 sq)
+  cut back, then a stand: 0.7 0.4 0.5 0.6 0.6 0.7 0.6 0.5 0.4 0.3 | after 1.03 (139 sq)
+  as now twice, then a stand: 1.2 1.6 2.4 2.7 2.8 2.1 1.4 0.9 0.6 0.4 | after 0.55 (58 sq)
+  a stand three times, then as now: 0.9 0.8 0.9 1.4 2.4 3.7 3.5 2.1 1.1 0.7 | after 0.24 (18 sq)
+  as now three times, then cut back: 1.2 1.6 3.3 3.2 2.0 0.9 0.4 0.2 0.1 0.0 | after 0.72 (83 sq)
+  slower, then as now from 1925: 1.1 1.2 1.9 3.2 5.1 4.1 1.9 1.0 0.6 0.4 | after 0.15 (9 sq)
+  as now twice, then slower: 1.2 1.6 2.9 4.0 4.9 2.5 1.3 0.8 0.6 0.4 | after 0.24 (17 sq)
+  the best path found: 1.3 1.7 2.3 2.5 2.8 2.5 2.0 1.8 1.4 0.9 | after 0.25 (19 sq)
+
+500 of 500 checks pass.
