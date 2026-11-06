@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jevons's Noon (The Coal Question)</title>
 <script data-goatcounter="https://steffenhuck.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<meta name="description" content="Jevons's Coal Question (1866) on his own graph paper: set the pace of Britain's coal for six generations and watch it come up out of the ground beneath, square by square. A big fire that runs out, or a small one that lasts?">
+<meta name="description" content="Jevons's Coal Question (1866) on his own graph paper: set the pace of Britain's coal for six generations and watch it come up out of the ground beneath, square by square. A big fire that runs out, or a small one that lasts? And what each generation got.">
 <style>
 @font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:400 900;src:url(data:font/woff2;base64,/*__FONT_ROMAN__*/) format('woff2');font-display:block}
 @font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;src:url(data:font/woff2;base64,/*__FONT_ITALIC__*/) format('woff2');font-display:block}
@@ -50,7 +50,6 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 .quote .who{display:block;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);margin-top:4px}
 .quote.big{font-size:18px;line-height:1.32}
 .aimline{font-style:italic;font-size:19px;line-height:1.3;margin:14px 0 6px}
-/* buttons: engraver's labels, a heavy rule with a hairline three points inside it */
 .btn{display:block;width:100%;min-height:52px;margin:12px 0 0;padding:8px 14px;background:var(--paper);color:var(--soot);border:2px solid var(--soot);border-radius:0;
   box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px var(--soot);font:italic 600 15px/1.15 var(--serif);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;text-align:center}
 .btn .sub{display:block;font-style:normal;font-weight:400;font-size:12.5px;letter-spacing:.02em;text-transform:none;margin-top:4px;line-height:1.25}
@@ -64,6 +63,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 .reading{font-size:14.5px;line-height:1.36;min-height:3.9em;margin:4px 0 0}
 .hint{font-size:13px;color:var(--ash);font-style:italic;margin:6px 0 0}
 .card{margin:6px 0 0}
+.card p{font-size:15.5px}
 .lumps{display:block;width:100%;height:auto;margin:6px 0 2px}
 .sig{text-align:center;margin:26px 0 0;font-style:italic;font-size:13px;color:var(--ash);text-transform:lowercase}
 .sig a{color:var(--ash);text-decoration:none}
@@ -82,7 +82,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   <h1 class="title">Jevons's<br>Noon</h1>
   <div class="sheetwrap"><svg id="coversheet" class="sheet" aria-label="Jevons's frontispiece: the shaded past, and the supposed future at the same rate of progress, climbing off the top of the sheet"></svg></div>
   <p class="small" style="margin-top:8px">It is 1865. Britain runs on coal: its mills, its engines, its ships. Every year it burns more than the year before. The dotted line is what happens if that goes on.</p>
-  <p class="small">All the coal Britain has is in the ground, drawn here as black squares. Burn it fast and it makes a big fire that runs out. Burn it slow and it makes a small fire that lasts. You decide the pace, one generation at a time.</p>
+  <p class="small">All the coal Britain has is in the ground, drawn here as black squares. Burn it fast and it makes a big fire that runs out. Burn it slow and it makes a small fire that lasts. You decide the pace, one generation at a time, and a ledger keeps what each generation got.</p>
   <p class="aimline">Choose for Britain: a brief greatness, or a long mediocrity.</p>
   <button class="btn" id="begin">Begin in 1865</button>
   <button class="btn line" id="coverhelp">How to play</button>
@@ -92,7 +92,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 <section id="play" class="screen">
   <div class="aimrow"><div class="aim">Choose for Britain: a brief greatness, or a long mediocrity.</div><button class="q" data-help aria-label="How to play">?</button></div>
   <div class="gens" id="gens"></div>
-  <div class="sheetwrap"><svg id="sheet" class="sheet" aria-label="The sheet: Britain's coal burnt each year above the line, the coal still in the ground below it"></svg></div>
+  <div class="sheetwrap"><svg id="sheet" class="sheet" aria-label="The sheet: Britain's coal burnt each year above the line, the coal still in the ground below it, and the ledger of what each generation got"></svg></div>
   <p class="key" id="key"></p>
   <div id="panel"></div>
 </section>
@@ -100,7 +100,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
 <section id="verdict" class="screen">
   <div class="aimrow"><div class="aim ash">1865 to 2065</div><button class="q" data-help aria-label="How to play">?</button></div>
   <h2 class="big" id="vhead"></h2>
-  <div class="sheetwrap"><svg id="vsheet" class="sheet" aria-label="Your sheet, with your morning, noon and evening"></svg></div>
+  <div class="sheetwrap"><svg id="vsheet" class="sheet" aria-label="Your sheet, with your morning, noon and evening, and the ledger"></svg></div>
   <div class="vtwo" id="vtwo"></div>
   <div class="res" id="vlines"></div>
   <div id="vquotes"></div>
@@ -121,18 +121,21 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     <p class="aimline" style="margin-top:4px">Choose for Britain: a brief greatness, or a long mediocrity.</p>
     <h3>The sheet</h3>
     <p>It is graph paper, ruled like Jevons's own. The years run along the black line in the middle, from 1850 to 2070.</p>
-    <p><b>Above the line</b> is Britain's fire: how much coal it burns in a year. The higher the curve, the bigger the fire. The black under the curve is coal that has been burnt, and you can count it in squares.</p>
+    <p><b>Above the line</b> is Britain's fire: how much coal it burns in a year. The higher the curve, the bigger the fire. The black under the curve is coal that has been burnt, and you can count it in squares. If the fire grows taller than the paper, more paper is added at the top.</p>
     <p><b>Below the line</b> is the coal still in the ground: 167 black squares, in eight layers, down to 4,000 feet. One square below is the same amount of coal as one square above. When a square is burnt above, a square goes from below. The top layer is dug first. The deeper the digging, the dearer the coal.</p>
-    <p>The dashed line is America's coal. The hatched bar at the bottom is people who went over the sea because there was no work for them. Orange is whatever is burning now. If the fire grows taller than the paper, more paper is added at the top.</p>
+    <p>The dashed line is America's coal. The hatched bar is people who went over the sea because there was no work for them. Orange is whatever is burning now.</p>
+    <p><b>The ledger</b> at the bottom says what each generation got: its income per head (the bar and the big figure) and Britain's whole income (the small figure), both against 1865. Income comes from power, and power comes from coal and from how much work a ton of it does.</p>
     <h3>Each generation</h3>
     <p>You set six turns of twenty years, from 1865 to 1985. Slide along the ruler under the sheet to say how much coal Britain should burn twenty years from now: <i>cut back</i> (half as much), <i>a stand</i> (the same), <i>slower</i> (half as much again), <i>as now</i> (twice as much: Jevons's own pace in 1865) or <i>faster</i>. Under each mark the ruler says how long the coal would last at that pace. The dotted line on the sheet is your plan, and the crossed squares are the coal it would take. Then press <b>Burn</b>. The solid line is what actually burnt, and it may leave your dotted line.</p>
-    <p>After your sixth turn the sheet runs on by itself to 2065, at the last pace you set, so that you can see where your fire ends up.</p>
+    <p>After your sixth turn the sheet runs on by itself to 2065, at the last pace you set, so that you can see where your fire ends up and what the later generations get.</p>
     <h3>The engines</h3>
-    <p>In 1885 and 1925 an engine is offered that does the same work on less coal. Fit it, or refuse it. America fits every new engine at once.</p>
+    <p>In 1885 and 1925 a new engine appears that does the same work on less coal, but costs more to build. It pays where coal is dear, and it gets cheaper every year. Britain's works fit it as soon as it pays for them; America fits it when it has become cheap enough. Nobody chooses. Watch what the fire does when an engine comes in.</p>
+    <h3>The price</h3>
+    <p>The price of coal is told as the days of a year's earnings that fuel takes: about 18 days in 1865. Deeper pits make it more; a better engine makes it less. Works go where fuel takes fewer days.</p>
     <h3>The evening</h3>
     <p>If coal has grown so dear that the fire could not grow at any pace, the evening has come: the fire falls whatever you set, and the rest of the sheet draws itself.</p>
     <h3>The end</h3>
-    <p>There is no score. The last page reads your sheet: how high the fire went, and how long it lasted. Then the curve, continued.</p>
+    <p>There is no score. The last page reads your sheet: how high the fire went, how long it lasted, and who got the coal. Then the curve, continued.</p>
   </div>
   <button class="btn" id="helpback">Back</button>
 </section>
@@ -160,7 +163,10 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   // ---- geometry of the sheet -----------------------------------------------------------------------------------
   const SW = 348, NC = (CF.SHEET_X1 - CF.SHEET_X0) / 10, SQ = SW / NC;
   const SB = 14, HB = 13, GH = CF.GROUND_ROWS * SQ, DB = 12, PHB = 12, PH = SQ;
+  const LHB = 26, LBAR = 48, LNUM = 22, LCAP = 11, LFLAG = 11, LH = LBAR + LNUM;
   const NSQ = M.groundSquares(), NCELL = NC * CF.GROUND_ROWS, SQT = M.squareTons();
+  const NGEN = (CF.RUN_TO - CF.START_YEAR) / CF.GEN_YEARS, PLAYER_END = CF.START_YEAR + CF.MAX_GENS * CF.GEN_YEARS;
+  const LEDGER_UNIT = 9, LEDGER_MAX = (LBAR - 6) / LEDGER_UNIT;   // 1865 = one unit of bar; the panel holds about five
   const xOf = y => (y - CF.SHEET_X0) / 10 * SQ;
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
   const txt = (s, attrs, parent) => { const e = el('text', attrs, parent); e.textContent = s; return e; };
@@ -170,38 +176,36 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   const rowsFor = maxC => Math.max(CF.ROWS_ABOVE, Math.ceil(maxC / CF.ROW_TONS) + 1);
 
   function makeSheet(svg, mode, rows) {
-    // mode: 'cover' | 'play' | 'verdict' | 'last'; rows: rows of 50 million tons above the line
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     rows = rows || CF.ROWS_ABOVE;
     const H1 = rows * SQ, yOf = c => H1 - c / CF.ROW_TONS * SQ;
     const G0 = H1 + SB + HB, people = mode === 'play' || mode === 'verdict';
     const P0 = G0 + GH + DB + PHB;
-    const H = people ? P0 + PH + 14 : G0 + GH + DB + 2;
+    const L0 = P0 + PH + 4 + LHB;                     // the ledger's top (bars grow up from L0 + LBAR)
+    const H = people ? L0 + LH + LCAP + LFLAG + 4 : G0 + GH + DB + 2;
     svg.setAttribute('viewBox', `0 0 ${SW} ${H}`);
     const defs = el('defs', {}, svg);
     const clip = el('clipPath', { id: svg.id + '-clip' }, defs); el('rect', { x: 0, y: 0, width: SW, height: H1 }, clip);
     const hatch = el('pattern', { id: svg.id + '-hatch', width: 5, height: 5, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
     el('line', { x1: 0, y1: 0, x2: 0, y2: 5, stroke: '#1D1B18', 'stroke-width': 1.6 }, hatch);
-    // the burnt coal above the line is soot ruled into squares, like the coal below
+    const fhatch = el('pattern', { id: svg.id + '-fhatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
+    el('line', { x1: 0, y1: 0, x2: 0, y2: 6, stroke: '#C3D2DE', 'stroke-width': 1 }, fhatch);
     const sqp = el('pattern', { id: svg.id + '-sq', width: SQ, height: SQ, x: 0, y: H1 % SQ, patternUnits: 'userSpaceOnUse' }, defs);
     el('rect', { x: 0, y: 0, width: SQ, height: SQ, fill: '#1D1B18' }, sqp);
     el('path', { d: `M0 0H${fmt(SQ)}M0 0V${fmt(SQ)}`, stroke: '#F2EBD9', 'stroke-width': 1.2, fill: 'none' }, sqp);
     const glow = el('radialGradient', { id: svg.id + '-glow' }, defs);
     el('stop', { offset: '0', 'stop-color': '#E2611B', 'stop-opacity': '.55' }, glow); el('stop', { offset: '1', 'stop-color': '#E2611B', 'stop-opacity': '0' }, glow);
     el('rect', { x: 0, y: 0, width: SW, height: H, fill: '#F2EBD9' }, svg);
-    // rules
     const g = el('g', { 'shape-rendering': 'crispEdges' }, svg);
     const rule = (x1, y1, x2, y2, strong) => el('line', { x1, y1, x2, y2, stroke: strong ? '#94AEC3' : '#C3D2DE', 'stroke-width': strong ? 1 : .6 }, g);
     for (let i = 0; i <= NC; i++) { const x = i * SQ; rule(x, 0, x, H1, i % 5 === 0); rule(x, G0, x, G0 + GH, i % 5 === 0); }
     for (let r = 0; r <= rows; r++) rule(0, H1 - r * SQ, SW, H1 - r * SQ, r % 2 === 0);
     for (let r = 0; r <= CF.GROUND_ROWS; r++) rule(0, G0 + r * SQ, SW, G0 + r * SQ, r % 2 === 0);
     if (people) { for (let i = 0; i <= NC; i++) rule(i * SQ, P0, i * SQ, P0 + PH, i % 5 === 0); rule(0, P0, SW, P0, true); rule(0, P0 + PH, SW, P0 + PH, true); }
-    // a join where paper was added above the first sheet
     if (rows > CF.ROWS_ABOVE) el('line', { x1: 0, y1: H1 - CF.ROWS_ABOVE * SQ, x2: SW, y2: H1 - CF.ROWS_ABOVE * SQ, stroke: '#8B847A', 'stroke-width': .8, 'stroke-dasharray': '3 2' }, g);
-    // frames
     el('rect', { x: .5, y: .5, width: SW - 1, height: H1 - .5, fill: 'none', stroke: '#94AEC3', 'stroke-width': 1 }, svg);
     el('rect', { x: .5, y: G0, width: SW - 1, height: GH, fill: 'none', stroke: '#94AEC3', 'stroke-width': 1 }, svg);
-    // the ground: NSQ squares of coal in NCELL cells, dug layer by layer from the top; the last cells are rock
+    // the ground
     const ground = el('g', {}, svg); const sqs = [];
     for (let i = 0; i < NCELL; i++) {
       const r = Math.floor(i / NC), c = i % NC;
@@ -210,10 +214,8 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     }
     const planG = el('g', {}, svg);
     const digG = el('g', {}, svg);
-    // the deeper band
     el('rect', { x: 0, y: G0 + GH + 2, width: SW, height: DB - 4, fill: '#8B847A', opacity: .28 }, svg);
     if (mode !== 'last') txt('deeper than 4,000 feet: coal too dear for any works to pay', { x: SW / 2, y: G0 + GH + DB - 3.2, 'text-anchor': 'middle', 'font-size': 7.6, 'font-style': 'italic', fill: '#5f594f' }, svg);
-    // the surface line and the years
     el('line', { x1: 0, y1: H1, x2: SW, y2: H1, stroke: '#1D1B18', 'stroke-width': 1.4 }, svg);
     el('line', { x1: 0, y1: G0, x2: SW, y2: G0, stroke: '#1D1B18', 'stroke-width': .6 }, svg);
     for (const y of [1850, 1900, 1950, 2000, 2050]) {
@@ -221,7 +223,6 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
       el('line', { x1: x, y1: H1, x2: x, y2: H1 + 3.5, stroke: '#1D1B18', 'stroke-width': .8 }, svg);
       txt(String(y), { x: Math.min(SW - 13, Math.max(13, x)), y: H1 + 11.6, 'text-anchor': 'middle', 'font-size': 9.4, 'font-style': 'italic', fill: '#1D1B18' }, svg);
     }
-    // the above panel, clipped at the top of the sheet
     const above = el('g', { 'clip-path': `url(#${svg.id}-clip)` }, svg);
     const L = {
       past: el('path', { fill: '#1D1B18' }, above),
@@ -239,31 +240,49 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
       pend: el('circle', { r: 3.4, fill: '#F2EBD9', stroke: '#5f594f', 'stroke-width': 1.3, visibility: 'hidden' }, above),
       glow: el('circle', { r: 11, fill: `url(#${svg.id}-glow)`, visibility: 'hidden' }, above),
       ember: el('circle', { r: 3.6, fill: '#E2611B', stroke: '#1D1B18', 'stroke-width': .8, visibility: 'hidden' }, above),
+      engines: el('g', {}, svg),
       labels: el('g', {}, svg),
     };
-    // the scale: million tons a year, at the right edge
     const tl = (s, y) => txt(s, { x: SW - 3, y, 'text-anchor': 'end', 'font-size': 8, 'font-style': 'italic', fill: '#5f594f', 'paint-order': 'stroke', stroke: '#F2EBD9', 'stroke-width': 2.4 }, svg);
     for (let c = 100; c < rows * CF.ROW_TONS; c += 200) tl(c === 100 ? '100 million tons a year' : String(c), yOf(c) - 2.5);
-    // headings, as on Jevons's plate
     if (mode !== 'last') {
       heading(mode === 'cover' ? 'COAL BURNT IN BRITAIN EACH YEAR' : "BRITAIN'S FIRE: COAL BURNT EACH YEAR", 5, 10.5, svg);
       heading(`COAL STILL IN THE GROUND: ${NSQ} SQUARES, 8 LAYERS DEEP`, 5, G0 - 3.5, svg);
       if (people) heading('PEOPLE GONE OVER THE SEA FOR WANT OF WORK', 5, P0 - 3.5, svg);
     }
-    // depth tabs
     const tabs = el('g', {}, svg);
     for (const [ft, r] of [[1000, 2], [2000, 4], [3000, 6], [4000, 8]]) {
       const y = G0 + r * SQ;
       el('rect', { x: 1.5, y: y - 6.2, width: 34, height: 9.6, fill: '#F2EBD9', stroke: '#94AEC3', 'stroke-width': .6 }, tabs);
       txt(ft.toLocaleString('en-GB') + ' ft', { x: 18.5, y: y + 1.1, 'text-anchor': 'middle', 'font-size': 7.4, 'font-style': 'italic', fill: '#1D1B18' }, tabs);
     }
-    // the people
-    let bar = null;
+    let bar = null; const cells = [];
     if (people) {
       bar = el('rect', { x: 0, y: P0 + 1, width: 0, height: PH - 2, fill: `url(#${svg.id}-hatch)` }, svg);
       txt(`one square: ${CF.PEOPLE_PER_SQUARE} million people`, { x: SW - 3, y: P0 + PH + 10, 'text-anchor': 'end', 'font-size': 8, 'font-style': 'italic', fill: '#5f594f' }, svg);
+      // the ledger: one cell per generation, under the years it covers
+      heading(W.LEDGER_HEADING, 5, L0 - 3.5, svg);
+      const base = L0 + LBAR;
+      el('rect', { x: xOf(CF.START_YEAR), y: L0, width: xOf(CF.RUN_TO) - xOf(CF.START_YEAR), height: LH, fill: 'none', stroke: '#94AEC3', 'stroke-width': 1 }, svg);
+      for (let i = 0; i < NGEN; i++) {
+        const from = CF.START_YEAR + i * CF.GEN_YEARS, x0 = xOf(from), x1 = xOf(from + CF.GEN_YEARS), w = x1 - x0;
+        const future = from >= PLAYER_END;
+        if (future) el('rect', { x: x0, y: L0, width: w, height: LH, fill: `url(#${svg.id}-fhatch)` }, svg);
+        if (i) el('line', { x1: x0, y1: L0, x2: x0, y2: L0 + LH, stroke: '#C3D2DE', 'stroke-width': .6 }, svg);
+        const barEl = el('rect', { x: x0 + 3, y: base, width: w - 6, height: 0, fill: '#1D1B18' }, svg);
+        const over = txt('', { x: x0 + w / 2, y: L0 + 7, 'text-anchor': 'middle', 'font-size': 7, fill: '#1D1B18' }, svg);
+        const big = txt('', { x: x0 + w / 2, y: base + 9.5, 'text-anchor': 'middle', 'font-size': 8.4, 'font-style': 'italic', 'font-weight': 700, fill: '#1D1B18' }, svg);
+        const small = txt('', { x: x0 + w / 2, y: base + 19, 'text-anchor': 'middle', 'font-size': 7.4, 'font-style': 'italic', fill: '#5f594f' }, svg);
+        cells.push({ from, barEl, big, small, over, x0, w });
+      }
+      // the 1865 line across the ledger
+      el('line', { x1: xOf(CF.START_YEAR), y1: base - LEDGER_UNIT, x2: xOf(CF.RUN_TO), y2: base - LEDGER_UNIT, stroke: '#8B847A', 'stroke-width': .7, 'stroke-dasharray': '2 2' }, svg);
+      txt('1865', { x: xOf(CF.START_YEAR) - 2, y: base - LEDGER_UNIT + 2.5, 'text-anchor': 'end', 'font-size': 6.8, 'font-style': 'italic', fill: '#5f594f' }, svg);
+      el('line', { x1: xOf(CF.START_YEAR), y1: base, x2: xOf(CF.RUN_TO), y2: base, stroke: '#1D1B18', 'stroke-width': .8 }, svg);
+      txt(W.LEDGER_CAPTION, { x: 5, y: L0 + LH + 9.5, 'font-size': 7.6, 'font-style': 'italic', fill: '#5f594f' }, svg);
+      txt(W.FUTURE_FLAG, { x: 5, y: L0 + LH + LCAP + 9.5, 'font-size': 7.6, 'font-style': 'italic', fill: '#5f594f' }, svg);
     }
-    const S = { svg, mode, rows, H1, yOf, L, sqs, planG, digG, bar, H };
+    const S = { svg, mode, rows, H1, yOf, L, sqs, planG, digG, bar, cells, H };
 
     S.ground = function (Sburnt, digging, planTo) {
       const done = Sburnt / SQT;
@@ -281,12 +300,10 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
           el('path', { d: `M${fmt(x + p)} ${fmt(y + p)}L${fmt(x + SQ - p)} ${fmt(y + SQ - p)}M${fmt(x + SQ - p)} ${fmt(y + p)}L${fmt(x + p)} ${fmt(y + SQ - p)}`, stroke: '#F2EBD9', 'stroke-width': 1.5, opacity: .85 }, planG);
         }
       }
-      // where the digging is
       while (digG.firstChild) digG.removeChild(digG.firstChild);
       if (mode === 'play' && done > 0 && done < NSQ) {
         const i = Math.min(NSQ - 1, Math.floor(done)), r = Math.floor(i / NC), c = i % NC;
-        const x = c * SQ + SQ / 2, y = G0 + r * SQ;
-        const right = c < NC / 2;
+        const x = c * SQ + SQ / 2, y = G0 + r * SQ, right = c < NC / 2;
         txt('digging here', { x: right ? x + SQ * .6 : x - SQ * .6, y: y + SQ * .68, 'text-anchor': right ? 'start' : 'end', 'font-size': 7.8, 'font-style': 'italic', fill: '#1D1B18',
           'paint-order': 'stroke', stroke: '#F2EBD9', 'stroke-width': 2.6 }, digG);
       }
@@ -330,6 +347,29 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
       L.pend.setAttribute('cx', fmt(xOf(e.year))); L.pend.setAttribute('cy', fmt(Math.max(3.4, yOf(e.C)))); L.pend.setAttribute('visibility', 'visible');
     };
     S.people = function (gone) { if (bar) bar.setAttribute('width', fmt(Math.min(SW, gone / CF.PEOPLE_PER_SQUARE * SQ))); };
+    // engines fitted: a small mark on the surface line at the year, B above, A below
+    S.engineMarks = function (events, hist) {
+      while (L.engines.firstChild) L.engines.removeChild(L.engines.firstChild);
+      for (const e of events) {
+        if (e.who !== 'britain') continue;
+        const x = xOf(e.year), h = hist.find(q => Math.round(q.year) === e.year);
+        const y = h ? Math.max(14, yOf(h.C)) : H1 - 20;
+        el('line', { x1: x, y1: y - 12, x2: x, y2: y - 2, stroke: '#1D1B18', 'stroke-width': 1 }, L.engines);
+        txt(e.key === 'air' ? 'air-engine' : 'perfected', { x: x + 2, y: y - 13, 'font-size': 7.4, 'font-style': 'italic', fill: '#1D1B18', 'paint-order': 'stroke', stroke: '#F2EBD9', 'stroke-width': 2.4 }, L.engines);
+      }
+    };
+    S.ledger = function (rows) {
+      if (!cells.length) return;
+      for (const c of cells) {
+        const r = rows.find(q => q.from === c.from);
+        if (!r || !r.n) { c.barEl.setAttribute('height', 0); c.big.textContent = ''; c.small.textContent = ''; c.over.textContent = ''; continue; }
+        const h = Math.min(LEDGER_MAX, r.perHead) * LEDGER_UNIT;
+        c.barEl.setAttribute('y', fmt(L0 + LBAR - h)); c.barEl.setAttribute('height', fmt(h));
+        c.over.textContent = r.perHead > LEDGER_MAX ? '▲' : '';
+        c.big.textContent = W.mult(r.perHead); c.small.textContent = W.mult(r.income);
+        c.barEl.setAttribute('fill', r.n < CF.GEN_YEARS ? '#E2611B' : '#1D1B18');
+      }
+    };
     S.clearLabels = function () { while (L.labels.firstChild) L.labels.removeChild(L.labels.firstChild); };
     S.label = function (s, x, y, opts) {
       opts = opts || {};
@@ -350,7 +390,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     else S.label('America', Math.min(SW - 36, x + 4), Math.max(12, y + 3), { size: 8.6 });
   }
 
-  // ---- the cover: Jevons's frontispiece --------------------------------------------------------------------------
+  // ---- the cover -------------------------------------------------------------------------------------------------
   function drawCover() {
     const S = makeSheet($('#coversheet'), 'cover');
     S.line(S.L.jevons, CF.JEVONS_CURVE.map(([y, c]) => ({ year: y, C: c })));
@@ -360,14 +400,11 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     cap.forEach((s, i) => { const t = S.label(s, 0, 0, { size: 8.2, fill: '#3a3630' }); t.setAttribute('transform', `translate(${fmt(xOf(1935) + i * 10.5)} ${fmt(S.H1 - 6)}) rotate(-90)`); });
   }
 
-  // ---- state of a game ------------------------------------------------------------------------------------------
-  const U = { st: null, used: new Set(), sheet: null, rows: CF.ROWS_ABOVE, pace: null, plan: null, touched: false, busy: false, prevScreen: 'cover', prevScroll: 0, lastPlan: null };
+  // ---- state ----------------------------------------------------------------------------------------------------
+  const U = { st: null, used: new Set(), sheet: null, rows: 0, pace: null, plan: null, touched: false, busy: false, prevScreen: 'cover', prevScroll: 0, lastPlan: null };
   window.__jevons = U;
 
-  function show(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
-    U.screen = id;
-  }
+  function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); U.screen = id; }
   function gensStrip() {
     const g = $('#gens'); g.innerHTML = '';
     for (let i = 0; i < CF.MAX_GENS; i++) {
@@ -393,8 +430,10 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     S.ground(opts.S != null ? opts.S : st.S, !!opts.digging, opts.planTo != null ? opts.planTo : null);
     S.people(opts.gone != null ? opts.gone : st.gone);
     S.pencil(opts.pencil || null, opts.beyond || null);
+    S.engineMarks(st.events.filter(e => e.year <= hist[hist.length - 1].year), hist);
+    S.ledger(M.ledgerOf(hist));
   }
-  const KEY = `<b>Above the line</b> is Britain's fire: how much coal it burns in a year. The black under the curve is coal that has been burnt. <b>Below the line</b> is the coal still in the ground, in squares. One square below is the same coal as one square above: burn a square above, and a square goes from below. The top layer is dug first, and the deeper the digging, the dearer the coal. The dashed line is America's fire.`;
+  const KEY = `<b>Above the line</b> is Britain's fire: how much coal it burns in a year. The black under the curve is coal that has been burnt. <b>Below the line</b> is the coal still in the ground, in squares. One square below is the same coal as one square above: burn a square above, and a square goes from below. The top layer is dug first, and the deeper the digging, the dearer the coal. The dashed line is America's fire. <b>The ledger</b> at the bottom says what each generation got: its income per head, and Britain's whole income, against 1865.`;
 
   function startGame() {
     U.st = M.newGame(); U.used = new Set(); U.lastPlan = null; U.sheet = null; U.rows = 0;
@@ -405,14 +444,14 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   function turn() {
     gensStrip(); U.pace = null; U.plan = null; U.touched = false;
     drawState();
-    const off = M.engineOffer(U.st);
-    if (off) return showEngine(off);
+    const news = M.engineNews(U.st);
+    if (news) return showEngine(news);
     if (M.checkEvening(U.st)) return showEvening();
     if (M.playerTurnsOver(U.st)) return showRunOn();
     showPace();
   }
 
-  // ---- the engine offer -------------------------------------------------------------------------------------------
+  // ---- the engine news ---------------------------------------------------------------------------------------------
   function lumpsSvg(card) {
     const w = 348, h = 64, s = 13, row = (label, lb, y) => {
       let out = `<text x="0" y="${y + 10}" font-size="12.5" font-style="italic" fill="#1D1B18">${label}</text>`;
@@ -424,17 +463,11 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     };
     return `<svg class="lumps" viewBox="0 0 ${w} ${h}" aria-label="coal for one horse-power for an hour">${row("Britain's engines", card.lumpsBritain, 6)}${row('the new engine', card.lumpsNew, 30)}<text x="0" y="${h - 2}" font-size="10.5" font-style="italic" fill="#8B847A">each black square is a pound of coal, for one horse's work for an hour</text></svg>`;
   }
-  function showEngine(off) {
-    const c = W.engineCard(off);
-    $('#panel').innerHTML = `<div class="card"><h2>${c.title}, ${off.year}</h2><p>${c.body}</p>${lumpsSvg(c)}<p class="small"><i>${c.rule}</i></p>
-      <div class="row2"><button class="btn" id="fit">Fit it<span class="sub">${c.fit}</span></button><button class="btn" id="refuse">Refuse it<span class="sub">${c.refuse}</span></button></div></div>`;
-    $('#fit').onclick = () => decide(true); $('#refuse').onclick = () => decide(false);
-  }
-  function decide(fit) {
-    M.decideEngine(U.st, fit);
-    U.engineNote = fit ? 'You fitted the new engine.' : 'You refused the new engine.';
-    if (M.checkEvening(U.st)) return showEvening();
-    showPace();
+  function showEngine(news) {
+    const c = W.engineCard(news);
+    $('#panel').innerHTML = `<div class="card"><h2>${c.title}, ${news.year}</h2><p>${c.what}</p>${lumpsSvg(c)}<p>${c.cost}</p><p>${c.when}</p>
+      <button class="btn" id="noted">${c.button}</button></div>`;
+    $('#noted').onclick = () => { if (M.checkEvening(U.st)) return showEvening(); showPace(); };
   }
 
   // ---- the ruler -------------------------------------------------------------------------------------------------
@@ -460,12 +493,11 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   }
   function showPace() {
     const y0 = U.st.year, y1 = y0 + CF.GEN_YEARS, lastTurn = U.st.gen === CF.MAX_GENS - 1;
-    const note = U.engineNote ? `<p class="small"><i>${U.engineNote}</i></p>` : '';
-    $('#panel').innerHTML = `<h2>Set the fire for ${y1}</h2>${note}<p class="small" style="margin-top:0">Slide along the ruler. How much coal should Britain burn in ${y1}, compared with now? The top row says how big the fire gets; the bottom row says how long the coal would last at that pace, if it were kept up.</p>${rulerSvg(U.st)}
+    $('#panel').innerHTML = `<h2>Set the fire for ${y1}</h2><p class="small" style="margin-top:0">Slide along the ruler. How much coal should Britain burn in ${y1}, compared with now? The top row says how big the fire gets; the bottom row says how long the coal would last at that pace, if it were kept up.</p>${rulerSvg(U.st)}
       <p class="reading" id="reading"><span class="ash"><i>Touch the ruler. The dotted line on the sheet will show your plan, and crossed squares the coal it would take.</i></span></p>
       <p class="hint">What actually burns is drawn solid, and it may not follow your dotted line.</p>
       <button class="btn fire" id="burn" disabled>Burn ${y0}–${y1}</button>`;
-    U.engineNote = null; U.lastTurn = lastTurn;
+    U.lastTurn = lastTurn;
     const r = $('#ruler');
     const setFrom = ev => {
       const b = r.getBoundingClientRect(); const x = (ev.clientX - b.left) / b.width * RW;
@@ -490,7 +522,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     drawState({ pencil: U.plan.points, beyond: U.plan.beyond, planTo: U.st.S + U.plan.burnt, fit: U.plan.target });
   }
 
-  // ---- burning a generation -------------------------------------------------------------------------------------
+  // ---- burning -------------------------------------------------------------------------------------------------------
   function animateGen(rec, ms, done) {
     const st = U.st, startIdx = st.history.length - rec.years.length - 1;
     const base = st.history.slice(0, startIdx + 1);
@@ -523,9 +555,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     scrollToSheet();
     animateGen(rec, reduced ? 200 : 3400, () => { U.busy = false; showResult(rec); });
   }
-  function quoteHtml(q, big) {
-    return q ? `<div class="quote${big ? ' big' : ''}">${q.text}<span class="who">Jevons, ${q.where}</span></div>` : '';
-  }
+  function quoteHtml(q, big) { return q ? `<div class="quote${big ? ' big' : ''}">${q.text}<span class="who">Jevons, ${q.where}</span></div>` : ''; }
   function showResult(rec) {
     gensStrip();
     const left = M.groundSquares() - U.st.S / M.squareTons();
@@ -535,9 +565,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
       <button class="btn" id="next">${over ? 'Run on to 2065' : 'Next generation: ' + rec.to}</button>`;
     $('#next').onclick = () => { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); turn(); };
   }
-
-  // ---- the evening, and the sheet running on -----------------------------------------------------------------------
-  function drawRest(afterHtml) {
+  function drawRest() {
     if (U.busy) return; U.busy = true;
     const recs = M.runOut(U.st);
     $('#panel').innerHTML = `<p class="reading" id="burning">Burning…</p>`;
@@ -567,9 +595,8 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     $('#vhead').textContent = t.heading;
     const S = makeSheet($('#vsheet'), 'verdict', rowsFor(maxFire(st.history)));
     S.fire(st.history); drawAmerica(S, st.history); S.clearLabels(); americaLabel(S, st.history);
-    S.ground(st.S, false, null); S.people(st.gone);
-    S.emberAt(null);
-    // morning, noon, evening
+    S.ground(st.S, false, null); S.people(st.gone); S.emberAt(null);
+    S.engineMarks(st.events, st.history); S.ledger(M.ledgerOf(st.history));
     if (v.noonYear > CF.START_YEAR) {
       S.label('morning', xOf(1868), S.yOf(95) - 8, { size: 10 });
       const nx = xOf(v.noonYear), ny = S.yOf(v.noonC), right = nx < SW - 90;
@@ -584,7 +611,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     $('#vquotes').innerHTML = t.quotes.map(q => quoteHtml(q, q.big)).join('');
   }
 
-  // ---- the last screen: the curve continued, with the date, and nothing else said --------------------------------
+  // ---- the last screen ---------------------------------------------------------------------------------------------
   function toLast() {
     show('last'); window.scrollTo(0, 0);
     const st = U.st, S = makeSheet($('#lsheet'), 'last');
@@ -615,7 +642,6 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
     requestAnimationFrame(step);
   }
 
-  // ---- help and about ------------------------------------------------------------------------------------------------
   function openAside(id) { U.prevScreen = U.screen; U.prevScroll = window.scrollY; show(id); window.scrollTo(0, 0); }
   function closeAside() { show(U.prevScreen); window.scrollTo(0, U.prevScroll); }
   document.querySelectorAll('[data-help]').forEach(b => b.onclick = () => openAside('help'));
@@ -628,7 +654,7 @@ h2.big{font-size:26px;letter-spacing:.12em;margin:10px 0 8px;line-height:1.12}
   $('#lastback').onclick = () => { show('verdict'); window.scrollTo(0, 0); };
 
   drawCover();
-  U.api = { startGame, burn, setPace, decide, toVerdict, toLast };
+  U.api = { startGame, burn, setPace, toVerdict, toLast };
 })();
 </script>
 </body>

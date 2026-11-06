@@ -47,6 +47,10 @@ const WORDS = (function () {
     if (r > 0.15) return `less than half ${what}`;
     return `only a small part of ${what}`;
   }
+  function mult(r) {                     // the ledger's figures: "x1.6"
+    if (r >= 9.5) return '×' + R(r);
+    return '×' + (Math.round(r * 10) / 10).toFixed(1).replace(/\.0$/, '');
+  }
   function priceWords(p) {
     if (p < 1.08) return 'no dearer than in 1865';
     if (p < 1.25) return 'a little dearer than in 1865';
@@ -56,6 +60,11 @@ const WORDS = (function () {
     if (p < 3.4) return 'about three times as dear as in 1865';
     if (p < 12) return `about ${R(p)} times as dear as in 1865`;
     return 'dearer than any works will pay';
+  }
+  function daysWords(d) {
+    if (!isFinite(d) || d > 365) return 'more than the whole year';
+    const n = Math.max(1, R(d));
+    return `${n} day${n === 1 ? '' : 's'}`;
   }
   function americaWords(ratio) {         // America's coal ÷ Britain's
     if (ratio < 0.15) return 'America burns about a tenth as much coal as Britain';
@@ -85,7 +94,7 @@ const WORDS = (function () {
     if (n < 1.5) return 'about one square';
     return `about ${R(n)} squares`;
   }
-  function lastsWords(y) {               // from lastsUntil
+  function lastsWords(y) {
     if (!isFinite(y)) return 'never';
     if (y > 2900) return 'for many centuries';
     return `to about ${roundTo(y, 10)}`;
@@ -95,14 +104,16 @@ const WORDS = (function () {
     if (y > 2900) return 'centuries';
     return `to ${roundTo(y, 10)}`;
   }
-  function lastsSentence(y, pace) {      // "Kept up, this pace ..."
+  function lastsSentence(y) {
     if (!isFinite(y)) return 'Kept up, this pace would never use up the coal.';
     if (y > 2900) return 'Kept up, this pace would leave coal in the ground for many centuries.';
     return `Kept up, this pace would use the last of the coal within 4,000 feet by about ${roundTo(y, 10)}.`;
   }
+  const does = lb => lb === 4 ? 'as much work as it does now' : lb === 2 ? 'twice the work a ton did in 1865' : 'three times the work a ton did in 1865';
+  const lb = n => n === 4 ? '4 pounds' : n === 2 ? '2 pounds' : n < 1.35 ? 'under 1⅓ pounds' : `${n} pounds`;
+  const engineName = key => key === 'air' ? 'the air-engine' : 'the perfected air-engine';
 
   // ---- the ruler ---------------------------------------------------------------------------------------------
-  // Each mark: Jevons's word for it, the plain amount, and what it means.
   const MARKS = [
     { key: 'cut', mult: 0.5, name: 'cut back', amount: 'half as much', short: 'half', def: y => `Cut back: forbid the sending of coal abroad and restrain the trade, so that by ${y} Britain burns half what it burns now.` },
     { key: 'stand', mult: 1, name: 'a stand', amount: 'the same', short: 'the same', def: y => `A stand: hold the fire where it is, so that in ${y} Britain burns the same as now.` },
@@ -110,52 +121,49 @@ const WORDS = (function () {
     { key: 'now', mult: 2, name: 'as now', amount: 'twice as much', short: 'twice', def: y => `As now: the pace of the last few years, three and a half in the hundred a year. The fire doubles in a generation.` },
     { key: 'faster', mult: 2.4, name: 'faster', amount: 'more than twice', short: 'more', def: y => `Faster: push the trade on and send coal freely abroad. The fire more than doubles.` },
   ];
-  function markNear(mult) {
+  function markNear(m) {
     let best = null;
-    for (const m of MARKS) if (Math.abs(mult - m.mult) < 0.06 && (!best || Math.abs(mult - m.mult) < Math.abs(mult - best.mult))) best = m;
+    for (const k of MARKS) if (Math.abs(m - k.mult) < 0.06 && (!best || Math.abs(m - k.mult) < Math.abs(m - best.mult))) best = k;
     return best;
   }
   function planReading(st, plan, lastTurn) {
     const y = st.year + 20, m = markNear(plan.mult);
     const head = m ? m.def(y) + ' ' : '';
     const runOn = lastTurn ? ` This is the last pace you set: from ${y} the sheet runs on at it.` : '';
-    return `${head}By ${y} Britain would burn ${sizeAgainst(plan.mult, 'what it burns now')}. The next twenty years would use ${squaresWords(plan.squares)} of coal. ${lastsSentence(plan.lastsUntil, plan.pace)}${runOn}`;
+    return `${head}By ${y} Britain would burn ${sizeAgainst(plan.mult, 'what it burns now')}. The next twenty years would use ${squaresWords(plan.squares)} of coal. ${lastsSentence(plan.lastsUntil)}${runOn}`;
   }
-  function paceVerb(mult) {             // for "What you did"
-    const m = markNear(mult);
-    if (m && m.key === 'cut') return 'cut it back hard';
-    if (m && m.key === 'stand') return 'held it level';
-    if (m && m.key === 'slower') return 'let it grow slowly';
-    if (m && m.key === 'now') return 'let it double';
-    if (m && m.key === 'faster') return 'pushed it faster than ever';
-    if (mult >= 2.15) return 'pushed it faster than ever';
-    if (mult >= 1.75) return 'let it nearly double';
-    if (mult >= 1.15) return 'let it grow slowly';
-    if (mult > 0.9) return 'held it about level';
+  function paceVerb(m) {
+    const k = markNear(m);
+    if (k && k.key === 'cut') return 'cut it back hard';
+    if (k && k.key === 'stand') return 'held it level';
+    if (k && k.key === 'slower') return 'let it grow slowly';
+    if (k && k.key === 'now') return 'let it double';
+    if (k && k.key === 'faster') return 'pushed it faster than ever';
+    if (m >= 2.15) return 'pushed it faster than ever';
+    if (m >= 1.75) return 'let it nearly double';
+    if (m >= 1.15) return 'let it grow slowly';
+    if (m > 0.9) return 'held it about level';
     return 'cut it back';
   }
 
-  // ---- the engine offer ------------------------------------------------------------------------------------
-  const lb = n => n === 4 ? '4 pounds' : n === 2 ? '2 pounds' : n < 1.35 ? 'under 1⅓ pounds' : `${n} pounds`;
-  function engineCard(offer) {
-    const first = offer.key === 'air';
+  // ---- the engine news (an announcement, not a choice) -------------------------------------------------------
+  function engineCard(news) {
+    const first = news.key === 'air';
     const title = first ? 'A NEW ENGINE' : 'THE AIR-ENGINE PERFECTED';
-    const gainWords = offer.gain >= 2.6 ? 'a third of the coal' : offer.gain >= 1.8 ? 'half the coal' : 'a third less coal';
-    const body = first
-      ? `Inventors offer an air-engine. It does the same work on half the coal. To do one horse's work for an hour, Britain's best engines burn ${lb(offer.lbBritain)} of coal. The air-engine burns ${lb(offer.lbNew)}.`
-      : `The air-engine has been perfected. It does the same work on ${gainWords} that Britain's engines burn. To do one horse's work for an hour, Britain's engines burn ${lb(offer.lbBritain)} of coal. The new one burns ${lb(offer.lbNew)}.`;
-    return {
-      title, body, lumpsBritain: offer.lbBritain, lumpsNew: offer.lbNew,
-      rule: 'Whatever Britain does, America fits the new engine at once.',
-      fit: 'Every engine in Britain is changed for it.', refuse: 'Britain keeps the engines it has.',
-    };
+    const what = first
+      ? `Inventors have an air-engine. It does the same work on half the coal: to do one horse's work for an hour, Britain's engines burn ${lb(news.lbBritain)} of coal, and the air-engine burns ${lb(news.lbNew)}.`
+      : `The air-engine has been perfected. To do one horse's work for an hour, Britain's engines now burn ${lb(news.lbBritain)} of coal, and the new one burns ${lb(news.lbNew)}.`;
+    const cost = `But it costs more to build. It pays only where coal is dear: today, where a ton costs about ${R(news.paysNow)} times what it did in 1865. Britain's coal costs ${priceWords(news.priceBritain).replace('no dearer than in 1865', 'the same as in 1865')}. America's coal is cheap, and stays cheap.`;
+    const when = `The engine gets cheaper to build every year. By about ${news.americaFitsIn} it will pay even at the 1865 price, and America will fit it then. Britain's works will fit it as soon as it pays for them: sooner, if Britain's coal is dearer.`;
+    return { title, what, cost, when, lumpsBritain: news.lbBritain, lumpsNew: news.lbNew, button: 'Noted. Set the fire' };
   }
 
   // ---- Jevons's sentences (only from the preface, ch. I, ch. VII and ch. XVIII) ------------------------------
   const Q = {
     paradox: ['It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth.', 'ch. VII'],
     saved: ['No one must suppose that coal thus saved is spared—it is only saved from one use to be employed in others.', 'ch. VII'],
-    smallness: ['To secure a safe smallness we should have to go back, and strangle in their birth those thoughts and inventions which redeemed us from dullness and degeneration a century ago.', 'ch. XVIII'],
+    capital: ['The question is one of capital against current expenditure.', 'preface'],
+    wasteful: ['The fact is, that a wasteful engine pays better where coals are cheap than a more perfect but costly engine.', 'preface'],
     passing: ['Not only must we meet some limit within our own country, but we must witness the coal produce of other countries approximating to our own, and ultimately passing it.', 'preface'],
     boulder: ['It is easy to set a boulder rolling on the mountain-side; it is perilous to try to stop it.', 'preface'],
     exodus: ['We must either maintain the expansion of our trade and employment, or else witness a sore pressure of population and a great exodus of our people.', 'preface'],
@@ -173,6 +181,8 @@ const WORDS = (function () {
     choice: ['We have to make the momentous choice between brief greatness and longer continued mediocrity.', 'ch. XVIII'],
     noon: ['We are now in the full morning of our national prosperity, and are approaching noon. Yet we have hardly begun to pay the moral and the social debts to millions of our countrymen which we must pay before the evening.', 'preface'],
     cannot: ['It is simply that we cannot long progress as we are now doing.', 'preface'],
+    successors: ['Even if our successors be less happily placed than ourselves they will not then blame us.', 'preface'],
+    spendthrifts: ['To disperse so lavishly the cream of our mineral wealth is to be spendthrifts of our capital—to part with that which will never come back.', 'ch. XVIII'],
   };
   function pick(used, keys) {
     for (const k of keys) if (k && !used.has(k)) { used.add(k); return { key: k, text: Q[k][0], where: Q[k][1] }; }
@@ -183,25 +193,40 @@ const WORDS = (function () {
   function result(rec, st, used, squaresLeft, squaresAll) {
     const pm = rec.planMult, am = rec.mult;
     const lines = [];
-    const eng = rec.engine ? (rec.engine.fit ? ' You fitted the new engine.' : ' You refused the new engine.') : '';
     const cmp = am > pm * 1.08 ? 'That is higher than your dotted line.' : am < pm * 0.92 ? 'That is short of your dotted line.' : 'That is what you set.';
-    const lead = `You set the fire for ${rec.to} at ${sizeAgainst(pm, 'that of ' + rec.from)}.${eng} The fire ${fireChange(am)}. ${cmp}`;
-    if (rec.engine && rec.engine.fit && am > pm * 1.03)
-      lines.push('Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less. America fitted the engine too.');
-    if (rec.engine && !rec.engine.fit)
-      lines.push('America fitted the engine Britain refused. Power there was cheaper, and works moved there.');
-    if (am < pm * 0.92 && rec.price >= 1.08)
-      lines.push(`Why short? Coal from ${depthWords(rec.depth)} is ${priceWords(rec.price)}. Works moved to America, where coal is cheap.`);
+    const lead = `You set the fire for ${rec.to} at ${sizeAgainst(pm, 'that of ' + rec.from)}. The fire ${fireChange(am)}. ${cmp}`;
+    // engines fitted this generation
+    const fitted = rec.engines.filter(e => e.who === 'britain'), fittedA = rec.engines.filter(e => e.who === 'america');
+    for (const e of fitted) {
+      const a = fittedA.find(x => x.key === e.key), aPrev = st.engines[e.key] && st.engines[e.key].america;
+      const whyNow = rec.years.find(y => y.year === e.year + 1) && rec.years.find(y => y.year === e.year + 1).price >= 1.08
+        ? 'coal was dear enough' : 'the engine was cheap enough';
+      let s = `In ${e.year} ${whyNow} that ${engineName(e.key)} paid, and Britain's works fitted it. Each ton now does ${does(st.lbB)}.`;
+      if (a) s += a.year === e.year ? ' America fitted it the same year.' : a.year < e.year ? ` America had fitted it in ${a.year}.` : ` America fitted it in ${a.year}.`;
+      else if (aPrev && aPrev < rec.from) s += ` America had fitted it in ${aPrev}.`;
+      else s += ' America has not fitted it yet: its coal is too cheap for the engine to pay there.';
+      lines.push(s);
+    }
+    for (const a of fittedA) if (!fitted.find(x => x.key === a.key)) {
+      const b = st.engines[a.key] && st.engines[a.key].britain;
+      lines.push(`In ${a.year} America fitted ${engineName(a.key)}.${b && b < rec.from ? ` Britain had fitted it in ${b}.` : ''}`);
+    }
+    if (rec.fittedBritain && am > pm * 1.03)
+      lines.push('Why higher? Each ton of coal did more work, so power was cheap. Cheap power paid for new works: ploughs, pumps, mills, ships. They burnt more coal, not less.');
+    if (am < pm * 0.92 && rec.relCost >= 1.08)
+      lines.push(`Why short? Power costs more in Britain than in America: coal from ${depthWords(rec.depth)} is ${priceWords(rec.price)}. Works moved to America.`);
     lines.push(`${cap(squaresWords(rec.squares))} of coal came out of the ground; ${pitsWords(rec.depth)}. ${R(squaresLeft)} of the ${squaresAll} squares are left.`);
+    // the ledger line
+    lines.push(`Fuel took ${daysWords(rec.days)} of a year's earnings. Income per head was ${sizeAgainst(rec.perHead, 'in 1865')}; Britain's whole income ${sizeAgainst(rec.income, '1865’s')}.`);
     lines.push(rec.americaPassedNow ? 'America now burns more coal than Britain.' : americaWords(rec.americaRatio) + '.');
     const pw = peopleWords(rec.gone);
     lines.push(pw ? `The people grew faster than the work. ${cap(pw)} went over the sea to find it.` : 'There was work for everyone. Nobody had to go over the sea.');
     const keys = [];
-    if (rec.engine && rec.engine.fit) keys.push(used.has('paradox') ? 'saved' : 'paradox');
-    if (rec.engine && !rec.engine.fit) keys.push('smallness');
+    if (fitted.length && am > pm * 1.03) keys.push(used.has('paradox') ? 'saved' : 'paradox');
+    if (fitted.length) keys.push(used.has('capital') ? 'wasteful' : 'capital');
     if (rec.americaPassedNow) keys.push('passing');
     if (rec.gone >= 1 && pm < 1.3) keys.push(used.has('boulder') ? 'exodus' : 'boulder');
-    if (am < pm * 0.9 && rec.price >= 1.15) keys.push(used.has('cheapest') ? 'dear' : 'cheapest');
+    if (am < pm * 0.9 && rec.relCost >= 1.08) keys.push(used.has('cheapest') ? 'dear' : 'cheapest');
     if (pm < 0.8) keys.push('mar');
     if (pm >= 2.2) keys.push('push');
     if (pm >= 1.8 && am >= 1.7) keys.push('greater');
@@ -212,12 +237,18 @@ const WORDS = (function () {
   }
 
   function evening(st, used) {
-    const text = `The pits are deep: coal from ${depthWords(MECH.depthOf(st.S))} is ${priceWords(MECH.priceOf(st.S))}, and America's is cheap. Works are moving there. Whatever pace you set now, the fire will fall. The sheet draws itself to 2065 at the last pace you set.`;
+    const last = st.history[st.history.length - 1];
+    const text = `The pits are deep: coal from ${depthWords(MECH.depthOf(st.S))} is ${priceWords(MECH.priceOf(st.S))}, and fuel takes ${daysWords(last.days)} of a year's earnings. America's coal is cheap, and the works are moving there. Whatever pace you set now, the fire will fall. The sheet draws itself to 2065 at the last pace you set.`;
     return { text, quote: pick(used, ['impossible', 'spring']) };
   }
   function runOn(st) {
     return `You have set six generations. From ${st.year} the sheet runs on to 2065 at the last pace you set.`;
   }
+
+  // ---- the ledger ---------------------------------------------------------------------------------------------
+  const LEDGER_HEADING = 'WHAT EACH GENERATION GOT: INCOME PER HEAD, AGAINST 1865';
+  const LEDGER_CAPTION = 'the big figure is income per head; the small one, the whole income; both against 1865';
+  const FUTURE_FLAG = 'from 1985: supposing, as Jevons did, that no substitute for coal is found';
 
   // ---- the verdict -----------------------------------------------------------------------------------------
   function whatYouDid(st) {
@@ -230,22 +261,16 @@ const WORDS = (function () {
     const N = ['', '', 'for two generations', 'for three generations', 'for four generations', 'for five generations', 'for six generations'];
     const parts = runs.map((r, i) => (i === 0 ? '' : 'then ') + r.v + (r.n > 1 ? ' ' + N[r.n] : (runs.length === 1 ? ' every generation' : '')));
     let s = 'You ' + parts.join(', ');
-    const e = st.engines, a = e.air, p = e.perfect;
-    let eng = '';
-    if (a && p) eng = a === 'fit' && p === 'fit' ? 'fitted both new engines' : a === 'refused' && p === 'refused' ? 'refused both new engines'
-      : a === 'fit' ? 'fitted the air-engine but refused the perfected one' : 'refused the air-engine but fitted the perfected one';
-    else if (a) eng = a === 'fit' ? 'fitted the air-engine' : 'refused the air-engine';
     s = s.replace(/^You let it/, 'You let the fire').replace(/^You held it/, 'You held the fire').replace(/^You cut it/, 'You cut the fire').replace(/^You pushed it/, 'You pushed the fire');
-    return s + (eng ? ', and ' + eng : '') + '.';
+    return s + '.';
   }
+  function span(g) { return `${g.from}–${g.to}`; }
   function verdict(v, st, used) {
     const heading = v.kind === 'greatness' ? 'A BRIEF GREATNESS' : v.kind === 'mediocrity' ? 'A LONGER CONTINUED MEDIOCRITY' : 'BETWEEN THE TWO';
     const C0 = MECH.CONFIG.START_YEAR;
-    // how high
     let high;
     if (v.noonYear === C0) high = 'How high: no higher than 1865. The fire never grew.';
     else high = `How high: ${sizeAgainst(v.noonMult, 'the fire of 1865')}, at its noon in ${v.noonYear}.`;
-    // how long
     const left = R(v.squaresAll - v.squaresBurnt);
     let long;
     const until = v.untilYear > 2900 ? 'for many centuries' : `until about ${roundTo(v.untilYear, 10)}`;
@@ -256,6 +281,15 @@ const WORDS = (function () {
     } else {
       long = `How long: still burning in ${v.endYear}, at ${sizeAgainst(v.endMult, 'the fire of 1865')}, with ${left} of the ${v.squaresAll} squares still in the ground. At that pace the coal lasts ${until}.`;
     }
+    // the generations
+    const b = v.bestGen, w = v.worstGen, l = v.lastGen;
+    let gens = `Who got the coal: the best-off generation was ${span(b)}, with income per head ${sizeAgainst(b.perHead, '1865’s')}`;
+    if (w.from === l.from) gens += `; the worst-off was the last on the sheet, ${span(w)}, with ${sizeAgainst(w.perHead, '1865’s')}, and fuel took ${daysWords(l.days)} of its year's earnings.`;
+    else {
+      gens += w.from === b.from ? '.' : `; the worst-off was ${span(w)}, with ${sizeAgainst(w.perHead, '1865’s')}.`;
+      gens += ` The last generation on the sheet, ${span(l)}, had ${sizeAgainst(l.perHead, '1865’s')} per head, and fuel took ${daysWords(l.days)} of its year's earnings.`;
+    }
+    gens += left > 0 ? ` ${left} square${left === 1 ? '' : 's'} of coal ${left === 1 ? 'is' : 'are'} left for the generations after 2065.` : ' Nothing is left for the generations after 2065.';
     const lines = [high, long, whatYouDid(st)];
     let after = '';
     if (v.evening) {
@@ -273,6 +307,7 @@ const WORDS = (function () {
       ppl = `${cap(pw)} went over the sea for want of work, ${when}.`;
     }
     lines.push((after ? after + ' ' : '') + am + ' ' + ppl);
+    lines.push(gens);
     const qs = [];
     const k = v.kind === 'greatness' ? 'instincts' : v.kind === 'mediocrity' ? 'littleness' : 'wise';
     qs.push({ text: Q[k][0], where: Q[k][1] });
@@ -281,7 +316,8 @@ const WORDS = (function () {
     return { heading, lines, quotes: qs };
   }
 
-  return { fireChange, sizeAgainst, priceWords, americaWords, peopleWords, depthWords, pitsWords, squaresWords, lastsWords,
-    lastsShort, lastsSentence, MARKS, markNear, planReading, engineCard, result, evening, runOn, verdict, whatYouDid, Q };
+  return { fireChange, sizeAgainst, mult, priceWords, daysWords, americaWords, peopleWords, depthWords, pitsWords, squaresWords,
+    lastsWords, lastsShort, lastsSentence, MARKS, markNear, planReading, engineCard, engineName, result, evening, runOn,
+    LEDGER_HEADING, LEDGER_CAPTION, FUTURE_FLAG, verdict, whatYouDid, Q };
 })();
 if (typeof module !== 'undefined' && module.exports) module.exports = WORDS;

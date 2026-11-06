@@ -4,6 +4,10 @@
 // Kind: TOY. A small model built to illustrate the argument of The Coal Question (1866, second edition: preface,
 // ch. I, ch. VII, ch. XVIII), calibrated to the numbers those chapters and the frontispiece give. Where the toy
 // had to choose something Jevons does not give, the line says "our choice".
+//
+// Revision 2: one production engine underneath. Power = coal x what a ton does; income = people x (power per
+// head)^ALPHA; fuel's share of income, shown as days of a year's earnings, is the price; works go where power is
+// cheap; an engine is fitted when the fuel it saves is worth its cost; the people's increase follows income per head.
 
 const CONFIG = {
   // ---- the clock -------------------------------------------------------------------------------------------
@@ -36,7 +40,7 @@ const CONFIG = {
   DEPTH_LIMIT: 4000,          // ch. I and preface: the 4,000-foot limit
                               // our choice: the coal lies evenly from the surface to 4,000 feet and the shallowest is
                               //   dug first, so the working depth is 4,000 feet times the share already burnt
-                              //   (eight bands of 500 feet on the sheet)
+                              //   (eight layers of 500 feet on the sheet)
   PRICE_K: 1,                 // ch. I: when the coal within 4,000 feet is nearly spent, "the average price of coal much
                               //   higher than the highest price now paid for the finest kinds of coal"; ch. I: "no
                               //   recent rise of importance" yet; preface: the cost of a shaft "increases in a far
@@ -45,34 +49,42 @@ const CONFIG = {
                               //   feet), without limit near the bottom ("we cannot get to the bottom of them")
   PRICE_FLOOR_LEFT: 0.002,    // numerical guard only
 
-  // ---- dear power and the works that leave -----------------------------------------------------------------
-  ETA: 2.5,                   // our choice: the trade Britain keeps is the trade its pace has built times (what power
-                              //   costs in Britain / what it costs in America) to the power -ETA. Coal twice as dear
-                              //   keeps about a sixth of the works cheap coal would have drawn. Preface: "so far as
-                              //   cheap fuel and power is the exciting cause of manufactures, these must pass to where
-                              //   fuel is cheapest"
+  // ---- the production engine (our choice throughout; Jevons gives the direction, "coal ... the factor in
+  //      everything we do", ch. I, not a function) ----------------------------------------------------------------
+  LB_1865: 4,                 // ch. VII: a good engine of the present day burns about 4 lb of coal per horse-power
+                              //   per hour (Rankine); what a ton does is LB_1865 / lb of the engine in use (1 in 1865)
+  ALPHA: 0.7,                 // income per head = (power per head, relative to 1865)^ALPHA: an extra horse per person
+                              //   brings a little less than proportionally
+  FUEL_SHARE_1865: 0.05,      // fuel's share of income in 1865: a twentieth, about 18 days of a year's earnings
+                              //   (95 million tons at pit prices against the national income; the chapters do not
+                              //   give it)
+  ETA: 2.5,                   // the trade Britain keeps is the trade its pace has built times (what power costs in
+                              //   Britain / what it costs in America) to the power -ETA; power costs price / what a
+                              //   ton does. Preface: "so far as cheap fuel and power is the exciting cause of
+                              //   manufactures, these must pass to where fuel is cheapest"
+  ADJUST: 0.1,                // works move a tenth of the way (in proportion) each year towards where cheap power
+                              //   draws them: a mill is not moved in a season, but a great gap moves many
 
   // ---- the new engines (ch. VII) ----------------------------------------------------------------------------
-  LB_1865: 4,                 // ch. VII: a good engine of the present day burns about 4 lb of coal per horse-power
-                              //   per hour (Rankine)
   ENGINES: [
-    { year: 1885, key: 'air', lbNew: 2 },
+    { key: 'air', year: 1885, lbNew: 2, pays: 3, cheapens: 0.04 },
                               // ch. VII: an air-engine "has worked at about one-half the expenditure of an ordinary
-                              //   good engine of the present day"
-    { year: 1925, key: 'perfect', lbNew: 1.3 },
+                              //   good engine of the present day". Our choice: it exists from 1885, pays where coal is
+                              //   three times the 1865 price, and gets 4 per cent a year cheaper to build, so it pays
+                              //   even at the 1865 price about 27 years later (preface: "the question is one of
+                              //   capital against current expenditure ... a wasteful engine pays better where coals
+                              //   are cheap than a more perfect but costly engine")
+    { key: 'perfect', year: 1925, lbNew: 1.3, pays: 3, cheapens: 0.04 },
                               // ch. VII: "the ultimate improvement of the air-engine will probably reduce the
-                              //   consumption to less than one-third of the present consumption"
-  ],                          // our choice: the years they are offered
-  REBOUND_EXP: 0.5,           // our choice: over the generation an engine comes in, the trade it powers grows by
-                              //   (old lb / new lb)^0.5: twice the work per ton -> about 1.4 times the coal. Ch. VII
-                              //   gives the direction ("the very contrary is the truth") and two magnitudes: a
-                              //   ten-fold better engine in under a century alongside a roughly ten-fold rise in coal,
-                              //   and Scottish iron at a third of the coal per ton with ten times the coal. Both mix in
-                              //   ordinary growth; ours is smaller than either.
-  REFUSE_EXP: 0.2,            // our choice: while British engines burn more per horse-power than American ones,
-                              //   British power is dearer by (lb Britain / lb America)^0.2 (ch. VII: economies are
-                              //   "as open to our commercial competitors as to ourselves ... more readily adopted by
-                              //   versatile foreigners")
+                              //   consumption to less than one-third of the present consumption"; same terms
+  ],
+  REBOUND_EXP: 0.5,           // our choice: over the twenty years after a country fits an engine, the trade it has
+                              //   built grows by (old lb / new lb)^0.5 besides: cheap power pays for new works
+                              //   (ch. VII: ploughs, pumps, ships; "the very contrary is the truth"). Smaller than
+                              //   either magnitude ch. VII reports (ten-fold engine, ten-fold coal; Scottish iron).
+                              // America's coal is at the 1865 price always, so America fits an engine when it has
+                              //   cheapened enough to pay at that price (ch. VII: economies are "as open to our
+                              //   commercial competitors as to ourselves")
 
   // ---- America (a toy rival) --------------------------------------------------------------------------------
   AMERICA0: 21,               // our choice: about a fifth of Britain's in 1865 (American output then was some
@@ -80,15 +92,17 @@ const CONFIG = {
   AMERICA_RATE: 0.06,         // our choice: America's coal grows 6 per cent a year, slowing towards a ceiling;
                               //   preface: other countries "approximating to our own, and ultimately passing it"
   AMERICA_CAP: 2500,          // our choice: the ceiling (far above the sheet)
-                              // our choice: American coal stays cheap on the sheet ("the unrivalled iron and coal
-                              //   resources of Pennsylvania", ch. I), and every new engine is fitted there at once
 
-  // ---- the people (preface: "a sore pressure of population and a great exodus of our people") ----------------
+  // ---- the people (preface: "a sore pressure of population and a great exodus of our people"; "the
+  //      extraordinary facts concerning the prevalence of marriage") ----------------------------------------------
   POP0: 30,                   // millions in the kingdom, 1865 (the 1861 census counted about 29 million)
-  POP_RATE: 0.012,            // our choice: the people increase about 1.2 per cent a year (the census rate of the
-                              //   1850s); ch. I: "a nation tends to multiply itself at a constant rate"
-  EMIGRATE_SHARE: 0.15,       // our choice: when the trade grows slower than the people, about one in seven of those
-                              //   it cannot employ go over the sea; the rest stay and "sink down into poverty" (ch. I)
+  POP_RATE: 0.012,            // the people increase about 1.2 per cent a year while income per head holds (the census
+                              //   rate of the 1850s); ch. I: "a nation tends to multiply itself at a constant rate"
+  POP_ELAST: 1,               // our choice: fewer marry as income per head falls below 1865's: the increase is
+                              //   POP_RATE x (income per head relative to 1865)^POP_ELAST, never above POP_RATE
+  EMIGRATE_SHARE: 0.15,       // our choice: when power (the trade) grows slower than the people, about one in seven
+                              //   of those it cannot employ go over the sea; the rest stay and "sink down into
+                              //   poverty" (ch. I)
 
   // ---- the sheet (drawing only; the mechanism reports in tons and years) ----------------------------------------
   SHEET_X0: 1850, SHEET_X1: 2070, // 22 columns of ten years
@@ -116,9 +130,32 @@ function multFromPace(pace) { return Math.pow(1 + pace, CONFIG.GEN_YEARS); }
 function clampPace(p) { return Math.min(CONFIG.PACE_MAX, Math.max(CONFIG.PACE_MIN, p)); }
 function squareTons() { return CONFIG.ROW_TONS * 10; }
 function groundSquares() { return Math.round(CONFIG.RESERVE / squareTons()); }
-// Kept up from now, when would this pace use the last of the coal within 4,000 feet? A year, or Infinity if never
-// (a falling fire burns a finite amount for ever). This is Jevons's own "at same rate of progress" projection; it
-// ignores dear coal and engines, which is what the burn then shows.
+function doesOf(lb) { return CONFIG.LB_1865 / lb; }           // what a ton does, relative to 1865
+// The production engine. power in 1865-ton-equivalents; income relative to 1865's; both for Britain only.
+function powerOf(C, lb) { return C * doesOf(lb); }
+function incomeOf(C, lb, N) {
+  const perHead = (powerOf(C, lb) / N) / (CONFIG.C0 / CONFIG.POP0);
+  return (N / CONFIG.POP0) * Math.pow(perHead, CONFIG.ALPHA);  // relative to the income of 1865 (= 1)
+}
+function incomePerHeadOf(C, lb, N) { return incomeOf(C, lb, N) / (N / CONFIG.POP0); }
+// Fuel's share of income, and the days of a year's earnings it takes.
+function fuelShareOf(C, lb, N, S) {
+  const y = incomeOf(C, lb, N);
+  return y > 1e-9 ? CONFIG.FUEL_SHARE_1865 * (priceOf(S) * C / CONFIG.C0) / y : Infinity;   // no coal: no income to pay for it
+}
+function daysOf(C, lb, N, S) { return 365 * fuelShareOf(C, lb, N, S); }
+// What power costs: the price of coal over what a ton does. America's coal stays at the 1865 price.
+function powerCost(price, lb) { return price / doesOf(lb); }
+function relCost(st) { return powerCost(priceOf(st.S), st.lbB) / powerCost(1, st.lbA); }
+// Where cheap power would draw the works to, as the share of the trade Britain keeps (1 when power costs the same in
+// both countries); the works move towards it a tenth of the way each year (st.w).
+function keepTarget(S, lbB, lbA) { return Math.min(1, Math.pow(powerCost(priceOf(S), lbB) / powerCost(1, lbA), -CONFIG.ETA)); }
+// (capped at 1: a lead in engines lets Britain keep its works, "neutralize the evils of dearness ... for a time",
+//  ch. VII; it does not draw America's works over)
+// The fire actually burning: the trade the nation's pace has built (Chat), times the share of it still at home.
+function fireOf(Chat, w) { return Chat * w; }
+// Kept up from now, when would this pace use the last of the coal within 4,000 feet? A year, or Infinity if never.
+// Jevons's own "at same rate of progress" projection: it ignores dear coal and engines, which the burn then shows.
 function lastsUntil(st, pace) {
   pace = clampPace(pace);
   let C = st.C, S = st.S, y = st.year;
@@ -126,50 +163,33 @@ function lastsUntil(st, pace) {
   while (S < CONFIG.RESERVE && y < 5000) { S += C; C *= 1 + pace; y += 1; }
   return y >= 5000 ? Infinity : y;
 }
-function penaltyOf(lbB, lbA) { return Math.pow(lbB / lbA, CONFIG.REFUSE_EXP); }
-
-// What power costs in Britain against America: the price of British coal, and any engine America has that Britain
-// does not. American coal stays at the 1865 price.
-function relCost(st) { return priceOf(st.S) * st.penalty; }
-// The fire actually burning: the trade the nation's pace has built (Chat), less the works dear power sends to America.
-function fireOf(Chat, S, penalty) { return Chat * Math.pow(priceOf(S) * penalty, -CONFIG.ETA); }
-// How hard dear coal is pulling the fire down this year, as a yearly share (for the evening check and the words).
-function dragOf(st) {
-  const now = fireOf(st.Chat, st.S, st.penalty), next = fireOf(st.Chat, st.S + st.C, st.penalty);
-  return Math.max(0, 1 - next / now);
-}
+// The price at which an engine pays in a given year: it falls as the engine gets cheaper to build.
+function paysAt(e, year) { return e.pays * Math.exp(-e.cheapens * (year - e.year)); }
+function americaFitsIn(e) { return e.year + Math.ceil(Math.log(e.pays) / e.cheapens); }
 
 function newGame() {
-  return {
+  const st = {
     year: CONFIG.START_YEAR, gen: 0, C: CONFIG.C0, Chat: CONFIG.C0, S: 0, A: CONFIG.AMERICA0,
-    pop: CONFIG.POP0, gone: 0, lbB: CONFIG.LB_1865, lbA: CONFIG.LB_1865, penalty: 1, pending: null,
-    history: [{ year: CONFIG.START_YEAR, C: CONFIG.C0, A: CONFIG.AMERICA0, S: 0, gone: 0 }],
-    gens: [], engines: {}, evening: false, eveningYear: null, ended: false, playerDone: false, lastPace: null,
-    americaPassed: null,
+    pop: CONFIG.POP0, gone: 0, lbB: CONFIG.LB_1865, lbA: CONFIG.LB_1865, rebB: [], rebA: [], w: 1,
+    history: [], gens: [], engines: {}, evening: false, eveningYear: null, ended: false, playerDone: false,
+    lastPace: null, americaPassed: null, events: [],
   };
+  st.history.push(snapshot(st));
+  return st;
+}
+function snapshot(st) {
+  return { year: st.year, C: st.C, A: st.A, S: st.S, gone: st.gone, pop: st.pop, lbB: st.lbB, lbA: st.lbA,
+    income: incomeOf(st.C, st.lbB, st.pop), perHead: incomePerHeadOf(st.C, st.lbB, st.pop),
+    days: daysOf(st.C, st.lbB, st.pop, st.S), price: priceOf(st.S), power: powerOf(st.C, st.lbB) };
 }
 
-// The engine offered at the start of this generation, if any and not yet decided, with Britain's engine beside it.
-function engineOffer(st) {
+// The engine that appears at the start of this generation, if any: an announcement, not a choice.
+function engineNews(st) {
   if (st.ended || st.evening || st.playerDone) return null;
   const e = CONFIG.ENGINES.find(e => e.year === st.year);
-  if (!e || st.engines[e.key]) return null;
-  return { key: e.key, year: e.year, lbNew: e.lbNew, lbBritain: st.lbB, lbAmerica: st.lbA, gain: st.lbB / e.lbNew };
-}
-function decideEngine(st, fit) {
-  const e = engineOffer(st);
   if (!e) return null;
-  const oldB = st.lbB, oldA = st.lbA;
-  st.engines[e.key] = fit ? 'fit' : 'refused';
-  st.lbA = e.lbNew;
-  if (fit) st.lbB = e.lbNew;
-  st.pending = {
-    key: e.key, fit,
-    rebB: fit ? Math.pow(oldB / e.lbNew, CONFIG.REBOUND_EXP) : 1,
-    rebA: Math.pow(oldA / e.lbNew, CONFIG.REBOUND_EXP),
-    penFrom: st.penalty, penTo: penaltyOf(st.lbB, st.lbA),
-  };
-  return st.engines[e.key];
+  return { key: e.key, year: e.year, lbNew: e.lbNew, lbBritain: st.lbB, lbAmerica: st.lbA, gain: st.lbB / e.lbNew,
+    paysNow: paysAt(e, st.year), americaFitsIn: americaFitsIn(e), priceBritain: priceOf(st.S) };
 }
 
 // The pencil: where a pace would put the fire in twenty years, and the coal that would take, if nothing else
@@ -179,60 +199,100 @@ function previewPlan(st, pace) {
   let C = st.C, S = st.S; const pts = [{ year: st.year, C }];
   for (let i = 0; i < CONFIG.GEN_YEARS; i++) { S += C; C *= 1 + pace; pts.push({ year: st.year + i + 1, C }); }
   const target = C, burnt = S - st.S;
-  // the same pace kept up to the edge of the sheet (drawn dotted beyond the generation, as Jevons drew his)
   const beyond = [{ year: st.year + CONFIG.GEN_YEARS, C }];
   for (let y = st.year + CONFIG.GEN_YEARS; y < CONFIG.SHEET_X1 && S < CONFIG.RESERVE; y++) { S += C; C *= 1 + pace; beyond.push({ year: y + 1, C }); }
   return { pace, mult: target / st.C, target, burnt, squares: burnt / squareTons(), points: pts, beyond,
     lastsUntil: lastsUntil(st, pace) };
 }
 
-// Has the evening come? Even at the hardest push, with any engine just decided, the fire could not grow.
+// Has the evening come? Even at the hardest push, the fire would not grow this year.
+function cloneState(st) {
+  const c = Object.assign({}, st);
+  c.rebB = st.rebB.map(r => Object.assign({}, r)); c.rebA = st.rebA.map(r => Object.assign({}, r));
+  c.engines = JSON.parse(JSON.stringify(st.engines)); c.history = []; c.events = []; c.gens = [];
+  return c;
+}
 function eveningNow(st) {
-  const p = st.pending || { rebB: 1, penFrom: st.penalty, penTo: st.penalty };
-  const yr = Math.pow(p.rebB, 1 / CONFIG.GEN_YEARS) * Math.pow(p.penTo / p.penFrom, -CONFIG.ETA / CONFIG.GEN_YEARS);
-  return (1 + CONFIG.PACE_MAX) * yr * (1 - dragOf(st)) <= 1;
+  const c = cloneState(st);
+  stepYear(c, CONFIG.PACE_MAX);
+  return c.C <= st.C;
+}
+// How hard dear coal is pulling the fire down this year, as a yearly share (for the words).
+function dragOf(st) {
+  const c = cloneState(st); stepYear(c, 0);
+  return Math.max(0, 1 - c.C / st.C);
+}
+
+// One year of the engine. Engines are fitted here, when they pay.
+function stepYear(st, pace) {
+  const ev = [];
+  // engines: Britain fits one when its coal is dear enough; America when the engine has cheapened to its price
+  for (const e of CONFIG.ENGINES) {
+    if (st.year < e.year) continue;
+    if (!st.engines[e.key]) st.engines[e.key] = {};
+    const rec = st.engines[e.key], pays = paysAt(e, st.year);
+    if (!rec.britain && e.lbNew < st.lbB && priceOf(st.S) >= pays) {
+      rec.britain = st.year; st.rebB.push({ yearly: Math.pow(st.lbB / e.lbNew, CONFIG.REBOUND_EXP / CONFIG.GEN_YEARS), left: CONFIG.GEN_YEARS });
+      st.lbB = e.lbNew; ev.push({ year: st.year, who: 'britain', key: e.key });
+    }
+    if (!rec.america && e.lbNew < st.lbA && 1 >= pays) {
+      rec.america = st.year; st.rebA.push({ yearly: Math.pow(st.lbA / e.lbNew, CONFIG.REBOUND_EXP / CONFIG.GEN_YEARS), left: CONFIG.GEN_YEARS });
+      st.lbA = e.lbNew; ev.push({ year: st.year, who: 'america', key: e.key });
+    }
+  }
+  const rebB = st.rebB.reduce((m, r) => m * r.yearly, 1), rebA = st.rebA.reduce((m, r) => m * r.yearly, 1);
+  st.rebB.forEach(r => r.left--); st.rebB = st.rebB.filter(r => r.left > 0);
+  st.rebA.forEach(r => r.left--); st.rebA = st.rebA.filter(r => r.left > 0);
+  // this year's coal comes out of the ground; the trade grows at the pace, and with cheap power
+  const burnt = Math.min(st.C, Math.max(0, CONFIG.RESERVE - st.S));
+  st.S += burnt;
+  st.Chat *= (1 + pace) * rebB;
+  st.w *= Math.pow(keepTarget(st.S, st.lbB, st.lbA) / st.w, CONFIG.ADJUST);
+  const Cn = Math.min(fireOf(st.Chat, st.w), Math.max(0, CONFIG.RESERVE - st.S));   // no more than is left
+  // the people: they increase at the census rate while income per head holds, more slowly as it falls; those the
+  // trade (power) cannot employ: a share go over the sea
+  const perHead = incomePerHeadOf(st.C, st.lbB, st.pop);
+  const rate = CONFIG.POP_RATE * Math.pow(Math.min(1, perHead), CONFIG.POP_ELAST);
+  const gPower = powerOf(Cn, st.lbB) / powerOf(st.C, st.lbB) - 1;
+  const short = rate - gPower;
+  const leave = short > 0 ? CONFIG.EMIGRATE_SHARE * short * st.pop : 0;
+  st.pop = st.pop * (1 + rate) - leave;
+  st.gone += leave;
+  // America: logistic growth, plus the rebound of its engines
+  st.A *= Math.exp(CONFIG.AMERICA_RATE * (1 - st.A / CONFIG.AMERICA_CAP)) * rebA;
+  st.C = Cn;
+  st.year += 1;
+  if (st.americaPassed === null && st.A > st.C) st.americaPassed = st.year;
+  const snap = snapshot(st); snap.burnt = burnt; snap.leave = leave; snap.g = Cn / burnt - 1;
+  st.history.push(snap);
+  st.events.push(...ev);
+  return { snap, events: ev };
 }
 
 // One generation, year by year. pace is the player's (clamped). Returns the record, with the years for drawing.
 function burnGeneration(st, pace) {
   if (st.ended) return null;
   pace = clampPace(pace);
-  const startC = st.C, startS = st.S, startGone = st.gone, startA = st.A, from = st.year;
-  const p = st.pending || { key: null, fit: null, rebB: 1, rebA: 1, penFrom: st.penalty, penTo: st.penalty };
-  const rbB = Math.pow(p.rebB, 1 / CONFIG.GEN_YEARS), rbA = Math.log(p.rebA) / CONFIG.GEN_YEARS;
-  const years = [];
+  const startC = st.C, startS = st.S, startGone = st.gone, startA = st.A, from = st.year, startLbB = st.lbB;
+  const years = [], events = [];
+  let incomeSum = 0, perHeadSum = 0;
   for (let i = 0; i < CONFIG.GEN_YEARS; i++) {
-    const burnt = st.C;                  // this year's coal comes out of the ground
-    st.S += burnt;
-    st.Chat *= (1 + pace) * rbB;
-    st.penalty = p.penFrom * Math.pow(p.penTo / p.penFrom, (i + 1) / CONFIG.GEN_YEARS);
-    const Cn = fireOf(st.Chat, st.S, st.penalty);
-    const g = Cn / st.C - 1;
-    // the people: if the trade grows slower than they do, some find no work and a share of them go over the sea
-    const short = CONFIG.POP_RATE - g;
-    const leave = short > 0 ? CONFIG.EMIGRATE_SHARE * short * st.pop : 0;
-    st.pop = st.pop * (1 + CONFIG.POP_RATE) - leave;
-    st.gone += leave;
-    // America: logistic growth, plus the rebound of an engine that came in this generation
-    st.A *= Math.exp(CONFIG.AMERICA_RATE * (1 - st.A / CONFIG.AMERICA_CAP) + rbA);
-    st.C = Cn;
-    st.year += 1;
-    if (st.americaPassed === null && st.A > st.C) st.americaPassed = st.year;
-    years.push({ year: st.year, C: st.C, A: st.A, S: st.S, burnt, gone: st.gone, leave, g,
-      depth: depthOf(st.S), price: priceOf(st.S) });
-    st.history.push({ year: st.year, C: st.C, A: st.A, S: st.S, gone: st.gone });
+    const r = stepYear(st, pace);
+    years.push(r.snap); events.push(...r.events);
+    incomeSum += r.snap.income; perHeadSum += r.snap.perHead;
   }
+  const last = years[years.length - 1];
   const rec = {
     gen: st.gen, from, to: st.year, pace, planMult: multFromPace(pace), plan: previewPlan({ C: startC, S: startS, year: from }, pace),
     mult: st.C / startC, burnt: st.S - startS, squares: (st.S - startS) / squareTons(), gone: st.gone - startGone,
-    depth: depthOf(st.S), price: priceOf(st.S), relCost: relCost(st), drag: dragOf(st),
-    engine: p.key ? { key: p.key, fit: p.fit } : null,
+    depth: depthOf(st.S), price: priceOf(st.S), relCost: relCost(st), drag: dragOf(st), days: last.days,
+    income: incomeSum / CONFIG.GEN_YEARS, perHead: perHeadSum / CONFIG.GEN_YEARS, perHeadEnd: last.perHead,
+    engines: events, fittedBritain: st.lbB < startLbB,
     americaRatio: st.A / st.C, americaRatioStart: startA / startC,
     americaPassedNow: st.americaPassed !== null && st.americaPassed > from && st.americaPassed <= st.year,
     auto: !!st.autoRun, years,
   };
   st.gens.push(rec);
-  st.pending = null;
   if (!st.autoRun) st.lastPace = pace;
   st.gen += 1;
   if (st.gen >= CONFIG.MAX_GENS) st.playerDone = true;
@@ -240,12 +300,10 @@ function burnGeneration(st, pace) {
   return rec;
 }
 
-// Between generations: if the evening has come (and no engine is waiting to be offered), it is declared, and the
-// rest of the sheet is drawn at the last pace the player set (runOut). The player's turns are over when the evening
-// comes or MAX_GENS have been set; either way the sheet runs on to RUN_TO.
+// Between generations: if the evening has come, it is declared, and the rest of the sheet is drawn at the last pace
+// the player set (runOut). The player's turns are over when the evening comes or MAX_GENS have been set.
 function checkEvening(st) {
   if (st.ended || st.evening || st.playerDone) return false;
-  if (engineOffer(st)) return false;
   if (!eveningNow(st)) return false;
   st.evening = true; st.eveningYear = st.year;
   return true;
@@ -259,6 +317,28 @@ function runOut(st) {
   return recs;
 }
 
+// ---- the ledger: what each generation got -----------------------------------------------------------------------
+// One entry per generation from 1865, each with the squares it burnt, its income (relative to the income of 1865 over
+// the same span) and its income per head (relative to 1865's); and a last entry for what is left after RUN_TO.
+function ledgerOf(history) {
+  const out = [];
+  const first = CONFIG.START_YEAR, playerEnd = first + CONFIG.MAX_GENS * CONFIG.GEN_YEARS;
+  for (let from = first; from < CONFIG.RUN_TO; from += CONFIG.GEN_YEARS) {
+    const to = from + CONFIG.GEN_YEARS;
+    const ys = history.filter(h => h.year > from && h.year <= to && h.burnt != null);
+    if (!ys.length) { out.push({ from, to, n: 0, squares: 0, income: null, perHead: null, days: null, future: from >= playerEnd }); continue; }
+    const mean = k => ys.reduce((a, h) => a + h[k], 0) / ys.length;
+    out.push({ from, to, n: ys.length, squares: ys.reduce((a, h) => a + h.burnt, 0) / squareTons(), income: mean('income'),
+      perHead: mean('perHead'), perHeadEnd: ys[ys.length - 1].perHead, days: ys[ys.length - 1].days, future: from >= playerEnd });
+  }
+  return out;
+}
+function ledger(st) {
+  const gens = ledgerOf(st.history).filter(g => g.n === CONFIG.GEN_YEARS);
+  const left = Math.max(0, CONFIG.RESERVE - st.S) / squareTons();
+  return { gens, left, total: CONFIG.RESERVE / squareTons() };
+}
+
 // ---- the verdict ---------------------------------------------------------------------------------------------
 function verdict(st) {
   const h = st.history;
@@ -269,25 +349,22 @@ function verdict(st) {
   const kind = peakMult >= CONFIG.GREAT_PEAK ? 'greatness' : peakMult <= CONFIG.MEDIOCRE_PEAK ? 'mediocrity' : 'between';
   const left = Math.max(0, CONFIG.RESERVE - st.S);
   const yearsLeft = last.C > 0 ? left / last.C : Infinity;
-  // the length of the fire: the last year it still burnt as much as in 1865 (null if it never fell below that for
-  // good, which on the sheet means it was still burning at least as much in the last year)
   let outYear = null;
   for (let i = h.length - 1; i >= 0; i--) if (h[i].C >= CONFIG.C0) { outYear = i === h.length - 1 ? null : h[i].year; break; }
-  const neverAbove = h.every(p => p.C < CONFIG.C0 * 0.999) ? true : false;
-  // when did most of the people go? the year by which half of them had gone
-  let halfYear = null;
-  for (const p of h) if (halfYear === null && st.gone > 0 && p.gone >= st.gone / 2) halfYear = p.year;
+  const L = ledger(st);
+  let best = L.gens[0], worst = L.gens[0];
+  for (const g of L.gens) { if (g.perHead > best.perHead) best = g; if (g.perHead < worst.perHead) worst = g; }
+  const lastGen = L.gens[L.gens.length - 1];
   return {
     kind, noonYear: peak.year, noonC: peak.C, noonMult: peakMult,
-    noonOffSheet: peak.C > CONFIG.ROW_TONS * CONFIG.ROWS_ABOVE,
     stillRising: last.C >= 0.98 * peak.C && peak.year > CONFIG.START_YEAR,
     endYear: last.year, endC: last.C, endMult: last.C / CONFIG.C0, fallFromNoon: last.C / peak.C,
-    evening: st.evening, eveningYear: st.eveningYear, eveningDepth: null,
+    evening: st.evening, eveningYear: st.eveningYear,
     americaPassed: st.americaPassed, gone: st.gone, goneBeforeNoon: peak.gone, goneAfterNoon: st.gone - peak.gone,
-    goneHalfYear: halfYear, shareBurnt: shareBurnt(st.S), depth: depthOf(st.S), price: priceOf(st.S),
-    relCost: relCost(st), yearsLeft, untilYear: last.year + yearsLeft, engines: Object.assign({}, st.engines),
-    popHome: st.pop, outYear, neverAbove, squaresBurnt: st.S / squareTons(), squaresAll: groundSquares(),
-    fireOut: last.C < 0.1 * CONFIG.C0,
+    shareBurnt: shareBurnt(st.S), depth: depthOf(st.S), price: priceOf(st.S), relCost: relCost(st),
+    yearsLeft, untilYear: last.year + yearsLeft, engines: JSON.parse(JSON.stringify(st.engines)),
+    popHome: st.pop, outYear, squaresBurnt: st.S / squareTons(), squaresAll: groundSquares(),
+    ledger: L, bestGen: best, worstGen: worst, lastGen, endDays: last.days, endPerHead: last.perHead,
   };
 }
 
@@ -321,7 +398,9 @@ const REAL = [
   [2020, 1.8], [2021, 1.2], [2022, 0.7], [2023, 0.6], [2024, 0.1],
 ];
 
-const MECH = { CONFIG, newGame, engineOffer, decideEngine, previewPlan, burnGeneration, checkEvening, playerTurnsOver,
-  runOut, verdict, depthOf, priceOf, shareBurnt, fireOf, paceFromMult, multFromPace, clampPace, squareTons,
-  groundSquares, lastsUntil, dragOf, relCost, eveningNow, REAL };
+
+const MECH = { CONFIG, newGame, engineNews, previewPlan, burnGeneration, checkEvening, playerTurnsOver, runOut,
+  verdict, ledger, ledgerOf, depthOf, priceOf, shareBurnt, fireOf, keepTarget, cloneState, paceFromMult, multFromPace, clampPace, squareTons,
+  groundSquares, lastsUntil, dragOf, relCost, eveningNow, doesOf, powerOf, incomeOf, incomePerHeadOf, fuelShareOf,
+  daysOf, powerCost, paysAt, americaFitsIn, REAL };
 if (typeof module !== 'undefined' && module.exports) module.exports = MECH;
