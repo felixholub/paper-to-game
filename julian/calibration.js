@@ -61,14 +61,16 @@ check('the cause is asked at most once a night and only as the first within-look
 }));
 check('the window never shows a sight and always names the sky and the blanket (ch. xix: "nothing betwixt the Cross and Heaven that might have harmed me")', play(3, POLICIES.window).record.every(function (r) { return r.sight === 'sky' && /sky/.test(r.line) && /blanket/.test(r.line); }));
 
-// 4. The change of cheer (ch. xxi): fires exactly when the player is at the cross in heaviness and the next beat is sureness; never otherwise.
-check('cheer fires iff at the cross, in heaviness, with sureness next', SEEDS.every(function (s) {
-  var st = play(s, POLICIES.random);
-  return st.record.every(function (r, t) { var should = r.place === 'cross' && !st.weather[t] && t + 1 < C.beats && st.weather[t + 1]; return r.cheer === should; });
+// 4. The change of cheer (ch. xxi): fires exactly when the player is at the cross in heaviness, the drying has been seen, and the next beat is sureness; never otherwise.
+check('cheer fires iff at the cross, in heaviness, past the drying, with sureness next', SEEDS.every(function (s) {
+  var st = play(s, POLICIES.random), dry = false;
+  return st.record.every(function (r, t) { if (r.sight === 'drying') dry = true; var should = r.place === 'cross' && !st.weather[t] && dry && t + 1 < C.beats && st.weather[t + 1]; return r.cheer === should; });
 }));
-check('a player who flees to the window in every dark never sees the cheer; one who stays sees it on every lift', SEEDS.slice(0, 100).every(function (s) {
-  return play(s, POLICIES.flee).record.every(function (r) { return !r.cheer; }) && (function () { var st = play(s, POLICIES.stay); var lifts = 0; for (var t = 1; t < C.beats; t++) if (st.weather[t] && !st.weather[t - 1]) lifts++; return st.record.filter(function (r) { return r.cheer; }).length === lifts; })();
+check('no cheer before the drying, on any night, under any policy', SEEDS.slice(0, 100).every(function (s) { return Object.keys(POLICIES).every(function (p) { var st = play(s, POLICIES[p]), dry = false; return st.record.every(function (r) { if (r.sight === 'drying') dry = true; return !r.cheer || dry; }); }); }));
+check('a player who flees to the window in every dark never sees the cheer; one at the cross all night sees it on every lift past the drying', SEEDS.slice(0, 100).every(function (s) {
+  return play(s, POLICIES.flee).record.every(function (r) { return !r.cheer; }) && (function () { var st = play(s, POLICIES.cross); var lifts = 0; for (var t = 1; t < C.beats; t++) if (st.weather[t] && !st.weather[t - 1] && t - 1 >= 5) lifts++; return st.record.filter(function (r) { return r.cheer; }).length === lifts; })();
 }));
+check('a player at the cross all night reaches the drying on beat 6 and sees the cheer on most nights', (function () { var k = 0; SEEDS.forEach(function (s) { var st = play(s, POLICIES.cross); if (st.record[5].sight === 'drying' && st.record.some(function (r) { return r.cheer; })) k++; }); return k / SEEDS.length >= 0.6; })());
 
 // 5. "Look up to Heaven" (ch. xix): offered once, in the first heaviness after the drying has been seen; the cross then answers "Nay".
 check('the proffer comes once, after the drying, in heaviness; taking the cross answers Nay, taking the window looks up', SEEDS.slice(0, 200).every(function (s) {
@@ -84,9 +86,10 @@ check('the proffer comes once, after the drying, in heaviness; taking the cross 
 
 // 6. The verdict is words, not a tally; it reads the record right on the boundary strategies.
 var vFlee = J.verdict(play(5, POLICIES.flee)), vStay = J.verdict(play(5, POLICIES.stay)), vJul = J.verdict(play(5, POLICIES.julian));
-check('verdict has no digits anywhere', [vFlee, vStay, vJul].every(function (v) { return !/\d/.test(v.did + v.says + v.means + v.sentence + v.morning); }));
-check('flee: never at the cross in the dark, no cheer', vFlee.counts.stay === 0 && vFlee.counts.cheers === 0 && /never at the cross when the heaviness went/.test(vFlee.did));
-check('stay: at the cross on every dark beat; cheer on every lift', vStay.counts.stay === vStay.counts.darks && vStay.counts.cheers === vStay.counts.lifts.length);
+check('verdict has no digits anywhere', [vFlee, vStay, vJul].every(function (v) { return !/\d/.test(v.did + v.says + v.means + v.sentence + v.morning + v.lived); }));
+check('the verdict names the heaviness, says she lived, and says the heaviness had no climb', [vFlee, vStay, vJul].every(function (v) { return /^The heaviness/.test(v.says) && /did not die/.test(v.lived) && /no climb/.test(v.means); }));
+check('flee: never at the cross in the dark, no cheer', vFlee.counts.stay === 0 && vFlee.counts.cheers === 0 && /never saw the cheer change|never reached the drying/.test(vFlee.did));
+check('stay: at the cross on every dark beat', vStay.counts.stay === vStay.counts.darks);
 check('julian: the cause was checked once, in the dark; the verdict does not scold', vJul.counts.within === 1 && !/never looked within/.test(vJul.means));
 check('the verdict ends with her sentence (ch. xxvii)', vJul.sentence === 'All shall be well, and all shall be well, and all manner of thing shall be well.');
 check('the onsets named in the verdict are the places looked at just before each heaviness', SEEDS.slice(0, 100).every(function (s) {

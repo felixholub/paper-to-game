@@ -73,7 +73,7 @@
     var v = J.verdict(state);
     $('nightNo').textContent = 'Night ' + state.seed + '. ' + (state.weather[J.CONFIG.beats - 1] ? 'The room is light.' : 'The heaviness is on the room.');
     $('recordGrid').innerHTML = state.record.map(function (r) { return '<div class="fr">' + Art.frame(r) + '</div>'; }).join('');
-    $('vDid').textContent = v.did; $('vSays').textContent = v.says; $('vMeans').textContent = v.means; $('vSentence').textContent = v.sentence;
+    $('vLived').textContent = v.lived; $('vDid').textContent = v.did; $('vSays').textContent = v.says; $('vMeans').textContent = v.means; $('vSentence').textContent = v.sentence;
     $('vMorning').style.display = v.morning ? '' : 'none'; $('vMorning').textContent = v.morning;
     show('end');
   }

@@ -15,6 +15,7 @@
     keeping: 1,         // ch. xv: "He keepeth us even alike secure in woe and in weal" — constant by construction, never read by the weather
     actsAffectWeather: 0, // ch. xv: "freely our Lord giveth when He will" — the schedule is drawn from the seed before the first look; 0 = no effect
     cheerNeedsCross: 1, // ch. xxi: "willingly abiding in the same Cross ... unto the last point, suddenly He shall change His Cheer" — our tie
+    cheerAfterDrying: 1, // ch. xxi: the cheer changes at the point of death, after the drying (ch. xvi–xvii, "the most pain, and the last"); before it a lift at the cross is only a lift
     profferAfterDrying: 1, // ch. xix: "Look up to Heaven" is offered while she beholds the drying (ch. xvi–xvii); our tie to the first dark after it
     hours: ['deep night', 'deep night', 'night', 'night', 'small hours', 'small hours', 'before dawn', 'before dawn', 'first light', 'morning'] // our choice: the window's clock; the text gives no hour in these chapters
   };
@@ -159,6 +160,8 @@
     kept: 'The blanket never changed: "He keepeth us even alike secure in woe and in weal."',
     passover: 'And: "it is not God’s will that we follow the feelings of pain in sorrow and mourning for them, but that we suddenly pass over."',
     means: 'The dark that comes over you is not a message about you. Between the dark and the light there is no time. What you saw, you saw by staying; what you sought and did not see counted the same.',
+    climb: 'The heaviness had no climb: the last was no worse than the first, and it led nowhere. That is the point, not a fault of the night. What climbed was the sight at the cross, from the garland to the drying, and only past the drying does the cheer change.',
+    lived: 'You did not die. The pain went out of you all at once, as it had come, and you took it that the night was shown for those who live.',
     sentence: 'All shall be well, and all shall be well, and all manner of thing shall be well.',
     morningDark: 'The heaviness was on the room when the morning came. It is passing: "pain is passing and shall be brought to nought."'
   };
@@ -223,7 +226,7 @@
       if (s.his) r.balloons.push({ who: 'his', text: s.his });
       if (s.hers) r.balloons.push({ who: 'hers', text: s.hers });
       if (state.profferOpen) { r.nay = true; r.caption = NAY.line + ' ' + r.caption; r.line = r.line + ' ' + NAY.after; r.balloons.unshift({ who: 'hers', text: NAY.hers }); state.proffered = true; }
-      if (CONFIG.cheerNeedsCross && !w && next === true) {
+      if (CONFIG.cheerNeedsCross && !w && next === true && (!CONFIG.cheerAfterDrying || state.dryingSeen)) {
         r.cheer = true; state.cheers++;
         var c = state.cheers === 1 ? CHEER : CHEER_AGAIN;
         r.cheerCaption = c.caption; r.balloons.push({ who: 'his', text: c.his }); if (c.hers) r.balloons.push({ who: 'hers', text: c.hers });
@@ -249,8 +252,8 @@
 
   // ---- the verdict, in words ---------------------------------------------------------------------------------------
   var NUM = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen'];
-  function times(n) { return n === 0 ? 'not once' : n === 2 ? 'twice' : NUM[n] + (n === 1 ? ' time' : ' times'); }
-  function places(obj) { return Object.keys(obj).map(function (p) { return WEATHER.after[p].replace('you looked at ', '').replace('you looked within', 'looking within') + ' ' + times(obj[p]); }); }
+  function times(n) { return n === 0 ? 'not once' : n === 1 ? 'once' : n === 2 ? 'twice' : NUM[n] + ' times'; }
+  function places(obj) { return Object.keys(obj).map(function (p) { return times(obj[p]) + ' ' + WEATHER.after[p].replace('you looked at ', '').replace('you looked within', 'looking within'); }); }
   function listNames(a) { if (!a.length) return 'nothing'; if (a.length === 1) return a[0]; return a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
 
   function verdict(state) {
@@ -273,10 +276,14 @@
     var did = 'The heaviness lay on the room ' + times(spells) + (spells !== darks ? ' (' + times(darks).replace(' times', ' beats').replace(' time', ' beat') + ' in all)' : '') + '. In it you stayed at the cross ' + times(stay) + ', went to the window ' + times(win) + ', and looked within ' + times(inn) + '.'
       + (seen.length ? ' At the cross you saw ' + listNames(seen) + (unseen.length ? '; you did not reach ' + listNames(unseen) : '') + '.' : ' At the cross you saw nothing; the ten sights went unseen.')
       + (asked.length ? ' Within, you asked ' + listNames(asked) + '.' : ' Within, you asked nothing.')
-      + (cheers ? ' The cheer changed for you ' + times(cheers) + ', with no time between.' : ' You were never at the cross when the heaviness went, so you never saw the cheer change.');
-    var says = (onsets.length ? 'It came ' + listNames(places(after)) + ': ' + (afterNames.length > 1 ? 'after everything, and so after nothing you did' : 'after one thing, as it would have come after any other') + '. ' : 'It was on the room from the start; nothing you did brought it. ')
+      + (cheers ? ' The cheer changed for you ' + times(cheers) + ', with no time between.' : (state.dryingSeen ? ' You were not at the cross when the heaviness went after the drying, so you never saw the cheer change.' : ' You never reached the drying, past which the cheer changes.'));
+    var onePlace = afterNames.length === 1 ? WEATHER.after[onsets[0]].replace('you looked at ', '').replace('you looked within', 'looking within') : '';
+    var says = (onsets.length === 0 ? 'The heaviness was on the room from the start; nothing you did brought it. '
+      : onsets.length === 1 ? 'The heaviness came once, ' + onePlace + '; it would have come after anything else. '
+      : afterNames.length === 1 ? 'The heaviness came ' + times(onsets.length) + ', each time ' + onePlace + '; after one thing, as it would have come after any other. '
+      : 'The heaviness came ' + times(onsets.length) + ': ' + listNames(places(after)) + '; after everything, and so after nothing you did. ')
       + VERDICT.checked + ' ' + VERDICT.kept + ' ' + VERDICT.passover;
-    return { did: did, says: says, means: VERDICT.means + (causeInDark ? '' : ' You never looked within for what brought it; Julian did, and found nothing.'), sentence: VERDICT.sentence,
+    return { did: did, says: says, means: VERDICT.means + (causeInDark ? '' : ' You never looked within for what brought it; Julian did, and found nothing.') + ' ' + VERDICT.climb, lived: VERDICT.lived, sentence: VERDICT.sentence,
              morning: w[n - 1] ? '' : VERDICT.morningDark, counts: { darks: darks, spells: spells, stay: stay, window: win, within: inn, cheers: cheers, onsets: onsets, lifts: lifts, seen: seen.length, asked: asked.length } };
   }
 
