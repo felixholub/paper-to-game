@@ -76,7 +76,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
 #now.dayheld{background:var(--day);border-color:var(--day)}
 #now:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
 #chips{display:flex;gap:4px;margin:10px 0 0;flex-wrap:wrap}
-#chips button{flex:1 1 52px;min-width:0;height:48px;border:2px solid var(--blue);background:var(--plaster);color:var(--blue);font-family:var(--sans);font-weight:800;font-size:12px;padding:0 2px;cursor:pointer;line-height:1.05;letter-spacing:.04em}
+#chips button{flex:1 1 52px;min-width:0;height:56px;border:2px solid var(--blue);background:var(--plaster);color:var(--blue);font-family:var(--sans);font-weight:800;font-size:12px;padding:0 2px;cursor:pointer;line-height:1.05;letter-spacing:.04em}
 #chips button small{display:block;font-weight:600;font-size:10px;margin-top:2px;letter-spacing:.06em}
 #chips button.sel{background:var(--blue);color:#fff}
 #chips button[disabled]{opacity:.5}
@@ -98,7 +98,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
 .help b{font-weight:800}
 .fade{animation:fade .5s both}
 .drop{animation:drop .35s cubic-bezier(.2,.8,.3,1) both}
-@keyframes drop{from{transform:translateY(-40px);opacity:0.2}to{transform:translateY(0);opacity:1}}
+@keyframes drop{from{transform:translateY(-14px);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion: reduce){.fade,.drop{animation:none}*{transition:none!important}}
 </style>
@@ -199,10 +199,10 @@ footer.sig a{color:var(--mute);text-decoration:none}
   <p><b>The circle is now.</b> In the middle of the screen is a black circle on a black line. It is the present moment. Above the line is what is still to come, drawn dashed. Below the line is memory: what is over, drawn solid.</p>
   <p><b>Nothing is drawn while it lasts.</b> While a voice sounds, the circle turns red, and that is all. When the voice stops, a red bar drops into memory. While you hold, the circle turns blue. When you let go, a blue bar drops in, so you can see which was longer.</p>
   <p><b>Holding.</b> Most stations ask you to press and hold the circle for as long as something lasted: a moment of your own life, a voice you just heard, the sun standing still. The game then says in words how close you came: the same, nine tenths, half, double. Where there is nothing to check against, it says so.</p>
-  <p><b>Choosing.</b> Some stations play you two or three voices and ask which of them was yours: as long as a silence you held, or standing in the relation you gave your night and your day. Touch first, second or third.</p>
+  <p><b>Choosing.</b> Some stations end with a question in big blue letters and a row of buttons under it: which of two or three voices was yours, which of your syllables was longest, how many voices were in the crowd. Touch one.</p>
   <p><b>Night and day.</b> Two holds in a row, a low note for last night and a high note for yesterday, so that the two sounds stand to each other as the night stood to the day. Only the relation is kept.</p>
-  <p><b>Half of it.</b> Press and hold: the low one starts when you press and keeps sounding. Let go when you think it is half over. It goes on to its end, so you hear how much was still to come.</p>
-  <p><b>The hymn.</b> Hear a line of eight syllables, short and long. The line stays in memory as words only. Sing it back with eight holds, each long one twice a short one. Then say which of your eight was the longest.</p>
+  <p><b>Half of it.</b> Hear the low one once more. Then press and hold: it sounds again while you hold. Let go at its half. It goes on to its end, so you hear how much was still to come.</p>
+  <p><b>The hymn.</b> Hear a line of eight syllables, short and long. The line stays in memory as words only. Sing it back with eight holds, each long one twice a short one; your line grows in memory as you go. Then say which of your eight was the longest.</p>
   <p><b>The tumult.</b> Press and hold, and a crowd of voices starts. Let go the moment the low one stops; the others go on. Then say how many voices there were.</p>
   <p><b>The last page</b> says what you did, what Augustine says about it, and shows the three spans that were only ever in you beside what was offered for them.</p>
   <button class="btn" id="helpback">Back</button>
@@ -267,7 +267,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
       SILENCE_AS_VOICE: true,                  // ch. XXVII, p. 173: silence measured by "a voice, as if it sounded"
     },
     // ---- ours
-    VOICE: { low: 50, mid: 57, high: 64, top: 71, stranger: 60, night: 45, day: 69, hymn: 55 }, // MIDI pitches (D3, A3, E4, B4, C4, A2, A4, G3)
+    VOICE: { low: 50, mid: 57, high: 64, top: 71, stranger: 60, stranger2: 53, night: 45, day: 69, hymn: 55 }, // MIDI pitches (D3, A3, E4, B4, C4, F3, A2, A4, G3)
     LENGTH: { min: 2.2, max: 4.2 },            // seconds: the low one's length
     HYMN: { short: 0.42, long: 0.84, gap: 0.08, capEach: 3 }, // the sung line: a long is double a short; a sung syllable is capped
     HALF: { capOver: 1.6 },                    // the half station ends by itself at 1.6 × the voice
@@ -277,8 +277,8 @@ footer.sig a{color:var(--mute);text-decoration:none}
     SUN: { crossMin: 5, crossMax: 9, arcMin: 0.5, arcMax: 1, stopAtMin: 0.3, stopAtMax: 0.7, stopMin: 1.6, stopMax: 4.0, capHold: 4 },
                                                // the sun crosses an arc of the sky in 5–9 s, the arc 50–100 % of the sky, and stands
                                                //   still at 30–70 % of the crossing for 1.6–4 s; the hold for the stillness is capped
-    TUMULT: { stagger: 0.6, sizeMin: 3, sizeMax: 5, extraMin: 1.6, extraMax: 3.0, lateCap: 1.5 }, // 3–5 voices enter 0.6 s apart, the
-                                               //   low one never first; the others outlast the low one by 1.6–3 s
+    TUMULT: { staggerMin: 0.4, staggerMax: 0.8, sizeMin: 3, sizeMax: 6, extraMin: 1.6, extraMax: 3.0, lateCap: 1.5 }, // 3–6 voices enter 0.4–0.8 s
+                                               //   apart (dealt per evening), the low one never first; the others outlast the low one by 1.6–3 s
     HOLD_CAP: 4,                               // a plain hold ends by itself at four times its target
     READ: { waitedTol: 0.2, tie: 0.05 },       // tumult: a release within 0.2 s of the crowd's end is "to the end"; hymn: longest within 5 % ties
     SEED: { min: 1000, max: 9999 },
@@ -340,13 +340,13 @@ footer.sig a{color:var(--mute);text-decoration:none}
     const cross = between(R, S.crossMin, S.crossMax), arc = between(R, S.arcMin, S.arcMax), stopAt = between(R, S.stopAtMin, S.stopAtMax), stop = between(R, S.stopMin, S.stopMax);
     const sun = { cross, arc, stopFrac: stopAt, stopStart: round3(stopAt * cross), stop, stopEnd: round3(stopAt * cross + stop), end: round3(cross + stop) };
     // the crowd: the low one and two to four others, the low one never first; the others outlast it
-    const size = TU.sizeMin + Math.floor(R() * (TU.sizeMax - TU.sizeMin + 1));
-    const others = shuffle(['mid', 'high', 'top', 'stranger'], R).slice(0, size - 1);
+    const size = TU.sizeMin + Math.floor(R() * (TU.sizeMax - TU.sizeMin + 1)), stagger = between(R, TU.staggerMin, TU.staggerMax);
+    const others = shuffle(['mid', 'high', 'top', 'stranger', 'stranger2'], R).slice(0, size - 1);
     let order; do { order = shuffle(['low'].concat(others), R); } while (order[0] === 'low');
-    const entries = order.map((id, k) => ({ id, at: round3(k * TU.stagger) }));
+    const entries = order.map((id, k) => ({ id, at: round3(k * stagger) }));
     const lowE = entries.find(e => e.id === 'low'), lowStart = lowE.at, lowEnd = round3(lowStart + low);
     entries.forEach(e => { e.end = e.id === 'low' ? lowEnd : round3(lowEnd + between(R, TU.extraMin, TU.extraMax)); e.dur = round3(e.end - e.at); });
-    const tumult = { entries, size, lowStart, lowEnd, end: Math.max.apply(null, entries.map(e => e.end)) };
+    const tumult = { entries, size, stagger, lowStart, lowEnd, end: Math.max.apply(null, entries.map(e => e.end)) };
     // the decoys: which way each is off, and where the player's own lands among the offered
     const deal = {
       plannedOff: R() < 0.5 ? CONFIG.PLANNED.off : 1 / CONFIG.PLANNED.off, plannedOrder: R() < 0.5 ? 0 : 1,
@@ -478,8 +478,8 @@ footer.sig a{color:var(--mute);text-decoration:none}
     const made = round3(Math.min(release, r.T * CONFIG.HALF.capOver)), of = made / r.T, x = of / 0.5, over = made >= r.T;
     const res = { id: r.id, title: r.title, target: r.T, made, of, ratio: x, big: over ? 'past its end' : amount(of).big, quote: QUOTES.expectation,
       mem: [{ kind: 'voice', label: 'THE LOW ONE', secs: r.T, mark: r.T / 2 }, { kind: 'you', label: 'YOU: ITS HALF', secs: made }],
-      lines: [over ? 'You were still holding when the low one ended.' : 'You let go at ' + amount(of).pre + ' the low one.',
-        'Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the two times you had heard it.'] };
+      lines: [over ? 'You were still holding when the low one ended.' : 'You let go at ' + amount(of).pre + ' the low one' + (amount(of).x < 0.5 ? ', and heard ' + amount(1 - of).pre + ' it still to come.' : amount(of).x > 0.5 ? ', with only ' + amount(1 - of).pre + ' it still to come.' : ', and heard the other half still to come.'),
+        'Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the times you had heard it.'] };
     return finish(g, res);
   }
 
@@ -524,21 +524,22 @@ footer.sig a{color:var(--mute);text-decoration:none}
     const h = holds.map(x => round3(clamp(x, 0.08, H.capEach)));
     const shorts = h.filter((x, k) => !L[k]), longs = h.filter((x, k) => L[k]);
     const mean = a => a.reduce((s, x) => s + x, 0) / a.length, ratio = mean(longs) / mean(shorts);
-    const max = Math.max.apply(null, h), longest = h.map((x, k) => k).filter(k => x_ok(h[k], max));
-    function x_ok(v, m) { return v >= m * (1 - CONFIG.READ.tie); }
-    const res = { id: r.id, title: r.title, holds: h, ratio, longest, big: amount(ratio).big, quote: QUOTES.hymn,
+    const max = Math.max.apply(null, h), longest = h.map((x, k) => k).filter(k => h[k] >= max * (1 - CONFIG.READ.tie));
+    const allSame = h.filter((x, k) => L[k]).every(x => x >= max * (1 - CONFIG.READ.tie));   // all four longs within the tie of the longest
+    const doubled = ratio >= 1.6 && ratio <= 2.6;
+    const res = { id: r.id, title: r.title, holds: h, ratio, longest, allSame, doubled, big: doubled ? 'double' : amount(ratio).big + ', not double', quote: QUOTES.hymn,
       mem: [{ kind: 'hymnvoice', label: 'THE LINE, AS SUNG TO YOU', syl: names.map((n, k) => ({ n, secs: L[k] ? H.long : H.short, long: L[k] })) },
         { kind: 'hymnyou', label: 'THE LINE, AS YOU SANG IT', syl: names.map((n, k) => ({ n, secs: h[k], long: L[k] })) }],
-      lines: ['Your longs were ' + amount(ratio).pre + ' your shorts. In the line as sung to you they were double.',
-        'One more thing: which of your eight syllables was the longest? Touch it.'] };
+      lines: [doubled ? 'Your longs were ' + amount(ratio).pre + ' your shorts, as in the line sung to you.' : 'Your longs were ' + amount(ratio).pre + ' your shorts. In the line sung to you they were double; yours were not.'] };
     return finish(g, res);
   }
   function hymnLongest(g, k) {
     const res = g.results[g.i]; if (!res || res.id !== 'hymn') throw new Error('nothing sung');
     const names = CONFIG.PAPER.HYMN_LINE;
     res.pick = k; res.right = res.longest.includes(k);
-    res.lines = ['Your longs were ' + amount(res.ratio).pre + ' your shorts. In the line as sung to you they were double.',
-      res.right ? 'Your longest was indeed ' + names[k].toUpperCase() + '.' : 'You took ' + names[k].toUpperCase() + ' for your longest. It was ' + names[res.longest[0]].toUpperCase() + ', ' + amount(res.holds[res.longest[0]] / res.holds[k]).pre + ' ' + names[k].toUpperCase() + '.',
+    res.lines = [res.lines[0],
+      res.allSame && res.right ? 'Your four longs were all much the same, so ' + names[k].toUpperCase() + ' is as good an answer as any.'
+        : res.right ? 'Your longest was indeed ' + names[k].toUpperCase() + '.' : 'You took ' + names[k].toUpperCase() + ' for your longest. It was ' + names[res.longest[0]].toUpperCase() + ', ' + amount(res.holds[res.longest[0]] / res.holds[k]).pre + ' ' + names[k].toUpperCase() + '.',
       'You measured each long by the short before it, but the short had ceased before the long began. Every comparison was between two things in memory, and the one who sang them can be wrong about them.'];
     return res;
   }
@@ -555,8 +556,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
     res.lines = [waited ? 'You held to the end of the crowd. The low one had stopped ' + secondsWords(plan.end - plan.lowEnd) + ' before the others did.'
       : early ? 'You let go before the low one had even come in: it was the ' + ORD[plan.entries.findIndex(e => e.id === 'low')] + ' voice to enter.'
         : Math.abs(off) <= 0.15 ? 'You let go on the moment the low one stopped, with the others still going.'
-          : off < 0 ? 'You let go ' + secondsWords(off) + ' before the low one stopped.' : 'You let go ' + secondsWords(off) + ' after the low one stopped, while the others went on.',
-      'One more thing: how many voices were in the crowd, the low one included? Touch the number.'];
+          : off < 0 ? 'You let go ' + secondsWords(off) + ' before the low one stopped.' : 'You let go ' + secondsWords(off) + ' after the low one stopped, while the others went on.'];
     return finish(g, res);
   }
   function tumultCount(g, n) {
@@ -629,7 +629,7 @@ footer.sig a{color:var(--mute);text-decoration:none}
     if (hf) did.push(hf.made >= hf.target ? 'Asked for its half while it sounded, you held the low one past its end.' : 'Asked for its half while it sounded, you let go of the low one at ' + amount(hf.of).n + ' its length.');
     if (pl) did.push('You planned a silence and then ' + (pl.right ? 'knew it again among two voices.' : 'took a voice ' + amount(pl.offered[pl.pick].secs / pl.made).pre + ' it for it.'));
     if (su) did.push('The sun stood still, and you measured its standing still with a sound ' + amount(su.ratio).pre + ' it.');
-    if (hy) did.push('You sang the hymn back with your longs ' + amount(hy.ratio).n + ' your shorts, and ' + (hy.right ? 'knew which of your syllables was longest.' : 'took the wrong syllable for your longest.'));
+    if (hy) did.push('You sang the hymn back with your longs ' + amount(hy.ratio).n + ' your shorts' + (hy.doubled ? ', double as they should be, ' : ', not the double they should be, ') + (hy.right ? 'and knew which of your syllables was longest.' : 'and took the wrong syllable for your longest.'));
     if (tu) did.push(tu.reading === 'waited' ? 'In the crowd you held to the end; the low one had stopped first.' : tu.reading === 'early' ? 'In the crowd you let go before the low one had come in.' : 'In the crowd you let go ' + (Math.abs(tu.off) <= 0.15 ? 'on the moment the low one stopped' : secondsWords(tu.off) + (tu.off < 0 ? ' before the low one stopped' : ' after the low one stopped')) + (tu.right ? ', and counted the voices rightly.' : ', and miscounted the voices.'));
     const world = [];
     if (first) world.push({ label: 'THE LOW ONE', target: first.target, made: first.made });
@@ -746,12 +746,13 @@ const ASK = {
   nightday: { ready: 'Last night you slept. Yesterday you were awake. <b>Press and hold once for the night</b>: a low note will sound while you hold. Then once for the day, a high note. Make the two sounds stand to each other <b>as the night stood to the day</b>.',
     ready2: 'That was the night. <b>Now press and hold for the day</b>, a high note, as long against the night as the day was against the night.',
     done: 'Two sounds, the night and the day, in the relation you gave them.' },
-  half: { ready: 'The low one again. <b>Press and hold: it starts sounding when you press, and keeps sounding. Let go when you think it is half over.</b> It goes on to its end, so you will hear how much was still to come.',
-    rest: 'You let go. The low one goes on to its end: listen to how much was still to come.',
+  half: { intro: 'The low one once more. Touch the circle to hear it. Then you will be asked for its half.',
+    ready: 'Now press and hold. <b>The low one sounds again while you hold. Let go at its half.</b>',
+    rest: 'You let go. The low one goes on to its end: that is how much was still to come.',
     done: 'You let go where you took its half to be. Its bar shows where the half really was.' },
   planned: { ready: '<b>Press and hold for as long as you like.</b> Nothing will sound. When you let go, two voices will sound, one after the other; one of them is as long as your hold.',
     listen: 'Listen: two voices, one after the other.',
-    choose: '<b>Which of the two was as long as your silence?</b> Touch first or second.',
+    choose: '<b>Which of the two was as long as your silence?</b> Touch first or second, below.',
     done: 'Your silence, and the two voices that came after it.' },
   sun: { intro: 'Touch the circle and the sun will rise. Watch it cross the sky. <b>Somewhere on the way it will stand still for a while</b>, then go on and set.',
     sun: 'Watch the sun. It will stand still for a while, then go on.',
@@ -759,20 +760,20 @@ const ASK = {
     done: 'You held a sound as long as the sun stood still.' },
   hymn: { intro: 'A voice will sing the first line of a hymn: <b>eight syllables, short, long, short, long</b>. Touch the circle to hear it. Then you sing it back.',
     ready: 'Now sing it back: <b>eight holds, one for each syllable</b>, the long ones twice as long as the short ones.',
-    choose: '<b>Which of your eight syllables was the longest?</b> Touch it.',
+    choose: '<b>Which of your eight syllables was the longest?</b> Touch it, below.',
     done: 'The line as sung to you, and the line as you sang it.' },
   tumult: { intro: 'A crowd is coming: several voices at once. First, touch the circle to hear <b>the low one</b> once more, alone.',
     ready: 'Now press and hold. <b>The crowd starts when you press.</b> The low one comes in after the others have begun. <b>Let go the moment the low one stops.</b> The others go on.',
     run: '<b>Let go the moment the low one stops.</b> The others go on.',
-    choose: '<b>How many voices were in the crowd</b>, the low one included? Touch the number.',
-    done: 'The crowd is over. The low one is drawn where it was; your hold is drawn where it fell.' },
+    choose: '<b>How many voices were in the crowd</b>, the low one included? Touch the number, below.',
+    done: 'The crowd is over. The low one is drawn where it was in it; your hold is drawn where it fell.' },
   nightday2: { intro: 'Your night and your day, from earlier. Touch the circle to hear <b>three pairs</b> of voices, a low one and a high one each time, at three different sizes.',
     listen: 'Listen: three pairs.',
-    choose: '<b>Which pair stands in the relation you gave your night and your day?</b> Touch first, second or third.',
+    choose: '<b>Which pair stands in the relation you gave your night and your day?</b> Touch first, second or third, below.',
     done: 'Three pairs, and the one that was yours.' },
   joy2: { intro: 'The moment of joy you held at the start. Touch the circle to hear <b>two voices</b>. One of them is as long as you held it.',
     listen: 'Listen: two voices.',
-    choose: '<b>Which of the two is as long as you held the moment?</b> Touch first or second.',
+    choose: '<b>Which of the two is as long as you held the moment?</b> Touch first or second, below.',
     done: 'Two voices, and the one that was yours.' },
 };
 const FIRST_LINE = { joy: '<br><span class="small">Nothing is drawn while it lasts. When it is over, it drops below the line into memory.</span>' };
@@ -781,7 +782,7 @@ function enterStation() {
   const r = A.current(g);
   if (ui && ui.raf) cancelAnimationFrame(ui.raf);
   stopAll();
-  const intro = ['first', 'sun', 'hymn', 'tumult', 'nightday2', 'joy2'].includes(r.id);
+  const intro = ['first', 'half', 'sun', 'hymn', 'tumult', 'nightday2', 'joy2'].includes(r.id);
   ui = { r, phase: intro ? 'intro' : 'ready', v0: null, h0: null, t0: null, bars: [], raf: null, lowOn: false, frozenT: 0, holds: [], k: 0, night: null, timers: [] };
   show('round');
   $('#rtitle').textContent = r.title;
@@ -794,7 +795,7 @@ function setAsk(extra) {
   const r = ui.r, a = ASK[r.id], p = ui.phase;
   let h;
   if (p === 'intro') h = a.intro;
-  else if (p === 'voice') h = r.id === 'hymn' ? 'Listen: the line.' : 'Listen: the low one' + (r.id === 'tumult' ? ', once more.' : '.');
+  else if (p === 'voice') h = r.id === 'hymn' ? 'Listen: the line.' : 'Listen: the low one' + (r.id === 'tumult' || r.id === 'half' ? ', once more.' : '.');
   else if (p === 'sun') h = a.sun;
   else if (p === 'listen') h = a.listen;
   else if (p === 'choose') h = a.choose;
@@ -868,7 +869,7 @@ function slipsFor() {
   if (r.id === 'joy') { if (p === 'ready') inner('THE MOMENT: AS LONG'); }
   if (r.id === 'first') { if (p === 'intro') voice('THE LOW ONE'); if (['intro', 'voice', 'ready'].includes(p)) you('YOU: AS LONG'); }
   if (r.id === 'nightday') { if (p === 'ready') add('THE NIGHT', COL.night); if (['ready', 'holding', 'ready2'].includes(p)) add('THE DAY', COL.day); }
-  if (r.id === 'half') { if (p === 'ready') { voice('THE LOW ONE'); you('YOU: HOLD TO ITS HALF'); } if (p === 'holding') you('YOU: HOLD TO ITS HALF'); if (p === 'rest') voice('THE REST OF IT'); }
+  if (r.id === 'half') { if (p === 'intro') voice('THE LOW ONE'); if (['intro', 'voice', 'ready'].includes(p)) { voice('THE LOW ONE AGAIN'); you('YOU: TO ITS HALF'); } if (p === 'holding') you('YOU: TO ITS HALF'); if (p === 'rest') voice('THE REST OF IT'); }
   if (r.id === 'planned') { if (p === 'ready') inner('YOUR SILENCE'); if (['ready', 'holding', 'done', 'listen'].includes(p)) { voice('FIRST'); voice('SECOND'); } }
   if (r.id === 'sun') { if (['intro', 'sun'].includes(p)) add('THE SUN STANDS STILL', COL.yellow); if (['intro', 'sun', 'ready'].includes(p)) you('YOU: AS LONG AS IT STOOD'); }
   if (r.id === 'hymn') { if (p === 'intro') voice('THE LINE'); if (['intro', 'voice', 'ready', 'sing', 'singing'].includes(p)) { for (let k = ui.k; k < 8; k++) out.push({ w: 38, label: C.PAPER.HYMN_LINE[k].toUpperCase(), c: COL.blue, small: true }); } }
@@ -932,8 +933,9 @@ function barRow(b, y) {
     return svg('g', {}, s);
   }
   if (b.kind === 'words') {
-    s += T(0, y + 8, b.label, { fill: COL.red, 'font-weight': 800 });
-    s += T(0, y + 26, b.words, { fill: COL.red, 'font-weight': 800, 'font-size': 14, 'letter-spacing': '2.5' });
+    const c = b.you ? COL.blue : COL.red;
+    s += T(0, y + 8, b.label, { fill: c, 'font-weight': 800 });
+    s += T(0, y + 26, b.words || '…', { fill: c, 'font-weight': 800, 'font-size': 14, 'letter-spacing': '2.5' });
     return svg('g', { class: b.fresh ? 'drop' : '' }, s);
   }
   if (b.kind === 'pair') {
@@ -975,7 +977,7 @@ function setCircle() {
   else if (p === 'voice') { lab = r.id === 'hymn' ? 'LINE' : 'LOW'; c.classList.add('voice'); }
   else if (p === 'sun' || p === 'listen') c.classList.add('idle');
   else if (p === 'rest') { c.classList.add('voice'); lab = 'LOW'; }
-  else if (p === 'ready') { lab = 'HOLD'; c.classList.add('ready'); if (r.id === 'half') lab = 'START'; if (r.id === 'nightday') { lab = 'NIGHT'; c.classList.add('night'); } }
+  else if (p === 'ready') { lab = 'HOLD'; c.classList.add('ready'); if (r.id === 'nightday') { lab = 'NIGHT'; c.classList.add('night'); } }
   else if (p === 'ready2') { lab = 'DAY'; c.classList.add('ready', 'day'); }
   else if (p === 'sing') { lab = C.PAPER.HYMN_LINE[ui.k].toUpperCase(); c.classList.add('ready'); }
   else if (p === 'singing') { lab = C.PAPER.HYMN_LINE[ui.k].toUpperCase(); c.classList.add('holding'); }
@@ -998,7 +1000,7 @@ function playVoice() {
     return;
   }
   sing(C.VOICE.low, r.T);
-  later(() => { ui.bars.push({ kind: 'voice', label: 'THE LOW ONE', secs: r.T, fresh: true }); ui.phase = 'ready'; setCircle(); setAsk(); drawMind(); }, r.T * 1000);
+  later(() => { ui.bars.push({ kind: 'voice', label: r.id === 'half' ? 'THE LOW ONE, ONCE MORE' : 'THE LOW ONE', secs: r.T, fresh: true }); ui.phase = 'ready'; setCircle(); setAsk(); drawMind(); }, r.T * 1000);
 }
 function playOffered() {                         // the planned silence's two voices, the night-and-day pairs, the moment's two voices
   const r = ui.r, res = g.results[g.i]; ui.phase = 'listen'; setCircle(); setAsk(); drawMind();
@@ -1037,7 +1039,7 @@ function down(e) {
   if (p !== 'ready') return;
   if (r.id === 'tumult') { startTumult(); return; }
   ui.phase = 'holding'; ui.h0 = performance.now();
-  if (r.id === 'half') { ui.v0 = ui.h0; sing(C.VOICE.low, r.T); later(() => { if (ui.phase === 'holding' || ui.phase === 'rest') { ui.bars.push({ kind: 'voice', label: 'THE LOW ONE', secs: r.T, mark: r.T / 2, fresh: true }); drawMind(); if (ui.phase === 'rest') { ui.phase = 'done'; setCircle(); setAsk(); setTimeout(() => showResult(ui.pending), reduce ? 0 : 450); } } }, r.T * 1000); }
+  if (r.id === 'half') { ui.v0 = ui.h0; sing(C.VOICE.low, r.T); later(() => { if (ui.phase === 'holding' || ui.phase === 'rest') { ui.bars.push({ kind: 'voice', label: 'THE LOW ONE AGAIN, ITS HALF MARKED', secs: r.T, mark: r.T / 2, fresh: true }); drawMind(); if (ui.phase === 'rest') { ui.phase = 'done'; setCircle(); setAsk(); setTimeout(() => showResult(ui.pending), reduce ? 0 : 450); } } }, r.T * 1000); }
   else if (r.id === 'nightday') humStart(C.VOICE.night);
   else if (r.id === 'first' || r.id === 'sun') humStart();
   setCircle(); setAsk(); drawMind();
@@ -1052,11 +1054,12 @@ function up(e) {
   if (secs < 0.12 && r.id !== 'hymn') { ui.phase = p === 'holding2' ? 'ready2' : 'ready'; if (r.id === 'half') { live.splice(0).forEach(n => n.stop()); ui.timers.forEach(clearTimeout); ui.timers = []; } setCircle(); setAsk('<br><span class="small">That was a tap. Press, and keep your finger down' + (r.id === 'half' ? ' while the low one sounds' : '') + '.</span>'); return; }
   if (p === 'singing') {
     ui.holds.push(secs); ui.k++;
+    { let sung = ui.bars.find(b => b.kind === 'words' && b.you); if (!sung) { sung = { kind: 'words', you: true, label: 'THE LINE, AS YOU SING IT', words: '', fresh: true }; ui.bars.push(sung); } sung.words = C.PAPER.HYMN_LINE.slice(0, ui.k).map(n => n.toUpperCase()).join(' '); }
     if (ui.k < 8) { ui.phase = 'sing'; setCircle(); setAsk(); drawMind(); return; }
     ui.phase = 'done'; setCircle();
     const res = A.hymnSing(g, ui.holds);
-    ui.bars = [{ kind: 'hymnvoice', label: 'THE LINE, AS SUNG TO YOU', syl: res.mem[0].syl, fresh: true }, { kind: 'hymnyou', label: 'THE LINE, AS YOU SANG IT', syl: res.mem[1].syl, fresh: true }];
-    drawMind(); setTimeout(() => { showResult(res); showChoice(); }, reduce ? 0 : 450); return;
+    const sung = ui.bars.find(b => b.kind === 'words' && b.you); if (sung) sung.label = 'THE LINE, AS YOU SANG IT';
+    drawMind(); setTimeout(() => showChoice(), reduce ? 0 : 450); return;
   }
   if (p === 'holding' && r.id === 'nightday') { ui.night = secs; ui.bars.push({ kind: 'night', label: 'THE NIGHT', secs: Math.min(secs, C.NIGHTDAY.cap), fresh: true }); ui.phase = 'ready2'; setCircle(); setAsk(); drawMind(); return; }
   release(secs);
@@ -1079,10 +1082,9 @@ function finishTumult(releaseAt) {
   ui.phase = 'done'; setCircle(); setAsk();
   live.splice(0).forEach(n => n.stop());
   const res = A.tumult(g, releaseAt);
-  ui.bars.push({ kind: 'crowd', label: 'THE CROWD, AS IT WAS', rows: plan.entries.map(e => ({ id: e.id, at: e.at, dur: e.dur, hidden: e.id !== 'low' })) });
-  ui.bars.push({ kind: 'you', label: 'YOU', secs: Math.max(0.05, releaseAt), at: 0, fresh: true });
+  ui.bars.push({ kind: 'you', label: 'YOU, FROM THE CROWD’S START', secs: Math.max(0.05, releaseAt), at: 0, fresh: true });
   drawMind();
-  setTimeout(() => { showResult(res); showChoice(); }, reduce ? 0 : 450);
+  setTimeout(() => showChoice(), reduce ? 0 : 450);
 }
 circle.addEventListener('pointerdown', down);
 circle.addEventListener('pointerup', up);
@@ -1099,12 +1101,15 @@ function showChoice() {
   if (r.id === 'planned' || r.id === 'joy2') items = res.offered.map((o, j) => ({ k: j, label: A.ORD[j].toUpperCase(), small: 'voice' }));
   else if (r.id === 'nightday2') items = res.pairs.map((p, j) => ({ k: j, label: A.ORD[j].toUpperCase(), small: 'pair' }));
   else if (r.id === 'hymn') items = C.PAPER.HYMN_LINE.map((n, k) => ({ k, label: n.toUpperCase(), small: C.PAPER.HYMN_LONG[k] ? 'long' : 'short' }));
-  else items = [2, 3, 4, 5, 6].map(n => ({ k: n, label: String(n), small: 'voices' }));
+  else items = [2, 3, 4, 5, 6, 7].map(n => ({ k: n, label: String(n), small: 'voices' }));
   items.forEach(it => { const b = document.createElement('button'); b.innerHTML = esc(it.label) + '<small>' + esc(it.small) + '</small>'; b.dataset.k = it.k; b.addEventListener('click', () => pick(it.k)); ch.appendChild(b); });
   ch.classList.remove('hidden');
-  if (ui.phase === 'choose') { $('#res').classList.remove('hidden'); $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">' + (r.id === 'nightday2' ? 'one of them yours' : 'one of them yours') + '</div>'; $('#lines').innerHTML = res.lines.map(l => '<p>' + esc(l) + '</p>').join(''); $('#rquote').innerHTML = ''; $('#next').classList.add('hidden'); }
-  else { ui.phase = 'choose'; setCircle(); setAsk(); $('#next').classList.add('hidden'); }
-  $('#res').scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+  if (ui.phase !== 'choose') { ui.phase = 'choose'; setCircle(); setAsk(); }
+  const Q = { planned: 'Which was yours?', joy2: 'Which was yours?', nightday2: 'Which pair?', hymn: 'Which was longest?', tumult: 'How many voices?' }[r.id];
+  const sub = { planned: 'as long as your silence', joy2: 'as long as you held the moment', nightday2: 'in the relation of your night to your day', hymn: 'of your eight syllables', tumult: 'in the crowd, the low one included' }[r.id];
+  $('#res').classList.remove('hidden'); $('#big').innerHTML = esc(Q) + '<div class="cap" style="color:var(--blue);margin-top:4px">' + sub + '</div>';
+  $('#lines').innerHTML = r.id === 'hymn' || r.id === 'tumult' ? res.lines.map(l => '<p>' + esc(l) + '</p>').join('') : ''; $('#rquote').innerHTML = ''; $('#next').classList.add('hidden');
+  $('#res').scrollIntoView({ block: 'start', behavior: 'auto' });
 }
 function pick(k) {
   if (!ui || ui.phase !== 'choose') return; audio();
@@ -1119,21 +1124,22 @@ function pick(k) {
   // the reveal in memory
   if (r.id === 'planned' || r.id === 'joy2') { ui.bars = ui.bars.slice(0, 1); res.offered.forEach((o, j) => ui.bars.push({ kind: o.yours ? 'voice' : 'ref', label: (A.ORD[j] + (o.yours ? ': YOURS' : '')).toUpperCase(), secs: o.secs, fresh: true })); }
   if (r.id === 'nightday2') { ui.bars = []; res.pairs.forEach((p, j) => ui.bars.push({ kind: 'pair', label: (A.ORD[j] + (p.yours ? ': YOURS' : '')).toUpperCase(), night: p.night, day: p.day, fresh: true })); }
-  if (r.id === 'tumult') { const crowd = ui.bars.find(b => b.kind === 'crowd'); if (crowd) crowd.rows.forEach(row => row.hidden = false); }
+  if (r.id === 'tumult') { const you = ui.bars.find(b => b.kind === 'you'); ui.bars = ui.bars.filter(b => b.kind !== 'you'); ui.bars.push({ kind: 'crowd', label: 'THE CROWD, AS IT WAS', rows: ui.r.plan.entries.map(e => ({ id: e.id, at: e.at, dur: e.dur })), fresh: true }); if (you) ui.bars.push(you); }
+  if (r.id === 'hymn') ui.bars = [{ kind: 'hymnvoice', label: 'THE LINE, AS SUNG TO YOU', syl: res.mem[0].syl, fresh: true }, { kind: 'hymnyou', label: 'THE LINE, AS YOU SANG IT', syl: res.mem[1].syl, fresh: true }];
   ui.phase = 'result'; setCircle(); setAsk(); drawMind();
   showResult(res, true);
 }
 function showResult(res, keepChips) {
   const r = ui.r;
-  if (!keepChips) { ui.phase = ['hymn', 'tumult'].includes(r.id) ? 'choose' : 'result'; setCircle(); setAsk(); }
+  if (!keepChips && ['hymn', 'tumult'].includes(r.id)) { showChoice(); return; }
+  if (!keepChips) { ui.phase = 'result'; setCircle(); setAsk(); }
   $('#res').classList.remove('hidden');
   const of = { joy: 'as long as it lasted', first: 'yours against the low one', nightday: 'your day against your night', half: 'where you let go of it', planned: 'your silence among two voices', sun: 'yours against the sun’s standing still', hymn: 'your longs against your shorts', tumult: 'your hold against the low one', nightday2: 'your relation among three pairs', joy2: 'your moment among two voices' }[r.id];
   $('#big').innerHTML = esc(res.big) + '<div class="cap" style="color:var(--blue);margin-top:4px">' + of + '</div>';
   $('#lines').innerHTML = res.lines.map(l => '<p>' + esc(l) + '</p>').join('');
-  $('#rquote').innerHTML = ui.phase === 'choose' ? '' : esc(res.quote.text) + '<span class="cite">' + esc(res.quote.cite) + '</span>';
-  $('#next').classList.toggle('hidden', ui.phase === 'choose');
+  $('#rquote').innerHTML = esc(res.quote.text) + '<span class="cite">' + esc(res.quote.cite) + '</span>';
+  $('#next').classList.remove('hidden');
   $('#next').textContent = g.i < g.stations.length - 1 ? 'Next' : 'The last page';
-  if (ui.phase === 'choose') { $('#chips').classList.remove('hidden'); $('#res').scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' }); return; }
   const m = $('#mind'), k = m.clientWidth / m.viewBox.baseVal.width, top = m.getBoundingClientRect().top + window.scrollY + (Y.mem - 26) * k;
   window.scrollTo({ top: Math.max(0, top - 8), behavior: reduce ? 'auto' : 'smooth' });
 }

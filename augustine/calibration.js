@@ -9,7 +9,7 @@ const noDigits = s => !/\d/.test(s);
 
 say('A. The deal');
 {
-  let lowOK = true, sunOK = true, crowdOK = true, lowFirst = 0, detOK = true, sizes = { 3: 0, 4: 0, 5: 0 };
+  let lowOK = true, sunOK = true, crowdOK = true, lowFirst = 0, detOK = true, sizes = { 3: 0, 4: 0, 5: 0, 6: 0 };
   for (let s = 1000; s < 4000; s++) {
     const g = A.newGame(s), S = g.sun, P = g.tumult;
     if (g.low < C.LENGTH.min || g.low > C.LENGTH.max) lowOK = false;
@@ -22,7 +22,7 @@ say('A. The deal');
   }
   check('the low one within ' + C.LENGTH.min + '–' + C.LENGTH.max + ' s', lowOK);
   check('the sun stands still inside its crossing, for ' + C.SUN.stopMin + '–' + C.SUN.stopMax + ' s, on an arc of ' + C.SUN.arcMin + '–' + C.SUN.arcMax, sunOK);
-  check('the crowd holds the low one and 2–4 others, which outlast it', crowdOK, '3/4/5 voices: ' + sizes[3] + '/' + sizes[4] + '/' + sizes[5]);
+  check('the crowd holds the low one and 2–5 others, which outlast it', crowdOK, '3/4/5/6 voices: ' + sizes[3] + '/' + sizes[4] + '/' + sizes[5] + '/' + sizes[6]);
   check('the low one never enters the crowd first', lowFirst === 0);
   check('the same number deals the same evening', detOK);
 }
@@ -49,7 +49,8 @@ say('C. Each station, through its functions');
   const pw = A.plannedPick(g, 1 - pl.offered.findIndex(o => o.yours)); check('picking the other is wrong and says yours', !pw.right && /Yours was the/.test(pw.lines[0])); A.plannedPick(g, pl.offered.findIndex(o => o.yours)); A.next(g);
   const su = A.sunHold(g, g.sun.stop * 0.9); check('the stillness held at nine tenths', su.big === 'nine tenths'); A.next(g);
   const hy = A.hymnSing(g, [0.4, 0.8, 0.4, 0.8, 0.4, 1.0, 0.4, 0.8]); check('the hymn: longs double shorts, longest found', hy.big === 'double' && hy.longest.length === 1 && hy.longest[0] === 5);
-  const hl = A.hymnLongest(g, 5); check('the longest syllable named rightly', hl.right); const hw = A.hymnLongest(g, 1); check('a wrong syllable is corrected', !hw.right && /It was OM/.test(hw.lines[1])); A.hymnLongest(g, 5); A.next(g);
+  const hl = A.hymnLongest(g, 5); check('the longest syllable named rightly', hl.right); const hw = A.hymnLongest(g, 1); check('a wrong syllable is corrected', !hw.right && /It was OM/.test(hw.lines[1])); check('flat singing is not double, and any long will do', A.hymnSing(g, [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]).big === 'the same, not double' && A.hymnLongest(g, 3).right && /as good an answer as any/.test(g.results[g.i].lines[1]));
+  A.hymnSing(g, [0.4, 0.8, 0.4, 0.8, 0.4, 1.0, 0.4, 0.8]); A.hymnLongest(g, 5); A.next(g);
   const P = g.tumult, tu = A.tumult(g, P.lowEnd + 0.1); check('a release on the moment reads as caught', tu.reading === 'caught');
   check('a release at the crowd’s end reads as waited', A.tumult(g, P.end + 0.5).reading === 'waited');
   check('a release before the low one came in reads as early', A.tumult(g, P.lowStart - 0.1).reading === 'early');

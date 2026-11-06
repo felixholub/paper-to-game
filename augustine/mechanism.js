@@ -33,7 +33,7 @@
       SILENCE_AS_VOICE: true,                  // ch. XXVII, p. 173: silence measured by "a voice, as if it sounded"
     },
     // ---- ours
-    VOICE: { low: 50, mid: 57, high: 64, top: 71, stranger: 60, night: 45, day: 69, hymn: 55 }, // MIDI pitches (D3, A3, E4, B4, C4, A2, A4, G3)
+    VOICE: { low: 50, mid: 57, high: 64, top: 71, stranger: 60, stranger2: 53, night: 45, day: 69, hymn: 55 }, // MIDI pitches (D3, A3, E4, B4, C4, F3, A2, A4, G3)
     LENGTH: { min: 2.2, max: 4.2 },            // seconds: the low one's length
     HYMN: { short: 0.42, long: 0.84, gap: 0.08, capEach: 3 }, // the sung line: a long is double a short; a sung syllable is capped
     HALF: { capOver: 1.6 },                    // the half station ends by itself at 1.6 × the voice
@@ -43,8 +43,8 @@
     SUN: { crossMin: 5, crossMax: 9, arcMin: 0.5, arcMax: 1, stopAtMin: 0.3, stopAtMax: 0.7, stopMin: 1.6, stopMax: 4.0, capHold: 4 },
                                                // the sun crosses an arc of the sky in 5–9 s, the arc 50–100 % of the sky, and stands
                                                //   still at 30–70 % of the crossing for 1.6–4 s; the hold for the stillness is capped
-    TUMULT: { stagger: 0.6, sizeMin: 3, sizeMax: 5, extraMin: 1.6, extraMax: 3.0, lateCap: 1.5 }, // 3–5 voices enter 0.6 s apart, the
-                                               //   low one never first; the others outlast the low one by 1.6–3 s
+    TUMULT: { staggerMin: 0.4, staggerMax: 0.8, sizeMin: 3, sizeMax: 6, extraMin: 1.6, extraMax: 3.0, lateCap: 1.5 }, // 3–6 voices enter 0.4–0.8 s
+                                               //   apart (dealt per evening), the low one never first; the others outlast the low one by 1.6–3 s
     HOLD_CAP: 4,                               // a plain hold ends by itself at four times its target
     READ: { waitedTol: 0.2, tie: 0.05 },       // tumult: a release within 0.2 s of the crowd's end is "to the end"; hymn: longest within 5 % ties
     SEED: { min: 1000, max: 9999 },
@@ -106,13 +106,13 @@
     const cross = between(R, S.crossMin, S.crossMax), arc = between(R, S.arcMin, S.arcMax), stopAt = between(R, S.stopAtMin, S.stopAtMax), stop = between(R, S.stopMin, S.stopMax);
     const sun = { cross, arc, stopFrac: stopAt, stopStart: round3(stopAt * cross), stop, stopEnd: round3(stopAt * cross + stop), end: round3(cross + stop) };
     // the crowd: the low one and two to four others, the low one never first; the others outlast it
-    const size = TU.sizeMin + Math.floor(R() * (TU.sizeMax - TU.sizeMin + 1));
-    const others = shuffle(['mid', 'high', 'top', 'stranger'], R).slice(0, size - 1);
+    const size = TU.sizeMin + Math.floor(R() * (TU.sizeMax - TU.sizeMin + 1)), stagger = between(R, TU.staggerMin, TU.staggerMax);
+    const others = shuffle(['mid', 'high', 'top', 'stranger', 'stranger2'], R).slice(0, size - 1);
     let order; do { order = shuffle(['low'].concat(others), R); } while (order[0] === 'low');
-    const entries = order.map((id, k) => ({ id, at: round3(k * TU.stagger) }));
+    const entries = order.map((id, k) => ({ id, at: round3(k * stagger) }));
     const lowE = entries.find(e => e.id === 'low'), lowStart = lowE.at, lowEnd = round3(lowStart + low);
     entries.forEach(e => { e.end = e.id === 'low' ? lowEnd : round3(lowEnd + between(R, TU.extraMin, TU.extraMax)); e.dur = round3(e.end - e.at); });
-    const tumult = { entries, size, lowStart, lowEnd, end: Math.max.apply(null, entries.map(e => e.end)) };
+    const tumult = { entries, size, stagger, lowStart, lowEnd, end: Math.max.apply(null, entries.map(e => e.end)) };
     // the decoys: which way each is off, and where the player's own lands among the offered
     const deal = {
       plannedOff: R() < 0.5 ? CONFIG.PLANNED.off : 1 / CONFIG.PLANNED.off, plannedOrder: R() < 0.5 ? 0 : 1,
@@ -244,8 +244,8 @@
     const made = round3(Math.min(release, r.T * CONFIG.HALF.capOver)), of = made / r.T, x = of / 0.5, over = made >= r.T;
     const res = { id: r.id, title: r.title, target: r.T, made, of, ratio: x, big: over ? 'past its end' : amount(of).big, quote: QUOTES.expectation,
       mem: [{ kind: 'voice', label: 'THE LOW ONE', secs: r.T, mark: r.T / 2 }, { kind: 'you', label: 'YOU: ITS HALF', secs: made }],
-      lines: [over ? 'You were still holding when the low one ended.' : 'You let go at ' + amount(of).pre + ' the low one.',
-        'Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the two times you had heard it.'] };
+      lines: [over ? 'You were still holding when the low one ended.' : 'You let go at ' + amount(of).pre + ' the low one' + (amount(of).x < 0.5 ? ', and heard ' + amount(1 - of).pre + ' it still to come.' : amount(of).x > 0.5 ? ', with only ' + amount(1 - of).pre + ' it still to come.' : ', and heard the other half still to come.'),
+        'Nothing could tell you where its half was while it sounded: the half was not there yet. You could only lay what had passed, lengthening in memory, against what you still expected of it, shortening. Your expectation of the whole came from the times you had heard it.'] };
     return finish(g, res);
   }
 
@@ -290,21 +290,22 @@
     const h = holds.map(x => round3(clamp(x, 0.08, H.capEach)));
     const shorts = h.filter((x, k) => !L[k]), longs = h.filter((x, k) => L[k]);
     const mean = a => a.reduce((s, x) => s + x, 0) / a.length, ratio = mean(longs) / mean(shorts);
-    const max = Math.max.apply(null, h), longest = h.map((x, k) => k).filter(k => x_ok(h[k], max));
-    function x_ok(v, m) { return v >= m * (1 - CONFIG.READ.tie); }
-    const res = { id: r.id, title: r.title, holds: h, ratio, longest, big: amount(ratio).big, quote: QUOTES.hymn,
+    const max = Math.max.apply(null, h), longest = h.map((x, k) => k).filter(k => h[k] >= max * (1 - CONFIG.READ.tie));
+    const allSame = h.filter((x, k) => L[k]).every(x => x >= max * (1 - CONFIG.READ.tie));   // all four longs within the tie of the longest
+    const doubled = ratio >= 1.6 && ratio <= 2.6;
+    const res = { id: r.id, title: r.title, holds: h, ratio, longest, allSame, doubled, big: doubled ? 'double' : amount(ratio).big + ', not double', quote: QUOTES.hymn,
       mem: [{ kind: 'hymnvoice', label: 'THE LINE, AS SUNG TO YOU', syl: names.map((n, k) => ({ n, secs: L[k] ? H.long : H.short, long: L[k] })) },
         { kind: 'hymnyou', label: 'THE LINE, AS YOU SANG IT', syl: names.map((n, k) => ({ n, secs: h[k], long: L[k] })) }],
-      lines: ['Your longs were ' + amount(ratio).pre + ' your shorts. In the line as sung to you they were double.',
-        'One more thing: which of your eight syllables was the longest? Touch it.'] };
+      lines: [doubled ? 'Your longs were ' + amount(ratio).pre + ' your shorts, as in the line sung to you.' : 'Your longs were ' + amount(ratio).pre + ' your shorts. In the line sung to you they were double; yours were not.'] };
     return finish(g, res);
   }
   function hymnLongest(g, k) {
     const res = g.results[g.i]; if (!res || res.id !== 'hymn') throw new Error('nothing sung');
     const names = CONFIG.PAPER.HYMN_LINE;
     res.pick = k; res.right = res.longest.includes(k);
-    res.lines = ['Your longs were ' + amount(res.ratio).pre + ' your shorts. In the line as sung to you they were double.',
-      res.right ? 'Your longest was indeed ' + names[k].toUpperCase() + '.' : 'You took ' + names[k].toUpperCase() + ' for your longest. It was ' + names[res.longest[0]].toUpperCase() + ', ' + amount(res.holds[res.longest[0]] / res.holds[k]).pre + ' ' + names[k].toUpperCase() + '.',
+    res.lines = [res.lines[0],
+      res.allSame && res.right ? 'Your four longs were all much the same, so ' + names[k].toUpperCase() + ' is as good an answer as any.'
+        : res.right ? 'Your longest was indeed ' + names[k].toUpperCase() + '.' : 'You took ' + names[k].toUpperCase() + ' for your longest. It was ' + names[res.longest[0]].toUpperCase() + ', ' + amount(res.holds[res.longest[0]] / res.holds[k]).pre + ' ' + names[k].toUpperCase() + '.',
       'You measured each long by the short before it, but the short had ceased before the long began. Every comparison was between two things in memory, and the one who sang them can be wrong about them.'];
     return res;
   }
@@ -321,8 +322,7 @@
     res.lines = [waited ? 'You held to the end of the crowd. The low one had stopped ' + secondsWords(plan.end - plan.lowEnd) + ' before the others did.'
       : early ? 'You let go before the low one had even come in: it was the ' + ORD[plan.entries.findIndex(e => e.id === 'low')] + ' voice to enter.'
         : Math.abs(off) <= 0.15 ? 'You let go on the moment the low one stopped, with the others still going.'
-          : off < 0 ? 'You let go ' + secondsWords(off) + ' before the low one stopped.' : 'You let go ' + secondsWords(off) + ' after the low one stopped, while the others went on.',
-      'One more thing: how many voices were in the crowd, the low one included? Touch the number.'];
+          : off < 0 ? 'You let go ' + secondsWords(off) + ' before the low one stopped.' : 'You let go ' + secondsWords(off) + ' after the low one stopped, while the others went on.'];
     return finish(g, res);
   }
   function tumultCount(g, n) {
@@ -395,7 +395,7 @@
     if (hf) did.push(hf.made >= hf.target ? 'Asked for its half while it sounded, you held the low one past its end.' : 'Asked for its half while it sounded, you let go of the low one at ' + amount(hf.of).n + ' its length.');
     if (pl) did.push('You planned a silence and then ' + (pl.right ? 'knew it again among two voices.' : 'took a voice ' + amount(pl.offered[pl.pick].secs / pl.made).pre + ' it for it.'));
     if (su) did.push('The sun stood still, and you measured its standing still with a sound ' + amount(su.ratio).pre + ' it.');
-    if (hy) did.push('You sang the hymn back with your longs ' + amount(hy.ratio).n + ' your shorts, and ' + (hy.right ? 'knew which of your syllables was longest.' : 'took the wrong syllable for your longest.'));
+    if (hy) did.push('You sang the hymn back with your longs ' + amount(hy.ratio).n + ' your shorts' + (hy.doubled ? ', double as they should be, ' : ', not the double they should be, ') + (hy.right ? 'and knew which of your syllables was longest.' : 'and took the wrong syllable for your longest.'));
     if (tu) did.push(tu.reading === 'waited' ? 'In the crowd you held to the end; the low one had stopped first.' : tu.reading === 'early' ? 'In the crowd you let go before the low one had come in.' : 'In the crowd you let go ' + (Math.abs(tu.off) <= 0.15 ? 'on the moment the low one stopped' : secondsWords(tu.off) + (tu.off < 0 ? ' before the low one stopped' : ' after the low one stopped')) + (tu.right ? ', and counted the voices rightly.' : ', and miscounted the voices.'));
     const world = [];
     if (first) world.push({ label: 'THE LOW ONE', target: first.target, made: first.made });
