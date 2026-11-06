@@ -1,123 +1,123 @@
-// Augustine's Clock (rebuild): the mechanism run headless, through the functions the browser calls.
+// Augustine's Clock (second rebuild): the mechanism run headless, through the functions the browser calls.
 // Run: node calibration.js   (calibration-result.txt is the saved output)
 const A = require('./mechanism.js');
 const C = A.CONFIG, out = [], say = s => { out.push(s); console.log(s); };
 let pass = 0, fail = 0;
 const check = (name, ok, note) => { if (ok) pass++; else fail++; say((ok ? 'pass' : 'FAIL') + '  ' + name + (note ? '  (' + note + ')' : '')); };
-const log = Math.log, abs = Math.abs;
+const abs = Math.abs, log = Math.log;
 const noDigits = s => !/\d/.test(s);
 
-say('A. The book and the deal');
+say('A. The deal');
 {
-  let apartOK = true, rangeOK = true, liveOK = true, crowdOK = true, sunOK = true, detOK = true, wheelOK = true, lowFirst = 0, tries = 0;
+  let lowOK = true, sunOK = true, crowdOK = true, lowFirst = 0, detOK = true, sizes = { 3: 0, 4: 0, 5: 0 };
   for (let s = 1000; s < 4000; s++) {
-    const g = A.newGame(s, { first: s % 2 === 0 }), v = g.voices, lens = ['low', 'middle', 'high', 'top'].map(id => v[id].T).sort((a, b) => a - b);
-    tries = Math.max(tries, g.tries);
-    for (let k = 1; k < 4; k++) if (lens[k] - lens[k - 1] < C.LENGTH.apart - 1e-9) apartOK = false;
-    lens.forEach(T => { if (T < C.LENGTH.min || T > C.LENGTH.max) rangeOK = false; });
-    const ratio = v.top.T / v.low.T; if (ratio < C.LENGTH.liveVsLow && ratio > 1 / C.LENGTH.liveVsLow) liveOK = false;
-    const p = g.stations[6].plan;
-    if (!p.present.includes('low') || !p.present.includes('stranger') || p.present.length !== 2 + C.TUMULT.others) crowdOK = false;
-    p.entries.forEach(e => { if (e.id !== 'low' && e.end <= p.lowEnd + C.TUMULT.extraMin - 1e-9) crowdOK = false; });
-    if (p.sunStop >= p.lowEnd || p.sunStop <= p.lowStart) sunOK = false;
-    const cr = A.countRatio(g.stations[5]); if (cr < C.WHEEL.countOff && cr > 1 / C.WHEEL.countOff) wheelOK = false;
-    if (p.present[0] === 'low') lowFirst++;
-    const g2 = A.newGame(s, { first: s % 2 === 0 }); if (JSON.stringify(g2.voices) !== JSON.stringify(v) || JSON.stringify(g2.stations[6].plan) !== JSON.stringify(p)) detOK = false;
+    const g = A.newGame(s), S = g.sun, P = g.tumult;
+    if (g.low < C.LENGTH.min || g.low > C.LENGTH.max) lowOK = false;
+    if (S.stopStart <= 0 || S.stopEnd >= S.end || S.stop < C.SUN.stopMin || S.stop > C.SUN.stopMax || S.arc < C.SUN.arcMin || S.arc > C.SUN.arcMax) sunOK = false;
+    if (P.entries[0].id === 'low') lowFirst++;
+    if (!P.entries.some(e => e.id === 'low') || P.size < C.TUMULT.sizeMin || P.size > C.TUMULT.sizeMax || P.entries.length !== P.size) crowdOK = false;
+    P.entries.forEach(e => { if (e.id !== 'low' && e.end < P.lowEnd + C.TUMULT.extraMin - 1e-9) crowdOK = false; });
+    sizes[P.size]++;
+    const g2 = A.newGame(s); if (JSON.stringify([g2.low, g2.sun, g2.tumult, g2.deal]) !== JSON.stringify([g.low, g.sun, g.tumult, g.deal])) detOK = false;
   }
-  check('four voices at least ' + C.LENGTH.apart + ' s apart', apartOK);
-  check('every voice within ' + C.LENGTH.min + '–' + C.LENGTH.max + ' s', rangeOK);
-  check('the top one at least ' + C.LENGTH.liveVsLow + '× or at most 1/' + C.LENGTH.liveVsLow + ' of the low one', liveOK, 'most draws needed: ' + tries);
-  check('the crowd: the low one, two others and a stranger; the others outlast the low one', crowdOK);
-  check('the sun stops after the low one begins and before it ends', sunOK);
-  check('the wheel’s third turn lands at least ' + C.WHEEL.countOff + '× off the voice, either way', wheelOK);
+  check('the low one within ' + C.LENGTH.min + '–' + C.LENGTH.max + ' s', lowOK);
+  check('the sun stands still inside its crossing, for ' + C.SUN.stopMin + '–' + C.SUN.stopMax + ' s, on an arc of ' + C.SUN.arcMin + '–' + C.SUN.arcMax, sunOK);
+  check('the crowd holds the low one and 2–4 others, which outlast it', crowdOK, '3/4/5 voices: ' + sizes[3] + '/' + sizes[4] + '/' + sizes[5]);
   check('the low one never enters the crowd first', lowFirst === 0);
   check('the same number deals the same evening', detOK);
 }
 
-say('B. The wheel in the silence');
+say('B. The sun');
 {
-  const g = A.newGame(2024, { first: true }), r = g.stations[5];
-  check('the heard voice lasts exactly three turns', abs(A.wheelTurns(r, r.T, null) - 3) < 1e-9);
-  const tp = r.T + 0.4, P = A.wheelPeriod(r);  // the press, 0.4 s into the hum
-  check('steady until the press', abs(A.wheelTurns(r, tp, tp) - tp / P) < 1e-9);
-  const seg0 = r.wheel[0], s0 = seg0.turns * P / seg0.pace;
-  check('the first segment runs at its pace for its turns', abs(A.turnsSince(r.wheel, P, s0) - seg0.turns) < 1e-9 && A.paceAt(r, s0 / 2) === seg0.pace);
-  check('the pace changes at the segment’s end', A.paceAt(r, s0 + 0.01) === r.wheel[1].pace);
-  check('turns and seconds agree: the third turn is done when turnsSince says three', abs(A.turnsSince(r.wheel, P, A.countSecs(r.wheel, P, 3)) - 3) < 1e-9);
-  const cr = A.countRatio(r);
-  check('on this evening three counted turns give ' + cr.toFixed(3) + ' of the voice', cr >= C.WHEEL.countOff || cr <= 1 / C.WHEEL.countOff);
-  g.i = 5; const counted = A.silence(g, cr * r.T), saw = A.silence(g, r.T);
-  check('a hold at the counting point reads as counted', counted.reading === 'counted');
-  check('a hold at the voice reads as saw', saw.reading === 'saw');
+  const g = A.newGame(2024), S = g.sun;
+  check('the sun is at the horizon as it rises', A.sunAt(S, 0) === 0);
+  check('the sun holds its place while it stands still', abs(A.sunAt(S, S.stopStart) - A.sunAt(S, S.stopEnd)) < 1e-9 && abs(A.sunAt(S, S.stopStart + S.stop / 2) - A.sunAt(S, S.stopStart)) < 1e-9);
+  check('the sun has set at the end', abs(A.sunAt(S, S.end) - 1) < 1e-9);
+  check('the stillness is not counted in the crossing', abs(A.sunAt(S, S.stopEnd + 1) - A.sunAt(S, S.stopStart - 1) - 2 / S.cross) < 1e-9);
 }
 
-say('C. Against a voice, the tumult, the last silence');
+say('C. Each station, through its functions');
 {
-  const g = A.newGame(3101, { first: true }), r = g.stations[4]; g.i = 4;
-  check('a hold at the top one’s length reads as pulled', A.against(g, r.liveT).reading === 'pulled');
-  check('a hold at the low one’s length reads as held', A.against(g, r.T).reading === 'held');
-  g.i = 6; const p = g.stations[6].plan;
-  const caught = A.tumult(g, p.lowEnd + 0.1), waited = A.tumult(g, p.end + 0.5), early = A.tumult(g, p.lowStart - 0.1), off = A.tumult(g, p.lowEnd - 0.8);
-  check('a release on the moment reads as caught', caught.reading === 'caught');
-  check('a release at the crowd’s end reads as waited', waited.reading === 'waited');
-  check('a release before the low one came in reads as early', early.reading === 'early' && /before the low one had even come in/.test(early.lines[0]));
-  check('an early release is said as before it stopped', off.reading === 'off' && /before the low one stopped/.test(off.lines[0]));
-  const h = A.heard(g, p.present.slice()); check('naming the crowd exactly: 5 of 5', h.right.length === 5 && h.wrong.length === 0);
-  const h2 = A.heard(g, ['low', 'stranger']); check('naming two: the missing ones are listed', h2.heardLines.some(l => /unnamed/.test(l)));
-  g.i = 7; const la = A.last(g, g.voices.low.T * 0.9); check('the last silence is measured against the low one', abs(la.ratio - 0.9) < 1e-9);
+  const g = A.newGame(3101), L = g.low;
+  const j1 = A.joy(g, 4); check('the moment is kept as held', g.held.joy === 4 && j1.mem[0].secs === 4); A.next(g);
+  A.hold(g, L); A.next(g);
+  const nd = A.nightDay(g, 2, 5); check('night and day keep their relation', abs(nd.ratio - 2.5) < 1e-9 && g.held.ndRatio === nd.ratio); A.next(g);
+  const hf = A.half(g, L / 2); check('a release at the half reads as half', A.amount(hf.of).x === 0.5 && hf.big === 'half');
+  const hfo = A.half(g, L * 1.2); check('a release after the end says so', hfo.big === 'past its end'); A.next(g);
+  const pl = A.planned(g, 2); check('the planned silence offers two voices, one of them yours', pl.offered.length === 2 && pl.offered.filter(o => o.yours).length === 1 && pl.offered.find(o => o.yours).secs === 2);
+  const pp = A.plannedPick(g, pl.offered.findIndex(o => o.yours)); check('picking yours is right', pp.right && pp.big === 'yours');
+  const pw = A.plannedPick(g, 1 - pl.offered.findIndex(o => o.yours)); check('picking the other is wrong and says yours', !pw.right && /Yours was the/.test(pw.lines[0])); A.plannedPick(g, pl.offered.findIndex(o => o.yours)); A.next(g);
+  const su = A.sunHold(g, g.sun.stop * 0.9); check('the stillness held at nine tenths', su.big === 'nine tenths'); A.next(g);
+  const hy = A.hymnSing(g, [0.4, 0.8, 0.4, 0.8, 0.4, 1.0, 0.4, 0.8]); check('the hymn: longs double shorts, longest found', hy.big === 'double' && hy.longest.length === 1 && hy.longest[0] === 5);
+  const hl = A.hymnLongest(g, 5); check('the longest syllable named rightly', hl.right); const hw = A.hymnLongest(g, 1); check('a wrong syllable is corrected', !hw.right && /It was OM/.test(hw.lines[1])); A.hymnLongest(g, 5); A.next(g);
+  const P = g.tumult, tu = A.tumult(g, P.lowEnd + 0.1); check('a release on the moment reads as caught', tu.reading === 'caught');
+  check('a release at the crowd’s end reads as waited', A.tumult(g, P.end + 0.5).reading === 'waited');
+  check('a release before the low one came in reads as early', A.tumult(g, P.lowStart - 0.1).reading === 'early');
+  A.tumult(g, P.lowEnd); const tc = A.tumultCount(g, P.size); check('the right count is right', tc.right); A.next(g);
+  const np = A.nightDayPairs(g); check('three pairs, one yours, at three sizes', np.pairs.length === 3 && np.pairs.filter(p => p.yours).length === 1 && new Set(np.pairs.map(p => p.night)).size === 3);
+  check('the pair that is yours has your relation', abs(np.pairs.find(p => p.yours).ratio - 2.5) < 1e-9);
+  check('the other pairs are off by ' + C.NIGHTDAY.off + ' either way', np.pairs.filter(p => !p.yours).every(p => abs(log(p.ratio / 2.5)) > log(C.NIGHTDAY.off) - 1e-9));
+  check('no offered day longer than ' + C.NIGHTDAY.maxDay + ' s', np.pairs.every(p => p.day <= C.NIGHTDAY.maxDay + 1e-9));
+  A.nightDayPick(g, np.yoursAt); check('picking your pair is right', g.results[g.i].right); A.next(g);
+  const jp = A.joyPairs(g); check('the moment offered beside a decoy', jp.offered.length === 2 && jp.offered.find(o => o.yours).secs === 4);
+  A.joyPick(g, jp.yoursAt); check('picking your moment is right', g.results[g.i].right); A.next(g);
+  check('the evening is done after ten stations', g.done && g.i === 10);
+  const v = A.verdict(g); check('the headline counts three inner spans known', /all three/.test(v.headline));
+}
+{
+  const g = A.newGame(77); A.joy(g, 9); for (let k = 0; k < 9; k++) { g.i = k; }
+  g.i = 9; const jp = A.joyPairs(g); check('a long moment gets a shorter decoy, never a longer one', jp.offered.find(o => !o.yours).secs < 9);
 }
 
 say('D. Words');
 {
   let digits = 0, lines = 0, mono = true;
   for (let s = 1000; s < 2200; s++) {
-    const g = A.newGame(s, { first: s % 3 === 0 }), R = () => 0.3 + Math.random() * 2;
-    g.i = 0; A.hold(g, g.voices.low.T * R()); g.i = 1; A.hold(g, g.voices.middle.T * R()); g.i = 2; A.hold(g, g.voices.low.T * R()); g.i = 3; A.hold(g, g.voices.middle.T * R());
-    g.i = 4; A.against(g, g.voices.low.T * R()); g.i = 5; A.silence(g, g.voices.high.T * R());
-    const p = g.stations[6].plan; g.i = 6; A.tumult(g, Math.random() * (p.end + 1.5)); A.heard(g, ['low', 'top'].filter(() => Math.random() < 0.7));
-    g.i = 7; A.last(g, g.voices.low.T * R()); g.i = 8; g.done = true;
+    const g = A.newGame(s), R = () => 0.3 + Math.random() * 2, L = g.low;
+    A.joy(g, 0.3 + Math.random() * 10); A.next(g); A.hold(g, L * R()); A.next(g); A.nightDay(g, 0.3 + Math.random() * 6, 0.3 + Math.random() * 6); A.next(g); A.half(g, L * Math.random() * 1.6); A.next(g);
+    A.planned(g, 0.3 + Math.random() * 5); A.plannedPick(g, Math.random() < 0.5 ? 0 : 1); A.next(g); A.sunHold(g, g.sun.stop * R()); A.next(g);
+    A.hymnSing(g, [0, 1, 2, 3, 4, 5, 6, 7].map(() => 0.1 + Math.random() * 1.5)); A.hymnLongest(g, Math.floor(Math.random() * 8)); A.next(g);
+    const P = g.tumult; A.tumult(g, Math.random() * (P.end + 1.5)); A.tumultCount(g, 2 + Math.floor(Math.random() * 5)); A.next(g);
+    A.nightDayPairs(g); A.nightDayPick(g, Math.floor(Math.random() * 3)); A.next(g); A.joyPairs(g); A.joyPick(g, Math.random() < 0.5 ? 0 : 1); A.next(g);
     const v = A.verdict(g);
-    [].concat.apply([], g.results.map(r => r.lines.concat(r.heardLines || []))).concat(v.did, [v.headline, v.says, v.means, v.torn, v.present]).forEach(l => { lines++; if (!noDigits(l)) digits++; });
+    [].concat.apply([], g.results.map(r => r.lines)).concat(v.did, [v.headline, v.says, v.means, v.torn, v.present, v.stranger]).forEach(l => { lines++; if (!noDigits(l)) digits++; });
   }
-  check('no decimal or digit reaches a sentence (the chips’ "n of 5" aside)', digits === 0, lines + ' lines');
-  let last = -1; for (let x = 0.2; x < 5; x += 0.01) { const k = A.AMOUNTS.indexOf(A.amount(x)); if (k < last) mono = false; last = k; }
+  check('no decimal or digit reaches a sentence', digits === 0, lines + ' lines over 1,200 evenings of wild play');
+  let last = -1; for (let x = 0.2; x < 12; x += 0.01) { const k = A.AMOUNTS.indexOf(A.amount(x)); if (k < last) mono = false; last = k; }
   check('fraction words never go down as the ratio goes up', mono);
-  check('seconds words at their values', A.secondsWords(0.05) === 'a tenth of a second' && A.secondsWords(0.5) === 'half a second' && A.secondsWords(1) === 'a second' && A.secondsWords(2.6) === 'two and a half seconds');
 }
 
 say('E. Playing it in numbers: 400 evenings per player');
 {
   const scatter = sd => Math.exp(sd * (Math.random() + Math.random() + Math.random() - 1.5) * 2);
   const players = {
-    'memory, steady (12%)': { sd: 0.12, pull: 0, count: false, wait: false },
-    'memory, shaky (30%)': { sd: 0.30, pull: 0, count: false, wait: false },
-    'half pulled by the live voice': { sd: 0.12, pull: 0.5, count: false, wait: false },
-    'wheel counter': { sd: 0.12, pull: 0, count: true, wait: false },
-    'sun watcher': { sd: 0.12, pull: 0, count: false, wait: true },
-    'the learned man (all three)': { sd: 0.12, pull: 1, count: true, wait: true },
+    'steady (12 % scatter), hears relations': { sd: 0.12, ear: 0.9 },
+    'shaky (30 %), hears relations': { sd: 0.30, ear: 0.9 },
+    'steady, guesses the choices': { sd: 0.12, ear: 0 },
   };
-  say('  player | typical miss (plain holds) | pulled | counted | waited | commonest headline');
+  say('  player | low one | half | sun | hymn ratio | inner spans known (of 3) | commonest headline');
   for (const name in players) {
-    const P = players[name], heads = {}, reads = { pulled: 0, counted: 0, waited: 0 }, misses = [];
+    const P = players[name], heads = {}, miss = { first: [], half: [], sun: [], hymn: [] }, known = [];
     for (let s = 0; s < 400; s++) {
-      const g = A.newGame(5000 + s, { first: s % 2 === 0 }), v = g.voices;
-      const hold = (T) => T * scatter(P.sd);
-      g.i = 0; A.hold(g, hold(v.low.T)); g.i = 1; A.hold(g, hold(v.middle.T)); g.i = 2; A.hold(g, hold(v.low.T)); g.i = 3; A.hold(g, hold(v.middle.T));
-      g.i = 4; const target = Math.exp((1 - P.pull) * log(v.low.T) + P.pull * log(v.top.T)); const ag = A.against(g, hold(target));
-      g.i = 5; const r5 = g.stations[5]; const sil = A.silence(g, P.count ? A.countRatio(r5) * r5.T * scatter(0.05) : hold(v.high.T));
-      g.i = 6; const p = g.stations[6].plan; const tu = A.tumult(g, P.wait ? p.end + 0.3 : p.lowEnd + (Math.random() - 0.5) * 0.4); A.heard(g, p.present);
-      g.i = 7; A.last(g, hold(v.low.T)); g.i = 8; g.done = true;
-      const vd = A.verdict(g); heads[vd.headline] = (heads[vd.headline] || 0) + 1;
-      if (ag.reading === 'pulled') reads.pulled++; if (sil.reading === 'counted') reads.counted++; if (tu.reading === 'waited') reads.waited++;
-      [0, 2, 7].forEach(k => misses.push(abs(log(g.results[k].ratio))));
+      const g = A.newGame(5000 + s), L = g.low;
+      const pickRight = (n, yoursAt) => Math.random() < P.ear ? yoursAt : Math.floor(Math.random() * n);
+      A.joy(g, 1 + Math.random() * 5); A.next(g); const f = A.hold(g, L * scatter(P.sd)); A.next(g); A.nightDay(g, 1.5, 1.5 * (2 + Math.random())); A.next(g);
+      const hf = A.half(g, L / 2 * scatter(P.sd)); A.next(g);
+      const pl = A.planned(g, 1 + Math.random() * 3); A.plannedPick(g, pickRight(2, pl.offered.findIndex(o => o.yours))); A.next(g);
+      const su = A.sunHold(g, g.sun.stop * scatter(P.sd)); A.next(g);
+      const hy = A.hymnSing(g, [0, 1, 2, 3, 4, 5, 6, 7].map(k => (k % 2 ? 0.84 : 0.42) * scatter(P.sd))); A.hymnLongest(g, hy.longest[0]); A.next(g);
+      const T = g.tumult; A.tumult(g, T.lowEnd + (Math.random() - 0.5) * 0.4); A.tumultCount(g, T.size); A.next(g);
+      const np = A.nightDayPairs(g); A.nightDayPick(g, pickRight(3, np.yoursAt)); A.next(g);
+      const jp = A.joyPairs(g); A.joyPick(g, pickRight(2, jp.yoursAt)); A.next(g);
+      const v = A.verdict(g); heads[v.headline.split(':')[0].split('.')[0]] = (heads[v.headline.split(':')[0].split('.')[0]] || 0) + 1;
+      miss.first.push(abs(log(f.ratio))); miss.half.push(abs(log(hf.ratio))); miss.sun.push(abs(log(su.ratio))); miss.hymn.push(abs(log(hy.ratio / 2)));
+      known.push([g.results[4].right, g.results[8].right, g.results[9].right].filter(Boolean).length);
     }
-    misses.sort((a, b) => a - b); const med = misses[Math.floor(misses.length / 2)];
+    const med = a => { a = a.slice().sort((x, y) => x - y); return Math.exp(a[Math.floor(a.length / 2)]).toFixed(2); };
     const top = Object.keys(heads).sort((a, b) => heads[b] - heads[a])[0];
-    say('  ' + name + ' | ×' + Math.exp(med).toFixed(2) + ' | ' + (reads.pulled / 4).toFixed(0) + '% | ' + (reads.counted / 4).toFixed(0) + '% | ' + (reads.waited / 4).toFixed(0) + '% | ' + top + ' (' + (heads[top] / 4).toFixed(0) + '%)');
-    if (name === 'memory, steady (12%)') check('a steady memory player gets the clean headline nearly always', heads[top] >= 360 && /all evening/.test(top));
-    if (name === 'wheel counter') check('a wheel counter is read as counted every time', reads.counted >= 390);
-    if (name === 'sun watcher') check('a sun watcher is read as waited every time', reads.waited >= 390);
-    if (name === 'the learned man (all three)') check('the learned man gets all three faults named', /pulled.*wheel.*sun|mostly/.test(top));
+    say('  ' + name + ' | ×' + med(miss.first) + ' | ×' + med(miss.half) + ' | ×' + med(miss.sun) + ' | ×' + med(miss.hymn) + ' | ' + (known.reduce((a, b) => a + b, 0) / 400).toFixed(2) + ' | ' + top + ' (' + (heads[top] / 4).toFixed(0) + '%)');
+    if (name.startsWith('steady (12')) check('a steady player who hears relations knows all three inner spans most evenings', known.filter(k => k === 3).length >= 260, known.filter(k => k === 3).length + ' of 400');
+    if (name.startsWith('steady, guesses')) check('a guesser knows about one of the three', abs(known.reduce((a, b) => a + b, 0) / 400 - (1 / 2 + 1 / 3 + 1 / 2)) < 0.15);
   }
 }
 
